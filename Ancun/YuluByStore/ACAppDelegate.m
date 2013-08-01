@@ -10,9 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
+#ifdef JAILBREAK
 #import "AlixPay.h"
 #import "AlixPayResult.h"
+#else
 #import "IAPHelper.h"
+#endif
 
 @implementation ACAppDelegate
 
@@ -36,10 +39,12 @@
     [session setActive:YES error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
+#ifndef JAILBREAK
     //添加支付监听
     if([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
     }
+#endif
     
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
@@ -61,9 +66,10 @@
     return YES;
 }
 
+#pragma mark 越狱版支持支付宝
+#ifdef JAILBREAK
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-	
-	AlixPay *alixpay = [AlixPay shared];
+    AlixPay *alixpay = [AlixPay shared];
 	AlixPayResult *result = [alixpay handleOpenURL:url];
 	if (result) {
 		//是否支付成功
@@ -88,5 +94,6 @@
     
 	return YES;
 }
+#endif
 
 @end

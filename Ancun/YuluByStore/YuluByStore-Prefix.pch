@@ -8,6 +8,11 @@
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
+#pragma mark -当前是否为测试环境产品上线需要注释该宏定义
+#define ISTEST
+#pragma mark -越狱版定义标记非越狱版需要注释该宏义
+#define JAILBREAK
+
 #ifdef __OBJC__
 //System
 #import <UIKit/UIKit.h>
@@ -28,7 +33,11 @@
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //常量
 #define SECOND 60
-#define PHONENUMBER @"95105856"
+#ifdef ISTEST
+    #define PHONENUMBER @"18368013123"
+#else
+    #define PHONENUMBER @"95105856"
+#endif
 #define Notification_TabClick_ACRecordingManagerViewController @"Notification_TabClick_ACRecordingManagerViewController"
 //配置常量
 #define DEFAULTDATA_PHONE @"DEFAULTDATA_PHONE"
@@ -63,17 +72,15 @@
 #define RESULTCODE_ACLoginViewController_3 3
 #define RESULTCODE_ACRecordingDetailViewController_back 222
 #define RESULTCODE_ACExtractionDetailViewController_back 2
-//是否为越狱
-//#define ISJAILBREAK YES
-#define ISJAILBREAK NO
-//正式环境定义的常量
-//#define ANCUN_HTTP_URL @"http://server.ancun.com:3391/rest/RestService"
-//#define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"
-//#define ACCESSKEY @"fUETGmOIiMujnipQnFm6rJIyO2wJDZSftsK4dwmmoSZ="
+#ifdef ISTEST
 //测试环境定义的常量
-//#define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
-#define ANCUN_HTTP_URL @"http://192.168.0.221:8080/accore/rest/RestService"
-#define ACCESSID @"b99810e661d546f14763f15a9270c28d"
-#define ACCESSKEY @"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ="
-
-
+    //#define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
+    #define ANCUN_HTTP_URL @"http://192.168.0.221:8080/accore/rest/RestService"
+    #define ACCESSID @"b99810e661d546f14763f15a9270c28d"
+    #define ACCESSKEY @"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ="
+#else
+//正式环境定义的常量
+    #define ANCUN_HTTP_URL @"http://server.ancun.com:3391/rest/RestService"
+    #define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"
+    #define ACCESSKEY @"fUETGmOIiMujnipQnFm6rJIyO2wJDZSftsK4dwmmoSZ="
+#endif

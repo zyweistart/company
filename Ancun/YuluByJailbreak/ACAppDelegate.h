@@ -1,19 +1,13 @@
 //
 //  ACAppDelegate.h
-//  YuluByJailbreak
+//  ACyulu
 //
-//  Created by Start on 13-7-24.
+//  Created by Start on 12-12-5.
+//  Copyright (c) 2012年 ancun. All rights reserved.
 //
-//
-
-#import <UIKit/UIKit.h>
-
-@class ACViewController;
 
 @interface ACAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) ACViewController *viewController;
 
 @end
