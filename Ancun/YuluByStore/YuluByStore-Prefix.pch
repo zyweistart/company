@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark -当前是否为测试环境产品上线需要注释该宏定义
-#define ISTEST
+#define TEST
 #pragma mark -越狱版定义标记非越狱版需要注释该宏义
 #define JAILBREAK
 
@@ -33,8 +33,8 @@
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //常量
 #define SECOND 60
-#ifdef ISTEST
-    #define PHONENUMBER @"18368013123"
+#ifdef TEST
+    #define PHONENUMBER @"057156559570"
 #else
     #define PHONENUMBER @"95105856"
 #endif
@@ -72,7 +72,7 @@
 #define RESULTCODE_ACLoginViewController_3 3
 #define RESULTCODE_ACRecordingDetailViewController_back 222
 #define RESULTCODE_ACExtractionDetailViewController_back 2
-#ifdef ISTEST
+#ifdef TEST
 //测试环境定义的常量
     //#define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
     #define ANCUN_HTTP_URL @"http://192.168.0.221:8080/accore/rest/RestService"
@@ -84,3 +84,5 @@
     #define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"
     #define ACCESSKEY @"fUETGmOIiMujnipQnFm6rJIyO2wJDZSftsK4dwmmoSZ="
 #endif
+
+#define NAVCOLOR [UIColor colorWithRed:(30/255.0) green:(175/255.0) blue:(200/255.0) alpha:1]

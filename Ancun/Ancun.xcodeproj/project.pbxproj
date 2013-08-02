@@ -3156,8 +3156,6 @@
 		C9E8EE77179FD2EC00E47BD9 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				C99B80E117A0CAF4004D0BFB /* MyView.xib */,
-				C99B80DB17A0C8C7004D0BFB /* ACGuideViewController.xib */,
 				C9D97A07179FA64E0076ACF3 /* ACAboutUsViewController.xib */,
 				C9D97A08179FA64E0076ACF3 /* ACAboutUsViewController@iPhone5.xib */,
 				C9D97A0B179FA64F0076ACF3 /* ACAccountHeaderCell.xib */,
@@ -3172,6 +3170,7 @@
 				C9D97A28179FA6500076ACF3 /* ACFeedBackViewController@iPhone5.xib */,
 				C9D97A2B179FA6500076ACF3 /* ACForgetPwdViewController.xib */,
 				C9D97A2C179FA6500076ACF3 /* ACForgetPwdViewController@iPhone5.xib */,
+				C99B80DB17A0C8C7004D0BFB /* ACGuideViewController.xib */,
 				C9D97A2F179FA6500076ACF3 /* ACLoginViewController.xib */,
 				C9D97A30179FA6500076ACF3 /* ACLoginViewController@iPhone5.xib */,
 				C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */,
@@ -3190,6 +3189,7 @@
 				C9D97A60179FA6520076ACF3 /* ACRegisterViewController.xib */,
 				C9D97A61179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib */,
 				C9D97AC1179FA6640076ACF3 /* LoadingCell.xib */,
+				C99B80E117A0CAF4004D0BFB /* MyView.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";

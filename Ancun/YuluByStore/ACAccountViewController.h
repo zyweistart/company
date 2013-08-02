@@ -5,16 +5,21 @@
 //  Created by Start on 12/26/12.
 //  Copyright (c) 2012 ancun. All rights reserved.
 //
+#import "BaseRefreshTableViewController.h"
 
-#import "BaseTableViewController.h"
-
-@class ACAccountHeaderCell;
-@class ACAccountHeaderCountCell;
-@interface ACAccountViewController : BaseTableViewController<UIActionSheetDelegate,HttpViewDelegate>{
+@interface ACAccountViewController :BaseRefreshTableViewController<UIScrollViewDelegate,UIActionSheetDelegate>{
     
-    NSArray *_cellArray;
-    ACAccountHeaderCell *_headerCell;
-    ACAccountHeaderCountCell *_headerCountCell;
+    HttpRequest *_loadHttp;
     
+    int currentTab;
+    
+    UILabel *_lblSlid;
+    UIButton *_leftTopTab;
+    UIButton *_rightTopTab;
+    
+    NSMutableArray *_leftDataItemArray;
+    NSMutableArray *_rightDataItemArray;
 }
+
 @end
+
