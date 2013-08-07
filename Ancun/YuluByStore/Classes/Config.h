@@ -19,6 +19,8 @@
 @property Boolean isRefreshExtractionList;
 //是否需要刷新录音详细页面
 @property Boolean isRefreshRecordingList;
+//是否刷新账户套餐列表页面
+@property Boolean isRefreshAccountPayList;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息
@@ -30,8 +32,10 @@
 //不能通过软件拔打的号码
 @property (strong,nonatomic) NSMutableArray *noDialPhoneNumber;
 
-+ (Config *) Instance;
+@property (assign,nonatomic) BOOL isPay;
 
-- (BOOL) isOldUser;
++(Config *)Instance;
+
+- (BOOL)isOldUser;
 
 @end

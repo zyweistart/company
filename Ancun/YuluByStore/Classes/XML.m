@@ -92,16 +92,33 @@
                 }
             }];
         }else{
+            __block BOOL isListFlag=YES;
+            __block NSMutableArray *nsArr=[[NSMutableArray alloc]init];
             __block NSMutableDictionary *mainDataDics=[[NSMutableDictionary alloc]init];
             [TBXML iterateElementsForQuery:@"*" fromElement:content withBlock:^(TBXMLElement *te){
                 TBXMLElement *mainData = [TBXML childElementNamed:[TBXML elementName:te] parentElement:content];
-                NSMutableDictionary *dicContent=[[NSMutableDictionary alloc]init];
-                [TBXML iterateElementsForQuery:@"*" fromElement:mainData withBlock:^(TBXMLElement *chte){
-                    [dicContent setObject:[TBXML textForElement:chte] forKey:[TBXML elementName:chte]];
-                }];
-                [mainDataDics setObject:dicContent forKey:[TBXML elementName:te]];
+                if([@"combolist" isEqualToString:[TBXML elementName:mainData]]){
+                    [TBXML iterateElementsForQuery:@"*" fromElement:mainData withBlock:^(TBXMLElement *singItem) {
+                        NSMutableDictionary *dicContent=[[NSMutableDictionary alloc]init];
+                        [TBXML iterateElementsForQuery:@"*" fromElement:singItem withBlock:^(TBXMLElement *te) {
+                            [dicContent setObject:[TBXML textForElement:te] forKey:[TBXML elementName:te]];
+                        }];
+                        [nsArr addObject:dicContent];
+                    }];
+                }else{
+                    NSMutableDictionary *dicContent=[[NSMutableDictionary alloc]init];
+                    [TBXML iterateElementsForQuery:@"*" fromElement:mainData withBlock:^(TBXMLElement *chte){
+                        [dicContent setObject:[TBXML textForElement:chte] forKey:[TBXML elementName:chte]];
+                    }];
+                    [mainDataDics setObject:dicContent forKey:[TBXML elementName:te]];
+                    isListFlag=NO;
+                }
             }];
-            [response setMainData:mainDataDics];
+            if(isListFlag){
+                [response setDataItemArray:nsArr];
+            }else{
+                [response setMainData:mainDataDics];
+            }
         }
     }
     return response;

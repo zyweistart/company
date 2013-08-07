@@ -13,12 +13,26 @@
     
     int currentTab;
     
+    UILabel *_lblTip1;
+    UILabel *_lblTip2;
+    UILabel *_lblTip3;
     UILabel *_lblSlid;
+    
     UIButton *_leftTopTab;
     UIButton *_rightTopTab;
-    
+
+    NSInteger _leftPageSize;
+    NSInteger _leftCurrentPage;
+	BOOL _leftReloading;
+    BOOL _leftLoadOver;
     NSMutableArray *_leftDataItemArray;
+    
+    NSInteger _rightPageSize;
+    NSInteger _rightCurrentPage;
+	BOOL _rightReloading;
+    BOOL _rightLoadOver;
     NSMutableArray *_rightDataItemArray;
+    
 }
 
 @end

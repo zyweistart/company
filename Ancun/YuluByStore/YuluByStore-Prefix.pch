@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark -当前是否为测试环境产品上线需要注释该宏定义
-#define TEST
+//#define TEST
 #pragma mark -越狱版定义标记非越狱版需要注释该宏义
 #define JAILBREAK
 
@@ -50,6 +50,9 @@
 #define CACHE_EXTRACTIONLIST @"CACHE_EXTRACTIONLIST"
 #define CACHE_RECORDINGMANAGER @"CACHE_RECORDINGMANAGER"
 #define CACHE_RECORDINGMANAGERLIST @"CACHE_RECORDINGMANAGERLIST"
+#define CACHE_ACCOUNT_USERECORD @"CACHE_ACCOUNT_USERECORD"
+#define CACHE_OLDACCOUNT_MONTH @"CACHE_OLDACCOUNT_MONTH"
+#define CACHE_OLDACCOUNT_DAY @"CACHE_OLDACCOUNT_DAY"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2

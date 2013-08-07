@@ -10,6 +10,7 @@
 #import "ACDialViewController.h"
 #import "ACContactViewController.h"
 #import "ACAccountViewController.h"
+#import "ACOldAccountViewController.h"
 #import "ACRecordingManagerViewController.h"
 #import "ACMoreViewController.h"
 #import "ACRegisterViewController.h"
@@ -107,7 +108,12 @@
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactViewController alloc]init]];
         //我的账户
-        UINavigationController *accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+        UINavigationController *accountViewControllerNav;
+        if([[Config Instance]isOldUser]) {
+            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACOldAccountViewController alloc]init]];
+        } else {
+            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+        }
         //录音管理
         UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
         //更多

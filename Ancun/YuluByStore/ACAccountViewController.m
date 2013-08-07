@@ -7,9 +7,10 @@
 //
 
 #import "ACAccountViewController.h"
-#import "ACRecordingCell.h"
-#import "ACRecording2Cell.h"
+#import "ACAccountPayCell.h"
+#import "ACAccountUseRecordCell.h"
 #import "DataSingleton.h"
+#import "NSString+Date.h"
 
 @interface ACAccountViewController ()
 
@@ -45,9 +46,18 @@
         }
         [_refreshHeaderView refreshLastUpdatedDate];
         
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithBarButtonSystemItem: UIBarButtonSystemItemSave
+                                                target:self
+                                                action:@selector(accountPay:)];
+        
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+- (void)accountPay:(id)sender{
+    NSLog(@"accountPay");
 }
 
 - (void)viewDidLoad {
@@ -57,18 +67,18 @@
     //设置Navigation Bar颜色
     self.navigationController.navigationBar.tintColor = NAVCOLOR;
     
-    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
-    [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setText:@"基础包月套餐: 剩余7分钟，已用8分钟"];
-    [self.view addSubview:lbl1];
-    UILabel *lbl2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
-    [lbl2 setFont:[UIFont systemFontOfSize:15]];
-    [lbl2 setText:@"增值时长剩余: 5741分钟"];
-    [self.view addSubview:lbl2];
-    UILabel *lbl3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
-    [lbl3 setFont:[UIFont systemFontOfSize:15]];
-    [lbl3 setText:@"当前可用容量: 114.11MB"];
-    [self.view addSubview:lbl3];
+    _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
+    [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip1 setText:@"基础包月套餐: 正在计算..."];
+    [self.view addSubview:_lblTip1];
+    _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
+    [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
+    [self.view addSubview:_lblTip2];
+    _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
+    [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip3 setText:@"当前可用容量: 正在计算..."];
+    [self.view addSubview:_lblTip3];
     
     _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 81, 159, 40)];
     [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
@@ -87,9 +97,25 @@
     _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
     [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
     [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
     _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
     [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
     [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //标记当前TAB页为第一页
+    currentTab=1;
+    //显示刷新标记
+    [[Config Instance]setIsRefreshAccountPayList:YES];
+    
+    //读取使用记录缓存信息
+    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+    if(dictioanry){
+        id content=[dictioanry objectForKey:CACHE_ACCOUNT_USERECORD];
+        if(content){
+            _rightDataItemArray=[[XML analysis:content] dataItemArray];
+        }
+    }
     
 }
 
@@ -97,9 +123,19 @@
 #pragma mark 界面按钮事件
 
 - (void)leftTopButtonAction {
-    NSLog(@"leftTopButtonAction");
     currentTab=1;
-    self.dataItemArray=_leftDataItemArray;
+    
+    _leftPageSize=_pageSize;
+    _leftCurrentPage=_currentPage;
+	_leftReloading=_reloading;
+    _leftLoadOver=_loadOver;
+    
+    if(_leftDataItemArray){
+        self.dataItemArray=_leftDataItemArray;
+        [self.tableView reloadData];
+    }else{
+        [self autoRefresh];
+    }
     
     [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
     [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
@@ -113,9 +149,19 @@
 }
 
 - (void)rightTopButtonAction {
-    NSLog(@"rightTopButtonAction");
     currentTab=2;
-    self.dataItemArray=_rightDataItemArray;
+    
+    _rightPageSize=_pageSize;
+    _rightCurrentPage=_currentPage;
+	_rightReloading=_reloading;
+    _rightLoadOver=_loadOver;
+    
+    if(_rightDataItemArray){
+        self.dataItemArray=_rightDataItemArray;
+        [self.tableView reloadData];
+    }else{
+        [self autoRefresh];
+    }
     
     [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
     [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
@@ -132,18 +178,20 @@
 #pragma mark -
 #pragma mark table view data source methods
 
-- (void) viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //如果为nil或者集合长度为零则自动刷新
-    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance]isRefreshRecordingList]){
-        [self autoRefresh];
-        [[Config Instance]setIsRefreshRecordingList:NO];
+    if(currentTab==1){
+        if([[Config Instance]isRefreshAccountPayList]){
+            [self autoRefresh];
+            [[Config Instance] setIsRefreshAccountPayList:NO];
+        }
     }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACRecordingManagerViewController"];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACAccountViewController"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACRecordingManagerViewController"];
+    [super viewDidDisappear:animated];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACAccountViewController"];
 }
 
 #pragma mark -
@@ -157,82 +205,240 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     [super requestFinishedByResponse:response requestCode:reqCode];
-    if([response successFlag]){
-        
-        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-            [dictionary setObject:[response responseString] forKey:CACHE_RECORDINGMANAGER];
-            //缓存数据
-            [Common setCache:[Config Instance].cacheKey data:dictionary];
+    if([response successFlag]) {
+        if(currentTab == 1) {
+            _leftDataItemArray=self.dataItemArray;
+            //计算剩余套餐值
+            [[Config Instance] setIsPay:NO];
+            int basesum=0,baseuse=0,timecan=0,storsum=0;
+            for (NSMutableDictionary *data in _leftDataItemArray) {
+                int ctype=[[data objectForKey:@"ctype"]intValue];
+                //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
+                if (ctype==0||ctype==1||ctype==3) {
+                    //只计算当前生效的套餐
+                    
+                    NSDate *currentDate=[NSDate date];
+                    NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
+                    NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
+                    if([currentDate compare:starttime]>=0&& [currentDate compare:endtime]){
+                        storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
+                        if(ctype==0||ctype==3){
+                            basesum=[[data objectForKey:@"rectimelimit"]intValue];
+                            baseuse=[[data objectForKey:@"useurectime"]intValue];
+                            if(ctype==3){
+                                //标记当前用户已经购买过基础套餐
+                                [[Config Instance] setIsPay:YES];
+                            }
+                        }
+                    }
+                } else if(ctype==2) {
+                    int timesum=[[data objectForKey:@"rectimelimit"]intValue];
+                    int timeuse=[[data objectForKey:@"useurectime"]intValue];
+                    timecan+=timesum-timeuse;
+                }
+                float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
+                [_lblTip1 setText:[NSString stringWithFormat:@"基础包月套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
+                [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
+                [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
+            }
+        } else if(currentTab == 2) {
+            _rightDataItemArray=self.dataItemArray;
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_USERECORD];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
         }
     }
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(currentTab==1) {
+        return [self.dataItemArray count];
+    } else {
+        if([self.dataItemArray count]>0){
+            if(_pageSize>[self.dataItemArray count]){
+                return [self.dataItemArray count];
+            }else{
+                return [self.dataItemArray count]+1;
+            }
+        }else{
+            return 1;
+        }
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-        NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"oppno"]];
-        if(name==nil){
-            name=[dictionary objectForKey:@"oppno"];
-        }
-        if([name isEqualToString:[dictionary objectForKey:@"oppno"]]){
-            return 60;
+    if(currentTab==1) {
+        return 75;
+    } else {
+        if([self.dataItemArray count]>[indexPath row]){
+            return 75;
         }else{
-            return 70;
+            return 50;
         }
-    }else{
-        return 50;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *accountPayCell=@"ACAccountPayCell";
+    static NSString *accountPayCellTimeLong=@"ACAccountPayCellTimeLong";
+    static NSString *accountUseRecordCell=@"ACAccountUseRecordCell";
     //获取当前的行
     NSInteger row=[indexPath row];
-    if([self.dataItemArray count]>row){
-        static NSString *cellReuseIdentifier=@"ACRecordingCellIdentifier";
-        static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"oppno"]];
-        if(name==nil){
-            name=[dictionary objectForKey:@"oppno"];
-        }
-        if([name isEqualToString:[dictionary objectForKey:@"oppno"]]){
-            ACRecordingCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-            if(!cell){
-                UINib *nib=[UINib nibWithNibName:@"ACRecordingCell" bundle:nil];
-                [self.tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-                cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(currentTab==1) {
+         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        int ctype=[[dictionary objectForKey:@"ctype"]intValue];
+        if (ctype==2){
+            ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCellTimeLong];
+            if(!cell) {
+                cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCellTimeLong];
             }
-            cell.lbl_oppno.text=[dictionary objectForKey:@"oppno"];
-            cell.lbl_lcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
-            cell.lbl_orttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"]]];
-            cell.lbl_rtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
-            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            [cell.lblName setText:@"增值时长"];
+            int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
+            [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟",rectimelimit/60]];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return cell;
+        } else {
+            ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell];
+            if(!cell) {
+                cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell];
+            }
+            int auciquotalimit=[[dictionary objectForKey:@"auciquotalimit"]intValue];
+            if(ctype==1){
+                [cell.lblName setText:@"增值存储"];
+                [cell.lblInfo setText:[NSString stringWithFormat:@"%dMB",auciquotalimit/1024/1024]];
+            } else if (ctype==3||ctype==0){
+                if(ctype==3){
+                    [cell.lblName setText:@"基础包月"];
+                }else{
+                    [cell.lblName setText:@"试用套餐"];
+                }
+                int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
+                [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟 %dMB",rectimelimit/60,auciquotalimit/1024/1024]];
+            }
+            [cell.lblStartTime setText:[[dictionary objectForKey:@"starttime"] substringWithRange:NSMakeRange(0, 10)]];
+            [cell.lblEndTime setText:[[dictionary objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
+            return cell;
+        }
+    } else {
+        if([self.dataItemArray count]>row){
+            NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+            NSMutableString *strContent=[[NSMutableString alloc]init];
+            int cgtype=[[dictionary objectForKey:@"cgtype"]intValue];
+            int cgsubtype=[[dictionary objectForKey:@"cgsubtype"]intValue];
+            if(cgtype==1){
+                [strContent appendString:@"活动-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"新手注册礼"];
+                } else if(cgsubtype==2){
+                    [strContent appendString:@"新手体验礼"];
+                } else {
+                    [strContent appendString:@"未知"];
+                }
+            } else if(cgtype==2) {
+                [strContent appendString:@"套餐充值购买-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"存储套餐"];
+                } else if(cgsubtype==2){
+                    [strContent appendString:@"时长套餐"];
+                } else if(cgsubtype==3){
+                    [strContent appendString:@"个人基础套餐"];
+                } else {
+                    [strContent appendString:@"未知"];
+                }
+            } else if(cgtype==3) {
+                [strContent appendString:@"套餐生效-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"存储套餐"];
+                }else if(cgsubtype==3){
+                    [strContent appendString:@"个人基础套餐"];
+                } else {
+                    [strContent appendString:@"未知"];
+                }
+            } else if(cgtype==4) {
+                [strContent appendString:@"套餐失效-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"存储套餐"];
+                } else if(cgsubtype==3){
+                    [strContent appendString:@"个人基础套餐"];
+                } else if(cgsubtype==0){
+                    [strContent appendString:@"试用套餐"];
+                }
+            } else if(cgtype==5) {
+                [strContent appendString:@"套餐转换-"];
+                if(cgsubtype==2){
+                    [strContent appendString:@"时长套餐"];
+                } else {
+                    [strContent appendString:@"未知"];
+                }
+            } else if(cgtype==6) {
+                [strContent appendString:@"通话录音-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"主叫录音"];
+                } else if(cgsubtype==2){
+                    [strContent appendString:@"被叫录音"];
+                } else if(cgsubtype==3){
+                    [strContent appendString:@"WebCall录音"];
+                }  else {
+                    [strContent appendString:@"未知"];
+                }
+            } else if(cgtype==7) {
+                [strContent appendString:@"录音删除-"];
+                if(cgsubtype==1){
+                    [strContent appendString:@"主叫录音删除"];
+                } else if(cgsubtype==2){
+                    [strContent appendString:@"被叫录音删除"];
+                } else if(cgsubtype==3){
+                    [strContent appendString:@"WebCall录音删除"];
+                }  else {
+                    [strContent appendString:@"未知"];
+                }
+            }
+            
+            ACAccountUseRecordCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountUseRecordCell];
+            if(!cell) {
+                cell = [[ACAccountUseRecordCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountUseRecordCell];
+            }
+            
+            [cell.lblDate setText:[dictionary objectForKey:@"cgtime"]];
+            [cell.lblContent setText:strContent];
+            
+            int cgflag=[[dictionary objectForKey:@"cgflag"]intValue];
+            int cgrectime=[[dictionary objectForKey:@"cgrectime"]floatValue];
+            float cgquota=[[dictionary objectForKey:@"cgquota"]floatValue];
+            NSMutableString *disStr=[[NSMutableString alloc]init];
+            if(cgrectime>0){
+                if(cgflag==1) {
+                    [disStr appendString:@"+"];
+                } else {
+                    [disStr appendString:@"-"];
+                }
+                [disStr appendFormat:@"%d分钟",cgrectime/60];
+                if(cgquota>0){
+                    [disStr appendString:@"\n"];
+                }
+            }
+            if(cgquota>0){
+                if(cgflag==1) {
+                    [disStr appendString:@"+"];
+                } else {
+                    [disStr appendString:@"-"];
+                }
+                [disStr appendFormat:@"%0.2fMB",cgquota/1024/1024];
+            }
+            [cell.lblRemark setText:disStr];
             return cell;
         }else{
-            ACRecording2Cell *cell2 = [self.tableView dequeueReusableCellWithIdentifier:cell2ReuseIdentifier];
-            if(!cell2){
-                UINib *nib=[UINib nibWithNibName:@"ACRecording2Cell" bundle:nil];
-                [self.tableView registerNib:nib forCellReuseIdentifier:cell2ReuseIdentifier];
-                cell2 = [self.tableView dequeueReusableCellWithIdentifier:cell2ReuseIdentifier];
-            }
-            cell2.lbl_name.text=name;
-            cell2.lbl_oppno.text=[dictionary objectForKey:@"oppno"];
-            cell2.lbl_lcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
-            cell2.lbl_orttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"] ]];
-            cell2.lbl_rtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
-            cell2.selectionStyle = UITableViewCellSelectionStyleBlue;
-            return cell2;
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
         }
-    }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if([self.dataItemArray count]>[indexPath indexAtPosition:1]){
-        NSLog(@"-----");
+        //不处理单击事件
     }else{
         //加载更多
         _currentPage++;
@@ -243,29 +449,31 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (void)refreshed:(NSNotification *)notification{
-    if (notification.object){
-        if ([(NSString *)notification.object isEqualToString:@"load"]) {
-            [self autoRefresh];
-        }
-    }
-}
-
 - (void)reloadTableViewDataSource{
 	if([[Config Instance]isLogin]){
         _reloading = YES;
         [self.tableView reloadData];
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"" forKey:@"oppno"];
-        [requestParams setObject:@"" forKey:@"begintime"];
-        [requestParams setObject:@"" forKey:@"endtime"];
-        [requestParams setObject:@"desc" forKey:@"ordersort"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp loginhandle:@"v4recStat" requestParams:requestParams];
+        if(currentTab == 1){
+            
+            self.dataItemArray=_leftDataItemArray;
+            
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp loginhandle:@"v4combinfoGet" requestParams:requestParams];
+        } else if (currentTab == 2){
+            
+            self.dataItemArray=_rightDataItemArray;
+            
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp loginhandle:@"v4accnewDetail" requestParams:requestParams];
+        }
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];

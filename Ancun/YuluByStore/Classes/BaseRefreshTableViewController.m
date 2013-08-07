@@ -45,32 +45,37 @@
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
         //判断是否已经全部加载完毕
-        NSInteger totalpage=[[[response pageInfo]objectForKey:@"totalpage"]intValue];
-        if(totalpage>=_currentPage){
-            if(totalpage==_currentPage){
-                _loadOver=YES;
-            }else{
-                _loadOver=NO;
-            }
-            if(_currentPage==1){
-                //如果当前为第一页则全部加入
-                if(self.dataItemArray){
-                    [self.dataItemArray removeAllObjects];
-                    [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
-                   
+        if([response pageInfo]){
+            //列表查询没有使用分页
+            NSInteger totalpage=[[[response pageInfo]objectForKey:@"totalpage"]intValue];
+            if(totalpage>=_currentPage){
+                if(totalpage==_currentPage){
+                    _loadOver=YES;
                 }else{
-                   self.dataItemArray=[[NSMutableArray alloc]initWithArray:[response dataItemArray]];
+                    _loadOver=NO;
+                }
+                if(_currentPage==1){
+                    //如果当前为第一页则全部加入
+                    if(self.dataItemArray){
+                        [self.dataItemArray removeAllObjects];
+                        [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
+                        
+                    }else{
+                        self.dataItemArray=[[NSMutableArray alloc]initWithArray:[response dataItemArray]];
+                    }
+                }else{
+                    //追加到最后面
+                    [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
                 }
             }else{
-                //追加到最后面
-                [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
+                _currentPage=totalpage;
+                _loadOver=YES;
+            }
+            if(!self.dataItemArray){
+                self.dataItemArray=[[NSMutableArray alloc]init];
             }
         }else{
-            _currentPage=totalpage;
-            _loadOver=YES;
-        }
-        if(!self.dataItemArray){
-            self.dataItemArray=[[NSMutableArray alloc]init];
+            self.dataItemArray=[[NSMutableArray alloc]initWithArray:[response dataItemArray]];
         }
         [self.tableView reloadData];
     }
