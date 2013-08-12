@@ -349,10 +349,6 @@
 		C9D97A6A179FA6520076ACF3 /* ACAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A06179FA64E0076ACF3 /* ACAboutUsViewController.m */; };
 		C9D97A6B179FA6520076ACF3 /* ACAboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A07179FA64E0076ACF3 /* ACAboutUsViewController.xib */; };
 		C9D97A6C179FA6520076ACF3 /* ACAboutUsViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A08179FA64E0076ACF3 /* ACAboutUsViewController@iPhone5.xib */; };
-		C9D97A6D179FA6520076ACF3 /* ACAccountHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A0A179FA64F0076ACF3 /* ACAccountHeaderCell.m */; };
-		C9D97A6E179FA6520076ACF3 /* ACAccountHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A0B179FA64F0076ACF3 /* ACAccountHeaderCell.xib */; };
-		C9D97A6F179FA6520076ACF3 /* ACAccountHeaderCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A0D179FA64F0076ACF3 /* ACAccountHeaderCountCell.m */; };
-		C9D97A70179FA6520076ACF3 /* ACAccountHeaderCountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A0E179FA64F0076ACF3 /* ACAccountHeaderCountCell.xib */; };
 		C9D97A71179FA6520076ACF3 /* ACAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */; };
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A73179FA6520076ACF3 /* ACBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */; };
@@ -656,6 +652,9 @@
 		C9E8EE75179FD18900E47BD9 /* icon-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE70179FD18900E47BD9 /* icon-@2x.png */; };
 		C9E8EE76179FD18900E47BD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE71179FD18900E47BD9 /* icon.png */; };
 		C9E8EE78179FD5E600E47BD9 /* ACRecordingManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */; };
+		C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */; };
+		C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */; };
+		C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1200,12 +1199,6 @@
 		C9D97A06179FA64E0076ACF3 /* ACAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAboutUsViewController.m; sourceTree = "<group>"; };
 		C9D97A07179FA64E0076ACF3 /* ACAboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACAboutUsViewController.xib; sourceTree = "<group>"; };
 		C9D97A08179FA64E0076ACF3 /* ACAboutUsViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACAboutUsViewController@iPhone5.xib"; sourceTree = "<group>"; };
-		C9D97A09179FA64E0076ACF3 /* ACAccountHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountHeaderCell.h; sourceTree = "<group>"; };
-		C9D97A0A179FA64F0076ACF3 /* ACAccountHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountHeaderCell.m; sourceTree = "<group>"; };
-		C9D97A0B179FA64F0076ACF3 /* ACAccountHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACAccountHeaderCell.xib; sourceTree = "<group>"; };
-		C9D97A0C179FA64F0076ACF3 /* ACAccountHeaderCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountHeaderCountCell.h; sourceTree = "<group>"; };
-		C9D97A0D179FA64F0076ACF3 /* ACAccountHeaderCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountHeaderCountCell.m; sourceTree = "<group>"; };
-		C9D97A0E179FA64F0076ACF3 /* ACAccountHeaderCountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACAccountHeaderCountCell.xib; sourceTree = "<group>"; };
 		C9D97A0F179FA64F0076ACF3 /* ACAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountViewController.h; sourceTree = "<group>"; };
 		C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountViewController.m; sourceTree = "<group>"; };
 		C9D97A11179FA64F0076ACF3 /* ACAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAppDelegate.h; sourceTree = "<group>"; };
@@ -1665,6 +1658,12 @@
 		C9E8EE6F179FD18900E47BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C9E8EE70179FD18900E47BD9 /* icon-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-@2x.png"; sourceTree = "<group>"; };
 		C9E8EE71179FD18900E47BD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeViewController.h; sourceTree = "<group>"; };
+		C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeViewController.m; sourceTree = "<group>"; };
+		C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountRechargeCell.h; sourceTree = "<group>"; };
+		C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountRechargeCell.m; sourceTree = "<group>"; };
+		C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeConfirmViewController.h; sourceTree = "<group>"; };
+		C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeConfirmViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3091,31 +3090,23 @@
 		C9D97D79179FA72C0076ACF3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C9D97D7B179FAB770076ACF3 /* Classes */,
+				C9F80CFA17B1D58E00E15885 /* Cell */,
+				C9D97D7B179FAB770076ACF3 /* Controller */,
+				C9F80CFB17B1D5E200E15885 /* View */,
 				C9E8EE77179FD2EC00E47BD9 /* XIB */,
 			);
 			name = UI;
 			sourceTree = "<group>";
 		};
-		C9D97D7B179FAB770076ACF3 /* Classes */ = {
+		C9D97D7B179FAB770076ACF3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				C9D97A05179FA64E0076ACF3 /* ACAboutUsViewController.h */,
 				C9D97A06179FA64E0076ACF3 /* ACAboutUsViewController.m */,
-				C9D97A09179FA64E0076ACF3 /* ACAccountHeaderCell.h */,
-				C9D97A0A179FA64F0076ACF3 /* ACAccountHeaderCell.m */,
-				C9D97A0C179FA64F0076ACF3 /* ACAccountHeaderCountCell.h */,
-				C9D97A0D179FA64F0076ACF3 /* ACAccountHeaderCountCell.m */,
-				C99FCA4F17B086300003B2FF /* ACAccountPayCell.h */,
-				C99FCA5017B086300003B2FF /* ACAccountPayCell.m */,
-				C99FCA5217B086440003B2FF /* ACAccountUseRecordCell.h */,
-				C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */,
 				C9D97A0F179FA64F0076ACF3 /* ACAccountViewController.h */,
 				C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */,
 				C9D97A13179FA64F0076ACF3 /* ACBuyViewController.h */,
 				C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */,
-				C9D97A15179FA64F0076ACF3 /* ACContactCell.h */,
-				C9D97A16179FA64F0076ACF3 /* ACContactCell.m */,
 				C9D97A18179FA64F0076ACF3 /* ACContactViewController.h */,
 				C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */,
 				C9D97A1B179FA64F0076ACF3 /* ACDialViewController.h */,
@@ -3134,36 +3125,22 @@
 				C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */,
 				C9D97A33179FA6500076ACF3 /* ACModifyPwdViewController.h */,
 				C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */,
-				C9D97A39179FA6500076ACF3 /* ACMoreCell.h */,
-				C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */,
 				C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */,
 				C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */,
 				C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */,
 				C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */,
 				C9D97A42179FA6510076ACF3 /* ACNotaryViewController.h */,
 				C9D97A43179FA6510076ACF3 /* ACNotaryViewController.m */,
-				C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */,
-				C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */,
 				C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */,
 				C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */,
-				C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */,
-				C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */,
 				C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */,
 				C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */,
-				C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */,
-				C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */,
-				C9D97A47179FA6510076ACF3 /* ACPlayerView.h */,
-				C9D97A48179FA6510076ACF3 /* ACPlayerView.m */,
-				C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */,
-				C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */,
-				C9D97A4D179FA6520076ACF3 /* ACRecordingCell.h */,
-				C9D97A4E179FA6520076ACF3 /* ACRecordingCell.m */,
-				C9D97A50179FA6520076ACF3 /* ACRecordingDetailCell.h */,
-				C9D97A51179FA6520076ACF3 /* ACRecordingDetailCell.m */,
+				C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */,
+				C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */,
+				C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */,
+				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
 				C9D97A53179FA6520076ACF3 /* ACRecordingDetailViewController.h */,
 				C9D97A54179FA6520076ACF3 /* ACRecordingDetailViewController.m */,
-				C9D97A57179FA6520076ACF3 /* ACRecordingItemCell.h */,
-				C9D97A58179FA6520076ACF3 /* ACRecordingItemCell.m */,
 				C9D97A5A179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.h */,
 				C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */,
 				C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */,
@@ -3174,12 +3151,10 @@
 				C9D97A63179FA6520076ACF3 /* ACTermsOfServiceViewController.m */,
 				C9D97A64179FA6520076ACF3 /* ACTipsViewController.h */,
 				C9D97A65179FA6520076ACF3 /* ACTipsViewController.m */,
-				C9D97ABF179FA6640076ACF3 /* LoadingCell.h */,
-				C9D97AC0179FA6640076ACF3 /* LoadingCell.m */,
 				C99B80DE17A0CAC0004D0BFB /* MyViewController.h */,
 				C99B80DF17A0CAC0004D0BFB /* MyViewController.m */,
 			);
-			name = Classes;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		C9D97D7E179FB1C40076ACF3 /* Model */ = {
@@ -3199,8 +3174,6 @@
 			children = (
 				C9D97A07179FA64E0076ACF3 /* ACAboutUsViewController.xib */,
 				C9D97A08179FA64E0076ACF3 /* ACAboutUsViewController@iPhone5.xib */,
-				C9D97A0B179FA64F0076ACF3 /* ACAccountHeaderCell.xib */,
-				C9D97A0E179FA64F0076ACF3 /* ACAccountHeaderCountCell.xib */,
 				C9D97A17179FA64F0076ACF3 /* ACContactCell.xib */,
 				C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */,
 				C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */,
@@ -3233,6 +3206,48 @@
 				C99B80E117A0CAF4004D0BFB /* MyView.xib */,
 			);
 			name = XIB;
+			sourceTree = "<group>";
+		};
+		C9F80CFA17B1D58E00E15885 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C99FCA4F17B086300003B2FF /* ACAccountPayCell.h */,
+				C99FCA5017B086300003B2FF /* ACAccountPayCell.m */,
+				C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */,
+				C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */,
+				C99FCA5217B086440003B2FF /* ACAccountUseRecordCell.h */,
+				C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */,
+				C9D97A15179FA64F0076ACF3 /* ACContactCell.h */,
+				C9D97A16179FA64F0076ACF3 /* ACContactCell.m */,
+				C9D97A39179FA6500076ACF3 /* ACMoreCell.h */,
+				C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */,
+				C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */,
+				C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */,
+				C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */,
+				C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */,
+				C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */,
+				C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */,
+				C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */,
+				C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */,
+				C9D97A4D179FA6520076ACF3 /* ACRecordingCell.h */,
+				C9D97A4E179FA6520076ACF3 /* ACRecordingCell.m */,
+				C9D97A50179FA6520076ACF3 /* ACRecordingDetailCell.h */,
+				C9D97A51179FA6520076ACF3 /* ACRecordingDetailCell.m */,
+				C9D97A57179FA6520076ACF3 /* ACRecordingItemCell.h */,
+				C9D97A58179FA6520076ACF3 /* ACRecordingItemCell.m */,
+				C9D97ABF179FA6640076ACF3 /* LoadingCell.h */,
+				C9D97AC0179FA6640076ACF3 /* LoadingCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		C9F80CFB17B1D5E200E15885 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9D97A47179FA6510076ACF3 /* ACPlayerView.h */,
+				C9D97A48179FA6510076ACF3 /* ACPlayerView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3307,8 +3322,6 @@
 				C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */,
 				C9D97A6B179FA6520076ACF3 /* ACAboutUsViewController.xib in Resources */,
 				C9D97A6C179FA6520076ACF3 /* ACAboutUsViewController@iPhone5.xib in Resources */,
-				C9D97A6E179FA6520076ACF3 /* ACAccountHeaderCell.xib in Resources */,
-				C9D97A70179FA6520076ACF3 /* ACAccountHeaderCountCell.xib in Resources */,
 				C9D97A75179FA6520076ACF3 /* ACContactCell.xib in Resources */,
 				C9D97A77179FA6520076ACF3 /* ACContactViewController.xib in Resources */,
 				C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */,
@@ -3740,8 +3753,6 @@
 				C9D97997179FA3500076ACF3 /* main.m in Sources */,
 				C9E8EE78179FD5E600E47BD9 /* ACRecordingManagerViewController.m in Sources */,
 				C9D97A6A179FA6520076ACF3 /* ACAboutUsViewController.m in Sources */,
-				C9D97A6D179FA6520076ACF3 /* ACAccountHeaderCell.m in Sources */,
-				C9D97A6F179FA6520076ACF3 /* ACAccountHeaderCountCell.m in Sources */,
 				C9D97A71179FA6520076ACF3 /* ACAccountViewController.m in Sources */,
 				C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */,
 				C9D97A73179FA6520076ACF3 /* ACBuyViewController.m in Sources */,
@@ -3835,6 +3846,9 @@
 				C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */,
 				C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */,
 				C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */,
+				C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */,
+				C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */,
+				C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

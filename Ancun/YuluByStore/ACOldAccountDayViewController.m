@@ -17,11 +17,14 @@
 
 @implementation ACOldAccountDayViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithDate:(NSString *)date{
     
     if (self) {
+
+        _year=[[date substringWithRange:NSMakeRange(0,4)]intValue];
+        _month=[date substringWithRange:NSMakeRange(5,2)];
         
-        self.navigationItem.title=@"2013年08月消费明细";
+        self.navigationItem.title=[NSString stringWithFormat:@"%d年%@月消费明细",_year,_month];
         
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 50,
@@ -40,7 +43,7 @@
         [_refreshHeaderView refreshLastUpdatedDate];
         
     }
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     return self;
 }
 
@@ -55,19 +58,19 @@
     [view setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
     
     UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:15]];
+    [lbl1 setFont:[UIFont systemFontOfSize:17]];
     [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
     [lbl1 setText:@"时间"];
     [view addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:15]];
+    [lbl1 setFont:[UIFont systemFontOfSize:17]];
     [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
     [lbl1 setText:@"类别"];
     [view addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(235, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:15]];
+    [lbl1 setFont:[UIFont systemFontOfSize:17]];
     [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
     [lbl1 setText:@"时长"];
     [view addSubview:lbl1];
@@ -77,9 +80,12 @@
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
-        id content=[dictioanry objectForKey:CACHE_OLDACCOUNT_MONTH];
+        id content=[dictioanry objectForKey:[NSString stringWithFormat:@"%d%@-%@",_year,_month,CACHE_OLDACCOUNT_DAY]];
         if(content){
-            //            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            if([self.dataItemArray count]>0){
+                [self.tableView reloadData];
+            }
         }
     }
     
@@ -91,12 +97,16 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACOldAccountViewController"];
+    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshNotaryList]){
+        [self autoRefresh];
+        [[Config Instance]setIsRefreshNotaryList:NO];
+    }
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACOldAccountDayViewController"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACOldAccountViewController"];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACOldAccountDayViewController"];
 }
 
 #pragma mark -
@@ -110,8 +120,13 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     [super requestFinishedByResponse:response requestCode:reqCode];
-    if([response successFlag]) {
-        
+    if([response successFlag]){
+        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+            [dictionary setObject:[response responseString] forKey:[NSString stringWithFormat:@"%d%@-%@",_year,_month,CACHE_OLDACCOUNT_DAY]];
+            //缓存数据
+            [Common setCache:[Config Instance].cacheKey data:dictionary];
+        }
     }
 }
 
@@ -129,7 +144,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if([self.dataItemArray count]>[indexPath row]){
-        return 65;
+        return 60;
     }else{
         return 50;
     }
@@ -145,7 +160,18 @@
         if(!cell) {
             cell = [[ACOldAccountDayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:oldAccountCell];
         }
-        
+        NSString *changetime=[dictionary objectForKey:@"changetime"];
+        [cell.lblMonth setText:[NSString stringWithFormat:@"%@号",[changetime substringWithRange:NSMakeRange(5, 2)]]];
+        [cell.lblTime setText:[changetime substringWithRange:NSMakeRange(11, 5)]];
+        int fundflow=[[dictionary objectForKey:@"fundflow"]intValue];
+        int changeamount=[[dictionary objectForKey:@"changeamount"]intValue];
+        if(fundflow==1) {
+            [cell.lblRemark setText:@"充值"];
+            [cell.lblValue setText:[NSString stringWithFormat:@"+%d分钟",changeamount/60]];
+        } else {
+            [cell.lblRemark setText:@"录音"];
+            [cell.lblValue setText:[NSString stringWithFormat:@"-%d分钟",changeamount/60]];
+        }
         return cell;
     }else{
         return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
@@ -169,14 +195,33 @@
 	if([[Config Instance]isLogin]){
         _reloading = YES;
         [self.tableView reloadData];
+        
+        int day=31;
+        switch ([_month intValue]) {
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                day=30;
+                break;
+            case 2:
+                if(_year%400==0||(_year/4==0&&_year%100!=0)){
+                    day=29;
+                } else {
+                    day=28;
+                }
+                break;
+        }
+        NSString *startday=[NSString stringWithFormat:@"%d%@01000000",_year,_month];
+        NSString *endday=[NSString stringWithFormat:@"%d%@%d235959",_year,_month,day];
+        
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"" forKey:@"changetimeb"];
-        [requestParams setObject:@"" forKey:@"changetimee"];
-        [requestParams setObject:@"" forKey:@"ordersort"];
+        [requestParams setObject:startday forKey:@"changetimeb"];
+        [requestParams setObject:endday forKey:@"changetimee"];
         _loadHttp=[[HttpRequest alloc]init];
         [_loadHttp setDelegate:self];
         [_loadHttp setController:self];
-        [_loadHttp loginhandle:@"v4accStat" requestParams:requestParams];
+        [_loadHttp loginhandle:@"v4accDetail" requestParams:requestParams];
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];

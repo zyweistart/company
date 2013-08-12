@@ -136,6 +136,7 @@
 }
 
 - (void)onControllerResult:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableArray*)result{
+    [Config initData];
     if(resultCode==RESULTCODE_ACLoginViewController_1){
         //登录
         [_txtPassword setText:@""];

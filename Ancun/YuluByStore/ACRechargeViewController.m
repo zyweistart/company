@@ -1,0 +1,414 @@
+//
+//  ACAccountViewController.m
+//  ACyulu
+//
+//  Created by Start on 12/26/12.
+//  Copyright (c) 2012 ancun. All rights reserved.
+//
+
+#import "ACRechargeViewController.h"
+#import "ACAccountRechargeCell.h"
+#import "DataSingleton.h"
+#import "NSString+Date.h"
+
+@interface ACRechargeViewController ()
+
+//界面按钮事件
+- (void)leftTopButtonAction;
+- (void)centerTopButtonAction;
+- (void)rightTopButtonAction;
+
+@end
+
+@implementation ACRechargeViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    
+    if (self) {
+        
+        self.navigationItem.title=@"账户充值";
+        
+        self.tableView=[[UITableView alloc]initWithFrame:
+                        CGRectMake(0, 83,
+                                   self.view.frame.size.width,
+                                   self.view.frame.size.height-83)];
+        [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.tableView setDelegate:self];
+        [self.tableView setDataSource:self];
+        [self.view addSubview:self.tableView];
+        if(_refreshHeaderView==nil){
+            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+            view.delegate = self;
+            [self.tableView addSubview:view];
+            _refreshHeaderView = view;
+        }
+        [_refreshHeaderView refreshLastUpdatedDate];
+        
+    }
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //设置Navigation Bar颜色
+    self.navigationController.navigationBar.tintColor = NAVCOLOR;
+    
+    _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
+    [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip1 setTextAlignment:NSTextAlignmentCenter];
+    [_lblTip1 setBackgroundColor:[UIColor redColor]];
+    [_lblTip1 setTextColor:[UIColor grayColor]];
+    [_lblTip1 setText:@"选择套餐"];
+    [self.view addSubview:_lblTip1];
+    
+    _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(80, 0, 80, 40)];
+    [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip2 setTextAlignment:NSTextAlignmentCenter];
+    [_lblTip2 setTextColor:[UIColor grayColor]];
+    [_lblTip2 setText:@"确认信息"];
+    [self.view addSubview:_lblTip2];
+    
+    _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(160, 0, 80, 40)];
+    [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip3 setTextAlignment:NSTextAlignmentCenter];
+    [_lblTip3 setTextColor:[UIColor grayColor]];
+    [_lblTip3 setText:@"支付"];
+    [self.view addSubview:_lblTip3];
+    
+    _lblTip4=[[UILabel alloc]initWithFrame:CGRectMake(240, 0, 80, 40)];
+    [_lblTip4 setFont:[UIFont systemFontOfSize:15]];
+    [_lblTip4 setTextAlignment:NSTextAlignmentCenter];
+    [_lblTip4 setTextColor:[UIColor grayColor]];
+    [_lblTip4 setText:@"成功"];
+    [self.view addSubview:_lblTip4];
+    
+    _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 40, 106, 40)];
+    [_leftTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [_leftTopTab setTitle:@"基础包月套餐" forState:UIControlStateNormal];
+    [_leftTopTab setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:_leftTopTab];
+    
+    _centerTopTab=[[UIButton alloc]initWithFrame:CGRectMake(107, 40, 106, 40)];
+    [_centerTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [_centerTopTab setTitle:@"增值时长套餐" forState:UIControlStateNormal];
+    [_centerTopTab setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:_centerTopTab];
+    
+    _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(214, 40, 106, 40)];
+    [_rightTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [_rightTopTab setTitle:@"增值存储套餐" forState:UIControlStateNormal];
+    [_rightTopTab setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:_rightTopTab];
+
+    _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 76, 106, 4)];
+    [_lblSlid setBackgroundColor:NAVCOLOR];
+    [self.view addSubview:_lblSlid];
+    
+    _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
+    [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    _centerTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+    [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    [_centerTopTab addTarget:self action:@selector(centerTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //标记当前TAB页为第一页
+    currentTab=1;
+    //显示刷新标记
+    [[Config Instance]setIsRefreshAccountPayList:YES];
+    
+    //读取使用记录缓存信息
+    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+    if(dictioanry){
+        id content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY1];
+        if(content){
+            _leftDataItemArray=[[XML analysis:content] dataItemArray];
+            if([_leftDataItemArray count]>0){
+                self.dataItemArray=_leftDataItemArray;
+                [self.tableView reloadData];
+            }
+        }
+        content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY2];
+        if(content){
+            _centerDataItemArray=[[XML analysis:content] dataItemArray];
+        }
+        content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY3];
+        if(content){
+            _rightDataItemArray=[[XML analysis:content] dataItemArray];
+        }
+    }
+    
+}
+
+#pragma mark-
+#pragma mark 界面按钮事件
+
+- (void)leftTopButtonAction {
+    currentTab=1;
+    
+    if([_leftDataItemArray count]>0){
+        self.dataItemArray=_leftDataItemArray;
+        [self.tableView reloadData];
+    }else{
+        [self autoRefresh];
+    }
+    
+    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
+    [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    
+    [UIView beginAnimations:nil context:nil];//动画开始
+    [UIView setAnimationDuration:0.3];
+    
+    _lblSlid.frame = CGRectMake(0, 76, 106, 4);
+    
+    [UIView commitAnimations];
+}
+
+- (void)centerTopButtonAction {
+    currentTab=2;
+    
+    if([_centerDataItemArray count]>0){
+        self.dataItemArray=_centerDataItemArray;
+        [self.tableView reloadData];
+    }else{
+        [self autoRefresh];
+    }
+    
+    [_centerTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
+    [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    
+    [UIView beginAnimations:nil context:nil];//动画开始
+    [UIView setAnimationDuration:0.3];
+    
+    _lblSlid.frame = CGRectMake(107, 76, 106, 4);
+    
+    [UIView commitAnimations];
+}
+
+- (void)rightTopButtonAction {
+    currentTab=3;
+    
+    if([_rightDataItemArray count]>0){
+        self.dataItemArray=_rightDataItemArray;
+        [self.tableView reloadData];
+    }else{
+        [self autoRefresh];
+    }
+    
+    [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
+    [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+    
+    [UIView beginAnimations:nil context:nil];//动画开始
+    [UIView setAnimationDuration:0.3];
+    
+    _lblSlid.frame = CGRectMake(214, 76, 106, 4);
+    
+    [UIView commitAnimations];
+}
+
+//表视图委托
+#pragma mark -
+#pragma mark table view data source methods
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+//    if(currentTab==1){
+//        if([_leftDataItemArray count]==0||[[Config Instance]isRefreshAccountPayList]){
+//            [self autoRefresh];
+//            [[Config Instance] setIsRefreshAccountPayList:NO];
+//        }
+//    }
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACAccountViewController"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACAccountViewController"];
+}
+
+#pragma mark -
+#pragma mark Delegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==0){
+        [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
+    }
+}
+
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
+    [super requestFinishedByResponse:response requestCode:reqCode];
+//    if([response successFlag]) {
+        if(currentTab == 1) {
+            _leftCurrentPage=_currentPage;
+            _leftReloading=_reloading;
+            _leftLoadOver=_loadOver;
+            _leftDataItemArray=self.dataItemArray;
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY1];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
+        } else if(currentTab == 2) {
+            _centerCurrentPage=_currentPage;
+            _centerReloading=_reloading;
+            _centerLoadOver=_loadOver;
+            _centerDataItemArray=self.dataItemArray;
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY2];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
+        } else if(currentTab == 3) {
+            _rightCurrentPage=_currentPage;
+            _rightReloading=_reloading;
+            _rightLoadOver=_loadOver;
+            _rightDataItemArray=self.dataItemArray;
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY3];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
+        }
+//    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if([self.dataItemArray count]>0){
+        if(_pageSize>[self.dataItemArray count]){
+            return [self.dataItemArray count];
+        }else{
+            return [self.dataItemArray count]+1;
+        }
+    }else{
+        return 1;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([self.dataItemArray count]>[indexPath row]){
+        return 60;
+    }else{
+        return 50;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *accountPayCell1=@"ACAccountRechargeCell1";
+    static NSString *accountPayCell2=@"ACAccountRechargeCell2";
+    //获取当前的行
+    NSInteger row=[indexPath row];
+    if([self.dataItemArray count]>row){
+        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        ACAccountRechargeCell *cell;
+        if(currentTab==1) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell1];
+            if(!cell) {
+                cell = [[ACAccountRechargeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell1];
+            }
+            [cell.lblTimeLong setText:[NSString stringWithFormat:@"有效期%@天",[dictionary objectForKey:@"valid"]]];
+            [cell.lblTime setText:[NSString stringWithFormat:@"%@分钟",[dictionary objectForKey:@"duration"]]];
+            [cell.lblStorage setText:[NSString stringWithFormat:@"%@MB",[dictionary objectForKey:@"storage"]]];
+        } else {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell2];
+            if(!cell) {
+                cell = [[ACAccountRechargeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell2];
+            }
+            if(currentTab ==2 ) {
+                [cell.lblTimeLong setText:@"无时间限制"];
+                [cell.lblTimeAndStorage setText:[NSString stringWithFormat:@"%@分钟",[dictionary objectForKey:@"duration"]]];
+            } else if(currentTab==3) {
+                [cell.lblTimeLong setText:[NSString stringWithFormat:@"有效期%@天",[dictionary objectForKey:@"valid"]]];
+                [cell.lblTimeAndStorage setText:[NSString stringWithFormat:@"%@MB",[dictionary objectForKey:@"storage"]]];
+            }
+        }
+        [cell.lblName setText:[dictionary objectForKey:@"name"]];
+        [cell setCurrentType:currentTab];
+        [cell setData:dictionary];
+        [cell setControler:self];
+        return cell;
+    }else{
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([self.dataItemArray count]>[indexPath indexAtPosition:1]){
+        //不处理单击事件
+    }else{
+        //加载更多
+        _currentPage++;
+        [self reloadTableViewDataSource];
+    }
+}
+
+#pragma mark -
+#pragma mark Custom Methods
+
+- (void)reloadTableViewDataSource{
+	if([[Config Instance]isLogin]){
+        _reloading = YES;
+        [self.tableView reloadData];
+        if(currentTab == 1){
+            
+            self.dataItemArray=_leftDataItemArray;
+            
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//            [requestParams setObject:@"2cec276a043223d9ff47859082cd99bc"  forKey:@"productrecordno"];
+            [requestParams setObject:@"3"  forKey:@"type"];
+            [requestParams setObject:@"1"  forKey:@"status"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_leftCurrentPage] forKey:@"currentpage"];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
+        } else if (currentTab == 2){
+            
+            self.dataItemArray=_centerDataItemArray;
+            
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//            [requestParams setObject:@"2cec276a043223d9ff47859082cd99bc"  forKey:@"productrecordno"];
+            [requestParams setObject:@"2"  forKey:@"type"];
+            [requestParams setObject:@"1"  forKey:@"status"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_centerCurrentPage] forKey:@"currentpage"];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
+        } else if (currentTab == 3){
+            
+            self.dataItemArray=_rightDataItemArray;
+            
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//            [requestParams setObject:@"2cec276a043223d9ff47859082cd99bc"  forKey:@"productrecordno"];
+            [requestParams setObject:@"1"  forKey:@"type"];
+            [requestParams setObject:@"1"  forKey:@"status"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_rightCurrentPage] forKey:@"currentpage"];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
+        }
+    }else{
+        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+        [Common noLoginAlert:self];
+    }
+}
+
+@end

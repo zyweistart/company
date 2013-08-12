@@ -31,11 +31,17 @@
 @property (strong,nonatomic) NSMutableDictionary *contact;
 //不能通过软件拔打的号码
 @property (strong,nonatomic) NSMutableArray *noDialPhoneNumber;
+//是否已经套餐过基础套餐
+@property (assign,nonatomic) BOOL isPayBase;
+//当前用户的套餐列表
+@property (strong,nonatomic) NSMutableArray *currentPackagesList;
 
-@property (assign,nonatomic) BOOL isPay;
++ (Config *)Instance;
 
-+(Config *)Instance;
++ (void)initData;
 
 - (BOOL)isOldUser;
+
+
 
 @end

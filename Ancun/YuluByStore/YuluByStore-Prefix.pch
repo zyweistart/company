@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark -当前是否为测试环境产品上线需要注释该宏定义
-//#define TEST
+#define TEST
 #pragma mark -越狱版定义标记非越狱版需要注释该宏义
 #define JAILBREAK
 
@@ -17,7 +17,7 @@
 //System
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-//Library
+//Library;
 #import "ATMHud.h"
 #import "ASIHTTPRequest.h"
 #import "BaiduMobStat.h"
@@ -53,6 +53,9 @@
 #define CACHE_ACCOUNT_USERECORD @"CACHE_ACCOUNT_USERECORD"
 #define CACHE_OLDACCOUNT_MONTH @"CACHE_OLDACCOUNT_MONTH"
 #define CACHE_OLDACCOUNT_DAY @"CACHE_OLDACCOUNT_DAY"
+#define CACHE_ACCOUNT_PAY1 @"CACHE_ACCOUNT_PAY1"
+#define CACHE_ACCOUNT_PAY2 @"CACHE_ACCOUNT_PAY2"
+#define CACHE_ACCOUNT_PAY3 @"CACHE_ACCOUNT_PAY3"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2

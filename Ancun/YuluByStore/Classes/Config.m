@@ -21,10 +21,14 @@ static Config * instance = nil;
             [phoneList addObject:@"112"];
             [phoneList addObject:@"95105856"];
             [instance setNoDialPhoneNumber:phoneList];
-            [instance setIsPay:NO];
+            [instance setIsPayBase:NO];
         }
     }
     return instance;
+}
+
++ (void)initData{
+    instance=nil;
 }
 
 #pragma mark 是否为老用户

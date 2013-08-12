@@ -9,6 +9,7 @@
 #import "ACAccountViewController.h"
 #import "ACAccountPayCell.h"
 #import "ACAccountUseRecordCell.h"
+#import "ACRechargeViewController.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
@@ -57,7 +58,7 @@
 }
 
 - (void)accountPay:(id)sender{
-    NSLog(@"accountPay");
+    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -208,26 +209,26 @@
     if([response successFlag]) {
         if(currentTab == 1) {
             _leftDataItemArray=self.dataItemArray;
+            [[Config Instance] setIsPayBase:NO];
+            [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
             //计算剩余套餐值
-            [[Config Instance] setIsPay:NO];
             int basesum=0,baseuse=0,timecan=0,storsum=0;
             for (NSMutableDictionary *data in _leftDataItemArray) {
                 int ctype=[[data objectForKey:@"ctype"]intValue];
                 //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
                 if (ctype==0||ctype==1||ctype==3) {
                     //只计算当前生效的套餐
-                    
                     NSDate *currentDate=[NSDate date];
                     NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
                     NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
-                    if([currentDate compare:starttime]>=0&& [currentDate compare:endtime]){
+                    if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
                         storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
                         if(ctype==0||ctype==3){
                             basesum=[[data objectForKey:@"rectimelimit"]intValue];
                             baseuse=[[data objectForKey:@"useurectime"]intValue];
                             if(ctype==3){
                                 //标记当前用户已经购买过基础套餐
-                                [[Config Instance] setIsPay:YES];
+                                [[Config Instance] setIsPayBase:YES];
                             }
                         }
                     }

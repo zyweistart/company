@@ -9,32 +9,35 @@
 #import "ACOldAccountDayCell.h"
 
 @implementation ACOldAccountDayCell
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+//高为60
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(25, 10, 50, 30)];
-        [lbl1 setFont:[UIFont systemFontOfSize:17]];
-        [lbl1 setTextColor:[UIColor redColor]];
-        [lbl1 setText:@"05号"];
-        [self addSubview:lbl1];
+        _lblMonth=[[UILabel alloc]initWithFrame:CGRectMake(40, 5, 50, 25)];
+        [_lblMonth setFont:[UIFont systemFontOfSize:20]];
+        [_lblMonth setTextAlignment:NSTextAlignmentCenter];
+        [_lblMonth setTextColor:[UIColor grayColor]];
+        [self addSubview:_lblMonth];
         
-        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
-        [lbl1 setFont:[UIFont systemFontOfSize:15]];
-        [lbl1 setBackgroundColor:[UIColor blackColor]];
-        [lbl1 setTextColor:[UIColor redColor]];
-        [lbl1 setText:@"充值"];
-        [self addSubview:lbl1];
+        _lblTime=[[UILabel alloc]initWithFrame:CGRectMake(40, 30, 50, 25)];
+        [_lblTime setFont:[UIFont systemFontOfSize:15]];
+        [_lblTime setTextAlignment:NSTextAlignmentCenter];
+        [_lblTime setTextColor:[UIColor grayColor]];
+        [self addSubview:_lblTime];
         
-        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(215, 10, 80, 30)];
-        [lbl1 setFont:[UIFont systemFontOfSize:15]];
+        _lblRemark=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
+        [_lblRemark setFont:[UIFont systemFontOfSize:15]];
+        [_lblRemark setTextColor:[UIColor redColor]];
+        [self addSubview:_lblRemark];
         
-        [lbl1 setTextColor:[UIColor redColor]];
-        [lbl1 setText:@"+6012分钟"];
-        [self addSubview:lbl1];
+        _lblValue=[[UILabel alloc]initWithFrame:CGRectMake(215, 10, 80, 30)];
+        [_lblValue setFont:[UIFont systemFontOfSize:15]];
+        [_lblValue setTextColor:[UIColor redColor]];
+        [_lblValue setTextAlignment:NSTextAlignmentCenter];
+        [self addSubview:_lblValue];
         
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }

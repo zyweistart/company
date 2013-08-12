@@ -9,6 +9,7 @@
 #import "ACOldAccountViewController.h"
 #import "ACOldAccountMonthCell.h"
 #import "ACOldAccountDayViewController.h"
+#import "ACRechargeViewController.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
@@ -73,7 +74,7 @@
     [_btnPay setFrame:CGRectMake(250, 15, 50, 20)];
     [_btnPay setImage:[UIImage imageNamed:@"accountpay_normal"] forState:UIControlStateNormal];
     [_btnPay setBackgroundImage:[UIImage imageNamed:@"accountpay_pressed"] forState:UIControlStateHighlighted];
-//    [_btnPay addTarget:self action:@selector(onPay:) forControlEvents:UIControlEventTouchDown];
+    [_btnPay addTarget:self action:@selector(onPay:) forControlEvents:UIControlEventTouchDown];
     [view addSubview:_btnPay];
     
     [self.view addSubview:view];
@@ -83,11 +84,19 @@
     if(dictioanry){
         id content=[dictioanry objectForKey:CACHE_OLDACCOUNT_MONTH];
         if(content){
-//            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            if([self.dataItemArray count]>0){
+                [self.tableView reloadData];
+            }
         }
     }
     
 }
+
+- (void)onPay:(id)sender {
+    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
+}
+
 
 //表视图委托
 #pragma mark -
@@ -95,6 +104,10 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshNotaryList]){
+        [self autoRefresh];
+        [[Config Instance]setIsRefreshNotaryList:NO];
+    }
     [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACOldAccountViewController"];
 }
 
@@ -114,8 +127,13 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     [super requestFinishedByResponse:response requestCode:reqCode];
-    if([response successFlag]) {
-
+    if([response successFlag]){
+        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+            [dictionary setObject:[response responseString] forKey:CACHE_OLDACCOUNT_MONTH];
+            //缓存数据
+            [Common setCache:[Config Instance].cacheKey data:dictionary];
+        }
     }
 }
 
@@ -165,10 +183,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.dataItemArray count]>[indexPath indexAtPosition:1]){
-        //不处理单击事件
-        [self.navigationController pushViewController:[[ACOldAccountDayViewController alloc]init] animated:YES];
-        
+    NSInteger row=[indexPath row];
+    if([self.dataItemArray count]>row){
+        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        [self.navigationController pushViewController:[[ACOldAccountDayViewController alloc] initWithDate:[dictionary objectForKey:@"tmonth"]] animated:YES];
     }else{
         //加载更多
         _currentPage++;
