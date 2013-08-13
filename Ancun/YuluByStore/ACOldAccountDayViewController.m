@@ -11,6 +11,8 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
+#define CACHE_OLDACCOUNT_DAY CACHE_CONSTANT(@"CACHE_OLDACCOUNT_DAY")
+
 @interface ACOldAccountDayViewController ()
 
 @end
@@ -25,6 +27,29 @@
         _month=[date substringWithRange:NSMakeRange(5,2)];
         
         self.navigationItem.title=[NSString stringWithFormat:@"%d年%@月消费明细",_year,_month];
+        
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+        [view setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        
+        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 35, 30)];
+        [lbl1 setFont:[UIFont systemFontOfSize:17]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setText:@"时间"];
+        [view addSubview:lbl1];
+        
+        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
+        [lbl1 setFont:[UIFont systemFontOfSize:17]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setText:@"类别"];
+        [view addSubview:lbl1];
+        
+        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(235, 10, 35, 30)];
+        [lbl1 setFont:[UIFont systemFontOfSize:17]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setText:@"时长"];
+        [view addSubview:lbl1];
+        
+        [self.view addSubview:view];
         
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 50,
@@ -49,41 +74,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    //设置Navigation Bar颜色
-    self.navigationController.navigationBar.tintColor = NAVCOLOR;
-    
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    [view setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    
-    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:17]];
-    [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    [lbl1 setText:@"时间"];
-    [view addSubview:lbl1];
-    
-    lbl1=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:17]];
-    [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    [lbl1 setText:@"类别"];
-    [view addSubview:lbl1];
-    
-    lbl1=[[UILabel alloc]initWithFrame:CGRectMake(235, 10, 35, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:17]];
-    [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    [lbl1 setText:@"时长"];
-    [view addSubview:lbl1];
-    
-    [self.view addSubview:view];
-    
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
         id content=[dictioanry objectForKey:[NSString stringWithFormat:@"%d%@-%@",_year,_month,CACHE_OLDACCOUNT_DAY]];
         if(content){
             self.dataItemArray=[[XML analysis:content] dataItemArray];
-            if([self.dataItemArray count]>0){
+            if([self.dataItemArray count]>0) {
                 [self.tableView reloadData];
             }
         }
@@ -97,16 +94,13 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshNotaryList]){
-        [self autoRefresh];
-        [[Config Instance]setIsRefreshNotaryList:NO];
+    if(![[Config Instance]isOldUser]) {
+        if(!self.dataItemArray||[self.dataItemArray count]==0){
+            [self autoRefresh];
+        }
+    } else {
+        NSLog(@"------");
     }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACOldAccountDayViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACOldAccountDayViewController"];
 }
 
 #pragma mark -

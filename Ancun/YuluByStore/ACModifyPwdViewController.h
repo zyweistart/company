@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACModifyPwdViewController : UIViewController<HttpViewDelegate>
+@interface ACModifyPwdViewController : ACBaseViewController<HttpViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *inputOldPassword;
 

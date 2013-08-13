@@ -73,14 +73,6 @@
     [self autoLogin];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACLoginViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACLoginViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 
@@ -105,8 +97,10 @@
         UINavigationController *dialViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACDialViewController alloc]init]];
         //是否隐藏导航条
         dialViewControllerNav.navigationBarHidden = YES;
+        dialViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactViewController alloc]init]];
+        contactViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //我的账户
         UINavigationController *accountViewControllerNav;
         if([[Config Instance]isOldUser]) {
@@ -114,10 +108,14 @@
         } else {
             accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
         }
+        accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //录音管理
         UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
+        recordingManagerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
+        moreViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        
         //添加标签控制器
         UITabBarController *_tabBarController = [[UITabBarController alloc] init];
         _tabBarController.delegate = self;

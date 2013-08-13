@@ -7,7 +7,7 @@
 //
 #import "SSCheckBoxView.h"
 
-@interface ACLoginViewController : UIViewController<UITabBarControllerDelegate,HttpViewDelegate,ResultDelegate>
+@interface ACLoginViewController : ACBaseViewController<UITabBarControllerDelegate,HttpViewDelegate,ResultDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *txtPhone;
 @property (retain, nonatomic) IBOutlet UITextField *txtPassword;

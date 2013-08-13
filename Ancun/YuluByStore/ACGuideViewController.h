@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACGuideViewController : UIViewController <UIScrollViewDelegate>
+@interface ACGuideViewController : ACBaseViewController <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *contentList;
 

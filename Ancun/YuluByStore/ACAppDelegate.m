@@ -16,15 +16,18 @@
 #else
 #import "IAPHelper.h"
 #endif
+#ifndef TEST
+#import "BaiduMobStat.h"
+#endif
 
 @implementation ACAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-
     //显示系统托盘
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
-    //百度统计
+#ifndef TEST
+    //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = NO;
     //渠道
@@ -33,6 +36,7 @@
     statTracker.sessionResumeInterval = 60;
     //应用ID
     [statTracker startWithAppId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BaiduWithAppId"]];
+#endif
     
     //后台播放音频设置
     AVAudioSession *session = [AVAudioSession sharedInstance];

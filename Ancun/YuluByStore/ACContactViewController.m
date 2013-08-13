@@ -53,14 +53,6 @@
     [self refresh:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACContactViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACContactViewController"];
-}
-
 #pragma mark -
 #pragma mark DelegateMethod
 

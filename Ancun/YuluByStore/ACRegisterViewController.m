@@ -48,14 +48,6 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACRegisterViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACRegisterViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 

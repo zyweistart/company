@@ -6,6 +6,6 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACAboutUsViewController : UIViewController
+@interface ACAboutUsViewController : ACBaseViewController
 
 @end

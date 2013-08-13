@@ -29,14 +29,6 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACModifyPwdViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACModifyPwdViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 

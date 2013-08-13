@@ -13,6 +13,8 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
+#define CACHE_ACCOUNT_USERECORD CACHE_CONSTANT(@"CACHE_ACCOUNT_USERECORD")
+
 @interface ACAccountViewController ()
 
 //界面按钮事件
@@ -47,67 +49,55 @@
         }
         [_refreshHeaderView refreshLastUpdatedDate];
         
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
-                                                initWithBarButtonSystemItem: UIBarButtonSystemItemSave
-                                                target:self
-                                                action:@selector(accountPay:)];
+        _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
+        [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip1 setText:@"基础包月套餐: 正在计算..."];
+        [self.view addSubview:_lblTip1];
         
+        _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
+        [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
+        [self.view addSubview:_lblTip2];
+        
+        _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
+        [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip3 setText:@"当前可用容量: 正在计算..."];
+        [self.view addSubview:_lblTip3];
+        
+        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 81, 159, 40)];
+        [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
+        [_leftTopTab setBackgroundColor:[UIColor blackColor]];
+        [self.view addSubview:_leftTopTab];
+        
+        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 81, 160, 40)];
+        [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
+        [_rightTopTab setBackgroundColor:[UIColor blackColor]];
+        [self.view addSubview:_rightTopTab];
+        
+        _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 117, 159, 4)];
+        [_lblSlid setBackgroundColor:NAVCOLOR];
+        [self.view addSubview:_lblSlid];
+        
+        _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+        [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
+        [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+        [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
+        [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
-- (void)accountPay:(id)sender{
-    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    //设置Navigation Bar颜色
-    self.navigationController.navigationBar.tintColor = NAVCOLOR;
-    
-    _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
-    [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip1 setText:@"基础包月套餐: 正在计算..."];
-    [self.view addSubview:_lblTip1];
-    _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
-    [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
-    [self.view addSubview:_lblTip2];
-    _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
-    [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip3 setText:@"当前可用容量: 正在计算..."];
-    [self.view addSubview:_lblTip3];
-    
-    _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 81, 159, 40)];
-    [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
-    [_leftTopTab setBackgroundColor:[UIColor blackColor]];
-    [self.view addSubview:_leftTopTab];
-    
-    _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 81, 160, 40)];
-    [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
-    [_rightTopTab setBackgroundColor:[UIColor blackColor]];
-    [self.view addSubview:_rightTopTab];
-    
-    _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 117, 159, 4)];
-    [_lblSlid setBackgroundColor:NAVCOLOR];
-    [self.view addSubview:_lblSlid];
-    
-    _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     //标记当前TAB页为第一页
     currentTab=1;
+    
     //显示刷新标记
     [[Config Instance]setIsRefreshAccountPayList:YES];
+    [[Config Instance]setIsRefreshAccountUseRecordList:NO];
     
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
@@ -120,16 +110,30 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(currentTab==1) {
+        if([[Config Instance]isRefreshAccountPayList]) {
+            [self autoRefresh];
+            [[Config Instance] setIsRefreshAccountPayList:NO];
+        }
+    } else if (currentTab==2) {
+        if([[Config Instance]isRefreshAccountUseRecordList]) {
+            [self autoRefresh];
+            [[Config Instance] setIsRefreshAccountUseRecordList:NO];
+        }
+    }
+}
+
 #pragma mark-
 #pragma mark 界面按钮事件
 
+- (void)accountPay:(id)sender{
+    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
+}
+
 - (void)leftTopButtonAction {
     currentTab=1;
-    
-    _leftPageSize=_pageSize;
-    _leftCurrentPage=_currentPage;
-	_leftReloading=_reloading;
-    _leftLoadOver=_loadOver;
     
     if(_leftDataItemArray){
         self.dataItemArray=_leftDataItemArray;
@@ -152,11 +156,6 @@
 - (void)rightTopButtonAction {
     currentTab=2;
     
-    _rightPageSize=_pageSize;
-    _rightCurrentPage=_currentPage;
-	_rightReloading=_reloading;
-    _rightLoadOver=_loadOver;
-    
     if(_rightDataItemArray){
         self.dataItemArray=_rightDataItemArray;
         [self.tableView reloadData];
@@ -175,26 +174,6 @@
     [UIView commitAnimations];
 }
 
-//表视图委托
-#pragma mark -
-#pragma mark table view data source methods
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    if(currentTab==1){
-        if([[Config Instance]isRefreshAccountPayList]){
-            [self autoRefresh];
-            [[Config Instance] setIsRefreshAccountPayList:NO];
-        }
-    }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACAccountViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACAccountViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 
@@ -204,52 +183,62 @@
     }
 }
 
-- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
     [super requestFinishedByResponse:response requestCode:reqCode];
     if([response successFlag]) {
         if(currentTab == 1) {
             _leftDataItemArray=self.dataItemArray;
             [[Config Instance] setIsPayBase:NO];
             [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
-            //计算剩余套餐值
-            int basesum=0,baseuse=0,timecan=0,storsum=0;
-            for (NSMutableDictionary *data in _leftDataItemArray) {
-                int ctype=[[data objectForKey:@"ctype"]intValue];
-                //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
-                if (ctype==0||ctype==1||ctype==3) {
-                    //只计算当前生效的套餐
-                    NSDate *currentDate=[NSDate date];
-                    NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
-                    NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
-                    if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
-                        storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
-                        if(ctype==0||ctype==3){
-                            basesum=[[data objectForKey:@"rectimelimit"]intValue];
-                            baseuse=[[data objectForKey:@"useurectime"]intValue];
-                            if(ctype==3){
-                                //标记当前用户已经购买过基础套餐
-                                [[Config Instance] setIsPayBase:YES];
+            if([_leftDataItemArray count]>0) {
+                //计算剩余套餐值
+                int basesum=0,baseuse=0,timecan=0,storsum=0;
+                for (NSMutableDictionary *data in _leftDataItemArray) {
+                    int ctype=[[data objectForKey:@"ctype"]intValue];
+                    //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
+                    if (ctype==0||ctype==1||ctype==3) {
+                        //只计算当前生效的套餐
+                        NSDate *currentDate=[NSDate date];
+                        NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
+                        NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
+                        if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
+                            storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
+                            if(ctype==0||ctype==3){
+                                basesum=[[data objectForKey:@"rectimelimit"]intValue];
+                                baseuse=[[data objectForKey:@"useurectime"]intValue];
+                                if(ctype==3){
+                                    //标记当前用户已经购买过基础套餐
+                                    [[Config Instance] setIsPayBase:YES];
+                                }
                             }
                         }
+                    } else if(ctype==2) {
+                        int timesum=[[data objectForKey:@"rectimelimit"]intValue];
+                        int timeuse=[[data objectForKey:@"useurectime"]intValue];
+                        timecan+=timesum-timeuse;
                     }
-                } else if(ctype==2) {
-                    int timesum=[[data objectForKey:@"rectimelimit"]intValue];
-                    int timeuse=[[data objectForKey:@"useurectime"]intValue];
-                    timecan+=timesum-timeuse;
+                    float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
+                    [_lblTip1 setText:[NSString stringWithFormat:@"基础包月套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
+                    [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
+                    [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
                 }
-                float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
-                [_lblTip1 setText:[NSString stringWithFormat:@"基础包月套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
-                [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
-                [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
+            } else {
+                //当没有任何套餐时
+                [_lblTip1 setText:@"基础包月套餐: 剩余0分钟，已用0分钟"];
+                [_lblTip2 setText:@"增值时长剩余: 0分钟"];
+                [_lblTip3 setText:@"当前可用容量: 0MB"];
             }
-        } else if(currentTab == 2) {
-            _rightDataItemArray=self.dataItemArray;
-            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-                [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_USERECORD];
-                //缓存数据
-                [Common setCache:[Config Instance].cacheKey data:dictionary];
-            }
+            //增加充值按钮
+            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
+        }
+    }
+    if(currentTab == 2) {
+        _rightDataItemArray=self.dataItemArray;
+        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+            [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_USERECORD];
+            //缓存数据
+            [Common setCache:[Config Instance].cacheKey data:dictionary];
         }
     }
 }
@@ -282,7 +271,7 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *accountPayCell=@"ACAccountPayCell";
     static NSString *accountPayCellTimeLong=@"ACAccountPayCellTimeLong";
     static NSString *accountUseRecordCell=@"ACAccountUseRecordCell";
@@ -437,7 +426,7 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if([self.dataItemArray count]>[indexPath indexAtPosition:1]){
         //不处理单击事件
     }else{
@@ -450,23 +439,20 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (void)reloadTableViewDataSource{
+- (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
         _reloading = YES;
         [self.tableView reloadData];
         if(currentTab == 1){
-            
+            self.navigationItem.rightBarButtonItem=nil;
             self.dataItemArray=_leftDataItemArray;
-            
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             _loadHttp=[[HttpRequest alloc]init];
             [_loadHttp setDelegate:self];
             [_loadHttp setController:self];
             [_loadHttp loginhandle:@"v4combinfoGet" requestParams:requestParams];
         } else if (currentTab == 2){
-            
             self.dataItemArray=_rightDataItemArray;
-            
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
             [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];

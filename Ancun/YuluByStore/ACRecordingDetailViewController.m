@@ -51,15 +51,6 @@
     [_recordingDetailHttp setController:self];
     [_recordingDetailHttp loginhandle:@"v4recGet" requestParams:requestParams];
 }
-
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACRecordingDetailViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACRecordingDetailViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 
@@ -95,8 +86,6 @@
         }else if(reqCode==REQUESTCODE_APPLYNOTARY){
             [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
             [_mainData setObject:@"2" forKey:@"cerflag"];
-            //刷新出证列表页面
-            [[Config Instance]setIsRefreshNotaryList:YES];
             
             ACNotaryDetailViewController *notaryDetailViewController=[[ACNotaryDetailViewController alloc]init];
             notaryDetailViewController.hidesBottomBarWhenPushed = YES;
@@ -104,18 +93,12 @@
         }else if(reqCode==REQUESTCODE_CANCELNOTARY){
             [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
             [_mainData setObject:@"1" forKey:@"cerflag"];
-            //刷新出证列表页面
-            [[Config Instance]setIsRefreshNotaryList:YES];
             
             [Common notificationMessage:@"取消成功" inView:self.view];
         }else if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply||
                  reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
             [_mainData setObject:@"1" forKey:@"accstatus"];
-            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
-                //刷新提取列表
-                [[Config Instance] setIsRefreshExtractionList:YES];
-            }
             ACExtractionDetailViewController *extractionDetailViewController=[[ACExtractionDetailViewController alloc]init];
             [extractionDetailViewController setFileno:_fileno];
             if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){

@@ -34,14 +34,6 @@
     _lblContentPlaceholder.hidden=NO;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACFeedBackViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACFeedBackViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACFeedBackViewController : UIViewController<UITextViewDelegate,HttpViewDelegate>
+@interface ACFeedBackViewController : ACBaseViewController<UITextViewDelegate,HttpViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextView *fbContent;
 @property (retain, nonatomic) IBOutlet UITextField *fbContact;

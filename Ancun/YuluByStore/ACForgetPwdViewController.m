@@ -36,14 +36,6 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACForgetPwdViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACForgetPwdViewController"];
-}
-
 - (IBAction)backgroundDoneEditing:(id)sender {
     [_regInputPhone resignFirstResponder];
     [_regInputVerificationCode resignFirstResponder];

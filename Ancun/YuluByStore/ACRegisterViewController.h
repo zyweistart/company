@@ -8,7 +8,7 @@
 
 #import "SSCheckBoxView.h"
 
-@interface ACRegisterViewController : UIViewController<HttpViewDelegate>{
+@interface ACRegisterViewController : ACBaseViewController<HttpViewDelegate>{
     int _second;
     NSTimer *_verificationCodeTime;
     NSString *_phone;

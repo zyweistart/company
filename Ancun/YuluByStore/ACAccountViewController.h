@@ -21,16 +21,7 @@
     UIButton *_leftTopTab;
     UIButton *_rightTopTab;
 
-    NSInteger _leftPageSize;
-    NSInteger _leftCurrentPage;
-	BOOL _leftReloading;
-    BOOL _leftLoadOver;
     NSMutableArray *_leftDataItemArray;
-    
-    NSInteger _rightPageSize;
-    NSInteger _rightCurrentPage;
-	BOOL _rightReloading;
-    BOOL _rightLoadOver;
     NSMutableArray *_rightDataItemArray;
     
 }

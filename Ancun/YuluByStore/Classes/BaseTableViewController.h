@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-@interface BaseTableViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface BaseTableViewController : ACBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (retain,nonatomic) UITableView *tableView;
 @property (retain,nonatomic) NSMutableArray *dataItemArray;

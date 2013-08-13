@@ -13,6 +13,8 @@
 #import "DataSingleton.h"
 #import "ACContactViewController.h"
 
+#define CACHE_RECORDINGMANAGER CACHE_CONSTANT(@"CACHE_RECORDINGMANAGER")
+
 @interface ACRecordingManagerViewController ()
 
 @end
@@ -55,11 +57,6 @@
         [self autoRefresh];
         [[Config Instance]setIsRefreshRecordingList:NO];
     }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACRecordingManagerViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACRecordingManagerViewController"];
 }
 
 #pragma mark -

@@ -9,6 +9,7 @@
 #import "ACRechargeConfirmViewController.h"
 #import "NSString+Date.h"
 #import "AlixPay.h"
+#import "ACRechargeNav.h"
 
 @interface ACRechargeConfirmViewController ()
 
@@ -30,6 +31,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationItem.title=@"账户充值";
+        
+        _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        [self.view addSubview:_rechargeNav];
+        
     }
     return self;
 }
@@ -37,37 +42,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor grayColor]];
-    
-	UILabel *lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    [lblTip1 setFont:[UIFont systemFontOfSize:15]];
-    [lblTip1 setTextAlignment:NSTextAlignmentCenter];
-    [lblTip1 setBackgroundColor:[UIColor redColor]];
-    [lblTip1 setTextColor:[UIColor grayColor]];
-    [lblTip1 setText:@"选择套餐"];
-    [self.view addSubview:lblTip1];
-    
-    _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(80, 0, 80, 40)];
-    [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip2 setTextAlignment:NSTextAlignmentCenter];
-    [_lblTip2 setBackgroundColor:[UIColor redColor]];
-    [_lblTip2 setTextColor:[UIColor grayColor]];
-    [_lblTip2 setText:@"确认信息"];
-    [self.view addSubview:_lblTip2];
-    
-    _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(160, 0, 80, 40)];
-    [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip3 setTextAlignment:NSTextAlignmentCenter];
-    [_lblTip3 setTextColor:[UIColor grayColor]];
-    [_lblTip3 setText:@"支付"];
-    [self.view addSubview:_lblTip3];
-    
-    _lblTip4=[[UILabel alloc]initWithFrame:CGRectMake(240, 0, 80, 40)];
-    [_lblTip4 setFont:[UIFont systemFontOfSize:15]];
-    [_lblTip4 setTextAlignment:NSTextAlignmentCenter];
-    [_lblTip4 setTextColor:[UIColor grayColor]];
-    [_lblTip4 setText:@"成功"];
-    [self.view addSubview:_lblTip4];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if(_currentType==1) {
         //基础套餐
         [self layoutPayPakcage];
@@ -76,11 +54,12 @@
         [self layoutPayDuration];
     } else if(_currentType==3) {
         //存储
+        //标记当前套餐列表中是否已经存在包月存储套餐
         BOOL storageflag=NO;
         for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
             if([[data objectForKey:@"ctype"]intValue]==1){
-                //标记当前套餐列表中是否已经存在包月存储套餐
                 storageflag=YES;
+                break;
             }
         }
         if(storageflag) {
@@ -91,7 +70,6 @@
             [self layoutPayStorage];
         }
     }
-    
 }
 
 - (void)layoutPayPakcage{
@@ -166,8 +144,9 @@
         NSDate *nEndtime=[[nData objectForKey:@"endtime"] stringConvertDate];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        [lblStartDay setText:[formatter stringFromDate:[nEndtime dateByAddingTimeInterval:24*60*60]]];
-        [lblEndDay setText:[formatter stringFromDate:[nEndtime dateByAddingTimeInterval:secondsPerDay]]];
+        NSDate *lastEndTime=[nEndtime dateByAddingTimeInterval:24*60*60];
+        [lblStartDay setText:[formatter stringFromDate:lastEndTime]];
+        [lblEndDay setText:[formatter stringFromDate:[lastEndTime dateByAddingTimeInterval:secondsPerDay]]];
     } else {
         NSDate *date=[[NSDate alloc]init];
         NSDate *tomorrow=[NSDate dateWithTimeIntervalSinceNow:secondsPerDay];
@@ -190,7 +169,7 @@
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
     [_btnConfirm setFrame:CGRectMake(97, 240, 127, 35)];
-//    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+//    [_btnConfirm setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
@@ -220,11 +199,14 @@
     [lbl1 setText:@"购买份数:"];
     [mainView addSubview:lbl1];
     
-    UIButton *btnNum=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [btnNum setTitle:@"选择" forState:UIControlStateNormal];
-    [btnNum setFrame:CGRectMake(115, 70, 50, 30)];
-    [btnNum addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
-    [mainView addSubview:btnNum];
+    UIStepper *stepper=[[UIStepper alloc]initWithFrame:CGRectMake(115, 70, 10, 30)];
+    stepper.tag=1;
+    stepper.minimumValue=1;
+    stepper.maximumValue=30;
+    stepper.stepValue=1;
+    stepper.value=1;
+    [stepper addTarget:self action:@selector(doStepper) forControlEvents:UIControlEventValueChanged];
+    [mainView addSubview:stepper];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
@@ -245,6 +227,7 @@
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 70, 30)];
+    lblMoney.tag=2;
     [lblMoney setFont:[UIFont systemFontOfSize:15]];
     [lblMoney setTextColor:[UIColor redColor]];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
@@ -371,7 +354,7 @@
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
     [_btnConfirm setFrame:CGRectMake(97, 240, 127, 35)];
-    //    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+//    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
@@ -503,7 +486,6 @@
     
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
-    [_btnConfirm setFrame:CGRectMake(97, 350, 127, 35)];
 //    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
@@ -512,19 +494,19 @@
     int tarvalue=[[_data objectForKey:@"storage"]intValue];
     [lblValue setText:[NSString stringWithFormat:@"%dMB",tarvalue]];
     for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
-        //只过滤出包月套餐
-        if([[data objectForKey:@"ctype"]intValue]==1){
+        if([[data objectForKey:@"ctype"]intValue]==1) {
             NSDate *currentDate=[NSDate date];
             NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
             NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
-            if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
-                if([self isCurrentStorageExit:data]){
+            //只过滤出当前生效的存储包月套餐
+            if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0) {
+                if([self isCurrentStorageExit:data]) {
                     //只能续费一次
                     [Common alert:[NSString stringWithFormat:@"%@已续费",[_data objectForKey:@"name"]]];
                 } else {
                     //已购买的存储容量
                     int storsum=[[data objectForKey:@"auciquotalimit"]intValue]/1024/1024;
-                    if(tarvalue>=storsum){
+                    if(tarvalue>=storsum) {
                         //升级、续费
                         [lblOldStorageValue setText:[NSString stringWithFormat:@"%dMB",storsum]];
                         if(tarvalue>storsum) {
@@ -538,9 +520,15 @@
                             [lblConvertMoney setFont:[UIFont systemFontOfSize:15]];
                             [lblConvertMoney setTextColor:[UIColor redColor]];
                             [mainView addSubview:lblConvertMoney];
+                            //确认充值按钮位置调整
+                            [_btnConfirm setFrame:CGRectMake(97, 350, 127, 35)];
+                            
                             //升级
+                            //到期的时间戳(秒)
                             long endtimeLong=[endtime timeIntervalSince1970];
+                            //当前的时间戳(秒)
                             long currentLong=[[NSDate date]timeIntervalSince1970];
+                            //为天为单位ceilf获取最小整数
                             int oridays=ceilf((float)(endtimeLong-currentLong)/86400);
                             int leftdays=[[data objectForKey:@"buyvtime"]intValue];
                             double buyprice=[[data objectForKey:@"buyprice"]doubleValue];
@@ -548,33 +536,36 @@
                             double newprice=[[_data objectForKey:@"newprice"]doubleValue];
                             double amount=newprice-deamount;
                             if(amount<=0) {
-                                [Common alert:@"无法购买该套餐"];
+                                [Common alert:@"套餐异常无法购买当前套餐"];
+                                [self.navigationController popViewControllerAnimated:YES];
                             } else {
                                 [lblMoney setText:[NSString stringWithFormat:@"%0.2f-%0.2f=%0.2f",newprice,deamount,amount]];
                                 [lblConvertMoney setText:[NSString stringWithFormat:@"%0.2f*%d/%d=%0.2f",buyprice,oridays,leftdays,deamount]];
                                 [lblOldEndTime setText:[[data objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
                             }
                         } else {
+                            //确认充值按钮位置调整
+                            [_btnConfirm setFrame:CGRectMake(97, 330, 127, 35)];
+                            
                             //续费
                             NSMutableDictionary *lastData=[self lastNewPackages:1];
                             NSString *newStartTime=[[lastData objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)];
-                            NSLog(@"%@",newStartTime);
                             NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
                             [formatter setDateStyle:NSDateFormatterFullStyle];
                             [formatter setDateFormat:@"yyyy-MM-dd"];
                             NSDate *date=[formatter dateFromString:newStartTime];
                             //增加一天
-                            date=[date dateByAddingTimeInterval:24*60*60];
+                            NSDate *lastDate=[date dateByAddingTimeInterval:24*60*60];
                             NSTimeInterval secondsPerDay=24*60*60*[[_data objectForKey:@"valid"]intValue];
-                            NSDate *tomorrow=[date dateByAddingTimeInterval:secondsPerDay];
-                            [lblStartDay setText:[formatter stringFromDate:date]];
+                            NSDate *tomorrow=[lastDate dateByAddingTimeInterval:secondsPerDay];
+                            [lblStartDay setText:[formatter stringFromDate:lastDate]];
                             [lblEndDay setText:[formatter stringFromDate:tomorrow]];
                             [lblOldEndTime setText:[[data objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
                             
                         }
                     } else {
-                        [Common alert:@"暂不支持存储套餐降容量级别购买，请选择存储容量等于或大于您当前在使用套餐的存储服务，多点空间才能有备无患哦。"];
-                        //返回前一页
+                        [Common alert:@"暂不支持存储套餐降容量级别购买，请选择存储容量等于或大于您当前在使用套餐的存储服务，多点空间才能有备无患哦"];
+                        [self.navigationController popViewControllerAnimated:YES];
                     }
                 }
             }
@@ -588,15 +579,16 @@
     
 }
 
+//根据类型套餐获取最后充值的套餐
 - (NSMutableDictionary *)lastNewPackages:(int)ctype{
     NSDate *nEndtime;
     NSMutableDictionary *nData;
     for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
         //只过滤出包月套餐
-        if([[data objectForKey:@"ctype"]intValue]==ctype){
+        if([[data objectForKey:@"ctype"]intValue]==ctype) {
             NSDate *endtime=[[data objectForKey:@"endtime"] stringConvertDate];
             if(nEndtime) {
-                if([endtime compare:nEndtime]>=0){
+                if([endtime compare:nEndtime]>=0) {
                     nEndtime=endtime;
                     nData=data;
                 }
@@ -627,15 +619,24 @@
     return NO;
 }
 
+- (void)doStepper {
+    float newprice=[[_data objectForKey:@"newprice"]floatValue];
+    UIStepper *stepper=(UIStepper*)[self.view viewWithTag:1];
+    UILabel *lblMoney=(UILabel*)[self.view viewWithTag:2];
+    [lblMoney setText:[NSString stringWithFormat:@"%0.2f元",stepper.value*newprice]];
+}
+
+//确认充值
 - (void)confirm:(id)sender{
-    if([[Config Instance]isLogin]){
+    if([[Config Instance]isLogin]) {
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"3" forKey:@"payuse"];
         [requestParams setObject:[_data objectForKey:@"recordno"] forKey:@"recprod"];
         [requestParams setObject:@"1" forKey:@"actflag"];
         if(_currentType==2) {
             //时长可以购买多份
-            [requestParams setObject:@"1" forKey:@"quantity"];
+            UIStepper *stepper=(UIStepper*)[self.view viewWithTag:1];
+            [requestParams setObject:[NSString stringWithFormat:@"%.0f",stepper.value] forKey:@"quantity"];
         } else {
             //基础套餐，存储只能购买一份
             [requestParams setObject:@"1" forKey:@"quantity"];
@@ -656,7 +657,6 @@
                                 //续费
                                 [requestParams setObject:@"1" forKey:@"actflag"];
                             } else {
-                                [Common alert:@"暂不支持存储套餐降容量级别购买，请选择存储容量等于或大于您当前在使用套餐的存储服务，多点空间才能有备无患哦。"];
                                 return;
                             }
                         }
@@ -668,22 +668,21 @@
         [_alipayHttp setDelegate:self];
         [_alipayHttp setController:self];
         [_alipayHttp setRequestCode:10000000];
-        NSLog(@"%@",requestParams);
-//        [_alipayHttp loginhandle:@"v4alipayReq" requestParams:requestParams];
-    }else{
+        [_alipayHttp loginhandle:@"v4alipayReq" requestParams:requestParams];
+    } else {
         [Common noLoginAlert:self];
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex==0){
         [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
     }
 }
 
-- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
-    if(reqCode==10000000){
-        if([response successFlag]){
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
+    if(reqCode==10000000) {
+        if([response successFlag]) {
             NSString *orderString=[[[response mainData] objectForKey:@"alipayinfo"] objectForKey:@"reqcontent"];
             
             orderString=[orderString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
@@ -700,14 +699,13 @@
                 [alertView setTag:123];
                 [alertView show];
             }
-        } else {
-            NSLog(@"充值产品不存在或暂不支持");
         }
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (alertView.tag == 123) {
+        //跳转到App Store下载支付宝插件
 		NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 	}

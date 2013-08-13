@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACRechargeConfirmViewController : UIViewController<HttpViewDelegate,UIActionSheetDelegate>{
+@class ACRechargeNav;
+@interface ACRechargeConfirmViewController : ACBaseViewController<HttpViewDelegate,UIActionSheetDelegate>{
     
-    UILabel *_lblTip2;
-    UILabel *_lblTip3;
-    UILabel *_lblTip4;
+    ACRechargeNav *_rechargeNav;
     
     HttpRequest *_alipayHttp;
+    
 }
 
 @property (assign,nonatomic) int currentType;

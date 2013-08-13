@@ -12,6 +12,9 @@
 #import "ACRechargeViewController.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
+#import "ACAccountViewController.h"
+
+#define CACHE_OLDACCOUNT_MONTH CACHE_CONSTANT(@"CACHE_OLDACCOUNT_MONTH")
 
 @interface ACOldAccountViewController ()
 
@@ -104,16 +107,18 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshNotaryList]){
-        [self autoRefresh];
-        [[Config Instance]setIsRefreshNotaryList:NO];
+    if([[Config Instance]isOldUser]) {
+        if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshOldAccountMonthList]){
+            [self autoRefresh];
+            [[Config Instance]setIsRefreshOldAccountMonthList:NO];
+        }
+    } else {
+        //如果为新用户则直接进行跳转
+        UINavigationController *accountViewControllerNav= [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+        accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        [self.navigationController setViewControllers:[NSArray arrayWithObjects:accountViewControllerNav, nil]];
     }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACOldAccountViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACOldAccountViewController"];
 }
 
 #pragma mark -

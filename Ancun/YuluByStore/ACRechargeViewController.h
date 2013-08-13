@@ -7,36 +7,34 @@
 //
 #import "BaseRefreshTableViewController.h"
 
+@class ACRechargeNav;
 @interface ACRechargeViewController :BaseRefreshTableViewController<UIScrollViewDelegate,UIActionSheetDelegate>{
     
     HttpRequest *_loadHttp;
     
     int currentTab;
     
-    UILabel *_lblTip1;
-    UILabel *_lblTip2;
-    UILabel *_lblTip3;
-    UILabel *_lblTip4;
-    UILabel *_lblSlid;
+    ACRechargeNav *_rechargeNav;
     
     UIButton *_leftTopTab;
-    UIButton *_centerTopTab;
-    UIButton *_rightTopTab;
-    
     NSInteger _leftCurrentPage;
 	BOOL _leftReloading;
     BOOL _leftLoadOver;
     NSMutableArray *_leftDataItemArray;
     
+    UIButton *_centerTopTab;
     NSInteger _centerCurrentPage;
 	BOOL _centerReloading;
     BOOL _centerLoadOver;
     NSMutableArray *_centerDataItemArray;
     
+    UIButton *_rightTopTab;
     NSInteger _rightCurrentPage;
 	BOOL _rightReloading;
     BOOL _rightLoadOver;
     NSMutableArray *_rightDataItemArray;
+    
+    UILabel *_lblSlid;
     
 }
 

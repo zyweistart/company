@@ -32,15 +32,6 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACNotaryDetailViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACNotaryDetailViewController"];
-}
-
 #pragma mark -
 #pragma mark Custom Methods
 

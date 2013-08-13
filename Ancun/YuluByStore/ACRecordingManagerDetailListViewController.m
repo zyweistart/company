@@ -11,6 +11,8 @@
 #import "ACRecordingDetailCell.h"
 #import "DataSingleton.h"
 
+#define CACHE_RECORDINGMANAGERLIST CACHE_CONSTANT(@"CACHE_RECORDINGMANAGERLIST")
+
 @interface ACRecordingManagerDetailListViewController ()
 
 @end
@@ -85,11 +87,6 @@
     if(!self.dataItemArray||[self.dataItemArray count]==0){
         [self autoRefresh];
     }
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACRecordingManagerDetailListViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACRecordingManagerDetailListViewController"];
 }
 
 #pragma mark -

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACTermsOfServiceViewController : UIViewController{
+@interface ACTermsOfServiceViewController : ACBaseViewController{
     
     UIWebView *_webView;
     

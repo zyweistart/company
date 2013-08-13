@@ -67,8 +67,6 @@
         if(reqCode==REQUESTCODE_APPLYNOTARY){
             [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
             [_dictionary setObject:@"2" forKey:@"cerflag"];
-            //刷新出证列表页面
-            [[Config Instance]setIsRefreshNotaryList:YES];
             ACRecordingManagerDetailListViewController *con=(ACRecordingManagerDetailListViewController*)_controller;
             for(NSMutableDictionary *dic in [con dataItemArray]){
                 if([[dic objectForKey:@"fileno"] isEqualToString:[_dictionary objectForKey:@"fileno"]]){
@@ -84,8 +82,6 @@
         }else if(reqCode==REQUESTCODE_CANCELNOTARY){
             [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
             [_dictionary setObject:@"1" forKey:@"cerflag"];
-            //刷新出证列表页面
-            [[Config Instance] setIsRefreshNotaryList:YES];
             ACRecordingManagerDetailListViewController *con=(ACRecordingManagerDetailListViewController*)_controller;
             for(NSMutableDictionary *dic in [con dataItemArray]){
                 if([[dic objectForKey:@"fileno"] isEqualToString:[_dictionary objectForKey:@"fileno"]]){
@@ -100,10 +96,6 @@
                  reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
             [_dictionary setObject:@"1" forKey:@"accstatus"];
-            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
-                //刷新提取列表
-                [[Config Instance] setIsRefreshExtractionList:YES];
-            }
             ACRecordingManagerDetailListViewController *con=(ACRecordingManagerDetailListViewController*)_controller;
             for(NSMutableDictionary *dic in [con dataItemArray]){
                 if([[dic objectForKey:@"fileno"] isEqualToString:[_dictionary objectForKey:@"fileno"]]){

@@ -49,15 +49,6 @@
     [_buyHttp setRequestCode:REQUESTCODE_BUY_LOADPRODUCT];
     [_buyHttp handle:@"recprodGet" signKey:nil headParams:nil requestParams:requestParams];
 }
-
-- (void)viewDidAppear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACBuyViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACBuyViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 

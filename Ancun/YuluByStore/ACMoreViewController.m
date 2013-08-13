@@ -50,16 +50,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACMoreViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACMoreViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 

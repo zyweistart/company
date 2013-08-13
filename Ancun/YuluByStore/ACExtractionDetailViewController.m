@@ -46,22 +46,12 @@
     [_lbl_accendtime setText:[_extractionDics objectForKey:@"endtime"]];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:@"ACExtractionDetailViewController"];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [[BaiduMobStat defaultStat] pageviewEndWithName:@"ACExtractionDetailViewController"];
-}
-
 #pragma mark -
 #pragma mark Delegate Methods
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
         if(reqCode==REQUESTCODE_ACExtractionDetailViewController_cancel){
-            [[Config Instance] setIsRefreshExtractionList:YES];
             [_resultDictionary setObject:@"2" forKey:@"accstatus"];
             [self back:nil];
             [Common alert:@"提取码已取消"];

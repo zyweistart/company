@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-@interface ACDialViewController : UIViewController<ABNewPersonViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
+@interface ACDialViewController : ACBaseViewController<ABNewPersonViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
     
     NSMutableString *_dialString;
     //退格定时器

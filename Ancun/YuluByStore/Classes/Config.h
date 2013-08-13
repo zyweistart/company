@@ -14,13 +14,17 @@
 //是否需要计算缓存空间大小
 @property Boolean isCalculateTotal;
 //是否需要刷新出证列表页面
-@property Boolean isRefreshNotaryList;
+//@property Boolean isRefreshNotaryList;
 //是否需要刷新提取列表页面
-@property Boolean isRefreshExtractionList;
+//@property Boolean isRefreshExtractionList;
 //是否需要刷新录音详细页面
 @property Boolean isRefreshRecordingList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountPayList;
+//是否刷新账户套餐列表页面
+@property Boolean isRefreshAccountUseRecordList;
+
+@property Boolean isRefreshOldAccountMonthList;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息

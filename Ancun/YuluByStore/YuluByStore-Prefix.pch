@@ -20,7 +20,6 @@
 //Library;
 #import "ATMHud.h"
 #import "ASIHTTPRequest.h"
-#import "BaiduMobStat.h"
 //CustomClass
 #import "Config.h"
 #import "NSString+Utils.h"
@@ -28,16 +27,16 @@
 #import "Response.h"
 #import "XML.h"
 #import "HttpRequest.h"
+#import "ACBaseViewController.h"
 #endif
 //iPhone检测是否当前环境为iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+//缓存常量唯一方法
+#define CACHE_CONSTANT(STRING) [NSString stringWithFormat:@"%@-%@-%@",STRING,ACCESSID,[Common getCache:DEFAULTDATA_PHONE]]
+//导航背景
+#define NAVCOLOR [UIColor colorWithRed:(30/255.0) green:(175/255.0) blue:(200/255.0) alpha:1]
 //常量
 #define SECOND 60
-#ifdef TEST
-    #define PHONENUMBER @"057156559570"
-#else
-    #define PHONENUMBER @"95105856"
-#endif
 #define Notification_TabClick_ACRecordingManagerViewController @"Notification_TabClick_ACRecordingManagerViewController"
 //配置常量
 #define DEFAULTDATA_PHONE @"DEFAULTDATA_PHONE"
@@ -45,17 +44,6 @@
 #define DEFAULTDATA_AUTOLOGIN @"DEFAULTDATA_AUTOLOGIN"
 #define DEFAULTDATA_FIRSTLOGIN @"DEFAULTDATA_FIRSTLOGIN"
 #define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
-//缓存常量
-#define CACHE_NOTARYLIST @"CACHE_NOTARYLIST"
-#define CACHE_EXTRACTIONLIST @"CACHE_EXTRACTIONLIST"
-#define CACHE_RECORDINGMANAGER @"CACHE_RECORDINGMANAGER"
-#define CACHE_RECORDINGMANAGERLIST @"CACHE_RECORDINGMANAGERLIST"
-#define CACHE_ACCOUNT_USERECORD @"CACHE_ACCOUNT_USERECORD"
-#define CACHE_OLDACCOUNT_MONTH @"CACHE_OLDACCOUNT_MONTH"
-#define CACHE_OLDACCOUNT_DAY @"CACHE_OLDACCOUNT_DAY"
-#define CACHE_ACCOUNT_PAY1 @"CACHE_ACCOUNT_PAY1"
-#define CACHE_ACCOUNT_PAY2 @"CACHE_ACCOUNT_PAY2"
-#define CACHE_ACCOUNT_PAY3 @"CACHE_ACCOUNT_PAY3"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2
@@ -80,15 +68,16 @@
 #define RESULTCODE_ACExtractionDetailViewController_back 2
 #ifdef TEST
 //测试环境定义的常量
+    #define PHONENUMBER @"057156559570"
     //#define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
     #define ANCUN_HTTP_URL @"http://192.168.0.221:8080/accore/rest/RestService"
     #define ACCESSID @"b99810e661d546f14763f15a9270c28d"
     #define ACCESSKEY @"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ="
 #else
 //正式环境定义的常量
+    #define PHONENUMBER @"95105856"
     #define ANCUN_HTTP_URL @"http://server.ancun.com:3391/rest/RestService"
     #define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"
     #define ACCESSKEY @"fUETGmOIiMujnipQnFm6rJIyO2wJDZSftsK4dwmmoSZ="
 #endif
 
-#define NAVCOLOR [UIColor colorWithRed:(30/255.0) green:(175/255.0) blue:(200/255.0) alpha:1]

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACTipsViewController : UIViewController{
+@interface ACTipsViewController : ACBaseViewController{
     
     UIWebView *_webView;
     

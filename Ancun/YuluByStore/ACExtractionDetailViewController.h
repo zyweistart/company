@@ -8,7 +8,7 @@
 
 #import <MessageUI/MessageUI.h>
 
-@interface ACExtractionDetailViewController : UIViewController<MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
+@interface ACExtractionDetailViewController : ACBaseViewController<MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
     
     NSMutableDictionary *_resultDictionary;
     

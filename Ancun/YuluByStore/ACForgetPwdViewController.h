@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-@interface ACForgetPwdViewController : UIViewController<HttpViewDelegate>
+@interface ACForgetPwdViewController : ACBaseViewController<HttpViewDelegate>
 {
     int _second;
     NSTimer *_verificationCodeTime;

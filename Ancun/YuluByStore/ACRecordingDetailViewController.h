@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-@interface ACRecordingDetailViewController : UIViewController<ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
+@interface ACRecordingDetailViewController : ACBaseViewController<ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
 {
     NSMutableDictionary *_mainData;
 }
