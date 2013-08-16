@@ -291,7 +291,7 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
             for (int k = 0; k<ABMultiValueGetCount(phoneRef); k++){
                 //的电话值
                 NSString * personPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phoneRef, k);
-                if(flag){
+                if(flag) {
                     if([name isEqualToString:@""]){
                         name=personPhone;
                         nameFlag=@"1";
@@ -320,6 +320,12 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
                     continue;
 //                }else if([phoneNumber length]<7){
 //                    continue;
+                }
+                //是否已经创建了安存语录音电话号码
+                if(ISCREATEACYULUPHONENUMBER) {
+                    if([name isEqualToString:APPNAME]) {
+                        ISCREATEACYULUPHONENUMBER=NO;
+                    }
                 }
                 
                 NSMutableDictionary* contact=[[Config Instance]contact];
@@ -352,10 +358,11 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
             }
         }
         CFRelease(results);
-        if(ISCREATEACYULUPHONENUMBER){
+        if(ISCREATEACYULUPHONENUMBER) {
+            //添加安存语录官方电话
             ABRecordRef newPerson = ABPersonCreate();
             CFErrorRef error = NULL;
-            ABRecordSetValue(newPerson, kABPersonFirstNameProperty, @"安存录音", &error);
+            ABRecordSetValue(newPerson, kABPersonFirstNameProperty, APPNAME, &error);
             //phone number
             ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
             ABMultiValueAddValueAndLabel(multiPhone, PHONENUMBER, kABPersonPhoneIPhoneLabel, NULL);

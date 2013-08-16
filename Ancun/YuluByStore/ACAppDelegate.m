@@ -10,17 +10,21 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
-#ifdef JAILBREAK
-#import "AlixPay.h"
-#import "AlixPayResult.h"
-#else
-#import "IAPHelper.h"
-#endif
+#import "ACRechargeConfirmViewController.h"
+#import "ACRechargeNav.h"
 #ifndef TEST
 #import "BaiduMobStat.h"
 #endif
+#ifdef JAILBREAK
+    #import "AlixPay.h"
+    #import "AlixPayResult.h"
+#else
+    #import "IAPHelper.h"
+#endif
 
-@implementation ACAppDelegate
+@implementation ACAppDelegate {
+    HttpRequest *_loadHttp;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     //显示系统托盘
@@ -70,7 +74,6 @@
     return YES;
 }
 
-#pragma mark 越狱版支持支付宝
 #ifdef JAILBREAK
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     AlixPay *alixpay = [AlixPay shared];
@@ -78,24 +81,50 @@
 	if (result) {
 		//是否支付成功
 		if (9000 == result.statusCode) {
-			UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                 message:result.resultString
-                                                                delegate:nil
-                                                       cancelButtonTitle:@"确定"
-                                                       otherButtonTitles:nil];
-            [alertView show];
+//            //服务端签名验证
+//            NSMutableString *verifyString=[[NSMutableString alloc]init];
+//            [verifyString appendFormat:@"resultStatus={%d};",result.statusCode];
+//            [verifyString appendFormat:@"memo={%@};",result.statusMessage];
+//            [verifyString appendString:@"result={"];
+//            [verifyString appendString:result.resultString];
+//            [verifyString appendString:@"&"];
+//            [verifyString appendFormat:@"sign_type=\"%@\"",result.signType];
+//            [verifyString appendString:@"&"];
+//            [verifyString appendFormat:@"sign=\"%@\"",result.signString];
+//            [verifyString appendString:@"}"];
+//            NSLog(@"%@",verifyString);
+//            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//            [requestParams setObject:ACCESSID forKey:@"accessid"];
+//            [requestParams setObject:@"3"  forKey:@"payproduct"];
+//            [requestParams setObject:verifyString  forKey:@"rescontent"];
+//            _loadHttp=[[HttpRequest alloc]init];
+//            [_loadHttp setDelegate:self];
+//            [_loadHttp setController:[application.keyWindow rootViewController]];
+//            [_loadHttp handle:@"v4ealipayRes" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
+            //显示成功页面
+            UIViewController *controller=[[Config Instance]currentViewController];
+            if(controller) {
+                if([controller isKindOfClass:[ACRechargeConfirmViewController class]]) {
+                    ACRechargeConfirmViewController *viewController=(ACRechargeConfirmViewController *)controller;
+                    [viewController layoutSuccessPage];
+                }
+            }
 		} else {
-            //如果支付失败,可以通过result.statusCode查询错误码
-			UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-																 message:result.statusMessage
-																delegate:nil
-													   cancelButtonTitle:@"确定"
-													   otherButtonTitles:nil];
-			[alertView show];
+            //充值失败
+            if(result.statusCode==6001) {
+                //用户中途取消
+            }
+            //使引导箭头标为第二步
+            UIViewController *controller=[[Config Instance]currentViewController];
+            if(controller) {
+                if([controller isKindOfClass:[ACRechargeConfirmViewController class]]) {
+                    ACRechargeConfirmViewController *viewController=(ACRechargeConfirmViewController *)controller;
+                    [viewController.rechargeNav secondStep];
+                }
+            }
+            [Common alert:result.statusMessage];
 		}
-		
 	}
-    
 	return YES;
 }
 #endif

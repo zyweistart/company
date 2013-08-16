@@ -13,8 +13,6 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
-#define CACHE_ACCOUNT_USERECORD CACHE_CONSTANT(@"CACHE_ACCOUNT_USERECORD")
-
 @interface ACAccountViewController ()
 
 //界面按钮事件
@@ -51,31 +49,34 @@
         
         _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
         [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip1 setText:@"基础包月套餐: 正在计算..."];
         [self.view addSubview:_lblTip1];
         
         _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
         [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip2 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
         [self.view addSubview:_lblTip2];
         
         _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
         [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
+        [_lblTip3 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip3 setText:@"当前可用容量: 正在计算..."];
         [self.view addSubview:_lblTip3];
         
         _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 81, 159, 40)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
-        [_leftTopTab setBackgroundColor:[UIColor blackColor]];
+        [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_leftTopTab];
         
         _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 81, 160, 40)];
         [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
-        [_rightTopTab setBackgroundColor:[UIColor blackColor]];
+        [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_rightTopTab];
         
         _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 117, 159, 4)];
-        [_lblSlid setBackgroundColor:NAVCOLOR];
+        [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [self.view addSubview:_lblSlid];
         
         _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
@@ -102,7 +103,7 @@
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
-        id content=[dictioanry objectForKey:CACHE_ACCOUNT_USERECORD];
+        id content=[dictioanry objectForKey:CACHE_DATA];
         if(content){
             _rightDataItemArray=[[XML analysis:content] dataItemArray];
         }
@@ -129,17 +130,24 @@
 #pragma mark 界面按钮事件
 
 - (void)accountPay:(id)sender{
-    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
+    ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
+    rechargeViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeViewController animated:YES];
 }
 
 - (void)leftTopButtonAction {
     currentTab=1;
     
-    if(_leftDataItemArray){
-        self.dataItemArray=_leftDataItemArray;
-        [self.tableView reloadData];
-    }else{
+    if([[Config Instance]isRefreshAccountPayList]) {
         [self autoRefresh];
+        [[Config Instance] setIsRefreshAccountPayList:NO];
+    } else {
+        if(_leftDataItemArray){
+            self.dataItemArray=_leftDataItemArray;
+            [self.tableView reloadData];
+        }else{
+            [self autoRefresh];
+        }
     }
     
     [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
@@ -236,7 +244,7 @@
         _rightDataItemArray=self.dataItemArray;
         if([[response code]isEqualToString:@"110042"]||_currentPage==1){
             NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-            [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_USERECORD];
+            [dictionary setObject:[response responseString] forKey:CACHE_DATA];
             //缓存数据
             [Common setCache:[Config Instance].cacheKey data:dictionary];
         }

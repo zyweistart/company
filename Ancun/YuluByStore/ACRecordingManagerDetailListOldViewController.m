@@ -6,49 +6,44 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-#import "ACRecordingManagerDetailListViewController.h"
+#import "ACRecordingManagerDetailListOldViewController.h"
 #import "ACRecordingDetailViewController.h"
 #import "ACRecordingDetailCell.h"
 #import "DataSingleton.h"
 
-#define CACHE_RECORDINGMANAGERLIST CACHE_CONSTANT(@"CACHE_RECORDINGMANAGERLIST")
+#define CACHE_RECORDINGMANAGERLISTOLD CACHE_CONSTANT(@"CACHE_RECORDINGMANAGERLISTOLD")
 
-@interface ACRecordingManagerDetailListViewController ()
+@interface ACRecordingManagerDetailListOldViewController ()
 
 @end
 
-@implementation ACRecordingManagerDetailListViewController{
+@implementation ACRecordingManagerDetailListOldViewController{
     HttpRequest *_managerHttp;
 }
 
-- (id)initWithOppno:(NSString *)oppno{
-    _oppno=oppno;
+- (id)init {
     if(self){
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
-                                                initWithTitle:@"返回"
-                                                style:UIBarButtonItemStyleBordered
-                                                target:self
-                                                action:@selector(back:)];
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(back:)];
 
-        NSString* navTitle=[[[Config Instance]contact] objectForKey:_oppno];
-        if(navTitle==nil){
-            navTitle=_oppno;
-        }
-        self.navigationItem.title=navTitle;
+        self.navigationItem.title=@"原时长版录音";
         
         _playerView=[ACPlayerView instance:self];
         //self.view.frame.size.height:主视图高度
         //[playerView frame].size.height:播放视图的高度
         //44:为导航栏的高度
         [_playerView setFrame:CGRectMake(0,
-                                        self.view.frame.size.height-[_playerView frame].size.height-44,
-                                        self.view.frame.size.width,
-                                        [_playerView frame].size.height)];
+                                         self.view.frame.size.height-[_playerView frame].size.height-44,
+                                         self.view.frame.size.width,
+                                         [_playerView frame].size.height)];
         [self.view addSubview:_playerView];
         self.tableView=[[UITableView alloc]initWithFrame:
-                    CGRectMake(0, 0,
-                               self.view.frame.size.width,
-                               self.view.frame.size.height-_playerView.frame.size.height)];
+                        CGRectMake(0, 0,
+                                   self.view.frame.size.width,
+                                   self.view.frame.size.height-_playerView.frame.size.height)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
@@ -68,14 +63,11 @@
     [super viewDidLoad];
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
-        NSMutableDictionary *opponodic=[dictioanry objectForKey:CACHE_RECORDINGMANAGERLIST];
-        if(opponodic){
-            id content=[opponodic objectForKey:_oppno];
-            if(content){
-                self.dataItemArray=[[XML analysis:content] dataItemArray];
-                if([self.dataItemArray count]>0){
-                    [self.tableView reloadData];
-                }
+        id content=[dictioanry objectForKey:CACHE_RECORDINGMANAGERLISTOLD];
+        if(content){
+            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            if([self.dataItemArray count]>0){
+                [self.tableView reloadData];
             }
         }
     }
@@ -139,9 +131,8 @@
             if([[response code]isEqualToString:@"110042"]||_currentPage==1){
                 //缓存数据
                 NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-                NSMutableDictionary *oppnoDic=[NSMutableDictionary dictionaryWithDictionary:[dictionary objectForKey:CACHE_RECORDINGMANAGERLIST]];
-                [oppnoDic setObject:[response responseString] forKey:_oppno];
-                [dictionary setObject:oppnoDic forKey:CACHE_RECORDINGMANAGERLIST];
+                [dictionary setObject:[response responseString] forKey:CACHE_RECORDINGMANAGERLISTOLD];
+                //缓存数据
                 [Common setCache:[Config Instance].cacheKey data:dictionary];
             }
         }
@@ -232,7 +223,7 @@
         }
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
         NSString *fileno=[dictionary objectForKey:@"fileno"];
-        cell.lbl_date.text=[dictionary objectForKey:@"begintime"];
+        cell.lbl_date.text=[dictionary objectForKey:@"calledno"];
         //创建文件管理器
         NSFileManager *fileManager = [NSFileManager defaultManager];
         //获取路径
@@ -370,8 +361,8 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"status"];
         [requestParams setObject:@"" forKey:@"calltype"];
-        [requestParams setObject:_oppno forKey:@"oppno"];
-        [requestParams setObject:@"1" forKey:@"rectype"];
+        [requestParams setObject:@"2" forKey:@"rectype"];
+        [requestParams setObject:@"" forKey:@"oppno"];
         [requestParams setObject:@"" forKey:@"callerno"];
         [requestParams setObject:@"" forKey:@"calledno"];
         [requestParams setObject:@"" forKey:@"begintime"];

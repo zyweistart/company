@@ -30,6 +30,27 @@
         self.tabBarItem.title = @"我的账户";
         self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
         
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];
+        [view setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
+        
+        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 10, 120, 30)];
+        [lbl1 setFont:[UIFont systemFontOfSize:17]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+        [lbl1 setText:@"可用录音时长:"];
+        [view addSubview:lbl1];
+        
+        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(130, 10, 150, 30)];
+        [lbl1 setFont:[UIFont systemFontOfSize:17]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(239/255.0) green:(126/255.0) blue:(7/255.0) alpha:1]];
+        [lbl1 setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
+        [view addSubview:lbl1];
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(onPay:)];
+        
+        [self.view addSubview:view];
+        
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 50,
                                    self.view.frame.size.width,
@@ -54,34 +75,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    //设置Navigation Bar颜色
-    self.navigationController.navigationBar.tintColor = NAVCOLOR;
-    
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];
-    [view setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    
-    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 10, 100, 30)];
-    [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    [lbl1 setText:@"可用录音时长:"];
-    [view addSubview:lbl1];
-    
-    _lblTimeLong=[[UILabel alloc]initWithFrame:CGRectMake(110, 10, 90, 30)];
-    [_lblTimeLong setFont:[UIFont systemFontOfSize:15]];
-    [_lblTimeLong setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
-    [_lblTimeLong setText:@"165分钟"];
-    [view addSubview:_lblTimeLong];
-    
-    _btnPay=[UIButton buttonWithType:UIButtonTypeCustom];
-    [_btnPay setFrame:CGRectMake(250, 15, 50, 20)];
-    [_btnPay setImage:[UIImage imageNamed:@"accountpay_normal"] forState:UIControlStateNormal];
-    [_btnPay setBackgroundImage:[UIImage imageNamed:@"accountpay_pressed"] forState:UIControlStateHighlighted];
-    [_btnPay addTarget:self action:@selector(onPay:) forControlEvents:UIControlEventTouchDown];
-    [view addSubview:_btnPay];
-    
-    [self.view addSubview:view];
-    
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
@@ -97,13 +90,10 @@
 }
 
 - (void)onPay:(id)sender {
-    [self.navigationController pushViewController:[[ACRechargeViewController alloc] init] animated:YES];
+    ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
+    rechargeViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeViewController animated:YES];
 }
-
-
-//表视图委托
-#pragma mark -
-#pragma mark table view data source methods
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -114,10 +104,7 @@
         }
     } else {
         //如果为新用户则直接进行跳转
-        UINavigationController *accountViewControllerNav= [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
-        accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-        [self.navigationController setViewControllers:[NSArray arrayWithObjects:accountViewControllerNav, nil]];
+        [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
     }
 }
 
@@ -202,8 +189,8 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (void)reloadTableViewDataSource{
-	if([[Config Instance]isLogin]){
+- (void)reloadTableViewDataSource {
+	if([[Config Instance]isLogin]) {
         _reloading = YES;
         [self.tableView reloadData];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];

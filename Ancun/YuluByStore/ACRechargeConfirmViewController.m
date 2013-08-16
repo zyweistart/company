@@ -8,8 +8,19 @@
 
 #import "ACRechargeConfirmViewController.h"
 #import "NSString+Date.h"
-#import "AlixPay.h"
 #import "ACRechargeNav.h"
+#import <QuartzCore/QuartzCore.h>
+#ifdef JAILBREAK
+    #import "AlixPay.h"
+#else
+
+#endif
+
+#define ALERTVIEWALIPAYTAG 123
+#define ALIPAYREQUESTCODE 10000000
+#define REFRESHUSERINFOREQUESTCODE 10000001
+#define LBLTEXTCOLOR [UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]
+#define LBLVALUETEXTCOLOR [UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]
 
 @interface ACRechargeConfirmViewController ()
 
@@ -25,7 +36,10 @@
 
 @end
 
-@implementation ACRechargeConfirmViewController
+@implementation ACRechargeConfirmViewController{
+    UIView *mainView;
+    UIScrollView *sMainView;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,7 +47,10 @@
         self.navigationItem.title=@"账户充值";
         
         _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        [_rechargeNav secondStep];
         [self.view addSubview:_rechargeNav];
+     
+        [self.view setBackgroundColor:[UIColor colorWithRed:(207/255.0) green:(212/255.0) blue:(221/255.0) alpha:1]];
         
     }
     return self;
@@ -72,67 +89,74 @@
     }
 }
 
-- (void)layoutPayPakcage{
+- (void)layoutPayPakcage {
     
-    UIView *mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+    mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+    mainView.layer.cornerRadius=10;
+    mainView.layer.masksToBounds=YES;
     [mainView setBackgroundColor:[UIColor whiteColor]];
     
     UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 40, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐名称:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[_data objectForKey:@"name"]];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 70, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐价值:"];
     [mainView addSubview:lbl1];
     //价值
     UILabel *lblValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 70, 150, 30)];
     [lblValue setFont:[UIFont systemFontOfSize:15]];
-    [lblValue setTextColor:[UIColor redColor]];
+    [lblValue setTextColor:LBLVALUETEXTCOLOR];
     [lblValue setText:[NSString stringWithFormat:@"%@分钟 %@MB",[_data objectForKey:@"duration"],[_data objectForKey:@"storage"]]];
     [mainView addSubview:lblValue];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"支付金额:"];
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 70, 30)];
     [lblMoney setFont:[UIFont systemFontOfSize:15]];
-    [lblMoney setTextColor:[UIColor redColor]];
+    [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 130, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"生效日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblStartDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 150, 30)];
     [lblStartDay setFont:[UIFont systemFontOfSize:15]];
-    [lblStartDay setTextColor:[UIColor redColor]];
+    [lblStartDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblStartDay];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 160, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"到期日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblEndDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
     [lblEndDay setFont:[UIFont systemFontOfSize:15]];
-    [lblEndDay setTextColor:[UIColor redColor]];
+    [lblEndDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblEndDay];
     
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
@@ -157,45 +181,51 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 190, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"充值账户:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 190, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[[[Config Instance]userInfo]objectForKey:@"phone"]];
     [mainView addSubview:lbl1];
     
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_btnConfirm setFrame:CGRectMake(25, 240, 250, 35)];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
-    [_btnConfirm setFrame:CGRectMake(97, 240, 127, 35)];
-//    [_btnConfirm setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
-    [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+    _btnConfirm.layer.cornerRadius=5;
+    _btnConfirm.layer.masksToBounds=YES;
+    [_btnConfirm setBackgroundColor:[UIColor colorWithRed:(131/255.0) green:(186/255.0) blue:(248/255.0) alpha:1]];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
     
     [self.view addSubview:mainView];
 }
 
-- (void)layoutPayDuration{
-    UIView *mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+- (void)layoutPayDuration {
+    mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+    mainView.layer.cornerRadius=10;
+    mainView.layer.masksToBounds=YES;
     [mainView setBackgroundColor:[UIColor whiteColor]];
     
     UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 40, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐名称:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[_data objectForKey:@"name"]];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 70, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"购买份数:"];
     [mainView addSubview:lbl1];
     
@@ -211,123 +241,135 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐价值:"];
     [mainView addSubview:lbl1];
     //价值
     UILabel *lblValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 150, 30)];
     [lblValue setFont:[UIFont systemFontOfSize:15]];
-    [lblValue setTextColor:[UIColor redColor]];
+    [lblValue setTextColor:LBLVALUETEXTCOLOR];
     [lblValue setText:[NSString stringWithFormat:@"%@分钟",[_data objectForKey:@"duration"]]];
     [mainView addSubview:lblValue];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 130, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"支付金额:"];
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 70, 30)];
     lblMoney.tag=2;
     [lblMoney setFont:[UIFont systemFontOfSize:15]];
-    [lblMoney setTextColor:[UIColor redColor]];
+    [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 160, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"有效期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblStartDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
     [lblStartDay setFont:[UIFont systemFontOfSize:15]];
-    [lblStartDay setTextColor:[UIColor redColor]];
+    [lblStartDay setTextColor:LBLVALUETEXTCOLOR];
     [lblStartDay setText:@"无时间限制"];
     [mainView addSubview:lblStartDay];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 190, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"充值账户:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 190, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[[[Config Instance]userInfo]objectForKey:@"phone"]];
     [mainView addSubview:lbl1];
     
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_btnConfirm setFrame:CGRectMake(25, 240, 250, 35)];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
-    [_btnConfirm setFrame:CGRectMake(97, 240, 127, 35)];
-//    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
-    [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+    _btnConfirm.layer.cornerRadius=5;
+    _btnConfirm.layer.masksToBounds=YES;
+    [_btnConfirm setBackgroundColor:[UIColor colorWithRed:(131/255.0) green:(186/255.0) blue:(248/255.0) alpha:1]];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
     
     [self.view addSubview:mainView];
 }
 
-- (void)layoutPayStorage{
-    UIView *mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+- (void)layoutPayStorage {
+    mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 300)];
+    mainView.layer.cornerRadius=10;
+    mainView.layer.masksToBounds=YES;
     [mainView setBackgroundColor:[UIColor whiteColor]];
     
     UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 40, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐名称:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[_data objectForKey:@"name"]];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 70, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐价值:"];
     [mainView addSubview:lbl1];
     //价值
     UILabel *lblValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 70, 150, 30)];
     [lblValue setFont:[UIFont systemFontOfSize:15]];
-    [lblValue setTextColor:[UIColor redColor]];
+    [lblValue setTextColor:LBLVALUETEXTCOLOR];
     [lblValue setText:[NSString stringWithFormat:@"%@MB",[_data objectForKey:@"storage"]]];
     [mainView addSubview:lblValue];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"支付金额:"];
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 70, 30)];
     [lblMoney setFont:[UIFont systemFontOfSize:15]];
-    [lblMoney setTextColor:[UIColor redColor]];
+    [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 130, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"生效日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblStartDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 150, 30)];
     [lblStartDay setFont:[UIFont systemFontOfSize:15]];
-    [lblStartDay setTextColor:[UIColor redColor]];
+    [lblStartDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblStartDay];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 160, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"到期日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblEndDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
     [lblEndDay setFont:[UIFont systemFontOfSize:15]];
-    [lblEndDay setTextColor:[UIColor redColor]];
+    [lblEndDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblEndDay];
     
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
@@ -342,33 +384,40 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 190, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"充值账户:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 190, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[[[Config Instance]userInfo]objectForKey:@"phone"]];
     [mainView addSubview:lbl1];
     
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_btnConfirm setFrame:CGRectMake(25, 240, 250, 35)];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
-    [_btnConfirm setFrame:CGRectMake(97, 240, 127, 35)];
-//    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
-    [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+    _btnConfirm.layer.cornerRadius=5;
+    _btnConfirm.layer.masksToBounds=YES;
+    [_btnConfirm setBackgroundColor:[UIColor colorWithRed:(131/255.0) green:(186/255.0) blue:(248/255.0) alpha:1]];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
     
     [self.view addSubview:mainView];
 }
 
-- (void)layoutPayUpgradeStorage{
+- (void)layoutPayUpgradeStorage {
     
-    int HEIGHT=iPhone5?395:300;
+    int HEIGHT=iPhone5?395:350;
     
-    UIScrollView *sView=[[UIScrollView alloc]initWithFrame:CGRectMake(10, 50, 300, HEIGHT)];
+    sMainView=[[UIScrollView alloc]initWithFrame:CGRectMake(10, 50, 300, HEIGHT)];
+    sMainView.layer.cornerRadius=10;
+    sMainView.layer.masksToBounds=YES;
+    [sMainView setBackgroundColor:[UIColor whiteColor]];
     
-    UIView *mainView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 300, 405)];
+    mainView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 300, 405)];
+    mainView.layer.cornerRadius=10;
+    mainView.layer.masksToBounds=YES;
     [mainView setBackgroundColor:[UIColor whiteColor]];
     
     UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 70, 30)];
@@ -380,58 +429,63 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 40, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐名称:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[_data objectForKey:@"name"]];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 70, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐价值:"];
     [mainView addSubview:lbl1];
     //价值
     UILabel *lblValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 70, 150, 30)];
     [lblValue setFont:[UIFont systemFontOfSize:15]];
-    [lblValue setTextColor:[UIColor redColor]];
+    [lblValue setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblValue];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"支付金额:"];
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 200, 30)];
     [lblMoney setFont:[UIFont systemFontOfSize:15]];
-    [lblMoney setTextColor:[UIColor redColor]];
+    [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 130, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"生效日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblStartDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 150, 30)];
     [lblStartDay setFont:[UIFont systemFontOfSize:15]];
-    [lblStartDay setTextColor:[UIColor redColor]];
+    [lblStartDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblStartDay];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 160, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"到期日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblEndDay=[[UILabel alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
     [lblEndDay setFont:[UIFont systemFontOfSize:15]];
-    [lblEndDay setTextColor:[UIColor redColor]];
+    [lblEndDay setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblEndDay];
     
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
@@ -446,12 +500,13 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 190, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"充值账户:"];
     [mainView addSubview:lbl1];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(115, 190, 150, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
-    [lbl1 setTextColor:[UIColor redColor]];
+    [lbl1 setTextColor:LBLVALUETEXTCOLOR];
     [lbl1 setText:[[[Config Instance]userInfo]objectForKey:@"phone"]];
     [mainView addSubview:lbl1];
 
@@ -464,30 +519,33 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 250, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"套餐价值:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblOldStorageValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 250, 150, 30)];
     [lblOldStorageValue setFont:[UIFont systemFontOfSize:15]];
-    [lblOldStorageValue setTextColor:[UIColor redColor]];
+    [lblOldStorageValue setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblOldStorageValue];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 280, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
     [lbl1 setTextAlignment:NSTextAlignmentRight];
+    [lbl1 setTextColor:LBLTEXTCOLOR];
     [lbl1 setText:@"到期日期:"];
     [mainView addSubview:lbl1];
     
     UILabel *lblOldEndTime=[[UILabel alloc]initWithFrame:CGRectMake(115, 280, 150, 30)];
     [lblOldEndTime setFont:[UIFont systemFontOfSize:15]];
-    [lblOldEndTime setTextColor:[UIColor redColor]];
+    [lblOldEndTime setTextColor:LBLVALUETEXTCOLOR];
     [mainView addSubview:lblOldEndTime];
  
     
     UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
     [_btnConfirm setTitle:@"确认充值" forState:UIControlStateNormal];
-//    [_btnPay setImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
-    [_btnConfirm setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+    _btnConfirm.layer.cornerRadius=5;
+    _btnConfirm.layer.masksToBounds=YES;
+    [_btnConfirm setBackgroundColor:[UIColor colorWithRed:(131/255.0) green:(186/255.0) blue:(248/255.0) alpha:1]];
     [_btnConfirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:_btnConfirm];
     
@@ -513,15 +571,16 @@
                             lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 310, 70, 30)];
                             [lbl1 setFont:[UIFont systemFontOfSize:15]];
                             [lbl1 setTextAlignment:NSTextAlignmentRight];
+                            [lbl1 setTextColor:LBLTEXTCOLOR];
                             [lbl1 setText:@"折算金额:"];
                             [mainView addSubview:lbl1];
                             
                             UILabel *lblConvertMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 310, 150, 30)];
                             [lblConvertMoney setFont:[UIFont systemFontOfSize:15]];
-                            [lblConvertMoney setTextColor:[UIColor redColor]];
+                            [lblConvertMoney setTextColor:LBLVALUETEXTCOLOR];
                             [mainView addSubview:lblConvertMoney];
                             //确认充值按钮位置调整
-                            [_btnConfirm setFrame:CGRectMake(97, 350, 127, 35)];
+                            [_btnConfirm setFrame:CGRectMake(25, 350, 250, 35)];
                             
                             //升级
                             //到期的时间戳(秒)
@@ -545,7 +604,7 @@
                             }
                         } else {
                             //确认充值按钮位置调整
-                            [_btnConfirm setFrame:CGRectMake(97, 330, 127, 35)];
+                            [_btnConfirm setFrame:CGRectMake(25, 330, 250, 35)];
                             
                             //续费
                             NSMutableDictionary *lastData=[self lastNewPackages:1];
@@ -560,8 +619,7 @@
                             NSDate *tomorrow=[lastDate dateByAddingTimeInterval:secondsPerDay];
                             [lblStartDay setText:[formatter stringFromDate:lastDate]];
                             [lblEndDay setText:[formatter stringFromDate:tomorrow]];
-                            [lblOldEndTime setText:[[data objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
-                            
+                            [lblOldEndTime setText:[[data objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];   
                         }
                     } else {
                         [Common alert:@"暂不支持存储套餐降容量级别购买，请选择存储容量等于或大于您当前在使用套餐的存储服务，多点空间才能有备无患哦"];
@@ -572,11 +630,67 @@
         }
     }
     
-    [sView addSubview:mainView];
-    sView.contentSize=mainView.frame.size;
+    [sMainView addSubview:mainView];
+    sMainView.contentSize=mainView.frame.size;
     
-    [self.view addSubview:sView];
+    [self.view addSubview:sMainView];
     
+}
+
+//充值成功后的页面
+- (void)layoutSuccessPage {
+    
+    [_rechargeNav fourthStep];
+    
+    [[Config Instance]setIsRefreshAccountPayList:YES];
+
+    if(sMainView) {
+        sMainView.hidden=YES;
+    } else if(mainView) {
+        mainView.hidden=YES;
+    }
+    
+    mainView=[[UIView alloc]initWithFrame:CGRectMake(10, 50, 300, 195)];
+    mainView.layer.cornerRadius=10;
+    mainView.layer.masksToBounds=YES;
+    [mainView setBackgroundColor:[UIColor whiteColor]];
+     
+    UIImageView *image=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACRechargeConfirmViewController_success"]];
+    [image setFrame:CGRectMake(30, 30, 27, 20)];
+    [mainView addSubview:image];
+    
+    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(60, 30, 80, 20)];
+    [lbl1 setFont:[UIFont systemFontOfSize:18]];
+    [lbl1 setTextAlignment:NSTextAlignmentLeft];
+    [lbl1 setText:@"充值成功"];
+    [mainView addSubview:lbl1];
+    
+    lbl1=[[UILabel alloc]initWithFrame:CGRectMake(30, 70, 240, 40)];
+    [lbl1 setFont:[UIFont systemFontOfSize:16]];
+    [lbl1 setTextAlignment:NSTextAlignmentLeft];
+    [lbl1 setLineBreakMode:UILineBreakModeCharacterWrap];
+    [lbl1 setNumberOfLines:0];
+    [lbl1 setText:[NSString stringWithFormat:@"您已经为账户(%@)\n购买：%@",[[[Config Instance]userInfo]objectForKey:@"phone"],[_data objectForKey:@"name"]]];
+    [mainView addSubview:lbl1];
+    
+    UIButton *_btnConfirm=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_btnConfirm setFrame:CGRectMake(25, 130, 250, 35)];
+    [_btnConfirm setTitle:@"返回我的账户" forState:UIControlStateNormal];
+    _btnConfirm.layer.cornerRadius=5;
+    _btnConfirm.layer.masksToBounds=YES;
+    [_btnConfirm setBackgroundColor:[UIColor colorWithRed:(131/255.0) green:(186/255.0) blue:(248/255.0) alpha:1]];
+    [_btnConfirm addTarget:self action:@selector(backRecharge:) forControlEvents:UIControlEventTouchDown];
+    [mainView addSubview:_btnConfirm];
+    
+    [self.view addSubview:mainView];
+    //充值成功后重新刷新用户信息
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    [requestParams setObject:@"1" forKey:@"raflag"];
+    _alipayHttp=[[HttpRequest alloc]init];
+    [_alipayHttp setDelegate:self];
+    [_alipayHttp setController:self];
+    [_alipayHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+    [_alipayHttp loginhandle:@"v4infoGet" requestParams:requestParams];
 }
 
 //根据类型套餐获取最后充值的套餐
@@ -664,51 +778,70 @@
                 }
             }
         }
+#ifdef JAILBREAK
         _alipayHttp=[[HttpRequest alloc]init];
         [_alipayHttp setDelegate:self];
         [_alipayHttp setController:self];
-        [_alipayHttp setRequestCode:10000000];
+        [_alipayHttp setRequestCode:ALIPAYREQUESTCODE];
         [_alipayHttp loginhandle:@"v4alipayReq" requestParams:requestParams];
+#else
+        [Common alert:@"非越狱版确认充值处理"];
+#endif
+        [_rechargeNav thirdStep];
     } else {
         [Common noLoginAlert:self];
     }
 }
 
+- (void)backRecharge:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex==0){
-        [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
+    if (actionSheet.tag == ALERTVIEWALIPAYTAG) {
+#ifdef JAILBREAK
+        if(buttonIndex==0) {
+            //跳转到App Store下载支付宝插件
+            NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+        } else if(buttonIndex==1) {
+            [_rechargeNav secondStep];
+        }
+#endif
+    } else {
+        if(buttonIndex==0) {
+            [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
+        }
     }
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-    if(reqCode==10000000) {
-        if([response successFlag]) {
+    if([response successFlag]) {
+#ifdef JAILBREAK
+        if(reqCode==ALIPAYREQUESTCODE) {
+
+            [[Config Instance]setCurrentViewController:self];
+            
             NSString *orderString=[[[response mainData] objectForKey:@"alipayinfo"] objectForKey:@"reqcontent"];
             
             orderString=[orderString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
             
             AlixPay * alixpay = [AlixPay shared];
-            int ret = [alixpay pay:orderString applicationScheme:@"iOSAlipay"];
+            int ret = [alixpay pay:orderString applicationScheme:@"ANCUNYULU"];
             
             if (ret == kSPErrorAlipayClientNotInstalled) {
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                     message:@"您还没有安装支付宝快捷支付，请先安装。"
-                                                                    delegate:self
-                                                           cancelButtonTitle:@"确定"
-                                                           otherButtonTitles:nil];
-                [alertView setTag:123];
-                [alertView show];
+                [Common actionSheet:self message:@"您还没有安装支付宝快捷支付，请先安装。" tag:ALERTVIEWALIPAYTAG];
+            }
+        }
+#endif        
+        if (reqCode==REFRESHUSERINFOREQUESTCODE) {
+            //更新旧的用户信息
+            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
+            for(NSString *key in dics){
+                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
             }
         }
     }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (alertView.tag == 123) {
-        //跳转到App Store下载支付宝插件
-		NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
-	}
 }
 
 @end

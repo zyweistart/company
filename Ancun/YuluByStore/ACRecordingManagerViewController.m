@@ -8,12 +8,11 @@
 
 #import "ACRecordingManagerViewController.h"
 #import "ACRecordingManagerDetailListViewController.h"
+#import "ACRecordingManagerDetailListOldViewController.h"
 #import "ACRecordingCell.h"
 #import "ACRecording2Cell.h"
 #import "DataSingleton.h"
 #import "ACContactViewController.h"
-
-#define CACHE_RECORDINGMANAGER CACHE_CONSTANT(@"CACHE_RECORDINGMANAGER")
 
 @interface ACRecordingManagerViewController ()
 
@@ -32,6 +31,10 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick_ACRecordingManagerViewController object:nil];
         
+        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
+            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"时长版录音" style:UIBarButtonItemStyleDone target:self action:@selector(oldRecordingManagerList:)];
+        }
+        
     }
     return self;
 }
@@ -40,7 +43,7 @@
     [super viewDidLoad];
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
-        id content=[dictioanry objectForKey:CACHE_RECORDINGMANAGER];
+        id content=[dictioanry objectForKey:CACHE_DATA];
         if(content){
             self.dataItemArray=[[XML analysis:content] dataItemArray];
             if([self.dataItemArray count]>0){
@@ -73,7 +76,7 @@
     if([response successFlag]){
         if([[response code]isEqualToString:@"110042"]||_currentPage==1){
             NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-            [dictionary setObject:[response responseString] forKey:CACHE_RECORDINGMANAGER];
+            [dictionary setObject:[response responseString] forKey:CACHE_DATA];
             //缓存数据
             [Common setCache:[Config Instance].cacheKey data:dictionary];
         }
@@ -187,6 +190,13 @@
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];
     }
+}
+
+//导航至原时长版录音数据
+- (void)oldRecordingManagerList:(id)sender {
+    ACRecordingManagerDetailListOldViewController* recordingManagerDetailListOldViewController=[[ACRecordingManagerDetailListOldViewController alloc] init];
+    recordingManagerDetailListOldViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:recordingManagerDetailListOldViewController animated:YES];
 }
 
 - (void)dealloc {

@@ -15,4 +15,9 @@
 @property (strong,nonatomic) UILabel *lblTip3;
 @property (strong,nonatomic) UILabel *lblTip4;
 
+- (void)firstStep;
+- (void)secondStep;
+- (void)thirdStep;
+- (void)fourthStep;
+
 @end

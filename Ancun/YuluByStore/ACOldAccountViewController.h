@@ -11,8 +11,6 @@
     
     HttpRequest *_loadHttp;
     
-    UILabel *_lblTimeLong;
-    UIButton *_btnPay;
 }
 
 @end

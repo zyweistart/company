@@ -11,13 +11,14 @@
 @class ACRechargeNav;
 @interface ACRechargeConfirmViewController : ACBaseViewController<HttpViewDelegate,UIActionSheetDelegate>{
     
-    ACRechargeNav *_rechargeNav;
-    
     HttpRequest *_alipayHttp;
     
 }
 
 @property (assign,nonatomic) int currentType;
 @property (strong,nonatomic) NSMutableDictionary *data;
+@property (strong,nonatomic) ACRechargeNav *rechargeNav;
+
+- (void)layoutSuccessPage;
 
 @end

@@ -326,6 +326,10 @@
 		C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */; };
 		C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */; };
 		C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */; };
+		C9A8A93317BB75CD00652B90 /* ACRechargeConfirmViewController_success.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93117BB75CD00652B90 /* ACRechargeConfirmViewController_success.png */; };
+		C9A8A93417BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93217BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png */; };
+		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
+		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
 		C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9D97993179FA3500076ACF3 /* InfoPlist.strings */; };
 		C9D97997179FA3500076ACF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97996179FA3500076ACF3 /* main.m */; };
 		C9D979B8179FA3690076ACF3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9D979B6179FA3690076ACF3 /* InfoPlist.strings */; };
@@ -628,6 +632,7 @@
 		C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C79179FA6640076ACF3 /* TermsOfService.txt */; };
 		C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C7A179FA6640076ACF3 /* TipContent.txt */; };
 		C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97D80179FB3730076ACF3 /* NSString+Utils.m */; };
+		C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */; };
 		C9E8EE5B179FD08200E47BD9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D979DC179FA4CD0076ACF3 /* AddressBook.framework */; };
 		C9E8EE5C179FD08200E47BD9 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D979DD179FA4CD0076ACF3 /* AddressBookUI.framework */; };
 		C9E8EE5D179FD08200E47BD9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D979DE179FA4CD0076ACF3 /* AudioToolbox.framework */; };
@@ -1169,6 +1174,10 @@
 		C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayViewController.m; sourceTree = "<group>"; };
 		C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountDayCell.h; sourceTree = "<group>"; };
 		C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayCell.m; sourceTree = "<group>"; };
+		C9A8A93117BB75CD00652B90 /* ACRechargeConfirmViewController_success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACRechargeConfirmViewController_success.png; sourceTree = "<group>"; };
+		C9A8A93217BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACRechargeConfirmViewController_success@2x.png"; sourceTree = "<group>"; };
+		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C9D97987179FA3500076ACF3 /* YuluByStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YuluByStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D97992179FA3500076ACF3 /* YuluByStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YuluByStore-Info.plist"; sourceTree = "<group>"; };
 		C9D97996179FA3500076ACF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1653,6 +1662,8 @@
 		C9D97C7A179FA6640076ACF3 /* TipContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TipContent.txt; sourceTree = "<group>"; };
 		C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		C9D97D80179FB3730076ACF3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingManagerDetailListOldViewController.h; sourceTree = "<group>"; };
+		C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerDetailListOldViewController.m; sourceTree = "<group>"; };
 		C9E8EE6D179FD18900E47BD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C9E8EE6E179FD18900E47BD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C9E8EE6F179FD18900E47BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -2937,10 +2948,14 @@
 		C9D97BF1179FA6640076ACF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C9A8A93517BB7FF100652B90 /* nav.png */,
+				C9A8A93617BB7FF100652B90 /* nav@2x.png */,
 				C9D97BF2179FA6640076ACF3 /* aboutus.png */,
 				C9D97BF3179FA6640076ACF3 /* aboutus@2x.png */,
 				C99FCA5B17B0DC3E0003B2FF /* accountpay_normal.png */,
 				C99FCA5C17B0DC3E0003B2FF /* accountpay_pressed.png */,
+				C9A8A93117BB75CD00652B90 /* ACRechargeConfirmViewController_success.png */,
+				C9A8A93217BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png */,
 				C9D97BF4179FA6640076ACF3 /* button_gb.png */,
 				C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */,
 				C9D97BF6179FA6640076ACF3 /* buy.png */,
@@ -3139,6 +3154,8 @@
 				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
 				C9D97A53179FA6520076ACF3 /* ACRecordingDetailViewController.h */,
 				C9D97A54179FA6520076ACF3 /* ACRecordingDetailViewController.m */,
+				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
+				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
 				C9D97A5A179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.h */,
 				C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */,
 				C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */,
@@ -3526,6 +3543,10 @@
 				C99B80F817A10B68004D0BFB /* guide4.png in Resources */,
 				C99FCA5D17B0DC3E0003B2FF /* accountpay_normal.png in Resources */,
 				C99FCA5E17B0DC3E0003B2FF /* accountpay_pressed.png in Resources */,
+				C9A8A93317BB75CD00652B90 /* ACRechargeConfirmViewController_success.png in Resources */,
+				C9A8A93417BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png in Resources */,
+				C9A8A93717BB7FF100652B90 /* nav.png in Resources */,
+				C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3849,6 +3870,7 @@
 				C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */,
 				C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */,
 				C90A351D17BA054F00BECE31 /* ACBaseViewController.m in Sources */,
+				C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -97,7 +97,6 @@
         UINavigationController *dialViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACDialViewController alloc]init]];
         //是否隐藏导航条
         dialViewControllerNav.navigationBarHidden = YES;
-        dialViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactViewController alloc]init]];
         contactViewControllerNav.navigationBar.tintColor=NAVCOLOR;

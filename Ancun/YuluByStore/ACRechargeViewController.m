@@ -40,28 +40,29 @@
         self.navigationItem.title=@"账户充值";
         
         _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        [_rechargeNav firstStep];
         [self.view addSubview:_rechargeNav];
         
         _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 40, 106, 40)];
         [_leftTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_leftTopTab setTitle:@"基础包月套餐" forState:UIControlStateNormal];
-        [_leftTopTab setBackgroundColor:[UIColor blackColor]];
+        [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_leftTopTab];
         
         _centerTopTab=[[UIButton alloc]initWithFrame:CGRectMake(107, 40, 106, 40)];
         [_centerTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_centerTopTab setTitle:@"增值时长套餐" forState:UIControlStateNormal];
-        [_centerTopTab setBackgroundColor:[UIColor blackColor]];
+        [_centerTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_centerTopTab];
         
         _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(214, 40, 106, 40)];
         [_rightTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_rightTopTab setTitle:@"增值存储套餐" forState:UIControlStateNormal];
-        [_rightTopTab setBackgroundColor:[UIColor blackColor]];
+        [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_rightTopTab];
         
         _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 76, 106, 4)];
-        [_lblSlid setBackgroundColor:NAVCOLOR];
+        [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [self.view addSubview:_lblSlid];
         
         _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光

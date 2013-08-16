@@ -29,23 +29,26 @@
         self.navigationItem.title=[NSString stringWithFormat:@"%d年%@月消费明细",_year,_month];
         
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-        [view setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [view setBackgroundColor:[UIColor colorWithRed:(202/255.0) green:(206/255.0) blue:(220/255.0) alpha:1]];
         
         UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 35, 30)];
         [lbl1 setFont:[UIFont systemFontOfSize:17]];
-        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(202/255.0) green:(206/255.0) blue:(220/255.0) alpha:1]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [lbl1 setText:@"时间"];
         [view addSubview:lbl1];
         
         lbl1=[[UILabel alloc]initWithFrame:CGRectMake(150, 10, 35, 30)];
         [lbl1 setFont:[UIFont systemFontOfSize:17]];
-        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(202/255.0) green:(206/255.0) blue:(220/255.0) alpha:1]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [lbl1 setText:@"类别"];
         [view addSubview:lbl1];
         
         lbl1=[[UILabel alloc]initWithFrame:CGRectMake(235, 10, 35, 30)];
         [lbl1 setFont:[UIFont systemFontOfSize:17]];
-        [lbl1 setBackgroundColor:[UIColor colorWithRed:(200/255.0) green:(200/255.0) blue:(200/255.0) alpha:1]];
+        [lbl1 setBackgroundColor:[UIColor colorWithRed:(202/255.0) green:(206/255.0) blue:(220/255.0) alpha:1]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [lbl1 setText:@"时长"];
         [view addSubview:lbl1];
         
@@ -94,12 +97,8 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(![[Config Instance]isOldUser]) {
-        if(!self.dataItemArray||[self.dataItemArray count]==0){
-            [self autoRefresh];
-        }
-    } else {
-        NSLog(@"------");
+    if(!self.dataItemArray||[self.dataItemArray count]==0){
+        [self autoRefresh];
     }
 }
 
