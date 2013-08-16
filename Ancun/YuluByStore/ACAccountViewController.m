@@ -9,7 +9,11 @@
 #import "ACAccountViewController.h"
 #import "ACAccountPayCell.h"
 #import "ACAccountUseRecordCell.h"
+#ifdef JAILBREAK
 #import "ACRechargeViewController.h"
+#else
+#import "ACRechargeViewByASController.h"
+#endif
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
@@ -130,9 +134,15 @@
 #pragma mark 界面按钮事件
 
 - (void)accountPay:(id)sender{
+#ifdef JAILBREAK
     ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
     rechargeViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rechargeViewController animated:YES];
+#else
+    ACRechargeViewByASController *rechargeByASViewController=[[ACRechargeViewByASController alloc] init];
+    rechargeByASViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeByASViewController animated:YES];
+#endif
 }
 
 - (void)leftTopButtonAction {

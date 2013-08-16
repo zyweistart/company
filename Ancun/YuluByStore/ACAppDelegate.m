@@ -12,24 +12,28 @@
 #import "ACLoginViewController.h"
 #import "ACRechargeConfirmViewController.h"
 #import "ACRechargeNav.h"
-#ifndef TEST
-#import "BaiduMobStat.h"
-#endif
 #ifdef JAILBREAK
     #import "AlixPay.h"
     #import "AlixPayResult.h"
 #else
     #import "IAPHelper.h"
 #endif
+#ifndef TEST
+    #import "BaiduMobStat.h"
+#endif
 
-@implementation ACAppDelegate {
-    HttpRequest *_loadHttp;
-}
+@implementation ACAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     //显示系统托盘
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
+#ifndef JAILBREAK
+    //添加支付监听
+    if([SKPaymentQueue canMakePayments]) {
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
+    }
+#endif
 #ifndef TEST
     //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
@@ -46,13 +50,6 @@
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    
-#ifndef JAILBREAK
-    //添加支付监听
-    if([SKPaymentQueue canMakePayments]) {
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
-    }
-#endif
     
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
@@ -79,9 +76,9 @@
     AlixPay *alixpay = [AlixPay shared];
 	AlixPayResult *result = [alixpay handleOpenURL:url];
 	if (result) {
-		//是否支付成功
+		//9000表示已经支付成功
 		if (9000 == result.statusCode) {
-//            //服务端签名验证
+            //服务端签名验证可开启以下代码
 //            NSMutableString *verifyString=[[NSMutableString alloc]init];
 //            [verifyString appendFormat:@"resultStatus={%d};",result.statusCode];
 //            [verifyString appendFormat:@"memo={%@};",result.statusMessage];

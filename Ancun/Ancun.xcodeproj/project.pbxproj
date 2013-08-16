@@ -337,6 +337,7 @@
 		C9E8EE75179FD18900E47BD9 /* icon-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE70179FD18900E47BD9 /* icon-@2x.png */; };
 		C9E8EE76179FD18900E47BD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE71179FD18900E47BD9 /* icon.png */; };
 		C9E8EE78179FD5E600E47BD9 /* ACRecordingManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */; };
+		C9F0695C17BE03FA00732C72 /* ACRechargeViewByASController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F0695B17BE03FA00732C72 /* ACRechargeViewByASController.m */; };
 		C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */; };
 		C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */; };
 		C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */; };
@@ -378,7 +379,7 @@
 		C9A8A93217BB75CD00652B90 /* ACRechargeConfirmViewController_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACRechargeConfirmViewController_success@2x.png"; sourceTree = "<group>"; };
 		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
-		C9D97987179FA3500076ACF3 /* YuluByStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = YuluByStore.app; path = Yulu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9D97987179FA3500076ACF3 /* YuluByStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YuluByStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D97992179FA3500076ACF3 /* YuluByStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YuluByStore-Info.plist"; sourceTree = "<group>"; };
 		C9D97996179FA3500076ACF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9D97998179FA3500076ACF3 /* YuluByStore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YuluByStore-Prefix.pch"; sourceTree = "<group>"; };
@@ -863,6 +864,8 @@
 		C9E8EE6F179FD18900E47BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C9E8EE70179FD18900E47BD9 /* icon-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-@2x.png"; sourceTree = "<group>"; };
 		C9E8EE71179FD18900E47BD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		C9F0695A17BE03F900732C72 /* ACRechargeViewByASController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeViewByASController.h; sourceTree = "<group>"; };
+		C9F0695B17BE03FA00732C72 /* ACRechargeViewByASController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeViewByASController.m; sourceTree = "<group>"; };
 		C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeViewController.h; sourceTree = "<group>"; };
 		C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeViewController.m; sourceTree = "<group>"; };
 		C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountRechargeCell.h; sourceTree = "<group>"; };
@@ -1590,6 +1593,8 @@
 				C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */,
 				C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */,
 				C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */,
+				C9F0695A17BE03F900732C72 /* ACRechargeViewByASController.h */,
+				C9F0695B17BE03FA00732C72 /* ACRechargeViewByASController.m */,
 				C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */,
 				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
 				C9D97A53179FA6520076ACF3 /* ACRecordingDetailViewController.h */,
@@ -2079,6 +2084,7 @@
 				C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */,
 				C90A351D17BA054F00BECE31 /* ACBaseViewController.m in Sources */,
 				C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */,
+				C9F0695C17BE03FA00732C72 /* ACRechargeViewByASController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

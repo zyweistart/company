@@ -1,16 +1,17 @@
 //
-//  ACAccountViewController.m
+//  ACRechargeViewByASController.m
 //  ACyulu
 //
 //  Created by Start on 12/26/12.
 //  Copyright (c) 2012 ancun. All rights reserved.
 //
 
-#import "ACRechargeViewController.h"
+#import "ACRechargeViewByASController.h"
 #import "ACRechargeNav.h"
 #import "ACAccountRechargeCell.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
+#import "IAPHelper.h"
 #ifdef  TEST
 #define PRODUCTRECORDNO_STRING @""
 #else
@@ -21,7 +22,7 @@
 #define CACHE_ACCOUNT_PAY2 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY2")
 #define CACHE_ACCOUNT_PAY3 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY3")
 
-@interface ACRechargeViewController ()
+@interface ACRechargeViewByASController ()
 
 //界面按钮事件
 - (void)leftTopButtonAction;
@@ -30,7 +31,7 @@
 
 @end
 
-@implementation ACRechargeViewController
+@implementation ACRechargeViewByASController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
@@ -115,7 +116,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
@@ -365,6 +368,44 @@
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];
     }
+}
+
+//产品加载
+- (void)productsLoaded:(NSNotification *)notification{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self dismissHUD:nil];
+    [self.tableView reloadData];
+}
+
+//购买产品
+- (void)productPurchased:(NSNotification *)notification{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self dismissHUD:nil];
+    [Common alert:@"支付成功"];
+}
+
+//购买失败
+- (void)productPurchaseFailed:(NSNotification *)notification {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self dismissHUD:nil];
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        [Common alert:transaction.error.localizedDescription];
+    }
+}
+
+//超时提示
+- (void)timeout:(id)arg {
+    _hud.labelText = @"超时!";
+    _hud.detailsLabelText = @"请稍候在试.";
+    _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	_hud.mode = MBProgressHUDModeCustomView;
+    [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
+}
+
+- (void)dismissHUD:(id)arg{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    _hud = nil;
 }
 
 @end

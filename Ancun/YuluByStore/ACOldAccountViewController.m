@@ -9,7 +9,11 @@
 #import "ACOldAccountViewController.h"
 #import "ACOldAccountMonthCell.h"
 #import "ACOldAccountDayViewController.h"
+#ifdef JAILBREAK
 #import "ACRechargeViewController.h"
+#else
+#import "ACRechargeViewByASController.h"
+#endif
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 #import "ACAccountViewController.h"
@@ -90,9 +94,15 @@
 }
 
 - (void)onPay:(id)sender {
+#ifdef JAILBREAK
     ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
     rechargeViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rechargeViewController animated:YES];
+#else
+    ACRechargeViewByASController *rechargeByASViewController=[[ACRechargeViewByASController alloc] init];
+    rechargeByASViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeByASViewController animated:YES];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated{
