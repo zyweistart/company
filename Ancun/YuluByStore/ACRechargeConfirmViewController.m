@@ -686,11 +686,11 @@
     //充值成功后重新刷新用户信息
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
     [requestParams setObject:@"1" forKey:@"raflag"];
-    _alipayHttp=[[HttpRequest alloc]init];
-    [_alipayHttp setDelegate:self];
-    [_alipayHttp setController:self];
-    [_alipayHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-    [_alipayHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+    _http=[[HttpRequest alloc]init];
+    [_http setDelegate:self];
+    [_http setController:self];
+    [_http setRequestCode:REFRESHUSERINFOREQUESTCODE];
+    [_http loginhandle:@"v4infoGet" requestParams:requestParams];
 }
 
 //根据类型套餐获取最后充值的套餐
@@ -779,11 +779,11 @@
             }
         }
 #ifdef JAILBREAK
-        _alipayHttp=[[HttpRequest alloc]init];
-        [_alipayHttp setDelegate:self];
-        [_alipayHttp setController:self];
-        [_alipayHttp setRequestCode:ALIPAYREQUESTCODE];
-        [_alipayHttp loginhandle:@"v4alipayReq" requestParams:requestParams];
+        _http=[[HttpRequest alloc]init];
+        [_http setDelegate:self];
+        [_http setController:self];
+        [_http setRequestCode:ALIPAYREQUESTCODE];
+        [_http loginhandle:@"v4alipayReq" requestParams:requestParams];
 #else
         [Common alert:@"非越狱版确认充值处理"];
 #endif

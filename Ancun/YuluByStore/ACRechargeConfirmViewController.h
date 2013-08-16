@@ -11,7 +11,7 @@
 @class ACRechargeNav;
 @interface ACRechargeConfirmViewController : ACBaseViewController<HttpViewDelegate,UIActionSheetDelegate>{
     
-    HttpRequest *_alipayHttp;
+    HttpRequest *_http;
     
 }
 

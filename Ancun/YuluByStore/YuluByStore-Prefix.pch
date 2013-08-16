@@ -11,7 +11,7 @@
 #pragma mark -当前是否为测试环境产品上线需要注释该宏定义
 #define TEST
 #pragma mark -越狱版定义标记非越狱版需要注释该宏义
-#define JAILBREAK
+//#define JAILBREAK
 
 #ifdef __OBJC__
 //System

@@ -106,7 +106,7 @@
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode{
     if([response successFlag]){
         if(reqCode==REQUESTCODE_BUY_LOADPRODUCT){
-            [[IAPHelper sharedHelper]setProductList:[response dataItemArray]];
+            [[IAPHelper sharedHelper] setProductlist:[response dataItemArray]];
             if ([IAPHelper sharedHelper].products == nil) {
                 [[IAPHelper sharedHelper] requestProducts];
                 _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];

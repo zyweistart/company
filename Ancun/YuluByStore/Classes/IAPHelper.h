@@ -6,30 +6,26 @@
 //  Copyright (c) 2013年 ancun. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "StoreKit/StoreKit.h"
 
+//加载完成
 #define kProductsLoadedNotification       @"ProductsLoaded"
+//支付成功
 #define kProductPurchasedNotification      @"ProductPurchased"
+//支付失败
 #define kProductPurchaseFailedNotification  @"ProductPurchaseFailed"
 
-@interface IAPHelper:NSObject<SKProductsRequestDelegate,SKPaymentTransactionObserver,HttpViewDelegate>{
-    NSArray* _products;
-    SKProductsRequest* _request;
-    NSMutableArray* _productlist;
-}
+@interface IAPHelper:NSObject<SKProductsRequestDelegate,SKPaymentTransactionObserver,HttpViewDelegate>
 
-@property (retain) NSArray* products;
-@property (retain) SKProductsRequest* request;
-@property (retain) NSMutableArray* productlist;
+@property (strong,nonatomic) NSString *recordno;
+@property (strong,nonatomic) UIViewController *controller;
+@property (strong,nonatomic) NSMutableArray *products;
+@property (strong,nonatomic) NSMutableArray *productlist;
 
-@property (retain,nonatomic) UIViewController *controller;
-@property (retain,nonatomic) NSString* recordno;
-
-+ (IAPHelper *) sharedHelper;
++ (IAPHelper *)sharedHelper;
 
 - (void)requestProducts;
-- (void)setProductList:(NSMutableArray*)productIdentifiers;
 - (NSMutableDictionary*)getProductDetail:(NSString*)identifier;
 - (void)buyProductIdentifier:(SKProduct*)product;
+
 @end
