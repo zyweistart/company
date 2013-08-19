@@ -8,10 +8,17 @@
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
-#pragma mark -当前是否为测试环境产品上线需要注释该宏定义
+#pragma mark 测试环境宏定义
 #define TEST
-#pragma mark -越狱版定义标记非越狱版需要注释该宏义
+#pragma mark 越狱版宏定义
 #define JAILBREAK
+
+#ifdef TEST
+#warning 当前是否为测试环境产品上线需要注释该宏定义
+#endif
+#ifdef JAILBREAK
+#warning 当前版本为越狱版非越狱版本请注释JAILBREAK宏
+#endif
 
 #ifdef __OBJC__
 //System

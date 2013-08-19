@@ -12,14 +12,14 @@
 #import "ACLoginViewController.h"
 #import "ACRechargeConfirmViewController.h"
 #import "ACRechargeNav.h"
+#ifndef TEST
+#import "BaiduMobStat.h"
+#endif
 #ifdef JAILBREAK
     #import "AlixPay.h"
     #import "AlixPayResult.h"
 #else
     #import "IAPHelper.h"
-#endif
-#ifndef TEST
-    #import "BaiduMobStat.h"
 #endif
 
 @implementation ACAppDelegate
@@ -28,12 +28,6 @@
     //显示系统托盘
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
-#ifndef JAILBREAK
-    //添加支付监听
-    if([SKPaymentQueue canMakePayments]) {
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
-    }
-#endif
 #ifndef TEST
     //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
@@ -44,6 +38,12 @@
     statTracker.sessionResumeInterval = 60;
     //应用ID
     [statTracker startWithAppId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BaiduWithAppId"]];
+#endif
+#ifndef JAILBREAK
+    //添加苹果支付监听
+    if([SKPaymentQueue canMakePayments]) {
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
+    }
 #endif
     
     //后台播放音频设置
@@ -66,7 +66,7 @@
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
+//    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
     
     return YES;
 }

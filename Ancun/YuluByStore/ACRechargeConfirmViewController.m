@@ -655,11 +655,11 @@
     mainView.layer.masksToBounds=YES;
     [mainView setBackgroundColor:[UIColor whiteColor]];
      
-    UIImageView *image=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACRechargeConfirmViewController_success"]];
-    [image setFrame:CGRectMake(30, 30, 27, 20)];
+    UIImageView *image=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"reg_for_done"]];
+    [image setFrame:CGRectMake(30, 30, 30, 30)];
     [mainView addSubview:image];
     
-    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(60, 30, 80, 20)];
+    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(65, 35, 80, 20)];
     [lbl1 setFont:[UIFont systemFontOfSize:18]];
     [lbl1 setTextAlignment:NSTextAlignmentLeft];
     [lbl1 setText:@"充值成功"];

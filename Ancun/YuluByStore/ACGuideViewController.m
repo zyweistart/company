@@ -13,8 +13,8 @@ static NSString *kImageKey = @"imageKey";
 
 @interface ACGuideViewController ()
 
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSMutableArray *viewControllers;
 
 @end
@@ -26,16 +26,25 @@ static NSString *kImageKey = @"imageKey";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    int HEIGHT=iPhone5?522:434;
+    self.scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, HEIGHT)];
+    [self.view addSubview:self.scrollView];
+    self.pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake(0, HEIGHT, 320, 26)];
+    [self.pageControl setBackgroundColor:[UIColor blackColor]];
+    [self.pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.pageControl];
     
     self.contentList=[[NSArray alloc]initWithObjects:
                       [[NSDictionary alloc]initWithObjectsAndKeys:
-                       @"guide1", kImageKey,nil],
+                       iPhone5?@"guide1-568h@2x":@"guide1", kImageKey,nil],
                       [[NSDictionary alloc]initWithObjectsAndKeys:
-                       @"guide2", kImageKey,nil],
+                       iPhone5?@"guide2-568h@2x":@"guide2", kImageKey,nil],
                       [[NSDictionary alloc]initWithObjectsAndKeys:
-                       @"guide3", kImageKey,nil],
+                       iPhone5?@"guide3-568h@2x":@"guide3", kImageKey,nil],
                       [[NSDictionary alloc]initWithObjectsAndKeys:
-                       @"guide4", kImageKey,nil],nil];
+                       iPhone5?@"guide4-568h@2x":@"guide4", kImageKey,nil],
+                      [[NSDictionary alloc]initWithObjectsAndKeys:
+                       iPhone5?@"guide5-568h@2x":@"guide5", kImageKey,nil],nil];
     
     NSUInteger numberPages = self.contentList.count;
     
@@ -160,7 +169,7 @@ static NSString *kImageKey = @"imageKey";
     [self.scrollView scrollRectToVisible:bounds animated:animated];
 }
 
-- (IBAction)changePage:(id)sender {
+- (void)changePage:(id)sender {
     [self gotoPage:YES];    // YES = animate
 }
 

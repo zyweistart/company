@@ -2,7 +2,7 @@
 
 @interface MyViewController : UIViewController
 
-@property (nonatomic, strong) IBOutlet UIImageView *numberImage;
+@property (strong,nonatomic) UIImageView *numberImage;
 
 - (id)initWithPageNumber:(NSUInteger)page;
 
