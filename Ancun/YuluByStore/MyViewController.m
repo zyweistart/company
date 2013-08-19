@@ -18,15 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.numberImage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?528:480)];
+    self.numberImage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?522:434)];
     [self.view addSubview:self.numberImage];
     if(pageNumber==4){
         int left=self.view.frame.size.width;
-        int top=self.view.frame.size.height;
+        int top=iPhone5?360:310;
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(left/2-139, top/2, 278, 46)];
-        [btn setImage:[UIImage imageNamed:@"extraction_button_2"] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:@"extraction_button_3"] forState:UIControlStateHighlighted];
+        [btn setFrame:CGRectMake(left/2-37, top, 74, 79)];
+        [btn setImage:[UIImage imageNamed:@"guide_button_f_gb"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"guide_button_b_gb"] forState:UIControlStateHighlighted];
         [btn addTarget:self action:@selector(welcomeOnClick:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:btn];
     }

@@ -66,8 +66,9 @@
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-//    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
-    
+#ifndef TEST
+    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
+#endif
     return YES;
 }
 

@@ -206,6 +206,7 @@
 - (IBAction)ibRegister:(id)sender{
     ACRegisterViewController *registerViewController=[[ACRegisterViewController alloc]init];
     UINavigationController *registerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:registerViewController];
+    registerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
     [self presentViewController:registerViewControllerNav animated:YES completion:nil];
 }
 
@@ -213,6 +214,7 @@
 - (IBAction)ibForgetPwd:(id)sender{
     ACForgetPwdViewController *forgetPwdViewController=[[ACForgetPwdViewController alloc]init];
     UINavigationController *forgetPwdViewControllerNav = [[UINavigationController alloc] initWithRootViewController:forgetPwdViewController];
+    forgetPwdViewControllerNav.navigationBar.tintColor=NAVCOLOR;
     [self presentViewController:forgetPwdViewControllerNav animated:YES completion:nil];
 }
 
