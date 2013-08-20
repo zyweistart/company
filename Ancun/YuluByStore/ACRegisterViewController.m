@@ -9,6 +9,8 @@
 #import "ACRegisterViewController.h"
 #import "ACTermsOfServiceViewController.h"
 
+#define SECOND 60
+
 @interface ACRegisterViewController ()
 
 @end

@@ -11,10 +11,16 @@
 #import "ACAccountRechargeCell.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
-#ifdef  TEST
-#define PRODUCTRECORDNO_STRING @""
+
+#ifdef JAILBREAK
+    //越狱版
+    #ifdef  TEST
+        #define PRODUCTRECORDNO_STRING @"8f13597db224df927b4a02658326ca39"
+    #else
+        #define PRODUCTRECORDNO_STRING @"ac9d9d16706af24455b5834eec56d2d5"
+    #endif
 #else
-#define PRODUCTRECORDNO_STRING @"2cec276a043223d9ff47859082cd99bc"
+    #define PRODUCTRECORDNO_STRING @"ac9d9d16706af24455b5834eec56d2d5"
 #endif
 
 #define CACHE_ACCOUNT_PAY1 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY1")

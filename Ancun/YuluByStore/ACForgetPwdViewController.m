@@ -8,6 +8,8 @@
 
 #import "ACForgetPwdViewController.h"
 
+#define SECOND 60
+
 @interface ACForgetPwdViewController ()
 
 @end

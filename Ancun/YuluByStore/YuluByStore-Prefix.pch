@@ -14,10 +14,10 @@
 #define JAILBREAK
 
 #ifdef TEST
-#warning 当前是否为测试环境产品上线需要注释该宏定义
+#warning 当前版本为测试版本上线需要注释该宏定义
 #endif
 #ifdef JAILBREAK
-#warning 当前版本为越狱版非越狱版本请注释JAILBREAK宏
+#warning 当前版本为越狱版本如提交App Store审核需注释该JAILBREAK宏定义
 #endif
 
 #ifdef __OBJC__
@@ -44,7 +44,6 @@
 //导航背景
 #define NAVCOLOR [UIColor colorWithRed:(68/255.0) green:(141/255.0) blue:(208/255.0) alpha:1]
 //常量
-#define SECOND 60
 #define APPNAME @"安存语录"
 #define Notification_TabClick_ACRecordingManagerViewController @"Notification_TabClick_ACRecordingManagerViewController"
 //配置常量

@@ -533,7 +533,6 @@
 		C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDelegate.h; path = Classes/ResultDelegate.h; sourceTree = "<group>"; };
 		C9D97AC7179FA6640076ACF3 /* XML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XML.h; sourceTree = "<group>"; };
 		C9D97AC8179FA6640076ACF3 /* XML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XML.m; sourceTree = "<group>"; };
-		C9D97ACB179FA6640076ACF3 /* alipay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alipay.h; sourceTree = "<group>"; };
 		C9D97ACC179FA6640076ACF3 /* AlixPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPay.h; sourceTree = "<group>"; };
 		C9D97ACD179FA6640076ACF3 /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
 		C9D97ACE179FA6640076ACF3 /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
@@ -1046,7 +1045,6 @@
 		C9D97ACA179FA6640076ACF3 /* alipay */ = {
 			isa = PBXGroup;
 			children = (
-				C9D97ACB179FA6640076ACF3 /* alipay.h */,
 				C9D97ACC179FA6640076ACF3 /* AlixPay.h */,
 				C9D97ACD179FA6640076ACF3 /* AlixPayOrder.h */,
 				C9D97ACE179FA6640076ACF3 /* AlixPayResult.h */,
