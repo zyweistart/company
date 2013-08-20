@@ -35,7 +35,7 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (void) back:(id)sender{
+- (void)back:(id)sender {
     [Common resultNavigationViewController:self resultDelegate:nil resultCode:0 requestCode:0 data:0];
 }
 

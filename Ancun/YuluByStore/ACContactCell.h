@@ -10,7 +10,7 @@
 
 @interface ACContactCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl_name;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_phone;
+@property (strong, nonatomic) UILabel *lblName;
+@property (strong, nonatomic) UILabel *lblPhone;
 
 @end

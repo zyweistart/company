@@ -69,13 +69,11 @@
     static NSString *cellReuseIdentifier=@"ACMoreCellIdentifier";
     ACMoreCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
     if(!cell){
-        UINib *nib=[UINib nibWithNibName:@"ACMoreCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-        cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        cell = [[ACMoreCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
     ACMore *more=[[_moreInSection objectForKey:[self.dataItemArray objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
-    cell.lbl_name.text=[more name];
-    cell.img_view.image=[UIImage imageNamed:[more img]];
+    cell.lblName.text=[more name];
+    cell.imgView.image=[UIImage imageNamed:[more img]];
     
     switch(more.tag){
         case 1:

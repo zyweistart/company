@@ -13,4 +13,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_rtcount;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_orttime;
 
+@property (strong, nonatomic) UILabel *lblOppno;
+@property (strong, nonatomic) UILabel *lblLcalltime;
+@property (strong, nonatomic) UILabel *lblRtcount;
+@property (strong, nonatomic) UILabel *lblOrttime;
+
 @end

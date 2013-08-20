@@ -44,7 +44,7 @@
 //导航背景
 #define NAVCOLOR [UIColor colorWithRed:(68/255.0) green:(141/255.0) blue:(208/255.0) alpha:1]
 //常量
-#define APPNAME @"安存语录"
+#define APPNAME @"安存录音"
 #define Notification_TabClick_ACRecordingManagerViewController @"Notification_TabClick_ACRecordingManagerViewController"
 //配置常量
 #define DEFAULTDATA_PHONE @"DEFAULTDATA_PHONE"

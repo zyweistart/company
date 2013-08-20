@@ -94,7 +94,7 @@
         if([name isEqualToString:[dictionary objectForKey:@"oppno"]]){
             return 60;
         }else{
-            return 70;
+            return 75;
         }
     }else{
         return 50;
@@ -114,29 +114,25 @@
         }
         if([name isEqualToString:[dictionary objectForKey:@"oppno"]]){
             ACRecordingCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-            if(!cell){
-                UINib *nib=[UINib nibWithNibName:@"ACRecordingCell" bundle:nil];
-                [self.tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-                cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+            if(!cell){          
+                cell = [[ACRecordingCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
             }
-            cell.lbl_oppno.text=[dictionary objectForKey:@"oppno"];
-            cell.lbl_lcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
-            cell.lbl_orttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"]]];
-            cell.lbl_rtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
+            cell.lblOppno.text=[dictionary objectForKey:@"oppno"];
+            cell.lblLcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
+            cell.lblOrttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"]]];
+            cell.lblRtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             return cell;
         }else{
             ACRecording2Cell *cell2 = [self.tableView dequeueReusableCellWithIdentifier:cell2ReuseIdentifier];
             if(!cell2){
-                UINib *nib=[UINib nibWithNibName:@"ACRecording2Cell" bundle:nil];
-                [self.tableView registerNib:nib forCellReuseIdentifier:cell2ReuseIdentifier];
-                cell2 = [self.tableView dequeueReusableCellWithIdentifier:cell2ReuseIdentifier];
+                cell2 = [[ACRecording2Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell2ReuseIdentifier];
             }
-            cell2.lbl_name.text=name;
-            cell2.lbl_oppno.text=[dictionary objectForKey:@"oppno"];
-            cell2.lbl_lcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
-            cell2.lbl_orttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"] ]];
-            cell2.lbl_rtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
+            cell2.lblName.text=name;
+            cell2.lblOppno.text=[dictionary objectForKey:@"oppno"];
+            cell2.lblLcalltime.text=[[dictionary objectForKey:@"lcalltime"] substringWithRange:NSMakeRange(0, 10)];
+            cell2.lblOrttime.text=[[NSString alloc]initWithFormat:@"%@",[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"onrttime"] ]];
+            cell2.lblRtcount.text=[[NSString alloc]initWithFormat:@"%@个录音",[dictionary objectForKey:@"onrtcount"]];
             cell2.selectionStyle = UITableViewCellSelectionStyleBlue;
             return cell2;
         }

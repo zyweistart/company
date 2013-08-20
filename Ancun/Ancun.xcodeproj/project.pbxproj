@@ -66,7 +66,6 @@
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A73179FA6520076ACF3 /* ACBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */; };
 		C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A16179FA64F0076ACF3 /* ACContactCell.m */; };
-		C9D97A75179FA6520076ACF3 /* ACContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A17179FA64F0076ACF3 /* ACContactCell.xib */; };
 		C9D97A76179FA6520076ACF3 /* ACContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */; };
 		C9D97A77179FA6520076ACF3 /* ACContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */; };
 		C9D97A78179FA6520076ACF3 /* ACDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */; };
@@ -89,7 +88,6 @@
 		C9D97A8B179FA6520076ACF3 /* ACModifyPwdViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */; };
 		C9D97A8C179FA6520076ACF3 /* ACMore.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A38179FA6500076ACF3 /* ACMore.m */; };
 		C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */; };
-		C9D97A8E179FA6520076ACF3 /* ACMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A3B179FA6510076ACF3 /* ACMoreCell.xib */; };
 		C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */; };
 		C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */; };
 		C9D97A91179FA6520076ACF3 /* ACNotaryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */; };
@@ -99,9 +97,7 @@
 		C9D97A96179FA6520076ACF3 /* ACPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A48179FA6510076ACF3 /* ACPlayerView.m */; };
 		C9D97A97179FA6520076ACF3 /* ACPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A49179FA6520076ACF3 /* ACPlayerView.xib */; };
 		C9D97A98179FA6520076ACF3 /* ACRecording2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */; };
-		C9D97A99179FA6520076ACF3 /* ACRecording2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A4C179FA6520076ACF3 /* ACRecording2Cell.xib */; };
 		C9D97A9A179FA6520076ACF3 /* ACRecordingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A4E179FA6520076ACF3 /* ACRecordingCell.m */; };
-		C9D97A9B179FA6520076ACF3 /* ACRecordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A4F179FA6520076ACF3 /* ACRecordingCell.xib */; };
 		C9D97A9C179FA6520076ACF3 /* ACRecordingDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A51179FA6520076ACF3 /* ACRecordingDetailCell.m */; };
 		C9D97A9D179FA6520076ACF3 /* ACRecordingDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A52179FA6520076ACF3 /* ACRecordingDetailCell.xib */; };
 		C9D97A9E179FA6520076ACF3 /* ACRecordingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A54179FA6520076ACF3 /* ACRecordingDetailViewController.m */; };
@@ -430,7 +426,6 @@
 		C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACBuyViewController.m; sourceTree = "<group>"; };
 		C9D97A15179FA64F0076ACF3 /* ACContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactCell.h; sourceTree = "<group>"; };
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
-		C9D97A17179FA64F0076ACF3 /* ACContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactCell.xib; sourceTree = "<group>"; };
 		C9D97A18179FA64F0076ACF3 /* ACContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactViewController.h; sourceTree = "<group>"; };
 		C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactViewController.m; sourceTree = "<group>"; };
 		C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactViewController.xib; sourceTree = "<group>"; };
@@ -462,7 +457,6 @@
 		C9D97A38179FA6500076ACF3 /* ACMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMore.m; sourceTree = "<group>"; };
 		C9D97A39179FA6500076ACF3 /* ACMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreCell.h; sourceTree = "<group>"; };
 		C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreCell.m; sourceTree = "<group>"; };
-		C9D97A3B179FA6510076ACF3 /* ACMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACMoreCell.xib; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
 		C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreViewController.m; sourceTree = "<group>"; };
 		C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNotaryDetailViewController.h; sourceTree = "<group>"; };
@@ -477,10 +471,8 @@
 		C9D97A49179FA6520076ACF3 /* ACPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACPlayerView.xib; sourceTree = "<group>"; };
 		C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecording2Cell.h; sourceTree = "<group>"; };
 		C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecording2Cell.m; sourceTree = "<group>"; };
-		C9D97A4C179FA6520076ACF3 /* ACRecording2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACRecording2Cell.xib; sourceTree = "<group>"; };
 		C9D97A4D179FA6520076ACF3 /* ACRecordingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingCell.h; sourceTree = "<group>"; };
 		C9D97A4E179FA6520076ACF3 /* ACRecordingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingCell.m; sourceTree = "<group>"; };
-		C9D97A4F179FA6520076ACF3 /* ACRecordingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACRecordingCell.xib; sourceTree = "<group>"; };
 		C9D97A50179FA6520076ACF3 /* ACRecordingDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingDetailCell.h; sourceTree = "<group>"; };
 		C9D97A51179FA6520076ACF3 /* ACRecordingDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingDetailCell.m; sourceTree = "<group>"; };
 		C9D97A52179FA6520076ACF3 /* ACRecordingDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACRecordingDetailCell.xib; sourceTree = "<group>"; };
@@ -1652,7 +1644,6 @@
 			children = (
 				C9D97A07179FA64E0076ACF3 /* ACAboutUsViewController.xib */,
 				C9D97A08179FA64E0076ACF3 /* ACAboutUsViewController@iPhone5.xib */,
-				C9D97A17179FA64F0076ACF3 /* ACContactCell.xib */,
 				C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */,
 				C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */,
 				C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */,
@@ -1666,13 +1657,10 @@
 				C9D97A30179FA6500076ACF3 /* ACLoginViewController@iPhone5.xib */,
 				C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */,
 				C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */,
-				C9D97A3B179FA6510076ACF3 /* ACMoreCell.xib */,
 				C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */,
 				C9D97A41179FA6510076ACF3 /* ACNotaryDetailViewController@iPhone5.xib */,
 				C9D97A46179FA6510076ACF3 /* ACPaymentCell.xib */,
 				C9D97A49179FA6520076ACF3 /* ACPlayerView.xib */,
-				C9D97A4C179FA6520076ACF3 /* ACRecording2Cell.xib */,
-				C9D97A4F179FA6520076ACF3 /* ACRecordingCell.xib */,
 				C9D97A52179FA6520076ACF3 /* ACRecordingDetailCell.xib */,
 				C9D97A55179FA6520076ACF3 /* ACRecordingDetailViewController.xib */,
 				C9D97A56179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib */,
@@ -1782,7 +1770,6 @@
 				C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */,
 				C9D97A6B179FA6520076ACF3 /* ACAboutUsViewController.xib in Resources */,
 				C9D97A6C179FA6520076ACF3 /* ACAboutUsViewController@iPhone5.xib in Resources */,
-				C9D97A75179FA6520076ACF3 /* ACContactCell.xib in Resources */,
 				C9D97A77179FA6520076ACF3 /* ACContactViewController.xib in Resources */,
 				C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */,
 				C9D97A7A179FA6520076ACF3 /* ACDialViewController@iPhone5.xib in Resources */,
@@ -1796,13 +1783,10 @@
 				C9D97A87179FA6520076ACF3 /* ACLoginViewController@iPhone5.xib in Resources */,
 				C9D97A8A179FA6520076ACF3 /* ACModifyPwdViewController.xib in Resources */,
 				C9D97A8B179FA6520076ACF3 /* ACModifyPwdViewController@iPhone5.xib in Resources */,
-				C9D97A8E179FA6520076ACF3 /* ACMoreCell.xib in Resources */,
 				C9D97A91179FA6520076ACF3 /* ACNotaryDetailViewController.xib in Resources */,
 				C9D97A92179FA6520076ACF3 /* ACNotaryDetailViewController@iPhone5.xib in Resources */,
 				C9D97A95179FA6520076ACF3 /* ACPaymentCell.xib in Resources */,
 				C9D97A97179FA6520076ACF3 /* ACPlayerView.xib in Resources */,
-				C9D97A99179FA6520076ACF3 /* ACRecording2Cell.xib in Resources */,
-				C9D97A9B179FA6520076ACF3 /* ACRecordingCell.xib in Resources */,
 				C9D97A9D179FA6520076ACF3 /* ACRecordingDetailCell.xib in Resources */,
 				C9D97A9F179FA6520076ACF3 /* ACRecordingDetailViewController.xib in Resources */,
 				C9D97AA0179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib in Resources */,

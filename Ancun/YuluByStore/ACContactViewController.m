@@ -43,14 +43,10 @@
                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                  target:self
                                                  action:@selector(refresh:)];
+        [self refresh:nil];
         
     }
     return self;
-}
-
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    [self refresh:nil];
 }
 
 #pragma mark -
@@ -122,12 +118,10 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
         //双
         ACContactCell *cell = [tableView dequeueReusableCellWithIdentifier:SectionsTableIdentifier2];
         if(!cell){
-            UINib *nib=[UINib nibWithNibName:SectionsTableIdentifier2 bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:SectionsTableIdentifier2];
-            cell = [tableView dequeueReusableCellWithIdentifier:SectionsTableIdentifier2];
+            cell = [[ACContactCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SectionsTableIdentifier2];
         }
-        cell.lbl_name.text=[namePhones objectAtIndex:0];
-        cell.lbl_phone.text=[namePhones objectAtIndex:1];
+        cell.lblName.text=[namePhones objectAtIndex:0];
+        cell.lblPhone.text=[namePhones objectAtIndex:1];
         return cell;
     }
 }
