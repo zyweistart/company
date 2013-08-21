@@ -154,6 +154,7 @@
             [requestParams setObject:_fileno forKey:@"fileno"];
             //1:生成;2:查看;3:取消;:4:短信发送（安存录音后台发送，暂不支持）
             [requestParams setObject:@"1" forKey:@"acccodeact"];
+            [requestParams setObject:@"10" forKey:@"vtime"];
             _recordingDetailHttp=[[HttpRequest alloc]init];
             [_recordingDetailHttp setDelegate:self];
             [_recordingDetailHttp setController:self];
@@ -229,6 +230,7 @@
     if([remark isEqualToString:@""]){
         [Common alert:@"请输入备注内容"];
     }else{
+        [_tv_remark resignFirstResponder];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:_fileno forKey:@"fileno"];
         [requestParams setObject:remark forKey:@"remark"];

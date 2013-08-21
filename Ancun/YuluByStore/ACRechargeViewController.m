@@ -12,13 +12,8 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
-#ifdef JAILBREAK
-    //越狱版
-    #ifdef  TEST
-        #define PRODUCTRECORDNO_STRING @"8f13597db224df927b4a02658326ca39"
-    #else
-        #define PRODUCTRECORDNO_STRING @"ac9d9d16706af24455b5834eec56d2d5"
-    #endif
+#ifdef  TEST
+    #define PRODUCTRECORDNO_STRING @"8f13597db224df927b4a02658326ca39"
 #else
     #define PRODUCTRECORDNO_STRING @"ac9d9d16706af24455b5834eec56d2d5"
 #endif
@@ -330,7 +325,7 @@
         [cell setControler:self];
         return cell;
     } else {
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];
     }
 }
 

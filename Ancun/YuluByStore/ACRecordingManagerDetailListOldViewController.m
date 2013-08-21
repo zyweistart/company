@@ -61,15 +61,9 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
-    if(dictioanry){
-        id content=[dictioanry objectForKey:CACHE_RECORDINGMANAGERLISTOLD];
-        if(content){
-            self.dataItemArray=[[XML analysis:content] dataItemArray];
-            if([self.dataItemArray count]>0){
-                [self.tableView reloadData];
-            }
-        }
+    self.dataItemArray=[Common getCacheXmlByList:CACHE_RECORDINGMANAGERLISTOLD];
+    if([self.dataItemArray count]>0){
+        [self.tableView reloadData];
     }
 }
 
@@ -129,11 +123,7 @@
         [super requestFinishedByResponse:response requestCode:reqCode];
         if([response successFlag]){
             if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-                //缓存数据
-                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-                [dictionary setObject:[response responseString] forKey:CACHE_RECORDINGMANAGERLISTOLD];
-                //缓存数据
-                [Common setCache:[Config Instance].cacheKey data:dictionary];
+                [Common setCacheXmlByList:[response responseString] tag:CACHE_RECORDINGMANAGERLISTOLD];
             }
         }
     }
@@ -168,6 +158,8 @@
                     break;
                 }
             }
+            //清空缓存原缓存已失效
+            [Common setCacheXmlByList:@"" tag:CACHE_RECORDINGMANAGERLISTOLD];
             [self.tableView reloadData];
         }
     }
@@ -217,13 +209,15 @@
         static NSString *cellReuseIdentifier=@"ACRecordingDetailCellIdentifier";
         ACRecordingDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
         if(!cell){
-            UINib *nib=[UINib nibWithNibName:@"ACRecordingDetailCell" bundle:nil];
-            [self.tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-            cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+            cell = [[ACRecordingDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
         }
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
         NSString *fileno=[dictionary objectForKey:@"fileno"];
-        cell.lbl_date.text=[dictionary objectForKey:@"calledno"];
+        NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"calledno"]];
+        if(name==nil){
+            name=[dictionary objectForKey:@"calledno"];
+        }
+        cell.lblDate.text=name;
         //创建文件管理器
         NSFileManager *fileManager = [NSFileManager defaultManager];
         //获取路径
@@ -236,21 +230,21 @@
         NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
         //如果录音文件存在都直接播放
         if([fileManager fileExistsAtPath:path]){
-            cell.lbl_downloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
+            cell.lblDownloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
         }else{
-            cell.lbl_downloadflag.text=@"未下载";
+            cell.lblDownloadflag.text=@"未下载";
         }
         NSString *remark=[dictionary objectForKey:@"remark"];
         if([remark isEqualToString:@""]){
-            cell.lbl_remark.textColor=[UIColor lightGrayColor];
-            cell.lbl_remark.text=@"添加备注";
+            cell.lblRemark.textColor=[UIColor lightGrayColor];
+            cell.lblRemark.text=@"添加备注";
         }else{
-            cell.lbl_remark.textColor=[UIColor blackColor];
-            cell.lbl_remark.text=remark;
+            cell.lblRemark.textColor=[UIColor blackColor];
+            cell.lblRemark.text=remark;
         }
         return cell;
     }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];
     }
 }
 

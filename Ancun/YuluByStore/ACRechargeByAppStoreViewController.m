@@ -1,28 +1,30 @@
 //
-//  ACRechargeViewByASController.m
+//  ACAccountViewController.m
 //  ACyulu
 //
 //  Created by Start on 12/26/12.
 //  Copyright (c) 2012 ancun. All rights reserved.
 //
 
-#import "ACRechargeViewByASController.h"
+#import "ACRechargeByAppStoreViewController.h"
 #import "ACRechargeNav.h"
 #import "ACAccountRechargeCell.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 #import "IAPHelper.h"
+#import "ACPaymentCell.h"
+
 #ifdef  TEST
-#define PRODUCTRECORDNO_STRING @""
+    #define PRODUCTRECORDNO_STRING @"1dc3838c3c2c9ce5a1fe54f9b6cf5bb9"
 #else
-#define PRODUCTRECORDNO_STRING @"2cec276a043223d9ff47859082cd99bc"
+    #define PRODUCTRECORDNO_STRING @"204ed4c44295be11e76887ea05a959ff"
 #endif
 
 #define CACHE_ACCOUNT_PAY1 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY1")
 #define CACHE_ACCOUNT_PAY2 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY2")
 #define CACHE_ACCOUNT_PAY3 CACHE_CONSTANT(@"CACHE_ACCOUNT_PAY3")
 
-@interface ACRechargeViewByASController ()
+@interface ACRechargeByAppStoreViewController ()
 
 //界面按钮事件
 - (void)leftTopButtonAction;
@@ -31,13 +33,13 @@
 
 @end
 
-@implementation ACRechargeViewByASController
+@implementation ACRechargeByAppStoreViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     if (self) {
         
-        self.navigationItem.title=@"账户充值";
+        self.navigationItem.title=@"账户充值(AppStore)";
         
         _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
         [_rechargeNav firstStep];
@@ -85,31 +87,12 @@
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.view addSubview:self.tableView];
-        if(_refreshHeaderView==nil){
-            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-            view.delegate = self;
-            [self.tableView addSubview:view];
-            _refreshHeaderView = view;
-        }
-        [_refreshHeaderView refreshLastUpdatedDate];
         
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     //初始化数据
     currentTab=1;
-    //左
-    _leftCurrentPage=_currentPage;
-    _leftReloading=_reloading;
-    _leftLoadOver=_loadOver;
-    //中
-    _centerCurrentPage=_currentPage;
-    _centerReloading=_reloading;
-    _centerLoadOver=_loadOver;
-    //右
-    _rightCurrentPage=_currentPage;
-    _rightReloading=_reloading;
-    _rightLoadOver=_loadOver;
     
     return self;
 }
@@ -119,6 +102,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
+
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
@@ -143,10 +127,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //如果为nil则自动加载
-    if(_leftDataItemArray==nil) {
-        [self autoRefresh];
-    }
+    [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark-
@@ -154,15 +135,12 @@
 
 - (void)leftTopButtonAction {
     currentTab=1;
-    
-    _currentPage=_leftCurrentPage;
-    _reloading=_leftReloading;
-    _loadOver=_leftLoadOver;
+
     self.dataItemArray=_leftDataItemArray;
-    if([_leftDataItemArray count]>0) {
-        [self.tableView reloadData];
+    if([self.dataItemArray count]>0) {
+        [self loadAppStoreProduct:self.dataItemArray];
     } else {
-        [self autoRefresh];
+        [self reloadTableViewDataSource];
     }
     
     [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
@@ -179,15 +157,12 @@
 
 - (void)centerTopButtonAction {
     currentTab=2;
-    
-    _currentPage=_centerCurrentPage;
-    _reloading=_centerReloading;
-    _loadOver=_centerLoadOver;
+ 
     self.dataItemArray=_centerDataItemArray;
-    if([_centerDataItemArray count]>0){
-        [self.tableView reloadData];
+    if([self.dataItemArray count]>0){
+        [self loadAppStoreProduct:self.dataItemArray];
     }else{
-        [self autoRefresh];
+        [self reloadTableViewDataSource];
     }
     
     [_centerTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
@@ -205,14 +180,11 @@
 - (void)rightTopButtonAction {
     currentTab=3;
     
-    _currentPage=_rightCurrentPage;
-    _reloading=_rightReloading;
-    _loadOver=_rightLoadOver;
     self.dataItemArray=_rightDataItemArray;
-    if([_rightDataItemArray count]>0){
-        [self.tableView reloadData];
+    if([self.dataItemArray count]>0){
+        [self loadAppStoreProduct:self.dataItemArray];
     }else{
-        [self autoRefresh];
+        [self reloadTableViewDataSource];
     }
     
     [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
@@ -230,62 +202,59 @@
 #pragma mark -
 #pragma mark Delegate Methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex==0){
-        [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
+    [Common setCacheXmlByList:[response responseString] tag:[self returnCurrentTab]];
+    if(currentTab == 1) {
+        _leftDataItemArray=[response dataItemArray];
+    } else if(currentTab == 2) {
+        _centerDataItemArray=[response dataItemArray];
+    } else if(currentTab == 3) {
+        _rightDataItemArray=[response dataItemArray];
+    }
+    if ([[response dataItemArray] count]>0) {
+        [self loadAppStoreProduct:[response dataItemArray]];
+    } else {
+        [self.tableView reloadData];
+    }    
+}
+
+- (void)loadAppStoreProduct:(NSMutableArray *)dataItemArray {
+    if ([dataItemArray count]>0) {
+        NSMutableDictionary *dic=[[IAPHelper sharedHelper] productlistDic];
+        if(dic==nil) {
+            dic=[[NSMutableDictionary alloc]init];
+        }
+        [dic setObject:dataItemArray forKey:[self returnCurrentTab]];
+        [[IAPHelper sharedHelper] setProductlistDic:dic];
+        NSMutableArray *dataItema=[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]];
+        if(dataItema==nil) {
+            [[IAPHelper sharedHelper] requestProducts:[self returnCurrentTab]];
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+        } else {
+            //通知产品列表已经加载完成
+            [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:dataItema];
+        }
     }
 }
 
-- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
-    [super requestFinishedByResponse:response requestCode:reqCode];
-    if([[response code]isEqualToString:@"140021"]||_currentPage==1) {
-        NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-        if(currentTab == 1) {
-            [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY1];
-        } else if(currentTab == 2) {
-            [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY2];
-        } else if(currentTab == 3) {
-            [dictionary setObject:[response responseString] forKey:CACHE_ACCOUNT_PAY3];
-        }
-        //缓存数据
-        [Common setCache:[Config Instance].cacheKey data:dictionary];
-        if([[response code]isEqualToString:@"140021"]) {
-            self.dataItemArray=nil;
-            [self.tableView reloadData];
-        }
-    }
-    if(currentTab == 1) {
-        _leftCurrentPage=_currentPage;
-        _leftReloading=_reloading;
-        _leftLoadOver=_loadOver;
-        _leftDataItemArray=self.dataItemArray;
-    } else if(currentTab == 2) {
-        _centerCurrentPage=_currentPage;
-        _centerReloading=_reloading;
-        _centerLoadOver=_loadOver;
-        _centerDataItemArray=self.dataItemArray;
+- (NSString *)returnCurrentTab {
+    if(currentTab == 2) {
+        return CACHE_ACCOUNT_PAY2;
     } else if(currentTab == 3) {
-        _rightCurrentPage=_currentPage;
-        _rightReloading=_reloading;
-        _rightLoadOver=_loadOver;
-        _rightDataItemArray=self.dataItemArray;
+        return CACHE_ACCOUNT_PAY3;
     }
+    return CACHE_ACCOUNT_PAY1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if([self.dataItemArray count]>0){
-        if(_pageSize>[self.dataItemArray count]){
-            return [self.dataItemArray count];
-        }else{
-            return [self.dataItemArray count]+1;
-        }
-    }else{
-        return 1;
-    }
+    int count=[[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] count];
+    return count+1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
+    int count=[[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] count];
+    if(count>[indexPath row]){
         return 60;
     }else{
         return 50;
@@ -293,50 +262,35 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *accountPayCell1=@"ACAccountRechargeCell1";
-    static NSString *accountPayCell2=@"ACAccountRechargeCell2";
-    //获取当前的行
     NSInteger row=[indexPath row];
-    if([self.dataItemArray count]>row) {
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        ACAccountRechargeCell *cell;
-        if(currentTab==1) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell1];
-            if(!cell) {
-                cell = [[ACAccountRechargeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell1];
-            }
-            [cell.lblTimeLong setText:[NSString stringWithFormat:@"有效期%@天",[dictionary objectForKey:@"valid"]]];
-            [cell.lblTime setText:[NSString stringWithFormat:@"%@分钟",[dictionary objectForKey:@"duration"]]];
-            [cell.lblStorage setText:[NSString stringWithFormat:@"%@MB",[dictionary objectForKey:@"storage"]]];
-        } else {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell2];
-            if(!cell) {
-                cell = [[ACAccountRechargeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell2];
-            }
-            if(currentTab ==2 ) {
-                [cell.lblTimeLong setText:@"无时间限制"];
-                [cell.lblTimeAndStorage setText:[NSString stringWithFormat:@"%@分钟",[dictionary objectForKey:@"duration"]]];
-            } else if(currentTab==3) {
-                [cell.lblTimeLong setText:[NSString stringWithFormat:@"有效期%@天",[dictionary objectForKey:@"valid"]]];
-                [cell.lblTimeAndStorage setText:[NSString stringWithFormat:@"%@MB",[dictionary objectForKey:@"storage"]]];
-            }
+    int count=[[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] count];
+    if(count>[indexPath row]){
+        static NSString *cellReuseIdentifier = @"ACPaymentCell";
+        ACPaymentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        if(!cell){
+            UINib *nib=[UINib nibWithNibName:@"ACPaymentCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
         }
-        [cell.lblName setText:[dictionary objectForKey:@"name"]];
-        [cell setCurrentType:currentTab];
-        [cell setData:dictionary];
-        [cell setControler:self];
+        SKProduct *product =[[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] objectAtIndex:row];
+        cell.lbl_description.text=product.localizedDescription;
         return cell;
     } else {
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+        static NSString *cellReuseIdentifier = @"ACPaymentCellUITableViewCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        if(!cell){
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+        }
+        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+        [cell.textLabel setText:@"重新加载"];
+        return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if([self.dataItemArray count]>[indexPath indexAtPosition:1]) {
-        //不处理单击事件
+        NSLog(@"购买了哦");
     } else {
-        //加载更多
-        _currentPage++;
         [self reloadTableViewDataSource];
     }
 }
@@ -345,29 +299,20 @@
 #pragma mark Custom Methods
 
 - (void)reloadTableViewDataSource {
-	if([[Config Instance]isLogin]) {
-        _reloading = YES;
-        [self.tableView reloadData];
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        if(currentTab == 1) {
-            [requestParams setObject:@"3"  forKey:@"type"];
-        } else if (currentTab == 2){
-            [requestParams setObject:@"2"  forKey:@"type"];
-        } else if (currentTab == 3){
-            [requestParams setObject:@"1"  forKey:@"type"];
-        }
-        [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
-        [requestParams setObject:@"1"  forKey:@"status"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
-    }else{
-        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
-        [Common noLoginAlert:self];
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    if(currentTab == 1) {
+        [requestParams setObject:@"3"  forKey:@"type"];
+    } else if (currentTab == 2){
+        [requestParams setObject:@"2"  forKey:@"type"];
+    } else if (currentTab == 3){
+        [requestParams setObject:@"1"  forKey:@"type"];
     }
+    [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
+    [requestParams setObject:@"1"  forKey:@"status"];
+    _loadHttp=[[HttpRequest alloc]init];
+    [_loadHttp setDelegate:self];
+    [_loadHttp setController:self];
+    [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
 }
 
 //产品加载

@@ -30,4 +30,7 @@
 //公共类获取
 + (ABAddressBookRef)getAbAddressBook;
 
++ (void)setCacheXmlByList:(NSString *)xml tag:(NSString *)tag;
++ (NSMutableArray *)getCacheXmlByList:(NSString *)tag;
+
 @end

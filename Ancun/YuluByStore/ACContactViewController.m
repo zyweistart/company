@@ -54,7 +54,12 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
+#ifdef TEST
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",PHONENUMBER]]];
+#else
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",[[[response mainData] objectForKey:@"serverinfo"] objectForKey:@"serverno"]]]];
+#endif
+        [[Config Instance]setIsRefreshUserInfo:YES];
     }
 }
 

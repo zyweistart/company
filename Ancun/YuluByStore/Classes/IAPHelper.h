@@ -19,13 +19,17 @@
 
 @property (strong,nonatomic) NSString *recordno;
 @property (strong,nonatomic) UIViewController *controller;
-@property (strong,nonatomic) NSMutableArray *products;
-@property (strong,nonatomic) NSMutableArray *productlist;
+
+//@property (strong,nonatomic) NSMutableArray *products;
+//@property (strong,nonatomic) NSMutableArray *productlist;
+
+@property (strong,nonatomic) NSMutableDictionary *productsDic;
+@property (strong,nonatomic) NSMutableDictionary *productlistDic;
 
 + (IAPHelper *)sharedHelper;
 
-- (void)requestProducts;
-- (NSMutableDictionary*)getProductDetail:(NSString*)identifier;
+- (void)requestProducts:(NSString *)tag;
+- (NSMutableDictionary*)getProductDetail:(NSString *)identifier tag:(NSString *)tag;
 - (void)buyProductIdentifier:(SKProduct*)product;
 
 @end

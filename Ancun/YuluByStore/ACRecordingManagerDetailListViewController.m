@@ -11,7 +11,7 @@
 #import "ACRecordingDetailCell.h"
 #import "DataSingleton.h"
 
-#define CACHE_RECORDINGMANAGERLIST CACHE_CONSTANT(@"CACHE_RECORDINGMANAGERLIST")
+#define CACHE_RECORDINGMANAGERLIST(PHONE) [NSString stringWithFormat:@"%@-%@",CACHE_DATA,PHONE]
 
 @interface ACRecordingManagerDetailListViewController ()
 
@@ -66,18 +66,9 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
-    if(dictioanry){
-        NSMutableDictionary *opponodic=[dictioanry objectForKey:CACHE_RECORDINGMANAGERLIST];
-        if(opponodic){
-            id content=[opponodic objectForKey:_oppno];
-            if(content){
-                self.dataItemArray=[[XML analysis:content] dataItemArray];
-                if([self.dataItemArray count]>0){
-                    [self.tableView reloadData];
-                }
-            }
-        }
+    self.dataItemArray=[Common getCacheXmlByList:CACHE_RECORDINGMANAGERLIST(_oppno)];
+    if([self.dataItemArray count]>0){
+        [self.tableView reloadData];
     }
 }
 
@@ -137,12 +128,7 @@
         [super requestFinishedByResponse:response requestCode:reqCode];
         if([response successFlag]){
             if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-                //缓存数据
-                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-                NSMutableDictionary *oppnoDic=[NSMutableDictionary dictionaryWithDictionary:[dictionary objectForKey:CACHE_RECORDINGMANAGERLIST]];
-                [oppnoDic setObject:[response responseString] forKey:_oppno];
-                [dictionary setObject:oppnoDic forKey:CACHE_RECORDINGMANAGERLIST];
-                [Common setCache:[Config Instance].cacheKey data:dictionary];
+                [Common setCacheXmlByList:[response responseString] tag:CACHE_RECORDINGMANAGERLIST(_oppno)];
             }
         }
     }
@@ -177,6 +163,8 @@
                     break;
                 }
             }
+            //清空缓存
+            [Common setCacheXmlByList:@"" tag:CACHE_RECORDINGMANAGERLIST(_oppno)];
             [self.tableView reloadData];
         }
     }
@@ -226,13 +214,11 @@
         static NSString *cellReuseIdentifier=@"ACRecordingDetailCellIdentifier";
         ACRecordingDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
         if(!cell){
-            UINib *nib=[UINib nibWithNibName:@"ACRecordingDetailCell" bundle:nil];
-            [self.tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-            cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+            cell = [[ACRecordingDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
         }
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
         NSString *fileno=[dictionary objectForKey:@"fileno"];
-        cell.lbl_date.text=[dictionary objectForKey:@"begintime"];
+        cell.lblDate.text=[dictionary objectForKey:@"begintime"];
         //创建文件管理器
         NSFileManager *fileManager = [NSFileManager defaultManager];
         //获取路径
@@ -245,21 +231,21 @@
         NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
         //如果录音文件存在都直接播放
         if([fileManager fileExistsAtPath:path]){
-            cell.lbl_downloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
+            cell.lblDownloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
         }else{
-            cell.lbl_downloadflag.text=@"未下载";
+            cell.lblDownloadflag.text=@"未下载";
         }
         NSString *remark=[dictionary objectForKey:@"remark"];
         if([remark isEqualToString:@""]){
-            cell.lbl_remark.textColor=[UIColor lightGrayColor];
-            cell.lbl_remark.text=@"添加备注";
+            cell.lblRemark.textColor=[UIColor lightGrayColor];
+            cell.lblRemark.text=@"添加备注";
         }else{
-            cell.lbl_remark.textColor=[UIColor blackColor];
-            cell.lbl_remark.text=remark;
+            cell.lblRemark.textColor=[UIColor blackColor];
+            cell.lblRemark.text=remark;
         }
         return cell;
     }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];
     }
 }
 
@@ -363,7 +349,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) reloadTableViewDataSource {
+- (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
         _reloading = YES;
         [self.tableView reloadData];

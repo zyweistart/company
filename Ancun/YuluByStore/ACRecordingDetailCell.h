@@ -10,8 +10,8 @@
 
 @interface ACRecordingDetailCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl_date;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_downloadflag;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_remark;
+@property (strong, nonatomic) UILabel *lblDate;
+@property (strong, nonatomic) UILabel *lblDownloadflag;
+@property (strong, nonatomic) UILabel *lblRemark;
 
 @end

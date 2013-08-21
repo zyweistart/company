@@ -35,6 +35,10 @@
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode{
     if([response successFlag]){
         [Common alert:@"密码修改成功！"];
+        //如果为自动登录则更新已保存的密码
+        if((BOOL)[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]) {
+            [Common setCache:DEFAULTDATA_PASSWORD data:_inputNewPassword.text];
+        }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [_inputOldPassword setText:@""];

@@ -10,6 +10,7 @@
 
 @implementation IAPHelper {
     HttpRequest *_http;
+    NSString *_tag;
     SKProductsRequest *_productsRequest;
 }
 
@@ -24,9 +25,9 @@ static IAPHelper * _sharedHelper;
     return _sharedHelper;
 }
 
-- (NSMutableDictionary*)getProductDetail:(NSString *)identifier {
-    for (NSMutableDictionary * product in _productlist){
-        if([identifier isEqualToString:[product objectForKey:@"procode"]]){
+- (NSMutableDictionary*)getProductDetail:(NSString *)identifier tag:(NSString *)tag {
+    for (NSMutableDictionary * product in [_productlistDic objectForKey:tag]){
+        if([identifier isEqualToString:[product objectForKey:@"appstorerecordno"]]){
             return product;
         }
     }
@@ -34,14 +35,20 @@ static IAPHelper * _sharedHelper;
 }
 
 //加载AppStore中的产品信息
-- (void)requestProducts {
-    NSMutableSet * products = [NSMutableSet set];
-    for (NSMutableDictionary * product in _productlist) {
-        [products addObject:[product objectForKey:@"procode"]];
+- (void)requestProducts:(NSString *)tag {
+    if(_productsRequest==nil&&_tag==nil) {
+        NSMutableSet * products = [NSMutableSet set];
+        for (NSMutableDictionary * product in [_productlistDic objectForKey:tag]) {
+            NSString *productId=[product objectForKey:@"appstorerecordno"];
+            if(![@"" isEqualToString:productId]) {
+                [products addObject:productId];
+            }
+        }
+        _tag=tag;
+        _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
+        _productsRequest.delegate = self;
+        [_productsRequest start];
     }
-    _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
-    _productsRequest.delegate = self;
-    [_productsRequest start];
 }
 
 //产品购买
@@ -71,29 +78,33 @@ static IAPHelper * _sharedHelper;
 
 //AppStore返回产品信息
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    [_products addObjectsFromArray:response.products];
-    _productsRequest=nil;
+    if(_productsDic==nil) {
+        _productsDic=[[NSMutableDictionary alloc]init];
+    }
+    [_productsDic setObject:response.products forKey:_tag];
     //通知产品列表已经加载完成
-    [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:_products];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:response.products];
+    _tag=nil;
+    _productsRequest=nil;
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
     for (SKPaymentTransaction *transaction in transactions) {
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchased:
-                //                NSLog(@"completeTransaction...");
+//                NSLog(@"completeTransaction...");
                 [self completeTransaction:transaction productIdentifier:transaction.payment.productIdentifier];
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
                 break;
             case SKPaymentTransactionStateFailed:
-                //                if (transaction.error.code != SKErrorPaymentCancelled){
-                //                    NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
-                //                }
+//                if (transaction.error.code != SKErrorPaymentCancelled){
+//                    NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
+//                }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kProductPurchaseFailedNotification object:transaction];
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
                 break;
             case SKPaymentTransactionStateRestored:
-                //                NSLog(@"restoreTransaction...");
+//                NSLog(@"restoreTransaction...");
                 [self completeTransaction:transaction productIdentifier:transaction.originalTransaction.payment.productIdentifier];
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
             default:

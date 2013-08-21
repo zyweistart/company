@@ -53,6 +53,7 @@
             [requestParams setObject:[_dictionary objectForKey:@"fileno"] forKey:@"fileno"];
             //1:生成;2:查看;3:取消;:4:短信发送（安存录音后台发送，暂不支持）
             [requestParams setObject:@"1" forKey:@"acccodeact"];
+            [requestParams setObject:@"10" forKey:@"vtime"];
             _playerViewHttp=[[HttpRequest alloc]init];
             [_playerViewHttp setDelegate:self];
             [_playerViewHttp setController:_controller];

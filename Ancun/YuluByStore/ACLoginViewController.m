@@ -93,6 +93,7 @@
         }else{
             [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         }
+        [[Config Instance] setIsRefreshUserInfo:YES];
         //拔号盘
         UINavigationController *dialViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACDialViewController alloc]init]];
         //是否隐藏导航条

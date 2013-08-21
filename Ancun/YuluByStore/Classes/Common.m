@@ -179,4 +179,27 @@
     }
     return addressBook;
 }
+
++ (void)setCacheXmlByList:(NSString *)xml tag:(NSString *)tag {
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+    [dictionary setObject:xml forKey:tag];
+    [Common setCache:[Config Instance].cacheKey data:dictionary];
+}
+
++ (NSMutableArray *)getCacheXmlByList:(NSString *)tag {
+    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+    if(dictioanry){
+        NSString *content=[dictioanry objectForKey:tag];
+        if(![@"" isEqualToString:content]) {
+            if(content){
+                NSMutableArray *dataItemArray=[[XML analysis:content] dataItemArray];
+                if([dataItemArray count]>0){
+                    return dataItemArray;
+                }
+            }
+        }
+    }
+    return nil;
+}
+
 @end

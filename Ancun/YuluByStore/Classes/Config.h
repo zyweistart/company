@@ -13,18 +13,16 @@
 @property Boolean isLogin;
 //是否需要计算缓存空间大小
 @property Boolean isCalculateTotal;
-//是否需要刷新出证列表页面
-//@property Boolean isRefreshNotaryList;
-//是否需要刷新提取列表页面
-//@property Boolean isRefreshExtractionList;
 //是否需要刷新录音详细页面
 @property Boolean isRefreshRecordingList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountPayList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountUseRecordList;
-
+//是否刷新时长版用户月份统计信息
 @property Boolean isRefreshOldAccountMonthList;
+//是否刷新用户信息
+@property Boolean isRefreshUserInfo;
 
 @property (strong,nonatomic) UIViewController *currentViewController;
 //唯一缓存键名称
@@ -47,7 +45,5 @@
 + (void)initData;
 
 - (BOOL)isOldUser;
-
-
 
 @end

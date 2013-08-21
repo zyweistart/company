@@ -53,9 +53,14 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
+#ifdef TEST
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",PHONENUMBER]]];
+#else
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",[[[response mainData] objectForKey:@"serverinfo"] objectForKey:@"serverno"]]]];
+#endif
         [_dialString deleteCharactersInRange:NSMakeRange(0, [_dialString length])];
         [self showDialText];
+        [[Config Instance]setIsRefreshUserInfo:YES];
     }
 }
 

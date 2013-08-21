@@ -66,10 +66,15 @@
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-#ifndef TEST
     [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
-#endif
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    if([[Config Instance]isLogin]) {
+        //重新返回到应用的时候刷新用户信息
+        [[Config Instance] setIsRefreshUserInfo:YES];
+    }
 }
 
 #ifdef JAILBREAK
@@ -123,6 +128,7 @@
             [Common alert:result.statusMessage];
 		}
 	}
+    
 	return YES;
 }
 #endif

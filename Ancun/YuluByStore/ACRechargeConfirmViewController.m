@@ -18,7 +18,6 @@
 
 #define ALERTVIEWALIPAYTAG 123
 #define ALIPAYREQUESTCODE 10000000
-#define REFRESHUSERINFOREQUESTCODE 10000001
 #define LBLTEXTCOLOR [UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]
 #define LBLVALUETEXTCOLOR [UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]
 
@@ -229,14 +228,21 @@
     [lbl1 setText:@"购买份数:"];
     [mainView addSubview:lbl1];
     
-    UIStepper *stepper=[[UIStepper alloc]initWithFrame:CGRectMake(115, 70, 10, 30)];
+    UIStepper *stepper=[[UIStepper alloc]initWithFrame:CGRectMake(115, 70, 100, 30)];
     stepper.tag=1;
     stepper.minimumValue=1;
-    stepper.maximumValue=30;
+    stepper.maximumValue=10;
     stepper.stepValue=1;
     stepper.value=1;
     [stepper addTarget:self action:@selector(doStepper) forControlEvents:UIControlEventValueChanged];
     [mainView addSubview:stepper];
+    
+    UILabel *lblNumber=[[UILabel alloc]initWithFrame:CGRectMake(215, 70, 35, 30)];
+    lblNumber.tag=3;
+    [lblNumber setFont:[UIFont systemFontOfSize:15]];
+    [lblNumber setTextColor:LBLVALUETEXTCOLOR];
+    [lblNumber setText:@"1份"];
+    [mainView addSubview:lblNumber];
     
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(40, 100, 70, 30)];
     [lbl1 setFont:[UIFont systemFontOfSize:15]];
@@ -246,6 +252,7 @@
     [mainView addSubview:lbl1];
     //价值
     UILabel *lblValue=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 150, 30)];
+    lblValue.tag=4;
     [lblValue setFont:[UIFont systemFontOfSize:15]];
     [lblValue setTextColor:LBLVALUETEXTCOLOR];
     [lblValue setText:[NSString stringWithFormat:@"%@分钟",[_data objectForKey:@"duration"]]];
@@ -684,13 +691,7 @@
     
     [self.view addSubview:mainView];
     //充值成功后重新刷新用户信息
-    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-    [requestParams setObject:@"1" forKey:@"raflag"];
-    _http=[[HttpRequest alloc]init];
-    [_http setDelegate:self];
-    [_http setController:self];
-    [_http setRequestCode:REFRESHUSERINFOREQUESTCODE];
-    [_http loginhandle:@"v4infoGet" requestParams:requestParams];
+    [[Config Instance]setIsRefreshUserInfo:YES];
 }
 
 //根据类型套餐获取最后充值的套餐
@@ -737,7 +738,11 @@
     float newprice=[[_data objectForKey:@"newprice"]floatValue];
     UIStepper *stepper=(UIStepper*)[self.view viewWithTag:1];
     UILabel *lblMoney=(UILabel*)[self.view viewWithTag:2];
+    UILabel *lblNumber=(UILabel*)[self.view viewWithTag:3];
+    UILabel *lblValue=(UILabel*)[self.view viewWithTag:4];
     [lblMoney setText:[NSString stringWithFormat:@"%0.2f元",stepper.value*newprice]];
+    [lblNumber setText:[NSString stringWithFormat:@"%.0f份",stepper.value]];
+    [lblValue setText:[NSString stringWithFormat:@"%.0f分钟",[[_data objectForKey:@"duration"]intValue]*stepper.value]];
 }
 
 //确认充值
@@ -833,14 +838,7 @@
                 [Common actionSheet:self message:@"您还没有安装支付宝快捷支付，请先安装。" tag:ALERTVIEWALIPAYTAG];
             }
         }
-#endif        
-        if (reqCode==REFRESHUSERINFOREQUESTCODE) {
-            //更新旧的用户信息
-            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
-            for(NSString *key in dics){
-                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
-            }
-        }
+#endif
     }
 }
 

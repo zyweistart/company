@@ -10,12 +10,14 @@
 #import "ACAccountPayCell.h"
 #import "ACAccountUseRecordCell.h"
 #ifdef JAILBREAK
-#import "ACRechargeViewController.h"
+    #import "ACRechargeViewController.h"
 #else
-#import "ACRechargeViewByASController.h"
+    #import "ACRechargeByAppStoreViewController.h"
 #endif
 #import "DataSingleton.h"
 #import "NSString+Date.h"
+
+#define REFRESHUSERINFOREQUESTCODE 10000001
 
 @interface ACAccountViewController ()
 
@@ -117,15 +119,26 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(currentTab==1) {
-        if([[Config Instance]isRefreshAccountPayList]) {
-            [self autoRefresh];
-            [[Config Instance] setIsRefreshAccountPayList:NO];
-        }
-    } else if (currentTab==2) {
-        if([[Config Instance]isRefreshAccountUseRecordList]) {
-            [self autoRefresh];
-            [[Config Instance] setIsRefreshAccountUseRecordList:NO];
+    if([[Config Instance]isRefreshUserInfo]) {
+        //更新账户信息
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:@"1" forKey:@"raflag"];
+        _loadHttp=[[HttpRequest alloc]init];
+        [_loadHttp setDelegate:self];
+        [_loadHttp setController:self];
+        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+    } else {
+        if(currentTab==1) {
+            if([[Config Instance]isRefreshAccountPayList]) {
+                [self autoRefresh];
+                [[Config Instance] setIsRefreshAccountPayList:NO];
+            }
+        } else if (currentTab==2) {
+            if([[Config Instance]isRefreshAccountUseRecordList]) {
+                [self autoRefresh];
+                [[Config Instance] setIsRefreshAccountUseRecordList:NO];
+            }
         }
     }
 }
@@ -139,9 +152,9 @@
     rechargeViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rechargeViewController animated:YES];
 #else
-    ACRechargeViewByASController *rechargeByASViewController=[[ACRechargeViewByASController alloc] init];
-    rechargeByASViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:rechargeByASViewController animated:YES];
+    ACRechargeByAppStoreViewController *rechargeByAppStoreViewController=[[ACRechargeByAppStoreViewController alloc] init];
+    rechargeByAppStoreViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeByAppStoreViewController animated:YES];
 #endif
 }
 
@@ -202,61 +215,75 @@
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-    [super requestFinishedByResponse:response requestCode:reqCode];
-    if([response successFlag]) {
-        if(currentTab == 1) {
-            _leftDataItemArray=self.dataItemArray;
-            [[Config Instance] setIsPayBase:NO];
-            [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
-            if([_leftDataItemArray count]>0) {
-                //计算剩余套餐值
-                int basesum=0,baseuse=0,timecan=0,storsum=0;
-                for (NSMutableDictionary *data in _leftDataItemArray) {
-                    int ctype=[[data objectForKey:@"ctype"]intValue];
-                    //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
-                    if (ctype==0||ctype==1||ctype==3) {
-                        //只计算当前生效的套餐
-                        NSDate *currentDate=[NSDate date];
-                        NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
-                        NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
-                        if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
-                            storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
-                            if(ctype==0||ctype==3){
-                                basesum=[[data objectForKey:@"rectimelimit"]intValue];
-                                baseuse=[[data objectForKey:@"useurectime"]intValue];
-                                if(ctype==3){
-                                    //标记当前用户已经购买过基础套餐
-                                    [[Config Instance] setIsPayBase:YES];
+    if (reqCode==REFRESHUSERINFOREQUESTCODE) {
+        if([response successFlag]) {
+            //更新用户信息
+            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
+            for(NSString *key in dics){
+                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
+            }
+            [[Config Instance]setIsRefreshUserInfo:NO];
+            //重新刷新信息
+            [[Config Instance] setIsRefreshAccountPayList:YES];
+            [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+    } else {
+        [super requestFinishedByResponse:response requestCode:reqCode];
+        if([response successFlag]) {
+            if(currentTab == 1) {
+                _leftDataItemArray=self.dataItemArray;
+                [[Config Instance] setIsPayBase:NO];
+                [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
+                if([_leftDataItemArray count]>0) {
+                    //计算剩余套餐值
+                    int basesum=0,baseuse=0,timecan=0,storsum=0;
+                    for (NSMutableDictionary *data in _leftDataItemArray) {
+                        int ctype=[[data objectForKey:@"ctype"]intValue];
+                        //ctype(1:存储2：时长3：个人基础套餐0：试用套餐)
+                        if (ctype==0||ctype==1||ctype==3) {
+                            //只计算当前生效的套餐
+                            NSDate *currentDate=[NSDate date];
+                            NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
+                            NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
+                            if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
+                                storsum+=[[data objectForKey:@"auciquotalimit"]intValue];
+                                if(ctype==0||ctype==3){
+                                    basesum=[[data objectForKey:@"rectimelimit"]intValue];
+                                    baseuse=[[data objectForKey:@"useurectime"]intValue];
+                                    if(ctype==3){
+                                        //标记当前用户已经购买过基础套餐
+                                        [[Config Instance] setIsPayBase:YES];
+                                    }
                                 }
                             }
+                        } else if(ctype==2) {
+                            int timesum=[[data objectForKey:@"rectimelimit"]intValue];
+                            int timeuse=[[data objectForKey:@"useurectime"]intValue];
+                            timecan+=timesum-timeuse;
                         }
-                    } else if(ctype==2) {
-                        int timesum=[[data objectForKey:@"rectimelimit"]intValue];
-                        int timeuse=[[data objectForKey:@"useurectime"]intValue];
-                        timecan+=timesum-timeuse;
+                        float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
+                        [_lblTip1 setText:[NSString stringWithFormat:@"基础包月套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
+                        [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
+                        [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
                     }
-                    float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
-                    [_lblTip1 setText:[NSString stringWithFormat:@"基础包月套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
-                    [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
-                    [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
+                } else {
+                    //当没有任何套餐时
+                    [_lblTip1 setText:@"基础包月套餐: 剩余0分钟，已用0分钟"];
+                    [_lblTip2 setText:@"增值时长剩余: 0分钟"];
+                    [_lblTip3 setText:@"当前可用容量: 0MB"];
                 }
-            } else {
-                //当没有任何套餐时
-                [_lblTip1 setText:@"基础包月套餐: 剩余0分钟，已用0分钟"];
-                [_lblTip2 setText:@"增值时长剩余: 0分钟"];
-                [_lblTip3 setText:@"当前可用容量: 0MB"];
+                //增加充值按钮
+                self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
             }
-            //增加充值按钮
-            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
         }
-    }
-    if(currentTab == 2) {
-        _rightDataItemArray=self.dataItemArray;
-        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-            [dictionary setObject:[response responseString] forKey:CACHE_DATA];
-            //缓存数据
-            [Common setCache:[Config Instance].cacheKey data:dictionary];
+        if(currentTab == 2) {
+            _rightDataItemArray=self.dataItemArray;
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_DATA];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
         }
     }
 }
@@ -439,7 +466,7 @@
             [cell.lblRemark setText:disStr];
             return cell;
         }else{
-            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"下面 8 项 . . .") andIsLoading:_reloading];
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];
         }
     }
 }
