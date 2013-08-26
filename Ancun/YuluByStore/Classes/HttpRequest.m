@@ -154,6 +154,9 @@
                     //用户不存在
                 }else if([[response code] isEqualToString:@"120169"]){
                     //该手机号码已被注册
+                }else if([[response code] isEqualToString:@"120202"]){
+                    //录音时长不足
+                    [Common alert:@"录音时长不足，充值相关套餐后才能通话录音"];
                 }else{
                     [Common alert:[response msg]];
                 }

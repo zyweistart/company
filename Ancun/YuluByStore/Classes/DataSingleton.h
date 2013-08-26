@@ -21,4 +21,8 @@
                        andLoadingString:(NSString *)loadingString 
                        andIsLoading:(BOOL)isLoading;
 
+- (UITableViewCell*)getLoadMoreCell:(UITableView *)tableView
+                      andIsLoadOver:(BOOL)isLoadOver
+                       andIsLoading:(BOOL)isLoading currentPage:(NSUInteger)currentPage;
+
 @end

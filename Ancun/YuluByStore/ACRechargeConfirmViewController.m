@@ -129,7 +129,7 @@
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 70, 30)];
-    [lblMoney setFont:[UIFont systemFontOfSize:15]];
+    [lblMoney setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
     [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
@@ -267,7 +267,7 @@
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 130, 70, 30)];
     lblMoney.tag=2;
-    [lblMoney setFont:[UIFont systemFontOfSize:15]];
+    [lblMoney setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
     [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
@@ -350,7 +350,7 @@
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 70, 30)];
-    [lblMoney setFont:[UIFont systemFontOfSize:15]];
+    [lblMoney setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
     [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
@@ -466,7 +466,7 @@
     [mainView addSubview:lbl1];
     //支付金额
     UILabel *lblMoney=[[UILabel alloc]initWithFrame:CGRectMake(115, 100, 200, 30)];
-    [lblMoney setFont:[UIFont systemFontOfSize:15]];
+    [lblMoney setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
     [lblMoney setTextColor:LBLVALUETEXTCOLOR];
     [lblMoney setText:[NSString stringWithFormat:@"%@元",[_data objectForKey:@"newprice"]]];
     [mainView addSubview:lblMoney];
@@ -799,7 +799,7 @@
 }
 
 - (void)backRecharge:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

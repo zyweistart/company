@@ -7,7 +7,7 @@
 //
 
 #import "ACAppDelegate.h"
-#import <AVFoundation/AVFoundation.h>
+//#import <AVFoundation/AVFoundation.h>
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
 #import "ACRechargeConfirmViewController.h"
@@ -32,7 +32,10 @@
     //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = NO;
-    //渠道
+    //渠道 [91,360,baidu]
+//    statTracker.channelId = @"91";
+//    statTracker.channelId = @"360";
+//    statTracker.channelId = @"baidu";
     statTracker.channelId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ChannelId"];
     statTracker.logStrategy=BaiduMobStatLogStrategyAppLaunch;
     statTracker.sessionResumeInterval = 60;
@@ -47,9 +50,9 @@
 #endif
     
     //后台播放音频设置
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setActive:YES error:nil];
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    AVAudioSession *session = [AVAudioSession sharedInstance];
+//    [session setActive:YES error:nil];
+//    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];

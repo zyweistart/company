@@ -82,6 +82,11 @@
         [[Config Instance] setIsLogin:YES];
         [[Config Instance] setIsCalculateTotal:YES];
         [[Config Instance] setUserInfo:[[response mainData] objectForKey:@"v4info"]];
+        //企业版用户无法登录
+        if([@"2" isEqualToString:[[[Config Instance]userInfo]objectForKey:@"usertype"]]) {
+            [Common alert:@"您的号码属于政企用户，目前尚不能使用APP登录，如需通话录音可直接拨打95105856"];
+            return;
+        }
         [[Config Instance] setCacheKey:[NSString stringWithFormat:@"cache_%@",phone]];
         if(![Common getCacheByBool:DEFAULTDATA_FIRSTLOGIN]){
             //TODO:第一次登录
@@ -93,7 +98,6 @@
         }else{
             [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         }
-        [[Config Instance] setIsRefreshUserInfo:YES];
         //拔号盘
         UINavigationController *dialViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACDialViewController alloc]init]];
         //是否隐藏导航条

@@ -208,7 +208,7 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
 
 - (void)dial:(NSString*)phone{
     if([[[Config Instance]noDialPhoneNumber] containsObject:[Common formatPhone:phone]]){
-        [Common alert:@"禁止通过安存录音拨打该号码"];
+        [Common alert:@"禁止通过安存语录拨打该号码"];
     }else if([HttpRequest isNetworkConnection]){
         //网络连接时用网络拔号
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];

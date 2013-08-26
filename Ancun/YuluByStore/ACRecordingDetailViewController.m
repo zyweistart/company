@@ -111,6 +111,12 @@
             extractionDetailViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:extractionDetailViewController animated:YES];
         }
+        NSString *remark=_tv_remark.text;
+        if([remark isEqualToString:@""]){
+            _lblRemarkTip.hidden=NO;
+        } else {
+            _lblRemarkTip.hidden=YES;
+        }
     }
 }
 
@@ -152,7 +158,7 @@
         if(buttonIndex==0){
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             [requestParams setObject:_fileno forKey:@"fileno"];
-            //1:生成;2:查看;3:取消;:4:短信发送（安存录音后台发送，暂不支持）
+            //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
             [requestParams setObject:@"1" forKey:@"acccodeact"];
             [requestParams setObject:@"10" forKey:@"vtime"];
             _recordingDetailHttp=[[HttpRequest alloc]init];
@@ -180,6 +186,7 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
+    _lblRemarkTip.hidden=YES;
     __block CGRect curFrame=self.view.frame;
     [UIView animateWithDuration:0.3f animations:^{
         curFrame.origin.y-=150;
@@ -188,6 +195,12 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
+    NSString *remark=_tv_remark.text;
+    if([remark isEqualToString:@""]){
+        _lblRemarkTip.hidden=NO;
+    } else {
+        _lblRemarkTip.hidden=YES;
+    }
     __block CGRect curFrame=self.view.frame;
     [UIView animateWithDuration:0.3f animations:^{
         curFrame.origin.y=0;
@@ -207,7 +220,7 @@
     if([[_mainData objectForKey:@"accstatus"] isEqualToString:@"1"]){
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:_fileno forKey:@"fileno"];
-        //1:生成;2:查看;3:取消;:4:短信发送（安存录音后台发送，暂不支持）
+        //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
         [requestParams setObject:@"2" forKey:@"acccodeact"];
         _recordingDetailHttp=[[HttpRequest alloc]init];
         [_recordingDetailHttp setDelegate:self];
@@ -229,7 +242,9 @@
     NSString *remark=_tv_remark.text;
     if([remark isEqualToString:@""]){
         [Common alert:@"请输入备注内容"];
-    }else{
+    } else if([remark length]>100) {
+        [Common alert:@"备注长度请在100字以内"];
+    } else {
         [_tv_remark resignFirstResponder];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:_fileno forKey:@"fileno"];

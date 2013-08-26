@@ -64,7 +64,7 @@
         if(buttonIndex==0){
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             [requestParams setObject:_fileno forKey:@"fileno"];
-            //1:生成;2:查看;3:取消;:4:短信发送（安存录音后台发送，暂不支持）
+            //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
             [requestParams setObject:@"3" forKey:@"acccodeact"];
             _detailHttp=[[HttpRequest alloc]init];
             [_detailHttp setDelegate:self];
@@ -97,7 +97,7 @@
 #pragma mark Custom Methods
 - (IBAction)pasteBoard:(id)sender{
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string =[NSString stringWithFormat:@"http://www.95105856.com/%@",_lbl_accendcode.text];
+    pasteboard.string =[NSString stringWithFormat:@"%@",_lbl_accendcode.text];
     [Common notificationMessage:@"复制成功" inView:self.view];
 }
 
@@ -110,13 +110,13 @@
             //收接者的号码
             picker.recipients = nil;
             //短信内容
-            picker.body = [NSString stringWithFormat:@"您申请的录音提取码为：http://www.95105856.com/%@，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】",[_lbl_accendcode text]];
+            picker.body = [NSString stringWithFormat:@"您申请的录音提取码为：%@，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】",[_lbl_accendcode text]];
             [self presentViewController:picker animated:YES completion:nil];
         } else {
             [Common alert:@"设备没有短信功能"];
         }
-    }else {
-        [Common alert:@"iOS版本过低,iOS4.0以上才支持程序内发送短信"];
+    } else {
+        [Common alert:@"当前版本暂不支持短信发送"];
     }
 }
 

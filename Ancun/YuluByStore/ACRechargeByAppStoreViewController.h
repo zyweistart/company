@@ -7,14 +7,11 @@
 //
 #import "BaseTableViewController.h"
 
-@class ACRechargeNav;
 @interface ACRechargeByAppStoreViewController :BaseTableViewController<HttpViewDelegate>{
     
     HttpRequest *_loadHttp;
     
     int currentTab;
-    
-    ACRechargeNav *_rechargeNav;
     
     UIButton *_leftTopTab;
     

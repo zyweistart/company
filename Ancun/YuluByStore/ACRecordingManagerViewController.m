@@ -42,11 +42,14 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+    //首次打开刷新我的录音列表
+    [[Config Instance]setIsRefreshRecordingList:YES];
     if(dictioanry){
         id content=[dictioanry objectForKey:CACHE_DATA];
         if(content){
             self.dataItemArray=[[XML analysis:content] dataItemArray];
             if([self.dataItemArray count]>0){
+                [[Config Instance]setIsRefreshRecordingList:NO];
                 [self.tableView reloadData];
             }
         }
@@ -56,9 +59,8 @@
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //如果为nil或者集合长度为零则自动刷新
-    if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance]isRefreshRecordingList]){
+    if([[Config Instance]isRefreshRecordingList]){
         [self autoRefresh];
-        [[Config Instance]setIsRefreshRecordingList:NO];
     }
 }
 
@@ -74,6 +76,7 @@
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     [super requestFinishedByResponse:response requestCode:reqCode];
     if([response successFlag]){
+        [[Config Instance]setIsRefreshRecordingList:NO];
         if([[response code]isEqualToString:@"110042"]||_currentPage==1){
             NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
             [dictionary setObject:[response responseString] forKey:CACHE_DATA];
@@ -137,7 +140,9 @@
             return cell2;
         }
     }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];;
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
+                                      currentPage:_currentPage];
+        
     }
 }
 
@@ -193,10 +198,6 @@
     ACRecordingManagerDetailListOldViewController* recordingManagerDetailListOldViewController=[[ACRecordingManagerDetailListOldViewController alloc] init];
     recordingManagerDetailListOldViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:recordingManagerDetailListOldViewController animated:YES];
-}
-
-- (void)dealloc {
-    _loadDataHttp=nil;
 }
 
 @end

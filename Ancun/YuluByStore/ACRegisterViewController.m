@@ -36,11 +36,11 @@
         [self.view removeFromSuperview];
         self.view=_regFirstView;
         if(iPhone5){
-            _checkbox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(30, 252, 200, 30)
+            _checkbox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(30, 252, 100, 30)
                                                         style:kSSCheckBoxViewStyleGlossy
                                                       checked:YES];
         }else{
-            _checkbox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(30, 200, 200, 30)
+            _checkbox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(30, 200, 100, 30)
                                                         style:kSSCheckBoxViewStyleGlossy
                                                       checked:YES];
         }

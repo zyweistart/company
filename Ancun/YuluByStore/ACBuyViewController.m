@@ -14,9 +14,7 @@
 
 @end
 
-@implementation ACBuyViewController{
-    HttpRequest *_buyHttp;
-}
+@implementation ACBuyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,28 +41,29 @@
     [requestParams setObject:@"6" forKey:@"type"];
     [requestParams setObject:@"2" forKey:@"subtype"];
     [requestParams setObject:@"2" forKey:@"property"];
-    _buyHttp=[[HttpRequest alloc]init];
-    [_buyHttp setDelegate:self];
-    [_buyHttp setController:self];
-    [_buyHttp setRequestCode:REQUESTCODE_BUY_LOADPRODUCT];
-    [_buyHttp handle:@"recprodGet" signKey:nil headParams:nil requestParams:requestParams];
+    HttpRequest *http=[[HttpRequest alloc]init];
+    [http setDelegate:self];
+    [http setController:self];
+    [http setRequestCode:REQUESTCODE_BUY_LOADPRODUCT];
+    [http handle:@"recprodGet" signKey:nil headParams:nil requestParams:requestParams];
 }
+
 #pragma mark -
 #pragma mark Delegate Methods
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return [[IAPHelper sharedHelper].products count];
-//}
-//
-//- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section{
-//    SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:section];
-//    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-//    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-//    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-//    [numberFormatter setLocale:product.priceLocale];
-//    NSString *formattedString = [numberFormatter stringFromNumber:product.price];
-//    return [NSString stringWithFormat:@"%@ %@",product.localizedTitle,formattedString];
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [[IAPHelper sharedHelper].products count];
+}
+
+- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section{
+    SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:section];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setLocale:product.priceLocale];
+    NSString *formattedString = [numberFormatter stringFromNumber:product.price];
+    return [NSString stringWithFormat:@"%@ %@",product.localizedTitle,formattedString];
+}
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -82,43 +81,43 @@
         [tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
     }
-//    SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:indexPath.row];
-//    cell.lbl_description.text=product.localizedDescription;
+    SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:indexPath.row];
+    cell.lbl_description.text=product.localizedDescription;
     return cell;
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath{
-//    if([SKPaymentQueue canMakePayments]){
-//        SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:indexPath.row];
-//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//        [requestParams setObject:[[[IAPHelper sharedHelper]getProductDetail:product.productIdentifier] objectForKey:@"recordno"] forKey:@"recprod"];
-//        _buyHttp=[[HttpRequest alloc]init];
-//        [_buyHttp setDelegate:self];
-//        [_buyHttp setController:[self parentViewController]];
-//        NSMutableDictionary* propertyes=[[NSMutableDictionary alloc]init];
-//        [propertyes setObject:product forKey:@"product"];
-//        [_buyHttp setPropertys:propertyes];
-//        [_buyHttp setRequestCode:REQUESTCODE_BUY_BUILD];
-//        [_buyHttp loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
-//    }
+    if([SKPaymentQueue canMakePayments]){
+        SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:indexPath.row];
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:[[[IAPHelper sharedHelper]productDetail:product.productIdentifier] objectForKey:@"recordno"] forKey:@"recprod"];
+        HttpRequest *http=[[HttpRequest alloc]init];
+        [http setDelegate:self];
+        [http setController:[self parentViewController]];
+        NSMutableDictionary* propertyes=[[NSMutableDictionary alloc]init];
+        [propertyes setObject:product forKey:@"product"];
+        [http setPropertys:propertyes];
+        [http setRequestCode:REQUESTCODE_BUY_BUILD];
+        [http loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
+    }
 }
 
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode{
-//    if([response successFlag]){
-//        if(reqCode==REQUESTCODE_BUY_LOADPRODUCT){
-//            [[IAPHelper sharedHelper] setProductlist:[response dataItemArray]];
-//            if ([IAPHelper sharedHelper].products == nil) {
-//                [[IAPHelper sharedHelper] requestProducts];
-//                _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
-//            }
-//        }else if(reqCode==REQUESTCODE_BUY_BUILD){
-//            SKProduct *product = [[response propertys] objectForKey:@"product"];
-//            [[IAPHelper sharedHelper] setController:self];
-//            [[IAPHelper sharedHelper] setRecordno:[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"]];
-//            [[IAPHelper sharedHelper] buyProductIdentifier:product];
-//        }
-//    }
+    if([response successFlag]){
+        if(reqCode==REQUESTCODE_BUY_LOADPRODUCT){
+            [[IAPHelper sharedHelper]setProductlist:[response dataItemArray]];
+            if ([IAPHelper sharedHelper].products == nil) {
+                [[IAPHelper sharedHelper] requestProducts];
+                _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+            }
+        }else if(reqCode==REQUESTCODE_BUY_BUILD){
+            SKProduct *product = [[response propertys] objectForKey:@"product"];
+            [[IAPHelper sharedHelper] setController:self];
+            [[IAPHelper sharedHelper] setRecordno:[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"]];
+            [[IAPHelper sharedHelper] buyProductIdentifier:product];
+        }
+    }
 }
 
 #pragma mark -

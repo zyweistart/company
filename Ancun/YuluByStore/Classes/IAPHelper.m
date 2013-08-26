@@ -8,89 +8,62 @@
 
 #import "IAPHelper.h"
 
-@implementation IAPHelper {
-    HttpRequest *_http;
-    NSString *_tag;
-    SKProductsRequest *_productsRequest;
-}
+@implementation IAPHelper
 
 static IAPHelper * _sharedHelper;
 
 + (IAPHelper *)sharedHelper {
-    if (_sharedHelper != nil) {
-        return _sharedHelper;
-    } else {
+    if (_sharedHelper == nil) {
         _sharedHelper = [[IAPHelper alloc] init];
     }
     return _sharedHelper;
 }
 
-- (NSMutableDictionary*)getProductDetail:(NSString *)identifier tag:(NSString *)tag {
-    for (NSMutableDictionary * product in [_productlistDic objectForKey:tag]){
-        if([identifier isEqualToString:[product objectForKey:@"appstorerecordno"]]){
-            return product;
+//根据唯一标识获取数据的详细集合
+- (NSMutableDictionary *)productDetail:(NSString *)identifier {
+    if(![@"" isEqualToString:identifier]) {
+        for (NSMutableDictionary * product in self.productlist){
+            if([identifier isEqualToString:[product objectForKey:@"procode"]]){
+                return product;
+            }
         }
     }
     return nil;
 }
 
-//加载AppStore中的产品信息
-- (void)requestProducts:(NSString *)tag {
-    if(_productsRequest==nil&&_tag==nil) {
+#pragma mark 请求加载AppStore中的产品信息
+- (void)requestProducts {
+    if(self.productsRequest==nil) {
         NSMutableSet * products = [NSMutableSet set];
-        for (NSMutableDictionary * product in [_productlistDic objectForKey:tag]) {
-            NSString *productId=[product objectForKey:@"appstorerecordno"];
+        for (NSMutableDictionary * product in self.productlist) {
+            NSString *productId=[product objectForKey:@"procode"];
             if(![@"" isEqualToString:productId]) {
                 [products addObject:productId];
             }
         }
-        _tag=tag;
-        _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
-        _productsRequest.delegate = self;
-        [_productsRequest start];
+        self.productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
+        self.productsRequest.delegate = self;
+        [self.productsRequest start];
     }
 }
 
-//产品购买
+#pragma mark 产品购买
 - (void)buyProductIdentifier:(SKProduct *)product {
 //    NSLog(@"Buying %@...", product.productIdentifier);
     SKPayment* payment=[SKPayment paymentWithProduct:product];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
-- (void)completeTransaction:(SKPaymentTransaction *)transaction productIdentifier:(NSString *)productIdentifier {
-    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-    [requestParams setObject:ACCESSID forKey:@"accessid"];
-    [requestParams setObject:_recordno forKey:@"recordno"];
-//    [requestParams setObject:[Crypto base64Encode:transaction.transactionReceipt] forKey:@"receiptdata"];
-    [requestParams setObject:[[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding] forKey:@"receiptdata"];
-    _http=[[HttpRequest alloc]init];
-    NSMutableDictionary* propertyes=[[NSMutableDictionary alloc]init];
-    [propertyes setObject:productIdentifier forKey:@"productIdentifier"];
-    [_http setPropertys:propertyes];
-    [_http setDelegate:self];
-    [_http setController:_controller];
-    [_http setRequestCode:REQUESTCODE_BUY_VERIFYING];
-    [_http handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
-}
-
-#pragma mark delegate
-
-//AppStore返回产品信息
+#pragma mark AppStore返回产品信息
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    if(_productsDic==nil) {
-        _productsDic=[[NSMutableDictionary alloc]init];
-    }
-    [_productsDic setObject:response.products forKey:_tag];
-    //通知产品列表已经加载完成
-    [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:response.products];
-    _tag=nil;
-    _productsRequest=nil;
+    self.products = response.products;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:_products];
+    self.productsRequest = nil;
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    for (SKPaymentTransaction *transaction in transactions) {
-        switch (transaction.transactionState) {
+    for (SKPaymentTransaction *transaction in transactions){
+        switch (transaction.transactionState){
             case SKPaymentTransactionStatePurchased:
 //                NSLog(@"completeTransaction...");
                 [self completeTransaction:transaction productIdentifier:transaction.payment.productIdentifier];
@@ -113,9 +86,25 @@ static IAPHelper * _sharedHelper;
     }
 }
 
+- (void)completeTransaction:(SKPaymentTransaction *)transaction productIdentifier:(NSString *)productIdentifier {
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    [requestParams setObject:ACCESSID forKey:@"accessid"];
+    [requestParams setObject:self.recordno forKey:@"recordno"];
+//    [requestParams setObject:[Crypto base64Encode:transaction.transactionReceipt] forKey:@"receiptdata"];
+    [requestParams setObject:[[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding] forKey:@"receiptdata"];
+    HttpRequest *http=[[HttpRequest alloc]init];
+    NSMutableDictionary* propertyes=[[NSMutableDictionary alloc]init];
+    [propertyes setObject:productIdentifier forKey:@"productIdentifier"];
+    [http setPropertys:propertyes];
+    [http setDelegate:self];
+    [http setController:self.controller];
+    [http setRequestCode:REQUESTCODE_BUY_VERIFYING];
+    [http handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
+}
+
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-    if([response successFlag]) {
-        if(reqCode==REQUESTCODE_BUY_VERIFYING) {
+    if([response successFlag]){
+        if(reqCode==REQUESTCODE_BUY_VERIFYING){
             [[NSNotificationCenter defaultCenter] postNotificationName:kProductPurchasedNotification object:[[response propertys] objectForKey:@"productIdentifier"]];
         }
     }

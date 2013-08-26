@@ -108,7 +108,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if([[Config Instance]isOldUser]) {
-        if(!self.dataItemArray||[self.dataItemArray count]==0||[[Config Instance] isRefreshOldAccountMonthList]){
+        if([[Config Instance] isRefreshOldAccountMonthList]){
             [self autoRefresh];
             [[Config Instance]setIsRefreshOldAccountMonthList:NO];
         }
@@ -180,7 +180,8 @@
         
         return cell;
     }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andLoadOverString:@"数据加载完毕" andLoadingString:(_reloading ? @"正在加载 . . ." : @"更多 . . .") andIsLoading:_reloading];
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
+                                             currentPage:_currentPage];
     }
 }
 
