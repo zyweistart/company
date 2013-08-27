@@ -82,7 +82,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
     }
     SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:indexPath.row];
-    cell.lbl_description.text=product.localizedDescription;
+    cell.lblDescription.text=product.localizedDescription;
     return cell;
 }
 

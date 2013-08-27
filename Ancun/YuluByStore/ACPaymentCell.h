@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACPaymentCell : UITableViewCell
+@interface ACPaymentCell : UITableViewCell<UIActionSheetDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl_description;
+@property (strong, nonatomic) UILabel *lblName;
+@property (strong, nonatomic) UILabel *lblDescription;
+
+@property (assign,nonatomic) int currentType;
+@property (strong,nonatomic) NSMutableDictionary *data;
+@property (strong,nonatomic) UIViewController *controler;
 
 @end

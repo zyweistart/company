@@ -10,6 +10,7 @@
 @interface ACOldAccountViewController :BaseRefreshTableViewController<UIScrollViewDelegate,UIActionSheetDelegate>{
     
     HttpRequest *_loadHttp;
+    UILabel *_lblTimeLong;
     
 }
 

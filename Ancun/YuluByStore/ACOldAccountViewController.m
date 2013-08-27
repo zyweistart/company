@@ -20,6 +20,8 @@
 
 #define CACHE_OLDACCOUNT_MONTH CACHE_CONSTANT(@"CACHE_OLDACCOUNT_MONTH")
 
+#define REFRESHUSERINFOREQUESTCODE 10000001
+
 @interface ACOldAccountViewController ()
 
 @end
@@ -44,12 +46,12 @@
         [lbl1 setText:@"可用录音时长:"];
         [view addSubview:lbl1];
         
-        lbl1=[[UILabel alloc]initWithFrame:CGRectMake(130, 10, 150, 30)];
-        [lbl1 setFont:[UIFont systemFontOfSize:17]];
-        [lbl1 setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
-        [lbl1 setTextColor:[UIColor colorWithRed:(239/255.0) green:(126/255.0) blue:(7/255.0) alpha:1]];
-        [lbl1 setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
-        [view addSubview:lbl1];
+        _lblTimeLong=[[UILabel alloc]initWithFrame:CGRectMake(130, 10, 150, 30)];
+        [_lblTimeLong setFont:[UIFont systemFontOfSize:17]];
+        [_lblTimeLong setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
+        [_lblTimeLong setTextColor:[UIColor colorWithRed:(239/255.0) green:(126/255.0) blue:(7/255.0) alpha:1]];
+        [_lblTimeLong setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
+        [view addSubview:_lblTimeLong];
         
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(onPay:)];
         
@@ -108,9 +110,18 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if([[Config Instance]isOldUser]) {
+        if([[Config Instance]isRefreshUserInfo]) {
+            //更新账户信息
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:@"1" forKey:@"raflag"];
+            _loadHttp=[[HttpRequest alloc]init];
+            [_loadHttp setDelegate:self];
+            [_loadHttp setController:self];
+            [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+            [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+        }
         if([[Config Instance] isRefreshOldAccountMonthList]){
             [self autoRefresh];
-            [[Config Instance]setIsRefreshOldAccountMonthList:NO];
         }
     } else {
         //如果为新用户则直接进行跳转
@@ -128,13 +139,31 @@
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
-    [super requestFinishedByResponse:response requestCode:reqCode];
     if([response successFlag]){
-        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
-            NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
-            [dictionary setObject:[response responseString] forKey:CACHE_OLDACCOUNT_MONTH];
-            //缓存数据
-            [Common setCache:[Config Instance].cacheKey data:dictionary];
+        if (reqCode==REFRESHUSERINFOREQUESTCODE) {
+            if([response successFlag]) {
+                //更新用户信息
+                NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
+                for(NSString *key in dics){
+                    [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
+                }
+                //刷新所用时长
+                [_lblTimeLong setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
+                [[Config Instance]setIsRefreshUserInfo:NO];
+                if(![[Config Instance]isOldUser]) {
+                    //如果为新用户则直接进行跳转
+                    [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
+                }
+            }
+        } else {
+            [super requestFinishedByResponse:response requestCode:reqCode];
+            [[Config Instance]setIsRefreshOldAccountMonthList:NO];
+            if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+                NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
+                [dictionary setObject:[response responseString] forKey:CACHE_OLDACCOUNT_MONTH];
+                //缓存数据
+                [Common setCache:[Config Instance].cacheKey data:dictionary];
+            }
         }
     }
 }

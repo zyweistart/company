@@ -10,6 +10,7 @@
 #import "NSString+Date.h"
 #import "ACRechargeNav.h"
 #import <QuartzCore/QuartzCore.h>
+#import "IAPHelper.h"
 #ifdef JAILBREAK
     #import "AlixPay.h"
 #else
@@ -51,6 +52,12 @@
      
         [self.view setBackgroundColor:[UIColor colorWithRed:(207/255.0) green:(212/255.0) blue:(221/255.0) alpha:1]];
         
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(backRecharge:)];
+        
     }
     return self;
 }
@@ -58,6 +65,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor grayColor]];
+#ifndef JAILBREAK
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
+#endif
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -650,7 +662,7 @@
     [_rechargeNav fourthStep];
     
     [[Config Instance]setIsRefreshAccountPayList:YES];
-
+    
     if(sMainView) {
         sMainView.hidden=YES;
     } else if(mainView) {
@@ -790,7 +802,19 @@
         [_http setRequestCode:ALIPAYREQUESTCODE];
         [_http loginhandle:@"v4alipayReq" requestParams:requestParams];
 #else
-        [Common alert:@"非越狱版确认充值处理"];
+        //苹果官方支付系统
+        if([SKPaymentQueue canMakePayments]) {
+            NSLog(@"苹果官方支付系统,参数：%@",_data);
+            //支付申请
+//            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//            NSString *recprod=[[_data objectForKey:@"appstorerecordno"] objectForKey:@"recordno"];
+//            [requestParams setObject:recprod forKey:@"recprod"];
+//            _http=[[HttpRequest alloc]init];
+//            [_http setDelegate:self];
+//            [_http setController:self];
+//            [_http setRequestCode:REQUESTCODE_BUY_BUILD];
+//            [_http loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
+        }
 #endif
         [_rechargeNav thirdStep];
     } else {
@@ -799,7 +823,11 @@
 }
 
 - (void)backRecharge:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if([[Config Instance]isRefreshUserInfo]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -838,8 +866,32 @@
                 [Common actionSheet:self message:@"您还没有安装支付宝快捷支付，请先安装。" tag:ALERTVIEWALIPAYTAG];
             }
         }
+#else
+        if(reqCode==REQUESTCODE_BUY_BUILD) {
+            SKProduct *product = [[IAPHelper sharedHelper]product:[_data objectForKey:@"appstorerecordno"]];
+            [[IAPHelper sharedHelper] setController:self];
+            [[IAPHelper sharedHelper] setRecordno:[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"]];
+            [[IAPHelper sharedHelper] buyProductIdentifier:product];
+        }
 #endif
     }
 }
+
+#ifndef JAILBREAK
+//购买产品
+- (void)productPurchased:(NSNotification *)notification{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [Common alert:@"支付成功"];
+}
+
+//购买失败
+- (void)productPurchaseFailed:(NSNotification *)notification {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        [Common alert:transaction.error.localizedDescription];
+    }
+}
+#endif
 
 @end

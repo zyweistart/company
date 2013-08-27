@@ -61,6 +61,7 @@
         [_dialString deleteCharactersInRange:NSMakeRange(0, [_dialString length])];
         [self showDialText];
         [[Config Instance]setIsRefreshUserInfo:YES];
+        [[Config Instance]setIsRefreshRecordingList:YES];
     }
 }
 

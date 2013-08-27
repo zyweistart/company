@@ -25,6 +25,7 @@
 
 + (IAPHelper *)sharedHelper;
 
+- (SKProduct *)product:(NSString *)identifier;
 - (NSMutableDictionary *)productDetail:(NSString*)identifier;
 - (void)requestProducts;
 - (void)buyProductIdentifier:(SKProduct*)product;

@@ -26,11 +26,6 @@
 
 @interface ACRechargeByAppStoreViewController ()
 
-//界面按钮事件
-- (void)leftTopButtonAction;
-- (void)centerTopButtonAction;
-- (void)rightTopButtonAction;
-
 @end
 
 @implementation ACRechargeByAppStoreViewController
@@ -39,46 +34,11 @@
     
     if (self) {
         
-        _leftDataItemArray=[[NSMutableArray alloc]init];
-        [_leftDataItemArray addObject:@"com_ancun_luyin_rns60"];
-        _centerDataItemArray=[[NSMutableArray alloc]init];
-        _rightDataItemArray=[[NSMutableArray alloc]init];
+        self.navigationItem.title=@"账户充值";
         
-        self.navigationItem.title=@"账户充值(AppStore)";
-        
-        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 106, 40)];
-        [_leftTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_leftTopTab setTitle:@"基础包月套餐" forState:UIControlStateNormal];
-        [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
-        [self.view addSubview:_leftTopTab];
-        
-        _centerTopTab=[[UIButton alloc]initWithFrame:CGRectMake(107, 0, 106, 40)];
-        [_centerTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_centerTopTab setTitle:@"增值时长套餐" forState:UIControlStateNormal];
-        [_centerTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
-        [self.view addSubview:_centerTopTab];
-        
-        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(214, 0, 106, 40)];
-        [_rightTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_rightTopTab setTitle:@"增值存储套餐" forState:UIControlStateNormal];
-        [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
-        [self.view addSubview:_rightTopTab];
-        
-        _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 36, 106, 4)];
-        [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
-        [self.view addSubview:_lblSlid];
-        
-        _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-        [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-        [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        _centerTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-        [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-        [_centerTopTab addTarget:self action:@selector(centerTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-        [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-        [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        [_rechargeNav firstStep];
+        [self.view addSubview:_rechargeNav];
         
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 40,
@@ -88,12 +48,15 @@
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.view addSubview:self.tableView];
-        
+        if(_refreshHeaderView==nil){
+            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+            view.delegate = self;
+            [self.tableView addSubview:view];
+            _refreshHeaderView = view;
+        }
+        [_refreshHeaderView refreshLastUpdatedDate];
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    //初始化数据
-    currentTab=1;
     
     return self;
 }
@@ -101,67 +64,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
-}
-
-#pragma mark-
-#pragma mark 界面按钮事件
-
-- (void)leftTopButtonAction {
-    currentTab=1;
-    
-    [self loadAppStoreProduct:_leftDataItemArray];
-    
-    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    _lblSlid.frame = CGRectMake(0, 36, 106, 4);
-    
-    [UIView commitAnimations];
-}
-
-- (void)centerTopButtonAction {
-    currentTab=2;
- 
-    [self loadAppStoreProduct:_centerDataItemArray];
-    
-    [_centerTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    _lblSlid.frame = CGRectMake(107, 36, 106, 4);
-    
-    [UIView commitAnimations];
-}
-
-- (void)rightTopButtonAction {
-    currentTab=3;
-    
-    [self loadAppStoreProduct:_rightDataItemArray];
-    
-    [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    [_centerTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    _lblSlid.frame = CGRectMake(214, 36, 106, 4);
-    
-    [UIView commitAnimations];
+    if ([IAPHelper sharedHelper].products == nil) {
+        [self autoRefresh];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark -
@@ -169,123 +80,160 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
-        if(reqCode==REQUESTCODE_BUY_LOADPRODUCT){
-//            [[IAPHelper sharedHelper] setProductlist:[response dataItemArray]];
-//            if ([IAPHelper sharedHelper].products == nil) {
-//                [[IAPHelper sharedHelper] requestProducts];
-//                _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
-//            }
-            NSLog(@"充值产品获取");
-        }else if(reqCode==REQUESTCODE_BUY_BUILD){
-            SKProduct *product = [[response propertys] objectForKey:@"product"];
-            [[IAPHelper sharedHelper] setController:self];
-            [[IAPHelper sharedHelper] setRecordno:[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"]];
-            [[IAPHelper sharedHelper] buyProductIdentifier:product];
+        if(reqCode==REQUESTCODE_BUY_LOADPRODUCT) {
+            //判断是否已经全部加载完毕
+            if([response pageInfo]) {
+                //列表查询没有使用分页
+                NSInteger totalpage=[[[response pageInfo]objectForKey:@"totalpage"]intValue];
+                if(totalpage>=_currentPage) {
+                    if(totalpage==_currentPage) {
+                        _loadOver=YES;
+                    }else{
+                        _loadOver=NO;
+                    }
+                    if(_currentPage==1) {
+                        //如果当前为第一页则全部加入
+                        if(self.dataItemArray) {
+                            [self.dataItemArray removeAllObjects];
+                            [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
+                            
+                        } else {
+                            self.dataItemArray=[[NSMutableArray alloc]initWithArray:[response dataItemArray]];
+                        }
+                    } else {
+                        //追加到最后面
+                        [self.dataItemArray addObjectsFromArray:[[NSMutableArray alloc]initWithArray:[response dataItemArray]]];
+                    }
+                } else {
+                    _currentPage=totalpage;
+                    _loadOver=YES;
+                }
+                if(!self.dataItemArray) {
+                    self.dataItemArray=[[NSMutableArray alloc]init];
+                }
+            } else {
+                self.dataItemArray=[[NSMutableArray alloc]initWithArray:[response dataItemArray]];
+            }
+            if([self.dataItemArray count]==0) {
+                _currentPage=0;
+                _loadOver=YES;
+            }
+            if([[[IAPHelper sharedHelper]productlist] count]>0) {
+               [[[IAPHelper sharedHelper]productlist] addObjectsFromArray:self.dataItemArray];
+            } else {
+               [[IAPHelper sharedHelper] setProductlist:self.dataItemArray];
+            }
+            [[IAPHelper sharedHelper] requestProducts];
+            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
         }
     }
 }
 
-- (void)loadAppStoreProduct:(NSMutableArray *)dataItemArray {
-//    if ([dataItemArray count]>0) {
-//        NSMutableDictionary *dic=[[IAPHelper sharedHelper] productlistDic];
-//        if(dic==nil) {
-//            dic=[[NSMutableDictionary alloc]init];
-//        }
-//        [dic setObject:dataItemArray forKey:[self returnCurrentTab]];
-//        [[IAPHelper sharedHelper] setProductlistDic:dic];
-//        NSMutableArray *dataItema=[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]];
-//        if(dataItema==nil) {
-//            [[IAPHelper sharedHelper] requestProducts:[self returnCurrentTab]];
-//            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//            [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
-//        } else {
-//            //通知产品列表已经加载完成
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:dataItema];
-//        }
-//    } else {
-//        //通知产品列表已经加载完成
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:nil];
-//    }
-}
-
-- (NSString *)returnCurrentTab {
-    if(currentTab == 2) {
-        return CACHE_ACCOUNT_PAY2;
-    } else if(currentTab == 3) {
-        return CACHE_ACCOUNT_PAY3;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    int count=[[[IAPHelper sharedHelper]products]count];
+    if(count>0){
+        if(_pageSize>count){
+            return count;
+        }else{
+            return count+1;
+        }
+    }else{
+        return 1;
     }
-    return CACHE_ACCOUNT_PAY1;
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return [[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] count];
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 60;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSInteger row=[indexPath row];
-//    static NSString *cellReuseIdentifier = @"ACPaymentCell";
-//    ACPaymentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-//    if(!cell){
-//        UINib *nib=[UINib nibWithNibName:@"ACPaymentCell" bundle:nil];
-//        [tableView registerNib:nib forCellReuseIdentifier:cellReuseIdentifier];
-//        cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-//    }
-////    SKProduct *product =[[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] objectAtIndex:row];
-////    cell.lbl_description.text=product.localizedDescription;
-////    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    return cell;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([[[IAPHelper sharedHelper]products]count]>[indexPath row]){
+        return 60;
+    }else{
+        return 50;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row=[indexPath row];
+    int count=[[[IAPHelper sharedHelper]products]count];
+    if(count>row) {
+        static NSString *cellReuseIdentifier = @"ACPaymentCell";
+        ACPaymentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        if(cell==nil) {
+            cell = [[ACPaymentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+        }
+        SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:row];
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+        [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [numberFormatter setLocale:product.priceLocale];
+        NSString *formattedString = [numberFormatter stringFromNumber:product.price];
+        cell.lblName.text=[NSString stringWithFormat:@"%@ %@",product.localizedTitle,formattedString];
+        cell.lblDescription.text=product.localizedDescription;
+        NSMutableDictionary *dictioanry=[[IAPHelper sharedHelper] productDetail:product.productIdentifier];
+        int type=[[dictioanry objectForKey:@"type"] intValue];
+        if(type==1) {
+            //存储
+            type=3;
+        } else if(type==2) {
+            //时长
+            type=2;
+        } else if(type==3) {
+            //基础
+            type=1;
+        }
+        [cell setCurrentType:type];
+        [cell setData:dictioanry];
+        [cell setControler:self];
+        return cell;
+    } else {
+        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
+                                             currentPage:_currentPage];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if([SKPaymentQueue canMakePayments]) {
-//        SKProduct *product = [[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] objectAtIndex:[indexPath row]];
-//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//        NSString *recprod=[[[IAPHelper sharedHelper]getProductDetail:product.productIdentifier tag:[self returnCurrentTab]] objectForKey:@"recordno"];
-//        [requestParams setObject:recprod forKey:@"recprod"];
-//        _loadHttp=[[HttpRequest alloc]init];
-//        [_loadHttp setDelegate:self];
-//        [_loadHttp setController:[self parentViewController]];
-//        NSMutableDictionary* propertyes=[[NSMutableDictionary alloc]init];
-//        [propertyes setObject:product forKey:@"product"];
-//        [_loadHttp setPropertys:propertyes];
-//        [_loadHttp setRequestCode:REQUESTCODE_BUY_BUILD];
-//        [_loadHttp loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
+    if([[[IAPHelper sharedHelper]products]count]>[indexPath row]) {
+        //不处理单击事件
+    } else {
+        //加载更多
+        _currentPage++;
+        [self reloadTableViewDataSource];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==0){
+        [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
     }
 }
 
 #pragma mark -
 #pragma mark Custom Methods
 
+- (void)reloadTableViewDataSource {
+	if([[Config Instance]isLogin]) {
+        _reloading = YES;
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
+        [requestParams setObject:@"1"  forKey:@"status"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
+        _loadHttp=[[HttpRequest alloc]init];
+        [_loadHttp setDelegate:self];
+//        [_loadHttp setController:self];
+        [_loadHttp setRequestCode:REQUESTCODE_BUY_LOADPRODUCT];
+        [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
+    }else{
+        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+        [Common noLoginAlert:self];
+    }
+}
+
 //产品加载
 - (void)productsLoaded:(NSNotification *)notification{
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self dismissHUD:nil];
-//    [self.tableView reloadData];
-//    if([[[[IAPHelper sharedHelper] productsDic]objectForKey:[self returnCurrentTab]] count]==0) {
-//        [Common alert:@"暂无记录"];
-//    }
-}
-
-//购买产品
-- (void)productPurchased:(NSNotification *)notification{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self dismissHUD:nil];
-    [Common alert:@"支付成功"];
-}
-
-//购买失败
-- (void)productPurchaseFailed:(NSNotification *)notification {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self dismissHUD:nil];
-    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
-    if (transaction.error.code != SKErrorPaymentCancelled) {
-        [Common alert:transaction.error.localizedDescription];
-    }
+    [self doneLoadingTableViewData];
+    [self.tableView reloadData];
 }
 
 //超时提示

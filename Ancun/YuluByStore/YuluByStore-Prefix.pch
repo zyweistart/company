@@ -39,7 +39,7 @@
 //iPhone检测是否当前环境为iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //缓存常量唯一方法
-#define CACHE_CONSTANT(STRING) [NSString stringWithFormat:@"%@-%@",STRING,ACCESSID]
+#define CACHE_CONSTANT(STRING) [NSString stringWithFormat:@"%@-%@-%@",STRING,[NSString stringWithUTF8String:object_getClassName(self)],ACCESSID]
 #define CACHE_DATA [NSString stringWithFormat:@"%@-%@",[NSString stringWithUTF8String:object_getClassName(self)],ACCESSID]
 //导航背景
 #define NAVCOLOR [UIColor colorWithRed:(68/255.0) green:(141/255.0) blue:(208/255.0) alpha:1]

@@ -60,6 +60,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",[[[response mainData] objectForKey:@"serverinfo"] objectForKey:@"serverno"]]]];
 #endif
         [[Config Instance]setIsRefreshUserInfo:YES];
+        [[Config Instance]setIsRefreshRecordingList:YES];
     }
 }
 

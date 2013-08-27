@@ -23,9 +23,18 @@ static IAPHelper * _sharedHelper;
 - (NSMutableDictionary *)productDetail:(NSString *)identifier {
     if(![@"" isEqualToString:identifier]) {
         for (NSMutableDictionary * product in self.productlist){
-            if([identifier isEqualToString:[product objectForKey:@"procode"]]){
+            if([identifier isEqualToString:[product objectForKey:@"appstorerecordno"]]){
                 return product;
             }
+        }
+    }
+    return nil;
+}
+
+- (SKProduct *)product:(NSString *)identifier {
+    for(SKProduct *product in self.products) {
+        if( [identifier isEqualToString:product.productIdentifier]) {
+            return product;
         }
     }
     return nil;
@@ -36,7 +45,7 @@ static IAPHelper * _sharedHelper;
     if(self.productsRequest==nil) {
         NSMutableSet * products = [NSMutableSet set];
         for (NSMutableDictionary * product in self.productlist) {
-            NSString *productId=[product objectForKey:@"procode"];
+            NSString *productId=[product objectForKey:@"appstorerecordno"];
             if(![@"" isEqualToString:productId]) {
                 [products addObject:productId];
             }

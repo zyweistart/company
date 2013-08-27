@@ -78,9 +78,9 @@
         [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
         self.tableView=[[UITableView alloc]initWithFrame:
-                        CGRectMake(0, 83,
+                        CGRectMake(0, 80,
                                    self.view.frame.size.width,
-                                   self.view.frame.size.height-83)];
+                                   self.view.frame.size.height-80)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
@@ -141,14 +141,9 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    if([[Config Instance]isRefreshUserInfo]) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        //如果为nil则自动加载
-        if(_leftDataItemArray==nil) {
-            [self autoRefresh];
-        }
+    //如果为nil则自动加载
+    if(_leftDataItemArray==nil) {
+        [self autoRefresh];
     }
 }
 
