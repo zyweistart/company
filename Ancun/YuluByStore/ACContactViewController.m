@@ -29,9 +29,6 @@
     HttpRequest *_contactHttp;
 }
 
-@synthesize table;
-@synthesize search;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -47,6 +44,11 @@
         
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self refresh:nil];
 }
 
 #pragma mark -
@@ -155,9 +157,9 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
 
 #pragma mark Table View Delegate Methods
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [search resignFirstResponder];
+    [self.search resignFirstResponder];
     _searching = NO;
-    search.text = @"";
+    self.search.text = @"";
     [tableView reloadData];
     return indexPath;
 }
@@ -168,14 +170,14 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *searchTerm = [searchBar text];
     [self handleSearchForTerm:searchTerm];
-    [search resignFirstResponder];
+    [self.search resignFirstResponder];
 }
 
 //输入文本实时更新时调用
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
     if ([searchTerm length] == 0) {
         [self resetSearch];
-        [table reloadData];
+        [self.table reloadData];
         return;
     }
     [self handleSearchForTerm:searchTerm];
@@ -184,16 +186,16 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
 //cancel按钮点击时调用
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     _searching = NO;
-    search.text = @"";
+    self.search.text = @"";
     [self resetSearch];
-    [table reloadData];
+    [self.table reloadData];
     [searchBar resignFirstResponder];
 }
 
 //点击搜索框时调用
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     _searching = YES;
-    [table reloadData];
+    [self.table reloadData];
 }
 
 #pragma mark -
@@ -251,7 +253,7 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
         [array removeObjectsInArray:toRemove];
     }
     [_keys removeObjectsInArray:sectionsToRemove];
-    [table reloadData];
+    [self.table reloadData];
 }
 
 - (void)refresh:(id)sender{
@@ -265,7 +267,7 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
         [_allNames removeAllObjects];
     }
     if (addressBook){
-        table.hidden=NO;
+        self.table.hidden=NO;
         _viewinfo.hidden=YES;
         NSMutableDictionary *refreshFlag=[[NSMutableDictionary alloc]init];
         CFArrayRef results =ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -375,10 +377,10 @@ static NSString *SectionsTableIdentifier2 = @"ACContactCell";
         }
         CFRelease(addressBook);
         [self resetSearch];
-        [table reloadData];
-        [table setContentOffset:CGPointMake(0.0, 44.0) animated:NO];
+        [self.table reloadData];
+        [self.table setContentOffset:CGPointMake(0.0, 44.0) animated:NO];
     }else{
-        table.hidden=YES;
+        self.table.hidden=YES;
         _viewinfo.hidden=NO;
     }
 }

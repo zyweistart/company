@@ -32,10 +32,11 @@
     //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = NO;
-    //渠道 [91,360,baidu]
+    //渠道 [91,360,baidu,官网]
 //    statTracker.channelId = @"91";
 //    statTracker.channelId = @"360";
 //    statTracker.channelId = @"baidu";
+//    statTracker.channelId = @"ancun";
     statTracker.channelId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ChannelId"];
     statTracker.logStrategy=BaiduMobStatLogStrategyAppLaunch;
     statTracker.sessionResumeInterval = 60;

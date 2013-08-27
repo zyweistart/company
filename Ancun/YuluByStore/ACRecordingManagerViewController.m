@@ -31,10 +31,6 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick_ACRecordingManagerViewController object:nil];
         
-        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
-            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"时长版录音" style:UIBarButtonItemStyleDone target:self action:@selector(oldRecordingManagerList:)];
-        }
-        
     }
     return self;
 }
@@ -56,10 +52,15 @@
     }
 }
 
-- (void) viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if(self.navigationItem.rightBarButtonItem==nil) {
+        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
+            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"时长版录音" style:UIBarButtonItemStyleDone target:self action:@selector(oldRecordingManagerList:)];
+        }
+    }
     //如果为nil或者集合长度为零则自动刷新
-    if([[Config Instance]isRefreshRecordingList]){
+    if([[Config Instance]isRefreshRecordingList]) {
         [self autoRefresh];
     }
 }
@@ -67,17 +68,17 @@
 #pragma mark -
 #pragma mark Delegate Methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex==0){
         [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
     }
 }
 
-- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
     [super requestFinishedByResponse:response requestCode:reqCode];
-    if([response successFlag]){
+    if([response successFlag]) {
         [[Config Instance]setIsRefreshRecordingList:NO];
-        if([[response code]isEqualToString:@"110042"]||_currentPage==1){
+        if([[response code]isEqualToString:@"110042"]||_currentPage==1) {
             NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
             [dictionary setObject:[response responseString] forKey:CACHE_DATA];
             //缓存数据
@@ -87,8 +88,8 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([self.dataItemArray count]>[indexPath row]) {
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
         NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"oppno"]];
         if(name==nil){

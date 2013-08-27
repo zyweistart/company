@@ -165,8 +165,8 @@
         [self autoRefresh];
         [[Config Instance] setIsRefreshAccountPayList:NO];
     } else {
+        self.dataItemArray=_leftDataItemArray;
         if(_leftDataItemArray){
-            self.dataItemArray=_leftDataItemArray;
             [self.tableView reloadData];
         }else{
             [self autoRefresh];
@@ -187,8 +187,8 @@
 - (void)rightTopButtonAction {
     currentTab=2;
     
+    self.dataItemArray=_rightDataItemArray;
     if(_rightDataItemArray){
-        self.dataItemArray=_rightDataItemArray;
         [self.tableView reloadData];
     }else{
         [self autoRefresh];

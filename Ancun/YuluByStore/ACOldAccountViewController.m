@@ -80,7 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[Config Instance] setIsRefreshOldAccountMonthList:YES];
     //读取使用记录缓存信息
     NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
     if(dictioanry){
@@ -89,6 +89,7 @@
             self.dataItemArray=[[XML analysis:content] dataItemArray];
             if([self.dataItemArray count]>0){
                 [self.tableView reloadData];
+                [[Config Instance] setIsRefreshOldAccountMonthList:NO];
             }
         }
     }
