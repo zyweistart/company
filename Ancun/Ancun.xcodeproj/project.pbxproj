@@ -38,6 +38,8 @@
 		C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */; };
 		C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */; };
 		C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */; };
+		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
+		C9A67EAB17CD882900E9A81E /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */; };
 		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
 		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
 		C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9D97993179FA3500076ACF3 /* InfoPlist.strings */; };
@@ -384,6 +386,9 @@
 		C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayViewController.m; sourceTree = "<group>"; };
 		C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountDayCell.h; sourceTree = "<group>"; };
 		C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayCell.m; sourceTree = "<group>"; };
+		C9A67EA717CD882900E9A81E /* ACContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactsViewController.h; sourceTree = "<group>"; };
+		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
+		C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
 		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C9D97987179FA3500076ACF3 /* YuluByStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YuluByStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1564,6 +1569,8 @@
 				C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */,
 				C9D97A13179FA64F0076ACF3 /* ACBuyViewController.h */,
 				C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */,
+				C9A67EA717CD882900E9A81E /* ACContactsViewController.h */,
+				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
 				C9D97A18179FA64F0076ACF3 /* ACContactViewController.h */,
 				C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */,
 				C9D97A1B179FA64F0076ACF3 /* ACDialViewController.h */,
@@ -1629,6 +1636,7 @@
 		C9E8EE77179FD2EC00E47BD9 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */,
 				C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */,
 				C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */,
 				C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */,
@@ -1955,6 +1963,7 @@
 				C909409417C2032900183921 /* guide_button_b_gb@2x.png in Resources */,
 				C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */,
 				C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */,
+				C9A67EAB17CD882900E9A81E /* ACContactsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2065,6 +2074,7 @@
 				C90A351D17BA054F00BECE31 /* ACBaseViewController.m in Sources */,
 				C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */,
 				C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */,
+				C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

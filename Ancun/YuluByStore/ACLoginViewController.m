@@ -8,7 +8,7 @@
 
 #import "ACLoginViewController.h"
 #import "ACDialViewController.h"
-#import "ACContactViewController.h"
+#import "ACContactsViewController.h"
 #import "ACAccountViewController.h"
 #import "ACOldAccountViewController.h"
 #import "ACRecordingManagerViewController.h"
@@ -103,7 +103,7 @@
         //是否隐藏导航条
         dialViewControllerNav.navigationBarHidden = YES;
         //联系人
-        UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactViewController alloc]init]];
+        UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactsViewController alloc]init]];
         contactViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //我的账户
         UINavigationController *accountViewControllerNav;

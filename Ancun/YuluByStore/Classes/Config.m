@@ -19,7 +19,7 @@ static Config * instance = nil;
             NSMutableArray* phoneList=[[NSMutableArray alloc]init];
             [phoneList addObject:@"110"];
             [phoneList addObject:@"112"];
-            [phoneList addObject:@"95105856"];
+            [phoneList addObject:PHONENUMBER];
             [instance setNoDialPhoneNumber:phoneList];
             [instance setIsPayBase:NO];
         }
