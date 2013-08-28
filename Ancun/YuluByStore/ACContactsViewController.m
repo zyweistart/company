@@ -30,10 +30,6 @@
         self.tabBarItem.title = @"通讯录";
         self.navigationItem.title=@"通讯录";
         
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
-                                                initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                target:self
-                                                action:@selector(refresh:)];
         //初始化加载通讯录
         [self loadContact];
         
@@ -47,6 +43,10 @@
         self.tableView.hidden=NO;
         self.message.hidden=YES;
         [self.tableView reloadData];
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                target:self
+                                                action:@selector(refresh:)];
     } else {
         self.message.hidden=NO;
         self.tableView.hidden=YES;
@@ -71,6 +71,7 @@
     BOOL ISCREATEACYULUPHONENUMBER=YES;
     //自iOS6.0后获取通讯录列表需要询问用户，经过用户同意后才可以获取通讯录用户列表。而且ABAddressBookRef的初始化工作也由ABAddressBookCreate函数转变为ABAddressBookCreateWithOptions函数。下面代码是兼容之前版本的获取通讯录用户列表方法。
     ABAddressBookRef addressBook=[Common getAbAddressBook];
+    [[[Config Instance]contact]removeAllObjects];
     if(_dataResults==nil){
         _dataResults=[[NSMutableDictionary alloc]init];
     }else{
@@ -306,7 +307,7 @@
                     initWithStyle:UITableViewCellStyleDefault
                     reuseIdentifier:SectionsTableIdentifier1];
         }
-        cell.textLabel.text=[namePhones objectAtIndex:0];
+        cell.textLabel.text=[Common formatPhone:[namePhones objectAtIndex:1]];
         return cell;
     }else{
         //双
@@ -315,7 +316,7 @@
             cell = [[ACContactCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SectionsTableIdentifier2];
         }
         cell.lblName.text=[namePhones objectAtIndex:0];
-        cell.lblPhone.text=[namePhones objectAtIndex:1];
+        cell.lblPhone.text=[Common formatPhone:[namePhones objectAtIndex:1]];
         return cell;
     }
 }

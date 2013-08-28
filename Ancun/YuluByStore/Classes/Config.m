@@ -21,7 +21,6 @@ static Config * instance = nil;
             [phoneList addObject:@"112"];
             [phoneList addObject:PHONENUMBER];
             [instance setNoDialPhoneNumber:phoneList];
-            [instance setIsPayBase:NO];
         }
     }
     return instance;

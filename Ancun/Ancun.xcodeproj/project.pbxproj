@@ -67,8 +67,6 @@
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A73179FA6520076ACF3 /* ACBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */; };
 		C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A16179FA64F0076ACF3 /* ACContactCell.m */; };
-		C9D97A76179FA6520076ACF3 /* ACContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */; };
-		C9D97A77179FA6520076ACF3 /* ACContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */; };
 		C9D97A78179FA6520076ACF3 /* ACDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */; };
 		C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */; };
 		C9D97A7A179FA6520076ACF3 /* ACDialViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */; };
@@ -425,9 +423,6 @@
 		C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACBuyViewController.m; sourceTree = "<group>"; };
 		C9D97A15179FA64F0076ACF3 /* ACContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactCell.h; sourceTree = "<group>"; };
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
-		C9D97A18179FA64F0076ACF3 /* ACContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactViewController.h; sourceTree = "<group>"; };
-		C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactViewController.m; sourceTree = "<group>"; };
-		C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactViewController.xib; sourceTree = "<group>"; };
 		C9D97A1B179FA64F0076ACF3 /* ACDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDialViewController.h; sourceTree = "<group>"; };
 		C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDialViewController.m; sourceTree = "<group>"; };
 		C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACDialViewController.xib; sourceTree = "<group>"; };
@@ -1571,8 +1566,6 @@
 				C9D97A14179FA64F0076ACF3 /* ACBuyViewController.m */,
 				C9A67EA717CD882900E9A81E /* ACContactsViewController.h */,
 				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
-				C9D97A18179FA64F0076ACF3 /* ACContactViewController.h */,
-				C9D97A19179FA64F0076ACF3 /* ACContactViewController.m */,
 				C9D97A1B179FA64F0076ACF3 /* ACDialViewController.h */,
 				C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */,
 				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
@@ -1637,7 +1630,6 @@
 			isa = PBXGroup;
 			children = (
 				C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */,
-				C9D97A1A179FA64F0076ACF3 /* ACContactViewController.xib */,
 				C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */,
 				C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */,
 				C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */,
@@ -1756,7 +1748,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */,
-				C9D97A77179FA6520076ACF3 /* ACContactViewController.xib in Resources */,
 				C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */,
 				C9D97A7A179FA6520076ACF3 /* ACDialViewController@iPhone5.xib in Resources */,
 				C9D97A7C179FA6520076ACF3 /* ACExtractionDetailViewController.xib in Resources */,
@@ -1981,7 +1972,6 @@
 				C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */,
 				C9D97A73179FA6520076ACF3 /* ACBuyViewController.m in Sources */,
 				C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */,
-				C9D97A76179FA6520076ACF3 /* ACContactViewController.m in Sources */,
 				C9D97A78179FA6520076ACF3 /* ACDialViewController.m in Sources */,
 				C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */,
 				C9D97A7F179FA6520076ACF3 /* ACFeedBackViewController.m in Sources */,

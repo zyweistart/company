@@ -132,12 +132,10 @@
         if(currentTab==1) {
             if([[Config Instance]isRefreshAccountPayList]) {
                 [self autoRefresh];
-                [[Config Instance] setIsRefreshAccountPayList:NO];
             }
         } else if (currentTab==2) {
             if([[Config Instance]isRefreshAccountUseRecordList]) {
                 [self autoRefresh];
-                [[Config Instance] setIsRefreshAccountUseRecordList:NO];
             }
         }
     }
@@ -231,6 +229,7 @@
         [super requestFinishedByResponse:response requestCode:reqCode];
         if([response successFlag]) {
             if(currentTab == 1) {
+                [[Config Instance] setIsRefreshAccountPayList:NO];
                 _leftDataItemArray=self.dataItemArray;
                 [[Config Instance] setIsPayBase:NO];
                 [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
@@ -277,6 +276,7 @@
             }
         }
         if(currentTab == 2) {
+            [[Config Instance] setIsRefreshAccountUseRecordList:NO];
             _rightDataItemArray=self.dataItemArray;
             if([[response code]isEqualToString:@"110042"]||_currentPage==1){
                 NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:[Common getCache:[Config Instance].cacheKey]];
