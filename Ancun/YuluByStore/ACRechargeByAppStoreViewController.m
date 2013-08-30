@@ -63,10 +63,10 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([IAPHelper sharedHelper].products == nil) {
-        [self autoRefresh];
-    } else {
+    if ([[IAPHelper sharedHelper].products count]>0) {
         [self.tableView reloadData];
+    } else {
+        [self autoRefresh];
     }
 }
 
