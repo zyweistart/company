@@ -1,12 +1,5 @@
-//
-//  ACBaseTableViewController.h
-//  ACyulu
-//
-//  Created by Start on 12-12-8.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
 
-@interface BaseTableViewController : ACBaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface BaseTableViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (retain,nonatomic) UITableView *tableView;
 @property (retain,nonatomic) NSMutableArray *dataItemArray;

@@ -1,11 +1,3 @@
-//
-//  ACAccountViewController.m
-//  ACyulu
-//
-//  Created by Start on 12/26/12.
-//  Copyright (c) 2012 ancun. All rights reserved.
-//
-
 #import "ACRechargeByAppStoreViewController.h"
 #import "ACRechargeNav.h"
 #import "ACAccountRechargeCell.h"
@@ -28,7 +20,15 @@
 
 @end
 
-@implementation ACRechargeByAppStoreViewController
+@implementation ACRechargeByAppStoreViewController {
+    
+    BOOL isTimeout;
+    MBProgressHUD *_hud;
+    ACRechargeNav *_rechargeNav;
+    HttpRequest *_loadHttp;
+    SKProductsRequest *_productsRequest;
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
@@ -59,11 +59,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -118,14 +113,23 @@
                 _currentPage=0;
                 _loadOver=YES;
             }
-            if([[[IAPHelper sharedHelper]productlist] count]>0) {
-               [[[IAPHelper sharedHelper]productlist] addObjectsFromArray:self.dataItemArray];
-            } else {
-               [[IAPHelper sharedHelper] setProductlist:self.dataItemArray];
+            
+            [[IAPHelper sharedHelper] setProductlist:self.dataItemArray];
+            if(_productsRequest==nil) {
+                NSMutableSet * products = [NSMutableSet set];
+                for (NSMutableDictionary *product in self.dataItemArray) {
+                    NSString *productId=[product objectForKey:@"appstorerecordno"];
+                    if(![@"" isEqualToString:productId]) {
+                        [products addObject:productId];
+                    }
+                }
+                _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
+                _productsRequest.delegate = self;
+                [_productsRequest start];
+                //等待30s超时
+                isTimeout=YES;
+                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
             }
-            [[IAPHelper sharedHelper] requestProducts];
-            _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-            [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
         }
     }
 }
@@ -168,22 +172,26 @@
         NSString *formattedString = [numberFormatter stringFromNumber:product.price];
         cell.lblName.text=[NSString stringWithFormat:@"%@ %@",product.localizedTitle,formattedString];
         cell.lblDescription.text=product.localizedDescription;
-        NSMutableDictionary *dictioanry=[[IAPHelper sharedHelper] productDetail:product.productIdentifier];
-        int type=[[dictioanry objectForKey:@"type"] intValue];
-        if(type==1) {
-            //存储
-            type=3;
-        } else if(type==2) {
-            //时长
-            type=2;
-        } else if(type==3) {
-            //基础
-            type=1;
+        for (NSMutableDictionary * dictionary in [[IAPHelper sharedHelper]productlist]){
+            if([product.productIdentifier isEqualToString:[dictionary objectForKey:@"appstorerecordno"]]){
+                int type=[[dictionary objectForKey:@"type"] intValue];
+                if(type==1) {
+                    //存储
+                    type=3;
+                } else if(type==2) {
+                    //时长
+                    type=2;
+                } else if(type==3) {
+                    //基础
+                    type=1;
+                }
+                [cell setCurrentType:type];
+                [cell setData:dictionary];
+                [cell setControler:self];
+                return cell;
+            }
         }
-        [cell setCurrentType:type];
-        [cell setData:dictioanry];
-        [cell setControler:self];
-        return cell;
+        return nil;
     } else {
         return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
                                              currentPage:_currentPage];
@@ -214,12 +222,14 @@
         _reloading = YES;
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
+        //只支持基础包月套餐版
+        [requestParams setObject:@"3"  forKey:@"type"];
         [requestParams setObject:@"1"  forKey:@"status"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
         _loadHttp=[[HttpRequest alloc]init];
         [_loadHttp setDelegate:self];
-//        [_loadHttp setController:self];
+        [_loadHttp setController:self];
         [_loadHttp setRequestCode:REQUESTCODE_BUY_LOADPRODUCT];
         [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
     }else{
@@ -228,26 +238,31 @@
     }
 }
 
-//产品加载
-- (void)productsLoaded:(NSNotification *)notification{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+    [[IAPHelper sharedHelper] setProducts:response.products];
+    _productsRequest = nil;
+    isTimeout=NO;
     [self dismissHUD:nil];
-    [self doneLoadingTableViewData];
-    [self.tableView reloadData];
 }
 
 //超时提示
 - (void)timeout:(id)arg {
-    _hud.labelText = @"超时!";
-    _hud.detailsLabelText = @"请稍候在试.";
-    _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-	_hud.mode = MBProgressHUDModeCustomView;
-    [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
+    if(isTimeout) {
+        _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hud.labelText = @"请求超时，请稍候在试.";
+        _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];
+        _hud.mode = MBProgressHUDModeCustomView;
+        [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
+    }
 }
 
 - (void)dismissHUD:(id)arg{
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-    _hud = nil;
+    if(_hud!=nil) {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        _hud = nil;
+    }
+    [self doneLoadingTableViewData];
+    [self.tableView reloadData];
 }
 
 @end

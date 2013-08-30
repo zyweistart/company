@@ -1,15 +1,7 @@
-//
-//  ACRechargeConfirmViewController.h
-//  Ancun
-//
-//  Created by Start on 13-8-7.
-//
-//
-
 #import <UIKit/UIKit.h>
 
 @class ACRechargeNav;
-@interface ACRechargeConfirmViewController : ACBaseViewController<HttpViewDelegate,UIActionSheetDelegate>{
+@interface ACRechargeConfirmViewController : BaseViewController<HttpViewDelegate,UIActionSheetDelegate>{
     
     HttpRequest *_http;
     

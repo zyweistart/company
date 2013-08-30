@@ -1,10 +1,3 @@
-//
-//  Config.h
-//  ACyulu
-//
-//  Created by Start on 12-12-6.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
 #import "ResultDelegate.h"
 
 @interface Config : NSObject
@@ -42,7 +35,7 @@
 
 + (Config *)Instance;
 
-+ (void)initData;
++ (void)resetConfig;
 
 - (BOOL)isOldUser;
 

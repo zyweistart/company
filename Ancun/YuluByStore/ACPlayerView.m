@@ -1,11 +1,3 @@
-//
-//  ACPlayerView.m
-//  ACyulu
-//
-//  Created by Start on 13-1-4.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACPlayerView.h"
 #import "ACExtractionDetailViewController.h"
 #import "ACRecordingManagerDetailListViewController.h"

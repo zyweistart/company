@@ -1,17 +1,8 @@
-//
-//  ACAccountPayCell.m
-//  Ancun
-//
-//  Created by Start on 13-8-6.
-//
-//
-
 #import "ACAccountPayCell.h"
 
 @implementation ACAccountPayCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 160, 30)];

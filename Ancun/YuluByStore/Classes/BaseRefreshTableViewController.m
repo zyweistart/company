@@ -1,11 +1,3 @@
-//
-//  ACBaseRefreshTableViewController.m
-//  ACyulu
-//
-//  Created by Start on 12-12-8.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
-
 #import "BaseRefreshTableViewController.h"
 
 @interface BaseRefreshTableViewController ()
@@ -111,7 +103,7 @@
             if(!_loadOver&&!_reloading) {
                 _currentPage++;
                 //0.1秒后自动开始刷新
-                [self performSelector:@selector(reloadTableViewDataSource) withObject:nil afterDelay:0.1];
+                [self performSelector:@selector(reloadTableViewDataSource) withObject:nil afterDelay:0.3];
             }
         }
     }

@@ -1,11 +1,3 @@
-//
-//  NSString+Utils.h
-//  Ancun
-//
-//  Created by Start on 13-7-24.
-//
-//
-
 #import <Foundation/Foundation.h>
 
 @interface NSString (Utils)

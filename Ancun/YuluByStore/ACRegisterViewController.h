@@ -1,14 +1,7 @@
-//
-//  ACRegisterViewController.h
-//  ACyulu
-//
-//  Created by Start on 13-1-6.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
+#import <UIKit/UIKit.h>
 #import "SSCheckBoxView.h"
 
-@interface ACRegisterViewController : ACBaseViewController<HttpViewDelegate>{
+@interface ACRegisterViewController : BaseViewController<HttpViewDelegate>{
     int _second;
     NSTimer *_verificationCodeTime;
     NSString *_phone;

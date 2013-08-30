@@ -24,9 +24,6 @@
 //System
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-//Library;
-#import "ATMHud.h"
-#import "ASIHTTPRequest.h"
 //CustomClass
 #import "Config.h"
 #import "NSString+Utils.h"
@@ -34,7 +31,7 @@
 #import "Response.h"
 #import "XML.h"
 #import "HttpRequest.h"
-#import "ACBaseViewController.h"
+#import "BaseViewController.h"
 #endif
 //iPhone检测是否当前环境为iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)

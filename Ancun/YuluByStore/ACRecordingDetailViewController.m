@@ -1,11 +1,3 @@
-//
-//  ACRecordingDetailViewController.m
-//  ACyulu
-//
-//  Created by Start on 12-12-8.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
-
 #import "ACRecordingDetailViewController.h"
 #import "ACExtractionDetailViewController.h"
 #import "ACNotaryDetailViewController.h"
@@ -252,6 +244,7 @@
         _recordingDetailHttp=[[HttpRequest alloc]init];
         [_recordingDetailHttp setDelegate:self];
         [_recordingDetailHttp setController:self];
+        [_recordingDetailHttp setIsShowMessage:YES];
         [_recordingDetailHttp setRequestCode:REQUESTCODE_SUBMITREMARK];
         [_recordingDetailHttp loginhandle:@"v4recRemark" requestParams:requestParams];
     }

@@ -1,11 +1,3 @@
-//
-//  ACPaymentCell.m
-//  ACluyin
-//
-//  Created by Start on 13-5-3.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACPaymentCell.h"
 #import "StoreKit/StoreKit.h"
 #import <QuartzCore/QuartzCore.h>
@@ -13,8 +5,7 @@
 
 @implementation ACPaymentCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
@@ -93,9 +84,9 @@
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(actionSheet.tag==1){
-        if(buttonIndex==0){
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(actionSheet.tag==1) {
+        if(buttonIndex==0) {
             ACRechargeConfirmViewController *rechargeConfirm=[[ACRechargeConfirmViewController alloc] init];
             [rechargeConfirm setCurrentType:_currentType];
             [rechargeConfirm setData:_data];

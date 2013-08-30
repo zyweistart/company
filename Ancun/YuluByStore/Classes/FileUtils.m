@@ -1,11 +1,3 @@
-//
-//  FileUtils.m
-//  ACyulu
-//
-//  Created by Start on 13-1-23.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "FileUtils.h"
 #include <sys/stat.h>
 #include <dirent.h>

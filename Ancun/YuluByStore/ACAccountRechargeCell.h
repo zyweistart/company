@@ -1,11 +1,3 @@
-//
-//  ACAccountRechargeCell.h
-//  Ancun
-//
-//  Created by Start on 13-8-7.
-//
-//
-
 #import <UIKit/UIKit.h>
 
 @interface ACAccountRechargeCell : UITableViewCell<UIActionSheetDelegate>

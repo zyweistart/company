@@ -1,14 +1,6 @@
-//
-//  ACContactsViewController.h
-//  Ancun
-//
-//  Created by Start on 13-8-28.
-//
-//
-
 #import <UIKit/UIKit.h>
 
-@interface ACContactsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchDisplayDelegate, UISearchBarDelegate,HttpViewDelegate>
+@interface ACContactsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UISearchDisplayDelegate, UISearchBarDelegate,HttpViewDelegate>
 
 @property (strong,nonatomic) NSMutableArray *dataKeys;
 @property (strong,nonatomic) NSMutableDictionary *dataResults;

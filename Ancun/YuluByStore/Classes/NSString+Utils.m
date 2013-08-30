@@ -1,11 +1,3 @@
-//
-//  NSString+Utils.m
-//  Ancun
-//
-//  Created by Start on 13-7-24.
-//
-//
-
 #import "NSString+Utils.h"
 #import <CommonCrypto/CommonDigest.h>
 

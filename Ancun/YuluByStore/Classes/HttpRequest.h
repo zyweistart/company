@@ -1,10 +1,4 @@
-//
-//  HttpRequest.h
-//  ACyulu
-//
-//  Created by Start on 12-12-6.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
+#import "ASIHTTPRequest.h"
 
 @protocol HttpViewDelegate <NSObject>
 
@@ -15,19 +9,15 @@
 
 @end
 
-@interface HttpRequest : NSObject<ASIHTTPRequestDelegate,ASIProgressDelegate,UIActionSheetDelegate>{
-    ATMHud *proHud;
-    NSString* _action;
-    NSString* _signKey;
-    NSMutableDictionary* _head;
-    NSMutableDictionary* _request;
-}
+@interface HttpRequest : NSObject<ASIHTTPRequestDelegate,ASIProgressDelegate,UIActionSheetDelegate>
 //请求码
 @property int requestCode;
 //是否验证
 @property BOOL isVerify;
 //是否为文件下载
 @property BOOL isFileDownload;
+//是否显示提示信息
+@property BOOL isShowMessage;
 //请求时的提示信息
 @property (strong,nonatomic) NSString *message;
 //当前请求的控制器

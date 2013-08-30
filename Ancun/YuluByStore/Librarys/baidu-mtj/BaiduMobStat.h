@@ -44,7 +44,7 @@ typedef enum _BaiduMobStatLogStrategy {
  *  v3.0 新增
  *  记录一次事件的时长，eventId请在网站上创建。未创建的evenId记录将无效。
  */
--(void) logEventWithDurationTime:(NSString*) eventId eventLabel:(NSString*)eventLabel durationTime: (int)duration;
+-(void) logEventWithDurationTime:(NSString*) eventId eventLabel:(NSString*)eventLabel durationTime: (unsigned long)duration;
 /**
  *  v3.0 新增 
  *  记录一次事件的开始，eventId请在网站上创建。未创建的evenId记录将无效。
@@ -103,5 +103,17 @@ typedef enum _BaiduMobStatLogStrategy {
  */
 @property (nonatomic) int logSendInterval;
 
+/**
+ *  v3.1  新增
+ *  开发者可以调用此接口来设置app的版本号，该版本号由开发者获取后传入该函数。
+ *  可以不设置，那么系统将会读取@CFBundleVersion
+ *  原因：Xcode4有两个版本号，一个是Version,另一个是Build,对应于Info.plist的字段名分别为
+ *  CFBundleShortVersionString,CFBundleVersion。为了兼容Xcode3的工程，默认取的是Build号，
+ *  如果需要取Xcode4的Version，可以使用下面的方法。
+ *  使用方法：
+ *   NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+ *   statTracker.shortAppVersion  = version;
+ */
+@property (nonatomic,retain) NSString* shortAppVersion;
 
 @end

@@ -1,11 +1,3 @@
-//
-//  ACRechargeConfirmViewController.m
-//  Ancun
-//
-//  Created by Start on 13-8-7.
-//
-//
-
 #import "ACRechargeConfirmViewController.h"
 #import "NSString+Date.h"
 #import "ACRechargeNav.h"
@@ -36,9 +28,10 @@
 
 @end
 
-@implementation ACRechargeConfirmViewController{
+@implementation ACRechargeConfirmViewController {
     UIView *mainView;
     UIScrollView *sMainView;
+    NSString *_orderRecordno;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -69,7 +62,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
 #endif
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -661,6 +653,8 @@
     
     [_rechargeNav fourthStep];
     
+    //充值成功后重新刷新用户信息
+    [[Config Instance]setIsRefreshUserInfo:YES];
     [[Config Instance]setIsRefreshAccountPayList:YES];
     
     if(sMainView) {
@@ -702,12 +696,11 @@
     [mainView addSubview:_btnConfirm];
     
     [self.view addSubview:mainView];
-    //充值成功后重新刷新用户信息
-    [[Config Instance]setIsRefreshUserInfo:YES];
+    
 }
 
 //根据类型套餐获取最后充值的套餐
-- (NSMutableDictionary *)lastNewPackages:(int)ctype{
+- (NSMutableDictionary *)lastNewPackages:(int)ctype {
     NSDate *nEndtime;
     NSMutableDictionary *nData;
     for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
@@ -729,7 +722,7 @@
 }
 
 //验证当前套餐是否已经续过费
-- (BOOL)isCurrentStorageExit:(NSMutableDictionary*)data{
+- (BOOL)isCurrentStorageExit:(NSMutableDictionary*)data {
     for (NSMutableDictionary *nData in [[Config Instance] currentPackagesList]) {
         //只过滤出包月套餐
         if([[nData objectForKey:@"ctype"]intValue]==1){
@@ -758,68 +751,60 @@
 }
 
 //确认充值
-- (void)confirm:(id)sender{
-    if([[Config Instance]isLogin]) {
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"3" forKey:@"payuse"];
-        [requestParams setObject:[_data objectForKey:@"recordno"] forKey:@"recprod"];
-        [requestParams setObject:@"1" forKey:@"actflag"];
-        if(_currentType==2) {
-            //时长可以购买多份
-            UIStepper *stepper=(UIStepper*)[self.view viewWithTag:1];
-            [requestParams setObject:[NSString stringWithFormat:@"%.0f",stepper.value] forKey:@"quantity"];
-        } else {
-            //基础套餐，存储只能购买一份
-            [requestParams setObject:@"1" forKey:@"quantity"];
-            if(_currentType==3) {
-                //存储
-                for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
-                    if([[data objectForKey:@"ctype"]intValue]==1){
-                        NSDate *currentDate=[NSDate date];
-                        NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
-                        NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
-                        if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
-                            int storsum=[[data objectForKey:@"auciquotalimit"]intValue]/1024/1024;
-                            int tarvalue=[[_data objectForKey:@"storage"]intValue];
-                            if(tarvalue>storsum) {
-                                //升级
-                                [requestParams setObject:@"2" forKey:@"actflag"];
-                            } else if(tarvalue==storsum) {
-                                //续费
-                                [requestParams setObject:@"1" forKey:@"actflag"];
-                            } else {
-                                return;
-                            }
+- (void)confirm:(id)sender {
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    [requestParams setObject:@"3" forKey:@"payuse"];
+    [requestParams setObject:[_data objectForKey:@"recordno"] forKey:@"recprod"];
+    [requestParams setObject:@"1" forKey:@"actflag"];
+    if(_currentType==2) {
+        //时长可以购买多份
+        UIStepper *stepper=(UIStepper*)[self.view viewWithTag:1];
+        [requestParams setObject:[NSString stringWithFormat:@"%.0f",stepper.value] forKey:@"quantity"];
+    } else {
+        //基础套餐，存储只能购买一份
+        [requestParams setObject:@"1" forKey:@"quantity"];
+        if(_currentType==3) {
+            //存储
+            for (NSMutableDictionary *data in [[Config Instance] currentPackagesList]) {
+                if([[data objectForKey:@"ctype"]intValue]==1){
+                    NSDate *currentDate=[NSDate date];
+                    NSDate *starttime = [[data objectForKey:@"starttime"] stringConvertDate];
+                    NSDate *endtime = [[data objectForKey:@"endtime"] stringConvertDate];
+                    if([currentDate compare:starttime]>=0&& [endtime compare:currentDate]>=0){
+                        int storsum=[[data objectForKey:@"auciquotalimit"]intValue]/1024/1024;
+                        int tarvalue=[[_data objectForKey:@"storage"]intValue];
+                        if(tarvalue>storsum) {
+                            //升级
+                            [requestParams setObject:@"2" forKey:@"actflag"];
+                        } else if(tarvalue==storsum) {
+                            //续费
+                            [requestParams setObject:@"1" forKey:@"actflag"];
+                        } else {
+                            return;
                         }
                     }
                 }
             }
         }
-#ifdef JAILBREAK
-        _http=[[HttpRequest alloc]init];
-        [_http setDelegate:self];
-        [_http setController:self];
-        [_http setRequestCode:ALIPAYREQUESTCODE];
-        [_http loginhandle:@"v4alipayReq" requestParams:requestParams];
-#else
-        //苹果官方支付系统
-        if([SKPaymentQueue canMakePayments]) {
-            NSLog(@"苹果官方支付系统,参数：%@",_data);
-            //支付申请
-//            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//            NSString *recprod=[[_data objectForKey:@"appstorerecordno"] objectForKey:@"recordno"];
-//            [requestParams setObject:recprod forKey:@"recprod"];
-//            _http=[[HttpRequest alloc]init];
-//            [_http setDelegate:self];
-//            [_http setController:self];
-//            [_http setRequestCode:REQUESTCODE_BUY_BUILD];
-//            [_http loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
-        }
-#endif
-        [_rechargeNav thirdStep];
-    } else {
-        [Common noLoginAlert:self];
     }
+#ifdef JAILBREAK
+    //支付宝支付
+    _http=[[HttpRequest alloc]init];
+    [_http setDelegate:self];
+    [_http setController:self];
+    [_http setIsShowMessage:YES];
+    [_http setRequestCode:ALIPAYREQUESTCODE];
+    [_http loginhandle:@"v4alipayReq" requestParams:requestParams];
+#else
+    //苹果官方支付
+    _http=[[HttpRequest alloc]init];
+    [_http setDelegate:self];
+    [_http setController:self];
+    [_http setMessage:@"正在请求支付"];
+    [_http setRequestCode:REQUESTCODE_BUY_BUILD];
+    [_http loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
+#endif
+    [_rechargeNav thirdStep];
 }
 
 - (void)backRecharge:(id)sender {
@@ -831,8 +816,9 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == ALERTVIEWALIPAYTAG) {
 #ifdef JAILBREAK
+    //安装支付宝快捷支付插件
+    if (actionSheet.tag == ALERTVIEWALIPAYTAG) {
         if(buttonIndex==0) {
             //跳转到App Store下载支付宝插件
             NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
@@ -840,19 +826,15 @@
         } else if(buttonIndex==1) {
             [_rechargeNav secondStep];
         }
-#endif
-    } else {
-        if(buttonIndex==0) {
-            [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];
-        }
     }
+#endif
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-    if([response successFlag]) {
 #ifdef JAILBREAK
-        if(reqCode==ALIPAYREQUESTCODE) {
-
+    //支付宝
+    if(reqCode==ALIPAYREQUESTCODE) {
+        if([response successFlag]) {
             [[Config Instance]setCurrentViewController:self];
             
             NSString *orderString=[[[response mainData] objectForKey:@"alipayinfo"] objectForKey:@"reqcontent"];
@@ -866,28 +848,52 @@
                 [Common actionSheet:self message:@"您还没有安装支付宝快捷支付，请先安装。" tag:ALERTVIEWALIPAYTAG];
             }
         }
+    }
 #else
-        if(reqCode==REQUESTCODE_BUY_BUILD) {
+    //苹果官方支付
+    if(reqCode==REQUESTCODE_BUY_BUILD) {
+        if([response successFlag]) {
+            _orderRecordno=[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"];
             SKProduct *product = [[IAPHelper sharedHelper]product:[_data objectForKey:@"appstorerecordno"]];
-            [[IAPHelper sharedHelper] setController:self];
-            [[IAPHelper sharedHelper] setRecordno:[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"]];
             [[IAPHelper sharedHelper] buyProductIdentifier:product];
         }
-#endif
+    } else if(reqCode==REQUESTCODE_BUY_VERIFYING) {
+        if([response successFlag]) {
+            [self layoutSuccessPage];
+        } else {
+            [_rechargeNav secondStep];
+            //这里不管成功还是失败都要重新刷新用户信息
+            [[Config Instance]setIsRefreshUserInfo:YES];
+            [[Config Instance]setIsRefreshAccountPayList:YES];
+        }
     }
+#endif
 }
 
 #ifndef JAILBREAK
 //购买产品
-- (void)productPurchased:(NSNotification *)notification{
+- (void)productPurchased:(NSNotification *)notification {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [Common alert:@"支付成功"];
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
+    
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    [requestParams setObject:ACCESSID forKey:@"accessid"];
+    [requestParams setObject:_orderRecordno forKey:@"recordno"];
+//    [requestParams setObject:[Crypto base64Encode:transaction.transactionReceipt] forKey:@"receiptdata"];
+    [requestParams setObject:[[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding] forKey:@"receiptdata"];
+    _http=[[HttpRequest alloc]init];
+    [_http setDelegate:self];
+    [_http setController:self];
+    [_http setMessage:@"支付信息校验中..."];
+    [_http setRequestCode:REQUESTCODE_BUY_VERIFYING];
+    [_http handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
 }
 
 //购买失败
 - (void)productPurchaseFailed:(NSNotification *)notification {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
+     [_rechargeNav secondStep];
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *)notification.object;
     if (transaction.error.code != SKErrorPaymentCancelled) {
         [Common alert:transaction.error.localizedDescription];
     }

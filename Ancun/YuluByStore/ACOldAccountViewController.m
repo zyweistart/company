@@ -1,11 +1,3 @@
-//
-//  ACAccountViewController.m
-//  ACyulu
-//
-//  Created by Start on 12/26/12.
-//  Copyright (c) 2012 ancun. All rights reserved.
-//
-
 #import "ACOldAccountViewController.h"
 #import "ACOldAccountMonthCell.h"
 #import "ACOldAccountDayViewController.h"
@@ -118,6 +110,7 @@
             _loadHttp=[[HttpRequest alloc]init];
             [_loadHttp setDelegate:self];
             [_loadHttp setController:self];
+            [_loadHttp setIsShowMessage:YES];
             [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
             [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
         }

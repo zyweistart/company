@@ -1,11 +1,3 @@
-//
-//  ACPlayerView.h
-//  ACyulu
-//
-//  Created by Start on 13-1-4.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import <AVFoundation/AVFoundation.h>
 
 @interface ACPlayerView : UIView<AVAudioPlayerDelegate,UIActionSheetDelegate,ResultDelegate,HttpViewDelegate>{

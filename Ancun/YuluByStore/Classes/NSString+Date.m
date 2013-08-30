@@ -1,11 +1,3 @@
-//
-//  NSString+Date.m
-//  Ancun
-//
-//  Created by Start on 13-8-5.
-//
-//
-
 #import "NSString+Date.h"
 
 @implementation NSString (Date)

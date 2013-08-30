@@ -1,18 +1,15 @@
-//
-//  ACRechargeNav.m
-//  Ancun
-//
-//  Created by Start on 13-8-13.
-//
-//
-
 #import "ACRechargeNav.h"
 
 #define NAVTOPCOLOR [UIColor colorWithRed:(255/255.0) green:(142/255.0) blue:(32/255.0) alpha:1]
 #define BACKGROUNDCOLOR [UIColor colorWithRed:(233/255.0) green:(233/255.0) blue:(233/255.0) alpha:1]
 #define TEXTCOLOR [UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]
 
-@implementation ACRechargeNav
+@implementation ACRechargeNav {
+    UILabel *_lblTip1;
+    UILabel *_lblTip2;
+    UILabel *_lblTip3;
+    UILabel *_lblTip4;
+}
 
 //CGRectMake(x,y,320,40);
 - (id)initWithFrame:(CGRect)frame {

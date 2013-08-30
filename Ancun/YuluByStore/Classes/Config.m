@@ -1,11 +1,3 @@
-//
-//  Config.m
-//  ACyulu
-//
-//  Created by Start on 12-12-6.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
-
 #import "Config.h"
 
 @implementation Config
@@ -26,7 +18,7 @@ static Config * instance = nil;
     return instance;
 }
 
-+ (void)initData{
++ (void)resetConfig {
     instance=nil;
 }
 

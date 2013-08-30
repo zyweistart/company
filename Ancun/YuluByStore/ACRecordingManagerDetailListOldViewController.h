@@ -1,11 +1,4 @@
-//
-//  ACRecordingManagerDetailListOldViewController.h
-//  Ancun
-//
-//  Created by Start on 13-8-15.
-//
-//
-
+#import <UIKit/UIKit.h>
 #import "BaseRefreshTableViewController.h"
 #import "ACPlayerView.h"
 

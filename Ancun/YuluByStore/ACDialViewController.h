@@ -1,20 +1,6 @@
-//
-//  ACDialViewController.h
-//  ACyulu
-//
-//  Created by Start on 12-12-5.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
+#import <UIKit/UIKit.h>
 
-@interface ACDialViewController : ACBaseViewController<ABNewPersonViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
-    
-    NSMutableString *_dialString;
-    //退格定时器
-    NSTimer *_timerBackDel;
-    //长按标记
-    Boolean longFlag;
-    
-}
+@interface ACDialViewController : BaseViewController<ABNewPersonViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UILabel *lbl_dial;
 @property (retain, nonatomic) IBOutlet UILabel *lbl_name;

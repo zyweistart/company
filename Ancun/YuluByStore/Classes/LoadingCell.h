@@ -1,6 +1,8 @@
+#import <UIKit/UIKit.h>
+
 @interface LoadingCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
+@property (strong, nonatomic) UILabel *lbl;
+@property (strong, nonatomic) UIActivityIndicatorView *loading;
 
 @end

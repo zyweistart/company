@@ -1,11 +1,3 @@
-//
-//  Common.m
-//  ACyulu
-//
-//  Created by Start on 13-1-5.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "Common.h"
 #import "GCDiscreetNotificationView.h"
 
@@ -64,7 +56,7 @@
                             initWithTitle:@"登录超时"
                             delegate:delegate
                             cancelButtonTitle:@"取消"
-                            destructiveButtonTitle:@"登录"
+                            destructiveButtonTitle:@"重新登录"
                             otherButtonTitles:nil,nil];
     //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];

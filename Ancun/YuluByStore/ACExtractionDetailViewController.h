@@ -1,18 +1,8 @@
-//
-//  ACExtractionDetailViewController.h
-//  ACyulu
-//
-//  Created by Start on 13-1-16.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
+#import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface ACExtractionDetailViewController : ACBaseViewController<MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>{
-    
-    NSMutableDictionary *_resultDictionary;
-    
-}
+@interface ACExtractionDetailViewController : BaseViewController<MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>
+
 @property BOOL load;
 @property (retain,nonatomic) NSString *fileno;
 @property (retain,nonatomic) NSMutableDictionary *extractionDics;

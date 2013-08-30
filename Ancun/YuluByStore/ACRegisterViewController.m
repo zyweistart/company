@@ -1,13 +1,5 @@
-//
-//  ACRegisterViewController.m
-//  ACyulu
-//
-//  Created by Start on 13-1-6.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACRegisterViewController.h"
-#import "ACTermsOfServiceViewController.h"
+#import "ACNavigationWebPageViewController.h"
 
 #define SECOND 60
 
@@ -129,6 +121,7 @@
     _registerHttp=[[HttpRequest alloc]init];
     [_registerHttp setDelegate:self];
     [_registerHttp setController:self];
+    [_registerHttp setIsShowMessage:YES];
     [_registerHttp setMessage:@"获取验证码..."];
     [_registerHttp setRequestCode:REQUESTCODE_GETVERIFICATIONCODE];
     [_registerHttp handle:@"v4scodeGet" signKey:nil headParams:nil requestParams:requestParams];
@@ -144,6 +137,7 @@
         [requestParams setObject:@"1" forKey:@"actype"];
         [requestParams setObject:_verificationCode forKey:@"authcode"];
         _registerHttp=[[HttpRequest alloc]init];
+        [_registerHttp setIsShowMessage:YES];
         [_registerHttp setDelegate:self];
         [_registerHttp setController:self];
         [_registerHttp setRequestCode:REQUESTCODE_SUBMITVERIFICATIONCODE];
@@ -172,6 +166,7 @@
         _registerHttp=[[HttpRequest alloc]init];
         [_registerHttp setDelegate:self];
         [_registerHttp setController:self];
+        [_registerHttp setIsShowMessage:YES];
         [_registerHttp setMessage:@"注册信息提交中..."];
         [_registerHttp setRequestCode:REQUESTCODE_SIGNUP];
         [_registerHttp handle:@"v4Signup" signKey:nil headParams:nil requestParams:requestParams];
@@ -190,9 +185,9 @@
 }
 
 - (IBAction)TermsOfService:(id)sender{
-    ACTermsOfServiceViewController *termsOfServiceViewController =[[ACTermsOfServiceViewController alloc]init];
-    termsOfServiceViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:termsOfServiceViewController animated:YES];
+    ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"服务条款" resourcePath:@"TermsOfService"];
+    navigationWebPageViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
 }
 
 - (void)updateTimer{

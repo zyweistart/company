@@ -1,18 +1,12 @@
-//
-//  ACForgetPwdViewController.h
-//  ACyulu
-//
-//  Created by Start on 13-1-9.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
+#import <UIKit/UIKit.h>
 
-@interface ACForgetPwdViewController : ACBaseViewController<HttpViewDelegate>
-{
+@interface ACForgetPwdViewController : BaseViewController<HttpViewDelegate> {
     int _second;
     NSTimer *_verificationCodeTime;
     NSString *_phone;
     NSString *_verificationCode;
 }
+
 @property (retain, nonatomic) IBOutlet UIView *regFirstView;
 @property (retain, nonatomic) IBOutlet UIView *regSecondView;
 @property (retain, nonatomic) IBOutlet UIControl *regThirdView;

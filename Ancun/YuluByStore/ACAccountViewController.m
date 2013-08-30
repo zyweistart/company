@@ -1,11 +1,3 @@
-//
-//  ACAccountViewController.m
-//  ACyulu
-//
-//  Created by Start on 12/26/12.
-//  Copyright (c) 2012 ancun. All rights reserved.
-//
-
 #import "ACAccountViewController.h"
 #import "ACAccountPayCell.h"
 #import "ACAccountUseRecordCell.h"
@@ -27,7 +19,24 @@
 
 @end
 
-@implementation ACAccountViewController
+@implementation ACAccountViewController {
+    
+    HttpRequest *_loadHttp;
+    
+    int currentTab;
+    
+    UILabel *_lblTip1;
+    UILabel *_lblTip2;
+    UILabel *_lblTip3;
+    UILabel *_lblSlid;
+    
+    UIButton *_leftTopTab;
+    UIButton *_rightTopTab;
+    
+    NSMutableArray *_leftDataItemArray;
+    NSMutableArray *_rightDataItemArray;
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 
@@ -92,6 +101,10 @@
         _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
         [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
         [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        //增加充值按钮
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
+
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
@@ -126,6 +139,7 @@
         _loadHttp=[[HttpRequest alloc]init];
         [_loadHttp setDelegate:self];
         [_loadHttp setController:self];
+        [_loadHttp setIsShowMessage:YES];
         [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
         [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
     } else {
@@ -145,15 +159,29 @@
 #pragma mark 界面按钮事件
 
 - (void)accountPay:(id)sender{
+    if([[Config Instance]isRefreshUserInfo]) {
+        //更新账户信息
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:@"1" forKey:@"raflag"];
+        _loadHttp=[[HttpRequest alloc]init];
+        [_loadHttp setDelegate:self];
+        [_loadHttp setController:self];
+        [_loadHttp setIsShowMessage:YES];
+        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+    } else if([[Config Instance]isRefreshAccountPayList]) {
+        [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else {
 #ifdef JAILBREAK
-    ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
-    rechargeViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:rechargeViewController animated:YES];
+        ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
+        rechargeViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:rechargeViewController animated:YES];
 #else
-    ACRechargeByAppStoreViewController *rechargeByAppStoreViewController=[[ACRechargeByAppStoreViewController alloc] init];
-    rechargeByAppStoreViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:rechargeByAppStoreViewController animated:YES];
+        ACRechargeByAppStoreViewController *rechargeByAppStoreViewController=[[ACRechargeByAppStoreViewController alloc] init];
+        rechargeByAppStoreViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:rechargeByAppStoreViewController animated:YES];
 #endif
+    }
 }
 
 - (void)leftTopButtonAction {
@@ -271,8 +299,7 @@
                     [_lblTip2 setText:@"增值时长剩余: 0分钟"];
                     [_lblTip3 setText:@"当前可用容量: 0MB"];
                 }
-                //增加充值按钮
-                self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
+                self.navigationItem.rightBarButtonItem.enabled=YES;
             }
         }
         if(currentTab == 2) {
@@ -490,7 +517,8 @@
         _reloading = YES;
         [self.tableView reloadData];
         if(currentTab == 1){
-            self.navigationItem.rightBarButtonItem=nil;
+            self.navigationItem.rightBarButtonItem.enabled=NO;
+            [[Config Instance] setIsRefreshAccountPayList:YES];
             self.dataItemArray=_leftDataItemArray;
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             _loadHttp=[[HttpRequest alloc]init];

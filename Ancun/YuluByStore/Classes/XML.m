@@ -1,11 +1,3 @@
-//
-//  XML.m
-//  ACyulu
-//
-//  Created by Start on 12-11-17.
-//  Copyright (c) 2012年 Start. All rights reserved.
-//
-
 #import "XML.h"
 #import "TBXML.h"
 

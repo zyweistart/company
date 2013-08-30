@@ -1,11 +1,3 @@
-//
-//  ACFeedBackViewController.m
-//  ACyulu
-//
-//  Created by Start on 13-1-11.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACFeedBackViewController.h"
 
 @interface ACFeedBackViewController ()
@@ -58,6 +50,7 @@
         _feedBackHttp=[[HttpRequest alloc]init];
         [_feedBackHttp setDelegate:self];
         [_feedBackHttp setController:self];
+        [_feedBackHttp setIsShowMessage:YES];
         [_feedBackHttp loginhandle:@"v4Feedback" requestParams:requestParams];
     }
 }

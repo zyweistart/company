@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
+@class ASIHTTPRequest;
 @interface Response : NSObject
 
 @property Boolean successFlag;

@@ -7,7 +7,6 @@
 //
 
 #import "ACAppDelegate.h"
-//#import <AVFoundation/AVFoundation.h>
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
 #import "ACRechargeConfirmViewController.h"
@@ -29,19 +28,31 @@
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
 #ifndef TEST
+    NSBundle *bundle=[NSBundle mainBundle];
     //测试环境下不进行百度统计
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
-    statTracker.enableExceptionLog = NO;
-    //渠道 [91,360,baidu,官网]
+    statTracker.enableExceptionLog = NO; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    
+    //设置您的app的发布渠道 [pp25,91,360,baidu,官网]
+//    statTracker.channelId = @"pp25";
 //    statTracker.channelId = @"91";
 //    statTracker.channelId = @"360";
 //    statTracker.channelId = @"baidu";
 //    statTracker.channelId = @"ancun";
-    statTracker.channelId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ChannelId"];
-    statTracker.logStrategy=BaiduMobStatLogStrategyAppLaunch;
+    statTracker.channelId = [bundle objectForInfoDictionaryKey:@"ChannelId"];
+
+    //根据开发者设定的时间间隔接口发送 也可以使用启动时发送策略
+    statTracker.logStrategy = BaiduMobStatLogStrategyCustom;
+    //为1时表示发送日志的时间间隔为1小时
+    statTracker.logSendInterval = 1;
+    //是否仅在WIfi情况下发送日志数据
+    statTracker.logSendWifiOnly = YES; 
+    //设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
     statTracker.sessionResumeInterval = 60;
-    //应用ID
-    [statTracker startWithAppId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BaiduWithAppId"]];
+    //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    statTracker.shortAppVersion  = [[bundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    //设置您在mtj网站上添加的app的appkey
+    [statTracker startWithAppId:[bundle objectForInfoDictionaryKey:@"BaiduWithAppId"]];
 #endif
 #ifndef JAILBREAK
     //添加苹果支付监听
@@ -49,11 +60,6 @@
         [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
     }
 #endif
-    
-    //后台播放音频设置
-//    AVAudioSession *session = [AVAudioSession sharedInstance];
-//    [session setActive:YES error:nil];
-//    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
@@ -70,7 +76,6 @@
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
     return YES;
 }
 

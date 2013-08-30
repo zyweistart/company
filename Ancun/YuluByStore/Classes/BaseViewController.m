@@ -1,34 +1,27 @@
-//
-//  ACBaseViewController.m
-//  Ancun
-//
-//  Created by Start on 13-8-13.
-//
-//
-
-#import "ACBaseViewController.h"
+#import "BaseViewController.h"
 #ifndef TEST
 #import "BaiduMobStat.h"
 #endif
 
-@interface ACBaseViewController ()
+@interface BaseViewController ()
 
 @end
 
-@implementation ACBaseViewController
+@implementation BaseViewController
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //百度统计
+    
 #ifndef TEST
-[[BaiduMobStat defaultStat] pageviewStartWithName:[NSString stringWithUTF8String:object_getClassName(self)]];
+    //百度统计
+    [[BaiduMobStat defaultStat] pageviewStartWithName:[NSString stringWithUTF8String:object_getClassName(self)]];
 #endif
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    //百度统计
 #ifndef TEST
+    //百度统计
     [[BaiduMobStat defaultStat] pageviewEndWithName:[NSString stringWithUTF8String:object_getClassName(self)]];
 #endif
 }

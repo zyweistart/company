@@ -1,12 +1,6 @@
-//
-//  ACFeedBackViewController.h
-//  ACyulu
-//
-//  Created by Start on 13-1-11.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
+#import <UIKit/UIKit.h>
 
-@interface ACFeedBackViewController : ACBaseViewController<UITextViewDelegate,HttpViewDelegate>
+@interface ACFeedBackViewController : BaseViewController<UITextViewDelegate,HttpViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextView *fbContent;
 @property (retain, nonatomic) IBOutlet UITextField *fbContact;

@@ -1,11 +1,3 @@
-//
-//  ACModifyPwdViewController.m
-//  ACyulu
-//
-//  Created by Start on 13-1-11.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACModifyPwdViewController.h"
 
 @interface ACModifyPwdViewController ()
@@ -69,6 +61,7 @@
         [requestParams setObject:[oldPwd md5] forKey:@"passwordold"];
         [requestParams setObject:[newPwd md5] forKey:@"passwordnew"];
         _modifyPwdHttp=[[HttpRequest alloc]init];
+        [_modifyPwdHttp setIsShowMessage:YES];
         [_modifyPwdHttp setDelegate:self];
         [_modifyPwdHttp setController:self];
         [_modifyPwdHttp loginhandle:@"v4pwdModify" requestParams:requestParams];

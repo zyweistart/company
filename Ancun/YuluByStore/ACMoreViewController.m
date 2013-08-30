@@ -1,13 +1,5 @@
-//
-//  ACMoreViewController.m
-//  ACyulu
-//
-//  Created by Start on 12-12-5.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
-
 #import "ACMoreViewController.h"
-#import "ACTipsViewController.h"
+#import "ACNavigationWebPageViewController.h"
 #import "ACAboutUsViewController.h"
 #import "ACFeedBackViewController.h"
 #import "ACModifyPwdViewController.h"
@@ -90,7 +82,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath{
-    ACTipsViewController *tipsViewController=[[ACTipsViewController alloc]init];
+    ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"小贴士" resourcePath:@"TipContent"];
     ACFeedBackViewController *feedBackViewController=[[ACFeedBackViewController alloc]init];
     ACAboutUsViewController *aboutUsViewController=[[ACAboutUsViewController alloc]init];
     ACModifyPwdViewController *modifyPwdViewController=[[ACModifyPwdViewController alloc]init];
@@ -98,8 +90,8 @@
     switch([more tag]){
         case 1:
             //小贴士
-            tipsViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:tipsViewController animated:YES];
+            navigationWebPageViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
             break;
         case 2:
             //意见反馈

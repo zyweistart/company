@@ -1,11 +1,3 @@
-//
-//  Common.h
-//  ACyulu
-//
-//  Created by Start on 13-1-5.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ResultDelegate.h"
 #import <AddressBookUI/AddressBookUI.h>
 

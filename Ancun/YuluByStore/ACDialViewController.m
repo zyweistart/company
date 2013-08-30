@@ -1,11 +1,3 @@
-//
-//  ACDialViewController.m
-//  ACyulu
-//
-//  Created by Start on 12-12-5.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
-
 #import "ACDialViewController.h"
 #import "LongPressButton.h"
 
@@ -18,6 +10,13 @@
 
 @implementation ACDialViewController{
     HttpRequest *_dialHttp;
+    
+    NSMutableString *_dialString;
+    //退格定时器
+    NSTimer *_timerBackDel;
+    //长按标记
+    Boolean longFlag;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -105,7 +104,15 @@
         case 12:
             //添加到联系人
             if([_dialString length]>0){
-                [Common actionSheet:self message:@"新建联系人" tag:1];
+                UIActionSheet *sheet = [[UIActionSheet alloc]
+                                        initWithTitle:nil
+                                        delegate:self
+                                        cancelButtonTitle:@"取消"
+                                        destructiveButtonTitle:@"创建联系人"
+                                        otherButtonTitles:nil,nil];
+                sheet.tag=1;
+                //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
+                [sheet showInView:[UIApplication sharedApplication].keyWindow];
             }
             break;
         case 13:
@@ -137,6 +144,7 @@
         _dialHttp=[[HttpRequest alloc]init];
         [_dialHttp setDelegate:self];
         [_dialHttp setController:self];
+        [_dialHttp setIsShowMessage:YES];
         [_dialHttp loginhandle:@"v4Call" requestParams:requestParams];
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@,%@#",PHONENUMBER,phone]]];

@@ -1,17 +1,8 @@
-//
-//  ACOldAccountMonthCell.m
-//  Ancun
-//
-//  Created by Start on 13-8-6.
-//
-//
-
 #import "ACOldAccountMonthCell.h"
 
 @implementation ACOldAccountMonthCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         

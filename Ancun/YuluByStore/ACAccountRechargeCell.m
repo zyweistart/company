@@ -1,19 +1,10 @@
-//
-//  ACAccountRechargeCell.m
-//  Ancun
-//
-//  Created by Start on 13-8-7.
-//
-//
-
 #import "ACAccountRechargeCell.h"
 #import "ACRechargeConfirmViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ACAccountRechargeCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
@@ -109,9 +100,9 @@
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(actionSheet.tag==1){
-        if(buttonIndex==0){
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(actionSheet.tag==1) {
+        if(buttonIndex==0) {
             ACRechargeConfirmViewController *rechargeConfirm=[[ACRechargeConfirmViewController alloc] init];
             [rechargeConfirm setCurrentType:_currentType];
             [rechargeConfirm setData:_data];

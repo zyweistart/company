@@ -1,11 +1,3 @@
-//
-//  LongPressButton.m
-//  UIButtonLongPressed
-//
-//  Created by qiulei on 12-4-2.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
-//
-
 #import "LongPressButton.h"
 
 @interface TargetObject : NSObject {

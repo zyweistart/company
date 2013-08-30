@@ -1,11 +1,3 @@
-//
-//  ACForgetPwdViewController.m
-//  ACyulu
-//
-//  Created by Start on 13-1-9.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACForgetPwdViewController.h"
 
 #define SECOND 60
@@ -132,6 +124,7 @@
     _forgetPwdHttp=[[HttpRequest alloc]init];
     [_forgetPwdHttp setDelegate:self];
     [_forgetPwdHttp setController:self];
+    [_forgetPwdHttp setIsShowMessage:YES];
     [_forgetPwdHttp setMessage:@"获取验证码..."];
     [_forgetPwdHttp setRequestCode:REQUESTCODE_GETVERIFICATIONCODE];
     [_forgetPwdHttp handle:@"v4scodeGet" signKey:nil headParams:nil requestParams:requestParams];
@@ -149,6 +142,7 @@
         _forgetPwdHttp=[[HttpRequest alloc]init];
         [_forgetPwdHttp setDelegate:self];
         [_forgetPwdHttp setController:self];
+        [_forgetPwdHttp setIsShowMessage:YES];
         [_forgetPwdHttp setRequestCode:REQUESTCODE_SUBMITVERIFICATIONCODE];
         [_forgetPwdHttp handle:@"v4scodeVer" signKey:nil headParams:nil requestParams:requestParams];
     }
@@ -175,8 +169,9 @@
         _forgetPwdHttp=[[HttpRequest alloc]init];
         [_forgetPwdHttp setDelegate:self];
         [_forgetPwdHttp setController:self];
+        [_forgetPwdHttp setIsShowMessage:YES];
         [_forgetPwdHttp setRequestCode:REQUESTCODE_SIGNUP];
-        [_forgetPwdHttp handle:@"v4pwdReset	" signKey:nil headParams:nil requestParams:requestParams];
+        [_forgetPwdHttp handle:@"v4pwdReset" signKey:nil headParams:nil requestParams:requestParams];
     }
 }
 

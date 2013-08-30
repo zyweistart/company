@@ -1,11 +1,3 @@
-//
-//  ACExtractionDetailViewController.m
-//  ACyulu
-//
-//  Created by Start on 13-1-16.
-//  Copyright (c) 2013年 ancun. All rights reserved.
-//
-
 #import "ACExtractionDetailViewController.h"
 
 @interface ACExtractionDetailViewController ()
@@ -14,6 +6,8 @@
 
 @implementation ACExtractionDetailViewController{
     HttpRequest *_detailHttp;
+        
+    NSMutableDictionary *_resultDictionary;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -69,6 +63,7 @@
             _detailHttp=[[HttpRequest alloc]init];
             [_detailHttp setDelegate:self];
             [_detailHttp setController:self];
+            [_detailHttp setIsShowMessage:YES];
             [_detailHttp setRequestCode:REQUESTCODE_ACExtractionDetailViewController_cancel];
             [_detailHttp loginhandle:@"v4recAcccode" requestParams:requestParams];
         }

@@ -1,11 +1,3 @@
-//
-//  ACContactsViewController.m
-//  Ancun
-//
-//  Created by Start on 13-8-28.
-//
-//
-
 #import "ACContactsViewController.h"
 #import "ChineseToPinyin.h"
 #import "ACContactCell.h"
@@ -405,6 +397,7 @@
         _contactHttp=[[HttpRequest alloc]init];
         [_contactHttp setDelegate:self];
         [_contactHttp setController:self];
+        [_contactHttp setIsShowMessage:YES];
         [_contactHttp loginhandle:@"v4Call" requestParams:requestParams];
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@,%@#",PHONENUMBER,phone]]];

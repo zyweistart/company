@@ -1,13 +1,6 @@
-//
-//  ACRecordingDetailViewController.h
-//  ACyulu
-//
-//  Created by Start on 12-12-8.
-//  Copyright (c) 2012年 ancun. All rights reserved.
-//
+#import <UIKit/UIKit.h>
 
-@interface ACRecordingDetailViewController : ACBaseViewController<ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
-{
+@interface ACRecordingDetailViewController : BaseViewController<ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate> {
     NSMutableDictionary *_mainData;
 }
 @property (strong,nonatomic) NSString *fileno;
