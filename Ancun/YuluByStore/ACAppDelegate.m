@@ -17,8 +17,6 @@
 #ifdef JAILBREAK
     #import "AlixPay.h"
     #import "AlixPayResult.h"
-#else
-    #import "IAPHelper.h"
 #endif
 
 @implementation ACAppDelegate
@@ -53,12 +51,6 @@
     statTracker.shortAppVersion  = [[bundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     //设置您在mtj网站上添加的app的appkey
     [statTracker startWithAppId:[bundle objectForInfoDictionaryKey:@"BaiduWithAppId"]];
-#endif
-#ifndef JAILBREAK
-    //添加苹果支付监听
-    if([SKPaymentQueue canMakePayments]) {
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:[IAPHelper sharedHelper]];
-    }
 #endif
     
     //获取最后保存的版本号不存在则为0

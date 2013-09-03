@@ -31,7 +31,12 @@
 @implementation ACRechargeConfirmViewController {
     UIView *mainView;
     UIScrollView *sMainView;
+    
+#ifndef JAILBREAK
     NSString *_orderRecordno;
+    MBProgressHUD *_hud;
+#endif
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -800,7 +805,7 @@
     _http=[[HttpRequest alloc]init];
     [_http setDelegate:self];
     [_http setController:self];
-    [_http setMessage:@"正在请求支付"];
+    [_http setIsShowMessage:YES];
     [_http setRequestCode:REQUESTCODE_BUY_BUILD];
     [_http loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
 #endif
@@ -853,6 +858,10 @@
     //苹果官方支付
     if(reqCode==REQUESTCODE_BUY_BUILD) {
         if([response successFlag]) {
+            
+            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            [self performSelector:@selector(timeout:) withObject:nil afterDelay:120.0];
+            
             _orderRecordno=[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"];
             SKProduct *product = [[IAPHelper sharedHelper]product:[_data objectForKey:@"appstorerecordno"]];
             [[IAPHelper sharedHelper] buyProductIdentifier:product];
@@ -862,9 +871,6 @@
             [self layoutSuccessPage];
         } else {
             [_rechargeNav secondStep];
-            //这里不管成功还是失败都要重新刷新用户信息
-            [[Config Instance]setIsRefreshUserInfo:YES];
-            [[Config Instance]setIsRefreshAccountPayList:YES];
         }
     }
 #endif
@@ -876,6 +882,12 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;
     
+    [self dismissHUD:nil];
+    
+    //这里不管成功还是失败都要重新刷新用户信息
+    [[Config Instance]setIsRefreshUserInfo:YES];
+    [[Config Instance]setIsRefreshAccountPayList:YES];
+    
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
     [requestParams setObject:ACCESSID forKey:@"accessid"];
     [requestParams setObject:_orderRecordno forKey:@"recordno"];
@@ -884,7 +896,7 @@
     _http=[[HttpRequest alloc]init];
     [_http setDelegate:self];
     [_http setController:self];
-    [_http setMessage:@"支付信息校验中..."];
+    [_http setIsShowMessage:YES];
     [_http setRequestCode:REQUESTCODE_BUY_VERIFYING];
     [_http handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
 }
@@ -897,7 +909,26 @@
     if (transaction.error.code != SKErrorPaymentCancelled) {
         [Common alert:transaction.error.localizedDescription];
     }
+    [self dismissHUD:nil];
 }
+
+//超时提示
+- (void)timeout:(id)arg {
+    if(_hud!=nil) {
+        _hud.labelText = @"请求超时，请稍候在试.";
+        _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];
+        _hud.mode = MBProgressHUDModeCustomView;
+        [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
+    }
+}
+
+- (void)dismissHUD:(id)arg{
+    if(_hud!=nil) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        _hud = nil;
+    }
+}
+
 #endif
 
 @end

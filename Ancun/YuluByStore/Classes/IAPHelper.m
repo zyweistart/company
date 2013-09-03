@@ -9,6 +9,7 @@ static IAPHelper * _sharedHelper;
 + (IAPHelper *)sharedHelper {
     if (_sharedHelper == nil) {
         _sharedHelper = [[IAPHelper alloc] init];
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:_sharedHelper];
     }
     return _sharedHelper;
 }
@@ -29,7 +30,7 @@ static IAPHelper * _sharedHelper;
         SKPayment* payment=[SKPayment paymentWithProduct:product];
         [[SKPaymentQueue defaultQueue] addPayment:payment];
     } else {
-        [Common alert:@"支付被禁用"];
+        [Common alert:@"应用程序内购买被禁用"];
     }
 }
 
@@ -60,6 +61,11 @@ static IAPHelper * _sharedHelper;
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction productIdentifier:(NSString *)productIdentifier {
     [[NSNotificationCenter defaultCenter] postNotificationName:kProductPurchasedNotification object:transaction];
+}
+
+
+- (void)dealloc {
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
 @end

@@ -9,8 +9,6 @@
 @property (strong,nonatomic) NSArray* products;
 @property (strong,nonatomic) NSMutableArray* productlist;
 
-@property (strong,nonatomic) SKProductsRequest* productsRequest;
-
 + (IAPHelper *)sharedHelper;
 
 - (SKProduct *)product:(NSString *)identifier;

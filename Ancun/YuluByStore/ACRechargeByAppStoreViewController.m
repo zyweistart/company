@@ -220,6 +220,7 @@
 - (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]) {
         _reloading = YES;
+        [self.tableView reloadData];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
         //只支持基础包月套餐版
