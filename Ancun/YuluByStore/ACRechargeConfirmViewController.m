@@ -2,11 +2,10 @@
 #import "NSString+Date.h"
 #import "ACRechargeNav.h"
 #import <QuartzCore/QuartzCore.h>
-#import "IAPHelper.h"
 #ifdef JAILBREAK
     #import "AlixPay.h"
 #else
-
+    #import "IAPHelper.h"
 #endif
 
 #define ALERTVIEWALIPAYTAG 123

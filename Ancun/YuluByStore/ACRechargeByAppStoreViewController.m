@@ -74,7 +74,7 @@
 #pragma mark Delegate Methods
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
-    if([response successFlag]){
+    if([response successFlag]) {
         if(reqCode==REQUESTCODE_BUY_LOADPRODUCT) {
             //判断是否已经全部加载完毕
             if([response pageInfo]) {
@@ -129,6 +129,9 @@
                 //等待30s超时
                 isTimeout=YES;
                 [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+            } else {
+                [self doneLoadingTableViewData];
+                [self.tableView reloadData];
             }
         }
     }
@@ -249,6 +252,9 @@
 //超时提示
 - (void)timeout:(id)arg {
     if(isTimeout) {
+        [[IAPHelper sharedHelper] setProducts:nil];
+        _productsRequest = nil;
+        isTimeout=NO;
         _hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         _hud.labelText = @"请求超时，请稍候在试.";
         _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];

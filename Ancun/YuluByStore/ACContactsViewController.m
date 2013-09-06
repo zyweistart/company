@@ -164,7 +164,9 @@
                 [mutable addObject:nameDic];
             }
             if(!flag) {
-                [_dataResults setObject:mutable forKey:hName];
+                if([mutable count]>0) {
+                    [_dataResults setObject:mutable forKey:hName];
+                }
             }
         }
         CFRelease(results);

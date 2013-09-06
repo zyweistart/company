@@ -9,7 +9,6 @@ static IAPHelper * _sharedHelper;
 + (IAPHelper *)sharedHelper {
     if (_sharedHelper == nil) {
         _sharedHelper = [[IAPHelper alloc] init];
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:_sharedHelper];
     }
     return _sharedHelper;
 }
