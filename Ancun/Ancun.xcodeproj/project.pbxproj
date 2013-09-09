@@ -309,14 +309,6 @@
 		C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C79179FA6640076ACF3 /* TermsOfService.txt */; };
 		C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C7A179FA6640076ACF3 /* TipContent.txt */; };
 		C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97D80179FB3730076ACF3 /* NSString+Utils.m */; };
-		C9DB0A3017D81E880018B429 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2117D81E880018B429 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
-		C9DB0A3117D81E880018B429 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2317D81E880018B429 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9DB0A3217D81E880018B429 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2517D81E880018B429 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9DB0A3317D81E880018B429 /* MKSKProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2717D81E880018B429 /* MKSKProduct.m */; };
-		C9DB0A3417D81E880018B429 /* MKSKSubscriptionProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2917D81E880018B429 /* MKSKSubscriptionProduct.m */; };
-		C9DB0A3517D81E880018B429 /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9DB0A2B17D81E880018B429 /* MKStoreKitConfigs.plist */; };
-		C9DB0A3617D81E880018B429 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2D17D81E880018B429 /* MKStoreManager.m */; };
-		C9DB0A3717D81E880018B429 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DB0A2F17D81E880018B429 /* MKStoreObserver.m */; };
 		C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */; };
 		C9E8EE72179FD18900E47BD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE6D179FD18900E47BD9 /* Default-568h@2x.png */; };
 		C9E8EE73179FD18900E47BD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E8EE6E179FD18900E47BD9 /* Default.png */; };
@@ -821,22 +813,6 @@
 		C9D97C7A179FA6640076ACF3 /* TipContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TipContent.txt; sourceTree = "<group>"; };
 		C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		C9D97D80179FB3730076ACF3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
-		C9DB0A2017D81E880018B429 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		C9DB0A2117D81E880018B429 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		C9DB0A2217D81E880018B429 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		C9DB0A2317D81E880018B429 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		C9DB0A2417D81E880018B429 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
-		C9DB0A2517D81E880018B429 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
-		C9DB0A2617D81E880018B429 /* MKSKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKProduct.h; sourceTree = "<group>"; };
-		C9DB0A2717D81E880018B429 /* MKSKProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKProduct.m; sourceTree = "<group>"; };
-		C9DB0A2817D81E880018B429 /* MKSKSubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKSubscriptionProduct.h; sourceTree = "<group>"; };
-		C9DB0A2917D81E880018B429 /* MKSKSubscriptionProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKSubscriptionProduct.m; sourceTree = "<group>"; };
-		C9DB0A2A17D81E880018B429 /* MKStoreKitConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreKitConfigs.h; sourceTree = "<group>"; };
-		C9DB0A2B17D81E880018B429 /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MKStoreKitConfigs.plist; sourceTree = "<group>"; };
-		C9DB0A2C17D81E880018B429 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
-		C9DB0A2D17D81E880018B429 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
-		C9DB0A2E17D81E880018B429 /* MKStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreObserver.h; sourceTree = "<group>"; };
-		C9DB0A2F17D81E880018B429 /* MKStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreObserver.m; sourceTree = "<group>"; };
 		C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingManagerDetailListOldViewController.h; sourceTree = "<group>"; };
 		C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerDetailListOldViewController.m; sourceTree = "<group>"; };
 		C9E8EE6D179FD18900E47BD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1005,7 +981,6 @@
 				C9D97B49179FA6640076ACF3 /* GCDiscreetNotificationView */,
 				C9D97B4C179FA6640076ACF3 /* GHKit */,
 				C9D97B9D179FA6640076ACF3 /* MBProgressHUD */,
-				C9DB0A1E17D81E880018B429 /* MKStoreKit */,
 				C9D97BA0179FA6640076ACF3 /* RefreshTableHeaderView */,
 				C9D97BA9179FA6640076ACF3 /* SSCheckBoxView */,
 				C9D97BC4179FA6640076ACF3 /* TBXML */,
@@ -1603,37 +1578,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		C9DB0A1E17D81E880018B429 /* MKStoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				C9DB0A1F17D81E880018B429 /* Externals */,
-				C9DB0A2617D81E880018B429 /* MKSKProduct.h */,
-				C9DB0A2717D81E880018B429 /* MKSKProduct.m */,
-				C9DB0A2817D81E880018B429 /* MKSKSubscriptionProduct.h */,
-				C9DB0A2917D81E880018B429 /* MKSKSubscriptionProduct.m */,
-				C9DB0A2A17D81E880018B429 /* MKStoreKitConfigs.h */,
-				C9DB0A2B17D81E880018B429 /* MKStoreKitConfigs.plist */,
-				C9DB0A2C17D81E880018B429 /* MKStoreManager.h */,
-				C9DB0A2D17D81E880018B429 /* MKStoreManager.m */,
-				C9DB0A2E17D81E880018B429 /* MKStoreObserver.h */,
-				C9DB0A2F17D81E880018B429 /* MKStoreObserver.m */,
-			);
-			path = MKStoreKit;
-			sourceTree = "<group>";
-		};
-		C9DB0A1F17D81E880018B429 /* Externals */ = {
-			isa = PBXGroup;
-			children = (
-				C9DB0A2017D81E880018B429 /* JSONKit.h */,
-				C9DB0A2117D81E880018B429 /* JSONKit.m */,
-				C9DB0A2217D81E880018B429 /* NSData+Base64.h */,
-				C9DB0A2317D81E880018B429 /* NSData+Base64.m */,
-				C9DB0A2417D81E880018B429 /* SFHFKeychainUtils.h */,
-				C9DB0A2517D81E880018B429 /* SFHFKeychainUtils.m */,
-			);
-			path = Externals;
-			sourceTree = "<group>";
-		};
 		C9E8EE77179FD2EC00E47BD9 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
@@ -1945,7 +1889,6 @@
 				C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */,
 				C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */,
 				C9A67EAB17CD882900E9A81E /* ACContactsViewController.xib in Resources */,
-				C9DB0A3517D81E880018B429 /* MKStoreKitConfigs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2054,13 +1997,6 @@
 				C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */,
 				C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */,
 				C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */,
-				C9DB0A3017D81E880018B429 /* JSONKit.m in Sources */,
-				C9DB0A3117D81E880018B429 /* NSData+Base64.m in Sources */,
-				C9DB0A3217D81E880018B429 /* SFHFKeychainUtils.m in Sources */,
-				C9DB0A3317D81E880018B429 /* MKSKProduct.m in Sources */,
-				C9DB0A3417D81E880018B429 /* MKSKSubscriptionProduct.m in Sources */,
-				C9DB0A3617D81E880018B429 /* MKStoreManager.m in Sources */,
-				C9DB0A3717D81E880018B429 /* MKStoreObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
