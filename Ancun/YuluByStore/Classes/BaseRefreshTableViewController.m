@@ -78,7 +78,8 @@
     }
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request requestCode:(int)reqCode{
+- (void)requestFailed:(int)reqCode {
+    [Common notificationMessage:@"网络请求出错，请重试" inView:self.view];
     [self doneLoadingTableViewData];
 }
 

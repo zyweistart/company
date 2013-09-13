@@ -1,15 +1,22 @@
-#import "ASIHTTPRequest.h"
+//
+//  HttpConnection.h
+//  Ancun
+//
+//  Created by Start on 13-9-12.
+//
+//
 
-@protocol HttpViewDelegate <NSObject>
+#import <Foundation/Foundation.h>
+
+@protocol HttpViewDelegate <NSURLConnectionDataDelegate>
 
 @optional
-- (void)requestFinished:(ASIHTTPRequest*)request requestCode:(int)reqCode;
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode;
-- (void)requestFailed:(ASIHTTPRequest*)request requestCode:(int)reqCode;
+- (void)requestFailed:(int)reqCode;
 
 @end
 
-@interface HttpRequest : NSObject<ASIHTTPRequestDelegate,ASIProgressDelegate,UIActionSheetDelegate>
+@interface HttpRequest : NSObject<NSURLConnectionDataDelegate,UIActionSheetDelegate>
 //请求码
 @property int requestCode;
 //是否验证
@@ -20,10 +27,10 @@
 @property BOOL isShowMessage;
 //请求时的提示信息
 @property (strong,nonatomic) NSString *message;
-//当前请求的控制器
-@property (weak,nonatomic) UIViewController *controller;
 //属性
 @property (strong,nonatomic) NSMutableDictionary *propertys;
+//当前请求的控制器
+@property (weak,nonatomic) UIViewController *controller;
 //代理对象
 @property (weak,nonatomic) NSObject<HttpViewDelegate> *delegate;
 

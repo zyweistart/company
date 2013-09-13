@@ -7,7 +7,6 @@
 //
 
 #import "Response.h"
-#import "ASIHTTPRequest.h"
 
 @implementation Response
 

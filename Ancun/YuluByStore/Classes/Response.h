@@ -6,11 +6,10 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-@class ASIHTTPRequest;
 @interface Response : NSObject
 
 @property Boolean successFlag;
-@property (weak,nonatomic) ASIHTTPRequest *request;
+@property (strong,nonatomic) NSData *data;
 @property (strong,nonatomic) NSMutableDictionary *propertys;
 @property (strong,nonatomic) NSString *responseString;
 @property (strong,nonatomic) NSString *code;

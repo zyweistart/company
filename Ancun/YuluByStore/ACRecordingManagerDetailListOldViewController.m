@@ -85,7 +85,7 @@
         //创建数据缓冲区
         NSMutableData* writer = [[NSMutableData alloc] init];
         //将字符串添加到缓冲中
-        [writer appendData: [[response request]responseData]];
+        [writer appendData: [response data]];
         //将其他数据添加到缓冲中
         //将缓冲的数据写入到临时文件中
         [writer writeToFile:tmpPath atomically:YES];
