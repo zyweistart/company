@@ -11,12 +11,12 @@
 @property (strong,nonatomic) NSMutableDictionary *dictionary;
 @property (strong,nonatomic) UIViewController *controller;
 
-@property (weak, nonatomic) IBOutlet UIButton *btn_notary;
-@property (weak, nonatomic) IBOutlet UIButton *btn_extraction;
-@property (weak, nonatomic) IBOutlet UIButton *btn_player;
-@property (weak, nonatomic) IBOutlet UISlider *sider_player;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_playertimerlong;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_playertimertotallong;
+@property (strong, nonatomic) IBOutlet UIButton *btn_notary;
+@property (strong, nonatomic) IBOutlet UIButton *btn_extraction;
+@property (strong, nonatomic) IBOutlet UIButton *btn_player;
+@property (strong, nonatomic) IBOutlet UISlider *sider_player;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_playertimerlong;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_playertimertotallong;
 
 + (ACPlayerView *)instance:(UIViewController *)viewController;
 

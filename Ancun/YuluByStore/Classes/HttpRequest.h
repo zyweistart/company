@@ -30,9 +30,9 @@
 //属性
 @property (strong,nonatomic) NSMutableDictionary *propertys;
 //当前请求的控制器
-@property (weak,nonatomic) UIViewController *controller;
+@property (strong,nonatomic) UIViewController *controller;
 //代理对象
-@property (weak,nonatomic) NSObject<HttpViewDelegate> *delegate;
+@property (strong,nonatomic) NSObject<HttpViewDelegate> *delegate;
 
 + (BOOL)isNetworkConnection;
 - (void)loginhandle:(NSString*)url requestParams:(NSMutableDictionary*)request;

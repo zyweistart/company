@@ -1,4 +1,5 @@
 #import "ACRechargeByAppStoreViewController.h"
+#import "MBProgressHUD.h"
 #import "ACRechargeNav.h"
 #import "ACAccountRechargeCell.h"
 #import "DataSingleton.h"
