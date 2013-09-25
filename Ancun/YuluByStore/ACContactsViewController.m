@@ -101,11 +101,16 @@
                         name=personPhone;
                         nameFlag=@"1";
                     }
-                    unichar c=[[[[ChineseToPinyin pinyinFromChiniseString:name] substringWithRange:NSMakeRange(0,1)] lowercaseString] characterAtIndex:0];
-                    if(c>=97&&c<=122){
-                        hName=[NSString stringWithFormat:@"%c",c];
-                    }else{
+                    NSString *strName=[ChineseToPinyin pinyinFromChiniseString:name];
+                    if([@"" isEqualToString:strName]) {
                         hName=@"#";
+                    } else {
+                        unichar c=[[[strName substringWithRange:NSMakeRange(0,1)] lowercaseString] characterAtIndex:0];
+                        if(c>=97&&c<=122){
+                            hName=[NSString stringWithFormat:@"%c",c];
+                        }else{
+                            hName=@"#";
+                        }
                     }
                     mutable=[_dataResults objectForKey:hName];
                     if(!mutable){
