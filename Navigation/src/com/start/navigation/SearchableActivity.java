@@ -138,8 +138,7 @@ public class SearchableActivity extends ListActivity {
 			startActivityForResult(intent, VIEW_BOOK);
 		} else {
 			Uri uri = Uri.withAppendedPath(Room.CONTENT_ID_URI_BASE, String.valueOf(id));
-			MapNavigationApplication app = (MapNavigationApplication) getApplication();
-			app.setPathSearchResult(null);
+			AppContext.getInstance().setPathSearchResult(null);
 
 			Intent intent = new Intent(this, IndoorMapActivity.class);
 			intent.setData(uri);
@@ -159,3 +158,4 @@ public class SearchableActivity extends ListActivity {
 			finish();
 		}
 	}
+}
