@@ -1,6 +1,5 @@
 package com.start.navigation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -8,9 +7,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import com.start.service.ImportConfigDataTask;
+import com.start.core.CoreActivity;
+import com.start.service.task.ImportConfigDataTask;
 
-public class SplashActivity extends Activity implements OnSharedPreferenceChangeListener {
+public class SplashActivity extends CoreActivity implements OnSharedPreferenceChangeListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +30,6 @@ public class SplashActivity extends Activity implements OnSharedPreferenceChange
 		}		
 	}
 	
-	private void forward() {
-		// Start login screen
-		startActivity(new Intent(this, MainActivity.class));
-		// Finish current screen since user won't go back
-		finish();
-	}
-
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 		if (TextUtils.equals("init", key)) {
@@ -45,6 +38,11 @@ public class SplashActivity extends Activity implements OnSharedPreferenceChange
 			
 			forward();
 		}
+	}
+	
+	private void forward() {
+		startActivity(new Intent(this, MainActivity.class));
+		finish();
 	}
 	
 }

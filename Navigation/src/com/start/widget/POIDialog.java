@@ -20,7 +20,7 @@ public class POIDialog extends AlertDialog implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialog_poi);
+		setContentView(R.layout.widget_dialog_poi);
 		findViewById(R.id.direction).setOnClickListener(this);
 		findViewById(R.id.poiName).setOnClickListener(this);
 	}

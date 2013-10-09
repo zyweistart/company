@@ -1,6 +1,10 @@
 package com.start.utils;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +13,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.view.Gravity;
+import android.view.Window;
+import android.view.WindowManager;
+
+import com.start.navigation.R;
+import com.start.widget.MenuDialog;
+import com.start.widget.POIDialog;
 
 public class CommonFn {
 
@@ -81,6 +92,42 @@ public class CommonFn {
 			return false;
 		}
 		return false;
+	}
+	
+	public static void close(Closeable closable) {
+		if (closable != null) {
+			try {
+				closable.close();
+			} catch (IOException e) {
+			}
+		}
+	}
+	
+	public static AlertDialog alertDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage(message);
+		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
+		return builder.create();
+	}
+	
+	public static Dialog createSearchOptionDialog(Context context) {
+		MenuDialog menuDialog = new MenuDialog(context, R.style.dialog);
+		Window win = menuDialog.getWindow();
+		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+		params.gravity = Gravity.TOP | Gravity.RIGHT;
+		params.y = context.getResources().getDimensionPixelSize(R.dimen.actionbar_height);
+		win.setAttributes(params);
+		menuDialog.setCanceledOnTouchOutside(true);
+		return menuDialog;
+	}
+	
+	public static Dialog createPOIDialog(Context context) {
+		POIDialog poiDialog = new POIDialog(context, R.style.dialog_poi);
+		Window win = poiDialog.getWindow();
+		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+		win.setAttributes(params);
+		poiDialog.setCanceledOnTouchOutside(true);
+		return poiDialog;
 	}
 	
 }

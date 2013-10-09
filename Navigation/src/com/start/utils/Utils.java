@@ -8,14 +8,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
-
-import com.start.navigation.R;
 
 public class Utils {
 
@@ -168,19 +164,4 @@ public class Utils {
 	public static final int DLG_POI = 2;
 	public static final int DLG_EXIT_NAVIGATION = 3;
 	public static final int DLG_EXIT = 4;
-
-	/**
-	 * Building dialog helper method
-	 * 
-	 * @param context
-	 * @param message the message shown in dialog
-	 * @param positiveButtonListener the OK button listener
-	 * @return
-	 */
-	public static AlertDialog buildDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setMessage(message);
-		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
-		return builder.create();
-	}
 }

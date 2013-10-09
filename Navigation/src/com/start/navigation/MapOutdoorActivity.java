@@ -33,7 +33,7 @@ import com.start.model.nav.PathSearchResult;
 import com.start.model.nav.PathSearchResult.Type;
 import com.start.model.overlay.BuildingOverlay;
 import com.start.model.overlay.OutdoorRouteOverlay;
-import com.start.utils.Utils;
+import com.start.utils.CommonFn;
 
 /**
  * 室外
@@ -43,9 +43,10 @@ import com.start.utils.Utils;
 @SuppressWarnings("deprecation")
 public class MapOutdoorActivity extends CoreActivity implements View.OnClickListener {
 
+	private boolean isSearchBook;
+	
 	private static final int DEFAULT_ZOOM_LEVEL = 17;
 	private static final GeoPoint DEFAULT_CENTER = new GeoPoint(30315941, 120396365);
-	private boolean isSearchBook;
 	
 	private MapView mMapView;
 	private MapController mMapController;
@@ -101,9 +102,8 @@ public class MapOutdoorActivity extends CoreActivity implements View.OnClickList
 				 * 显示底图poi名称并移动至该点
 				 * 设置过： mMapController.enableClick(true); 时，此回调才能被触发
 				 */
-				String title = "";
 				if (mapPoiInfo != null){
-					title = mapPoiInfo.strText;
+					String title = mapPoiInfo.strText;
 					makeTextLong(title);
 					mMapController.animateTo(mapPoiInfo.geoPt);
 				}
@@ -148,7 +148,7 @@ public class MapOutdoorActivity extends CoreActivity implements View.OnClickList
 		overlays.add(mBuildingOverlay);
 		mMapView.getOverlays().addAll(overlays);
 		
-		new LoadBuildingTask().execute();
+		new LoadBuildingListTask().execute();
     }
     
     //如果Activity实例是第一次启动，则不调用，否则，以后的每次重新启动都会调用
@@ -217,27 +217,6 @@ public class MapOutdoorActivity extends CoreActivity implements View.OnClickList
 	    	mMapView.onRestoreInstanceState(savedInstanceState);
     }
 
-	private BDLocationListener bdLocationListener=new BDLocationListener() {
-
-		@Override
-		public void onReceivePoi(BDLocation arg0) {
-		}
-
-		@Override
-		public void onReceiveLocation(BDLocation location) {
-			if (location == null) {
-				return;
-			}
-			mLocationData.latitude = location.getLatitude();
-			mLocationData.longitude = location.getLongitude();
-			mLocationData.direction = location.getDerect();
-			mLocationData.accuracy = location.getRadius();
-			
-			myLocationOverlay.setData(mLocationData);
-		}
-	
-	};
-
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
@@ -271,9 +250,9 @@ public class MapOutdoorActivity extends CoreActivity implements View.OnClickList
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 			case DLG_SEARCH_OPTION:
-				return createSearchOptionDialog();
+				return CommonFn.createSearchOptionDialog(this);
 			case DLG_EXIT_NAVIGATION:
-				return Utils.buildDialog(this, R.string.exit_navigation, new DialogInterface.OnClickListener() {
+				return CommonFn.alertDialog(this, R.string.exit_navigation, new DialogInterface.OnClickListener() {
 	
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -296,10 +275,31 @@ public class MapOutdoorActivity extends CoreActivity implements View.OnClickList
 		}
 	}
 	
+	private BDLocationListener bdLocationListener=new BDLocationListener() {
+
+		@Override
+		public void onReceivePoi(BDLocation arg0) {
+		}
+
+		@Override
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null) {
+				return;
+			}
+			mLocationData.latitude = location.getLatitude();
+			mLocationData.longitude = location.getLongitude();
+			mLocationData.direction = location.getDerect();
+			mLocationData.accuracy = location.getRadius();
+			
+			myLocationOverlay.setData(mLocationData);
+		}
+	
+	};
+	
 	/**
-	 * 异步加载地图上标注的建筑点
+	 * 异步加载建筑列表并显示在百度地图上
 	 */
-	private class LoadBuildingTask extends AsyncTask<Void, Void, List<Building>> {
+	private class LoadBuildingListTask extends AsyncTask<Void, Void, List<Building>> {
 
 		@Override
 		protected List<Building> doInBackground(Void... params) {

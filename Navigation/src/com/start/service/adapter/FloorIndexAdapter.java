@@ -1,4 +1,4 @@
-package com.start.service;
+package com.start.service.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

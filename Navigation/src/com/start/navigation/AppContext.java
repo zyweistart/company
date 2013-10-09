@@ -37,10 +37,6 @@ import com.start.widget.PullToRefreshListView;
 public class AppContext extends Application {
 
 	/**
-	 * 百度地图授权Key是否正确
-	 */
-	public boolean m_bKeyRight;
-	/**
 	 * 百度地图授权Key
 	 */
 	private static final String BAIDUMAPKEY = "5f681baed1fb6cb29011fb8f81522c30";
@@ -70,7 +66,6 @@ public class AppContext extends Application {
 	}
 	
 	public BMapManager instanceBMapManager(){
-		AppContext.getInstance().m_bKeyRight=true;
 		if (mBMapManager == null) {
 			mBMapManager = new BMapManager(this);
 	        if (!mBMapManager.init(BAIDUMAPKEY,new MKGeneralListener(){
@@ -91,7 +86,6 @@ public class AppContext extends Application {
 	                if (iError ==  MKEvent.ERROR_PERMISSION_DENIED) {
 	                    //授权Key错误
 	                    AppContext.getInstance().makeTextLong("请输入正确的百度地图授权Key！");
-	                    AppContext.getInstance().m_bKeyRight = false;
 	                }
 	            }
 	        	

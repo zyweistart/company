@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <com.baidu.mapapi.map.MapView
-        android:id="@id/bmapsView"
+        android:id="@+id/bmapsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />

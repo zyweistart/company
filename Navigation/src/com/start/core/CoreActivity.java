@@ -1,14 +1,8 @@
 package com.start.core;
 
-import com.start.navigation.AppContext;
-import com.start.navigation.R;
-import com.start.widget.MenuDialog;
-
 import android.app.Activity;
-import android.app.Dialog;
-import android.view.Gravity;
-import android.view.Window;
-import android.view.WindowManager;
+
+import com.start.navigation.AppContext;
 
 public abstract class CoreActivity extends Activity{
 
@@ -24,16 +18,5 @@ public abstract class CoreActivity extends Activity{
 	protected void makeTextLong(String text){
     		AppContext.getInstance().makeTextLong(text);
     }
-	
-	protected Dialog createSearchOptionDialog() {
-		MenuDialog menuDialog = new MenuDialog(this, R.style.dialog);
-		Window win = menuDialog.getWindow();
-		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-		params.gravity = Gravity.TOP | Gravity.RIGHT;
-		params.y = getResources().getDimensionPixelSize(R.dimen.actionbar_height);
-		win.setAttributes(params);
-		menuDialog.setCanceledOnTouchOutside(true);
-		return menuDialog;
-	}
 	
 }
