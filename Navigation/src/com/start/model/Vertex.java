@@ -5,7 +5,7 @@ import org.mapsforge.core.model.GeoPoint;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 import com.start.utils.Utils;
 
 /**

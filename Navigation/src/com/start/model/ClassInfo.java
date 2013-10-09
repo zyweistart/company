@@ -3,7 +3,7 @@ package com.start.model;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 
 public class ClassInfo implements BaseColumns, AbsClass {
 	

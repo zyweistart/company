@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/content_padding_normal" >
+
+    <TextView
+        style="@style/TextHeader2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/affair_info" />
+
+    <TextView
+        android:id="@+id/affair"
+        style="@style/TextBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/TextHeader2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/element_spacing_normal"
+        android:text="@string/staff_info" />
+
+    <TextView
+        android:id="@+id/staff"
+        style="@style/TextBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

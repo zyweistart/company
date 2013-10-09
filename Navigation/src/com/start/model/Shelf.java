@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 import com.start.utils.Utils;
 
 /**

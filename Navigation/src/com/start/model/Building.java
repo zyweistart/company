@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.baidu.platform.comapi.basestruct.GeoPoint;
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 
 /**
  * 建筑

@@ -4,66 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="18"/>
-
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="false"
-        android:resizeable="true"
-        android:smallScreens="true" />
-    
-    <application
-        android:allowBackup="true"
-        android:name=".AppContext"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/ActionbarTheme" >
-        
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".MainActivity">
-            
-        </activity>
-        
-        <activity
-            android:name=".OutdoorMapActivity">
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
-        </activity>
-        
-        <activity
-            android:name=".IndoorMapActivity">
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
-        </activity>
-        
-        <activity
-            android:name=".SearchableActivity" android:exported="false" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data 
-                android:name="android.app.searchable" 
-                android:resource="@xml/searchable" />
-        </activity>
-        
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-        
-    </application>
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -102,4 +43,70 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" />
+    
+    <application
+        android:allowBackup="true"
+        android:name=".AppContext"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/ActionbarTheme" >
+        
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".MainActivity">
+            
+        </activity>
+        
+        <activity
+            android:name=".MapOutdoorActivity">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        
+        <activity
+            android:name=".MapIndoorActivity">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        
+        <activity
+            android:name=".SearchableActivity" android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data 
+                android:name="android.app.searchable" 
+                android:resource="@xml/searchable" />
+        </activity>
+        
+        <provider
+            android:name=".DatabaseProvider"
+            android:authorities="com.start.navigation"
+            android:exported="false" >
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        
+    </application>
+
 </manifest>

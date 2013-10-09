@@ -10,7 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 import com.start.utils.Utils;
 
 public class Room implements BaseColumns, Searchable, POI {

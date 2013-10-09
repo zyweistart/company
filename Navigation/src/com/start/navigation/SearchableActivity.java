@@ -49,7 +49,7 @@ public class SearchableActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.activity_search_result);
+		setContentView(R.layout.activity_searchable);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.actionbar);
 		
 		ListView listView = getListView();
@@ -84,9 +84,9 @@ public class SearchableActivity extends ListActivity {
 		@Override
 		protected void onPostExecute(List<Searchable> books) {
 			if (books.size() > 0) {
-				SearchResultAdapter adapter = new SearchResultAdapter(getLayoutInflater());
-				adapter.setData(books);
-				setListAdapter(adapter);
+//				SearchResultAdapter adapter = new SearchResultAdapter(getLayoutInflater());
+//				adapter.setData(books);
+//				setListAdapter(adapter);
 			} else {
 				mProgressBar.setVisibility(View.INVISIBLE);
 				mNotificationView.setText(R.string.no_result);
@@ -140,7 +140,7 @@ public class SearchableActivity extends ListActivity {
 			Uri uri = Uri.withAppendedPath(Room.CONTENT_ID_URI_BASE, String.valueOf(id));
 			AppContext.getInstance().setPathSearchResult(null);
 
-			Intent intent = new Intent(this, IndoorMapActivity.class);
+			Intent intent = new Intent(this, MapIndoorActivity.class);
 			intent.setData(uri);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			

@@ -3,7 +3,7 @@ package com.start.model;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 
 public class Office implements BaseColumns {
 	public static final String TABLE_NAME = "office";

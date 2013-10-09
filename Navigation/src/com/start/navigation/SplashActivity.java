@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.start.service.ImportConfigDataTask;
+
 public class SplashActivity extends Activity implements OnSharedPreferenceChangeListener {
 
 	@Override
@@ -21,11 +23,11 @@ public class SplashActivity extends Activity implements OnSharedPreferenceChange
 			// Register a listener to be invoked when initialization completes
 			prefs.registerOnSharedPreferenceChangeListener(this);
 			// Start asynchronous task to import data from configuration into database
-//			new ImportConfigDataTask(getApplicationContext()).execute();
+			new ImportConfigDataTask(getApplicationContext()).execute();
 		} else {
 			// Go ahead to next screen
+			forward();
 		}		
-		forward();
 	}
 	
 	private void forward() {

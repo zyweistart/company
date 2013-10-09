@@ -44,6 +44,8 @@
 	<string name="no_course">没有课程</string>
 	<string name="refresh">刷新</string>
 	<string name="input_checkcode">请输入下面验证码：</string>
+	
+	<string name="empty"></string>
     
     <string name="app_pleasewait">请稍候</string>
     <string name="app_network_connecterror">网络连接不可用，请检查网络设置</string>

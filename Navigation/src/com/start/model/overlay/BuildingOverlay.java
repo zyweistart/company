@@ -13,7 +13,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.OverlayItem;
 import com.start.model.Building;
 import com.start.navigation.AppContext;
-import com.start.navigation.IndoorMapActivity;
+import com.start.navigation.MapIndoorActivity;
 import com.start.navigation.R;
 
 /**
@@ -43,7 +43,7 @@ public class BuildingOverlay extends ItemizedOverlay<OverlayItem> {
 
 	@Override
 	protected boolean onTap(int i) {
-		Intent intent = new Intent(mContext, IndoorMapActivity.class);
+		Intent intent = new Intent(mContext, MapIndoorActivity.class);
 		intent.setData(Uri.withAppendedPath(Building.CONTENT_ID_URI_BASE, mGeoList.get(i).getSnippet()));
 		mContext.startActivity(intent);
 		return true;
@@ -53,14 +53,13 @@ public class BuildingOverlay extends ItemizedOverlay<OverlayItem> {
 		if (buildings == null) {
 			return;
 		}
-
+		this.removeAll();
 		Drawable marker = AppContext.getInstance().getResources().getDrawable(R.drawable.ic_building);
 		for (Building b : buildings) {
 			OverlayItem item = new OverlayItem(b.getGeoPoint(), b.getDesc(), String.valueOf(b.getID()));
 			item.setMarker(marker);
 			mGeoList.add(item);
 		}
-		
-//		populate();
+		this.addItem(mGeoList);
 	}
 }

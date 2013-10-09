@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mapsforge.core.model.GeoPoint;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -20,6 +22,7 @@ import com.baidu.mapapi.map.MKEvent;
 import com.start.core.Constant;
 import com.start.model.LoadMode;
 import com.start.model.UIRunnable;
+import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
 import com.start.utils.CommonFn;
 import com.start.utils.HttpUtils;
@@ -402,5 +405,11 @@ public class AppContext extends Application {
 			CommonFn.settingNetwork(activity);
 		}
 	}
+	
+	public MyLocation getMyLocation() {
+		MyLocation myLocation = new MyLocation("LIB", 1, new GeoPoint(76.740133,-129.009255), null);
+		return myLocation;
+	}
+	
 	
 }

@@ -3,7 +3,7 @@ package com.start.model;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.start.service.DatabaseProvider;
+import com.start.navigation.DatabaseProvider;
 
 /**
  * Database help class that represents a mapping record of book to shelf

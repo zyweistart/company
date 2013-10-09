@@ -10,7 +10,7 @@
         android:layout_width="@dimen/actionbar_button_home_width"
         android:layout_height="match_parent"
         android:contentDescription="@string/home"
-        android:src="@drawable/ic_launcher" /> -->
+        android:src="@drawable/ic_logo" /> -->
     <TextView
         android:id="@+id/actionbar_title"
         style="@style/ActionBarTitle"
