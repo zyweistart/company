@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_actionbar">
+    <!-- <ImageButton
+        android:id="@+id/actionbar_home"
+        style="@style/ActionBarItem"
+        android:layout_width="@dimen/actionbar_button_home_width"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/home"
+        android:src="@drawable/ic_launcher" /> -->
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/ActionBarTitle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/app_name" />
+    <ImageButton
+        android:id="@+id/actionbar_search"
+        style="@style/ActionBarItem"
+        android:layout_width="@dimen/actionbar_button_home_width"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/search"
+        android:src="@drawable/ic_action_search"
+        android:onClick="onClick"
+        android:visibility="gone" />
+    <ImageButton
+        android:id="@+id/actionbar_locate"
+        style="@style/ActionBarItem"
+        android:layout_width="@dimen/actionbar_button_home_width"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/search"
+        android:src="@drawable/ic_action_map"
+        android:onClick="onClick"
+        android:visibility="gone" />
+</LinearLayout>
