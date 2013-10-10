@@ -17,13 +17,9 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
-    <style name="ActionbarTheme" parent="android:style/Theme.Light">
-        <item name="android:windowTitleSize">@dimen/actionbar_height</item>
-        <item name="android:windowTitleBackgroundStyle">@style/ActionBar</item>
-        <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
-    </style>
+    <!-- Custom -->
     
-    <style name="AppTheme" parent="android:style/Theme.Light">
+    <style name="ActionbarTheme" parent="android:style/Theme.Light">
         <item name="android:windowTitleSize">@dimen/actionbar_height</item>
         <item name="android:windowTitleBackgroundStyle">@style/ActionBar</item>
         <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
@@ -72,6 +68,7 @@
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
+    
     <style name="ListSection">
         <item name="android:minHeight">24dp</item>
         <item name="android:paddingLeft">@dimen/list_preferred_item_padding_left</item>

@@ -67,11 +67,6 @@
         </activity>
         
         <activity
-            android:name=".MainActivity">
-            
-        </activity>
-        
-        <activity
             android:name=".MapOutdoorActivity">
             <meta-data
                 android:name="android.app.default_searchable"
@@ -86,7 +81,8 @@
         </activity>
         
         <activity
-            android:name=".SearchableActivity" android:exported="false" >
+            android:name=".SearchableActivity" 
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -94,6 +90,19 @@
                 android:name="android.app.searchable" 
                 android:resource="@xml/searchable" />
         </activity>
+        
+        <activity
+            android:name=".MainActivity"/>
+        <activity
+            android:name=".LoginActivity"/>
+        <activity
+            android:name=".OfficeActivity"/>
+        <activity
+            android:name=".ClassTableActivity"/>
+        <activity
+            android:name=".ClassActivity"/>
+        <activity
+            android:name=".BookDetailsActivity"/>
         
         <provider
             android:name=".DatabaseProvider"

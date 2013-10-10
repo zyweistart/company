@@ -36,10 +36,10 @@ import com.start.widget.PullToRefreshListView;
 
 public class AppContext extends Application {
 
-	/**
-	 * 百度地图授权Key
-	 */
-	private static final String BAIDUMAPKEY = "5f681baed1fb6cb29011fb8f81522c30";
+	//自己电脑
+//	private static final String BAIDUMAPKEY = "5f681baed1fb6cb29011fb8f81522c30";
+	//公司电脑
+	private static final String BAIDUMAPKEY = "6cd13faaf6d5b89b71423522b0d9592a";
 	
 	private static AppContext mInstance;
     private SharedPreferencesUtils sharedPreferencesUtils;
