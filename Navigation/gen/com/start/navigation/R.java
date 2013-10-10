@@ -202,64 +202,66 @@ public final class R {
         public static final int test=0x7f0c0002;
     }
     public static final class string {
-        public static final int account=0x7f090004;
-        public static final int affair_info=0x7f090011;
-        public static final int app_error_please_try_again=0x7f09002a;
-        public static final int app_name=0x7f090000;
-        public static final int app_network_connecterror=0x7f090029;
-        public static final int app_pleasewait=0x7f090028;
-        public static final int book=0x7f090017;
-        public static final int book_index=0x7f090014;
-        public static final int book_name=0x7f090013;
-        public static final int class_info=0x7f09000f;
-        public static final int class_table=0x7f090009;
-        public static final int empty=0x7f090027;
-        public static final int enter_building_navigation=0x7f09001b;
-        public static final int exit_navigation=0x7f09001c;
-        public static final int hangzhou=0x7f09001a;
-        public static final int home=0x7f09000a;
-        public static final int input_checkcode=0x7f090025;
-        public static final int launcher_name=0x7f090001;
+        public static final int account=0x7f090003;
+        public static final int affair_info=0x7f090010;
+        public static final int app_error_please_try_again=0x7f090029;
+        public static final int app_name=0x7f090026;
+        public static final int app_network_connecterror=0x7f090028;
+        public static final int app_pleasewait=0x7f090027;
+        public static final int book=0x7f090016;
+        public static final int book_index=0x7f090013;
+        public static final int book_name=0x7f090012;
+        public static final int class_info=0x7f09000e;
+        public static final int class_table=0x7f090008;
+        public static final int empty=0x7f09002a;
+        public static final int enter_building_navigation=0x7f09001a;
+        public static final int exit_navigation=0x7f09001b;
+        public static final int hangzhou=0x7f090019;
+        public static final int home=0x7f090009;
+        public static final int input_checkcode=0x7f090024;
+        public static final int launcher_name=0x7f090000;
         public static final int load_empty=0x7f09002e;
         public static final int load_error=0x7f09002f;
         public static final int load_full=0x7f09002d;
         public static final int load_ing=0x7f09002c;
         public static final int load_more=0x7f09002b;
-        public static final int loading=0x7f09000e;
-        public static final int login=0x7f090002;
-        public static final int logon_fail_and_refresh=0x7f09001f;
-        public static final int logoning=0x7f090020;
-        public static final int my_location_unavailable=0x7f090019;
-        public static final int navigate=0x7f090008;
-        public static final int no_course=0x7f090023;
-        public static final int no_result=0x7f09000d;
-        public static final int ok=0x7f090003;
-        public static final int parsing=0x7f090022;
-        public static final int password=0x7f090005;
+        public static final int loading=0x7f09000d;
+        public static final int login=0x7f090001;
+        public static final int logon_fail_and_refresh=0x7f09001e;
+        public static final int logoning=0x7f09001f;
+        public static final int my_location_unavailable=0x7f090018;
+        public static final int navigate=0x7f090007;
+        public static final int no_course=0x7f090022;
+        public static final int no_result=0x7f09000c;
+        public static final int ok=0x7f090002;
+        public static final int parsing=0x7f090021;
+        public static final int password=0x7f090004;
         /**  widget 
          */
         public static final int pull_to_refresh_pull_label=0x7f090030;
         public static final int pull_to_refresh_refreshing_label=0x7f090032;
         public static final int pull_to_refresh_release_label=0x7f090031;
-        public static final int querying=0x7f090021;
-        public static final int refresh=0x7f090024;
-        public static final int room=0x7f090016;
-        public static final int search=0x7f090007;
-        public static final int search_city=0x7f09001d;
-        public static final int search_hint=0x7f09000b;
-        public static final int searching=0x7f09000c;
-        public static final int shelf=0x7f090015;
-        public static final int signup=0x7f090006;
-        public static final int staff_info=0x7f090012;
-        public static final int teacher_info=0x7f090010;
-        public static final int week=0x7f090018;
-        public static final int week_duration=0x7f090026;
-        public static final int week_label=0x7f09001e;
+        public static final int querying=0x7f090020;
+        public static final int refresh=0x7f090023;
+        public static final int room=0x7f090015;
+        public static final int search=0x7f090006;
+        public static final int search_city=0x7f09001c;
+        public static final int search_hint=0x7f09000a;
+        public static final int searching=0x7f09000b;
+        public static final int shelf=0x7f090014;
+        public static final int signup=0x7f090005;
+        public static final int staff_info=0x7f090011;
+        public static final int teacher_info=0x7f09000f;
+        public static final int week=0x7f090017;
+        public static final int week_duration=0x7f090025;
+        public static final int week_label=0x7f09001d;
     }
     public static final class style {
         public static final int ActionBar=0x7f0b0005;
         public static final int ActionBarItem=0x7f0b0006;
         public static final int ActionBarTitle=0x7f0b0007;
+        /**  Custom 
+         */
         public static final int ActionbarTheme=0x7f0b0002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
