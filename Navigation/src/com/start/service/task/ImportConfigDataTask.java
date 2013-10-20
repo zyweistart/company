@@ -49,12 +49,12 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		mContentResolver = context.getContentResolver();
 	}
 
-	private static final String F_DEPARTMENT="department.txt";
-	private static final String F_DOCTOR="doctor.txt";
-	private static final String F_EDGE="edge.txt";
-	private static final String F_MAP="map.txt";
-	private static final String F_ROOM="room.txt";
-	private static final String F_VERTEX="vertex.txt";
+//	private static final String F_DEPARTMENT="department.txt";
+//	private static final String F_DOCTOR="doctor.txt";
+//	private static final String F_EDGE="edge.txt";
+//	private static final String F_MAP="map.txt";
+//	private static final String F_ROOM="room.txt";
+//	private static final String F_VERTEX="vertex.txt";
 	
 	private List<String[]> readFileData(String fullFilePath){
 		List<String[]> datas=null;
@@ -92,7 +92,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 	/**
 	 * 导航部门数据
 	 */
-	private boolean importDepartment(String fileName) {
+	boolean importDepartment(String fileName) {
 		boolean success = false;
 
 		String filePath = String.format("%1$s/%2$s", AppConfig.CONFIG_DATA_PATH, fileName);
