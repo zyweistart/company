@@ -61,6 +61,8 @@
         [self showDialText];
         [[Config Instance]setIsRefreshUserInfo:YES];
         [[Config Instance]setIsRefreshRecordingList:YES];
+        //拨打完电话刷新使用记录
+        [[Config Instance]setIsRefreshUseRecordList:YES];
     }
 }
 

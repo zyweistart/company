@@ -388,6 +388,8 @@
         [[Config Instance]setIsRefreshUserInfo:YES];
         //拨打完电话刷新录音列表
         [[Config Instance]setIsRefreshRecordingList:YES];
+        //拨打完电话刷新使用记录
+        [[Config Instance]setIsRefreshUseRecordList:YES];
     }
 }
 

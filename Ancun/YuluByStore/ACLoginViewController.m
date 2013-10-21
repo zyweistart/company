@@ -8,6 +8,7 @@
 #import "ACRegisterViewController.h"
 #import "ACForgetPwdViewController.h"
 #import "SSCheckBoxView.h"
+#import "ACUseRecordViewController.h"
 
 @interface ACLoginViewController ()
 
@@ -151,7 +152,11 @@
         if([[Config Instance]isOldUser]) {
             accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACOldAccountViewController alloc]init]];
         } else {
-            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+            #ifdef JAILBREAK
+                accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+            #else
+                accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACUseRecordViewController alloc]init]];
+            #endif
         }
         accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //录音管理

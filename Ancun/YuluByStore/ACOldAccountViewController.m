@@ -8,7 +8,11 @@
 #endif
 #import "DataSingleton.h"
 #import "NSString+Date.h"
+#ifdef JAILBREAK
 #import "ACAccountViewController.h"
+#else 
+#import "ACUseRecordViewController.h"
+#endif
 
 #define CACHE_OLDACCOUNT_MONTH CACHE_CONSTANT(@"CACHE_OLDACCOUNT_MONTH")
 
@@ -44,8 +48,9 @@
         [_lblTimeLong setTextColor:[UIColor colorWithRed:(239/255.0) green:(126/255.0) blue:(7/255.0) alpha:1]];
         [_lblTimeLong setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
         [view addSubview:_lblTimeLong];
-        
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(onPay:)];
+        #ifdef JAILBREAK
+            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(onPay:)];
+        #endif
         
         [self.view addSubview:view];
         
@@ -119,7 +124,11 @@
         }
     } else {
         //如果为新用户则直接进行跳转
-        [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
+        #ifdef JAILBREAK
+            [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
+        #else
+            [self.navigationController pushViewController:[[ACUseRecordViewController alloc]init] animated:NO];
+        #endif
     }
 }
 
@@ -146,7 +155,12 @@
                 [[Config Instance]setIsRefreshUserInfo:NO];
                 if(![[Config Instance]isOldUser]) {
                     //如果为新用户则直接进行跳转
+#ifdef JAILBREAK
                     [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
+#else
+                    [self.navigationController pushViewController:[[ACUseRecordViewController alloc]init] animated:NO];
+#endif
+                    
                 }
             }
         } else {

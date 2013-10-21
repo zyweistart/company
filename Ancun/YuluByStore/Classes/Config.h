@@ -8,6 +8,8 @@
 @property Boolean isCalculateTotal;
 //是否需要刷新录音详细页面
 @property Boolean isRefreshRecordingList;
+//是否需要刷新使用记录页面
+@property Boolean isRefreshUseRecordList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountPayList;
 //是否刷新账户套餐列表页面

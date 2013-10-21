@@ -28,6 +28,7 @@
 		C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351917B9D81C00BECE31 /* ACRechargeNav.m */; };
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
+		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
 		C98A1C5D17CE01DE00AC0CC9 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */; };
 		C98A1C5F17CE029500AC0CC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C98A1C5E17CE029500AC0CC9 /* Security.framework */; };
 		C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */; };
@@ -338,6 +339,8 @@
 		C90A351C17BA054F00BECE31 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavigationWebPageViewController.h; sourceTree = "<group>"; };
 		C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
+		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
+		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
 		C97DA4D717A9EFF7000D9B31 /* ydefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ydefines.h; sourceTree = "<group>"; };
 		C98A1C5B17CE01DE00AC0CC9 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
@@ -1492,6 +1495,8 @@
 				C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */,
 				C9D97A5E179FA6520076ACF3 /* ACRegisterViewController.h */,
 				C9D97A5F179FA6520076ACF3 /* ACRegisterViewController.m */,
+				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
+				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
 				C99B80DE17A0CAC0004D0BFB /* MyViewController.h */,
 				C99B80DF17A0CAC0004D0BFB /* MyViewController.m */,
 			);
@@ -1917,6 +1922,7 @@
 				C9D4D19017E2B8EE0013D03E /* CJSONDeserializer.m in Sources */,
 				C9D4D19117E2B8EE0013D03E /* CJSONScanner.m in Sources */,
 				C9D4D19217E2B8EE0013D03E /* CJSONSerializer.m in Sources */,
+				C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

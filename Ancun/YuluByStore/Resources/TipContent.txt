@@ -26,199 +26,13 @@
     <span style="font-size: 12px;font-family: Tahoma;color: rgb(102, 102, 102)">4</span><span style="font-size: 12px;color: rgb(102, 102, 102)">、营销监控</span><span style="font-size: 12px;font-family: Tahoma;color: rgb(102, 102, 102)">5</span><span style="font-size: 12px;color: rgb(102, 102, 102)">、客服录音</span><span style="font-size: 12px;font-family: Tahoma;color: rgb(102, 102, 102)">6</span><span style="font-size: 12px;color: rgb(102, 102, 102)">、口头交易</span>
 </p>
 <p style="background:white">
-    <strong><span style="font-size:14px">3.</span></strong><strong><span style="font-size:14px">资费说明 </span></strong>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">　　录音通话的通话费用按用户实际通话时长，由运营商收取（按照本地通话费收取）。</span>
-</p>
-<p>
-    <span style=";font-family:微软雅黑">3.1</span><span style=";font-family:微软雅黑">、基础套餐</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">官网统一零售价：</span><span style="font-size:12px;font-family:Tahoma;color:#666666">50</span><span style="font-size:12px;color:#666666">元</span><span style="font-size:12px;font-family:Tahoma;color:#666666">/31</span><span style="font-size:12px;color:#666666">天</span><span style="font-size:12px;font-family:Tahoma;color:#666666">&nbsp;</span>
-</p>
-<table cellspacing="0" cellpadding="0" border="1" width="100%">
-    <tbody>
-        <tr>
-            <td width="64" rowspan="3" style="border-color: windowtext; border-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">基础包月套餐</span>
-                </p>
-            </td>
-            <td width="50" valign="top" style="border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-style: none; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">价格</span>
-                </p>
-            </td>
-            <td width="100" valign="top" style="border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-style: none; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">套餐包括</span>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td width="50" rowspan="2" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">50</span><span style="font-size:12px;color:#666666">元</span><span style="font-size:12px;font-family:Tahoma;color:#666666">/31</span><span style="font-size:12px;color:#666666">天</span>
-                </p>
-            </td>
-            <td width="100" valign="top" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">录音时长：</span><span style="font-size:12px;font-family:Tahoma;color:#666666">209</span><span style="font-size:12px;color:#666666">分钟</span><span style="font-size:12px;font-family:Tahoma;color:#666666">/31</span><span style="font-size:12px;color:#666666">天</span>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td width="100" valign="top" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">存储空间：</span><span style="font-size:12px;font-family:Tahoma;color:#666666">309M/31</span><span style="font-size:12px;color:#666666">天</span>
-                </p>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">备注：只有购买基础套餐情况下，才能购买下面的增值套餐。</span>
-</p>
-<p>
-    <span style=";font-family:微软雅黑">2</span><span style=";font-family:微软雅黑">、增值套餐</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">①增值时长套餐：当您当月录音时长接近或者超过基础套餐包含的</span><span style="font-size:12px;font-family:Tahoma;color:#666666">209</span><span style="font-size:12px;color:#666666">分钟时，您可以选择购买时长套餐保证您继续使用。</span>
-</p>
-<table cellspacing="0" cellpadding="0" border="1" width="100%">
-    <tbody>
-        <tr>
-            <td width="253" colspan="2" valign="top" style="border-color: windowtext; border-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">增值时长套餐</span>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td width="121" valign="top" style="border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: none; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">一份</span><span style="font-size:12px;font-family:Tahoma;color:#666666">=10</span><span style="font-size:12px;color:#666666">元</span><span style="font-size:12px;font-family:Tahoma;color:#666666">/30</span><span style="font-size:12px;color:#666666">分钟</span>
-                </p>
-            </td>
-            <td width="132" valign="top" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px 7px;">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">可多份购买，叠加使用</span>
-                </p>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;font-family:Tahoma;color:#666666">&nbsp;</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">②增值存储套餐：当您当月录音存储空间接近或者超过基础套餐包含的</span><span style="font-size:12px;font-family:Tahoma;color:#666666">309MB</span><span style="font-size:12px;color:#666666">时，您可以选择购买存储套餐保证您继续使用。</span>
-</p>
-<table cellspacing="0" cellpadding="0" border="1" width="100%">
-    <tbody>
-        <tr style=";height:18px">
-            <td width="133" colspan="3" style="border-color: windowtext black windowtext windowtext; border-width: 1px; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;color:#666666">增值存储套餐（一年</span><span style="font-size:12px;font-family:Tahoma;color:#666666">365</span><span style="font-size:12px;color:#666666">天）</span>
-                </p>
-            </td>
-        </tr>
-        <tr style=";height:18px">
-            <td width="48" style="border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: none; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">50</span><span style="font-size:12px;color:#666666">元</span>
-                </p>
-            </td>
-            <td width="25" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">100</span><span style="font-size:12px;color:#666666">元</span>
-                </p>
-            </td>
-            <td width="47" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">200</span><span style="font-size:12px;color:#666666">元</span>
-                </p>
-            </td>
-        </tr>
-        <tr style=";height:18px">
-            <td width="48" style="border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: none; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">500MB</span>
-                </p>
-            </td>
-            <td width="25" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">1G</span>
-                </p>
-            </td>
-            <td width="47" style="border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1px; border-right-color: windowtext; border-right-width: 1px; padding: 0px;" height="18">
-                <p style=";margin-bottom:0;background:white">
-                    <span style="font-size:12px;font-family:Tahoma;color:#666666">5G</span>
-                </p>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    <span style="font-size:16px;font-family:微软雅黑">&nbsp;</span>
-</p>
-<p>
-    <span style=";font-family:微软雅黑">3.2</span><span style=";font-family:微软雅黑">套餐使用有效期</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">基础包月套餐：包月形式，生效开始</span><span style="font-size:12px;font-family:Tahoma;color:#666666">31</span><span style="font-size:12px;color:#666666">天为期限。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">（例：</span><span style="font-size:12px;font-family:Tahoma;color:#666666">2013</span><span style="font-size:12px;color:#666666">年</span><span style="font-size:12px;font-family:Tahoma;color:#666666">7</span><span style="font-size:12px;color:#666666">月</span><span style="font-size:12px;font-family:Tahoma;color:#666666">7</span><span style="font-size:12px;color:#666666">号</span><span style="font-size:12px;font-family:Tahoma;color:#666666">7</span><span style="font-size:12px;color:#666666">点开通基础套餐，</span><span style="font-size:12px;font-family:Tahoma;color:#666666">2013</span><span style="font-size:12px;color:#666666">年</span><span style="font-size:12px;font-family:Tahoma;color:#666666">8</span><span style="font-size:12px;color:#666666">月</span><span style="font-size:12px;font-family:Tahoma;color:#666666">6</span><span style="font-size:12px;color:#666666">号</span><span style="font-size:12px;font-family:Tahoma;color:#666666">6</span><span style="font-size:12px;color:#666666">点</span><span style="font-size:12px;font-family:Tahoma;color:#666666">59</span><span style="font-size:12px;color:#666666">分套餐截止，如您还要使用，请继续购买基础套餐服务）</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">增值时长套餐：不限期限。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">（例：在保证您基础套餐正常购买下，购买增值包时长套餐后，不限期限使用）</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">增值存储套餐：包年形式，生效开始一年为期限。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">（例：在保证您基础套餐正常购买下，购买增值包空间套餐，以一年为期限）</span>
-</p>
-<p>
-    <span style=";font-family:微软雅黑">3.3</span><span style=";font-family:微软雅黑">套餐使用规则：</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;font-family:Tahoma;color:#666666">1</span><span style="font-size:12px;color:#666666">、必须购买基础套餐后，才能购买增值套餐。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;font-family:Tahoma;color:#666666">2</span><span style="font-size:12px;color:#666666">、直接购买增值套餐无法使用本产品的功能。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">备注：基础套餐是您使用本产品的前提，您在使用过程中如要开通其他的增值服务，请先确认您的基础套餐在正常使用过程中，谢谢！</span>
-</p>
-<p>
-    <span style=";font-family:微软雅黑">3.4</span><span style=";font-family:微软雅黑">、语录保存时间：</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">停止使用基础套餐后，为您保管</span><span style="font-size:12px;font-family:Tahoma;color:#666666">90</span><span style="font-size:12px;color:#666666">天</span>
-</p>
-<p style="background:white">
-    <strong><span style="font-size:14px">4 </span></strong><strong><span style="font-size:14px">使用流程</span></strong>
+    <strong><span style="font-size:14px">3。 </span></strong><strong><span style="font-size:14px">使用流程</span></strong>
 </p>
 <p style=";margin-bottom:0;background:white">
     <strong><span style="font-size:12px;color:#666666">【下载并注册】</span></strong>
 </p>
 <p style=";margin-bottom:0;background:white">
     <span style="font-size:12px;color:#666666">　　用户通过安存语录官网或</span><span style="font-size:12px;font-family:Tahoma;color:#666666">App Store</span><span style="font-size:12px;color:#666666">下载安存语录</span><span style="font-size:12px;font-family:Tahoma;color:#666666">APP</span><span style="font-size:12px;color:#666666">，注册并登录账号。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <strong><span style="font-size:12px;color:#666666">【账户充值】</span></strong>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;color:#666666">　　用户可通过支付宝充值购买录音时长套餐。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <span style="font-size:12px;font-family:Tahoma;color:#666666">&nbsp; </span><span style="font-size:12px;color:#666666">进入安存语录</span><span style="font-size:12px;font-family:Tahoma;color:#666666">APP</span><span style="font-size:12px;color:#666666">，进入“我的账户”“充值”，选择您需要的录音时长套餐进行充值购买，支付宝支付即可。</span>
 </p>
 <p style=";margin-bottom:0;background:white">
     <strong><span style="font-size:12px;color:#666666">【通话录音】</span></strong>
@@ -260,7 +74,7 @@
     <span style="font-size:12px;font-family:Tahoma;color:#666666">&nbsp;</span>
 </p>
 <p style="background:white">
-    <strong><span style="font-size:14px">5. </span></strong><strong><span style="font-size:14px">功能操作</span></strong>
+    <strong><span style="font-size:14px">4. </span></strong><strong><span style="font-size:14px">功能操作</span></strong>
 </p>
 <p style=";margin-bottom:0;background:white">
     <strong><span style="font-size:12px;color:#666666">【拨号界面】</span></strong>
@@ -294,18 +108,6 @@
 </p>
 <p style="text-indent:24px">
     <span style="font-size:12px;font-family:宋体;color:#666666">查看：点击右侧图标查看录音详情，可填写录音备注信息，还可申请提取码、申办公证。</span>
-</p>
-<p style=";margin-bottom:0;background:white">
-    <strong><span style="font-size:12px;color:#666666">【我的账户】</span></strong>
-</p>
-<p style="text-indent:24px">
-    <span style="font-size:12px;font-family:宋体;color:#666666">我的帐户：可以查看基础包月套餐、增值时长剩余、当前可用容量使用情况。</span>
-</p>
-<p style="text-indent:24px">
-    <span style="font-size:12px;font-family:宋体;color:#666666">记录查看：详细记录充值与消费记录。</span>
-</p>
-<p style="text-indent:24px">
-    <span style="font-size:12px;font-family:宋体;color:#666666">账户充值：选择您需要的录音时长套餐进行充值购买，支付宝支付即可。</span>
 </p>
 <p style=";margin-bottom:0;background:white">
     <strong><span style="font-size:12px;color:#666666">【更多】</span></strong>

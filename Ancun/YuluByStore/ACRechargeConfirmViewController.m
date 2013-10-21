@@ -1,6 +1,7 @@
 #import "ACRechargeConfirmViewController.h"
 #import "NSString+Date.h"
 #import "ACRechargeNav.h"
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 #ifdef JAILBREAK
     #import "AlixPay.h"
