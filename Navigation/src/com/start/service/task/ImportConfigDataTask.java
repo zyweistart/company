@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -28,6 +30,7 @@ import com.start.model.Room;
 import com.start.model.Shelf;
 import com.start.model.Teacher;
 import com.start.model.Vertex;
+import com.start.model.medmap.Department;
 import com.start.utils.Utils;
 
 public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
@@ -46,9 +49,80 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		mContentResolver = context.getContentResolver();
 	}
 
+//	private static final String F_DEPARTMENT="department.txt";
+//	private static final String F_DOCTOR="doctor.txt";
+//	private static final String F_EDGE="edge.txt";
+//	private static final String F_MAP="map.txt";
+//	private static final String F_ROOM="room.txt";
+//	private static final String F_VERTEX="vertex.txt";
+	
+	private List<String[]> readFileData(String fullFilePath){
+		List<String[]> datas=null;
+		InputStream is = null;
+		try {
+			datas=new ArrayList<String[]>();
+			is = mAssetManager.open(fullFilePath);
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				String[] tokens=line.split(";");
+				if(tokens==null){
+					continue;
+				}
+				datas.add(tokens);
+			}
+			return datas;
+		} catch (IOException e) {
+			message = "Failed to import "+fullFilePath +".";
+			Log.e(DEBUG_TAG, e.getMessage());
+		} finally {
+			if(is!=null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally{
+					is=null;
+				}
+			}
+		}
+		return null;
+	}
+	/**
+	 * 导航部门数据
+	 */
+	boolean importDepartment(String fileName) {
+		boolean success = false;
+
+		String filePath = String.format("%1$s/%2$s", AppConfig.CONFIG_DATA_PATH, fileName);
+		List<String[]> datas=readFileData(filePath);
+		if(datas!=null){
+			for(String[] data:datas){
+				if(data.length!=7){
+					Map<String,String> values=new HashMap<String,String>();
+					values.put(Department.COLUMN_NAME_CODE, data[0]);
+					values.put(Department.COLUMN_NAME_NAME, data[1]);
+					values.put(Department.COLUMN_NAME_MAPID, data[2]);
+					values.put(Department.COLUMN_NAME_INTRODUCTION, data[3]);
+					//TODO:保存
+				}
+			}
+		}
+		
+		return success;
+	}
+	
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		try {
+			//导航数据1
+			for(String fileName:mAssetManager.list("med_data")){
+				if(fileName.equals("")){
+					
+				}
+			}
+			//导航数据2
 			for (String globalFile : mAssetManager.list(AppConfig.CONFIG_DATA_PATH)) {
 				switch (AppConfig.getFileType(globalFile)) {
 				case AppConfig.TYPE_BUILDING:

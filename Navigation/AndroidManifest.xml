@@ -104,6 +104,20 @@
         <activity
             android:name=".BookDetailsActivity"/>
         
+        <activity
+            android:name=".MedMapActivity"
+            android:theme="@style/anim_style_slide"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DoctorActivity"
+            android:theme="@style/anim_style_slide" />
+        <activity
+            android:name=".DoctorDetailsActivity"
+            android:theme="@style/anim_style_slide" />
+        <activity
+            android:name=".DepartmentActivity"
+            android:theme="@style/anim_style_slide" />
+        
         <provider
             android:name=".DatabaseProvider"
             android:authorities="com.start.navigation"

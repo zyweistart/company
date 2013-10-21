@@ -53,6 +53,33 @@
 	</string-array>
 	<string name="week_duration">第%1$s~%2$s周</string>
 	
+	
+	<string name="next">下一步</string>
+    <string name="emergency_or_not">急诊还是门诊？</string>
+    <string name="emergency">急诊</string>
+    <string name="pre_diagnosis">门诊</string>
+    <string name="gynecology">请挂妇科</string>
+    <string name="to_department">去科室</string>
+    <string name="cancel">取消</string>
+    <string name="doctor_name">请输入医生名字</string>
+    <string name="search_department_or_doctor">搜索科室或医生</string>
+    <string name="map">地图</string>
+    <string name="locate_me">定位</string>
+    <string name="guide">导医</string>
+    <string name="visit">探病</string>
+    <string name="departments">科室列表</string>
+    <string name="department">科室</string>
+    <string name="restroom">厕所</string>
+    <string name="drinking_water">开水间</string>
+    <string name="doctors">医生列表</string>
+    <string name="doctor">医生</string>
+    <string name="introduction">介绍</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="choose_next">请选择下一步</string>
+    <string name="end">结束</string>
+    <string name="start_over">重新开始</string>
+    <string name="get_medicine">取药</string>
+    <string name="assay">化验</string>
     
 	<string name="app_name">导航</string>
     <string name="app_pleasewait">请稍候</string>

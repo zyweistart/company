@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/mm_listitem"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:src="@drawable/doctor1" />
+
+    <ImageView
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:duplicateParentState="true"
+        android:src="@drawable/bakchat_forward" />
+
+    <TextView
+        android:id="@+id/doctor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/indicator"
+        android:layout_toRightOf="@id/avatar"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/black" />
+
+</RelativeLayout>
