@@ -4,7 +4,7 @@ import java.util.Random;
 
 import android.content.Context;
 
-import com.start.model.medmap.UserLocation;
+import com.start.model.UserLocation;
 
 public abstract class Util{
 	

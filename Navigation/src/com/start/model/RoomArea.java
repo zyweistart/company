@@ -1,4 +1,4 @@
-package com.start.model.medmap;
+package com.start.model;
 
 import com.start.core.CoreModel;
 

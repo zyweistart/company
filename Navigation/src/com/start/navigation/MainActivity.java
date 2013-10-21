@@ -23,10 +23,10 @@ public class MainActivity extends CoreActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch(v.getId()){
 			case R.id.navHospital:
-				startActivity(new Intent(MainActivity.this,MapOutdoorActivity.class));
+				startActivity(new Intent(MainActivity.this,MedMapActivity.class));
 				break;
 			case R.id.navLibrary:
-				startActivity(new Intent(MainActivity.this,MapOutdoorActivity.class));
+				startActivity(new Intent(MainActivity.this,MedMapActivity.class));
 				break;
 		}
 	}

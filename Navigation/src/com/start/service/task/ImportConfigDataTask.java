@@ -15,26 +15,25 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.start.core.AppConfig;
-import com.start.model.medmap.Department;
-import com.start.model.medmap.DepartmentHasRoom;
-import com.start.model.medmap.Doctor;
-import com.start.model.medmap.Edge;
-import com.start.model.medmap.MapData;
-import com.start.model.medmap.Room;
-import com.start.model.medmap.RoomArea;
-import com.start.model.medmap.Vertex;
+import com.start.model.Department;
+import com.start.model.DepartmentHasRoom;
+import com.start.model.Doctor;
+import com.start.model.Edge;
+import com.start.model.MapData;
+import com.start.model.Room;
+import com.start.model.RoomArea;
+import com.start.model.Vertex;
 
 public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 
 	private static final String DEBUG_TAG = "ImportConfigDataTask";
 	
-	private Context context;
+	private Context mContext;
 	private AssetManager mAssetManager;
 
 	public ImportConfigDataTask(Context context) {
-		super();
-		this.context = context;
-		mAssetManager = context.getAssets();
+		this.mContext = context;
+		this.mAssetManager = context.getAssets();
 	}
 
 	private List<String[]> readFileData(String fullFilePath){
@@ -75,7 +74,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		try {
 			//导航数据1
 			for(String fileName:mAssetManager.list(AppConfig.CONFIG_DATA_PATH_MEDMAP)){
-				if(fileName.equals("")){
+				if(AppConfig.F_DEPARTMENT.equals(fileName)){
+					
+				}else if(AppConfig.F_DEPARTMENTHASROOM.equals(fileName)){
+					
+				}else if(AppConfig.F_DOCTOR.equals(fileName)){
 					
 				}
 			}
@@ -91,13 +94,13 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=7){
+				if(data.length!=4){
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(Department._ID, data[0]);
 					values.put(Department.COLUMN_NAME_NAME, data[1]);
 					values.put(Department.COLUMN_NAME_MAPID, data[2]);
 					values.put(Department.COLUMN_NAME_INTRODUCTION, data[3]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -113,7 +116,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(DepartmentHasRoom._ID, data[0]);
 					values.put(DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID, data[1]);
 					values.put(DepartmentHasRoom.COLUMN_NAME_ROOMID, data[2]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -124,14 +127,14 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=4){
+				if(data.length!=5){
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(Room._ID, data[0]);
 					values.put(Room.COLUMN_NAME_MAPID, data[1]);
 					values.put(Room.COLUMN_NAME_NAME, data[2]);
 					values.put(Room.COLUMN_NAME_DEPARTMENTID, data[3]);
 					values.put(Room.COLUMN_NAME_VERTEXID, data[4]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -147,7 +150,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(RoomArea._ID, data[0]);
 					values.put(RoomArea.COLUMN_NAME_ROOMID, data[1]);
 					values.put(RoomArea.COLUMN_NAME_VERTEXID, data[2]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -167,7 +170,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Doctor.COLUMN_NAME_SPECIALTY, data[4]);
 					values.put(Doctor.COLUMN_NAME_INTRODUCTION, data[5]);
 					values.put(Doctor.COLUMN_NAME_DEPARTMENTID, data[6]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -184,7 +187,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Vertex.COLUMN_NAME_MAPID, data[1]);
 					values.put(Vertex.COLUMN_NAME_LATITUDE, data[2]);
 					values.put(Vertex.COLUMN_NAME_LONGITUDE, data[3]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -199,7 +202,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
-					//TODO:保存
+					
 				}
 			}
 		}
@@ -210,12 +213,12 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=4){
+				if(data.length!=3){
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(Edge._ID, data[0]);
 					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[1]);
 					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[2]);
-					//TODO:保存
+					
 				}
 			}
 		}

@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mapsforge.core.model.GeoPoint;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -22,8 +20,6 @@ import com.baidu.mapapi.map.MKEvent;
 import com.start.core.Constant;
 import com.start.model.LoadMode;
 import com.start.model.UIRunnable;
-import com.start.model.nav.MyLocation;
-import com.start.model.nav.PathSearchResult;
 import com.start.utils.CommonFn;
 import com.start.utils.HttpUtils;
 import com.start.utils.LogUtils;
@@ -45,7 +41,6 @@ public class AppContext extends Application {
     private SharedPreferencesUtils sharedPreferencesUtils;
 
     private BMapManager mBMapManager;
-    private PathSearchResult pathSearchResult;
     
 	@Override
     public void onCreate() {
@@ -94,14 +89,6 @@ public class AppContext extends Application {
 	        }
         }
 		return mBMapManager;
-	}
-	
-	public PathSearchResult getPathSearchResult() {
-		return pathSearchResult;
-	}
-
-	public void setPathSearchResult(PathSearchResult pathSearchResult) {
-		this.pathSearchResult = pathSearchResult;
 	}
 
 	public void makeTextShort(String text){
@@ -399,11 +386,5 @@ public class AppContext extends Application {
 			CommonFn.settingNetwork(activity);
 		}
 	}
-	
-	public MyLocation getMyLocation() {
-		MyLocation myLocation = new MyLocation("LIB", 1, new GeoPoint(76.740133,-129.009255), null);
-		return myLocation;
-	}
-	
 	
 }

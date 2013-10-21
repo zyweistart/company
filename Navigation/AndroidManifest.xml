@@ -93,16 +93,6 @@
         
         <activity
             android:name=".MainActivity"/>
-        <activity
-            android:name=".LoginActivity"/>
-        <activity
-            android:name=".OfficeActivity"/>
-        <activity
-            android:name=".ClassTableActivity"/>
-        <activity
-            android:name=".ClassActivity"/>
-        <activity
-            android:name=".BookDetailsActivity"/>
         
         <activity
             android:name=".MedMapActivity"
@@ -117,13 +107,6 @@
         <activity
             android:name=".DepartmentActivity"
             android:theme="@style/anim_style_slide" />
-        
-        <provider
-            android:name=".DatabaseProvider"
-            android:authorities="com.start.navigation"
-            android:exported="false" >
-            <grant-uri-permission android:pathPattern=".*" />
-        </provider>
         
         <service
             android:name="com.baidu.location.f"

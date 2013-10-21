@@ -1,4 +1,4 @@
-package com.start.model.medmap;
+package com.start.model;
 
 
 public class UserLocation {
