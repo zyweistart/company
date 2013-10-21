@@ -80,6 +80,16 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					
 				}else if(AppConfig.F_DOCTOR.equals(fileName)){
 					
+				}else if(AppConfig.F_EDGE.equals(fileName)){
+					
+				}else if(AppConfig.F_MAPDATA.equals(fileName)){
+					
+				}else if(AppConfig.F_ROOM.equals(fileName)){
+					
+				}else if(AppConfig.F_ROOMAREA.equals(fileName)){
+					
+				}else if(AppConfig.F_VERTEX.equals(fileName)){
+					
 				}
 			}
 		} catch (IOException e) {
