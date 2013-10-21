@@ -392,7 +392,7 @@ public class MapIndoorActivity extends MapActivity implements OnItemClickListene
 	 * @param floor
 	 */
 	private void setMapFile(int floor) {
-		String path = String.format("%1$s/%2$s/%3$s.map", AppConfig.CONFIG_DATA_PATH, mBuilding.getName(), floor);
+		String path = String.format("%1$s/%2$s/%3$s.map", AppConfig.CONFIG_DATA_PATH_NAVIGATION, mBuilding.getName(), floor);
 		File file = Utils.getFile(MapIndoorActivity.this, path);
 		if (file == null) {
 			throw new IllegalArgumentException("null map file");

@@ -6,28 +6,20 @@ import com.start.core.CoreModel;
 
 public class Room extends CoreModel {
 	
-public static String TABLE_NAME="ST_DOCTOR";
+	public static String TABLE_NAME="ST_ROOM";
 	
-	public static String COLUMN_NAME_MAPID="mapId";
-	public static String COLUMN_NAME_NAME="name";
-	public static String COLUMN_NAME_DEPARTMENTID="departmentId";
-	public static String COLUMN_NAME_VERTEXID="vertextId";
-	public static String COLUMN_NAME_LEFT="left";
-	public static String COLUMN_NAME_TOP="top";
-	public static String COLUMN_NAME_RIGHT="right";
-	public static String COLUMN_NAME_BOTTOM="bottom";
+	public static final String COLUMN_NAME_MAPID="mapId";
+	public static final String COLUMN_NAME_NAME="name";
+	public static final String COLUMN_NAME_DEPARTMENTID="departmentId";
+	public static final String COLUMN_NAME_VERTEXID="vertextId";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " INTEGER PRIMARY KEY,"
+			+ _ID + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
-			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_DEPARTMENTID + " TEXT,"
-			+ COLUMN_NAME_VERTEXID + " TEXT,"
-			+ COLUMN_NAME_LEFT + " TEXT,"
-			+ COLUMN_NAME_TOP + " TEXT,"
-			+ COLUMN_NAME_RIGHT + " TEXT,"
-			+ COLUMN_NAME_BOTTOM + " TEXT"
+			+ COLUMN_NAME_NAME + " TEXT,"
+			+ COLUMN_NAME_VERTEXID + " TEXT"
 			+ ");";
 	
 	/**
@@ -47,21 +39,9 @@ public static String TABLE_NAME="ST_DOCTOR";
 	 */
 	private String vertextId;
 	/**
-	 * 多边形bounding box的左限
+	 * 坐标区域
 	 */
-	private double left;
-	/**
-	 * 多边形bounding box的上限
-	 */
-	private double top;
-	/**
-	 * 多边形bounding box的右限
-	 */
-	private double right;
-	/**
-	 * 多边形bounding box的下限
-	 */
-	private double bottom;
+	private double[][] area;
 	
 	public String getName() {
 		return name;
@@ -102,46 +82,13 @@ public static String TABLE_NAME="ST_DOCTOR";
 		this.vertextId = vertextId;
 	}
 
-
-	public double getLeft() {
-		return left;
+	public double[][] getArea() {
+		return area;
 	}
 
-
-	public void setLeft(double left) {
-		this.left = left;
+	public void setArea(double[][] area) {
+		this.area = area;
 	}
-
-
-	public double getTop() {
-		return top;
-	}
-
-
-	public void setTop(double top) {
-		this.top = top;
-	}
-
-
-	public double getRight() {
-		return right;
-	}
-
-
-	public void setRight(double right) {
-		this.right = right;
-	}
-
-
-	public double getBottom() {
-		return bottom;
-	}
-
-
-	public void setBottom(double bottom) {
-		this.bottom = bottom;
-	}
-
 
 	public boolean contains(GeoPoint geoPoint) {
 		return false;

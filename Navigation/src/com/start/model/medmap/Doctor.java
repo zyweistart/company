@@ -5,18 +5,18 @@ import com.start.core.CoreModel;
 
 public class Doctor extends CoreModel {
 	
-	public static String TABLE_NAME="ST_DOCTOR";
+	public static final String TABLE_NAME="ST_DOCTOR";
 	
-	public static String COLUMN_NAME_NAME="name";
-	public static String COLUMN_NAME_SEX="sex";
-	public static String COLUMN_NAME_TITLE="title";
-	public static String COLUMN_NAME_SPECIALTY="specialty";
-	public static String COLUMN_NAME_INTRODUCTION="introduction";
-	public static String COLUMN_NAME_DEPARTMENTID="departmentId";
+	public static final String COLUMN_NAME_NAME="name";
+	public static final String COLUMN_NAME_SEX="sex";
+	public static final String COLUMN_NAME_TITLE="title";
+	public static final String COLUMN_NAME_SPECIALTY="specialty";
+	public static final String COLUMN_NAME_INTRODUCTION="introduction";
+	public static final String COLUMN_NAME_DEPARTMENTID="departmentId";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " INTEGER PRIMARY KEY,"
+			+ _ID + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_SEX + " TEXT,"
 			+ COLUMN_NAME_TITLE + " TEXT,"

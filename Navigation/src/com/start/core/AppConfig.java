@@ -42,7 +42,8 @@ public class AppConfig {
 	 * Local database configurations
 	 */
 	// Configuration directory
-	public static final String CONFIG_DATA_PATH = "raw_data";
+	public static final String CONFIG_DATA_PATH_MEDMAP = "med_data";
+	public static final String CONFIG_DATA_PATH_NAVIGATION = "raw_data";
 	
 	// Configuration file extension
 	public static final String BUILDING_FILE_EXT = "building.csv";
@@ -56,6 +57,15 @@ public class AppConfig {
 	public static final String TEACHER_FILE_EXT = "teacher.csv";
 	public static final String SHELF_FILE_EXT = "shelf.csv";
 	public static final String BOOK_2_SHELF_FILE_EXT = "book_2_shelf.csv";
+	
+	public static final String F_DEPARTMENT="department.txt";
+	public static final String F_DEPARTMENTHASROOM="department.txt";
+	public static final String F_DOCTOR="doctor.txt";
+	public static final String F_EDGE="edge.txt";
+	public static final String F_MAPDATA="mapdata.txt";
+	public static final String F_ROOM="room.txt";
+	public static final String F_ROOMAREA="roomarea.txt";
+	public static final String F_VERTEX="vertex.txt";
 	
 	// Configuration file type
 	public static final int TYPE_UNKNOWN = -1;

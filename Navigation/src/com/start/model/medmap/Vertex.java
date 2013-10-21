@@ -5,15 +5,15 @@ import com.start.core.CoreModel;
 
 public class Vertex extends CoreModel {
 	
-	public static String TABLE_NAME="ST_VERTEX";
+	public static final String TABLE_NAME="ST_VERTEX";
 	
-	public static String COLUMN_NAME_MAPID="mapId";
-	public static String COLUMN_NAME_LATITUDE="latitude";
-	public static String COLUMN_NAME_LONGITUDE="longitude";
+	public static final String COLUMN_NAME_MAPID="mapId";
+	public static final String COLUMN_NAME_LATITUDE="latitude";
+	public static final String COLUMN_NAME_LONGITUDE="longitude";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " INTEGER PRIMARY KEY,"
+			+ _ID + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
 			+ COLUMN_NAME_LATITUDE + " TEXT,"
 			+ COLUMN_NAME_LONGITUDE + " TEXT"

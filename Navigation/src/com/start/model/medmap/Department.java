@@ -5,16 +5,15 @@ import com.start.core.CoreModel;
 
 public class Department extends CoreModel {
 
-	public static String TABLE_NAME="ST_DEPARTMENT";
+	public static final String TABLE_NAME="ST_DEPARTMENT";
 	
-	public static String COLUMN_NAME_MAPID="mapId";
-	public static String COLUMN_NAME_NAME="name";
-	public static String COLUMN_NAME_INTRODUCTION="introduction";
+	public static final String COLUMN_NAME_MAPID="mapId";
+	public static final String COLUMN_NAME_NAME="name";
+	public static final String COLUMN_NAME_INTRODUCTION="introduction";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " INTEGER PRIMARY KEY,"
-			+ COLUMN_NAME_CODE + " TEXT,"
+			+ _ID + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_INTRODUCTION + " TEXT"
