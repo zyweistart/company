@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.start.core.AppConfig;
+import com.start.core.CoreService;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
@@ -30,10 +31,12 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 	
 	private Context mContext;
 	private AssetManager mAssetManager;
-
+	private CoreService mCoreService;
+	
 	public ImportConfigDataTask(Context context) {
 		this.mContext = context;
 		this.mAssetManager = context.getAssets();
+		this.mCoreService=new CoreService(mContext);
 	}
 
 	private List<String[]> readFileData(String fullFilePath){
@@ -108,9 +111,9 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(Department._ID, data[0]);
 					values.put(Department.COLUMN_NAME_NAME, data[1]);
-					values.put(Department.COLUMN_NAME_MAPID, data[2]);
-					values.put(Department.COLUMN_NAME_INTRODUCTION, data[3]);
-					
+					values.put(Department.COLUMN_NAME_INTRODUCTION, data[2]);
+					values.put(Department.COLUMN_NAME_MAJORROOMID, data[3]);
+					mCoreService.save(Department.TABLE_NAME,values);
 				}
 			}
 		}
@@ -121,12 +124,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=3){
+				if(data.length!=2){
 					Map<String,String> values=new HashMap<String,String>();
-					values.put(DepartmentHasRoom._ID, data[0]);
-					values.put(DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID, data[1]);
-					values.put(DepartmentHasRoom.COLUMN_NAME_ROOMID, data[2]);
-					
+					values.put(DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID, data[0]);
+					values.put(DepartmentHasRoom.COLUMN_NAME_ROOMID, data[1]);
+					mCoreService.save(DepartmentHasRoom.TABLE_NAME,values);
 				}
 			}
 		}
@@ -137,14 +139,13 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=5){
+				if(data.length!=4){
 					Map<String,String> values=new HashMap<String,String>();
-					values.put(Room._ID, data[0]);
-					values.put(Room.COLUMN_NAME_MAPID, data[1]);
+					values.put(Room.COLUMN_NAME_MAPID, data[0]);
+					values.put(Room._ID, data[1]);
 					values.put(Room.COLUMN_NAME_NAME, data[2]);
-					values.put(Room.COLUMN_NAME_DEPARTMENTID, data[3]);
-					values.put(Room.COLUMN_NAME_VERTEXID, data[4]);
-					
+					values.put(Room.COLUMN_NAME_VERTEXID, data[3]);
+					mCoreService.save(Room.TABLE_NAME,values);
 				}
 			}
 		}
@@ -155,12 +156,13 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=3){
+				if(data.length!=4){
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(RoomArea._ID, data[0]);
 					values.put(RoomArea.COLUMN_NAME_ROOMID, data[1]);
-					values.put(RoomArea.COLUMN_NAME_VERTEXID, data[2]);
-					
+					values.put(RoomArea.COLUMN_NAME_LATITUDE, data[2]);
+					values.put(RoomArea.COLUMN_NAME_LONGITUDE, data[3]);
+					mCoreService.save(RoomArea.TABLE_NAME,values);
 				}
 			}
 		}
@@ -180,7 +182,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Doctor.COLUMN_NAME_SPECIALTY, data[4]);
 					values.put(Doctor.COLUMN_NAME_INTRODUCTION, data[5]);
 					values.put(Doctor.COLUMN_NAME_DEPARTMENTID, data[6]);
-					
+					mCoreService.save(Doctor.TABLE_NAME,values);
 				}
 			}
 		}
@@ -193,11 +195,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length!=4){
 					Map<String,String> values=new HashMap<String,String>();
-					values.put(Vertex._ID, data[0]);
-					values.put(Vertex.COLUMN_NAME_MAPID, data[1]);
+					values.put(Vertex.COLUMN_NAME_MAPID, data[0]);
+					values.put(Vertex._ID, data[1]);
 					values.put(Vertex.COLUMN_NAME_LATITUDE, data[2]);
 					values.put(Vertex.COLUMN_NAME_LONGITUDE, data[3]);
-					
+					mCoreService.save(Vertex.TABLE_NAME,values);
 				}
 			}
 		}
@@ -212,7 +214,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					Map<String,String> values=new HashMap<String,String>();
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
-					
+					mCoreService.save(MapData.TABLE_NAME,values);
 				}
 			}
 		}
@@ -228,7 +230,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Edge._ID, data[0]);
 					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[1]);
 					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[2]);
-					
+					mCoreService.save(Edge.TABLE_NAME,values);
 				}
 			}
 		}

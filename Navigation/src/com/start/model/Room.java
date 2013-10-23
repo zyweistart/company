@@ -10,14 +10,12 @@ public class Room extends CoreModel {
 	
 	public static final String COLUMN_NAME_MAPID="mapId";
 	public static final String COLUMN_NAME_NAME="name";
-	public static final String COLUMN_NAME_DEPARTMENTID="departmentId";
 	public static final String COLUMN_NAME_VERTEXID="vertextId";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ _ID + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
-			+ COLUMN_NAME_DEPARTMENTID + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_VERTEXID + " TEXT"
 			+ ");";
