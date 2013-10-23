@@ -78,21 +78,21 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 			//导航数据1
 			for(String fileName:mAssetManager.list(AppConfig.CONFIG_DATA_PATH_MEDMAP)){
 				if(AppConfig.F_DEPARTMENT.equals(fileName)){
-					
+					importDepartment(fileName);
 				}else if(AppConfig.F_DEPARTMENTHASROOM.equals(fileName)){
-					
+					importDepartmentHasRoom(fileName);
 				}else if(AppConfig.F_DOCTOR.equals(fileName)){
-					
+					importDoctor(fileName);
 				}else if(AppConfig.F_EDGE.equals(fileName)){
-					
+					importEdge(fileName);
 				}else if(AppConfig.F_MAPDATA.equals(fileName)){
-					
+					importMapData(fileName);
 				}else if(AppConfig.F_ROOM.equals(fileName)){
-					
+					importRoom(fileName);
 				}else if(AppConfig.F_ROOMAREA.equals(fileName)){
-					
+					importRoomArea(fileName);
 				}else if(AppConfig.F_VERTEX.equals(fileName)){
-					
+					importEdge(fileName);
 				}
 			}
 		} catch (IOException e) {
@@ -156,12 +156,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length!=4){
+				if(data.length!=3){
 					Map<String,String> values=new HashMap<String,String>();
-					values.put(RoomArea._ID, data[0]);
-					values.put(RoomArea.COLUMN_NAME_ROOMID, data[1]);
-					values.put(RoomArea.COLUMN_NAME_LATITUDE, data[2]);
-					values.put(RoomArea.COLUMN_NAME_LONGITUDE, data[3]);
+					values.put(RoomArea.COLUMN_NAME_ROOMID, data[0]);
+					values.put(RoomArea.COLUMN_NAME_LATITUDE, data[1]);
+					values.put(RoomArea.COLUMN_NAME_LONGITUDE, data[2]);
 					mCoreService.save(RoomArea.TABLE_NAME,values);
 				}
 			}
@@ -227,9 +226,10 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length!=3){
 					Map<String,String> values=new HashMap<String,String>();
-					values.put(Edge._ID, data[0]);
-					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[1]);
-					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[2]);
+//					values.put(Edge._ID, data[0]);mapid
+					values.put(Edge._ID, data[1]);
+					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[2]);
+					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[3]);
 					mCoreService.save(Edge.TABLE_NAME,values);
 				}
 			}

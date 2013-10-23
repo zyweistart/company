@@ -12,10 +12,10 @@ public class RoomArea extends CoreModel {
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " TEXT,"
+			+ _ID + " INTEGER PRIMARY KEY,"
+			+ COLUMN_NAME_ROOMID + " TEXT,"
 			+ COLUMN_NAME_LATITUDE + " TEXT,"
-			+ COLUMN_NAME_LONGITUDE + " TEXT,"
-			+ COLUMN_NAME_ROOMID + " TEXT"
+			+ COLUMN_NAME_LONGITUDE + " TEXT"
 			+ ");";
 
 	private String roomId;

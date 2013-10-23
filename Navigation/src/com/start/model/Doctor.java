@@ -16,7 +16,7 @@ public class Doctor extends CoreModel {
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " TEXT,"
+			+ COLUMN_NAME_ID + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_SEX + " TEXT,"
 			+ COLUMN_NAME_TITLE + " TEXT,"
