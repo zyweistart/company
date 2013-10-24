@@ -9,7 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.content.Context;
-import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
 
@@ -131,9 +130,9 @@ public class Utils {
 	 * @param location
 	 * @return
 	 */
-	public static com.baidu.platform.comapi.basestruct.GeoPoint toBDPoint(Location location) {
-		return new com.baidu.platform.comapi.basestruct.GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6));
-	}
+//	public static com.baidu.platform.comapi.basestruct.GeoPoint toBDPoint(Location location) {
+//		return new com.baidu.platform.comapi.basestruct.GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6));
+//	}
 
 	/**
 	 * Construct a baidu map point
@@ -142,9 +141,9 @@ public class Utils {
 	 * @param longitude
 	 * @return
 	 */
-	public static com.baidu.platform.comapi.basestruct.GeoPoint toBDPoint(double latitude, double longitude) {
-		return new com.baidu.platform.comapi.basestruct.GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
-	}
+//	public static com.baidu.platform.comapi.basestruct.GeoPoint toBDPoint(double latitude, double longitude) {
+//		return new com.baidu.platform.comapi.basestruct.GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
+//	}
 
 	/**
 	 * Construct a mapsforge map point

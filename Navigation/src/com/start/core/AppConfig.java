@@ -50,32 +50,11 @@ public class AppConfig {
 		mFileExtMatcher.put(F_MAP0202, TYPE_MAP);
 	}
 
-	/**
-	 * Get file type by file name according to its extension
-	 * 
-	 * @param fileName
-	 * @return file type
-	 */
 	public static int getFileType(String fileName) {
 		if (mFileExtMatcher.containsKey(fileName)) {
 			return mFileExtMatcher.get(fileName);
 		} else {
 			return TYPE_UNKNOWN;
-		}
-	}
-
-	/**
-	 * Get floor that the file belongs to according to file name
-	 * 
-	 * @param fileName
-	 * @return the floor that contained in file name
-	 */
-	public static int getFloorByFileName(String fileName) {
-		String floorStr = fileName.substring(0, fileName.indexOf('.'));
-		try {
-			return Integer.valueOf(floorStr);
-		} catch (NumberFormatException nfe) {
-			return Integer.MAX_VALUE;
 		}
 	}
 }
