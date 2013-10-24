@@ -13,7 +13,7 @@ public class Vertex extends CoreModel {
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
-			+ _ID + " TEXT,"
+			+ COLUMN_NAME_ID + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
 			+ COLUMN_NAME_LATITUDE + " TEXT,"
 			+ COLUMN_NAME_LONGITUDE + " TEXT"

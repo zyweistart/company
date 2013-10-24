@@ -27,7 +27,7 @@ public class SplashActivity extends CoreActivity implements OnSharedPreferenceCh
 		} else {
 			// Go ahead to next screen
 			forward();
-		}		
+		}	
 	}
 	
 	@Override
