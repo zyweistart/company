@@ -1,4 +1,7 @@
 <resources>
+    
+    <color name="white">#ffffffff</color>
+    
     <color name="floor_index_text_normal">#222222</color>
     <color name="border_floor_index">#bf666666</color>
  
