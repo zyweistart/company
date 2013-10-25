@@ -14,7 +14,7 @@ public class CoreService {
 		this.dbHelper=new SQLiteDBHelper(mContext);
 	}
 	
-	public void save(String tableName,ContentValues values){
+	public void insert(String tableName,ContentValues values){
 		SQLiteDatabase sdb=this.dbHelper.getWritableDatabase();
 		sdb.insert(tableName, null, values);
 	}

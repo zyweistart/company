@@ -7,6 +7,11 @@ public class AppConfig {
 	// Configuration directory
 	public static final String CONFIG_DATA_PATH_MEDMAP = "med_data";
 	
+	//地图文件
+	public static final String F_MAPMAIN="main.map";
+	public static final String F_MAP0201="0201.map";
+	public static final String F_MAP0202="0202.map";
+	//数据文件
 	public static final String F_DEPARTMENT="department.txt";
 	public static final String F_DEPARTMENTHASROOM="department_has_room.txt";
 	public static final String F_DOCTOR="doctor.txt";
@@ -15,10 +20,6 @@ public class AppConfig {
 	public static final String F_ROOM="room.txt";
 	public static final String F_ROOMAREA="roomarea.txt";
 	public static final String F_VERTEX="vertex.txt";
-	
-	public static final String F_MAPMAIN="main.map";
-	public static final String F_MAP0201="0201.map";
-	public static final String F_MAP0202="0202.map";
 	
 	// Configuration file type
 	public static final int TYPE_UNKNOWN = -1;
@@ -36,6 +37,11 @@ public class AppConfig {
 	private static final HashMap<String, Integer> mFileExtMatcher = new HashMap<String, Integer>();
 
 	static {
+		//地图文件
+		mFileExtMatcher.put(F_MAPMAIN, TYPE_MAP);
+		mFileExtMatcher.put(F_MAP0201, TYPE_MAP);
+		mFileExtMatcher.put(F_MAP0202, TYPE_MAP);
+		//数据文件
 		mFileExtMatcher.put(F_DEPARTMENT, TYPE_DEPARTMENT);
 		mFileExtMatcher.put(F_DEPARTMENTHASROOM, TYPE_DEPARTMENTHASROOM);
 		mFileExtMatcher.put(F_DOCTOR, TYPE_DOCTOR);
@@ -44,10 +50,6 @@ public class AppConfig {
 		mFileExtMatcher.put(F_ROOM, TYPE_ROOM);
 		mFileExtMatcher.put(F_ROOMAREA, TYPE_ROOMAREA);
 		mFileExtMatcher.put(F_VERTEX, TYPE_VERTEX);
-		
-		mFileExtMatcher.put(F_MAPMAIN, TYPE_MAP);
-		mFileExtMatcher.put(F_MAP0201, TYPE_MAP);
-		mFileExtMatcher.put(F_MAP0202, TYPE_MAP);
 	}
 
 	public static int getFileType(String fileName) {
@@ -57,4 +59,5 @@ public class AppConfig {
 			return TYPE_UNKNOWN;
 		}
 	}
+	
 }

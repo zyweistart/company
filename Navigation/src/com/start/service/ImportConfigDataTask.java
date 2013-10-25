@@ -108,7 +108,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Department.COLUMN_NAME_NAME, data[1]);
 					values.put(Department.COLUMN_NAME_INTRODUCTION, data[2]);
 					values.put(Department.COLUMN_NAME_MAJORROOMID, data[3]);
-					mCoreService.save(Department.TABLE_NAME,values);
+					mCoreService.insert(Department.TABLE_NAME,values);
 				}
 			}
 		}
@@ -123,7 +123,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					ContentValues values=new ContentValues();
 					values.put(DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID, data[0]);
 					values.put(DepartmentHasRoom.COLUMN_NAME_ROOMID, data[1]);
-					mCoreService.save(DepartmentHasRoom.TABLE_NAME,values);
+					mCoreService.insert(DepartmentHasRoom.TABLE_NAME,values);
 				}
 			}
 		}
@@ -140,7 +140,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Room._ID, data[1]);
 					values.put(Room.COLUMN_NAME_NAME, data[2]);
 					values.put(Room.COLUMN_NAME_VERTEXID, data[3]);
-					mCoreService.save(Room.TABLE_NAME,values);
+					mCoreService.insert(Room.TABLE_NAME,values);
 				}
 			}
 		}
@@ -156,7 +156,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(RoomArea.COLUMN_NAME_ROOMID, data[0]);
 					values.put(RoomArea.COLUMN_NAME_LATITUDE, data[1]);
 					values.put(RoomArea.COLUMN_NAME_LONGITUDE, data[2]);
-					mCoreService.save(RoomArea.TABLE_NAME,values);
+					mCoreService.insert(RoomArea.TABLE_NAME,values);
 				}
 			}
 		}
@@ -176,7 +176,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Doctor.COLUMN_NAME_SPECIALTY, data[4]);
 					values.put(Doctor.COLUMN_NAME_INTRODUCTION, data[5]);
 					values.put(Doctor.COLUMN_NAME_DEPARTMENTID, data[6]);
-					mCoreService.save(Doctor.TABLE_NAME,values);
+					mCoreService.insert(Doctor.TABLE_NAME,values);
 				}
 			}
 		}
@@ -193,7 +193,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Vertex.COLUMN_NAME_ID, data[1]);
 					values.put(Vertex.COLUMN_NAME_LATITUDE, data[2]);
 					values.put(Vertex.COLUMN_NAME_LONGITUDE, data[3]);
-					mCoreService.save(Vertex.TABLE_NAME,values);
+					mCoreService.insert(Vertex.TABLE_NAME,values);
 				}
 			}
 		}
@@ -208,7 +208,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					ContentValues values=new ContentValues();
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
-					mCoreService.save(MapData.TABLE_NAME,values);
+					mCoreService.insert(MapData.TABLE_NAME,values);
 				}
 			}
 		}
@@ -225,7 +225,7 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Edge._ID, data[1]);
 					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[2]);
 					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[3]);
-					mCoreService.save(Edge.TABLE_NAME,values);
+					mCoreService.insert(Edge.TABLE_NAME,values);
 				}
 			}
 		}
