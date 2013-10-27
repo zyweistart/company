@@ -7,39 +7,39 @@
 	android:gravity="center_vertical"
 	android:background="@drawable/widget_bar_bg_n">
 	<RadioButton 
-		android:id="@+id/main_footbar_news"
+		android:id="@+id/main_footbar_introduction"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_news"/>
+		android:drawableTop="@drawable/widget_bar_introduction"/>
 	<ImageView
 		style="@style/main_footbar_cutline"
 		android:src="@drawable/widget_bar_cut_off"
 		android:contentDescription="@string/empty"/>
 	<RadioButton 
-		android:id="@+id/main_footbar_question"
+		android:id="@+id/main_footbar_map"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_question"/>
+		android:drawableTop="@drawable/widget_bar_map"/>
 	<ImageView
 		style="@style/main_footbar_cutline"
 		android:src="@drawable/widget_bar_cut_off"
 		android:contentDescription="@string/empty"/>
 	<RadioButton 
-		android:id="@+id/main_footbar_tweet"
+		android:id="@+id/main_footbar_process"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_tweet"/>
+		android:drawableTop="@drawable/widget_bar_process"/>
 	<ImageView
 		style="@style/main_footbar_cutline"
 		android:src="@drawable/widget_bar_cut_off"
 		android:contentDescription="@string/empty"/>
 	<RadioButton
-		android:id="@+id/main_footbar_active"
+		android:id="@+id/main_footbar_friend"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_active"/>
+		android:drawableTop="@drawable/widget_bar_friend"/>
 	<ImageView
 		style="@style/main_footbar_cutline"
 		android:src="@drawable/widget_bar_cut_off"
 		android:contentDescription="@string/empty"/>
 	<RadioButton
-		android:id="@+id/main_footbar_setting"
+		android:id="@+id/main_footbar_more"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_active"/>
+		android:drawableTop="@drawable/widget_bar_more"/>
 </LinearLayout>

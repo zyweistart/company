@@ -7,6 +7,12 @@
     <string name="cancel">取消</string>
     <string name="empty"></string>
     
+    <string name="frame_introduction_title">介绍</string>
+    <string name="frame_map_title">地图</string>
+    <string name="frame_process_title">流程</string>
+    <string name="frame_friend_title">好友</string>
+    <string name="frame_more_title">更多</string>
+    
     <!-- PullToRefreshListView -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">松开后刷新</string>

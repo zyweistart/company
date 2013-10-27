@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -24,74 +23,48 @@ import com.start.widget.ScrollLayout;
  */
 public class MainActivity extends MapActivity implements OnTouchListener {
 
+	private MapView mMapView;
+	
 	private int mCurSel;
 	private int mViewCount;
 	private RadioButton[] mButtons;
 	private ScrollLayout mScrollLayout;
 	
-	private RadioButton rbo1;
-	private RadioButton rbo2;
-	private RadioButton rbo3;
-	private RadioButton rbo4;
-	private RadioButton rbo5;
+	private RadioButton rboIntroduction;
+	private RadioButton rboMap;
+	private RadioButton rboProcess;
+	private RadioButton rboFriend;
+	private RadioButton rboMore;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		init();
-		setupUI();
+		setUpUI();
 	}
 	
-	private MapView mMapView;
-	
-	private void setupUI() {
-		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_ll_content);
-		mMapView = new MapView(this);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.setClickable(true);
-		mMapView.setOnTouchListener(this);
-		container.addView(mMapView, 0);
-		setMapFile();
-	}
-	
-	private void setMapFile() {
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"0202");
-		String fullPath=Utils.getFile(this, path).getPath();
-		Log.v("MainActivity",fullPath);
-		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
-		if (!openResult.isSuccess()) {
-			return;
-		}
-		updateOverlay();
-	}
-	
-
-	private void updateOverlay() {
-		
-	}
-
 	@Override
     protected void onResume() {
 	    	super.onResume();
-	    	if(mViewCount == 0) mViewCount = 4;
-	    	if(mCurSel == 0 && !rbo1.isChecked()) {
-	    		rbo1.setChecked(true);
-	    		rbo2.setChecked(false);
-	    		rbo3.setChecked(false);
-	    		rbo4.setChecked(false);
-	    		rbo5.setChecked(false);
+	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
+	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
+	    		rboIntroduction.setChecked(true);
+	    		rboMap.setChecked(false);
+	    		rboProcess.setChecked(false);
+	    		rboFriend.setChecked(false);
+	    		rboMore.setChecked(false);
 	    	}
 	    	//读取左右滑动配置
 	    	mScrollLayout.setIsScroll(AppConfig.isScrollLayoutScrool());
     }
 
 	private void init() {
-		rbo1=(RadioButton)findViewById(R.id.main_footbar_active);
-		rbo2=(RadioButton)findViewById(R.id.main_footbar_news);
-		rbo3=(RadioButton)findViewById(R.id.main_footbar_question);
-		rbo4=(RadioButton)findViewById(R.id.main_footbar_setting);
-		rbo5=(RadioButton)findViewById(R.id.main_footbar_tweet);
+		rboIntroduction=(RadioButton)findViewById(R.id.main_footbar_introduction);
+		rboMap=(RadioButton)findViewById(R.id.main_footbar_map);
+		rboProcess=(RadioButton)findViewById(R.id.main_footbar_process);
+		rboFriend=(RadioButton)findViewById(R.id.main_footbar_friend);
+		rboMore=(RadioButton)findViewById(R.id.main_footbar_more);
 		
 	    	mScrollLayout = (ScrollLayout) findViewById(R.id.main_scrolllayout);
 	    	
@@ -142,6 +115,31 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		return false;
+	}
+	
+	private void setUpUI() {
+//		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_ll_content);
+		mMapView = new MapView(this);
+		mMapView.setBuiltInZoomControls(true);
+		mMapView.setClickable(true);
+		mMapView.setOnTouchListener(this);
+//		container.addView(mMapView, 0);
+		setMapFile();
+	}
+	
+	private void setMapFile() {
+		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"0202");
+		String fullPath=Utils.getFile(this, path).getPath();
+		Log.v("MainActivity",fullPath);
+		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
+		if (!openResult.isSuccess()) {
+			return;
+		}
+		updateOverlay();
+	}
+	
+	private void updateOverlay() {
+		
 	}
 	
 }

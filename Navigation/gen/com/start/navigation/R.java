@@ -11,7 +11,8 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int white=0x7f040000;
+        public static final int black=0x7f040000;
+        public static final int white=0x7f040001;
     }
     public static final class dimen {
         /** 
@@ -26,25 +27,25 @@ public final class R {
         public static final int start_background=0x7f020001;
         public static final int welcome=0x7f020002;
         public static final int widget_arrow=0x7f020003;
-        public static final int widget_bar_active=0x7f020004;
-        public static final int widget_bar_active_nor=0x7f020005;
-        public static final int widget_bar_active_over=0x7f020006;
-        public static final int widget_bar_bg=0x7f020007;
-        public static final int widget_bar_bg_n=0x7f020008;
-        public static final int widget_bar_bg_p=0x7f020009;
-        public static final int widget_bar_cut_off=0x7f02000a;
-        public static final int widget_bar_more=0x7f02000b;
-        public static final int widget_bar_more_nor=0x7f02000c;
-        public static final int widget_bar_more_over=0x7f02000d;
-        public static final int widget_bar_news=0x7f02000e;
-        public static final int widget_bar_news_nor=0x7f02000f;
-        public static final int widget_bar_news_over=0x7f020010;
-        public static final int widget_bar_question=0x7f020011;
-        public static final int widget_bar_question_nor=0x7f020012;
-        public static final int widget_bar_question_over=0x7f020013;
-        public static final int widget_bar_tweet=0x7f020014;
-        public static final int widget_bar_tweet_nor=0x7f020015;
-        public static final int widget_bar_tweet_over=0x7f020016;
+        public static final int widget_bar_bg=0x7f020004;
+        public static final int widget_bar_bg_n=0x7f020005;
+        public static final int widget_bar_bg_p=0x7f020006;
+        public static final int widget_bar_cut_off=0x7f020007;
+        public static final int widget_bar_friend=0x7f020008;
+        public static final int widget_bar_friend_nor=0x7f020009;
+        public static final int widget_bar_friend_over=0x7f02000a;
+        public static final int widget_bar_introduction=0x7f02000b;
+        public static final int widget_bar_introduction_nor=0x7f02000c;
+        public static final int widget_bar_introduction_over=0x7f02000d;
+        public static final int widget_bar_map=0x7f02000e;
+        public static final int widget_bar_map_nor=0x7f02000f;
+        public static final int widget_bar_map_over=0x7f020010;
+        public static final int widget_bar_more=0x7f020011;
+        public static final int widget_bar_more_nor=0x7f020012;
+        public static final int widget_bar_more_over=0x7f020013;
+        public static final int widget_bar_process=0x7f020014;
+        public static final int widget_bar_process_nor=0x7f020015;
+        public static final int widget_bar_process_over=0x7f020016;
         public static final int widget_pulltorefresh_arrow=0x7f020017;
     }
     public static final class id {
@@ -53,11 +54,11 @@ public final class R {
         public static final int head_lastUpdatedTextView=0x7f08000f;
         public static final int head_progressBar=0x7f08000d;
         public static final int head_tipsTextView=0x7f08000e;
-        public static final int main_footbar_active=0x7f080006;
-        public static final int main_footbar_news=0x7f080003;
-        public static final int main_footbar_question=0x7f080004;
-        public static final int main_footbar_setting=0x7f080007;
-        public static final int main_footbar_tweet=0x7f080005;
+        public static final int main_footbar_friend=0x7f080006;
+        public static final int main_footbar_introduction=0x7f080003;
+        public static final int main_footbar_map=0x7f080004;
+        public static final int main_footbar_more=0x7f080007;
+        public static final int main_footbar_process=0x7f080005;
         public static final int main_linearlayout_footer=0x7f080001;
         public static final int main_scrolllayout=0x7f080000;
         public static final int module_main_footer_id=0x7f080002;
@@ -70,11 +71,11 @@ public final class R {
         public static final int activity_start=0x7f030001;
         public static final int lvitem_friendlocation=0x7f030002;
         public static final int module_main_footer=0x7f030003;
-        public static final int module_main_frame_1=0x7f030004;
-        public static final int module_main_frame_2=0x7f030005;
-        public static final int module_main_frame_3=0x7f030006;
-        public static final int module_main_frame_4=0x7f030007;
-        public static final int module_main_frame_5=0x7f030008;
+        public static final int module_main_frame_friend=0x7f030004;
+        public static final int module_main_frame_introduction=0x7f030005;
+        public static final int module_main_frame_map=0x7f030006;
+        public static final int module_main_frame_more=0x7f030007;
+        public static final int module_main_frame_process=0x7f030008;
         public static final int module_main_header=0x7f030009;
         public static final int widget_pull_to_refresh_head=0x7f03000a;
     }
@@ -82,12 +83,17 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int cancel=0x7f060002;
         public static final int empty=0x7f060003;
+        public static final int frame_friend_title=0x7f060007;
+        public static final int frame_introduction_title=0x7f060004;
+        public static final int frame_map_title=0x7f060005;
+        public static final int frame_more_title=0x7f060008;
+        public static final int frame_process_title=0x7f060006;
         public static final int ok=0x7f060001;
         /**  PullToRefreshListView 
          */
-        public static final int pull_to_refresh_pull_label=0x7f060004;
-        public static final int pull_to_refresh_refreshing_label=0x7f060006;
-        public static final int pull_to_refresh_release_label=0x7f060005;
+        public static final int pull_to_refresh_pull_label=0x7f060009;
+        public static final int pull_to_refresh_refreshing_label=0x7f06000b;
+        public static final int pull_to_refresh_release_label=0x7f06000a;
     }
     public static final class style {
         /** 

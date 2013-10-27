@@ -4,9 +4,11 @@
   	android:layout_width="match_parent" 
   	android:layout_height="40.0dip"
   	android:layout_gravity="center_vertical|center_horizontal"
+  	android:background="@color/black"
   	android:gravity="center">
   	<TextView
   	    android:layout_width="match_parent"
   	    android:layout_height="wrap_content"
-  	    android:text="这是标题"/>
+  	    android:textColor="@color/white"
+  	    android:text="@string/app_name"/>
 </RelativeLayout>
