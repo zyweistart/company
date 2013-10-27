@@ -35,4 +35,7 @@ public class AppContext extends Application {
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 	
+    
+    
+    
 }

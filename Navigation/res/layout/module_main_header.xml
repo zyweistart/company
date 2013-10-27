@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" 
-	android:id="@+id/main_linearlayout_footer"
-	android:layout_width="fill_parent" 
-	android:layout_height="wrap_content"
-	android:gravity="center_vertical">
-	
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/module_main_header_id" 
+  	android:layout_width="match_parent" 
+  	android:layout_height="40.0dip"
+  	android:layout_gravity="center_vertical|center_horizontal"
+  	android:gravity="center">
+  	<TextView
+  	    android:layout_width="match_parent"
+  	    android:layout_height="wrap_content"
+  	    android:text="这是标题"/>
+</RelativeLayout>
