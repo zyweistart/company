@@ -38,8 +38,9 @@
 		style="@style/main_footbar_cutline"
 		android:src="@drawable/widget_bar_cut_off"
 		android:contentDescription="@string/empty"/>
-	<RadioButton
+	<ImageView
 		android:id="@+id/main_footbar_more"
-		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/widget_bar_more"/>
+		style="@style/main_footbar_image"
+		android:src="@drawable/widget_bar_more"
+		android:contentDescription="@string/empty"/>
 </LinearLayout>

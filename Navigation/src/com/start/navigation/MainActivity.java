@@ -4,11 +4,13 @@ import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -23,7 +25,7 @@ import com.start.widget.ScrollLayout;
  */
 public class MainActivity extends MapActivity implements OnTouchListener {
 
-	private MapView mMapView;
+	private AppContext appContext;
 	
 	private int mCurSel;
 	private int mViewCount;
@@ -34,37 +36,46 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	private RadioButton rboMap;
 	private RadioButton rboProcess;
 	private RadioButton rboFriend;
-	private RadioButton rboMore;
+	private ImageView imMore;
+	
+	private MapView mMapView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		init();
-		setUpUI();
+		
+		appContext=AppContext.getInstance();
+		
+		this.initHeadView();
+        this.initFootBar();
+        this.initFrame();
+		
+        this.setUpUI();
+        
 	}
 	
-	@Override
-    protected void onResume() {
-	    	super.onResume();
-	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
-	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
-	    		rboIntroduction.setChecked(true);
-	    		rboMap.setChecked(false);
-	    		rboProcess.setChecked(false);
-	    		rboFriend.setChecked(false);
-	    		rboMore.setChecked(false);
-	    	}
-	    	//读取左右滑动配置
-	    	mScrollLayout.setIsScroll(AppConfig.isScrollLayoutScrool());
-    }
 
-	private void init() {
+	private void initHeadView() {
+		
+	}
+	
+	private void initFootBar() {
 		rboIntroduction=(RadioButton)findViewById(R.id.main_footbar_introduction);
 		rboMap=(RadioButton)findViewById(R.id.main_footbar_map);
 		rboProcess=(RadioButton)findViewById(R.id.main_footbar_process);
 		rboFriend=(RadioButton)findViewById(R.id.main_footbar_friend);
-		rboMore=(RadioButton)findViewById(R.id.main_footbar_more);
+		
+		imMore = (ImageView)findViewById(R.id.main_footbar_more);
+	    	imMore.setOnClickListener(new View.OnClickListener() {
+	    		public void onClick(View v) {
+	    			
+	    			Intent intent=new Intent(MainActivity.this,MoreActivity.class);
+	    			startActivity(intent);
+	    			
+	    		}
+	    	});    	
+		
 		
 	    	mScrollLayout = (ScrollLayout) findViewById(R.id.main_scrolllayout);
 	    	
@@ -79,8 +90,8 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	    		mButtons[i].setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						int pos = (Integer)(v.getTag());
-						//点击当前项刷新
 			    			if(mCurSel == pos) {
+			    				//TODO:点击当前项刷新
 			    			}
 						mScrollLayout.snapToScreen(pos);
 					}
@@ -93,10 +104,28 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	    	
 	    	mScrollLayout.SetOnViewChangeListener(new ScrollLayout.OnViewChangeListener() {
 				public void OnViewChange(int viewIndex) {
-					//切换列表视图-如果列表数据为空：加载数据
+					//TODO:切换列表视图-如果列表数据为空：加载数据
 					setCurPoint(viewIndex);
 				}
 			});
+	}
+
+	private void initFrame() {
+		
+	}
+	
+	@Override
+    protected void onResume() {
+	    	super.onResume();
+	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
+	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
+	    		rboIntroduction.setChecked(true);
+	    		rboMap.setChecked(false);
+	    		rboProcess.setChecked(false);
+	    		rboFriend.setChecked(false);
+	    	}
+	    	//读取左右滑动配置
+	    	mScrollLayout.setIsScroll(appContext.isScrollLayoutScrool());
     }
 	
     /**

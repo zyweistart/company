@@ -9,7 +9,7 @@ import com.start.core.CoreActivity;
  * @author start
  *
  */
-public class SettingActivity extends CoreActivity {
+public class MoreActivity extends CoreActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

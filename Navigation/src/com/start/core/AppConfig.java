@@ -2,8 +2,6 @@ package com.start.core;
 
 import java.util.HashMap;
 
-import com.start.navigation.AppContext;
-
 public class AppConfig {
 
 	// Configuration directory
@@ -66,13 +64,6 @@ public class AppConfig {
 		
 		public static final String ScrollLayoutisScrool="ScrollLayoutisScrool";
 
-	}
-	
-	/**
-	 * 主体框架是否滚动
-	 */
-	public static boolean isScrollLayoutScrool(){
-		return AppContext.getInstance().getSharedPreferencesUtils().getBoolean(PreferencesConfig.ScrollLayoutisScrool, true);
 	}
 	
 }

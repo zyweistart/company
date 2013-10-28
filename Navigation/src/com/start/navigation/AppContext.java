@@ -3,6 +3,7 @@ package com.start.navigation;
 import android.app.Application;
 import android.widget.Toast;
 
+import com.start.core.AppConfig.PreferencesConfig;
 import com.start.utils.SharedPreferencesUtils;
 
 public class AppContext extends Application {
@@ -35,6 +36,12 @@ public class AppContext extends Application {
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 	
+    /**
+	 * 主体框架是否滚动
+	 */
+	public boolean isScrollLayoutScrool(){
+		return AppContext.getInstance().getSharedPreferencesUtils().getBoolean(PreferencesConfig.ScrollLayoutisScrool, true);
+	}
     
     
     
