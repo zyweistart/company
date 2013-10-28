@@ -49,28 +49,31 @@ public final class R {
         public static final int widget_pulltorefresh_arrow=0x7f020017;
     }
     public static final class id {
-        public static final int head_arrowImageView=0x7f080012;
-        public static final int head_contentLayout=0x7f080010;
-        public static final int head_lastUpdatedTextView=0x7f080015;
-        public static final int head_progressBar=0x7f080013;
-        public static final int head_tipsTextView=0x7f080014;
-        public static final int main_footbar_friend=0x7f080006;
-        public static final int main_footbar_introduction=0x7f080003;
-        public static final int main_footbar_map=0x7f080004;
-        public static final int main_footbar_more=0x7f080007;
-        public static final int main_footbar_process=0x7f080005;
-        public static final int main_linearlayout_footer=0x7f080001;
-        public static final int main_scrolllayout=0x7f080000;
-        public static final int module_main_footer_content=0x7f080002;
-        public static final int module_main_frame_friend_content=0x7f080008;
-        public static final int module_main_frame_introduction_btnDepartment=0x7f08000b;
-        public static final int module_main_frame_introduction_btnDoctor=0x7f08000c;
-        public static final int module_main_frame_introduction_btnHospital=0x7f08000a;
-        public static final int module_main_frame_introduction_content=0x7f080009;
-        public static final int module_main_frame_map_content=0x7f08000d;
-        public static final int module_main_frame_process_content=0x7f08000e;
-        public static final int module_main_header_id=0x7f08000f;
-        public static final int mylistview_word=0x7f080011;
+        public static final int head_arrowImageView=0x7f080015;
+        public static final int head_contentLayout=0x7f080013;
+        public static final int head_lastUpdatedTextView=0x7f080018;
+        public static final int head_progressBar=0x7f080016;
+        public static final int head_tipsTextView=0x7f080017;
+        public static final int lvitem_department_content=0x7f080002;
+        public static final int lvitem_department_name=0x7f080003;
+        public static final int main_footbar_friend=0x7f080009;
+        public static final int main_footbar_introduction=0x7f080006;
+        public static final int main_footbar_map=0x7f080007;
+        public static final int main_footbar_more=0x7f08000a;
+        public static final int main_footbar_process=0x7f080008;
+        public static final int main_linearlayout_footer=0x7f080004;
+        public static final int main_scrolllayout=0x7f080001;
+        public static final int module_main_footer_content=0x7f080005;
+        public static final int module_main_frame_department_list=0x7f080000;
+        public static final int module_main_frame_friend_content=0x7f08000b;
+        public static final int module_main_frame_introduction_btnDepartment=0x7f08000e;
+        public static final int module_main_frame_introduction_btnDoctor=0x7f08000f;
+        public static final int module_main_frame_introduction_btnHospital=0x7f08000d;
+        public static final int module_main_frame_introduction_content=0x7f08000c;
+        public static final int module_main_frame_map_content=0x7f080010;
+        public static final int module_main_frame_process_content=0x7f080011;
+        public static final int module_main_header_id=0x7f080012;
+        public static final int mylistview_word=0x7f080014;
     }
     public static final class layout {
         public static final int activity_department_detail=0x7f030000;
@@ -80,14 +83,15 @@ public final class R {
         public static final int activity_main=0x7f030004;
         public static final int activity_more=0x7f030005;
         public static final int activity_start=0x7f030006;
-        public static final int lvitem_friendlocation=0x7f030007;
-        public static final int module_main_footer=0x7f030008;
-        public static final int module_main_frame_friend=0x7f030009;
-        public static final int module_main_frame_introduction=0x7f03000a;
-        public static final int module_main_frame_map=0x7f03000b;
-        public static final int module_main_frame_process=0x7f03000c;
-        public static final int module_main_header=0x7f03000d;
-        public static final int widget_pull_to_refresh_head=0x7f03000e;
+        public static final int lvitem_department=0x7f030007;
+        public static final int lvitem_friendlocation=0x7f030008;
+        public static final int module_main_footer=0x7f030009;
+        public static final int module_main_frame_friend=0x7f03000a;
+        public static final int module_main_frame_introduction=0x7f03000b;
+        public static final int module_main_frame_map=0x7f03000c;
+        public static final int module_main_frame_process=0x7f03000d;
+        public static final int module_main_header=0x7f03000e;
+        public static final int widget_pull_to_refresh_head=0x7f03000f;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
