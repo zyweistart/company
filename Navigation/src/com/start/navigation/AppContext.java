@@ -40,9 +40,7 @@ public class AppContext extends Application {
 	 * 主体框架是否滚动
 	 */
 	public boolean isScrollLayoutScrool(){
-		return AppContext.getInstance().getSharedPreferencesUtils().getBoolean(PreferencesConfig.ScrollLayoutisScrool, true);
+		return AppContext.getInstance().getSharedPreferencesUtils().getBoolean(PreferencesConfig.ScrollLayoutisScrool, false);
 	}
-    
-    
     
 }

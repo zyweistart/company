@@ -26,11 +26,12 @@
             </intent-filter>
         </activity>
         
-        <activity
-            android:name=".MainActivity"/>
-        
-        <activity
-            android:name=".MoreActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".DepartmentListActivity"/>
+        <activity android:name=".DepartmentDetailActivity"/>
+        <activity android:name=".DoctorListActivity"/>
+        <activity android:name=".DoctorDetailActivity"/>
+        <activity android:name=".MoreActivity"/>
         
     </application>
 

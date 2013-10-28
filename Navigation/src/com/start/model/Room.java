@@ -3,8 +3,9 @@ package com.start.model;
 import org.mapsforge.core.model.GeoPoint;
 
 import com.start.core.CoreModel;
+import com.start.model.overlay.POI;
 
-public class Room extends CoreModel {
+public class Room extends CoreModel implements POI {
 	
 	public static String TABLE_NAME="ST_ROOM";
 	
@@ -89,6 +90,41 @@ public class Room extends CoreModel {
 	}
 
 	public boolean contains(GeoPoint geoPoint) {
+		return false;
+	}
+
+
+	@Override
+	public GeoPoint getGeoPoint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getVertex() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int getFloor() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public String getBuilding() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean inside(GeoPoint p) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

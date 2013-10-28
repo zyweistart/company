@@ -1,21 +1,36 @@
 package com.start.navigation;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
+import org.mapsforge.android.maps.Projection;
+import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.start.core.AppConfig;
+import com.start.model.Room;
+import com.start.model.overlay.POI;
+import com.start.model.overlay.POIMarker;
 import com.start.utils.Utils;
+import com.start.widget.OnTapMapListener;
+import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 import com.start.widget.ScrollLayout;
 
 /**
@@ -23,7 +38,7 @@ import com.start.widget.ScrollLayout;
  * @author start
  *
  */
-public class MainActivity extends MapActivity implements OnTouchListener {
+public class MainActivity extends MapActivity implements OnTouchListener,OnClickListener,OnTapMapClickListener {
 
 	private AppContext appContext;
 	
@@ -38,7 +53,23 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	private RadioButton rboFriend;
 	private ImageView imMore;
 	
+	private Button module_main_frame_introduction_btnHospital;
+	private Button module_main_frame_introduction_btnDepartment;
+	private Button module_main_frame_introduction_btnDoctor;
+	
 	private MapView mMapView;
+	/**
+	 * 当前打开的地图编号
+	 */
+	private String currentMapID;
+	/**
+	 * 当前选重的Marker
+	 */
+	protected POIMarker mPOIMarker;
+	/**
+	 * 当前地图对应的所有房间列表
+	 */
+	private Map<String,List<Room>> mRooms=new HashMap<String,List<Room>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +78,42 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 		
 		appContext=AppContext.getInstance();
 		
-		this.initHeadView();
-        this.initFootBar();
-        this.initFrame();
-		
-        this.setUpUI();
+		this.initHeaderView();
+        this.initFooterView();
+        this.initMainFrameView();
         
 	}
 	
-
-	private void initHeadView() {
+	@Override
+    protected void onResume() {
+	    	super.onResume();
+	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
+	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
+	    		rboIntroduction.setChecked(true);
+	    		rboMap.setChecked(false);
+	    		rboProcess.setChecked(false);
+	    		rboFriend.setChecked(false);
+	    	}
+	    	//读取左右滑动配置
+	    	mScrollLayout.setIsScroll(appContext.isScrollLayoutScrool());
+    }
+	
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		return mGestureDetector.onTouchEvent(event);
+	}
+	
+	/**
+	 * 初始化头部视图
+	 */
+	private void initHeaderView() {
 		
 	}
 	
-	private void initFootBar() {
+	/**
+	 * 初始化底部视图
+	 */
+	private void initFooterView() {
 		rboIntroduction=(RadioButton)findViewById(R.id.main_footbar_introduction);
 		rboMap=(RadioButton)findViewById(R.id.main_footbar_map);
 		rboProcess=(RadioButton)findViewById(R.id.main_footbar_process);
@@ -76,10 +129,9 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	    		}
 	    	});    	
 		
-		
 	    	mScrollLayout = (ScrollLayout) findViewById(R.id.main_scrolllayout);
 	    	
-	    	LinearLayout linearLayout = (LinearLayout) findViewById(R.id.module_main_footer_id);
+	    	LinearLayout linearLayout = (LinearLayout) findViewById(R.id.module_main_footer_content);
 	    	mViewCount = mScrollLayout.getChildCount();
 	    	mButtons = new RadioButton[mViewCount];
 	    	
@@ -109,26 +161,8 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 				}
 			});
 	}
-
-	private void initFrame() {
-		
-	}
 	
-	@Override
-    protected void onResume() {
-	    	super.onResume();
-	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
-	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
-	    		rboIntroduction.setChecked(true);
-	    		rboMap.setChecked(false);
-	    		rboProcess.setChecked(false);
-	    		rboFriend.setChecked(false);
-	    	}
-	    	//读取左右滑动配置
-	    	mScrollLayout.setIsScroll(appContext.isScrollLayoutScrool());
-    }
-	
-    /**
+	/**
      * 设置底部栏当前焦点
      * @param index
      */
@@ -141,23 +175,38 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	    	mCurSel = index;
     }
 
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		return false;
-	}
-	
-	private void setUpUI() {
-//		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_ll_content);
+    private GestureDetector mGestureDetector;
+    
+    /**
+     * 初始化主体框架视图
+     */
+	private void initMainFrameView() {
+		//introduction
+		module_main_frame_introduction_btnHospital = (Button) findViewById(R.id.module_main_frame_introduction_btnHospital);
+		module_main_frame_introduction_btnHospital.setOnClickListener(this);
+		module_main_frame_introduction_btnDepartment = (Button) findViewById(R.id.module_main_frame_introduction_btnDepartment);
+		module_main_frame_introduction_btnDepartment.setOnClickListener(this);
+		module_main_frame_introduction_btnDoctor = (Button) findViewById(R.id.module_main_frame_introduction_btnDoctor);
+		module_main_frame_introduction_btnDoctor.setOnClickListener(this);
+		//map
+		mGestureDetector = new GestureDetector(this,new OnTapMapListener(this));
+		
+		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
 		mMapView = new MapView(this);
 		mMapView.setBuiltInZoomControls(true);
 		mMapView.setClickable(true);
 		mMapView.setOnTouchListener(this);
-//		container.addView(mMapView, 0);
+		container.addView(mMapView, 0);
 		setMapFile();
+		
+		//process
+		
+		//friend
+		
 	}
 	
 	private void setMapFile() {
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"0202");
+		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"main");
 		String fullPath=Utils.getFile(this, path).getPath();
 		Log.v("MainActivity",fullPath);
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
@@ -169,6 +218,54 @@ public class MainActivity extends MapActivity implements OnTouchListener {
 	
 	private void updateOverlay() {
 		
+	}
+
+	@Override
+	public void onClickAt(float xPixel, float yPixel) {
+		Projection projection = mMapView.getProjection();
+		if (projection == null) {
+			return;
+		}
+
+		GeoPoint g = projection.fromPixels((int) xPixel, (int) yPixel);
+
+		if (mPOIMarker != null) {
+			POI poi = mPOIMarker.getPOI();
+			if (poi.inside(g)) {
+//				tapPOI(poi);
+				return;
+			}
+		}
+
+		if (mRooms.isEmpty()) {
+			return;
+		}
+
+		List<Room> rooms = mRooms.get(currentMapID);
+		for (Room r : rooms) {
+			if (r.inside(g)) {
+//				tapPOI(r);
+				return;
+			}
+		}
+		
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v.getId()==R.id.module_main_frame_introduction_btnHospital){
+			//医院介绍
+			Intent intent=new Intent(this,DoctorListActivity.class);
+			startActivity(intent);
+		}else if(v.getId()==R.id.module_main_frame_introduction_btnDepartment){
+			//部门介绍
+			Intent intent=new Intent(this,DepartmentListActivity.class);
+			startActivity(intent);
+		}else if(v.getId()==R.id.module_main_frame_introduction_btnDoctor){
+			//医生介绍
+			Intent intent=new Intent(this,DoctorListActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 }

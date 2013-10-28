@@ -31,6 +31,8 @@ public class Department extends CoreModel {
 	 * 科室简介
 	 */
 	private String introduction;
+	
+	private String majorRoomId;
 	/**
 	 * 科室所在所有房间编号
 	 */
@@ -59,7 +61,15 @@ public class Department extends CoreModel {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	
+
+	public String getMajorRoomId() {
+		return majorRoomId;
+	}
+
+	public void setMajorRoomId(String majorRoomId) {
+		this.majorRoomId = majorRoomId;
+	}
+
 	public Room[] getRooms() {
 		return rooms;
 	}

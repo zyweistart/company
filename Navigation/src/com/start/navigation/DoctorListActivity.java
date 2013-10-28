@@ -14,6 +14,7 @@ public class DoctorListActivity extends CoreActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_doctor_list);
 	}
 
 }
