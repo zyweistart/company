@@ -8,11 +8,7 @@
 #endif
 #import "DataSingleton.h"
 #import "NSString+Date.h"
-#ifdef JAILBREAK
 #import "ACAccountViewController.h"
-#else 
-#import "ACUseRecordViewController.h"
-#endif
 
 #define CACHE_OLDACCOUNT_MONTH CACHE_CONSTANT(@"CACHE_OLDACCOUNT_MONTH")
 
@@ -124,11 +120,7 @@
         }
     } else {
         //如果为新用户则直接进行跳转
-        #ifdef JAILBREAK
-            [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
-        #else
-            [self.navigationController pushViewController:[[ACUseRecordViewController alloc]init] animated:NO];
-        #endif
+        [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
     }
 }
 
@@ -155,12 +147,7 @@
                 [[Config Instance]setIsRefreshUserInfo:NO];
                 if(![[Config Instance]isOldUser]) {
                     //如果为新用户则直接进行跳转
-#ifdef JAILBREAK
                     [self.navigationController pushViewController:[[ACAccountViewController alloc]init] animated:NO];
-#else
-                    [self.navigationController pushViewController:[[ACUseRecordViewController alloc]init] animated:NO];
-#endif
-                    
                 }
             }
         } else {
