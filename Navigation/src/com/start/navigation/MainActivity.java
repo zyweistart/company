@@ -12,22 +12,26 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 
 import com.start.core.AppConfig;
 import com.start.model.Room;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
+import com.start.service.MapDataAdapter;
+import com.start.service.MapDataService;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
@@ -71,12 +75,30 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	 */
 	private Map<String,List<Room>> mRooms=new HashMap<String,List<Room>>();
 	
+	private MapDataService mapDataService;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
 		appContext=AppContext.getInstance();
+		
+		mapDataService=new MapDataService(this);
+		
+		MapDataAdapter mapAdapter=new MapDataAdapter(this.getLayoutInflater());
+		
+		ListView mapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
+		mapIndexListView.setAdapter(mapAdapter);
+		mapIndexListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				
+			}
+			
+		});
+		mapAdapter.setData(mapDataService.findAll());
 		
 		this.initHeaderView();
         this.initFooterView();
@@ -208,7 +230,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private void setMapFile() {
 		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"2main");
 		String fullPath=Utils.getFile(this, path).getPath();
-		Log.v("MainActivity",fullPath);
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
 			return;
