@@ -18,9 +18,11 @@
         [_lblName setText:@"基础套餐"];
         [self addSubview:_lblName];
         
-        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 25)];
+        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 30)];
         [_lblDescription setFont:[UIFont systemFontOfSize:13]];
         [_lblDescription setTextAlignment:NSTextAlignmentLeft];
+        [_lblDescription setNumberOfLines:0];
+        [_lblDescription setLineBreakMode:UILineBreakModeCharacterWrap];
         [_lblDescription setTextColor:[UIColor colorWithRed:(163/255.0) green:(163/255.0) blue:(163/255.0) alpha:1]];
         [_lblDescription setText:@"有效期31天209分钟 309MB"];
         [self addSubview:_lblDescription];

@@ -8,7 +8,10 @@ public class AppConfig {
 	public static final String CONFIG_DATA_PATH_MEDMAP = "med_data";
 	
 	//地图文件
-	public static final String F_MAPMAIN="main.map";
+	public static final String F_MAPMAIN1="1main.map";
+	public static final String F_MAPMAIN2="2main.map";
+	public static final String F_MAP0101="0101.map";
+	public static final String F_MAP0102="0102.map";
 	public static final String F_MAP0201="0201.map";
 	public static final String F_MAP0202="0202.map";
 	//数据文件
@@ -38,7 +41,10 @@ public class AppConfig {
 
 	static {
 		//地图文件
-		mFileExtMatcher.put(F_MAPMAIN, TYPE_MAP);
+		mFileExtMatcher.put(F_MAPMAIN1, TYPE_MAP);
+		mFileExtMatcher.put(F_MAPMAIN2, TYPE_MAP);
+		mFileExtMatcher.put(F_MAP0101, TYPE_MAP);
+		mFileExtMatcher.put(F_MAP0102, TYPE_MAP);
 		mFileExtMatcher.put(F_MAP0201, TYPE_MAP);
 		mFileExtMatcher.put(F_MAP0202, TYPE_MAP);
 		//数据文件

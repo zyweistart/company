@@ -219,12 +219,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length==4){
+				if(data.length==3){
 					ContentValues values=new ContentValues();
-//					values.put(Edge._ID, data[0]);mapid
-					values.put(Edge._ID, data[1]);
-					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[2]);
-					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[3]);
+					values.put(Edge._ID, data[0]);
+					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[1]);
+					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[2]);
 					mCoreService.insert(Edge.TABLE_NAME,values);
 				}
 			}

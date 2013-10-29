@@ -206,7 +206,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	}
 	
 	private void setMapFile() {
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"main");
+		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"1main");
 		String fullPath=Utils.getFile(this, path).getPath();
 		Log.v("MainActivity",fullPath);
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
@@ -232,7 +232,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		if (mPOIMarker != null) {
 			POI poi = mPOIMarker.getPOI();
 			if (poi.inside(g)) {
-//				tapPOI(poi);
+				tapPOI(poi);
 				return;
 			}
 		}
@@ -244,10 +244,14 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		List<Room> rooms = mRooms.get(currentMapID);
 		for (Room r : rooms) {
 			if (r.inside(g)) {
-//				tapPOI(r);
+				tapPOI(r);
 				return;
 			}
 		}
+		
+	}
+
+	private void tapPOI(POI poi) {
 		
 	}
 

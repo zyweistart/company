@@ -153,7 +153,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if([[[IAPHelper sharedHelper]products]count]>[indexPath row]){
-        return 60;
+        return 65;
     }else{
         return 50;
     }
