@@ -50,6 +50,34 @@ public class DoctorService extends CoreService {
 		return doctors;
 	}
 	
-	
+	public Doctor findById(String Id){
+		Doctor doctor =null;
+		Cursor cursor = getDbHelper().getReadableDatabase().query(Doctor.TABLE_NAME, 
+				new String[]{
+					Doctor.COLUMN_NAME_ID,
+					Doctor.COLUMN_NAME_NAME,
+					Doctor.COLUMN_NAME_SEX,
+					Doctor.COLUMN_NAME_TITLE,
+					Doctor.COLUMN_NAME_SPECIALTY,
+					Doctor.COLUMN_NAME_INTRODUCTION,
+					Doctor.COLUMN_NAME_DEPARTMENTID},Doctor.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+		try{
+			if(cursor.moveToFirst()){
+				do {
+					doctor = new Doctor();
+					doctor.setId(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_ID)));
+					doctor.setName(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_NAME)));
+					doctor.setSex(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_SEX)));
+					doctor.setTitle(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_TITLE)));
+					doctor.setSpecialty(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_SPECIALTY)));
+					doctor.setIntroduction(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_INTRODUCTION)));
+					doctor.setDepartmentId(cursor.getString(cursor.getColumnIndex(Doctor.COLUMN_NAME_DEPARTMENTID)));
+				} while (cursor.moveToNext());
+			}
+		}finally{
+			cursor.close();
+		}
+		return doctor;
+	}
 	
 }

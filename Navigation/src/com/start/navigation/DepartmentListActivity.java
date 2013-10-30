@@ -2,15 +2,16 @@ package com.start.navigation;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.start.core.CoreActivity;
 import com.start.model.Department;
@@ -22,7 +23,6 @@ import com.start.service.DepartmentService;
  *
  */
 public class DepartmentListActivity extends CoreActivity implements OnItemClickListener{
-
 	
 	private List<Department> departments;
 	private DepartmentService departmentService;
@@ -76,21 +76,31 @@ public class DepartmentListActivity extends CoreActivity implements OnItemClickL
 			}
 			
 			Department department=departments.get(position);
+			holder.department=department;
 			holder.tvName.setText(department.getName());
 			return convertView;
 		}
 		
-		private class ViewHolder{
-			
-			private TextView tvName;
-			
-		}
+	}
+	
+	private class ViewHolder{
+		
+		private TextView tvName;
+		
+		private Department department;
 		
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		
+		ViewHolder vh=(ViewHolder)arg1.getTag();
+		if(vh!=null){
+			Bundle bundle=new Bundle();
+			bundle.putString(Department.COLUMN_NAME_ID, vh.department.getId());
+			Intent intent=new Intent(this,DepartmentDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
 	}
 
 }

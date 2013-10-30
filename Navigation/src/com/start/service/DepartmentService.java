@@ -44,6 +44,28 @@ public class DepartmentService extends CoreService {
 		return departments;
 	}
 	
-	
+	public Department findById(String Id){
+		Department department = null;
+		Cursor cursor = getDbHelper().getReadableDatabase().query(Department.TABLE_NAME, 
+				new String[]{
+				Department.COLUMN_NAME_ID,
+				Department.COLUMN_NAME_NAME,
+				Department.COLUMN_NAME_INTRODUCTION,
+				Department.COLUMN_NAME_MAJORROOMID},Department.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+		try{
+			if(cursor.moveToFirst()){
+				do {
+					department = new Department();
+					department.setId(cursor.getString(cursor.getColumnIndex(Department.COLUMN_NAME_ID)));
+					department.setName(cursor.getString(cursor.getColumnIndex(Department.COLUMN_NAME_NAME)));
+					department.setIntroduction(cursor.getString(cursor.getColumnIndex(Department.COLUMN_NAME_INTRODUCTION)));
+					department.setMajorRoomId(cursor.getString(cursor.getColumnIndex(Department.COLUMN_NAME_MAJORROOMID)));
+				} while (cursor.moveToNext());
+			}
+		}finally{
+			cursor.close();
+		}
+		return department;
+	}
 	
 }

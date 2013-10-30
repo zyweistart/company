@@ -2,8 +2,8 @@ package com.start.navigation;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +77,7 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 			}
 			
 			Doctor doctor=doctors.get(position);
+			holder.doctor=doctor;
 			holder.tvName.setText(doctor.getName());
 			return convertView;
 		}
@@ -85,6 +86,8 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 
 	private class ViewHolder{
 		
+		private Doctor doctor;
+		
 		private TextView tvName;
 		
 	}
@@ -92,7 +95,13 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		ViewHolder vh=(ViewHolder)arg1.getTag();
-		Log.v(TAG,vh+"");
+		if(vh!=null){
+			Bundle bundle=new Bundle();
+			bundle.putString(Doctor._ID, vh.doctor.getId());
+			Intent intent=new Intent(this,DoctorDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
 	}
 
 }

@@ -42,7 +42,9 @@ public class MapDataAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.lvitem_mapdata_index, parent, false);
 		}
-		((CheckedTextView) convertView).setText(mapDatas.get(position).getId().substring(2,4));
+		MapData md=mapDatas.get(position);
+		((CheckedTextView) convertView).setText(md.getId().substring(2,4));
+		convertView.setTag(md);
 		return convertView;
 	}
 	

@@ -1,5 +1,6 @@
 package com.start.navigation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +8,15 @@ import java.util.Map;
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
+import org.mapsforge.android.maps.overlay.ListOverlay;
+import org.mapsforge.android.maps.overlay.OverlayItem;
+import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +32,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 
 import com.start.core.AppConfig;
+import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
@@ -62,10 +68,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private Button module_main_frame_introduction_btnDoctor;
 	
 	private MapView mMapView;
+	private ListOverlay mListOverlay;
 	/**
 	 * 当前打开的地图编号
 	 */
 	private String currentMapID;
+	private MapData currentMapData;
 	/**
 	 * 当前选重的Marker
 	 */
@@ -94,11 +102,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				
+				Log.v("tag",view.getTag()+"");
 			}
 			
 		});
-		mapAdapter.setData(mapDataService.findAll());
+		List<MapData> mapDatas=mapDataService.findAll();
+		currentMapData=mapDatas.get(0);
+		mapAdapter.setData(mapDatas);
 		
 		this.initHeaderView();
         this.initFooterView();
@@ -219,6 +229,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		mMapView.setClickable(true);
 		mMapView.setOnTouchListener(this);
 		container.addView(mMapView, 0);
+		
+		mListOverlay = new ListOverlay();
+		mMapView.getOverlays().add(mListOverlay);
+		
 		setMapFile();
 		
 		//process
@@ -228,7 +242,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	}
 	
 	private void setMapFile() {
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"2main");
+		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,currentMapData.getId());
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
 			return;
@@ -237,7 +251,39 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	}
 	
 	private void updateOverlay() {
-		
+
+		ArrayList<OverlayItem> markers = getMarkers("");
+		Polyline routeLine = getRouteLine("");
+
+		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
+		synchronized (itemList) {
+			itemList.clear();
+
+			if (routeLine != null || markers != null) {
+				if (routeLine != null) {
+					itemList.add(routeLine);
+				}
+				if (markers != null) {
+					itemList.addAll(markers);
+				}
+			} else {
+				//当前房间当前书架位置点
+				if (mPOIMarker != null) {
+					itemList.add(mPOIMarker);
+					//设置当前目标位置点为中心点
+					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
+				}
+			}
+			mMapView.getMapViewPosition().setCenter(mMapView.getMapViewPosition().getCenter());
+		}
+	}
+	
+	protected ArrayList<OverlayItem> getMarkers(String currentMapId) {
+		return null;
+	}
+	
+	protected Polyline getRouteLine(String currentMapId) {
+		return null;
 	}
 
 	@Override
