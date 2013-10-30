@@ -229,7 +229,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	
 	private void setMapFile() {
 		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,"2main");
-		String fullPath=Utils.getFile(this, path).getPath();
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
 			return;

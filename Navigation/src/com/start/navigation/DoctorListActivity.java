@@ -3,6 +3,7 @@ package com.start.navigation;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,17 +81,18 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 			return convertView;
 		}
 		
-		private class ViewHolder{
-			
-			private TextView tvName;
-			
-		}
-		
 	}
 
+	private class ViewHolder{
+		
+		private TextView tvName;
+		
+	}
+	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		
+		ViewHolder vh=(ViewHolder)arg1.getTag();
+		Log.v(TAG,vh+"");
 	}
 
 }
