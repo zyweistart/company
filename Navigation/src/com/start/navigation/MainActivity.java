@@ -102,7 +102,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				Log.v("tag",view.getTag()+"");
+				currentMapData=(MapData)view.getTag();
+				setMapFile();
 			}
 			
 		});

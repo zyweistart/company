@@ -89,13 +89,16 @@ public class Room extends CoreModel implements POI {
 		this.area = area;
 	}
 
-	public boolean contains(GeoPoint geoPoint) {
-		return false;
+
+	@Override
+	public GeoPoint getGeoPoint() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 	@Override
-	public GeoPoint getGeoPoint() {
+	public MapData getMapData() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -109,22 +112,9 @@ public class Room extends CoreModel implements POI {
 
 
 	@Override
-	public int getFloor() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public String getBuilding() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public boolean inside(GeoPoint p) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

@@ -12,12 +12,9 @@ public class POIMarker extends Marker {
 		super(obj.getGeoPoint(), drawable);
 		this.poi = obj;
 	}
-
-	public int getFloor() {
-		return poi.getFloor();
-	}
 	
 	public POI getPOI() {
 		return poi;
 	}
+	
 }

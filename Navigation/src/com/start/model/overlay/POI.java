@@ -2,12 +2,16 @@ package com.start.model.overlay;
 
 import org.mapsforge.core.model.GeoPoint;
 
+import com.start.model.MapData;
+
 public interface POI {
 
 	GeoPoint getGeoPoint();
-	String getName();
+	
+	MapData getMapData();
+	
 	String getVertex();
-	int getFloor();
-	String getBuilding();
+	
 	boolean inside(GeoPoint p);
+	
 }
