@@ -8,6 +8,10 @@ import com.start.model.overlay.POI;
 public class MyLocation implements POI {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1836027206915254846L;
+	/**
 	 * 当前所在的地图数据
 	 */
 	private MapData currentMapData;
@@ -43,6 +47,12 @@ public class MyLocation implements POI {
 	@Override
 	public boolean inside(org.mapsforge.core.model.GeoPoint p) {
 		return false;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

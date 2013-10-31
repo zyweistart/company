@@ -1,12 +1,21 @@
 package com.start.model;
 
+import java.util.List;
+
 import org.mapsforge.core.model.GeoPoint;
 
 import com.start.core.CoreModel;
+import com.start.model.nav.Lasso;
 import com.start.model.overlay.POI;
+import com.start.navigation.AppContext;
 
 public class Room extends CoreModel implements POI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static String TABLE_NAME="ST_ROOM";
 	
 	public static final String COLUMN_NAME_MAPID="mapId";
@@ -92,7 +101,10 @@ public class Room extends CoreModel implements POI {
 
 	@Override
 	public GeoPoint getGeoPoint() {
-		// TODO Auto-generated method stub
+		Vertex vertex=AppContext.getInstance().getVertexService().findById(getVertextId());
+		if(vertex!=null){
+			return new GeoPoint(Double.parseDouble(vertex.getLatitude()), Double.parseDouble(vertex.getLongitude()));
+		}
 		return null;
 	}
 
@@ -113,8 +125,15 @@ public class Room extends CoreModel implements POI {
 
 	@Override
 	public boolean inside(GeoPoint p) {
-		// TODO Auto-generated method stub
-		return false;
+		List<RoomArea> ras=AppContext.getInstance().getRoomAreaService().findAllByRoomId(getId());
+		double[] mPolyX=new double[ras.size()];
+		double[] mPolyY=new double[ras.size()];
+		for(int i=0;i<ras.size();i++){
+			mPolyX[i]=Double.parseDouble(ras.get(i).getLatitude());
+			mPolyY[i]=Double.parseDouble(ras.get(i).getLongitude());
+		}
+		Lasso lasso=new Lasso(mPolyX,mPolyY,ras.size());
+		return lasso.contains(p.latitude, p.longitude);
 	}
 
 }

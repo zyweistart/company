@@ -16,11 +16,9 @@ import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,15 +32,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.start.core.AppConfig;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
 import com.start.model.Vertex;
+import com.start.model.navigation.MyLocation;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.service.MapDataAdapter;
+import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
@@ -71,6 +73,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private Button module_main_frame_introduction_btnHospital;
 	private Button module_main_frame_introduction_btnDepartment;
 	private Button module_main_frame_introduction_btnDoctor;
+	
+	private GestureDetector mGestureDetector;
 	
 	private MapView mMapView;
 	private ListOverlay mListOverlay;
@@ -138,7 +142,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		return mGestureDetector.onTouchEvent(event);
+		mGestureDetector.onTouchEvent(event);
+		return false;
 	}
 	
 	/**
@@ -181,7 +186,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 					public void onClick(View v) {
 						int pos = (Integer)(v.getTag());
 			    			if(mCurSel == pos) {
-			    				//TODO:点击当前项刷新
+			    				//点击当前项刷新
 			    			}
 						mScrollLayout.snapToScreen(pos);
 					}
@@ -194,7 +199,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	    	
 	    	mScrollLayout.SetOnViewChangeListener(new ScrollLayout.OnViewChangeListener() {
 				public void OnViewChange(int viewIndex) {
-					//TODO:切换列表视图-如果列表数据为空：加载数据
+					//切换列表视图-如果列表数据为空：加载数据
 					setCurPoint(viewIndex);
 				}
 			});
@@ -213,8 +218,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	    	mCurSel = index;
     }
 
-    private GestureDetector mGestureDetector;
-    
     /**
      * 初始化主体框架视图
      */
@@ -259,27 +262,26 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private void updateOverlay() {
 
 		ArrayList<OverlayItem> markers = getMarkers("");
+		Polyline routeLine = getRouteLine("");
 		
 		List<Room> rooms=mRooms.get(currentMapData.getId());
 
+		List<GeoPoint> gps=new ArrayList<GeoPoint>();
+		
 		for(Room r:rooms){
 			Vertex v=appContext.getVertexService().findById(r.getVertextId());
 			Marker points = new Marker(new GeoPoint(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLongitude())), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
 			markers.add(points);
+			
+			List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
+			
+			for(RoomArea ra:ras){
+				gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+			}
 		}
 		
-		
-		Polyline routeLine = getRouteLine("");
-		
-		List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(rooms.get(2).getId());
-		List<GeoPoint> gps=new ArrayList<GeoPoint>();
-		for(RoomArea ra:ras){
-			gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
-			Log.v("tag",ra.getLatitude()+"-=--"+ra.getLongitude());
-		}
 		PolygonalChain pc = new PolygonalChain(gps);
-		routeLine = new Polyline(pc, getPaintStroke());
-		
+		routeLine = new Polyline(pc, appContext.getPaintStroke());
 
 		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
 		synchronized (itemList) {
@@ -292,13 +294,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				if (markers != null) {
 					itemList.addAll(markers);
 				}
-			} else {
-				//当前房间当前书架位置点
-				if (mPOIMarker != null) {
-					itemList.add(mPOIMarker);
-					//设置当前目标位置点为中心点
-					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
-				}
+//			} else {
+//				当前房间当前书架位置点
+//				if (mPOIMarker != null) {
+//					itemList.add(mPOIMarker);
+//					//设置当前目标位置点为中心点
+//					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
+//				}
 			}
 			mMapView.getMapViewPosition().setCenter(mMapView.getMapViewPosition().getCenter());
 		}
@@ -311,7 +313,83 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	protected Polyline getRouteLine(String currentMapId) {
 		return null;
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	private void tapPOI(POI poi) {
+		Bundle data = new Bundle();
+		data.putSerializable("data", poi);
+		showDialog(Utils.DLG_POI, data);
+		mMapView.getMapViewPosition().setCenter(poi.getGeoPoint());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+		if (id == Utils.DLG_POI) {
+			POI poi = (POI) args.getSerializable("data");
+			((TextView) dialog.findViewById(R.id.poiName)).setText(poi.getName());
+			dialog.findViewById(R.id.direction).setTag(poi);
+			dialog.findViewById(R.id.poiName).setTag(poi);
+			if (mPOIMarker != null) {
+				dialog.getWindow().getAttributes().y = -50;
+			} else {
+				dialog.getWindow().getAttributes().y = 0;
+			}
+			return;
+		} else {
+			super.onPrepareDialog(id, dialog, args);
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		switch (id) {
+		case Utils.DLG_SEARCH_OPTION:
+//			dialog = createSearchOptionDialog();
+			break;
+		case Utils.DLG_POI:
+			dialog = CommonFn.createPOIDialog(this);
+			break;
+		default:
+			dialog = super.onCreateDialog(id);
+		}
+		return dialog;
+	}
+	
+	@Override
+	public void onClick(View v) {
+		if(v.getId()==R.id.module_main_frame_introduction_btnHospital){
+			//医院介绍
+			Intent intent=new Intent(this,DoctorListActivity.class);
+			startActivity(intent);
+		}else if(v.getId()==R.id.module_main_frame_introduction_btnDepartment){
+			//部门介绍
+			Intent intent=new Intent(this,DepartmentListActivity.class);
+			startActivity(intent);
+		}else if(v.getId()==R.id.module_main_frame_introduction_btnDoctor){
+			//医生介绍
+			Intent intent=new Intent(this,DoctorListActivity.class);
+			startActivity(intent);
+		}if (v.getId() == R.id.poiName) {
+//			POI r = (POI) v.getTag();
+			//跳转至POI
+		} else if (v.getId() == R.id.direction) {
+//			POI r = (POI) v.getTag();
+			MyLocation myLocation = appContext.getMyLocation();
+			if (myLocation != null) {
+//				//开始位置
+//				EndPoint sp = new IndoorEndPoint(myLocation.getMapData().getId(), myLocation.getGeoPoint());
+//				//终点位置
+//				EndPoint ep = new IndoorEndPoint(currentMapData.getId(), r.getGeoPoint(), r.getVertex());
+//				search.execute(sp, ep);
+			} else {
+				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
 	@Override
 	public void onClickAt(float xPixel, float yPixel) {
 		Projection projection = mMapView.getProjection();
@@ -340,41 +418,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				return;
 			}
 		}
-		
 	}
 
-	private void tapPOI(POI poi) {
-		
-	}
-
-	@Override
-	public void onClick(View v) {
-		if(v.getId()==R.id.module_main_frame_introduction_btnHospital){
-			//医院介绍
-			Intent intent=new Intent(this,DoctorListActivity.class);
-			startActivity(intent);
-		}else if(v.getId()==R.id.module_main_frame_introduction_btnDepartment){
-			//部门介绍
-			Intent intent=new Intent(this,DepartmentListActivity.class);
-			startActivity(intent);
-		}else if(v.getId()==R.id.module_main_frame_introduction_btnDoctor){
-			//医生介绍
-			Intent intent=new Intent(this,DoctorListActivity.class);
-			startActivity(intent);
-		}
-	}
-	
-	private Paint mPaintStroke;
-	
-	public Paint getPaintStroke(){
-		if(mPaintStroke==null){
-			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-			mPaintStroke.setStyle(Paint.Style.STROKE);
-			mPaintStroke.setColor(Color.BLUE);
-			mPaintStroke.setAlpha(96);
-			mPaintStroke.setStrokeWidth(5);
-		}
-		return mPaintStroke;
-	}
-	
 }

@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.IOException;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,8 +13,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.start.navigation.R;
+import com.start.widget.POIDialog;
 
 public class CommonFn {
 
@@ -102,6 +106,15 @@ public class CommonFn {
 		builder.setMessage(message);
 		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
 		return builder.create();
+	}
+	
+	public static Dialog createPOIDialog(Context context) {
+		POIDialog poiDialog = new POIDialog(context, R.style.dialog_poi);
+		Window win = poiDialog.getWindow();
+		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+		win.setAttributes(params);
+		poiDialog.setCanceledOnTouchOutside(true);
+		return poiDialog;
 	}
 	
 }

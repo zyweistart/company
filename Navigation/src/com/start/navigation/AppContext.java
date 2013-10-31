@@ -1,9 +1,12 @@
 package com.start.navigation;
 
 import android.app.Application;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.widget.Toast;
 
 import com.start.core.AppConfig.PreferencesConfig;
+import com.start.model.navigation.MyLocation;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
 import com.start.service.MapDataService;
@@ -16,6 +19,8 @@ public class AppContext extends Application {
 	
 	private static AppContext mInstance;
     private SharedPreferencesUtils sharedPreferencesUtils;
+    
+    private Paint mPaintStroke;
     
     private DoctorService doctorService;
     private DepartmentService departmentService;
@@ -49,6 +54,17 @@ public class AppContext extends Application {
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 	
+	public Paint getPaintStroke(){
+		if(mPaintStroke==null){
+			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+			mPaintStroke.setStyle(Paint.Style.STROKE);
+			mPaintStroke.setColor(Color.BLUE);
+			mPaintStroke.setAlpha(96);
+			mPaintStroke.setStrokeWidth(5);
+		}
+		return mPaintStroke;
+	}
+    
     public DoctorService getDoctorService() {
     		if(doctorService==null){
     			doctorService=new DoctorService(this);
@@ -91,6 +107,10 @@ public class AppContext extends Application {
 		return roomAreaService;
 	}
 
+	public MyLocation getMyLocation(){
+		return null;
+	}
+	
 	/**
 	 * 主体框架是否滚动
 	 */
