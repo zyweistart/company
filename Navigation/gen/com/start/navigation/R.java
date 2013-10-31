@@ -11,10 +11,11 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f040001;
-        public static final int mapdata_index_text=0x7f040003;
+        public static final int black=0x7f040002;
+        public static final int border_mapdata_index=0x7f040001;
+        public static final int mapdata_index_text=0x7f040004;
         public static final int mapdata_index_text_normal=0x7f040000;
-        public static final int white=0x7f040002;
+        public static final int white=0x7f040003;
     }
     public static final class dimen {
         /** 
@@ -25,30 +26,34 @@ public final class R {
         public static final int activity_horizontal_margin=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int start=0x7f020001;
-        public static final int start_background=0x7f020002;
-        public static final int widget_arrow=0x7f020003;
-        public static final int widget_bar_bg=0x7f020004;
-        public static final int widget_bar_bg_n=0x7f020005;
-        public static final int widget_bar_bg_p=0x7f020006;
-        public static final int widget_bar_cut_off=0x7f020007;
-        public static final int widget_bar_friend=0x7f020008;
-        public static final int widget_bar_friend_nor=0x7f020009;
-        public static final int widget_bar_friend_over=0x7f02000a;
-        public static final int widget_bar_introduction=0x7f02000b;
-        public static final int widget_bar_introduction_nor=0x7f02000c;
-        public static final int widget_bar_introduction_over=0x7f02000d;
-        public static final int widget_bar_map=0x7f02000e;
-        public static final int widget_bar_map_nor=0x7f02000f;
-        public static final int widget_bar_map_over=0x7f020010;
-        public static final int widget_bar_more=0x7f020011;
-        public static final int widget_bar_more_nor=0x7f020012;
-        public static final int widget_bar_more_over=0x7f020013;
-        public static final int widget_bar_process=0x7f020014;
-        public static final int widget_bar_process_nor=0x7f020015;
-        public static final int widget_bar_process_over=0x7f020016;
-        public static final int widget_pulltorefresh_arrow=0x7f020017;
+        public static final int bg_mapdata_index=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int icon_nav_end=0x7f020002;
+        public static final int icon_nav_start=0x7f020003;
+        public static final int icon_node=0x7f020004;
+        public static final int start=0x7f020005;
+        public static final int start_background=0x7f020006;
+        public static final int widget_arrow=0x7f020007;
+        public static final int widget_bar_bg=0x7f020008;
+        public static final int widget_bar_bg_n=0x7f020009;
+        public static final int widget_bar_bg_p=0x7f02000a;
+        public static final int widget_bar_cut_off=0x7f02000b;
+        public static final int widget_bar_friend=0x7f02000c;
+        public static final int widget_bar_friend_nor=0x7f02000d;
+        public static final int widget_bar_friend_over=0x7f02000e;
+        public static final int widget_bar_introduction=0x7f02000f;
+        public static final int widget_bar_introduction_nor=0x7f020010;
+        public static final int widget_bar_introduction_over=0x7f020011;
+        public static final int widget_bar_map=0x7f020012;
+        public static final int widget_bar_map_nor=0x7f020013;
+        public static final int widget_bar_map_over=0x7f020014;
+        public static final int widget_bar_more=0x7f020015;
+        public static final int widget_bar_more_nor=0x7f020016;
+        public static final int widget_bar_more_over=0x7f020017;
+        public static final int widget_bar_process=0x7f020018;
+        public static final int widget_bar_process_nor=0x7f020019;
+        public static final int widget_bar_process_over=0x7f02001a;
+        public static final int widget_pulltorefresh_arrow=0x7f02001b;
     }
     public static final class id {
         public static final int head_arrowImageView=0x7f080017;
