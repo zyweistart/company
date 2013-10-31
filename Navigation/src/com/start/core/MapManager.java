@@ -66,4 +66,7 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 		
 	}
 	
+	
+	
+	
 }

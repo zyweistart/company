@@ -13,9 +13,11 @@
         android:layout_marginRight="8dp"
         android:cacheColorHint="@android:color/transparent"
         android:listSelector="@android:color/transparent"
+        android:divider="@color/border_mapdata_index"
         android:dividerHeight="1dp"
         android:fadingEdge="none"
         android:scrollbars="none"
+        android:background="@drawable/bg_mapdata_index"
         android:choiceMode="singleChoice"/>
 
 </RelativeLayout>

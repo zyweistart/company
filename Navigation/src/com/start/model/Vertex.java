@@ -22,37 +22,37 @@ public class Vertex extends CoreModel {
 	/**
 	 * 所属地图编号
 	 */
-	private int mapId;
+	private String mapId;
 	/**
 	 * 纬度
 	 */
-	private double latitude;
+	private String latitude;
 	/**
 	 * 经度
 	 */
-	private double longitude;
+	private String longitude;
 	
-	public int getMapId() {
+	public String getMapId() {
 		return mapId;
 	}
 
-	public void setMapId(int mapId) {
+	public void setMapId(String mapId) {
 		this.mapId = mapId;
 	}
 
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 

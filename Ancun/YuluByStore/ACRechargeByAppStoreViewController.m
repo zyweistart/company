@@ -227,7 +227,7 @@
         [self.tableView reloadData];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
-        //只支持基础包月套餐版
+        //只支持基础服务套餐版
         [requestParams setObject:@"3"  forKey:@"type"];
         [requestParams setObject:@"1"  forKey:@"status"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];

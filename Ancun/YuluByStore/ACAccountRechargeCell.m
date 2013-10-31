@@ -79,7 +79,7 @@
     } else if (_currentType==2) {
         
         if([[Config Instance]isOldUser]){
-            [Common alert:@"要先购买基础包月套餐后才能购买增值时长套餐，打好基础很重要哦"];
+            [Common alert:@"要先购买基础服务套餐后才能购买增值时长套餐，打好基础很重要哦"];
         } else {
             if([[Config Instance]isPayBase]){
                 [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
@@ -89,7 +89,7 @@
         }
     } else if (_currentType==3) {
         if([[Config Instance]isOldUser]){
-            [Common alert:@"要先购买基础包月套餐后才能购买增值存储套餐，更多空间更多安心"];
+            [Common alert:@"要先购买基础服务套餐后才能购买增值存储套餐，更多空间更多安心"];
         } else {
             if([[Config Instance]isPayBase]){
                 [_controler.navigationController pushViewController:rechargeConfirm animated:YES];

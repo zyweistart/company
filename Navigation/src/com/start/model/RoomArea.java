@@ -19,8 +19,11 @@ public class RoomArea extends CoreModel {
 			+ ");";
 
 	private String roomId;
+
+	private String latitude;
 	
-	private String vertexId;
+	private String longitude;
+	
 
 	public String getRoomId() {
 		return roomId;
@@ -30,12 +33,20 @@ public class RoomArea extends CoreModel {
 		this.roomId = roomId;
 	}
 
-	public String getVertexId() {
-		return vertexId;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setVertexId(String vertexId) {
-		this.vertexId = vertexId;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
-	
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 }

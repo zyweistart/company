@@ -9,12 +9,16 @@ import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.ListOverlay;
+import org.mapsforge.android.maps.overlay.Marker;
 import org.mapsforge.android.maps.overlay.OverlayItem;
+import org.mapsforge.android.maps.overlay.PolygonalChain;
 import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -34,10 +38,11 @@ import android.widget.RadioButton;
 import com.start.core.AppConfig;
 import com.start.model.MapData;
 import com.start.model.Room;
+import com.start.model.RoomArea;
+import com.start.model.Vertex;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.service.MapDataAdapter;
-import com.start.service.MapDataService;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
@@ -72,7 +77,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	/**
 	 * 当前打开的地图编号
 	 */
-	private String currentMapID;
 	private MapData currentMapData;
 	/**
 	 * 当前选重的Marker
@@ -83,16 +87,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	 */
 	private Map<String,List<Room>> mRooms=new HashMap<String,List<Room>>();
 	
-	private MapDataService mapDataService;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
 		appContext=AppContext.getInstance();
-		
-		mapDataService=new MapDataService(this);
 		
 		MapDataAdapter mapAdapter=new MapDataAdapter(this.getLayoutInflater());
 		
@@ -102,12 +102,17 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				currentMapData=(MapData)view.getTag();
-				setMapFile();
+				MapData md=(MapData)view.getTag();
+				if(!md.getId().equals(currentMapData.getId())){
+					currentMapData=md;
+					setMapFile();
+				}
 			}
 			
 		});
-		List<MapData> mapDatas=mapDataService.findAll();
+		List<MapData> mapDatas=appContext.getMapDataService().findAll();
+		mRooms=appContext.getRoomService().findAllPullMap();
+		
 		currentMapData=mapDatas.get(0);
 		mapAdapter.setData(mapDatas);
 		
@@ -254,7 +259,27 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private void updateOverlay() {
 
 		ArrayList<OverlayItem> markers = getMarkers("");
+		
+		List<Room> rooms=mRooms.get(currentMapData.getId());
+
+		for(Room r:rooms){
+			Vertex v=appContext.getVertexService().findById(r.getVertextId());
+			Marker points = new Marker(new GeoPoint(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLongitude())), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
+			markers.add(points);
+		}
+		
+		
 		Polyline routeLine = getRouteLine("");
+		
+		List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(rooms.get(2).getId());
+		List<GeoPoint> gps=new ArrayList<GeoPoint>();
+		for(RoomArea ra:ras){
+			gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+			Log.v("tag",ra.getLatitude()+"-=--"+ra.getLongitude());
+		}
+		PolygonalChain pc = new PolygonalChain(gps);
+		routeLine = new Polyline(pc, getPaintStroke());
+		
 
 		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
 		synchronized (itemList) {
@@ -280,7 +305,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	}
 	
 	protected ArrayList<OverlayItem> getMarkers(String currentMapId) {
-		return null;
+		return new ArrayList<OverlayItem>();
 	}
 	
 	protected Polyline getRouteLine(String currentMapId) {
@@ -308,7 +333,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			return;
 		}
 
-		List<Room> rooms = mRooms.get(currentMapID);
+		List<Room> rooms = mRooms.get(currentMapData.getId());
 		for (Room r : rooms) {
 			if (r.inside(g)) {
 				tapPOI(r);
@@ -337,6 +362,19 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			Intent intent=new Intent(this,DoctorListActivity.class);
 			startActivity(intent);
 		}
+	}
+	
+	private Paint mPaintStroke;
+	
+	public Paint getPaintStroke(){
+		if(mPaintStroke==null){
+			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+			mPaintStroke.setStyle(Paint.Style.STROKE);
+			mPaintStroke.setColor(Color.BLUE);
+			mPaintStroke.setAlpha(96);
+			mPaintStroke.setStrokeWidth(5);
+		}
+		return mPaintStroke;
 	}
 	
 }

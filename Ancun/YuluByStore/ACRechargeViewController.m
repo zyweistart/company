@@ -37,7 +37,7 @@
         
         _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 40, 106, 40)];
         [_leftTopTab.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_leftTopTab setTitle:@"基础包月套餐" forState:UIControlStateNormal];
+        [_leftTopTab setTitle:@"基础服务套餐" forState:UIControlStateNormal];
         [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_leftTopTab];
         

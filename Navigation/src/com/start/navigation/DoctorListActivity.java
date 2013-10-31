@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.start.core.CoreActivity;
 import com.start.model.Doctor;
-import com.start.service.DoctorService;
 
 /**
  * 医生列表
@@ -26,7 +25,6 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 
 	
 	private List<Doctor> doctors;
-	private DoctorService doctorService;
 	
 	private ListView departmentListView;
 	
@@ -35,9 +33,7 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_list);
 		
-		doctorService=new DoctorService(this);
-		
-		doctors=doctorService.findAll();
+		doctors=getAppContext().getDoctorService().findAll();
 		
 		DataAdapter adapter=new DataAdapter();
 		departmentListView=(ListView)findViewById(R.id.module_main_frame_doctor_list);

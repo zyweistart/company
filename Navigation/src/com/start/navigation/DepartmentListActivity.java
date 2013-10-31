@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.start.core.CoreActivity;
 import com.start.model.Department;
-import com.start.service.DepartmentService;
 
 /**
  * 科室列表
@@ -25,7 +24,6 @@ import com.start.service.DepartmentService;
 public class DepartmentListActivity extends CoreActivity implements OnItemClickListener{
 	
 	private List<Department> departments;
-	private DepartmentService departmentService;
 	
 	private ListView departmentListView;
 	
@@ -34,9 +32,7 @@ public class DepartmentListActivity extends CoreActivity implements OnItemClickL
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_department_list);
 		
-		departmentService=new DepartmentService(this);
-		
-		departments=departmentService.findAll();
+		departments=getAppContext().getDepartmentService().findAll();
 		
 		DataAdapter adapter=new DataAdapter();
 		departmentListView=(ListView)findViewById(R.id.module_main_frame_department_list);
