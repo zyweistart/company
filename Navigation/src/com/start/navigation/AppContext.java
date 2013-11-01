@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.widget.Toast;
 
 import com.start.core.AppConfig.PreferencesConfig;
+import com.start.model.nav.PathSearchResult;
 import com.start.model.navigation.MyLocation;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
@@ -22,6 +23,8 @@ public class AppContext extends Application {
 	
 	private static AppContext mInstance;
     private SharedPreferencesUtils sharedPreferencesUtils;
+    
+    private PathSearchResult pathSearchResult;
     
     private Paint mPaintStroke;
     
@@ -58,6 +61,16 @@ public class AppContext extends Application {
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 	
+    
+    
+	public PathSearchResult getPathSearchResult() {
+		return pathSearchResult;
+	}
+
+	public void setPathSearchResult(PathSearchResult pathSearchResult) {
+		this.pathSearchResult = pathSearchResult;
+	}
+
 	public Paint getPaintStroke(){
 		if(mPaintStroke==null){
 			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
