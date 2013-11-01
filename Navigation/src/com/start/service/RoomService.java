@@ -36,7 +36,7 @@ public class RoomService extends CoreService {
 					room.setId(cursor.getString(cursor.getColumnIndex(Room.COLUMN_NAME_ID)));
 					room.setMapId(cursor.getString(cursor.getColumnIndex(Room.COLUMN_NAME_MAPID)));
 					room.setName(cursor.getString(cursor.getColumnIndex(Room.COLUMN_NAME_NAME)));
-					room.setVertextId(cursor.getString(cursor.getColumnIndex(Room.COLUMN_NAME_VERTEXID)));
+					room.setVertexId(cursor.getString(cursor.getColumnIndex(Room.COLUMN_NAME_VERTEXID)));
 					rooms.add(room);
 				} while (cursor.moveToNext());
 			}

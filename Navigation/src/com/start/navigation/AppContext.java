@@ -1,5 +1,7 @@
 package com.start.navigation;
 
+import org.mapsforge.core.model.GeoPoint;
+
 import android.app.Application;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +11,7 @@ import com.start.core.AppConfig.PreferencesConfig;
 import com.start.model.navigation.MyLocation;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
+import com.start.service.EdgeService;
 import com.start.service.MapDataService;
 import com.start.service.RoomAreaService;
 import com.start.service.RoomService;
@@ -28,6 +31,7 @@ public class AppContext extends Application {
     private RoomService roomService;
     private VertexService vertexService;
     private RoomAreaService roomAreaService;
+    private EdgeService edgeService;
 
 	@Override
     public void onCreate() {
@@ -106,8 +110,16 @@ public class AppContext extends Application {
 		}
 		return roomAreaService;
 	}
+	
+	public EdgeService getEdgeService() {
+		if(edgeService==null){
+			edgeService=new EdgeService(this);
+		}
+		return edgeService;
+	}
 
 	public MyLocation getMyLocation(){
+		new MyLocation(null, new GeoPoint(0, 0));
 		return null;
 	}
 	

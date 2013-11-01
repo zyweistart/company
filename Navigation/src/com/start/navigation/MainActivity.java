@@ -40,10 +40,15 @@ import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
 import com.start.model.Vertex;
+import com.start.model.nav.EndPoint;
+import com.start.model.nav.IndoorEndPoint;
+import com.start.model.nav.PathSearchResult;
 import com.start.model.navigation.MyLocation;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.service.MapDataAdapter;
+import com.start.service.PathSearchTask;
+import com.start.service.PathSearchTask.PathSearchListener;
 import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
@@ -55,7 +60,7 @@ import com.start.widget.ScrollLayout;
  * @author start
  *
  */
-public class MainActivity extends MapActivity implements OnTouchListener,OnClickListener,OnTapMapClickListener {
+public class MainActivity extends MapActivity implements OnTouchListener,OnClickListener,OnTapMapClickListener,PathSearchListener {
 
 	private AppContext appContext;
 	
@@ -269,7 +274,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		List<GeoPoint> gps=new ArrayList<GeoPoint>();
 		
 		for(Room r:rooms){
-			Vertex v=appContext.getVertexService().findById(r.getVertextId());
+			Vertex v=appContext.getVertexService().findById(r.getVertexId());
 			Marker points = new Marker(new GeoPoint(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLongitude())), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
 			markers.add(points);
 			
@@ -376,14 +381,14 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 //			POI r = (POI) v.getTag();
 			//跳转至POI
 		} else if (v.getId() == R.id.direction) {
-//			POI r = (POI) v.getTag();
+			PathSearchTask search = new PathSearchTask(this);
+			POI r = (POI) v.getTag();
+
 			MyLocation myLocation = appContext.getMyLocation();
 			if (myLocation != null) {
-//				//开始位置
-//				EndPoint sp = new IndoorEndPoint(myLocation.getMapData().getId(), myLocation.getGeoPoint());
-//				//终点位置
-//				EndPoint ep = new IndoorEndPoint(currentMapData.getId(), r.getGeoPoint(), r.getVertex());
-//				search.execute(sp, ep);
+				EndPoint sp  = new IndoorEndPoint(myLocation.getMapData(), myLocation.getGeoPoint());
+				EndPoint ep = new IndoorEndPoint(currentMapData, r.getGeoPoint(), r.getVertexId());
+				search.execute(sp, ep);
 			} else {
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
 			}
@@ -417,6 +422,20 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				tapPOI(r);
 				return;
 			}
+		}
+	}
+
+	@Override
+	public void onGetResult(PathSearchResult result) {
+		mPOIMarker = null;
+		if(result.getType()==PathSearchResult.Type.IN_BUILDING){
+//			NavRoute route = result.indoorRouteEnd;
+			
+		}else if(result.getType()==PathSearchResult.Type.BETWEEN_BUILDING){
+//			NavRoute route = result.indoorRouteStart;
+			
+		}else if(result.getType()==PathSearchResult.Type.OUTDOOR_INDOOR){
+			finish();
 		}
 	}
 

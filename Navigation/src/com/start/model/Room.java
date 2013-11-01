@@ -45,7 +45,7 @@ public class Room extends CoreModel implements POI {
 	/**
 	 * 导航中心点（Vertex对象）
 	 */
-	private String vertextId;
+	private String vertexId;
 	/**
 	 * 坐标区域
 	 */
@@ -80,15 +80,15 @@ public class Room extends CoreModel implements POI {
 		this.departmentId = departmentId;
 	}
 
-
-	public String getVertextId() {
-		return vertextId;
+	public String getVertexId() {
+		return vertexId;
 	}
 
 
-	public void setVertextId(String vertextId) {
-		this.vertextId = vertextId;
+	public void setVertexId(String vertexId) {
+		this.vertexId = vertexId;
 	}
+
 
 	public double[][] getArea() {
 		return area;
@@ -101,7 +101,7 @@ public class Room extends CoreModel implements POI {
 
 	@Override
 	public GeoPoint getGeoPoint() {
-		Vertex vertex=AppContext.getInstance().getVertexService().findById(getVertextId());
+		Vertex vertex=AppContext.getInstance().getVertexService().findById(getVertexId());
 		if(vertex!=null){
 			return new GeoPoint(Double.parseDouble(vertex.getLatitude()), Double.parseDouble(vertex.getLongitude()));
 		}
@@ -111,13 +111,6 @@ public class Room extends CoreModel implements POI {
 
 	@Override
 	public MapData getMapData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public String getVertex() {
 		// TODO Auto-generated method stub
 		return null;
 	}

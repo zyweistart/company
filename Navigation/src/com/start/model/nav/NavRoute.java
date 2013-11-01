@@ -8,14 +8,15 @@ public class NavRoute extends ArrayList<NavStep> {
 
 	private static final long serialVersionUID = 7542240231442289872L;
 	
-	private MapData mapData;
+	private String mapId;
 	
-	public MapData getMapData() {
-		return mapData;
+
+	public String getMapId() {
+		return mapId;
 	}
 
-	public void setMapData(MapData mapData) {
-		this.mapData = mapData;
+	public void setMapId(String mapId) {
+		this.mapId = mapId;
 	}
 
 	public NavStep getStep(MapData mapData) {
@@ -26,4 +27,5 @@ public class NavRoute extends ArrayList<NavStep> {
 		}
 		return null;
 	}
+	
 }

@@ -3,14 +3,9 @@ package com.start.model.navigation;
 import org.mapsforge.core.model.GeoPoint;
 
 import com.start.model.MapData;
-import com.start.model.overlay.POI;
 
-public class MyLocation implements POI {
+public class MyLocation {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1836027206915254846L;
 	/**
 	 * 当前所在的地图数据
 	 */
@@ -29,30 +24,22 @@ public class MyLocation implements POI {
 		return targetMapData.getId().equals(targetMapData.getId());
 	}
 	
-	@Override
+	/**
+	 * 判断是否在室内
+	 * @return
+	 */
+	public boolean isIndoor(){
+		return true;
+	}
+	
+	
 	public GeoPoint getGeoPoint() {
 		return indoorPoint;
 	}
 
-	@Override
 	public MapData getMapData() {
 		return currentMapData;
 	}
 	
-	@Override
-	public String getVertex() {
-		return null;
-	}
-
-	@Override
-	public boolean inside(org.mapsforge.core.model.GeoPoint p) {
-		return false;
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -1,5 +1,7 @@
 package com.start.model;
 
+import org.mapsforge.core.model.GeoPoint;
+
 import com.start.core.CoreModel;
 
 
@@ -56,4 +58,8 @@ public class Vertex extends CoreModel {
 		this.longitude = longitude;
 	}
 
+	public GeoPoint getGeoPoint(){
+		return new GeoPoint(Double.parseDouble(getLatitude()), Double.parseDouble(getLongitude()));
+	}
+	
 }

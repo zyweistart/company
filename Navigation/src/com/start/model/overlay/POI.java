@@ -12,7 +12,7 @@ public interface POI extends Serializable {
 	
 	MapData getMapData();
 	
-	String getVertex();
+	String getVertexId();
 	
 	String getName();
 	
