@@ -43,6 +43,34 @@ public class VertexService extends CoreService {
 	}
 	
 	/**
+	 * 获取所有的点
+	 * @return
+	 */
+	public List<Vertex> findAll(){
+		List<Vertex> vertexs = new ArrayList<Vertex>();
+		Cursor cursor = getDbHelper().getReadableDatabase().query(Vertex.TABLE_NAME, 
+				new String[]{
+					Vertex.COLUMN_NAME_ID,
+					Vertex.COLUMN_NAME_MAPID,
+					Vertex.COLUMN_NAME_LATITUDE,
+					Vertex.COLUMN_NAME_LONGITUDE},null,null, null, null, null);
+		try{
+			if(cursor.moveToFirst()){
+				do {
+					Vertex vertex = new Vertex();
+					vertex.setId(cursor.getString(cursor.getColumnIndex(Vertex.COLUMN_NAME_ID)));
+					vertex.setMapId(cursor.getString(cursor.getColumnIndex(Vertex.COLUMN_NAME_MAPID)));
+					vertex.setLatitude(cursor.getString(cursor.getColumnIndex(Vertex.COLUMN_NAME_LATITUDE)));
+					vertex.setLongitude(cursor.getString(cursor.getColumnIndex(Vertex.COLUMN_NAME_LONGITUDE)));
+					vertexs.add(vertex);
+				} while (cursor.moveToNext());
+			}
+		}finally{
+			cursor.close();
+		}
+		return vertexs;
+	}
+	/**
 	 * 获了当前地图上所有的点
 	 * @return
 	 */

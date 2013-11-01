@@ -4,17 +4,15 @@ import java.io.Serializable;
 
 import org.mapsforge.core.model.GeoPoint;
 
-import com.start.model.MapData;
-
 public interface POI extends Serializable {
 
 	GeoPoint getGeoPoint();
 	
-	MapData getMapData();
+	String getName();
+	
+	String getMapId();
 	
 	String getVertexId();
-	
-	String getName();
 	
 	boolean inside(GeoPoint p);
 	

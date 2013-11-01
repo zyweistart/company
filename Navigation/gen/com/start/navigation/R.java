@@ -71,13 +71,13 @@ public final class R {
         public static final int head_tipsTextView=0x7f08001b;
         public static final int lvitem_department_content=0x7f080003;
         public static final int lvitem_department_name=0x7f080004;
+        public static final int main_content_layout=0x7f080002;
         public static final int main_footbar_friend=0x7f08000a;
         public static final int main_footbar_introduction=0x7f080007;
         public static final int main_footbar_map=0x7f080008;
         public static final int main_footbar_more=0x7f08000b;
         public static final int main_footbar_process=0x7f080009;
         public static final int main_linearlayout_footer=0x7f080005;
-        public static final int main_scrolllayout=0x7f080002;
         public static final int module_main_footer_content=0x7f080006;
         public static final int module_main_frame_department_list=0x7f080000;
         public static final int module_main_frame_doctor_list=0x7f080001;

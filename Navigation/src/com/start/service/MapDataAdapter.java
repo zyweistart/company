@@ -28,7 +28,7 @@ public class MapDataAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public MapData getItem(int position) {
 		return mapDatas.get(position);
 	}
 
@@ -53,6 +53,15 @@ public class MapDataAdapter extends BaseAdapter {
 			this.mapDatas=mapDatas;
 			this.notifyDataSetChanged();
 		}
+	}
+	
+	public int getMapDataIndex(String mapId){
+		for(int i=0;i<mapDatas.size();i++){
+			if(mapId.equals(mapDatas.get(i).getId())){
+				return i;
+			}
+		}
+		return 0;
 	}
 
 }

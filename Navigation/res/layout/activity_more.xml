@@ -7,4 +7,9 @@
     
 	<include layout="@layout/module_main_header" />
 
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="更多设置"/>
+	
 </LinearLayout>

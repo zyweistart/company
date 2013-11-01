@@ -1,7 +1,6 @@
 package com.start.navigation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +54,6 @@ import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
-import com.start.widget.ScrollLayout;
 
 /**
  * 主界面
@@ -67,9 +65,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private AppContext appContext;
 	
 	private int mCurSel;
-	private int mViewCount;
+	private int mFrameViewCount;
 	private RadioButton[] mButtons;
-	private ScrollLayout mScrollLayout;
+	private LinearLayout mMainContentLayout;
 	
 	private RadioButton rboIntroduction;
 	private RadioButton rboMap;
@@ -77,31 +75,24 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private RadioButton rboFriend;
 	private ImageView imMore;
 	
-	private Button module_main_frame_introduction_btnHospital;
-	private Button module_main_frame_introduction_btnDepartment;
-	private Button module_main_frame_introduction_btnDoctor;
+	private View mModuleMainFrameMapContent;
+	private View mModuleMainFrameIntroductionContent;
+	private View mModuleMainFrameProcessContent;
+	private View mModuleMainFrameFriendContent;
+	
+	private Button mModuleMainFrameIntroduction_btnHospital;
+	private Button mModuleMainFrameIntroduction_btnDepartment;
+	private Button mModuleMainFrameIntroduction_btnDoctor;
 	
 	private GestureDetector mGestureDetector;
-	
-	private ListView mMapIndexListView;
 	private MapView mMapView;
+	private ListView mMapIndexListView;
+	private MapDataAdapter mMapDataAdapter;
 	private ListOverlay mListOverlay;
-	/**
-	 * 我的位置
-	 */
+	private MapData mCurrentMapData;
+	private POIMarker mPOIMarker;
 	private MyLocationMarker mMyLocMarker;
-	/**
-	 * 当前打开的地图编号
-	 */
-	private MapData currentMapData;
-	/**
-	 * 当前选重的Marker
-	 */
-	protected POIMarker mPOIMarker;
-	/**
-	 * 当前地图对应的所有房间列表
-	 */
-	private Map<String,List<Room>> mRooms=new HashMap<String,List<Room>>();
+	private Map<String,List<Room>> mRooms;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,27 +101,28 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		
 		appContext=AppContext.getInstance();
 		
-		MapDataAdapter mapAdapter=new MapDataAdapter(this.getLayoutInflater());
+		mMapDataAdapter=new MapDataAdapter(this.getLayoutInflater());
 		
 		mMapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
-		mMapIndexListView.setAdapter(mapAdapter);
+		mMapIndexListView.setAdapter(mMapDataAdapter);
 		mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 				MapData md=(MapData)view.getTag();
-				if(!md.getId().equals(currentMapData.getId())){
-					currentMapData=md;
+				if(!md.getId().equals(mCurrentMapData.getId())){
+					mCurrentMapData=md;
 					setMapFile();
 				}
 			}
 			
 		});
+		
 		List<MapData> mapDatas=appContext.getMapDataService().findAll();
 		mRooms=appContext.getRoomService().findAllPullMap();
 		
-		currentMapData=mapDatas.get(0);
-		mapAdapter.setData(mapDatas);
+		mCurrentMapData=mapDatas.get(0);
+		mMapDataAdapter.setData(mapDatas);
 		
 		this.initHeaderView();
         this.initFooterView();
@@ -141,16 +133,47 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	@Override
     protected void onResume() {
 	    	super.onResume();
-	    	if(mViewCount == 0) mViewCount = mScrollLayout.getChildCount();
-	    	if(mCurSel == 0 && !rboIntroduction.isChecked()) {
+	    	if(mCurSel==0&&!rboIntroduction.isChecked()) {
 	    		rboIntroduction.setChecked(true);
 	    		rboMap.setChecked(false);
 	    		rboProcess.setChecked(false);
 	    		rboFriend.setChecked(false);
+	    		mCurSel=0;
+	    		setCurPoint(mCurSel);
 	    	}
-	    	//读取左右滑动配置
-	    	mScrollLayout.setIsScroll(false);
     }
+	
+	private void setCurPoint(int index){
+		if(mCurSel != index) {
+			if(index>=0&&mFrameViewCount>index){
+				//点击当前项刷新
+				if(index==0){
+					mModuleMainFrameIntroductionContent.setVisibility(View.VISIBLE);
+					mModuleMainFrameMapContent.setVisibility(View.GONE);
+					mModuleMainFrameProcessContent.setVisibility(View.GONE);
+					mModuleMainFrameFriendContent.setVisibility(View.GONE);
+				}else if(index==1){
+					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
+					mModuleMainFrameMapContent.setVisibility(View.VISIBLE);
+					mModuleMainFrameProcessContent.setVisibility(View.GONE);
+					mModuleMainFrameFriendContent.setVisibility(View.GONE);
+				}else if(index==2){
+					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
+					mModuleMainFrameMapContent.setVisibility(View.GONE);
+					mModuleMainFrameProcessContent.setVisibility(View.VISIBLE);
+					mModuleMainFrameFriendContent.setVisibility(View.GONE);
+				}else if(index==3){
+					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
+					mModuleMainFrameMapContent.setVisibility(View.GONE);
+					mModuleMainFrameProcessContent.setVisibility(View.GONE);
+					mModuleMainFrameFriendContent.setVisibility(View.VISIBLE);
+				}
+				mButtons[mCurSel].setChecked(false);
+		    		mButtons[index].setChecked(true);  
+				mCurSel=index;
+			}
+		}
+	}
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
@@ -184,63 +207,40 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	    		}
 	    	});    	
 		
-	    	mScrollLayout = (ScrollLayout) findViewById(R.id.main_scrolllayout);
+	    	mMainContentLayout=(LinearLayout)findViewById(R.id.main_content_layout);
+	    	mModuleMainFrameMapContent=(View)findViewById(R.id.module_main_frame_map_content);
+		mModuleMainFrameIntroductionContent=(View)findViewById(R.id.module_main_frame_introduction_content);
+		mModuleMainFrameProcessContent=(View)findViewById(R.id.module_main_frame_process_content);
+		mModuleMainFrameFriendContent=(View)findViewById(R.id.module_main_frame_friend_content);
 	    	
 	    	LinearLayout linearLayout = (LinearLayout) findViewById(R.id.module_main_footer_content);
-	    	mViewCount = mScrollLayout.getChildCount();
-	    	mButtons = new RadioButton[mViewCount];
+	    	mFrameViewCount=mMainContentLayout.getChildCount();
+	    	mButtons = new RadioButton[mFrameViewCount];
 	    	
-	    	for(int i = 0; i < mViewCount; i++) 	{
+	    	for(int i = 0; i < mFrameViewCount; i++) 	{
 	    		mButtons[i] = (RadioButton) linearLayout.getChildAt(i*2);
 	    		mButtons[i].setTag(i);
 	    		mButtons[i].setChecked(false);
 	    		mButtons[i].setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
-						int pos = (Integer)(v.getTag());
-			    			if(mCurSel == pos) {
-			    				//点击当前项刷新
-			    			}
-						mScrollLayout.snapToScreen(pos);
+						setCurPoint((Integer)(v.getTag()));
 					}
 				});
 	    	}
 	    	
-	    	//设置第一显示屏
-	    	mCurSel = 0;
-	    	mButtons[mCurSel].setChecked(true);
-	    	
-	    	mScrollLayout.SetOnViewChangeListener(new ScrollLayout.OnViewChangeListener() {
-				public void OnViewChange(int viewIndex) {
-					//切换列表视图-如果列表数据为空：加载数据
-					setCurPoint(viewIndex);
-				}
-			});
 	}
-	
-	/**
-     * 设置底部栏当前焦点
-     * @param index
-     */
-    private void setCurPoint(int index) {
-	    	if (index < 0 || index > mViewCount - 1 || mCurSel == index)
-	    		return;
-	   	
-	    	mButtons[mCurSel].setChecked(false);
-	    	mButtons[index].setChecked(true);	
-	    	mCurSel = index;
-    }
 
     /**
      * 初始化主体框架视图
      */
 	private void initMainFrameView() {
 		//introduction
-		module_main_frame_introduction_btnHospital = (Button) findViewById(R.id.module_main_frame_introduction_btnHospital);
-		module_main_frame_introduction_btnHospital.setOnClickListener(this);
-		module_main_frame_introduction_btnDepartment = (Button) findViewById(R.id.module_main_frame_introduction_btnDepartment);
-		module_main_frame_introduction_btnDepartment.setOnClickListener(this);
-		module_main_frame_introduction_btnDoctor = (Button) findViewById(R.id.module_main_frame_introduction_btnDoctor);
-		module_main_frame_introduction_btnDoctor.setOnClickListener(this);
+		mModuleMainFrameIntroduction_btnHospital = (Button) findViewById(R.id.module_main_frame_introduction_btnHospital);
+		mModuleMainFrameIntroduction_btnHospital.setOnClickListener(this);
+		mModuleMainFrameIntroduction_btnDepartment = (Button) findViewById(R.id.module_main_frame_introduction_btnDepartment);
+		mModuleMainFrameIntroduction_btnDepartment.setOnClickListener(this);
+		mModuleMainFrameIntroduction_btnDoctor = (Button) findViewById(R.id.module_main_frame_introduction_btnDoctor);
+		mModuleMainFrameIntroduction_btnDoctor.setOnClickListener(this);
 		//map
 		mGestureDetector = new GestureDetector(this,new OnTapMapListener(this));
 		
@@ -255,7 +255,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		mMapView.getOverlays().add(mListOverlay);
 		
 		setMapFile();
-		
 		//process
 		
 		//friend
@@ -264,9 +263,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	
 	private void setMapFile() {
 		
-//		mMapIndexListView.setItemChecked(mListViewCheckedPos, true);
+		mMapIndexListView.setItemChecked(mMapDataAdapter.getMapDataIndex(mCurrentMapData.getId()), true);
 		
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,currentMapData.getId());
+		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,mCurrentMapData.getId());
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
 			return;
@@ -277,28 +276,24 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private void updateOverlay() {
 
 		ArrayList<OverlayItem> markers = getMarkers();
-		Polyline routeLine = getRouteLine("");
+		Polyline routeLine = getRouteLine();
 		
-		List<Room> rooms=mRooms.get(currentMapData.getId());
-
-		List<GeoPoint> gps=new ArrayList<GeoPoint>();
-		
-		for(Room r:rooms){
-			
-			List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
-			
-			for(RoomArea ra:ras){
-				gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
-			}
-		}
-		
-		PolygonalChain pc = new PolygonalChain(gps);
-		routeLine = new Polyline(pc, appContext.getPaintStroke());
-
 		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
 		synchronized (itemList) {
 			itemList.clear();
-
+			//添加房间区域
+			List<Room> rooms=mRooms.get(mCurrentMapData.getId());
+			List<GeoPoint> gps=new ArrayList<GeoPoint>();
+			for(Room r:rooms){
+				List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
+				for(RoomArea ra:ras){
+					gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+				}
+			}
+			PolygonalChain pc = new PolygonalChain(gps);
+			Polyline arealine = new Polyline(pc, appContext.getPaintStroke());
+			itemList.add(arealine);
+			
 			if (routeLine != null || markers != null) {
 				if (routeLine != null) {
 					itemList.add(routeLine);
@@ -306,15 +301,15 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				if (markers != null) {
 					itemList.addAll(markers);
 				}
-				MyLocation myLocation=appContext.getMyLocation(currentMapData);
-				addMyLocMarker(myLocation);
-//				当前房间当前书架位置点
-//				if (mPOIMarker != null) {
-//					itemList.add(mPOIMarker);
-//					//设置当前目标位置点为中心点
-//					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
-//				}
+				//当前房间当前书架位置点
+				if (mPOIMarker != null) {
+					itemList.add(mPOIMarker);
+					//设置当前目标位置点为中心点
+					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
+				}
 			}
+			MyLocation myLocation=appContext.getMyLocation();
+			addMyLocMarker(myLocation);
 			mMapView.getMapViewPosition().setCenter(mMapView.getMapViewPosition().getCenter());
 		}
 	}
@@ -330,7 +325,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			return null;
 		}
 
-		NavStep step = route.getStep(currentMapData.getId());
+		NavStep step = route.getStep(mCurrentMapData.getId());
 		if (step == null) {
 			return null;
 		}
@@ -360,16 +355,36 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		return markers;
 	}
 	
-	private Polyline getRouteLine(String currentMapId) {
-		return null;
+	private Polyline getRouteLine() {
+		
+		PathSearchResult result=appContext.getPathSearchResult();
+		if (result == null) {
+			return null;
+		}
+
+		NavRoute route = result.getRouteByBuilding();
+		if (route == null) {
+			return null;
+		}
+
+		NavStep step = route.getStep(mCurrentMapData.getId());
+		if (step == null) {
+			return null;
+		}
+
+		Polyline routeLine = null;
+		if (step.size() > 1) {
+			PolygonalChain pc = new PolygonalChain(step);
+			routeLine = new Polyline(pc, appContext.getPaintStroke());
+		}
+		return routeLine;
 	}
-	
 	/**
 	 * 添加用户位置定位标记
 	 */
 	private void addMyLocMarker(MyLocation myLocation) {
 		//如果当前定位的位置与当前的地图相同则添加位置标记
-		if(myLocation.getMapData().getId().equals(currentMapData.getId())){
+		if(myLocation.getMapId().equals(mCurrentMapData.getId())){
 			if (mMyLocMarker == null) {
 				mMyLocMarker = new MyLocationMarker(myLocation, Marker.boundCenter(getResources().getDrawable(R.drawable.ic_my_loc)));
 			} else {
@@ -450,11 +465,11 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			PathSearchTask search = new PathSearchTask(this);
 			POI r = (POI) v.getTag();
 
-			MyLocation myLocation = appContext.getMyLocation(currentMapData);
+			MyLocation myLocation = appContext.getMyLocation();
 			
 			if (myLocation != null) {
-				EndPoint sp  = new IndoorEndPoint(myLocation.getMapData(), myLocation.getGeoPoint());
-				EndPoint ep = new IndoorEndPoint(currentMapData, r.getGeoPoint(), r.getVertexId());
+				EndPoint sp  = new IndoorEndPoint(myLocation.getMapId(), myLocation.getGeoPoint());
+				EndPoint ep = new IndoorEndPoint(mCurrentMapData.getId(), r.getGeoPoint(), r.getVertexId());
 				search.execute(sp, ep);
 			} else {
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
@@ -484,7 +499,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			return;
 		}
 
-		List<Room> rooms = mRooms.get(currentMapData.getId());
+		List<Room> rooms = mRooms.get(mCurrentMapData.getId());
 		for (Room r : rooms) {
 			if (r.inside(g)) {
 				tapPOI(r);
@@ -497,8 +512,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	public void onGetResult(PathSearchResult result) {
 		mPOIMarker = null;
 		if(result.getType()==PathSearchResult.Type.IN_BUILDING){
-//			NavRoute route = result.indoorRouteEnd;
-			
+			NavRoute route = result.indoorRouteEnd;
+			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataIndex(route.getMapId()));
+			setMapFile();
 		}else if(result.getType()==PathSearchResult.Type.BETWEEN_BUILDING){
 //			NavRoute route = result.indoorRouteStart;
 			

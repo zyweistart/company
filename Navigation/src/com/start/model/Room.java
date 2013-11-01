@@ -108,14 +108,6 @@ public class Room extends CoreModel implements POI {
 		return null;
 	}
 
-
-	@Override
-	public MapData getMapData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	@Override
 	public boolean inside(GeoPoint p) {
 		List<RoomArea> ras=AppContext.getInstance().getRoomAreaService().findAllByRoomId(getId());

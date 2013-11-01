@@ -11,7 +11,6 @@ import org.mapsforge.core.model.GeoPoint;
 import android.util.Log;
 
 import com.start.model.Edge;
-import com.start.model.MapData;
 import com.start.model.Vertex;
 import com.start.navigation.AppContext;
 
@@ -69,16 +68,18 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * @param geoPoint
 	 * @return the nearest vertex
 	 */
-	public Vertex getClosestVertex(GeoPoint geoPoint) {
+	public Vertex getClosestVertex(GeoPoint geoPoint,String mapId) {
 		double minDist = Double.MAX_VALUE;
 		double longitude = geoPoint.longitude, latitude = geoPoint.latitude;
 
 		Vertex target = null;
 		for (Vertex v : vertexMap.values()) {
-			double dist = Math.abs(longitude - Double.parseDouble(v.getLongitude())) + Math.abs(latitude - Double.parseDouble(v.getLatitude()));
-			if (dist < minDist) {
-				target = v;
-				minDist = dist;
+			if(v.getMapId().equals(mapId)){
+				double dist = Math.abs(longitude - Double.parseDouble(v.getLongitude())) + Math.abs(latitude - Double.parseDouble(v.getLatitude()));
+				if (dist < minDist) {
+					target = v;
+					minDist = dist;
+				}
 			}
 		}
 		return target;
@@ -175,8 +176,8 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * 
 	 * @param buildingName building name
 	 */
-	public void init(MapData mapData) {
-		List<Vertex> vertexs=AppContext.getInstance().getVertexService().findAllByMapId(mapData.getId());
+	public void init() {
+		List<Vertex> vertexs=AppContext.getInstance().getVertexService().findAll();
 		for(Vertex v:vertexs){
 			addVertex(v);
 		}

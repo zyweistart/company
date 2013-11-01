@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.Toast;
 
-import com.start.model.MapData;
 import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
 import com.start.service.DepartmentService;
@@ -129,8 +128,8 @@ public class AppContext extends Application {
 		return edgeService;
 	}
 
-	public MyLocation getMyLocation(MapData mapData){
-		return new MyLocation(mapData, new GeoPoint(0.0006458,0.0013545));
+	public MyLocation getMyLocation(){
+		return new MyLocation("0102", new GeoPoint(0.0006458,0.0013545));
 	}
     
 }

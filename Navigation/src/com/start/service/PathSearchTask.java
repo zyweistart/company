@@ -9,7 +9,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.start.model.MapData;
 import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.Graph;
@@ -57,12 +56,12 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 			
 			IndoorEndPoint sp = (IndoorEndPoint) params[0];
 			//当前位置与目标位置在同一张地图
-			if (sp.getMapData().getId().equals(ep.getMapData().getId())) {
+			if (sp.getMapId().equals(ep.getMapId())) {
 				
 				// Search path in the same building.
-				Graph g = getGraph(sp.getMapData());
+				Graph g = getGraph();
 
-				NavRoute r = searchInBuilding(g, sp.getGeoPoint(), ep.getVertex(), sp.getMapData());
+				NavRoute r = searchInBuilding(g, sp.getGeoPoint(), ep.getMapId()+ep.getVertex(), sp.getMapId());
 				
 				result.indoorRouteEnd = r;
 				result.type = PathSearchResult.Type.IN_BUILDING;
@@ -70,12 +69,12 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 			} else {
 				
 				// Search path in the different buildings.
-				Graph g = getGraph(sp.getMapData());
-				NavRoute r1 = searchInBuilding(g, sp.getGeoPoint(), sp.getVertex(), sp.getMapData());
+				Graph g = getGraph();
+				NavRoute r1 = searchInBuilding(g, sp.getGeoPoint(), sp.getVertex(), sp.getMapId());
 				result.indoorRouteStart = r1;
 				
-				g = getGraph(ep.getMapData());
-				NavRoute r2 = searchInBuilding(g, ep.getGeoPoint(), ep.getVertex(), ep.getMapData());
+				g = getGraph();
+				NavRoute r2 = searchInBuilding(g, ep.getGeoPoint(), ep.getVertex(), ep.getMapId());
 				result.indoorRouteEnd = r2;
 				
 				result.type = PathSearchResult.Type.BETWEEN_BUILDING;
@@ -104,33 +103,33 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 		}
 	}
 
-	private Graph getGraph(MapData mapData) {
+	private Graph getGraph() {
 		Graph g = new Graph();
-		g.init(mapData);
+		g.init();
 		return g;
 	}
 
-	protected NavRoute searchInBuilding(Graph g, GeoPoint startPoint, String endVertex, MapData mapData) {
-		if (startPoint == null || endVertex == null || mapData == null) {
+	protected NavRoute searchInBuilding(Graph g, GeoPoint startPoint, String endVertex, String mapId) {
+		if (startPoint == null || endVertex == null || mapId == null) {
 			throw new IllegalArgumentException("null parameters");
 		}
 
-		Vertex v = g.getClosestVertex(startPoint);
+		Vertex v = g.getClosestVertex(startPoint,mapId);
 		if (v == null) {
 			return null;
 		}
-		NavRoute route = searchInBuilding(g, v.getId(), endVertex, mapData);
+		NavRoute route = searchInBuilding(g, v.getMapId()+v.getId(), endVertex, mapId);
 		return route;
 	}
 
-	protected NavRoute searchInBuilding(Graph g, final String startVertex, final String endVertex, final MapData mapData) {
-		if (startVertex == null || endVertex == null || mapData == null) {
+	protected NavRoute searchInBuilding(Graph g, final String startVertex, final String endVertex, final String mapId) {
+		if (startVertex == null || endVertex == null || mapId == null) {
 			throw new IllegalArgumentException("null parameters");
 		}
 
 		NavRoute route = g.findPath(startVertex, endVertex);
 		if (route != null) {
-			route.setMapId(mapData.getId());
+			route.setMapId(mapId);
 		}
 		return route;
 	}

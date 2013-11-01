@@ -2,7 +2,6 @@ package com.start.model.nav;
 
 import org.mapsforge.core.model.GeoPoint;
 
-import com.start.model.MapData;
 import com.start.model.overlay.POI;
 
 public class MyLocation implements POI {
@@ -11,19 +10,19 @@ public class MyLocation implements POI {
 	/**
 	 * 当前所在的地图数据
 	 */
-	private MapData targetMapData;
+	private String mapId;
 	/**
 	 * 室内的位置点
 	 */
 	private GeoPoint indoorPoint;
 
-	public MyLocation(MapData targetMapData, GeoPoint indoorPoint) {
-		this.targetMapData = targetMapData;
+	public MyLocation(String targetMapId, GeoPoint indoorPoint) {
+		this.mapId = targetMapId;
 		this.indoorPoint = indoorPoint;
 	}
 
-	public boolean locateIn(MapData targetMapData) {
-		return targetMapData.getId().equals(targetMapData.getId());
+	public boolean locateIn(String targetMapId) {
+		return mapId.equals(targetMapId);
 	}
 	
 	/**
@@ -34,13 +33,8 @@ public class MyLocation implements POI {
 		return true;
 	}
 	
-	
 	public GeoPoint getGeoPoint() {
 		return indoorPoint;
-	}
-
-	public MapData getMapData() {
-		return targetMapData;
 	}
 
 	@Override
@@ -56,6 +50,11 @@ public class MyLocation implements POI {
 	@Override
 	public boolean inside(GeoPoint p) {
 		return false;
+	}
+
+	@Override
+	public String getMapId() {
+		return mapId;
 	}
 
 }

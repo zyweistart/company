@@ -7,21 +7,21 @@
     
 	<include layout="@layout/module_main_header" />   
     
-    <com.start.widget.ScrollLayout   
-	  android:id="@+id/main_scrolllayout"    
-	  android:layout_width="match_parent"    
-	  android:layout_height="match_parent"
-	  android:layout_weight="1">    
-  
-      <include layout="@layout/module_main_frame_map" />
+	<LinearLayout 
+	    android:id="@+id/main_content_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1">
         
- 	  <include layout="@layout/module_main_frame_introduction" />
+ 	 	<include layout="@layout/module_main_frame_introduction" />
+ 	 	
+ 	 	<include layout="@layout/module_main_frame_map" />
       
-	  <include layout="@layout/module_main_frame_process" />
+	  	<include layout="@layout/module_main_frame_process" />
 	  
-	  <include layout="@layout/module_main_frame_friend" />
-	  
-	</com.start.widget.ScrollLayout> 
+	  	<include layout="@layout/module_main_frame_friend" />
+	    
+	</LinearLayout>
     
     <include layout="@layout/module_main_footer" />   
 

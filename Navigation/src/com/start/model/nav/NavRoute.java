@@ -8,7 +8,6 @@ public class NavRoute extends ArrayList<NavStep> {
 	
 	private String mapId;
 	
-
 	public String getMapId() {
 		return mapId;
 	}
