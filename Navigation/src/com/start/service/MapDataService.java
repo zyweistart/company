@@ -24,13 +24,15 @@ public class MapDataService extends CoreService {
 		Cursor cursor = getDbHelper().getReadableDatabase().query(MapData.TABLE_NAME, 
 				new String[]{
 					MapData.COLUMN_NAME_ID,
-					MapData.COLUMN_NAME_NAME},null,null, null, null, null);
+					MapData.COLUMN_NAME_NAME,
+					MapData.COLUMN_NAME_VERTEXID},null,null, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
 					MapData mapData = new MapData();
 					mapData.setId(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_ID)));
 					mapData.setName(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_NAME)));
+					mapData.setVertexId(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_VERTEXID)));
 					mapDatas.add(mapData);
 				} while (cursor.moveToNext());
 			}
@@ -45,13 +47,15 @@ public class MapDataService extends CoreService {
 		Cursor cursor = getDbHelper().getReadableDatabase().query(MapData.TABLE_NAME, 
 				new String[]{
 				MapData.COLUMN_NAME_ID,
-				MapData.COLUMN_NAME_NAME},MapData.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+				MapData.COLUMN_NAME_NAME,
+				MapData.COLUMN_NAME_VERTEXID},MapData.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
 					mapData = new MapData();
 					mapData.setId(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_ID)));
 					mapData.setName(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_NAME)));
+					mapData.setVertexId(cursor.getString(cursor.getColumnIndex(MapData.COLUMN_NAME_VERTEXID)));
 				} while (cursor.moveToNext());
 			}
 		}finally{

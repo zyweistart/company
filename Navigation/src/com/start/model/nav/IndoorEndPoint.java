@@ -2,31 +2,33 @@ package com.start.model.nav;
 
 import org.mapsforge.core.model.GeoPoint;
 
+import com.start.model.MapData;
+
 
 
 public class IndoorEndPoint implements EndPoint {
 
-	private String mapId;
+	private MapData mapData;
 	private String vertex;
 	private GeoPoint geoPoint;
 	
-	public IndoorEndPoint(String mapId, GeoPoint p) {
-		this.mapId=mapId;
+	public IndoorEndPoint(MapData mapData, GeoPoint p) {
+		this.mapData=mapData;
 		this.geoPoint = p;
 	}
 	
-	public IndoorEndPoint(String mapId, GeoPoint p, String vertex) {
-		this.mapId=mapId;
+	public IndoorEndPoint(MapData mapData, GeoPoint p, String vertex) {
+		this.mapData=mapData;
 		this.geoPoint = p;
 		this.vertex = vertex;
 	}
 
-	public String getMapId() {
-		return mapId;
+	public MapData getMapData() {
+		return mapData;
 	}
 
-	public void setMapId(String mapId) {
-		this.mapId = mapId;
+	public void setMapData(MapData mapData) {
+		this.mapData = mapData;
 	}
 
 	public String getVertex() {

@@ -204,10 +204,11 @@ public class ImportConfigDataTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(filePath);
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length==2){
+				if(data.length==3){
 					ContentValues values=new ContentValues();
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
+					values.put(MapData.COLUMN_NAME_VERTEXID, data[2]);
 					mCoreService.insert(MapData.TABLE_NAME,values);
 				}
 			}

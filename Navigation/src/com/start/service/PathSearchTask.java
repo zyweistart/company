@@ -56,12 +56,12 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 			
 			IndoorEndPoint sp = (IndoorEndPoint) params[0];
 			//当前位置与目标位置在同一张地图
-			if (sp.getMapId().equals(ep.getMapId())) {
+			if (sp.getMapData().getId().equals(ep.getMapData().getId())) {
 				
 				// Search path in the same building.
 				Graph g = getGraph();
 
-				NavRoute r = searchInBuilding(g, sp.getGeoPoint(), ep.getMapId()+ep.getVertex(), sp.getMapId());
+				NavRoute r = searchInBuilding(g, sp.getGeoPoint(), ep.getMapData().getId()+ep.getVertex(), sp.getMapData().getId());
 				
 				result.indoorRouteEnd = r;
 				result.type = PathSearchResult.Type.IN_BUILDING;
@@ -70,11 +70,11 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 				
 				// Search path in the different buildings.
 				Graph g = getGraph();
-				NavRoute r1 = searchInBuilding(g, sp.getGeoPoint(), sp.getVertex(), sp.getMapId());
+				NavRoute r1 = searchInBuilding(g, sp.getGeoPoint(), sp.getMapData().getId()+sp.getMapData().getVertexId(), sp.getMapData().getId());
 				result.indoorRouteStart = r1;
 				
 				g = getGraph();
-				NavRoute r2 = searchInBuilding(g, ep.getGeoPoint(), ep.getVertex(), ep.getMapId());
+				NavRoute r2 = searchInBuilding(g, ep.getMapData().getId()+ep.getMapData().getVertexId(), ep.getMapData().getId()+ep.getVertex(), ep.getMapData().getId());
 				result.indoorRouteEnd = r2;
 				
 				result.type = PathSearchResult.Type.BETWEEN_BUILDING;

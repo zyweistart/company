@@ -461,14 +461,18 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 //			POI r = (POI) v.getTag();
 			//跳转至POI
 		} else if (v.getId() == R.id.direction) {
+			
 			PathSearchTask search = new PathSearchTask(this);
 			POI r = (POI) v.getTag();
 
 			MyLocation myLocation = appContext.getMyLocation();
 			
 			if (myLocation != null) {
-				EndPoint sp  = new IndoorEndPoint(myLocation.getMapId(), myLocation.getGeoPoint());
-				EndPoint ep = new IndoorEndPoint(mCurrentMapData.getId(), r.getGeoPoint(), r.getVertexId());
+				
+				MapData mapData=appContext.getMapDataService().findById(myLocation.getMapId());
+				
+				EndPoint sp = new IndoorEndPoint(mapData, myLocation.getGeoPoint(), myLocation.getVertexId());
+				EndPoint ep = new IndoorEndPoint(mCurrentMapData, r.getGeoPoint(), r.getVertexId());
 				search.execute(sp, ep);
 			} else {
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
