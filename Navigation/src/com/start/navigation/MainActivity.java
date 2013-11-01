@@ -17,6 +17,7 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -62,19 +63,20 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
  */
 public class MainActivity extends MapActivity implements OnTouchListener,OnClickListener,OnTapMapClickListener,PathSearchListener {
 
+	private static final String BUNDLEDATA_DATA="data";
+	
 	private AppContext appContext;
 	
 	private int mCurSel;
 	private int mFrameViewCount;
-	private RadioButton[] mButtons;
-	private LinearLayout mMainContentLayout;
-	
 	private RadioButton rboIntroduction;
 	private RadioButton rboMap;
 	private RadioButton rboProcess;
 	private RadioButton rboFriend;
 	private ImageView imMore;
+	private RadioButton[] mButtons;
 	
+	private LinearLayout mMainContentLayout;
 	private View mModuleMainFrameMapContent;
 	private View mModuleMainFrameIntroductionContent;
 	private View mModuleMainFrameProcessContent;
@@ -101,37 +103,16 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		
 		appContext=AppContext.getInstance();
 		
-		mMapDataAdapter=new MapDataAdapter(this.getLayoutInflater());
-		
-		mMapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
-		mMapIndexListView.setAdapter(mMapDataAdapter);
-		mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				MapData md=(MapData)view.getTag();
-				if(!md.getId().equals(mCurrentMapData.getId())){
-					mCurrentMapData=md;
-					setMapFile();
-				}
-			}
-			
-		});
-		
-		List<MapData> mapDatas=appContext.getMapDataService().findAll();
-		mRooms=appContext.getRoomService().findAllPullMap();
-		
-		mCurrentMapData=mapDatas.get(0);
-		mMapDataAdapter.setData(mapDatas);
-		
 		this.initHeaderView();
         this.initFooterView();
         this.initMainFrameView();
         
+        new LoadingMapContentDataByRoom().execute();
+        
 	}
 	
 	@Override
-    protected void onResume() {
+	protected void onResume() {
 	    	super.onResume();
 	    	if(mCurSel==0&&!rboIntroduction.isChecked()) {
 	    		rboIntroduction.setChecked(true);
@@ -244,35 +225,43 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		//map
 		mGestureDetector = new GestureDetector(this,new OnTapMapListener(this));
 		
-		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
 		mMapView = new MapView(this);
 		mMapView.setBuiltInZoomControls(true);
 		mMapView.setClickable(true);
 		mMapView.setOnTouchListener(this);
-		container.addView(mMapView, 0);
 		
 		mListOverlay = new ListOverlay();
 		mMapView.getOverlays().add(mListOverlay);
 		
-		setMapFile();
 		//process
 		
 		//friend
 		
 	}
 	
+	/**
+	 * 设置视图的地图数据文件
+	 */
 	private void setMapFile() {
+		if(mCurrentMapData==null){
+			return;
+		}
 		
-		mMapIndexListView.setItemChecked(mMapDataAdapter.getMapDataIndex(mCurrentMapData.getId()), true);
+		//设置当前地图索引选重状态
+		mMapIndexListView.setItemChecked(mMapDataAdapter.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
 		
 		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,mCurrentMapData.getId());
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
 			return;
 		}
+		
 		updateOverlay();
 	}
 	
+	/**
+	 * 更新地图上的覆盖图、路线、位置等信息
+	 */
 	private void updateOverlay() {
 
 		ArrayList<OverlayItem> markers = getMarkers();
@@ -281,18 +270,21 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
 		synchronized (itemList) {
 			itemList.clear();
+			
 			//添加房间区域
-			List<Room> rooms=mRooms.get(mCurrentMapData.getId());
-			List<GeoPoint> gps=new ArrayList<GeoPoint>();
-			for(Room r:rooms){
-				List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
-				for(RoomArea ra:ras){
-					gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+			if(mRooms!=null){
+				List<Room> rooms=mRooms.get(mCurrentMapData.getId());
+				List<GeoPoint> gps=new ArrayList<GeoPoint>();
+				for(Room r:rooms){
+					List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
+					for(RoomArea ra:ras){
+						gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+					}
 				}
+				PolygonalChain pc = new PolygonalChain(gps);
+				Polyline arealine = new Polyline(pc, appContext.getPaintStroke());
+				itemList.add(arealine);
 			}
-			PolygonalChain pc = new PolygonalChain(gps);
-			Polyline arealine = new Polyline(pc, appContext.getPaintStroke());
-			itemList.add(arealine);
 			
 			if (routeLine != null || markers != null) {
 				if (routeLine != null) {
@@ -314,6 +306,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		}
 	}
 	
+	/**
+	 * 获取地图上的覆盖图
+	 */
 	private ArrayList<OverlayItem> getMarkers() {
 		PathSearchResult res = appContext.getPathSearchResult();
 		if (res == null) {
@@ -355,6 +350,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		return markers;
 	}
 	
+	/**
+	 * 获取地图上覆盖的路线
+	 */
 	private Polyline getRouteLine() {
 		
 		PathSearchResult result=appContext.getPathSearchResult();
@@ -379,8 +377,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		}
 		return routeLine;
 	}
+	
 	/**
-	 * 添加用户位置定位标记
+	 * 添加用户位置标记
 	 */
 	private void addMyLocMarker(MyLocation myLocation) {
 		//如果当前定位的位置与当前的地图相同则添加位置标记
@@ -403,7 +402,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	@SuppressWarnings("deprecation")
 	private void tapPOI(POI poi) {
 		Bundle data = new Bundle();
-		data.putSerializable("data", poi);
+		data.putSerializable(BUNDLEDATA_DATA, poi);
 		showDialog(Utils.DLG_POI, data);
 		mMapView.getMapViewPosition().setCenter(poi.getGeoPoint());
 	}
@@ -412,7 +411,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		if (id == Utils.DLG_POI) {
-			POI poi = (POI) args.getSerializable("data");
+			POI poi = (POI) args.getSerializable(BUNDLEDATA_DATA);
 			((TextView) dialog.findViewById(R.id.poiName)).setText(poi.getName());
 			dialog.findViewById(R.id.direction).setTag(poi);
 			dialog.findViewById(R.id.poiName).setTag(poi);
@@ -513,7 +512,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		mPOIMarker = null;
 		if(result.getType()==PathSearchResult.Type.IN_BUILDING){
 			NavRoute route = result.indoorRouteEnd;
-			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataIndex(route.getMapId()));
+			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(route.getMapId()));
 			setMapFile();
 		}else if(result.getType()==PathSearchResult.Type.BETWEEN_BUILDING){
 //			NavRoute route = result.indoorRouteStart;
@@ -523,4 +522,73 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		}
 	}
 
+	/**
+	 * 加载所有房间数据
+	 * @author start
+	 *
+	 */
+	private class LoadingMapContentDataByRoom extends AsyncTask<Void, Void, Map<String,List<Room>>> {
+
+		@Override
+		protected Map<String,List<Room>> doInBackground(Void... params) {
+			return appContext.getRoomService().findAllPullMap();
+		}
+
+		@Override
+		protected void onPostExecute(Map<String,List<Room>> result) {
+			super.onPostExecute(result);
+			mRooms=result;
+			//等加载完房间数据后再加载地图数据
+			new LoadingMapContentDataByMapData().execute();
+		}
+
+	};
+	
+	/**
+	 * 加载所有地图数据
+	 * @author start
+	 *
+	 */
+	private class LoadingMapContentDataByMapData extends AsyncTask<Void, Void, List<MapData>> {
+
+		@Override
+		protected List<MapData> doInBackground(Void... params) {
+			return appContext.getMapDataService().findAll();
+		}
+
+		@Override
+		protected void onPostExecute(List<MapData> result) {
+			super.onPostExecute(result);
+			//设置首次展示的地图数据
+			mCurrentMapData=result.get(0);
+			
+			mMapDataAdapter=new MapDataAdapter(getLayoutInflater());
+			mMapDataAdapter.setData(result);
+			
+			mMapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
+			mMapIndexListView.setAdapter(mMapDataAdapter);
+			mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+					MapData md=(MapData)view.getTag();
+					//只有当点击的索引不同时才会进行切换
+					if(!md.getId().equals(mCurrentMapData.getId())){
+						mCurrentMapData=md;
+						setMapFile();
+					}
+				}
+				
+			});
+			
+			//地图数据加载完毕后才把地图视图显示到页面上
+			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
+			container.addView(mMapView, 0);
+			
+			setMapFile();
+			
+		}
+
+	};
+	
 }

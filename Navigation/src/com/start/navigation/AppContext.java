@@ -129,7 +129,7 @@ public class AppContext extends Application {
 	}
 
 	public MyLocation getMyLocation(){
-		return new MyLocation("0102", new GeoPoint(0.0006458,0.0013545));
+		return new MyLocation("0101", new GeoPoint(0.0006458,0.0013545));
 	}
     
 }

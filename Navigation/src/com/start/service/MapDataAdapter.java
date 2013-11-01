@@ -1,6 +1,5 @@
 package com.start.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import com.start.navigation.R;
 
 public class MapDataAdapter extends BaseAdapter {
 	
-	private List<MapData> mapDatas=new ArrayList<MapData>();
+	private List<MapData> mapDatas;
 
 	private LayoutInflater inflater;
 
@@ -54,14 +53,23 @@ public class MapDataAdapter extends BaseAdapter {
 			this.notifyDataSetChanged();
 		}
 	}
-	
-	public int getMapDataIndex(String mapId){
-		for(int i=0;i<mapDatas.size();i++){
-			if(mapId.equals(mapDatas.get(i).getId())){
-				return i;
+	/**
+	 * 根据地图编号获取索引
+	 * @param mapId
+	 * @return
+	 */
+	public int getMapDataPositionByMapId(String mapId){
+		if(mapDatas!=null){
+			for(int i=0;i<mapDatas.size();i++){
+				if(mapId.equals(mapDatas.get(i).getId())){
+					return i;
+				}
 			}
+			throw new IllegalArgumentException("mapId error ! value = "+mapId);
+		}else{
+			throw new NullPointerException("mapDatas is null");
 		}
-		return 0;
+		
 	}
 
 }
