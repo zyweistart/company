@@ -64,10 +64,4 @@ public class AppConfig {
 		}
 	}
 	
-	public static class PreferencesConfig{
-		
-		public static final String ScrollLayoutisScrool="ScrollLayoutisScrool";
-
-	}
-	
 }

@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.Toast;
 
-import com.start.core.AppConfig.PreferencesConfig;
+import com.start.model.MapData;
 import com.start.model.nav.PathSearchResult;
 import com.start.model.navigation.MyLocation;
 import com.start.service.DepartmentService;
@@ -60,8 +60,6 @@ public class AppContext extends Application {
     public void makeTextLong(String text){
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
-	
-    
     
 	public PathSearchResult getPathSearchResult() {
 		return pathSearchResult;
@@ -131,16 +129,8 @@ public class AppContext extends Application {
 		return edgeService;
 	}
 
-	public MyLocation getMyLocation(){
-		new MyLocation(null, new GeoPoint(0, 0));
-		return null;
-	}
-	
-	/**
-	 * 主体框架是否滚动
-	 */
-	public boolean isScrollLayoutScrool(){
-		return AppContext.getInstance().getSharedPreferencesUtils().getBoolean(PreferencesConfig.ScrollLayoutisScrool, false);
+	public MyLocation getMyLocation(MapData mapData){
+		return new MyLocation(mapData, new GeoPoint(0.0006458,0.0013545));
 	}
     
 }

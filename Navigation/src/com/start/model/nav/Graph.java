@@ -6,7 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import android.content.Context;
+import org.mapsforge.core.model.GeoPoint;
+
 import android.util.Log;
 
 import com.start.model.Edge;
@@ -22,7 +23,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	private static final long serialVersionUID = -1310931483972347772L;
 
 	private HashMap<String, Vertex> vertexMap = new HashMap<String, Vertex>();
-	private ArrayList<String> vertexNames = new ArrayList<String>();
+	private ArrayList<String> vertexIds = new ArrayList<String>();
 
 	/**
 	 * Add a vertex into the graph
@@ -30,7 +31,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 */
 	public synchronized void addVertex(Vertex v) {
 		vertexMap.put(v.getId(), v);
-		vertexNames.add(v.getId());
+		vertexIds.add(v.getId());
 		add(new LinkedList<Short>());
 	}
 
@@ -41,8 +42,8 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * @param bVertexName the name of the end point of edge
 	 */
 	public synchronized void addEdge(String aVertexName, String bVertexName) {
-		int aVertexIdx = vertexNames.indexOf(aVertexName);
-		int bVertexIdx = vertexNames.indexOf(bVertexName);
+		int aVertexIdx = vertexIds.indexOf(aVertexName);
+		int bVertexIdx = vertexIds.indexOf(bVertexName);
 
 		if (aVertexIdx == -1 || bVertexIdx == -1) {
 			Log.e("error", "wrong edge: " + aVertexName + ", " + bVertexName);
@@ -67,7 +68,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * @param geoPoint
 	 * @return the nearest vertex
 	 */
-	public Vertex getClosestVertex(org.mapsforge.core.model.GeoPoint geoPoint) {
+	public Vertex getClosestVertex(GeoPoint geoPoint) {
 		double minDist = Double.MAX_VALUE;
 		double longitude = geoPoint.longitude, latitude = geoPoint.latitude;
 
@@ -87,7 +88,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 */
 	private ArrayList<Vertex> searchPath(short start, short end) {
 		Queue<Short> q = new LinkedList<Short>();
-		int n = vertexNames.size();
+		int n = vertexIds.size();
 		boolean[] visit = new boolean[n];
 		int[] pre = new int[n];
 		q.add(start);
@@ -110,7 +111,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 		ArrayList<Vertex> p = new ArrayList<Vertex>();
 		if (!q.isEmpty()) {
 			for (int i = end; i != -1; i = pre[i]) {
-				p.add(vertexMap.get(vertexNames.get(i)));
+				p.add(vertexMap.get(vertexIds.get(i)));
 			}
 		}
 		return p;
@@ -125,7 +126,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * @return The shortest path
 	 */
 	public NavRoute findPath(String startName, String endName) {
-		int start = vertexNames.indexOf(startName), end = vertexNames.indexOf(endName);
+		int start = vertexIds.indexOf(startName), end = vertexIds.indexOf(endName);
 		ArrayList<Vertex> pathVertexes = searchPath((short) start, (short) end);
 		return dividePath(pathVertexes);
 	}
@@ -171,10 +172,9 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	/**
 	 * Init a graph for a building
 	 * 
-	 * @param context
 	 * @param buildingName building name
 	 */
-	public void init(Context context, MapData mapData) {
+	public void init(MapData mapData) {
 		List<Vertex> vertexs=AppContext.getInstance().getVertexService().findAllByMapId(mapData.getId());
 		for(Vertex v:vertexs){
 			addVertex(v);

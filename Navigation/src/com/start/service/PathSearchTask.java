@@ -16,6 +16,7 @@ import com.start.model.nav.Graph;
 import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.NavRoute;
 import com.start.model.nav.PathSearchResult;
+import com.start.navigation.AppContext;
 
 public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> {
 
@@ -94,6 +95,7 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 		if (listener != null) {
 			
 			if (result.isValid()) {
+				AppContext.getInstance().setPathSearchResult(result);
 				listener.onGetResult(result);
 			} else {
 				Toast.makeText(context, "暂无结果", Toast.LENGTH_SHORT).show();
@@ -104,7 +106,7 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 
 	private Graph getGraph(MapData mapData) {
 		Graph g = new Graph();
-		g.init(context, mapData);
+		g.init(mapData);
 		return g;
 	}
 

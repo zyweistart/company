@@ -39,11 +39,13 @@ import com.start.core.AppConfig;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
-import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
+import com.start.model.nav.NavRoute;
+import com.start.model.nav.NavStep;
 import com.start.model.nav.PathSearchResult;
 import com.start.model.navigation.MyLocation;
+import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.service.MapDataAdapter;
@@ -81,8 +83,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	
 	private GestureDetector mGestureDetector;
 	
+	private ListView mMapIndexListView;
 	private MapView mMapView;
 	private ListOverlay mListOverlay;
+	/**
+	 * 我的位置
+	 */
+	private MyLocationMarker mMyLocMarker;
 	/**
 	 * 当前打开的地图编号
 	 */
@@ -105,9 +112,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		
 		MapDataAdapter mapAdapter=new MapDataAdapter(this.getLayoutInflater());
 		
-		ListView mapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
-		mapIndexListView.setAdapter(mapAdapter);
-		mapIndexListView.setOnItemClickListener(new OnItemClickListener() {
+		mMapIndexListView=(ListView)findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
+		mMapIndexListView.setAdapter(mapAdapter);
+		mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
@@ -142,7 +149,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	    		rboFriend.setChecked(false);
 	    	}
 	    	//读取左右滑动配置
-	    	mScrollLayout.setIsScroll(appContext.isScrollLayoutScrool());
+	    	mScrollLayout.setIsScroll(false);
     }
 	
 	@Override
@@ -256,6 +263,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	}
 	
 	private void setMapFile() {
+		
+//		mMapIndexListView.setItemChecked(mListViewCheckedPos, true);
+		
 		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,currentMapData.getId());
 		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
 		if (!openResult.isSuccess()) {
@@ -266,7 +276,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	
 	private void updateOverlay() {
 
-		ArrayList<OverlayItem> markers = getMarkers("");
+		ArrayList<OverlayItem> markers = getMarkers();
 		Polyline routeLine = getRouteLine("");
 		
 		List<Room> rooms=mRooms.get(currentMapData.getId());
@@ -274,9 +284,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		List<GeoPoint> gps=new ArrayList<GeoPoint>();
 		
 		for(Room r:rooms){
-			Vertex v=appContext.getVertexService().findById(r.getVertexId());
-			Marker points = new Marker(new GeoPoint(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLongitude())), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
-			markers.add(points);
 			
 			List<RoomArea> ras=appContext.getRoomAreaService().findAllByRoomId(r.getId());
 			
@@ -299,7 +306,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				if (markers != null) {
 					itemList.addAll(markers);
 				}
-//			} else {
+				MyLocation myLocation=appContext.getMyLocation(currentMapData);
+				addMyLocMarker(myLocation);
 //				当前房间当前书架位置点
 //				if (mPOIMarker != null) {
 //					itemList.add(mPOIMarker);
@@ -311,12 +319,64 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		}
 	}
 	
-	protected ArrayList<OverlayItem> getMarkers(String currentMapId) {
-		return new ArrayList<OverlayItem>();
+	private ArrayList<OverlayItem> getMarkers() {
+		PathSearchResult res = appContext.getPathSearchResult();
+		if (res == null) {
+			return null;
+		}
+		
+		NavRoute route = res.getRouteByBuilding();
+		if (route == null) {
+			return null;
+		}
+
+		NavStep step = route.getStep(currentMapData.getId());
+		if (step == null) {
+			return null;
+		}
+
+		mMapView.getMapViewPosition().setCenter(step.getStart().getGeoPoint());
+		ArrayList<OverlayItem> markers = new ArrayList<OverlayItem>();
+		Marker lineStart = new Marker(step.getStart().getGeoPoint(), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
+		markers.add(lineStart);
+
+		if (step.getEnd() != null) {
+			Marker lineEnd = new Marker(step.getEnd().getGeoPoint(), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
+			markers.add(lineEnd);
+		}
+
+		if (res.getStartPoint() instanceof IndoorEndPoint) {
+			IndoorEndPoint start = (IndoorEndPoint) res.getStartPoint();
+			Marker searchStart = new Marker(start.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_start)));
+			markers.add(searchStart);
+		}
+
+		if (res.getEndPoint() instanceof IndoorEndPoint) {
+			IndoorEndPoint end = (IndoorEndPoint) res.getEndPoint();
+			Marker searchEnd = new Marker(end.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_end)));
+			markers.add(searchEnd);
+		}
+
+		return markers;
 	}
 	
-	protected Polyline getRouteLine(String currentMapId) {
+	private Polyline getRouteLine(String currentMapId) {
 		return null;
+	}
+	
+	private void addMyLocMarker(MyLocation myLocation) {
+		if (mMyLocMarker == null) {
+			mMyLocMarker = new MyLocationMarker(myLocation, Marker.boundCenter(getResources().getDrawable(R.drawable.ic_my_loc)));
+		} else {
+			mMyLocMarker.updateLocation(myLocation);
+		}
+
+		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
+		synchronized (itemList) {
+			if (!itemList.contains(mMyLocMarker)) {
+				itemList.add(mMyLocMarker);
+			}
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -384,7 +444,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			PathSearchTask search = new PathSearchTask(this);
 			POI r = (POI) v.getTag();
 
-			MyLocation myLocation = appContext.getMyLocation();
+			MyLocation myLocation = appContext.getMyLocation(currentMapData);
+			
 			if (myLocation != null) {
 				EndPoint sp  = new IndoorEndPoint(myLocation.getMapData(), myLocation.getGeoPoint());
 				EndPoint ep = new IndoorEndPoint(currentMapData, r.getGeoPoint(), r.getVertexId());
@@ -392,6 +453,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			} else {
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
 			}
+			
 		}
 	}
 	
