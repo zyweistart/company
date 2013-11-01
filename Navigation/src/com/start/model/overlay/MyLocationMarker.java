@@ -2,7 +2,7 @@ package com.start.model.overlay;
 
 import android.graphics.drawable.Drawable;
 
-import com.start.model.navigation.MyLocation;
+import com.start.model.nav.MyLocation;
 
 public class MyLocationMarker extends POIMarker {
 

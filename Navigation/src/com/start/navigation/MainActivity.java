@@ -41,10 +41,10 @@ import com.start.model.Room;
 import com.start.model.RoomArea;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
+import com.start.model.nav.MyLocation;
 import com.start.model.nav.NavRoute;
 import com.start.model.nav.NavStep;
 import com.start.model.nav.PathSearchResult;
-import com.start.model.navigation.MyLocation;
 import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
@@ -364,17 +364,23 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		return null;
 	}
 	
+	/**
+	 * 添加用户位置定位标记
+	 */
 	private void addMyLocMarker(MyLocation myLocation) {
-		if (mMyLocMarker == null) {
-			mMyLocMarker = new MyLocationMarker(myLocation, Marker.boundCenter(getResources().getDrawable(R.drawable.ic_my_loc)));
-		} else {
-			mMyLocMarker.updateLocation(myLocation);
-		}
+		//如果当前定位的位置与当前的地图相同则添加位置标记
+		if(myLocation.getMapData().getId().equals(currentMapData.getId())){
+			if (mMyLocMarker == null) {
+				mMyLocMarker = new MyLocationMarker(myLocation, Marker.boundCenter(getResources().getDrawable(R.drawable.ic_my_loc)));
+			} else {
+				mMyLocMarker.updateLocation(myLocation);
+			}
 
-		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
-		synchronized (itemList) {
-			if (!itemList.contains(mMyLocMarker)) {
-				itemList.add(mMyLocMarker);
+			List<OverlayItem> itemList = mListOverlay.getOverlayItems();
+			synchronized (itemList) {
+				if (!itemList.contains(mMyLocMarker)) {
+					itemList.add(mMyLocMarker);
+				}
 			}
 		}
 	}

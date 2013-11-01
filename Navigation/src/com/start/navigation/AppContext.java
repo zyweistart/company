@@ -8,8 +8,8 @@ import android.graphics.Paint;
 import android.widget.Toast;
 
 import com.start.model.MapData;
+import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
-import com.start.model.navigation.MyLocation;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
 import com.start.service.EdgeService;

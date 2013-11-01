@@ -30,8 +30,9 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 * @param v the vertex to add
 	 */
 	public synchronized void addVertex(Vertex v) {
-		vertexMap.put(v.getId(), v);
-		vertexIds.add(v.getId());
+		String key=v.getMapId()+v.getId();
+		vertexMap.put(key, v);
+		vertexIds.add(key);
 		add(new LinkedList<Short>());
 	}
 

@@ -1,4 +1,4 @@
-package com.start.model.navigation;
+package com.start.model.nav;
 
 import org.mapsforge.core.model.GeoPoint;
 
