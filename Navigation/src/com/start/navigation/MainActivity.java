@@ -315,7 +315,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			return null;
 		}
 		
-		NavRoute route = res.getRouteByBuilding();
+		NavRoute route = res.getRoute();
 		if (route == null) {
 			return null;
 		}
@@ -337,14 +337,20 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 
 		if (res.getStartPoint() instanceof IndoorEndPoint) {
 			IndoorEndPoint start = (IndoorEndPoint) res.getStartPoint();
-			Marker searchStart = new Marker(start.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_start)));
-			markers.add(searchStart);
+			//如果终点位置在当前地图上则添加起点覆盖图
+			if(start.getMapId().equals(mCurrentMapData.getId())){
+				Marker searchStart = new Marker(start.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_start)));
+				markers.add(searchStart);
+			}
 		}
 
 		if (res.getEndPoint() instanceof IndoorEndPoint) {
 			IndoorEndPoint end = (IndoorEndPoint) res.getEndPoint();
-			Marker searchEnd = new Marker(end.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_end)));
-			markers.add(searchEnd);
+			//如果终点在当前地图则添加终点覆盖图
+			if(end.getMapId().equals(mCurrentMapData.getId())){
+				Marker searchEnd = new Marker(end.getGeoPoint(), Marker.boundCenterBottom(getResources().getDrawable(R.drawable.icon_nav_end)));
+				markers.add(searchEnd);
+			}
 		}
 
 		return markers;
@@ -360,7 +366,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			return null;
 		}
 
-		NavRoute route = result.getRouteByBuilding();
+		NavRoute route = result.getRoute();
 		if (route == null) {
 			return null;
 		}
@@ -469,10 +475,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			
 			if (myLocation != null) {
 				
-				MapData mapData=appContext.getMapDataService().findById(myLocation.getMapId());
-				
-				EndPoint sp = new IndoorEndPoint(mapData, myLocation.getGeoPoint(), myLocation.getVertexId());
-				EndPoint ep = new IndoorEndPoint(mCurrentMapData, r.getGeoPoint(), r.getVertexId());
+				EndPoint sp = new IndoorEndPoint(myLocation.getMapId(), myLocation.getGeoPoint());
+				EndPoint ep = new IndoorEndPoint(mCurrentMapData.getId(), r.getGeoPoint(), r.getVertexId());
 				search.execute(sp, ep);
 			} else {
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
@@ -515,8 +519,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	public void onGetResult(PathSearchResult result) {
 		mPOIMarker = null;
 		if(result.getType()==PathSearchResult.Type.IN_BUILDING){
-			NavRoute route = result.indoorRouteEnd;
-			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(route.getMapId()));
 			setMapFile();
 		}else if(result.getType()==PathSearchResult.Type.BETWEEN_BUILDING){
 //			NavRoute route = result.indoorRouteStart;

@@ -2,6 +2,7 @@ package com.start.model.nav;
 
 
 
+
 public class PathSearchResult {
 
 	public enum Type {NORMAL, IN_BUILDING, BETWEEN_BUILDING, OUTDOOR_INDOOR, OUTDOOR }
@@ -21,7 +22,7 @@ public class PathSearchResult {
 		return type == null ? Type.NORMAL : type;
 	}
 	
-	public NavRoute getRouteByBuilding() {
+	public NavRoute getRoute() {
 		if (indoorRouteStart != null) {
 			return indoorRouteStart;
 		} else if (indoorRouteEnd != null) {

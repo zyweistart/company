@@ -147,24 +147,23 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 		Vertex start = path.get(len - 1);
 		NavStep step = new NavStep(start.getMapId());
 		step.setStart(start);
+		step.add(start.getGeoPoint());
 		route.add(step);
 		if (len == 1) {
 			return route;
 		}
 
-		step.add(start.getGeoPoint());
-
 		int i = len - 2;
 		while (i >= 0) {
 			Vertex v = path.get(i);
 			if(v.getMapId().equals(step.getMapId())){
-				step = new NavStep(v.getMapId());
-				route.add(step);
-				step.setStart(v);
-				step.add(v.getGeoPoint());
-			} else {
 				step.add(v.getGeoPoint());
 				step.setEnd(v);
+			} else {
+				step = new NavStep(v.getMapId());
+				step.setStart(v);
+				step.add(v.getGeoPoint());
+				route.add(step);
 			}
 			i--;
 		}

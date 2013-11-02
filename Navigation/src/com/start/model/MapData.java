@@ -17,8 +17,13 @@ public class MapData extends CoreModel {
 			+ COLUMN_NAME_VERTEXID + " TEXT"
 			+ ");";
 	
+	/**
+	 * 地图名称
+	 */
 	private String name;
-	
+	/**
+	 * 地图数据的初始点
+	 */
 	private String vertexId;
 
 	public String getName() {
