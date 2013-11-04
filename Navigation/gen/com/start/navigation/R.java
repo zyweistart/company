@@ -63,12 +63,12 @@ public final class R {
         public static final int widget_pulltorefresh_arrow=0x7f020022;
     }
     public static final class id {
-        public static final int direction=0x7f080015;
-        public static final int head_arrowImageView=0x7f080019;
-        public static final int head_contentLayout=0x7f080017;
-        public static final int head_lastUpdatedTextView=0x7f08001c;
-        public static final int head_progressBar=0x7f08001a;
-        public static final int head_tipsTextView=0x7f08001b;
+        public static final int direction=0x7f080018;
+        public static final int head_arrowImageView=0x7f08001c;
+        public static final int head_contentLayout=0x7f08001a;
+        public static final int head_lastUpdatedTextView=0x7f08001f;
+        public static final int head_progressBar=0x7f08001d;
+        public static final int head_tipsTextView=0x7f08001e;
         public static final int lvitem_department_content=0x7f080003;
         public static final int lvitem_department_name=0x7f080004;
         public static final int main_content_layout=0x7f080002;
@@ -89,9 +89,12 @@ public final class R {
         public static final int module_main_frame_map_content=0x7f080011;
         public static final int module_main_frame_map_content_mapdataindexlist=0x7f080012;
         public static final int module_main_frame_process_content=0x7f080013;
-        public static final int module_main_header_id=0x7f080014;
-        public static final int mylistview_word=0x7f080018;
-        public static final int poiName=0x7f080016;
+        public static final int module_main_header_content=0x7f080014;
+        public static final int module_main_header_content_location=0x7f080016;
+        public static final int module_main_header_content_search=0x7f080017;
+        public static final int module_main_header_content_title=0x7f080015;
+        public static final int mylistview_word=0x7f08001b;
+        public static final int poiName=0x7f080019;
     }
     public static final class layout {
         public static final int activity_department_detail=0x7f030000;

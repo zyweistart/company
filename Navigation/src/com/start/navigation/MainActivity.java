@@ -1,6 +1,7 @@
 package com.start.navigation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,12 +83,18 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private View mModuleMainFrameProcessContent;
 	private View mModuleMainFrameFriendContent;
 	
+	private TextView mModuleMainHeaderContentTitle;
+	private Button mModuleMainHeaderContentLocation;
+	private Button mModuleMainHeaderContentSearch;
+	
 	private Button mModuleMainFrameIntroduction_btnHospital;
 	private Button mModuleMainFrameIntroduction_btnDepartment;
 	private Button mModuleMainFrameIntroduction_btnDoctor;
 	
-	private MapView mMapView;
-	private ListOverlay mListOverlay;
+	Map<String,ViewCollections> mMapViewCollections=new HashMap<String,ViewCollections>();
+	
+//	private MapView mMapView;
+//	private ListOverlay mListOverlay;
 	private GestureDetector mGestureDetector;
 	/**
 	 * 当前使用的地图
@@ -184,7 +191,11 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	 * 初始化头部视图
 	 */
 	private void initHeaderView() {
-		
+		mModuleMainHeaderContentTitle=(TextView)findViewById(R.id.module_main_header_content_title);
+		mModuleMainHeaderContentLocation=(Button)findViewById(R.id.module_main_header_content_location);
+		mModuleMainHeaderContentLocation.setOnClickListener(this);
+		mModuleMainHeaderContentSearch=(Button)findViewById(R.id.module_main_header_content_search);
+		mModuleMainHeaderContentSearch.setOnClickListener(this);
 	}
 	
 	/**
@@ -243,13 +254,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		//map
 		mGestureDetector = new GestureDetector(this,new OnTapMapListener(this));
 		
-		mMapView = new MapView(this);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.setClickable(true);
-		mMapView.setOnTouchListener(this);
-		
-		mListOverlay = new ListOverlay();
-		mMapView.getOverlays().add(mListOverlay);
+//		mMapView = new MapView(this);
+//		mMapView.setBuiltInZoomControls(true);
+//		mMapView.setClickable(true);
+//		mMapView.setOnTouchListener(this);
+//		
+//		mListOverlay = new ListOverlay();
+//		mMapView.getOverlays().add(mListOverlay);
 		
 		//process
 		
@@ -268,10 +279,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		//设置当前地图索引选重状态
 		mMapIndexListView.setItemChecked(mMapDataAdapter.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
 		
-		String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,mCurrentMapData.getId());
-		FileOpenResult openResult = mMapView.setMapFile(Utils.getFile(this, path));
-		if (!openResult.isSuccess()) {
-			return;
+		for(String mapId:mMapViewCollections.keySet()){
+			ViewCollections vc=mMapViewCollections.get(mapId);
+			if(mapId.equals(mCurrentMapData.getId())){
+				vc.getMapView().setVisibility(View.VISIBLE);
+			}else{
+				vc.getMapView().setVisibility(View.GONE);
+			}
 		}
 		
 		updateOverlay();
@@ -285,7 +299,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		ArrayList<OverlayItem> markers = getMarkers();
 		Polyline routeLine = getRouteLine();
 		
-		List<OverlayItem> itemList = mListOverlay.getOverlayItems();
+		ViewCollections vc=mMapViewCollections.get(mCurrentMapData.getId());
+		
+		List<OverlayItem> itemList = vc.getListOverlay().getOverlayItems();
 		synchronized (itemList) {
 			itemList.clear();
 			
@@ -315,12 +331,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				if (mPOIMarker != null) {
 					itemList.add(mPOIMarker);
 					//设置当前目标位置点为中心点
-					mMapView.getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
+					vc.getMapView().getMapViewPosition().setCenter(mPOIMarker.getGeoPoint());
 				}
 			}
 			MyLocation myLocation=appContext.getMyLocation();
 			addMyLocMarker(myLocation);
-			mMapView.getMapViewPosition().setCenter(mMapView.getMapViewPosition().getCenter());
+			vc.getMapView().getMapViewPosition().setCenter(vc.getMapView().getMapViewPosition().getCenter());
 		}
 	}
 	
@@ -342,8 +358,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		if (step == null) {
 			return null;
 		}
-
-		mMapView.getMapViewPosition().setCenter(step.getStart().getGeoPoint());
+		
+		ViewCollections vc=mMapViewCollections.get(mCurrentMapData.getId());
+		
+		vc.getMapView().getMapViewPosition().setCenter(step.getStart().getGeoPoint());
 		ArrayList<OverlayItem> markers = new ArrayList<OverlayItem>();
 		Marker lineStart = new Marker(step.getStart().getGeoPoint(), Marker.boundCenter(getResources().getDrawable(R.drawable.icon_node)));
 		markers.add(lineStart);
@@ -414,7 +432,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				mMyLocMarker.updateLocation(myLocation);
 			}
 
-			List<OverlayItem> itemList = mListOverlay.getOverlayItems();
+			ViewCollections vc=mMapViewCollections.get(mCurrentMapData.getId());
+			
+			List<OverlayItem> itemList = vc.getListOverlay().getOverlayItems();
 			synchronized (itemList) {
 				if (!itemList.contains(mMyLocMarker)) {
 					itemList.add(mMyLocMarker);
@@ -428,7 +448,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		Bundle data = new Bundle();
 		data.putSerializable(BUNDLEDATA_DATA, poi);
 		showDialog(Utils.DLG_POI, data);
-		mMapView.getMapViewPosition().setCenter(poi.getGeoPoint());
+		
+		ViewCollections vc=mMapViewCollections.get(mCurrentMapData.getId());
+		
+		vc.getMapView().getMapViewPosition().setCenter(poi.getGeoPoint());
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -498,12 +521,21 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 		}else if(v.getId() == R.id.poiName){
 //			POI r = (POI) v.getTag();
 			//跳转至POI
+		}else if(v.getId() == R.id.module_main_header_content_location){
+			MyLocation myLocation=appContext.getMyLocation();
+			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+			setMapFile();
+			addMyLocMarker(myLocation);
+		}else if(v.getId() == R.id.module_main_header_content_search){
+			
 		}
 	}
 	
 	@Override
 	public void onClickAt(float xPixel, float yPixel) {
-		Projection projection = mMapView.getProjection();
+		ViewCollections vc=mMapViewCollections.get(mCurrentMapData.getId());
+		
+		Projection projection = vc.getMapView().getProjection();
 		if (projection == null) {
 			return;
 		}
@@ -583,6 +615,22 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			super.onPostExecute(result);
 			//设置首次展示的地图数据
 			mCurrentMapData=result.get(0);
+			//地图数据加载完毕后才把地图视图显示到页面上
+			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
+			
+			for(int i=0;i<result.size();i++){
+				MapData md=result.get(i);
+				ViewCollections vc=new ViewCollections();
+				
+				String path = String.format("%1$s/%2$s.map", AppConfig.CONFIG_DATA_PATH_MEDMAP,md.getId());
+				FileOpenResult openResult = vc.getMapView().setMapFile(Utils.getFile(MainActivity.this, path));
+				if (!openResult.isSuccess()) {
+					return;
+				}
+				
+				container.addView(vc.getMapView(), i);
+				mMapViewCollections.put(md.getId(), vc);
+			}
 			
 			mMapDataAdapter=new MapDataAdapter(getLayoutInflater());
 			mMapDataAdapter.setData(result);
@@ -603,14 +651,39 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				
 			});
 			
-			//地图数据加载完毕后才把地图视图显示到页面上
-			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
-			container.addView(mMapView, 0);
+			
 			
 			setMapFile();
 			
 		}
 
 	};
+	
+	private class ViewCollections{
+		
+		private MapView mapView;
+		private ListOverlay listOverlay;
+		
+		public ViewCollections(){
+			mapView = new MapView(MainActivity.this);
+			mapView.setBuiltInZoomControls(true);
+			mapView.setClickable(true);
+			mapView.setOnTouchListener(MainActivity.this);
+			
+			listOverlay = new ListOverlay();
+			mapView.getOverlays().add(listOverlay);
+			
+			mapView.setVisibility(View.GONE);
+		}
+		
+		public MapView getMapView() {
+			return mapView;
+		}
+		
+		public ListOverlay getListOverlay() {
+			return listOverlay;
+		}
+		
+	}
 	
 }
