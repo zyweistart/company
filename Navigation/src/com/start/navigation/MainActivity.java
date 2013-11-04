@@ -86,14 +86,32 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 	private Button mModuleMainFrameIntroduction_btnDepartment;
 	private Button mModuleMainFrameIntroduction_btnDoctor;
 	
-	private GestureDetector mGestureDetector;
 	private MapView mMapView;
-	private ListView mMapIndexListView;
-	private MapDataAdapter mMapDataAdapter;
 	private ListOverlay mListOverlay;
+	private GestureDetector mGestureDetector;
+	/**
+	 * 当前使用的地图
+	 */
 	private MapData mCurrentMapData;
+	/**
+	 * 当前选重的房间标记
+	 */
 	private POIMarker mPOIMarker;
+	/**
+	 * 我的位置覆盖图
+	 */
 	private MyLocationMarker mMyLocMarker;
+	/**
+	 * 地图索引视图列表
+	 */
+	private ListView mMapIndexListView;
+	/**
+	 * 地图索引适配器
+	 */
+	private MapDataAdapter mMapDataAdapter;
+	/**
+	 * 地图上房间的集合
+	 */
 	private Map<String,List<Room>> mRooms;
 	
 	@Override
@@ -463,18 +481,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 			//医生介绍
 			Intent intent=new Intent(this,DoctorListActivity.class);
 			startActivity(intent);
-		}if (v.getId() == R.id.poiName) {
-//			POI r = (POI) v.getTag();
-			//跳转至POI
-		} else if (v.getId() == R.id.direction) {
-			
-			PathSearchTask search = new PathSearchTask(this);
+		}else if(v.getId() == R.id.direction){
 			POI r = (POI) v.getTag();
 
 			MyLocation myLocation = appContext.getMyLocation();
 			
 			if (myLocation != null) {
-				
+				PathSearchTask search = new PathSearchTask(this);
 				EndPoint sp = new IndoorEndPoint(myLocation.getMapId(), myLocation.getGeoPoint());
 				EndPoint ep = new IndoorEndPoint(mCurrentMapData.getId(), r.getGeoPoint(), r.getVertexId());
 				search.execute(sp, ep);
@@ -482,6 +495,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,OnClick
 				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
 			}
 			
+		}else if(v.getId() == R.id.poiName){
+//			POI r = (POI) v.getTag();
+			//跳转至POI
 		}
 	}
 	
