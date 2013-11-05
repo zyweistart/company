@@ -7,9 +7,15 @@
     
 	<include layout="@layout/module_main_header" />
 
-	<TextView 
+	<Button
+	    android:id="@+id/department_detail_btndoctorlist"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="部门详细"/>
+	    android:text="医生列表"/>
+	
+	<TextView 
+	    android:id="@+id/department_detail_content"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
 	
 </LinearLayout>

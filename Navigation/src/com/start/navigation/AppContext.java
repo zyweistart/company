@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
+import com.start.service.DepartmentHasRoomService;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
 import com.start.service.EdgeService;
@@ -29,6 +30,7 @@ public class AppContext extends Application {
     
     private DoctorService doctorService;
     private DepartmentService departmentService;
+    private DepartmentHasRoomService departmentHasRoomService;
     private MapDataService mapDataService;
     private RoomService roomService;
     private VertexService vertexService;
@@ -93,6 +95,13 @@ public class AppContext extends Application {
 		return departmentService;
 	}
 
+	public DepartmentHasRoomService getDepartmentHasRoomService() {
+		if(departmentHasRoomService==null){
+			departmentHasRoomService=new DepartmentHasRoomService(this);
+		}
+		return departmentHasRoomService;
+	}
+
 	public MapDataService getMapDataService() {
 		if(mapDataService==null){
 			mapDataService=new MapDataService(this);
@@ -129,7 +138,7 @@ public class AppContext extends Application {
 	}
 
 	public MyLocation getMyLocation(){
-		return new MyLocation("0101", new GeoPoint(0.0007388,0.0012458));
+		return new MyLocation("0102", new GeoPoint(0.0007388,0.0012458));
 	}
     
 }

@@ -57,4 +57,9 @@ public class MyLocation implements POI {
 		return mapId;
 	}
 
+	@Override
+	public String getId() {
+		return null;
+	}
+
 }

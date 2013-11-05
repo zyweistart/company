@@ -6,6 +6,7 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="empty"></string>
+    <string name="exit_navigation">退出导航</string>
     
     <string name="frame_introduction_title">介绍</string>
     <string name="frame_map_title">地图</string>

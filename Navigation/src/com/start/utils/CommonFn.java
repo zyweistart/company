@@ -101,7 +101,14 @@ public class CommonFn {
 		}
 	}
 	
-	public static AlertDialog alertDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
+	public static AlertDialog alertsDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage(message);
+		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
+		return builder.create();
+	}
+	
+	public static AlertDialog buildDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setMessage(message);
 		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);

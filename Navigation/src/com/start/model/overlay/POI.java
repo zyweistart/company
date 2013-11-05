@@ -6,6 +6,8 @@ import org.mapsforge.core.model.GeoPoint;
 
 public interface POI extends Serializable {
 
+	String getId();
+	
 	GeoPoint getGeoPoint();
 	
 	String getName();

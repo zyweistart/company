@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.start.core.CoreActivity;
+import com.start.model.Department;
 import com.start.model.Doctor;
 
 /**
@@ -32,8 +33,18 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_list);
-		
-		doctors=getAppContext().getDoctorService().findAll();
+
+		Bundle bundle=getIntent().getExtras();
+		if(bundle!=null){
+			String departmentId=bundle.getString(Department.COLUMN_NAME_ID);
+			if(departmentId!=null){
+				doctors=getAppContext().getDoctorService().findByDepartmentId(departmentId);
+			}else{
+				doctors=getAppContext().getDoctorService().findAll();
+			}
+		}else{
+			doctors=getAppContext().getDoctorService().findAll();
+		}
 		
 		DataAdapter adapter=new DataAdapter();
 		departmentListView=(ListView)findViewById(R.id.module_main_frame_doctor_list);
