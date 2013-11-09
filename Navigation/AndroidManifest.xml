@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" android:launchMode="singleInstance"/>
         <activity android:name=".DepartmentListActivity"/>
         <activity android:name=".DepartmentDetailActivity"/>
         <activity android:name=".DoctorListActivity"/>
