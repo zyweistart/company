@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HandlerLeak" severity="ignore" />
+    <issue id="InlinedApi" severity="ignore" />
+    <issue id="NewApi" severity="ignore">
+        <ignore path="src/com/ancun/yulualiyun/SearchRecordedActivity.java" />
+    </issue>
+    <issue id="SimpleDateFormat" severity="ignore" />
+</lint>

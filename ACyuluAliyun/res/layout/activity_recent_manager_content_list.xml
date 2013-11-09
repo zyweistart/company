@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialpad_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/recorded_main_detaillist_layout_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <include
+            android:layout_alignParentTop="true"
+            layout="@layout/common_title" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/app_listview_pulltorefreshlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/recorded_main_detaillist_layout_top"
+        android:cacheColorHint="#00000000"
+        android:divider="#415c71"
+        android:dividerHeight="0.8dp"
+        android:fadeScrollbars="true"
+        android:fastScrollEnabled="true" >
+    </ListView>
+
+</RelativeLayout>

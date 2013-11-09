@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:layout_marginTop="20.0dip"
+        android:background="@drawable/shape_bg"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="@drawable/shape_line" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15.0dip"
+                android:text="@string/activity_mobilenum"
+                android:textColor="@android:color/black"
+                android:textSize="20.0sp" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="14dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="14dip"
+                android:background="#AAAAAA" />
+
+            <EditText
+                android:id="@+id/appr_edittext_mobile_num"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3.0dip"
+                android:layout_marginLeft="0.0dip"
+                android:layout_marginRight="15.0dip"
+                android:layout_marginTop="3.0dip"
+                android:background="@android:color/white"
+                android:hint="@string/activity_mobilenumhint"
+                android:inputType="number"
+                android:maxLength="20"
+                android:paddingLeft="10.0dip"
+                android:textColor="#AAAAAA"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="10.0dip"
+        android:gravity="left"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/appr_checkbox_readProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/checkbox_bg1"
+            android:drawablePadding="4.0dip"
+            android:text="@string/activity_register_readprotocol_1"
+            android:textColor="#ff545454"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/appr_textview_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_register_readprotocol_2"
+            android:textColor="@color/button_unselected"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+
+</LinearLayout>

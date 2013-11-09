@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_8"
+    android:scrollbarStyle="outsideInset" 
+    android:fadingEdge="none"
+    android:fillViewport="true"
+    android:background="@drawable/dialpad_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_8"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:background="@drawable/bg_login_logo" 
+            android:contentDescription="@string/empty"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:background="@drawable/login_input"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_activity_login_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="phone"
+                android:maxLength="@integer/edittext_maxlength"
+                android:padding="@dimen/spacing_5"
+                android:textSize="@dimen/fontsize_h1" 
+                android:hint="@string/activity_login_account_hint"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColor="@android:color/black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.0px"
+                android:layout_marginLeft="1.0px"
+                android:layout_marginRight="1.0px"
+                android:background="#ffc0c3c4" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.0px"
+                android:layout_marginLeft="1.0px"
+                android:layout_marginRight="1.0px"
+                android:background="#fffdfdfd" />
+            
+            <EditText
+                android:id="@+id/et_activity_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="textPassword"
+                android:maxLength="@integer/edittext_maxlength"
+                android:padding="@dimen/spacing_5"
+                android:textSize="@dimen/fontsize_h1" 
+                android:hint="@string/activity_login_password_hint"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColor="@android:color/black"/>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:orientation="horizontal" >
+            
+            <CheckBox
+                android:id="@+id/cb_activity_login_autologin"
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2.0"
+                android:background="@null"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/checkbox_bg1"
+                android:drawablePadding="4.0dip"
+                android:text="@string/activity_login_autologin"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/fontsize_h1" />
+            
+            <Button
+                android:id="@+id/btn_activity_login_forgetpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_forgetpwd_bg"
+                android:paddingLeft="@dimen/spacing_3"
+                android:paddingRight="@dimen/spacing_8"
+                android:text="@string/activity_login_forgetpwdtip"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/fontsize_h1" />
+            
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/btn_activity_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_send_button_bg"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:shadowDx="0.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:shadowColor="#72ffffff"
+            android:text="@string/activity_login_tip"
+            android:textColor="@color/activity_login_btnlogin_textColor"
+            android:padding="@dimen/spacing_3"
+            android:textSize="@dimen/fontsize_h5" />
+        
+        <Button
+            android:id="@+id/btn_activity_login_regsiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_regist_bg"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@string/activity_login_registertip"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/spacing_8"
+            android:textSize="@dimen/fontsize_h2" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_3"
+            android:textSize="@dimen/fontsize_h1"
+            android:text="请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全。" />
+        
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Activity背景 -->
+   	<color name="activity_gb">#f3f3f3</color>
+   	<!-- 登录按钮颜色 -->
+   	<color name="activity_login_btnlogin_textColor">#2b7195</color>
+    
+    <color name="transparent">#00000000</color>
+    <color name="gold">#b89766</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <!-- 透明色 -->
+    <color name="button_unselected">#ff54acea</color>
+    <color name="darkgray_regist">#999999</color>
+    <color name="setting_text1">#ff000000</color>
+    <color name="dial_bg_normal">#33B5E5</color>
+    <color name="dial_bg_pressed">#A7FC2E</color>
+    <color name="listview_pressed_bg">#0a202f</color>
+    <color name="listview_account_pressed_bg">#dddddd</color>
+    <color name="main_title_bar_normal">#3f84a7</color>
+    <color name="main_title_bar_selected">#33b5e5</color>
+    <color name="main_title_bar_selected_bg">#0c2b3b</color>
+   <color name="register_btn_word_color">#6a9cbe</color>
+   <color name="register_btn_disable_word_color">#999999</color>
+   
+   <color name="frame_button_text_nor">#033a5c</color>
+    <color name="frame_button_text_select">#000000</color>
+   
+</resources>

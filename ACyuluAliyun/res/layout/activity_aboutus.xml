@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_gb"
+    android:orientation="vertical">
+    
+    <include layout="@layout/common_title" />
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+        
+        <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:gravity="center_vertical|center_horizontal">
+	        <ImageView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/empty"
+		        android:src="@drawable/setting_about_us_logo" />
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:gravity="center_vertical|center_horizontal">
+	        <ImageView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/empty"
+		        android:src="@drawable/welcome_tip_txt" />
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:gravity="center_vertical|center_horizontal">
+	        <ImageView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/empty"
+		        android:src="@drawable/setting_about_us_contact" />
+	    </LinearLayout>
+        
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:orientation="vertical">
+	        <TextView
+		        android:id="@+id/setting_about_us_version"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_horizontal"
+		        android:drawableTop="@drawable/setting_about_us_time"/>
+	    </LinearLayout>
+        
+    </LinearLayout>
+    
+</LinearLayout>

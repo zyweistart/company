@@ -1,0 +1,203 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialpad_background">
+
+    <LinearLayout
+        android:id="@+id/recorded_main_detaillist_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+        <Button 
+	        android:id="@+id/contact_search_bar_edit"
+	        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_weight="3"
+            android:background="@drawable/chat_send_button_bg"
+            android:text="编辑"
+            android:visibility="gone"/>
+		<RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_weight="1"
+	        android:layout_height="40dip"
+	        android:layout_marginLeft="2dip"
+	        android:layout_marginRight="2dip"
+	        android:layout_marginTop="5dip"
+	        android:layout_marginBottom="5dip"
+	        android:background="@drawable/contact_search_bg"
+	        android:orientation="horizontal" >
+	        <ImageButton
+	            android:id="@+id/contact_search_bar_clean"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="5dip"
+	            android:background="@drawable/contact_search_clean"
+	            android:contentDescription="@string/empty"
+	            android:focusable="false" 
+	            android:visibility="gone"/>
+	        <EditText
+	            android:id="@+id/contact_search_bar_content"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:layout_centerVertical="true"
+	            android:layout_marginBottom="0.0dip"
+	            android:layout_marginLeft="0.0dip"
+	            android:layout_marginRight="0.0dip"
+	            android:layout_marginTop="0dip"
+	            android:layout_toLeftOf="@+id/contact_search_bar_icon"
+	            android:layout_toRightOf="@+id/contact_search_bar_clean"
+	            android:background="@color/transparent"
+	            android:hint="姓名查找前请加载完全部录音"
+	            android:paddingLeft="10.0dip"
+	            android:singleLine="true"
+	            android:textColor="#000000"
+	            android:textColorHint="#AAAAAA"
+	            android:textSize="14.0dip" />
+	        <ImageButton
+	            android:id="@+id/contact_search_bar_icon"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginRight="5dip"
+	            android:background="@drawable/contact_search_icon"
+	            android:contentDescription="@string/empty"
+	            android:focusable="false" />
+	    </RelativeLayout>
+	    <TextView
+	        android:id="@+id/contact_search_bar_adv"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:text="精确查找"/>
+    </LinearLayout>
+
+    <com.ancun.widget.PullToRefreshListView
+        android:id="@+id/recorded_manager_content_list_pulltorefreshlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/recorded_main_detaillist_rl_player"
+        android:layout_below="@+id/recorded_main_detaillist_layout_top"
+        android:cacheColorHint="#00000000"
+        android:divider="#415c71"
+        android:dividerHeight="0.8dp"
+        android:fadeScrollbars="true"
+        android:fastScrollEnabled="true" />
+
+    <RelativeLayout
+        android:id="@+id/recorded_main_detaillist_rl_player"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_above="@+id/relativelayout_bottom"
+        android:background="@drawable/recorded_main_detaillist_appeal_bg"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:id="@+id/recorded_main_detaillist_taobao_appeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:background="#00000000"
+            android:focusable="false"
+            android:contentDescription="@string/empty" />
+
+        <ImageButton
+            android:id="@+id/recorded_main_detaillist_notarization_appeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:background="#00000000"
+            android:focusable="false"
+            android:contentDescription="@string/empty" />
+    </RelativeLayout>
+
+    <FrameLayout 
+         android:id="@+id/relativelayout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true">
+        <RelativeLayout
+	        android:id="@+id/relativelayout_palyer"
+	        android:layout_width="fill_parent"
+	        android:layout_height="70dip"
+	        android:layout_marginBottom="0dip"
+	        android:layout_marginTop="0dip"
+	        android:background="@drawable/recorded_main_detaillist_palyer_bg" >
+	
+	        <ImageButton
+	            android:id="@+id/recorded_main_detaillist_btn_play"
+	            android:layout_width="46dip"
+	            android:layout_height="46dip"
+	            android:layout_alignParentLeft="true"
+	            android:layout_centerVertical="true"
+	            android:contentDescription="@string/empty"
+	            android:background="@drawable/recorded_play_to_play_normal" />
+	
+	        <SeekBar
+	            android:id="@+id/recorded_main_detaillist_seekbar"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="10dip"
+	            android:layout_marginRight="10dip"
+	            android:layout_toRightOf="@+id/recorded_main_detaillist_btn_play"
+	            android:maxHeight="10dp"
+	            android:minHeight="10dp"
+	            android:progressDrawable="@drawable/recorded_seekbar_progress"
+	            android:scrollbarStyle="outsideOverlay"
+	            android:thumb="@drawable/recorded_play_thumb"
+	            android:thumbOffset="0dp" />
+	
+	        <TextView
+	            android:id="@+id/recorded_main_detaillist_tv_playtime"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/recorded_main_detaillist_seekbar"
+	            android:layout_marginLeft="10dip"
+	            android:layout_marginTop="1dip"
+	            android:layout_toRightOf="@+id/recorded_main_detaillist_btn_play"
+	            android:gravity="center" />
+	
+	        <TextView
+	            android:id="@+id/recorded_main_detaillist_tv_totaltime"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_below="@+id/recorded_main_detaillist_seekbar"
+	            android:layout_marginRight="10dip"
+	            android:layout_marginTop="1dip"
+	            android:gravity="center" />
+	    </RelativeLayout>
+        <RelativeLayout 
+            android:id="@+id/recorded_main_edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5.0dip"
+            android:visibility="gone"
+            android:background="#578fb2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="删除"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="星标"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="置顶"/>
+        </RelativeLayout>
+        
+    </FrameLayout>
+
+</RelativeLayout>

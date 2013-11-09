@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_gb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0.0px"
+        android:layout_weight="1.0"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbarThumbVertical="@drawable/scrollbar_handle_vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60.0dip"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20.0dip"
+                    android:layout_marginRight="20.0dip" >
+
+                    <RelativeLayout
+                        android:id="@+id/appr_layout01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0" >
+
+                        <TextView
+                            android:id="@+id/appr_textview_verify_code_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/activity_mobileverify"
+                            android:textColor="@android:color/black"
+                            android:textSize="18.0sp" />
+
+                        <ImageView
+                            android:id="@+id/appr_imageview_verify_code_ok"
+                            android:layout_width="10.0dip"
+                            android:layout_height="10.0dip"
+                            android:layout_alignBaseline="@id/appr_textview_verify_code_title"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_toRightOf="@id/appr_textview_verify_code_title"
+                            android:background="@drawable/result_ok"
+                            android:visibility="gone" />
+
+                        <View
+                            android:id="@+id/appr_view_verify_code_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35.0dip"
+                            android:layout_alignLeft="@id/appr_textview_verify_code_title"
+                            android:layout_alignRight="@id/appr_textview_verify_code_title"
+                            android:layout_marginTop="2.0dip"
+                            android:background="@drawable/tab_bg_selected" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/appr_imageview_verify_code_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/register_arrow" />
+
+                    <RelativeLayout
+                        android:id="@+id/appr_layout02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0" >
+
+                        <TextView
+                            android:id="@+id/appr_textview_set_password_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/activity_setpassword"
+                            android:textColor="@android:color/black"
+                            android:textSize="18.0sp" />
+
+                        <ImageView
+                            android:id="@+id/appr_imageview_set_password_ok"
+                            android:layout_width="10.0dip"
+                            android:layout_height="10.0dip"
+                            android:layout_alignBaseline="@id/appr_textview_set_password_title"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_toRightOf="@id/appr_textview_set_password_title"
+                            android:background="@drawable/result_ok"
+                            android:visibility="gone" />
+
+                        <View
+                            android:id="@+id/appr_view_set_password_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35.0dip"
+                            android:layout_alignLeft="@id/appr_textview_set_password_title"
+                            android:layout_alignRight="@id/appr_textview_set_password_title"
+                            android:layout_marginTop="2.0dip"
+                            android:background="@drawable/tab_bg_selected" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/appr_textview02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/register_arrow" />
+
+                    <RelativeLayout
+                        android:id="@+id/appr_layout02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0" >
+
+                        <TextView
+                            android:id="@+id/appr_textview_register_end_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:enabled="true"
+                            android:text="@string/app_done"
+                            android:textColor="@android:color/black"
+                            android:textSize="18.0sp" />
+
+                        <View
+                            android:id="@+id/appr_view01"
+                            android:layout_width="10.0dip"
+                            android:layout_height="10.0dip"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_toRightOf="@id/appr_textview_register_end_title"
+                            android:background="@drawable/result_ok"
+                            android:visibility="gone" />
+
+                        <View
+                            android:id="@+id/appr_view_register_end_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35.0dip"
+                            android:layout_alignLeft="@id/appr_textview_register_end_title"
+                            android:layout_alignRight="@id/appr_textview_register_end_title"
+                            android:layout_marginTop="2.0dip"
+                            android:background="@drawable/tab_bg_selected" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@drawable/shape_line" />
+
+            <!-- 三个view轮流出现 -->
+
+            <LinearLayout
+                android:id="@+id/appr_linearlayout_mobile_num_module"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <include layout="@layout/module_activity_register_forgetpwd_mobile_num" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appr_linearlayout_verify_code_module"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone" >
+
+                <include layout="@layout/module_activity_register_forgetpwd_verify_code" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appr_linearlayout_password_module"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone" >
+
+                <include layout="@layout/module_activity_register_forgetpwd_password" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appr_linearlayout_register_end_module"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone" >
+
+                <include layout="@layout/module_activity_register_forgetpwd_end" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegisterNextStep"
+                android:layout_width="fill_parent"
+                android:layout_height="44dip"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginRight="20.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/register_button_not_available"
+                android:textColor="#ff000000"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
