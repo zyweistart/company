@@ -109,21 +109,9 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         
-        <!--通话记录-->
-        <activity
-            android:name=".RecentManagerContentListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
         <!-- 录音管理 -->
         <activity
             android:name=".RecordedManagerContentListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 老录音管理 -->
-        <activity
-            android:name=".OldRecordedManagerContentListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         

@@ -14,14 +14,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.CallLog;
 import android.provider.ContactsContract;
 
 import com.ancun.core.CoreServiceModel;
 import com.ancun.model.ContactModel;
-import com.ancun.model.RecentModel;
 import com.ancun.utils.StringUtils;
-import com.ancun.utils.TimeUtils;
 
 public class ContactService extends CoreServiceModel {
 
@@ -31,22 +28,22 @@ public class ContactService extends CoreServiceModel {
 	/**
 	 * 自动修改通话设置
 	 */
-	public void dialByModifyContact(String phone){
-		ContentValues values = new ContentValues();
-		values.put("phone", phone);
-		values.put("calltime", TimeUtils.getSysTime());
-		values.put("status", CallLog.Calls.OUTGOING_TYPE);
-		getSQLiteDatabase().insert(RecentModel.TABLENAME, null, values);
-		ContactModel cm=getContactModelByPhone(phone);
-		if(cm!=null){
-			//如果为系统默认则进行自动设置
-			if(cm.getUserSetFlag()==1){
-				if(cm.getRecordFlag()==2){
-					modifyFlag(cm.getLookupKey(),1);
-				}
-			}
-		}
-	}
+//	public void dialByModifyContact(String phone){
+//		ContentValues values = new ContentValues();
+//		values.put("phone", phone);
+//		values.put("calltime", TimeUtils.getSysTime());
+//		values.put("status", CallLog.Calls.OUTGOING_TYPE);
+//		getSQLiteDatabase().insert(RecentModel.TABLENAME, null, values);
+//		ContactModel cm=getContactModelByPhone(phone);
+//		if(cm!=null){
+//			//如果为系统默认则进行自动设置
+//			if(cm.getUserSetFlag()==1){
+//				if(cm.getRecordFlag()==2){
+//					modifyFlag(cm.getLookupKey(),1);
+//				}
+//			}
+//		}
+//	}
 	
 	public List<ContactModel> loadAllContact() {
 		Cursor allContactCursor=null;

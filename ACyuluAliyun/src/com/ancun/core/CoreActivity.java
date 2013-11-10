@@ -175,8 +175,8 @@ public abstract class CoreActivity  extends StatActivity {
 				
 				@Override
 				public void run() {
-					ContactService contactService=new ContactService(CoreActivity.this);
-					contactService.dialByModifyContact(phone);
+//					ContactService contactService=new ContactService(CoreActivity.this);
+//					contactService.dialByModifyContact(phone);
 					//重新加载最后通话记录
 					((RecentContent)CoreScrollContent.getContentcache().get(RecentContent.class)).isOpenRefreshData=true;
 					//重新加载我的录音列表

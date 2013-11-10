@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.provider.CallLog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,8 +26,7 @@ import com.ancun.yulualiyun.R;
  * 最近通话记录
  * @author Start
  */
-public class RecentContent extends CoreScrollContent implements
-AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickListener {
+public class RecentContent extends CoreScrollContent implements OnClickListener {
 
 	private ListView listview;
 
@@ -41,8 +37,6 @@ AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickList
 	public RecentContent(Activity activity, int resourceID) {
 		super(activity, resourceID);
 		listview = (ListView) findViewById(R.id.recent_contacts_listview);
-		listview.setOnItemClickListener(this);
-		listview.setOnItemLongClickListener(this);
 	}
 
 	public void loadData(final Boolean flag){
@@ -124,11 +118,9 @@ AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickList
 			}
 			if(recent.getName()!=null&&!"".equals(recent.getName())){
 				holder.name.setText(recent.getName());
-				holder.recentName=recent.getPhone();
 				holder.phone.setVisibility(View.VISIBLE);
 			} else {
 				holder.name.setText(recent.getPhone());
-				holder.recentName=recent.getPhone();
 				holder.phone.setVisibility(View.GONE);
 			}
 			
@@ -142,8 +134,6 @@ AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickList
 				//呼入未接通
 				holder.call_in_out_flag.setImageResource(R.drawable.flag_call_in);
 			}
-			holder.recentId = recent.getRecent_id();
-			holder.recentPhone=recent.getPhone();
 			holder.phone.setText(recent.getPhone());
 			holder.from.setText(TimeUtils.customerTimeConvert(recent.getCalltime()));
 			holder.call.setTag(holder);
@@ -153,9 +143,6 @@ AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickList
 	}
 	
 	private class HolderView {
-		private Integer recentId;
-		private String recentPhone;
-		private String recentName;
 		private ImageView head;
 		private ImageView call_in_out_flag;
 		private TextView name;
@@ -170,43 +157,6 @@ AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,OnClickList
 		if (vh != null) {
 			getMainActivity().inAppDial(String.valueOf(vh.phone.getText()));
 		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//		HolderView vh=(HolderView)arg1.getTag();
-//		if(vh!=null){
-//			Bundle extras=new Bundle();
-//			extras.putString("phone",vh.recentPhone);
-//			extras.putString("name",vh.recentName);
-//			Intent intent = new Intent(getContext(),RecentManagerContentListActivity.class);
-//			intent.putExtras(extras);
-//			getContext().startActivity(intent);
-//		}
-	}
-
-	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-		final HolderView vh = (HolderView) arg1.getTag();
-		if (vh != null) {
-			if(vh.recentId!=null){
-				new AlertDialog.Builder(getContext())
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setMessage("确认删除 "+vh.recentName+" 的所有通话记录吗？")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						getMainActivity().getRecentService().deleteByPhone(vh.recentPhone);
-						// 重新加载最后通话记录
-						loadData(false);
-					}
-				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						dialog.dismiss();
-					}
-				}).show();
-			}
-		}
-		return false;
 	}
 
 }
