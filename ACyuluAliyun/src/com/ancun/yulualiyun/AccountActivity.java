@@ -63,6 +63,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 		//当前基础月度可用容量
 		activity_myaccount_storageinfo=(TextView)findViewById(R.id.activity_myaccount_storageinfo);
 		activity_myaccount_storageinfo.setText("已赠送使用套餐0个月，剩余未赠送套餐0个月");
+		activity_myaccount_storageinfo.setVisibility(View.GONE);
 		//增值时长剩余
 		activity_myaccount_durationinfo=(TextView)findViewById(R.id.activity_myaccount_durationinfo);
 		activity_myaccount_durationinfo.setText("增值时长剩余：正在计算...");
@@ -148,6 +149,10 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
+						//赠送用户
+						if("yunos01".equals(getAppContext().getUserInfo().get("prodid"))){
+							activity_myaccount_storageinfo.setVisibility(View.VISIBLE);
+						}
 						getPackInfo();
 					}
 					

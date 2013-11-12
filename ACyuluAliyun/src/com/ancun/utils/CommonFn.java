@@ -86,6 +86,7 @@ public class CommonFn {
 	public static AlertDialog buildDialog(Context context, String message, DialogInterface.OnClickListener positiveButtonListener) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setMessage(message);
+		builder.setCancelable(false);
 		builder.setPositiveButton("确认", positiveButtonListener);
 		return builder.create();
 	}

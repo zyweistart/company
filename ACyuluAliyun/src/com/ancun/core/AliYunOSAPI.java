@@ -1,17 +1,16 @@
 package com.ancun.core;
 
 import com.ancun.utils.StringUtils;
-
-import android.content.Context;
+import com.ancun.yulualiyun.AppContext;
 
 public class AliYunOSAPI {
 
 	@SuppressWarnings("unused")
-	private Context mContext;
+	private AppContext mContext;
 	
 //	private SellerAuthority mSellerAuthority
 	
-	public AliYunOSAPI(Context context){
+	public AliYunOSAPI(AppContext context){
 		this.mContext=context;
 //		this.mSellerAuthority = new SellerAuthority(context);
 	}
@@ -51,7 +50,7 @@ public class AliYunOSAPI {
 	 * 登录帐号对应的激活码是否已激活
 	 */
 	public Boolean isActivation(){
-		return false;
+		return true;
 	}
 	
 	/**
