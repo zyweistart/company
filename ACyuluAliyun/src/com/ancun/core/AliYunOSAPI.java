@@ -51,7 +51,7 @@ public class AliYunOSAPI {
 	 * 登录帐号对应的激活码是否已激活
 	 */
 	public Boolean isActivation(){
-		return true;
+		return false;
 	}
 	
 	/**

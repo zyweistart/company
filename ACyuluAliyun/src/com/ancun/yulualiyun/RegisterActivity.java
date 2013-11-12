@@ -316,6 +316,16 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 						requestParams.put("mac", "");
 						requestParams.put("idcode", getAppContext().getYunOSAPI().getUUID());
 						requestParams.put("loginflag", "1");
+						
+						//用户自主注册开通流程
+						requestParams.put("prodid", "yunos02");
+						if(bundle!=null){
+							if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+								//阿里云OS激活赠送用户
+								requestParams.put("prodid", "yunos01");
+							}
+						}
+						
 						Map<String,String> headerParams=new HashMap<String,String>();
 						headerParams.put("sign", "");
 						getAppContext().exeNetRequest(this,Constant.GlobalURL.v4Signup,requestParams,headerParams,new UIRunnable() {
@@ -328,7 +338,11 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 									public void run() {
 										
 										//TODO：提示安存语录服务端受理服务赠送，赠送服务成功处理后，将服务记录的服务状态修改为“已赠送”（分别返回信息给淘宝API和安存服务）
-										appr_end_module_tipmsg.setVisibility(View.VISIBLE);
+										if(bundle!=null){
+											if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+												appr_end_module_tipmsg.setVisibility(View.VISIBLE);
+											}
+										}
 										
 										getAppContext().buildAuth(getResponseContent());
 										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_ACCOUNT,g_Mobile);

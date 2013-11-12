@@ -125,21 +125,21 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			if(getAppContext().getYunOSAPI().isMjPhone()){
 				if(getAppContext().getYunOSAPI().isSystemLogin()){
 					if(getAppContext().getYunOSAPI().isActivation()){
-//						if(getAppContext().getYunOSAPI().isServiceUse()){
-//							CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
-//
-//								@Override
-//								public void onClick(DialogInterface dialog,
-//										int which) {
-//									
-//									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-//									
-//									forward();
-//								}
-//								
-//							}).show();
-//							return;
-//						}
+						if(getAppContext().getYunOSAPI().isServiceUse()){
+							CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									
+									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+									
+									forward();
+								}
+								
+							}).show();
+							return;
+						}
 						if(getAppContext().getYunOSAPI().isValidService()){
 							Intent intent=new Intent(this,ActivationAccountActivity.class);
 							startActivityForResult(intent,REQUEST_CODE_WELCOME);
