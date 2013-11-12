@@ -1,5 +1,6 @@
 package com.ancun.yulualiyun;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import com.ancun.utils.HttpUtils;
 import com.ancun.utils.MD5;
 import com.ancun.utils.NetConnectManager;
 import com.ancun.utils.PasswordVerityUtils;
+import com.ancun.utils.StringUtils;
 import com.ancun.utils.XMLUtils;
 
 public class RegisterActivity extends CoreActivity implements OnClickListener {
@@ -38,37 +40,24 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 	private static final int SUCCESS=0xAC1111;
 	private static final int EXIT=0xAC1112;
 
-	public static final int STATUS_NUM_MODULE = 1;
-	public static final int STATUS_CODE_MODULE = 2;
-	public static final int STATUS_PASSWORD_MODULE = 3;
-	public static final int STATUS_END_MODULE = 4;
+	private static final int STATUS_NUM_MODULE = 1;
+	private static final int STATUS_CODE_MODULE = 2;
+	private static final int STATUS_PASSWORD_MODULE = 3;
+	private static final int STATUS_END_MODULE = 4;
 
-	String leftTime="秒后 可重新获取验证码";
-	int leftSecond=60;
-	boolean isCountRun=false;
-	/**
-	 * 下一屏注册状态
-	 */
+	private String leftTime="秒后 可重新获取验证码";
+	private int leftSecond=60;
+	private boolean isCountRun=false;
+	
 	private int  nextStatusModule=STATUS_CODE_MODULE;
 
 	private int currentStatusModule=STATUS_NUM_MODULE;
 
 	private Button btnRegisterNextStep=null;
-	/**
-	 * 第一屏输入手机号
-	 */
+	
 	private LinearLayout linearLayoutMobileNumModule=null;
-	/**
-	 * 第一屏输入验证码
-	 */
 	private LinearLayout linearLayoutVerifyCodeModule=null;
-	/**
-	 * 第一屏设置密码
-	 */
 	private LinearLayout linearLayoutPasswordModule=null;
-	/**
-	 * 第一屏完成
-	 */
 	private LinearLayout linearLayoutRegisterEndModule=null;
 
 	private TextView appr_textview_protocol=null;
@@ -93,6 +82,8 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 	private EditText etVerifyCode ;
 	private EditText etPassword ;
 	private EditText etRePassword ;
+	
+	private TextView appr_end_module_tipmsg;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -174,6 +165,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 		});
 		etRePassword=(EditText)findViewById(R.id.appr_edittext_rePassword);
 		etRePassword.addTextChangedListener(new CustomTextWatcher(etRePassword));
+		appr_end_module_tipmsg=(TextView)findViewById(R.id.appr_end_module_tipmsg);
 	}
 	/**
 	 * 设置当前注册界面视图
@@ -226,14 +218,15 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 			btnRegisterNextStep.setText("提交密码");
 			break;
 		case STATUS_END_MODULE:
-			//			TextView tvMobile=(TextView)findViewById(R.id.appr_my_mobile_num);
-			//			tvMobile.setText(g_Mobile);
+//			TextView tvMobile=(TextView)findViewById(R.id.appr_my_mobile_num);
+//			tvMobile.setText(g_Mobile);
 			linearLayoutMobileNumModule.setVisibility(View.GONE);
 			linearLayoutVerifyCodeModule.setVisibility(View.GONE);
 			linearLayoutPasswordModule.setVisibility(View.GONE);
 			linearLayoutRegisterEndModule.setVisibility(View.VISIBLE);
 			this.currentStatusModule=STATUS_END_MODULE;
 
+			ivVerifyCodeOK.setVisibility(View.VISIBLE);
 			ivSetPasswordOK.setVisibility(View.VISIBLE);
 			tvVerifyCodeTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
 			tvSetPasswordTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
@@ -322,10 +315,18 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 									
 									@Override
 									public void run() {
+										
+										//TODO:判断是否赠送成功如果已赠成功的则把该标签文字设置为显示状态,并通知阿里云的服务状态修改为“已赠送”
+										appr_end_module_tipmsg.setVisibility(View.VISIBLE);
+										
 										getAppContext().buildAuth(getResponseContent());
-										//启用记住密码
 										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_ACCOUNT,g_Mobile);
-										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
+										try {
+											getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,StringUtils.doKeyEncrypt(password,getAssets().open(Constant.DESKEYKEY)));
+										} catch (IOException e) {
+											e.printStackTrace();
+											getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
+										}
 										getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN,true);
 										getAppContext().setUserInfoAll(getAllInfoContent());
 										getAppContext().setUserInfo(getAllInfoContent().get("v4info"));

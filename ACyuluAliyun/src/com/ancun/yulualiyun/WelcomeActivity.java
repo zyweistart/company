@@ -33,9 +33,16 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			finish();
 		}
 		
-		if(!getAppContext().getYunOSAPI().isSystemLogin()){
-			//TODO:淘宝卖家账号未进行登录时处理
-			makeTextLong("还未使用淘宝账号进行登录");
+		boolean SP_ISBIND_TAOBAOACCOUNT=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ISBIND_TAOBAOACCOUNT,false);
+		if(!SP_ISBIND_TAOBAOACCOUNT){
+			if(!getAppContext().getYunOSAPI().isSystemLogin()){
+				//TODO:应用内页面提示：如果您购买的服务套餐含有该应用的服务，且尚未激活，请进入“设置-关于本机-激活赠送服务”中进行激活
+				makeTextLong("还未使用淘宝账号进行登录");
+				return;
+			}else{
+				//如果已经绑定则设置绑定标记为真
+				getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ISBIND_TAOBAOACCOUNT,true);
+			}
 		}
 		
 		ImageView imageView = (ImageView)findViewById(R.id.activity_welcome_logo);
@@ -50,6 +57,11 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
  	}
 	
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
 	public void onAnimationStart(Animation animation) {
 		
 	}
@@ -57,7 +69,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		 try {
-        	//getPackageName()是你当前类的包名，0代表是获取版本信息
+			//getPackageName()是你当前类的包名，0代表是获取版本信息
 			PackageInfo packInfo = getPackageManager().getPackageInfo(getPackageName(),0);
 			int curVersionCode=packInfo.versionCode;
 			boolean FIRST_LOADAPP=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_FIRST_LOADAPP,true);

@@ -66,22 +66,16 @@ public class AliYunOSAPI {
 	
 	/**
 	 * 登录帐号对应的激活码是否已激活
-	 * @param accountId
-	 * @param activationCode
-	 * @return
 	 */
-	public Boolean isActivation(String accountId,String activationCode){
+	public Boolean isActivation(){
 		return false;
 	}
 	
 	/**
 	 * 登录帐号对应的激活码和应用服务是否有效[有该服务且还未赠送]
-	 * @param accountId
-	 * @param activationCode
-	 * @param AppId
-	 * @return
 	 */
-	public Boolean isValidService(String accountId,String activationCode,String appId){
+	public Boolean isValidService(){
 		return false;
 	}
+	
 }

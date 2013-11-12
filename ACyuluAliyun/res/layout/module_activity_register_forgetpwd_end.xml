@@ -28,6 +28,16 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/appr_end_module_tipmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="赠送给您价值2400元的服务已经成功领取"
+        android:textColor="#ff0000"
+        android:textSize="18.0sp"
+        android:visibility="gone"/>
+    
+    <TextView
         android:id="@+id/appr_my_mobile_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.ancun.yulualiyun;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import com.ancun.utils.HttpUtils;
 import com.ancun.utils.MD5;
 import com.ancun.utils.NetConnectManager;
 import com.ancun.utils.PasswordVerityUtils;
+import com.ancun.utils.StringUtils;
 import com.ancun.utils.XMLUtils;
 
 public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
@@ -74,6 +76,7 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 	private TextView tvRegisterEndTitle = null;
 
 	private ImageView ivVerifyCodeOK = null;
+	private ImageView ivSetPasswordOK=null;
 
 	private TextView tvTimeToReget = null;
 	private Button btnReget = null;
@@ -118,6 +121,7 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 		tvRegisterEndTitle = (TextView) findViewById(R.id.appr_textview_register_end_title);
 
 		ivVerifyCodeOK = (ImageView) findViewById(R.id.appr_imageview_verify_code_ok);
+		ivSetPasswordOK=(ImageView)findViewById(R.id.appr_imageview_set_password_ok);
 
 		tvTimeToReget = (TextView) findViewById(R.id.appr_textview_time_to_reget);
 		btnReget = (Button) findViewById(R.id.appr_btn_reget);
@@ -231,30 +235,26 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 			this.nextStatusModule = STATUS_END_MODULE;
 
 			ivVerifyCodeOK.setVisibility(View.VISIBLE);
-			tvVerifyCodeTitle
-					.setTextColor(rs.getColor(R.color.darkgray_regist));
+			tvVerifyCodeTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
 			tvSetPasswordTitle.setTextColor(rs.getColor(R.color.black));
-			tvRegisterEndTitle.setTextColor(rs
-					.getColor(R.color.darkgray_regist));
+			tvRegisterEndTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
 
 			setSubmitBtnAble(false);
 
 			btnRegisterNextStep.setText("提交密码");
 			break;
 		case STATUS_END_MODULE:
-			// TextView
-			// tvMobile=(TextView)findViewById(R.id.appr_my_mobile_num);
-			// tvMobile.setText(g_Mobile);
 			linearLayoutMobileNumModule.setVisibility(View.GONE);
 			linearLayoutVerifyCodeModule.setVisibility(View.GONE);
 			linearLayoutPasswordModule.setVisibility(View.GONE);
 			linearLayoutRegisterEndModule.setVisibility(View.VISIBLE);
 			this.currentStatusModule = STATUS_END_MODULE;
 
-			tvVerifyCodeTitle
-					.setTextColor(rs.getColor(R.color.darkgray_regist));
-			tvSetPasswordTitle.setTextColor(rs
-					.getColor(R.color.darkgray_regist));
+			ivVerifyCodeOK.setVisibility(View.VISIBLE);
+			ivSetPasswordOK.setVisibility(View.VISIBLE);
+			
+			tvVerifyCodeTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
+			tvSetPasswordTitle.setTextColor(rs.getColor(R.color.darkgray_regist));
 			tvRegisterEndTitle.setTextColor(rs.getColor(R.color.black));
 			btnRegisterNextStep.setText("进入体验");
 			break;
@@ -335,14 +335,19 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 									@Override
 									public void run() {
 										getAppContext().buildAuth(getResponseContent());
-										// 启用记住密码
 										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_ACCOUNT,g_Mobile);
-										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
-										getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN,false);
+										try {
+											getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,StringUtils.doKeyEncrypt(password,getAssets().open(Constant.DESKEYKEY)));
+										} catch (IOException e) {
+											e.printStackTrace();
+											getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
+										}
+										getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN,true);
 										getAppContext().setUserInfoAll(getAllInfoContent());
 										getAppContext().setUserInfo(getAllInfoContent().get("v4info"));
 										Constant.ACCESSID=getAppContext().getUserInfo().get("accessid");
 										Constant.ACCESSKEY=getAppContext().getUserInfo().get("accesskey");
+										//注册成功
 										setCurrRegisterView(nextStatusModule);
 									}
 								});

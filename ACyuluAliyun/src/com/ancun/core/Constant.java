@@ -86,6 +86,10 @@ public final class Constant {
 	 */
 	public final class SharedPreferencesConstant{
 		/**
+		 * 是否绑定阿里云淘宝账户
+		 */
+		public static final String SP_ISBIND_TAOBAOACCOUNT="SP_ISBIND_TAOBAOACCOUNT";
+		/**
 		 * 当前的版本号
 		 */
 		public static final String SP_CURRENTVERSIONCODE="SP_CURRENTVERSIONCODE";
