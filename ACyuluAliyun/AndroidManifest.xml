@@ -75,6 +75,12 @@
             </intent-filter>
         </activity>
         
+        <!-- 激活服务页面 -->
+        <activity
+            android:name=".ActivationAccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        
         <!-- 引导页 -->
         <activity
             android:name=".GuideActivity"

@@ -38,6 +38,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 	private Button activity_myaccount_btn_rechargelist;
 	private Button activity_myaccount_btn_userecord;
 	
+	private PullListViewData rechargelistPullListViewData;
 	private PullListViewData useRecordPullListViewData;
 	
 	private TextView activity_myaccount_storageinfo;
@@ -49,6 +50,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 	private RechargeAdapter rechargeAdapter;
 	private List<Map<String,String>> rechargeList=new ArrayList<Map<String,String>>();
 	
+	private int rechargeType=1;
 	
 	 @Override
 	 public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +79,45 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 		activity_myaccount_btn_userecord.setEnabled(true);
 		activity_myaccount_btn_userecord.setOnClickListener(this);
 		
-		activity_myaccount_pulllistview_rechargelist=(ListView)findViewById(R.id.activity_myaccount_pulllistview_rechargelist);
-		rechargeAdapter=new RechargeAdapter();
-		activity_myaccount_pulllistview_rechargelist.setAdapter(rechargeAdapter);
+		//根据不同的类型显示不同的服务列表
+		if(rechargeType==1){
+			activity_myaccount_pulllistview_rechargelist=(ListView)findViewById(R.id.activity_myaccount_istview_rechargelist);
+			rechargeAdapter=new RechargeAdapter();
+			activity_myaccount_pulllistview_rechargelist.setAdapter(rechargeAdapter);
+			activity_myaccount_pulllistview_rechargelist.setVisibility(View.VISIBLE);
+		}else{
+			rechargelistPullListViewData=new PullListViewData(this);
+			rechargelistPullListViewData.setOnLoadDataListener(
+					new OnLoadDataListener(){
+						
+						@Override
+						public void LoadData(LoadMode loadMode) {
+							Map<String,String> requestParams=new HashMap<String,String>();
+							requestParams.put("accessid",Constant.ACCESSID);
+							requestParams.put("calltype","1");
+							requestParams.put("oppno","");
+							requestParams.put("callerno","");
+							requestParams.put("calledno","");
+							requestParams.put("begintime","");
+							requestParams.put("endtime","");
+							requestParams.put("remark","");
+							requestParams.put("durmin","");
+							requestParams.put("durmax","");
+							requestParams.put("licno","");
+							requestParams.put("ordersort","desc");
+							rechargelistPullListViewData.sendPullToRefreshListViewNetRequest(loadMode,Constant.GlobalURL.v4recQry,requestParams,null,new UIRunnable(){
+								@Override
+								public void run() {
+									rechargelistPullListViewData.getAdapter().notifyDataSetChanged();
+								}
+							},"reclist","reclist"+TAG);
+						}
+						
+					});
+			rechargelistPullListViewData.start(R.id.activity_myaccount_pulllistview_rechargelist, 
+					new Recharge2Adapter(rechargelistPullListViewData),null,LoadMode.HEAD);
+			rechargelistPullListViewData.getPulllistview().setVisibility(View.VISIBLE);
+		}
 		
 		//使用记录列表
 		useRecordPullListViewData=new PullListViewData(this);
@@ -126,13 +164,21 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			//充值套餐
 			activity_myaccount_btn_rechargelist.setEnabled(false);
 			activity_myaccount_btn_userecord.setEnabled(true);
-			activity_myaccount_pulllistview_rechargelist.setVisibility(View.VISIBLE);
+			if(rechargeType==1){
+				activity_myaccount_pulllistview_rechargelist.setVisibility(View.VISIBLE);
+			}else{
+				rechargelistPullListViewData.getPulllistview().setVisibility(View.VISIBLE);
+			}
 			useRecordPullListViewData.getPulllistview().setVisibility(View.GONE);
 		}else if(activity_myaccount_btn_userecord==v){
 			//使用记录
 			activity_myaccount_btn_rechargelist.setEnabled(true);
 			activity_myaccount_btn_userecord.setEnabled(false);
-			activity_myaccount_pulllistview_rechargelist.setVisibility(View.GONE);
+			if(rechargeType==1){
+				activity_myaccount_pulllistview_rechargelist.setVisibility(View.GONE);
+			}else{
+				rechargelistPullListViewData.getPulllistview().setVisibility(View.GONE);
+			}
 			useRecordPullListViewData.getPulllistview().setVisibility(View.VISIBLE);
 		}
 	}
@@ -149,7 +195,9 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
-						getPackInfo();
+						if(rechargeType==1){
+							getPackInfo();
+						}
 					}
 					
 				});
@@ -315,6 +363,50 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			LinearLayout frtime;
 			TextView notime;
 			ImageView usedImg;
+		}
+		
+	}
+	
+	/**
+	 * 充值套餐2
+	 * @author start
+	 *
+	 */
+	public class Recharge2Adapter extends PullListViewData.DataAdapter{
+		
+		public Recharge2Adapter(PullListViewData pullListViewData) {
+			pullListViewData.super();
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Recharge2ViewHolder holder;
+			if (convertView != null && convertView.getId() == R.id.lvitem_activity_myaccount_userecord_item_layout) {
+				holder = (Recharge2ViewHolder) convertView.getTag();
+			}else{
+				convertView = getLayoutInflater().inflate(R.layout.lvitem_activity_myaccount_userecord_item, null);
+				holder = new Recharge2ViewHolder();
+				holder.time = (TextView) convertView.findViewById(R.id.lvitem_activity_myaccount_userecord_item_txt1);
+				holder.remark = (TextView) convertView.findViewById(R.id.lvitem_activity_myaccount_userecord_item_txt2);
+				holder.timelong = (TextView) convertView.findViewById(R.id.lvitem_activity_myaccount_userecord_item_txt3);
+				convertView.setTag(holder);
+			}
+			Map<String,String> data=rechargelistPullListViewData.getDataItemList().get(position);
+			holder.time.setText(data.get("begintime"));
+			holder.remark.setText("录音");
+			
+			DecimalFormat df=new DecimalFormat("#.##");
+			int filesize=Integer.parseInt(data.get("filesize"));
+			String duration=TimeUtils.secondConvertTime(Integer.parseInt(data.get("duration")));
+			
+			holder.timelong.setText(df.format((float)(filesize/1024))+"MB\n"+duration);
+			return convertView;
+		}
+		
+		class Recharge2ViewHolder {
+			TextView time;
+			TextView remark;
+			TextView timelong;
 		}
 		
 	}

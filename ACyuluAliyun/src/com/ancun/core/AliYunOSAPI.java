@@ -25,34 +25,17 @@ public class AliYunOSAPI {
 	}
 	
 	/**
-	 * 普通手机
-	 * @return
-	 */
-	public Boolean normalPhone(){
-		return false;
-	}
-	
-	/**
-	 * 卖家手机
-	 * @return
-	 */
-	public Boolean sellerPhone(){
-		return false;
-	}
-	
-	/**
-	 * 网络不可用
-	 * @return
-	 */
-	public Boolean errorNetworkNotAvailable(){
-		return true;
-	}
-	
-	/**
 	 * 是否卖家机
 	 * @return
 	 */
 	public Boolean isMjPhone(){
+		return true;
+	}
+	
+	/**
+	 * 判断是否为阿里云手机
+	 */
+	public Boolean isAliYunPhone(){
 		return true;
 	}
 	
@@ -68,13 +51,21 @@ public class AliYunOSAPI {
 	 * 登录帐号对应的激活码是否已激活
 	 */
 	public Boolean isActivation(){
-		return false;
+		return true;
 	}
 	
 	/**
 	 * 登录帐号对应的激活码和应用服务是否有效[有该服务且还未赠送]
 	 */
 	public Boolean isValidService(){
+		return true;
+	}
+	
+	/**
+	 * 该服务是否已经赠送使用
+	 * @return
+	 */
+	public Boolean isServiceUse(){
 		return false;
 	}
 	

@@ -84,13 +84,24 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 	private EditText etRePassword ;
 	
 	private TextView appr_end_module_tipmsg;
+	
+	public static final String ACTIVATION_FLAG="ACTIVATION_FLAG";
 
+	private Bundle bundle;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 
 		setNavigationTitle(R.string.register_title);
+		
+		bundle=getIntent().getExtras();
+		if(bundle!=null){
+			if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+				setResult(ActivationAccountActivity.RESULT_CODE_REGISTER);
+			}
+		}
 		
 		//初始化注册界面
 		btnRegisterNextStep=(Button)findViewById(R.id.btnRegisterNextStep);
@@ -316,7 +327,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 									@Override
 									public void run() {
 										
-										//TODO:判断是否赠送成功如果已赠成功的则把该标签文字设置为显示状态,并通知阿里云的服务状态修改为“已赠送”
+										//TODO：提示安存语录服务端受理服务赠送，赠送服务成功处理后，将服务记录的服务状态修改为“已赠送”（分别返回信息给淘宝API和安存服务）
 										appr_end_module_tipmsg.setVisibility(View.VISIBLE);
 										
 										getAppContext().buildAuth(getResponseContent());
@@ -344,6 +355,16 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 					}
 					break;
 				case STATUS_END_MODULE:
+					if(bundle!=null){
+						if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+							
+							//激活成功
+							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+							
+							finish();
+							return;
+						}
+					}
 					Intent loginIntent=new Intent(RegisterActivity.this,MainActivity.class);
 					startActivity(loginIntent);
 					finish();

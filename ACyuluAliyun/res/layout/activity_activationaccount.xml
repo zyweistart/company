@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_gb"
+    android:orientation="vertical">
+    
+    <include layout="@layout/common_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="激活赠送服务页面，引导用户了解所赠服务详情并注册开通安存语服务"/>
+    <Button 
+        android:id="@+id/btn_activation_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册并激活"/>
+    
+</LinearLayout>

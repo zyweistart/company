@@ -88,7 +88,7 @@ public final class Constant {
 		/**
 		 * 是否绑定阿里云淘宝账户
 		 */
-		public static final String SP_ISBIND_TAOBAOACCOUNT="SP_ISBIND_TAOBAOACCOUNT";
+		public static final String SP_ALIYUN_INIT_SET="SP_ALIYUN_INIT_SET";
 		/**
 		 * 当前的版本号
 		 */
