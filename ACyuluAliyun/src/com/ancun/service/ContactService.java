@@ -25,25 +25,6 @@ public class ContactService extends CoreServiceModel {
 	public ContactService(Context mContext){
 		super(mContext);
 	}
-	/**
-	 * 自动修改通话设置
-	 */
-//	public void dialByModifyContact(String phone){
-//		ContentValues values = new ContentValues();
-//		values.put("phone", phone);
-//		values.put("calltime", TimeUtils.getSysTime());
-//		values.put("status", CallLog.Calls.OUTGOING_TYPE);
-//		getSQLiteDatabase().insert(RecentModel.TABLENAME, null, values);
-//		ContactModel cm=getContactModelByPhone(phone);
-//		if(cm!=null){
-//			//如果为系统默认则进行自动设置
-//			if(cm.getUserSetFlag()==1){
-//				if(cm.getRecordFlag()==2){
-//					modifyFlag(cm.getLookupKey(),1);
-//				}
-//			}
-//		}
-//	}
 	
 	public List<ContactModel> loadAllContact() {
 		Cursor allContactCursor=null;
@@ -222,6 +203,7 @@ public class ContactService extends CoreServiceModel {
 		}
 		return mContactInfo;
 	}
+	
 	/**
 	 * 加载当前联系人头像
 	 */
@@ -233,19 +215,18 @@ public class ContactService extends CoreServiceModel {
 			return BitmapFactory.decodeStream(localInputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}finally{
 			if(localInputStream!=null){
 				try {
 					localInputStream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-					return null;
 				}finally{
 					localInputStream=null;
 				}
 			}
 		}
+		return null;
 	}
 	
 }

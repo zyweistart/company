@@ -386,8 +386,6 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		}else if(v==activity_main_ibmore){
 			startActivityForResult(new Intent(this, SettingActivity.class), 0);
 		}else if(v==activity_main_btnacount){
-			getAppContext().setPayBasePackages(false);
-			getAppContext().setPackagesinfos(null);
 //			if(getAppContext().isOldUserFlag()){
 //				//时长老用户
 //				startActivity(new Intent(this,AccountMonthConsumeActivity.class));

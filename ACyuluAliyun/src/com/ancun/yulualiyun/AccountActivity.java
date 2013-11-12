@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +28,6 @@ import com.ancun.service.PullListViewData;
 import com.ancun.service.PullListViewData.OnLoadDataListener;
 import com.ancun.utils.TimeUtils;
 import com.ancun.yulualiyun.AppContext.LoadMode;
-import com.ancun.yulualiyun.accountp.AccountRechargeActivity;
 
 public class AccountActivity extends CoreActivity implements OnClickListener {
 	
@@ -123,7 +121,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 	public void onClick(View v) {
 		if(activity_myaccount_btn_RightTitle==v){
 			//账户充值
-			startActivityForResult(new Intent(this,AccountRechargeActivity.class),REQUESTCODEMyAccountActivity);
+			
 		}else if(activity_myaccount_btn_rechargelist==v){
 			//充值套餐
 			activity_myaccount_btn_rechargelist.setEnabled(false);
@@ -300,7 +298,6 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			}else{
 				holder.usedImg.setImageResource(R.drawable.myaccount_recharge_noused);
 			}
-			getAppContext().setPayBasePackages(true);
 			holder.name.setText("云OS用户专享体验套餐");
 			holder.frtime.setVisibility(View.VISIBLE);
 			holder.notime.setVisibility(View.GONE);

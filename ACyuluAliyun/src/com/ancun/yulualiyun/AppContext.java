@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.ancun.core.Constant;
 import com.ancun.core.XMLException;
+import com.ancun.core.AliYunOSAPI;
 import com.ancun.model.UIRunnable;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.HttpUtils;
@@ -39,6 +40,18 @@ public class AppContext extends Application {
 			wmParams=new WindowManager.LayoutParams();
 		}
 		return wmParams;
+	}
+	
+	private AliYunOSAPI yunOSAPI;
+	
+	/**
+	 * 阿里云OSAPI接口
+	 */
+	public AliYunOSAPI getYunOSAPI() {
+		if(yunOSAPI==null){
+			yunOSAPI=new AliYunOSAPI(this);
+		}
+		return yunOSAPI;
 	}
 	
 	private SharedPreferencesUtils sharedPreferencesUtils=null;
@@ -107,40 +120,6 @@ public class AppContext extends Application {
 		}
 		reLogin(activity, "登录超时");
 		return "";
-	}
-	
-	private boolean payBasePackages=false;
-	
-	/**
-	 * TODO:阿里云设备唯一码
-	 * @return
-	 */
-	public String getAliyunUniqueCode(){
-		return StringUtils.random();
-	}
-	
-	/**
-	 * 标记是否已经购买过基础套餐
-	 */
-	public boolean isPayBasePackages(){
-		return payBasePackages;
-	}
-	
-	public void setPayBasePackages(boolean flag){
-		this.payBasePackages=flag;
-	}
-	
-	public List<Map<String,String>> packagesinfos;
-	
-	/**
-	 * 当前登录用户的套餐信息
-	 */
-	public List<Map<String, String>> getPackagesinfos() {
-		return packagesinfos;
-	}
-
-	public void setPackagesinfos(List<Map<String, String>> packagesinfos) {
-		this.packagesinfos = packagesinfos;
 	}
 	
 	/**

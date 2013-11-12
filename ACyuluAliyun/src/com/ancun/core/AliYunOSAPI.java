@@ -1,17 +1,27 @@
 package com.ancun.core;
 
+import com.ancun.utils.StringUtils;
+
 import android.content.Context;
 
-public class YunOSAPI {
+public class AliYunOSAPI {
 
 	@SuppressWarnings("unused")
 	private Context mContext;
 	
 //	private SellerAuthority mSellerAuthority
 	
-	public YunOSAPI(Context context){
+	public AliYunOSAPI(Context context){
 		this.mContext=context;
 //		this.mSellerAuthority = new SellerAuthority(context);
+	}
+	
+	/**
+	 * 阿里云设备唯一码
+	 * @return
+	 */
+	public String getUUID(){
+		return StringUtils.random();
 	}
 	
 	/**

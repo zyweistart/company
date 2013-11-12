@@ -7,7 +7,6 @@ import android.content.Intent.ShortcutIconResource;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -27,6 +26,18 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+		
+		if(!getAppContext().getYunOSAPI().isMjPhone()){
+			//TODO：不是阿里云环境处理
+			makeTextLong("当前环境不是卖家手机，无法运行");
+			finish();
+		}
+		
+		if(!getAppContext().getYunOSAPI().isSystemLogin()){
+			//TODO:淘宝卖家账号未进行登录时处理
+			makeTextLong("还未使用淘宝账号进行登录");
+		}
+		
 		ImageView imageView = (ImageView)findViewById(R.id.activity_welcome_logo);
 		Animation alphaAnimation = AnimationUtils.loadAnimation(this, R.anim.activity_welcome_alpha);
 		//启动Fill保持
@@ -111,12 +122,9 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	}
 	
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode==KeyEvent.KEYCODE_BACK) {
-			//屏蔽BACK键
-			return false;
-		}
-		return super.onKeyDown(keyCode, event);
+	public void onBackPressed() {
+		//屏蔽返回按钮
+//		super.onBackPressed();
 	}
 	
 }

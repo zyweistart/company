@@ -116,7 +116,6 @@ public class LoginActivity extends CoreActivity implements OnClickListener {
 						try{
 							getAppContext().setUserInfoAll(getAllInfoContent());
 							getAppContext().setUserInfo(getAllInfoContent().get("v4info"));
-							//TODO:个人用户暂无法登录
 							if("1".equals(getAppContext().getUserInfo().get("usertype"))){
 								runOnUiThread(new Runnable() {
 									

@@ -310,7 +310,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 						requestParams.put("signupsource","h");
 						requestParams.put("ip", "");
 						requestParams.put("mac", "");
-						requestParams.put("idcode", getAppContext().getAliyunUniqueCode());
+						requestParams.put("idcode", getAppContext().getYunOSAPI().getUUID());
 						requestParams.put("loginflag", "1");
 						Map<String,String> headerParams=new HashMap<String,String>();
 						headerParams.put("sign", "");

@@ -109,6 +109,12 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         
+        <!-- 录音搜索 -->
+        <activity
+            android:name=".SearchRecordedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Dialog_NoTitle" />
+        
         <!-- 录音管理 -->
         <activity
             android:name=".RecordedManagerContentListActivity"
@@ -199,61 +205,11 @@
             android:name=".ServerClauseActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <!-- 录音搜索 -->
-        <activity
-            android:name=".SearchRecordedActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme_Dialog_NoTitle" />
+        
         
         <!-- 我的账户 -->
         <activity
             android:name=".AccountActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 我的账户时长版 -->
-        <!-- 按月统计消费明细 -->
-        <activity
-            android:name=".accounttl.AccountMonthConsumeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 按日统计消费明细 -->
-        <activity
-            android:name=".accounttl.AccountDayConsumeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 账号充值 -->
-        <activity
-            android:name=".accounttl.AccountRechargeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateHidden" />
-        
-        <!-- 账户充值确认 -->
-        <activity
-            android:name=".accounttl.AccountRechargeConfirmActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 账户充值结果 -->
-        <activity
-            android:name=".accounttl.AccountRechargeResultActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        
-        <!-- 我的账户套餐版 -->
-        <activity
-            android:name=".accountp.MyAccountActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".accountp.AccountRechargeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".accountp.RechargeDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         
