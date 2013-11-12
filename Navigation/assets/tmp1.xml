@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process>
+    
+    <start title="开始" next="急诊/门诊"/>
+    
+    <node id="急诊/门诊"/>
+    
+    <node id="预诊"/>
+    
+    <end title="结束"/>
+    
+</process>

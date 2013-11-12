@@ -39,9 +39,21 @@ public abstract class CoreActivity  extends StatActivity {
 
 	protected final String TAG=this.getClass().getSimpleName();
 	
+	private YunOSAPI yunOSAPI;
+	
 	private RecentService recentService;
 	
 	private ContactService contactService;
+	
+	/**
+	 * 阿里云OSAPI接口
+	 */
+	public YunOSAPI getYunOSAPI() {
+		if(yunOSAPI==null){
+			yunOSAPI=new YunOSAPI(this);
+		}
+		return yunOSAPI;
+	}
 	
 	public AppContext getAppContext(){
 		return (AppContext)getApplication();
