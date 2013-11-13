@@ -3,9 +3,7 @@ package com.ancun.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -27,23 +25,23 @@ public class ContactService extends CoreServiceModel {
 	}
 	
 	public List<ContactModel> loadAllContact() {
-		Cursor allContactCursor=null;
-		Map<String,ContactModel> cmMap=new HashMap<String,ContactModel>();
-		try{
-			allContactCursor = getSQLiteDatabase().query(ContactModel.TABLENAME, new String[]{"key","flag","usersetflag"},
-					null,null,null, null, null);
-			if (allContactCursor.moveToFirst()) {
-				do {
-					ContactModel cm=new ContactModel();
-					cm.setPhone(allContactCursor.getString(allContactCursor.getColumnIndex("key")));
-					cm.setRecordFlag(allContactCursor.getInt(allContactCursor.getColumnIndex("flag")));
-					cm.setUserSetFlag(allContactCursor.getInt(allContactCursor.getColumnIndex("usersetflag")));
-					cmMap.put(cm.getPhone(), cm);
-				} while (allContactCursor.moveToNext());
-			}
-		}finally{
-			allContactCursor.close();
-		}
+//		Cursor allContactCursor=null;
+//		Map<String,ContactModel> cmMap=new HashMap<String,ContactModel>();
+//		try{
+//			allContactCursor = getSQLiteDatabase().query(ContactModel.TABLENAME, new String[]{"key","flag","usersetflag"},
+//					null,null,null, null, null);
+//			if (allContactCursor.moveToFirst()) {
+//				do {
+//					ContactModel cm=new ContactModel();
+//					cm.setPhone(allContactCursor.getString(allContactCursor.getColumnIndex("key")));
+//					cm.setRecordFlag(allContactCursor.getInt(allContactCursor.getColumnIndex("flag")));
+//					cm.setUserSetFlag(allContactCursor.getInt(allContactCursor.getColumnIndex("usersetflag")));
+//					cmMap.put(cm.getPhone(), cm);
+//				} while (allContactCursor.moveToNext());
+//			}
+//		}finally{
+//			allContactCursor.close();
+//		}
         String[] projection = new String[] {
                 ContactsContract.Contacts._ID,
                 ContactsContract.Contacts.DISPLAY_NAME,
@@ -62,21 +60,21 @@ public class ContactService extends CoreServiceModel {
 					mContactInfo.setName(cursor.getString(1));
 					mContactInfo.setPhotoID(cursor.getLong(2));
 					mContactInfo.setLookupKey(cursor.getString(3));
-					if(cmMap.isEmpty()){
-						ContactModel contactModel=new ContactModel();
-						contactModel.setLookupKey(mContactInfo.getLookupKey());
+//					if(cmMap.isEmpty()){
+//						ContactModel contactModel=new ContactModel();
+//						contactModel.setLookupKey(mContactInfo.getLookupKey());
 //						save(contactModel);
-					}else{
-						ContactModel contactModel=cmMap.get(mContactInfo.getLookupKey());
-						if(contactModel==null){
-							contactModel=new ContactModel();
-							contactModel.setLookupKey(mContactInfo.getLookupKey());
-//							save(contactModel);
-						}else{
-							mContactInfo.setRecordFlag(contactModel.getRecordFlag());
-							mContactInfo.setUserSetFlag(contactModel.getUserSetFlag());
-						}
-					}
+//					}else{
+//						ContactModel contactModel=cmMap.get(mContactInfo.getLookupKey());
+//						if(contactModel==null){
+//							contactModel=new ContactModel();
+//							contactModel.setLookupKey(mContactInfo.getLookupKey());
+////							save(contactModel);
+//						}else{
+//							mContactInfo.setRecordFlag(contactModel.getRecordFlag());
+//							mContactInfo.setUserSetFlag(contactModel.getUserSetFlag());
+//						}
+//					}
 					contactListData.add(mContactInfo);
 				} while (cursor.moveToNext());
 			}
