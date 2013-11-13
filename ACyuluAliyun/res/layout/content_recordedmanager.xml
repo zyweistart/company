@@ -50,7 +50,7 @@
 	            android:layout_toLeftOf="@+id/contact_search_bar_icon"
 	            android:layout_toRightOf="@+id/contact_search_bar_clean"
 	            android:background="@color/transparent"
-	            android:hint="姓名查找前请加载完全部录音"
+	            android:hint="如需按姓名信息查找请先加载全部录音"
 	            android:paddingLeft="10.0dip"
 	            android:singleLine="true"
 	            android:textColor="#000000"

@@ -59,10 +59,10 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 		activity_myaccount_btn_RightTitle.setOnClickListener(this);
 		//基础包月套餐
 		activity_myaccount_baseinfo=(TextView)findViewById(R.id.activity_myaccount_baseinfo);
-		activity_myaccount_baseinfo.setText("使用中套餐空间：剩余0MB，已用0MB");
+		activity_myaccount_baseinfo.setText("通话录音存储空间：剩余0MB，已用0MB");
 		//当前基础月度可用容量
 		activity_myaccount_storageinfo=(TextView)findViewById(R.id.activity_myaccount_storageinfo);
-		activity_myaccount_storageinfo.setText("已赠送使用套餐0个月，剩余未赠送套餐0个月");
+		activity_myaccount_storageinfo.setText("已赠送基础服务套餐0个月，剩余未赠送套餐0个月");
 		activity_myaccount_storageinfo.setVisibility(View.GONE);
 		//增值时长剩余
 		activity_myaccount_durationinfo=(TextView)findViewById(R.id.activity_myaccount_durationinfo);
@@ -183,7 +183,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 						Float rt=(float)(rtsize/1024/1024);
 						String noUseV=df.format(bq-rt);
 						String UseV=df.format(rt);
-						activity_myaccount_baseinfo.setText("使用中套餐空间：剩余"+noUseV+"MB，已用"+UseV+"MB");
+						activity_myaccount_baseinfo.setText("通话录音存储空间：剩余"+noUseV+"MB，已用"+UseV+"MB");
 					
 						try {
 							int totalDay=TimeUtils.getDaysBetween(getAppContext().getUserInfo().get("signuptime"), getInfoContent().get("comboendtime"));
@@ -195,7 +195,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 								useMonth=(totalDay+1)/31;
 							}
 							
-							activity_myaccount_storageinfo.setText("已赠送使用套餐"+useMonth+"个月，剩余未赠送套餐"+noUseMonth+"个月");
+							activity_myaccount_storageinfo.setText("已赠送基础服务套餐"+useMonth+"个月，剩余未赠送套餐"+noUseMonth+"个月");
 							
 							SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							Calendar a = Calendar.getInstance();
@@ -308,7 +308,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			}else{
 				holder.usedImg.setImageResource(R.drawable.myaccount_recharge_noused);
 			}
-			holder.name.setText("云OS用户专享体验套餐");
+			holder.name.setText("阿里云手机卖家版专享年度体验——基础服务周期赠送");
 			holder.frtime.setVisibility(View.VISIBLE);
 			holder.notime.setVisibility(View.GONE);
 			holder.remark.setText(data.get("rectimelimit"));

@@ -14,7 +14,8 @@ import com.ancun.core.CoreActivity;
 public class TipActivity extends CoreActivity {
 	
 
-	private static final String WEBURL="file:///android_asset/html/tip.html";
+	private static final String WEBURL1="file:///android_asset/html/tip1.html";
+	private static final String WEBURL2="file:///android_asset/html/tip2.html";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,13 @@ public class TipActivity extends CoreActivity {
 		
 //		setContentView(R.layout.activity_tip);
 //		setNavigationTitle(R.string.tip_title);
+		String url=null;
+		if("yunos01".equals(getAppContext().getUserInfo().get("prodid"))){
+			//获赠用户
+			url=WEBURL1;
+		}else{
+			url=WEBURL2;
+		}
 		
 		LayoutInflater layoutInflater = LayoutInflater.from(this);
 		
@@ -36,7 +44,7 @@ public class TipActivity extends CoreActivity {
 		
 		WebView webView=new WebView(this);
 		webView.getSettings().setDefaultTextEncodingName(Constant.ENCODE);
-		webView.loadUrl(WEBURL);  
+		webView.loadUrl(url);  
 		layout.addView(webView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		
 		setContentView(layout);

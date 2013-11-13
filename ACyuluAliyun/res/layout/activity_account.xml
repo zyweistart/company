@@ -17,7 +17,7 @@
 	           android:id="@+id/activity_myaccount_baseinfo"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
-	           android:textSize="@dimen/fontsize_h0"
+	           android:textSize="13.0dip"
 	           android:textColor="@color/black"
 	           android:layout_marginTop="@dimen/spacing_2"/>
 	       
@@ -25,7 +25,7 @@
 	           android:id="@+id/activity_myaccount_durationinfo"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
-	           android:textSize="@dimen/fontsize_h0"
+	           android:textSize="13.0dip"
 	           android:textColor="@color/black"
 	           android:layout_marginTop="@dimen/spacing_2"/>
 	       
@@ -33,7 +33,7 @@
 	           android:id="@+id/activity_myaccount_storageinfo"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
-	           android:textSize="@dimen/fontsize_h0"
+	           android:textSize="13.0dip"
 	           android:textColor="@color/black"/>
 	       
     	</LinearLayout>

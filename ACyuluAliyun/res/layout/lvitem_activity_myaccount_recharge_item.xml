@@ -19,7 +19,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:textSize="@dimen/fontsize_h1"
+	        android:textSize="@dimen/fontsize_h0"
 	        android:textColor="#313131"
 	        android:gravity="left|center"/>
         
