@@ -17,14 +17,14 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5.0dip"
-	        android:textSize="15.0dip"
+	        android:textSize="@dimen/fontsize_h1"
 	        android:text="尊敬的淘宝掌柜，您好！感谢您使用安存语录--淘宝网官方唯一认可的第三方通话录音取证服务和维权证据"/>
 	    <TextView
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5.0dip"
-	        android:textSize="15.0dip"
-	        android:text="您购买的卖家服务套餐中包含安存语录免费体验服务，请点击“下一步”了解更多激活赠送服务"/>
+	        android:textSize="@dimen/fontsize_h1"
+	        android:text="您购买的卖家服务套餐中包含安存语录免费体验服务，请点击“下一步”了解更多并激活赠送服务"/>
 	    <LinearLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
@@ -35,8 +35,6 @@
 			     android:id="@+id/btn_activation_register1"
 		         android:layout_width="wrap_content"
 		         android:layout_height="wrap_content"
-		         android:layout_centerHorizontal="true"
-		  		 android:layout_above="@+id/guide_layout"
 		         android:background="@drawable/activity_btn_activation_registernext_selector" 
 		         android:contentDescription="@string/empty"/>
 	    </LinearLayout>
@@ -53,13 +51,13 @@
 	    <TextView
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:textSize="15.0dip"
+	        android:textSize="@dimen/fontsize_h1"
 	        android:layout_margin="5.0dip"
-	        android:text="亲，您将获赠为期12个月的“安存语录-阿里云卖家专享年度免费服务”，可供您开通本机号码的安存语录体验服务，保全通话交涉信息，从此不再口说无凭。"/>
+	        android:text="亲，您将获赠为期12个月的“安存语录-阿里云手机卖家版专享年度免费服务”，可供您开通本机号码的安存语录体验服务，保全通话交涉信息，从此不再口说无凭。"/>
 	    <TextView
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:textSize="15.0dip"
+	        android:textSize="@dimen/fontsize_h1"
 	        android:layout_margin="5.0dip"
 	        android:text="温馨提示：需手机本机号码与注册账户（手机号码）一致时才能体验完整的应用服务，激活注册前建议您确认本机号码是否为常用号码"/>
 	    <LinearLayout 
@@ -72,14 +70,9 @@
 			     android:id="@+id/btn_activation_register2"
 		         android:layout_width="wrap_content"
 		         android:layout_height="wrap_content"
-		         android:layout_centerHorizontal="true"
-		  		 android:layout_above="@+id/guide_layout"
 		         android:background="@drawable/activity_btn_activation_registerstart_selector" 
 		         android:contentDescription="@string/empty"/>
 	    </LinearLayout>
     </LinearLayout>
-    
-    
-    
     
 </LinearLayout>
