@@ -16,7 +16,7 @@ public class AliYunOSAPI {
 	}
 	
 	/**
-	 * 阿里云设备唯一码
+	 * 阿里云设备唯一码，或淘宝账号
 	 * @return
 	 */
 	public String getUUID(){

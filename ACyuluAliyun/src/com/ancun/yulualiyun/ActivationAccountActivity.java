@@ -49,7 +49,6 @@ public class ActivationAccountActivity extends CoreActivity{
 	
 	@Override
 	public void onBackPressed() {
-		//屏蔽返回按钮
 	}
 	
 }

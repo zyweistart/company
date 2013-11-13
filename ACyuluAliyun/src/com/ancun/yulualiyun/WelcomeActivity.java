@@ -114,58 +114,13 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	}
 
 	@Override
-	public void onAnimationStart(Animation animation) {
-		
-	}
-	
-	@Override
 	public void onAnimationEnd(Animation animation) {
+		//TODO:发布时删除该条件语句
+		boolean SP_ALIYUN_INIT_SET=false;
 //		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
-//		if(!SP_ALIYUN_INIT_SET){
-			if(getAppContext().getYunOSAPI().isMjPhone()){
-				if(getAppContext().getYunOSAPI().isSystemLogin()){
-					if(getAppContext().getYunOSAPI().isActivation()){
-						if(getAppContext().getYunOSAPI().isServiceUse()){
-							CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									
-									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-									
-									forward();
-								}
-								
-							}).show();
-							return;
-						}
-						if(getAppContext().getYunOSAPI().isValidService()){
-							Intent intent=new Intent(this,ActivationAccountActivity.class);
-							startActivityForResult(intent,REQUEST_CODE_WELCOME);
-							return;
-						}else{
-							//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-						}
-					}else{
-						
-						CommonFn.buildDialog(this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
-
-							@Override
-							public void onClick(DialogInterface dialog,int which) {
-								
-								forward();
-								
-							}
-							
-						}).show();
-						return;
-						
-					}
-				}else{
-					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-				}
-			}else{
+		if(!SP_ALIYUN_INIT_SET){
+			//是否满足卖家手机条件
+			if(!getAppContext().getYunOSAPI().isMjPhone()){
 				if(getAppContext().getYunOSAPI().isAliYunPhone()){
 					
 					//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
@@ -173,9 +128,64 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				}else{
 					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
 				}
+				forward();
+				return;
 			}
-//		}
-		forward();
+			//是否已经使用淘宝卖家账号登录
+			if(!getAppContext().getYunOSAPI().isSystemLogin()){
+				//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+				forward();
+				return;
+			}
+			//是否尚未激活服务
+			if(!getAppContext().getYunOSAPI().isActivation()){
+				CommonFn.buildDialog(this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog,int which) {
+						
+						//TODO:点击确认是否跳转至设置激活页面待定
+						
+						forward();
+						
+					}
+					
+				}).show();
+				return;
+			}
+			//有服务已赠送
+			if(getAppContext().getYunOSAPI().isServiceUse()){
+				CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						
+						//有服务已赠送则下次不再进行检测
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+						
+						forward();
+					}
+					
+				}).show();
+				return;
+			}
+			//有服务未赠送
+			if(getAppContext().getYunOSAPI().isValidService()){
+				Intent intent=new Intent(this,ActivationAccountActivity.class);
+				startActivityForResult(intent,REQUEST_CODE_WELCOME);
+				return;
+			}else{
+				//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+				forward();
+				return;
+			}
+		}
+	}
+	
+	@Override
+	public void onAnimationStart(Animation animation) {
+		
 	}
 	
 	@Override
@@ -185,8 +195,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	
 	@Override
 	public void onBackPressed() {
-		//屏蔽返回按钮
-//		super.onBackPressed();
+		
 	}
 	
 }
