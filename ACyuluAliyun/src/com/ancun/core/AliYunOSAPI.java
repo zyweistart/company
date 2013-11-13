@@ -24,6 +24,8 @@ public class AliYunOSAPI {
 		return StringUtils.random();
 	}
 	
+	
+	
 	/**
 	 * 是否卖家机
 	 * @return

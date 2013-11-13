@@ -8,6 +8,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -17,6 +18,7 @@ import com.ancun.core.Constant;
 import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
+import com.ancun.utils.NetConnectManager;
 
 /**
  * 欢迎界面
@@ -115,72 +117,92 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
+		verifity();
+	}
+	
+	public void verifity(){
 		//TODO:发布时删除该条件语句
 		boolean SP_ALIYUN_INIT_SET=false;
 //		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
-			//是否满足卖家手机条件
-			if(!getAppContext().getYunOSAPI().isMjPhone()){
-				if(getAppContext().getYunOSAPI().isAliYunPhone()){
-					
-					//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
-					
-				}else{
-					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+			if(NetConnectManager.isNetWorkAvailable(this)){
+				//是否满足卖家手机条件
+				if(!getAppContext().getYunOSAPI().isMjPhone()){
+					if(getAppContext().getYunOSAPI().isAliYunPhone()){
+						
+						//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
+						
+					}else{
+						//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+					}
+					forward();
+					return;
 				}
-				forward();
-				return;
-			}
-			//是否已经使用淘宝卖家账号登录
-			if(!getAppContext().getYunOSAPI().isSystemLogin()){
-				//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-				forward();
-				return;
-			}
-			//是否尚未激活服务
-			if(!getAppContext().getYunOSAPI().isActivation()){
-				CommonFn.buildDialog(this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
+				//是否已经使用淘宝卖家账号登录
+				if(!getAppContext().getYunOSAPI().isSystemLogin()){
+					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+					forward();
+					return;
+				}
+				//是否尚未激活服务
+				if(!getAppContext().getYunOSAPI().isActivation()){
+					CommonFn.buildDialog(this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
 
-					@Override
-					public void onClick(DialogInterface dialog,int which) {
+						@Override
+						public void onClick(DialogInterface dialog,int which) {
+							
+							//TODO:点击确认是否跳转至设置激活页面待定
+							
+							forward();
+							
+						}
 						
-						//TODO:点击确认是否跳转至设置激活页面待定
-						
-						forward();
-						
-					}
-					
-				}).show();
-				return;
-			}
-			//有服务已赠送
-			if(getAppContext().getYunOSAPI().isServiceUse()){
-				CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
+					}).show();
+					return;
+				}
+				//有服务已赠送
+				if(getAppContext().getYunOSAPI().isServiceUse()){
+					CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
 
-					@Override
-					public void onClick(DialogInterface dialog,
-							int which) {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							
+							//有服务已赠送则下次不再进行检测
+							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+							
+							forward();
+						}
 						
-						//有服务已赠送则下次不再进行检测
-						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-						
-						forward();
-					}
-					
-				}).show();
-				return;
-			}
-			//有服务且未赠送
-			if(getAppContext().getYunOSAPI().isValidService()){
-				Intent intent=new Intent(this,ActivationAccountActivity.class);
-				startActivityForResult(intent,REQUEST_CODE_WELCOME);
-				return;
+					}).show();
+					return;
+				}
+				//有服务且未赠送
+				if(getAppContext().getYunOSAPI().isValidService()){
+					Intent intent=new Intent(this,ActivationAccountActivity.class);
+					startActivityForResult(intent,REQUEST_CODE_WELCOME);
+					return;
+				}else{
+					//下次不再进行检测
+					getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+					forward();
+					return;
+				}
 			}else{
-				//下次不再进行检测
-				getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-				//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-				forward();
-				return;
+				AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
+				aDialog.
+				setIcon(android.R.drawable.ic_dialog_info).
+				setTitle("提示！").
+				setMessage("当前无法连接到网络，是否立即进行设置？").
+				setPositiveButton("设置", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+						startActivity(netIntent);
+						finish();
+					}
+				}).show();
 			}
 		}
 	}
