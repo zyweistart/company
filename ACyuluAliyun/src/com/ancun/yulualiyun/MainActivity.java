@@ -79,8 +79,7 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		setContentView(R.layout.activity_main);
 		
 		main_tip_content=(TextView)findViewById(R.id.main_tip_content);
-//		main_tip_content.setVisibility(View.VISIBLE);
-		main_tip_content.setText("欢迎使用安存@记忆管理产品服务");
+		
 		//我的账户
 		activity_main_btnacount=(Button)findViewById(R.id.activity_main_btnacount); 
 		activity_main_btnacount.setOnClickListener(this);
@@ -248,7 +247,7 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 				}).show();
 			}
 		}
-		
+		setWelcomeInfo();
 	}
 	
 	@Override
@@ -536,6 +535,29 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 			
 		}
 
+	}
+	
+	private void setWelcomeInfo(){
+		final String prodid=getAppContext().getUserInfo().get("prodid");
+		Map<String,String> requestParams=new HashMap<String,String>();
+		requestParams.put("accessid", Constant.ACCESSID);
+		requestParams.put("recordno", prodid);
+		getAppContext().exeNetRequest(this,Constant.GlobalURL.v4versionDetail,requestParams,null,new UIRunnable(){
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						
+						main_tip_content.setVisibility(View.VISIBLE);
+						main_tip_content.setText(getAllInfoContent().get("versioninfo").get("content"));
+						
+					}
+					
+				});
+			}
+		});
 	}
 	
 }

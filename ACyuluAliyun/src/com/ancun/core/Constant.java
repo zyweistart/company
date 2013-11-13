@@ -293,6 +293,10 @@ public final class Constant {
 		 *  新充值产品查询
 		 */
 		public static final String v4QrycomboList="v4QrycomboList";
+		/**
+		 * 版本信息详情
+		 */
+		public static final String v4versionDetail="v4versionDetail";
 	}
 	
 	public final class Auth{
