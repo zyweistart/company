@@ -128,13 +128,13 @@
             android:text="@string/activity_login_registertip"
             android:textColor="@android:color/white"
             android:padding="@dimen/spacing_8"
-            android:textSize="@dimen/fontsize_h2" />
+            android:textSize="@dimen/fontsize_h1" />
         
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_3"
-            android:textSize="@dimen/fontsize_h1"
+            android:textSize="@dimen/fontsize_h0"
             android:text="请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全。" />
         
     </LinearLayout>
