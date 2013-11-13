@@ -170,12 +170,14 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				}).show();
 				return;
 			}
-			//有服务未赠送
+			//有服务且未赠送
 			if(getAppContext().getYunOSAPI().isValidService()){
 				Intent intent=new Intent(this,ActivationAccountActivity.class);
 				startActivityForResult(intent,REQUEST_CODE_WELCOME);
 				return;
 			}else{
+				//下次不再进行检测
+				getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 				//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
 				forward();
 				return;

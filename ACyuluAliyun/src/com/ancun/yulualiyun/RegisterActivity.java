@@ -340,7 +340,8 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 										
 										if(bundle!=null){
 											if(bundle.getBoolean(ACTIVATION_FLAG,false)){
-												//TODO:通知阿里API说明该服务已赠送
+												//注册成功后如果为赠送注册则：1.通知OS服务端2.初始设置标记设为TRUE表示下次启动不再检测3.显示注册成功获赠文案
+												getAppContext().getYunOSAPI().notifyOSService();
 												//赠送激活成功初始设置标记
 												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 												appr_end_module_tipmsg.setVisibility(View.VISIBLE);

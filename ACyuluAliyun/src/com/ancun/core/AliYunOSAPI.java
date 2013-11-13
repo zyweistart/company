@@ -61,7 +61,14 @@ public class AliYunOSAPI {
 	}
 	
 	/**
-	 * 该服务是否已经赠送使用
+	 * 赠送成功后通知云OS
+	 */
+	public void notifyOSService(){
+		
+	}
+	
+	/**
+	 * TODO：该服务是否已经赠送使用（待定）
 	 * @return
 	 */
 	public Boolean isServiceUse(){
