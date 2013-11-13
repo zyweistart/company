@@ -539,25 +539,27 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 	
 	private void setWelcomeInfo(){
 		final String prodid=getAppContext().getUserInfo().get("prodid");
-		Map<String,String> requestParams=new HashMap<String,String>();
-		requestParams.put("accessid", Constant.ACCESSID);
-		requestParams.put("recordno", prodid);
-		getAppContext().exeNetRequest(this,Constant.GlobalURL.v4versionDetail,requestParams,null,new UIRunnable(){
-			@Override
-			public void run() {
-				runOnUiThread(new Runnable() {
-					
-					@Override
-					public void run() {
+		if(!"".equals(prodid)){
+			Map<String,String> requestParams=new HashMap<String,String>();
+			requestParams.put("accessid", Constant.ACCESSID);
+			requestParams.put("recordno", prodid);
+			getAppContext().exeNetRequest(this,Constant.GlobalURL.v4versionDetail,requestParams,null,new UIRunnable(){
+				@Override
+				public void run() {
+					runOnUiThread(new Runnable() {
 						
-						main_tip_content.setVisibility(View.VISIBLE);
-						main_tip_content.setText(getAllInfoContent().get("versioninfo").get("content"));
+						@Override
+						public void run() {
+							
+							main_tip_content.setVisibility(View.VISIBLE);
+							main_tip_content.setText(getAllInfoContent().get("versioninfo").get("content"));
+							
+						}
 						
-					}
-					
-				});
-			}
-		});
+					});
+				}
+			});
+		}
 	}
 	
 }
