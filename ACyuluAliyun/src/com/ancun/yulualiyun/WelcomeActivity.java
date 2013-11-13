@@ -190,6 +190,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 					return;
 				}
 			}else{
+				//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
 				AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
 				aDialog.
 				setIcon(android.R.drawable.ic_dialog_info).
