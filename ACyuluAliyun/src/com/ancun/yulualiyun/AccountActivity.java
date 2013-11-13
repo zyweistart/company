@@ -188,12 +188,13 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 						try {
 							int totalDay=TimeUtils.getDaysBetween(getAppContext().getUserInfo().get("signuptime"), getInfoContent().get("comboendtime"));
 							
+//							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),"2019-10-10 10:10:10");
 							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),TimeUtils.getSysTimeS());
 							int noUseMonth=(totalDay+1)/31-useMonth;
 							if(noUseMonth<0){
-								makeTextLong("套餐已到期");
-								finish();
+								useMonth=(totalDay+1)/31;
 							}
+							
 							activity_myaccount_storageinfo.setText("已赠送使用套餐"+useMonth+"个月，剩余未赠送套餐"+noUseMonth+"个月");
 							
 							SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -206,10 +207,14 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 							List<Map<String,String>> tmpData=new ArrayList<Map<String,String>>();
 							for(int i=1;i<=useMonth;i++){
 								Map<String,String> data=new HashMap<String,String>();
-								if(i==(useMonth)){
-									data.put("used", "1");
-								}else{
+								if(noUseMonth<0){
 									data.put("used", "0");
+								}else{
+									if(i==(useMonth)){
+										data.put("used", "1");
+									}else{
+										data.put("used", "0");
+									}
 								}
 //								data.put("rectimelimit", df.format(bq/12)+"MB");
 								data.put("rectimelimit","500MB");
