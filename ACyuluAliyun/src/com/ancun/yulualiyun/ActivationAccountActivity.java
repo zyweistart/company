@@ -8,6 +8,11 @@ import android.widget.Button;
 
 import com.ancun.core.CoreActivity;
 
+/**
+ * 账户激活赠送
+ * @author start
+ *
+ */
 public class ActivationAccountActivity extends CoreActivity{
 
 	private static final int REQUEST_CODE_ACTIVATION=222;
@@ -49,6 +54,8 @@ public class ActivationAccountActivity extends CoreActivity{
 	
 	@Override
 	public void onBackPressed() {
+		setResult(WelcomeActivity.RESULT_CODE_REGISTER);
+		super.onBackPressed();
 	}
 	
 }

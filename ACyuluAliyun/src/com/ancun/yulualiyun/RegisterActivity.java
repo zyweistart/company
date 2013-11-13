@@ -99,6 +99,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 		bundle=getIntent().getExtras();
 		if(bundle!=null){
 			if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+				//设置返回值
 				setResult(ActivationAccountActivity.RESULT_CODE_REGISTER);
 			}
 		}
@@ -337,9 +338,11 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 									@Override
 									public void run() {
 										
-										//TODO：提示安存语录服务端受理服务赠送，赠送服务成功处理后，将服务记录的服务状态修改为“已赠送”（分别返回信息给淘宝API和安存服务）
 										if(bundle!=null){
 											if(bundle.getBoolean(ACTIVATION_FLAG,false)){
+												//TODO:通知阿里API说明该服务已赠送
+												//赠送激活成功初始设置标记
+												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 												appr_end_module_tipmsg.setVisibility(View.VISIBLE);
 											}
 										}
@@ -371,10 +374,6 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 				case STATUS_END_MODULE:
 					if(bundle!=null){
 						if(bundle.getBoolean(ACTIVATION_FLAG,false)){
-							
-							//激活成功
-							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-							
 							finish();
 							return;
 						}
