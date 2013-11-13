@@ -89,7 +89,7 @@
                 android:drawablePadding="4.0dip"
                 android:text="@string/activity_login_autologin"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/fontsize_h1" />
+                android:textSize="@dimen/fontsize_h0" />
             
             <Button
                 android:id="@+id/btn_activity_login_forgetpwd"
@@ -100,7 +100,7 @@
                 android:paddingRight="@dimen/spacing_8"
                 android:text="@string/activity_login_forgetpwdtip"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/fontsize_h1" />
+                android:textSize="@dimen/fontsize_h0" />
             
         </LinearLayout>
         
