@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.ancun.core.CoreActivity;
 
@@ -18,6 +19,9 @@ public class ActivationAccountActivity extends CoreActivity{
 	private static final int REQUEST_CODE_ACTIVATION=222;
 	public static final int RESULT_CODE_REGISTER=222;
 	
+	private LinearLayout ll1;
+	private LinearLayout ll2;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,8 +29,24 @@ public class ActivationAccountActivity extends CoreActivity{
 		
 		setNavigationTitle("激活赠送服务");
 		
-		Button button=(Button)findViewById(R.id.btn_activation_register);
-		button.setOnClickListener(new OnClickListener() {
+		
+		ll1=(LinearLayout)findViewById(R.id.btn_activation_ll_register1);
+		ll2=(LinearLayout)findViewById(R.id.btn_activation_ll_register2);
+		
+		ImageButton button1=(ImageButton)findViewById(R.id.btn_activation_register1);
+		button1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				ll1.setVisibility(View.GONE);
+				ll2.setVisibility(View.VISIBLE);
+				
+			}
+		});
+		
+		ImageButton button2=(ImageButton)findViewById(R.id.btn_activation_register2);
+		button2.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

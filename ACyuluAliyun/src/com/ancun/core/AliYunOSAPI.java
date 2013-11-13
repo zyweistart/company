@@ -2,17 +2,18 @@ package com.ancun.core;
 
 import com.ancun.utils.StringUtils;
 import com.ancun.yulualiyun.AppContext;
+import com.yunos.seller.SellerAuthority;
 
 public class AliYunOSAPI {
 
 	@SuppressWarnings("unused")
 	private AppContext mContext;
 	
-//	private SellerAuthority mSellerAuthority
+	private SellerAuthority mSellerAuthority;
 	
 	public AliYunOSAPI(AppContext context){
 		this.mContext=context;
-//		this.mSellerAuthority = new SellerAuthority(context);
+		this.mSellerAuthority = new SellerAuthority(context);
 	}
 	
 	/**
@@ -28,6 +29,7 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public Boolean isMjPhone(){
+//		return SellerAuthority.SELLER_PHONE==mSellerAuthority.getSystemType();
 		return true;
 	}
 	
