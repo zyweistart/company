@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<process>
+<process id="导医">
     
-    <start title="开始" next="急诊/门诊"/>
+    <start id="开始" next="急诊/门诊"/>
     
-    <node id="急诊/门诊"/>
+    <switch id="急诊/门诊">
+        <option id="急诊" next="预诊"/>
+ 		<option id="门诊" next="挂号"/>
+    </switch>
     
-    <node id="预诊"/>
+    <node id="预诊" next="挂号">
+        <action type="location" content="地图编号；经度；纬度"/>
+    </node>
     
-    <end title="结束"/>
+    <node id="挂号" next="结束">
+        <action type="dialog" content="请挂妇科"/>
+        <action type="location" content="地图编号；经度；纬度"/>
+    </node>
+    
+    <end id="结束"/>
     
 </process>

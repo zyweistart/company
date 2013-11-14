@@ -1,5 +1,6 @@
 package com.start.navigation;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,7 @@ import com.start.model.nav.PathSearchResult;
 import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
+import com.start.model.process.ProcessService;
 import com.start.service.MapDataAdapter;
 import com.start.service.PathSearchTask;
 import com.start.service.PathSearchTask.PathSearchListener;
@@ -581,8 +583,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	public void onClick(View v) {
 		if (v.getId() == R.id.module_main_frame_introduction_btnHospital) {
 			// 医院介绍
-			Intent intent = new Intent(this, DoctorListActivity.class);
-			startActivity(intent);
+			ProcessService process=new ProcessService();
+			try {
+				InputStream in =this.getAssets().open("tmp1.xml");
+				process.buildProcessXML(in);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (v.getId() == R.id.module_main_frame_introduction_btnDepartment) {
 			// 部门介绍
 			Intent intent = new Intent(this, DepartmentListActivity.class);

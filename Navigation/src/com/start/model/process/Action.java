@@ -10,6 +10,8 @@ public class Action {
 	
 	private ActionType type; 
 	
+	private String content;
+	
 	/**
 	 * 提示信息
 	 */
@@ -22,6 +24,16 @@ public class Action {
 	private String latitude;
 	
 	private String longitude;
+
+	
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public ActionType getType() {
 		return type;

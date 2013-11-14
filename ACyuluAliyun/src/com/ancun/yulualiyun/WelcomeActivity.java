@@ -19,7 +19,6 @@ import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.NetConnectManager;
-import com.yunos.seller.SellerAuthority;
 
 /**
  * 欢迎界面
