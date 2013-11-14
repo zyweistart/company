@@ -1,10 +1,7 @@
 package com.ancun.yulualiyun;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,12 +39,16 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 	
 	private TextView activity_myaccount_storageinfo;
 	private TextView activity_myaccount_baseinfo;
-	private TextView activity_myaccount_durationinfo;
+	private TextView activity_myaccount_info;
 	
 	private ListView activity_myaccount_pulllistview_rechargelist;
 	
 	private RechargeAdapter rechargeAdapter;
 	private List<Map<String,String>> rechargeList=new ArrayList<Map<String,String>>();
+	
+	private static final String NAME1="阿里云手机卖家版专享年度体验";
+	private static final String NAME2="阿里云手机用户专享月度体验服务";
+	
 	
 	 @Override
 	 public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,9 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 		//账户充值按钮
 		activity_myaccount_btn_RightTitle=(ImageButton)findViewById(R.id.common_title_btn_right);
 		activity_myaccount_btn_RightTitle.setOnClickListener(this);
+		
+		activity_myaccount_info=(TextView)findViewById(R.id.activity_myaccount_info);
+		activity_myaccount_info.setVisibility(View.GONE);
 		//基础包月套餐
 		activity_myaccount_baseinfo=(TextView)findViewById(R.id.activity_myaccount_baseinfo);
 		activity_myaccount_baseinfo.setText("通话录音存储空间：剩余0MB，已用0MB");
@@ -64,10 +68,6 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 		activity_myaccount_storageinfo=(TextView)findViewById(R.id.activity_myaccount_storageinfo);
 		activity_myaccount_storageinfo.setText("已赠送基础服务套餐0个月，剩余未赠送套餐0个月");
 		activity_myaccount_storageinfo.setVisibility(View.GONE);
-		//增值时长剩余
-		activity_myaccount_durationinfo=(TextView)findViewById(R.id.activity_myaccount_durationinfo);
-		activity_myaccount_durationinfo.setText("增值时长剩余：正在计算...");
-		activity_myaccount_durationinfo.setVisibility(View.GONE);
 		//充值套餐标签按钮
 		activity_myaccount_btn_rechargelist=(Button)findViewById(R.id.activity_myaccount_btn_rechargelist);
 		activity_myaccount_btn_rechargelist.setEnabled(false);
@@ -149,10 +149,14 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
-						//赠送用户
-						if("yunos01".equals(getAppContext().getUserInfo().get("prodid"))){
-							activity_myaccount_storageinfo.setVisibility(View.VISIBLE);
-						}
+//						//赠送用户
+//						if("yunos01".equals(getAppContext().getUserInfo().get("prodid"))){
+//							activity_myaccount_storageinfo.setVisibility(View.VISIBLE);
+//						}else{
+//							
+//						}
+						activity_myaccount_info.setText("当前账户："+getAppContext().getUserInfo().get("phone"));
+						activity_myaccount_info.setVisibility(View.VISIBLE);
 						getPackInfo();
 					}
 					
@@ -175,85 +179,105 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 					@Override
 					public void run() {
 						Map<String,String> entinfo=getAppContext().getUserInfoAll().get("entinfo");
-						DecimalFormat df=new DecimalFormat("#.##");
+						Map<String,String> data=new HashMap<String,String>();
+						//赠送用户
+						if("yunos01".equals(getAppContext().getUserInfo().get("prodid"))){
+							data.put("name", NAME1);
+						}else{
+							data.put("name", NAME2);
+						}
+						data.put("used", "1");
 						
+						DecimalFormat df=new DecimalFormat("#.##");
 						Float bquota=Float.parseFloat(getInfoContent().get("bquota"));
-						Float rtsize=Float.parseFloat(entinfo.get("rtsize"));
 						Float bq=(float)(bquota/1024/1024);
+						data.put("rectimelimit",df.format(bq)+"MB");
+						data.put("starttime", getAppContext().getUserInfo().get("signuptime"));
+						data.put("endtime",getInfoContent().get("comboendtime"));
+						rechargeList.clear();
+						rechargeList.add(data);
+						rechargeAdapter.notifyDataSetChanged();
+						
+//						Map<String,String> entinfo=getAppContext().getUserInfoAll().get("entinfo");
+//						DecimalFormat df=new DecimalFormat("#.##");
+//						
+//						Float bquota=Float.parseFloat(getInfoContent().get("bquota"));
+						Float rtsize=Float.parseFloat(entinfo.get("rtsize"));
+//						Float bq=(float)(bquota/1024/1024);
 						Float rt=(float)(rtsize/1024/1024);
 						String noUseV=df.format(bq-rt);
 						String UseV=df.format(rt);
 						activity_myaccount_baseinfo.setText("通话录音存储空间：剩余"+noUseV+"MB，已用"+UseV+"MB");
-					
-						try {
-							int totalDay=TimeUtils.getDaysBetween(getAppContext().getUserInfo().get("signuptime"), getInfoContent().get("comboendtime"));
-							
-//							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),"2019-10-10 10:10:10");
-							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),TimeUtils.getSysTimeS());
-							int noUseMonth=(totalDay+1)/31-useMonth;
-							if(noUseMonth<0){
-								useMonth=(totalDay+1)/31;
-							}
-							
-							activity_myaccount_storageinfo.setText("已赠送基础服务套餐"+useMonth+"个月，剩余未赠送套餐"+noUseMonth+"个月");
-							
-							SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-							Calendar a = Calendar.getInstance();
-							a.setTime(sdf2.parse(getAppContext().getUserInfo().get("signuptime")));
-							int endYear=a.get(Calendar.YEAR);
-							int endMonth=a.get(Calendar.MONTH)+1;
-							int endDay=a.get(Calendar.DAY_OF_MONTH);
-							
-							List<Map<String,String>> tmpData=new ArrayList<Map<String,String>>();
-							for(int i=1;i<=useMonth;i++){
-								Map<String,String> data=new HashMap<String,String>();
-								if(noUseMonth<0){
-									data.put("used", "0");
-								}else{
-									if(i==(useMonth)){
-										data.put("used", "1");
-									}else{
-										data.put("used", "0");
-									}
-								}
-//								data.put("rectimelimit", df.format(bq/12)+"MB");
-								data.put("rectimelimit","500MB");
-								
-								String mStrMonth=endMonth+"";
-								if(endMonth<10){
-									mStrMonth="0"+mStrMonth;
-								}
-								String mStrDay=endDay+"";
-								if(endDay<10){
-									mStrDay="0"+mStrDay;
-								}
-								data.put("starttime", endYear+"-"+mStrMonth+"-"+mStrDay);
-//								a.add(Calendar.MONTH, 1);
-								a.add(Calendar.DAY_OF_MONTH, 31);
-								endYear=a.get(Calendar.YEAR);
-								endMonth=a.get(Calendar.MONTH)+1;
-								endDay=a.get(Calendar.DAY_OF_MONTH);
-								
-								mStrMonth=endMonth+"";
-								if(endMonth<10){
-									mStrMonth="0"+mStrMonth;
-								}
-								int e=endDay-1;
-								mStrDay=e+"";
-								if(e<10){
-									mStrDay="0"+mStrDay;
-								}
-								data.put("endtime", endYear+"-"+mStrMonth+"-"+mStrDay);
-								tmpData.add(data);
-							}
-							rechargeList.clear();
-							for(int i=tmpData.size()-1;i>=0;i--){
-								rechargeList.add(tmpData.get(i));
-							}
-							rechargeAdapter.notifyDataSetChanged();
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
+//					
+//						try {
+//							int totalDay=TimeUtils.getDaysBetween(getAppContext().getUserInfo().get("signuptime"), getInfoContent().get("comboendtime"));
+//							
+////							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),"2019-10-10 10:10:10");
+//							int useMonth=TimeUtils.DiffMonth(getAppContext().getUserInfo().get("signuptime"),TimeUtils.getSysTimeS());
+//							int noUseMonth=(totalDay+1)/31-useMonth;
+//							if(noUseMonth<0){
+//								useMonth=(totalDay+1)/31;
+//							}
+//							
+//							activity_myaccount_storageinfo.setText("已赠送基础服务套餐"+useMonth+"个月，剩余未赠送套餐"+noUseMonth+"个月");
+//							
+//							SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//							Calendar a = Calendar.getInstance();
+//							a.setTime(sdf2.parse(getAppContext().getUserInfo().get("signuptime")));
+//							int endYear=a.get(Calendar.YEAR);
+//							int endMonth=a.get(Calendar.MONTH)+1;
+//							int endDay=a.get(Calendar.DAY_OF_MONTH);
+//							
+//							List<Map<String,String>> tmpData=new ArrayList<Map<String,String>>();
+//							for(int i=1;i<=useMonth;i++){
+//								Map<String,String> data=new HashMap<String,String>();
+//								if(noUseMonth<0){
+//									data.put("used", "0");
+//								}else{
+//									if(i==(useMonth)){
+//										data.put("used", "1");
+//									}else{
+//										data.put("used", "0");
+//									}
+//								}
+////								data.put("rectimelimit", df.format(bq/12)+"MB");
+//								data.put("rectimelimit","500MB");
+//								
+//								String mStrMonth=endMonth+"";
+//								if(endMonth<10){
+//									mStrMonth="0"+mStrMonth;
+//								}
+//								String mStrDay=endDay+"";
+//								if(endDay<10){
+//									mStrDay="0"+mStrDay;
+//								}
+//								data.put("starttime", endYear+"-"+mStrMonth+"-"+mStrDay);
+////								a.add(Calendar.MONTH, 1);
+//								a.add(Calendar.DAY_OF_MONTH, 31);
+//								endYear=a.get(Calendar.YEAR);
+//								endMonth=a.get(Calendar.MONTH)+1;
+//								endDay=a.get(Calendar.DAY_OF_MONTH);
+//								
+//								mStrMonth=endMonth+"";
+//								if(endMonth<10){
+//									mStrMonth="0"+mStrMonth;
+//								}
+//								int e=endDay-1;
+//								mStrDay=e+"";
+//								if(e<10){
+//									mStrDay="0"+mStrDay;
+//								}
+//								data.put("endtime", endYear+"-"+mStrMonth+"-"+mStrDay);
+//								tmpData.add(data);
+//							}
+//							rechargeList.clear();
+//							for(int i=tmpData.size()-1;i>=0;i--){
+//								rechargeList.add(tmpData.get(i));
+//							}
+//							rechargeAdapter.notifyDataSetChanged();
+//						} catch (ParseException e) {
+//							e.printStackTrace();
+//						}
 						
 					}
 				});
@@ -308,7 +332,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			}else{
 				holder.usedImg.setImageResource(R.drawable.myaccount_recharge_noused);
 			}
-			holder.name.setText("阿里云手机卖家版专享年度体验——基础服务周期赠送");
+			holder.name.setText(data.get("name"));
 			holder.frtime.setVisibility(View.VISIBLE);
 			holder.notime.setVisibility(View.GONE);
 			holder.remark.setText(data.get("rectimelimit"));

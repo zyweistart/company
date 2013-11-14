@@ -24,15 +24,14 @@ public class AliYunOSAPI {
 		return StringUtils.random();
 	}
 	
-	
-	
 	/**
-	 * 是否卖家机
+	 * SellerAuthority.SELLER_PHONE 卖家手机
+	 * SellerAuthority.NORMAL_PHONE 普通手机
+	 * SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE 网络不可用
 	 * @return
 	 */
-	public Boolean isMjPhone(){
-//		return SellerAuthority.SELLER_PHONE==mSellerAuthority.getSystemType();
-		return true;
+	public int getSystemType(){
+		return mSellerAuthority.getSystemType();
 	}
 	
 	/**

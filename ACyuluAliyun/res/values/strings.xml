@@ -102,7 +102,7 @@
 	<string name="recordedappealnotarylist_title">公证机构一览表</string>
 	
 	<!-- 我的账户套餐版 -->
-	<string name="activity_myaccount_btn_rechargelist">已有服务</string>
+	<string name="activity_myaccount_btn_rechargelist">当前服务</string>
 	<string name="activity_myaccount_btn_userecord">使用记录</string>
 	
     <!-- widget -->

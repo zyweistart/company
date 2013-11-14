@@ -19,6 +19,7 @@ import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.NetConnectManager;
+import com.yunos.seller.SellerAuthority;
 
 /**
  * 欢迎界面
@@ -127,7 +128,21 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		if(!SP_ALIYUN_INIT_SET){
 			if(NetConnectManager.isNetWorkAvailable(this)){
 				//是否满足卖家手机条件
-				if(!getAppContext().getYunOSAPI().isMjPhone()){
+				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
+					//网络不可用
+					AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
+					aDialog.
+					setIcon(android.R.drawable.ic_dialog_info).
+					setMessage("当前网络不可用，请稍候再试").
+					setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					}).show();
+					return;
+				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
+					//普通手机
 					if(getAppContext().getYunOSAPI().isAliYunPhone()){
 						
 						//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?

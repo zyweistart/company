@@ -13,16 +13,16 @@
 	       android:background="#e7e8ec"
 	       android:orientation="vertical">
 	       
-	       <TextView 
-	           android:id="@+id/activity_myaccount_baseinfo"
+	      <TextView 
+	           android:id="@+id/activity_myaccount_info"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:textSize="13.0dip"
 	           android:textColor="@color/black"
 	           android:layout_marginTop="@dimen/spacing_2"/>
-	       
+        
 	       <TextView 
-	           android:id="@+id/activity_myaccount_durationinfo"
+	           android:id="@+id/activity_myaccount_baseinfo"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:textSize="13.0dip"
