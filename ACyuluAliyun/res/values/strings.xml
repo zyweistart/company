@@ -58,7 +58,7 @@
     <string name="activity_setpasswordhint">输入密码</string>
     <string name="activity_resetpassword">再次输入</string>
     <string name="activity_resetpasswordhint">请再输入一次密码</string>
-    <string name="activity_register_done">恭喜您，成功开通</string>
+    <string name="activity_register_done">亲，恭喜您，成功开通</string>
     <!-- MainActivity -->
     <string name="activity_main_tab_keyboard">拔号盘</string>
     <string name="activity_main_tab_callrecords">通话记录</string>

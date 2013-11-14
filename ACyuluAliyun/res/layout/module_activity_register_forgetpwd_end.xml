@@ -34,7 +34,6 @@
         android:layout_marginTop="10.0dip"
         android:layout_marginLeft="18.0dip"
         android:layout_marginRight="18.0dip"
-        android:text="赠送给您的价值720元“阿里云手机卖家版专享年度免费服务”已经成功领取"
         android:textColor="#ff0000"
         android:textSize="18.0sp"
         android:visibility="gone"/>

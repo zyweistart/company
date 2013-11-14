@@ -46,7 +46,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 	private RechargeAdapter rechargeAdapter;
 	private List<Map<String,String>> rechargeList=new ArrayList<Map<String,String>>();
 	
-	private static final String NAME1="阿里云手机卖家版专享年度体验";
+	private static final String NAME1="阿里云手机卖家版专享年度免费服务";
 	private static final String NAME2="阿里云手机用户专享月度体验服务";
 	
 	

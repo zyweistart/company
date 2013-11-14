@@ -338,16 +338,17 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 									@Override
 									public void run() {
 										
+										appr_end_module_tipmsg.setText("赠送给您的价值60元 “安存语录-阿里云手机用户专享月度体验服务” 已同步开通，敬请体验。");
 										if(bundle!=null){
 											if(bundle.getBoolean(ACTIVATION_FLAG,false)){
 												//注册成功后如果为赠送注册则：1.通知OS服务端2.初始设置标记设为TRUE表示下次启动不再检测3.显示注册成功获赠文案
 												getAppContext().getYunOSAPI().notifyOSService();
 												//赠送激活成功初始设置标记
 												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-												appr_end_module_tipmsg.setVisibility(View.VISIBLE);
+												appr_end_module_tipmsg.setText("赠送给您的价值720元“安存语录-阿里云手机卖家版专享年度免费服务”已成功领取。");
 											}
 										}
-										
+										appr_end_module_tipmsg.setVisibility(View.VISIBLE);
 										getAppContext().buildAuth(getResponseContent());
 										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_ACCOUNT,g_Mobile);
 										try {

@@ -43,6 +43,16 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		imageView.setAnimation(alphaAnimation);
 		//为动画设置监听
 		alphaAnimation.setAnimationListener(this);
+		
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				SellerServiceHandler handler=new SellerServiceHandler(WelcomeActivity.this);
+//				Log.v(TAG,"getServiceList:"+handler.getServiceList());
+//			}
+//		}).start();
+		
  	}
 	
 	private void forward(){
@@ -128,31 +138,31 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		if(!SP_ALIYUN_INIT_SET){
 			if(NetConnectManager.isNetWorkAvailable(this)){
 				//是否满足卖家手机条件
-				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
-					//网络不可用
-					AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
-					aDialog.
-					setIcon(android.R.drawable.ic_dialog_info).
-					setMessage("当前网络不可用，请稍候再试").
-					setPositiveButton("确定", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							finish();
-						}
-					}).show();
-					return;
-				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
-					//普通手机
-					if(getAppContext().getYunOSAPI().isAliYunPhone()){
-						
-						//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
-						
-					}else{
-						//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-					}
-					forward();
-					return;
-				}
+//				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
+//					//网络不可用
+//					AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
+//					aDialog.
+//					setIcon(android.R.drawable.ic_dialog_info).
+//					setMessage("当前网络不可用，请稍候再试").
+//					setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							finish();
+//						}
+//					}).show();
+//					return;
+//				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
+//					//普通手机
+//					if(getAppContext().getYunOSAPI().isAliYunPhone()){
+//						
+//						//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
+//						
+//					}else{
+//						//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+//					}
+//					forward();
+//					return;
+//				}
 				//是否已经使用淘宝卖家账号登录
 				if(!getAppContext().getYunOSAPI().isSystemLogin()){
 					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
