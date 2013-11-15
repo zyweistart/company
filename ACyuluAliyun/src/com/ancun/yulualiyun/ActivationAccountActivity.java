@@ -58,6 +58,16 @@ public class ActivationAccountActivity extends CoreActivity{
 				startActivityForResult(intent,REQUEST_CODE_ACTIVATION);
 			}
 		});
+		ImageButton button3=(ImageButton)findViewById(R.id.btn_activation_register3);
+		button3.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				setResult(WelcomeActivity.RESULT_CODE_REGISTER);
+				finish();
+			}
+		});
 		
 	}
 	

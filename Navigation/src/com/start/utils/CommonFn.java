@@ -111,6 +111,7 @@ public class CommonFn {
 	public static AlertDialog alertsDialog(Context context, String message, DialogInterface.OnClickListener positiveButtonListener) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setMessage(message);
+		builder.setCancelable(false);
 		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
 		return builder.create();
 	}

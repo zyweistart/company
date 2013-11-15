@@ -6,16 +6,17 @@
     <switch id="急诊/门诊" title="急诊/门诊">
         <option id="急诊" next="预诊"/>
  		<option id="门诊" next="挂号"/>
+ 		<option id="就诊" next="挂号"/>
     </switch>
     
     <node id="预诊" title="预诊" next="挂号">
         <!-- <action type="openweb" message="注意安全哦" url="http://www.qq.com"/> -->
-        <action type="location" message="请挂妇科" content="0102;0.0007388;0.0012458"/>
+        <action type="location" message="请挂妇科" content="0101;0009"/>
         
     </node>
     
     <node id="挂号" title="挂号" next="结束">
-        <action type="dialog" message="请挂妇科"/>
+        <action type="dialog" message="不要忘记挂号了"/>
     </node>
     
     <end id="结束" title="结束"/>

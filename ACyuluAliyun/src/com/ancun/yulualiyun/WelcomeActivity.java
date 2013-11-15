@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -68,38 +67,40 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			if(FIRST_LOADAPP){
 				getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_FIRST_LOADAPP,false);
 				//如果为首次运行应用则进入引导页
-				new AlertDialog.Builder(this)
-				.setCancelable(false)
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setMessage("是否在桌面创建快捷方式")
-				.setPositiveButton("不，谢谢", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						dialog.dismiss();
-						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
-						finish();
-					}
-				}).setNegativeButton("创建", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-					    //为程序创建桌面快捷方式
-					    //同时需要在manifest中设置以下权限：
-					    //<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-						Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-						// 快捷方式的名称
-						shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
-						// 不允许重复创建
-						shortcut.putExtra("duplicate", false);
-						Intent respondIntent = new Intent(WelcomeActivity.this, WelcomeActivity.this.getClass());
-						respondIntent.setAction(WelcomeActivity.this.getPackageName() + "." + WelcomeActivity.this.getLocalClassName());
-						shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, respondIntent);
-						// 快捷方式的图标
-						ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(WelcomeActivity.this, R.drawable.ic_launcher);
-						shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
-						sendBroadcast(shortcut);
-						dialog.dismiss();
-						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
-						finish();
-					}
-				}).show();
+//				new AlertDialog.Builder(this)
+//				.setCancelable(false)
+//				.setIcon(android.R.drawable.ic_dialog_info)
+//				.setMessage("是否在桌面创建快捷方式")
+//				.setPositiveButton("不，谢谢", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int whichButton) {
+//						dialog.dismiss();
+//						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
+//						finish();
+//					}
+//				}).setNegativeButton("创建", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int whichButton) {
+//					    //为程序创建桌面快捷方式
+//					    //同时需要在manifest中设置以下权限：
+//					    //<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+//						Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+//						// 快捷方式的名称
+//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
+//						// 不允许重复创建
+//						shortcut.putExtra("duplicate", false);
+//						Intent respondIntent = new Intent(WelcomeActivity.this, WelcomeActivity.this.getClass());
+//						respondIntent.setAction(WelcomeActivity.this.getPackageName() + "." + WelcomeActivity.this.getLocalClassName());
+//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, respondIntent);
+//						// 快捷方式的图标
+//						ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(WelcomeActivity.this, R.drawable.ic_launcher);
+//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
+//						sendBroadcast(shortcut);
+//						dialog.dismiss();
+//						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
+//						finish();
+//					}
+//				}).show();
+				startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
+				finish();
 			}else{
 				Intent intent=new Intent(this,LoginActivity.class);
 				if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN, false)){
@@ -164,8 +165,23 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 //				}
 				//是否已经使用淘宝卖家账号登录
 				if(!getAppContext().getYunOSAPI().isSystemLogin()){
-					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-					forward();
+					new AlertDialog.Builder(this)
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.setMessage("如您是淘宝卖家，则您购买的服务套餐中有可能该应用的赠送服务，请使用淘宝卖家账号登陆云OS后登录安存语录以确认，以免影响您正常获赠相关服务。")
+					.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							//TODO:去设置卖家账号登录
+							Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+							startActivity(netIntent);
+							finish();
+						}
+					}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							forward();
+						}
+					}).show();
 					return;
 				}
 				//是否尚未激活服务
@@ -218,7 +234,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
 				aDialog.
 				setIcon(android.R.drawable.ic_dialog_info).
-				setTitle("提示！").
 				setMessage("当前无法连接到网络，是否立即进行设置？").
 				setPositiveButton("设置", new DialogInterface.OnClickListener() {
 					@Override

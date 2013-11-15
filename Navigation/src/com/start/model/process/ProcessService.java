@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import com.start.core.XMLException;
 import com.start.model.process.Action.ActionType;
@@ -33,11 +32,13 @@ import com.start.utils.CommonFn;
 
 public class ProcessService {
 	
-	private String TAG="ProcessService";
-
-	private String currentId;
+	private String currentJunctionId;
+	
+	private String nextJunctionId;
 	
 	private String startJunctionId;
+	
+	private String endJunctionId;
 	
 	private Map<String,Junction> junctions;
 	
@@ -45,9 +46,12 @@ public class ProcessService {
 	
 	private AppContext mAppContext;
 	
-	public ProcessService(Context context){
+	private ProcessListener processListener;
+	
+	public ProcessService(Context context,ProcessListener listener){
 		this.mContext=context;
 		this.mAppContext=AppContext.getInstance();
+		this.processListener=listener;
 		try {
 			InputStream in =context.getAssets().open("tmp1.xml");
 			buildProcessXML(in);
@@ -120,6 +124,7 @@ public class ProcessService {
 					id=nnM.getNamedItem("id").getNodeValue();
 					String title=nnM.getNamedItem("title").getNodeValue();
 					jun=new Junction(id,title,NodeType.END);
+					endJunctionId=id;
 				}
 				if("start".equals(nodeName)
 						||"node".equals(nodeName)
@@ -128,13 +133,11 @@ public class ProcessService {
 						Node actionNode=aoChildList.item(l);
 						if("action".equals(actionNode.getNodeName().toLowerCase())){
 							NamedNodeMap actionNNM=actionNode.getAttributes();
-							
 							Node node=actionNNM.getNamedItem("type");
 							if(node==null){
-								throw new XMLException("行为类型不能为空");
+								throw new XMLException("动作类型不能为空");
 							}
 							String type=node.getNodeValue().toLowerCase();
-							
 							Action action=new Action();
 							if("dialog".equals(type)){
 								node=actionNNM.getNamedItem("message");
@@ -148,15 +151,22 @@ public class ProcessService {
 								if(node!=null){
 									action.setMessage(node.getNodeValue());
 								}
-								String content=actionNNM.getNamedItem("content").getNodeValue();
-								action.setContent(content);
+								node=actionNNM.getNamedItem("content");
+								if(node==null){
+									throw new XMLException("位置动作内容不能为空");
+								}
+								action.setContent(node.getNodeValue());
 								action.setType(ActionType.LOCATION);
 							}else if("openweb".equals(type)){
 								node=actionNNM.getNamedItem("message");
 								if(node!=null){
 									action.setMessage(node.getNodeValue());
 								}
-								String url=actionNNM.getNamedItem("url").getNodeValue();
+								node=actionNNM.getNamedItem("url");
+								if(node==null){
+									throw new XMLException("打开浏览器动作url不能为空");
+								}
+								String url=node.getNodeValue();
 								action.setUrl(url);
 								action.setType(ActionType.OPENWEB);
 							}
@@ -177,16 +187,19 @@ public class ProcessService {
 	}
 	
 	public void init(){
-		currentId=startJunctionId;
+		currentJunctionId=startJunctionId;
+		nextJunctionId=currentJunctionId;
 	}
 	
-	public void next(){
-		Junction jun=junctions.get(currentId);
+	public void execute(){
+		if(!currentJunctionId.equals(nextJunctionId)){
+			currentJunctionId=nextJunctionId;
+		}
+		Junction jun=junctions.get(currentJunctionId);
 		if(jun!=null){
-			Log.v(TAG,"当前节点："+currentId);
 			if(jun.getNodeType()==NodeType.START){
 				
-				currentId=jun.getNextNodeId();
+				nextJunctionId=jun.getNextNodeId();
 			}else if(jun.getNodeType()==NodeType.SWITCH){
 				final Option o1=jun.getOptions().get(0);
 				final Option o2=jun.getOptions().get(1);
@@ -196,13 +209,17 @@ public class ProcessService {
 				.setPositiveButton(o1.getTitle(), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						
-						currentId=o1.getNextNodeId();
+						nextJunctionId=o1.getNextNodeId();
+						//选择分支直接执行下一步
+						execute();
 						dialog.dismiss();
 					}
-				}).setNegativeButton(o2.getTitle(), new DialogInterface.OnClickListener() {
+				}).setNeutralButton(o2.getTitle(), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						
-						currentId=o2.getNextNodeId();
+						nextJunctionId=o2.getNextNodeId();
+						//选择分支直接执行下一步
+						execute();
 						dialog.dismiss();
 					}
 				});
@@ -211,7 +228,9 @@ public class ProcessService {
 					ad.setNegativeButton(o3.getTitle(), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
 							
-							currentId=o3.getNextNodeId();
+							nextJunctionId=o3.getNextNodeId();
+							//选择分支直接执行下一步
+							execute();
 							dialog.dismiss();
 						}
 					});
@@ -219,16 +238,9 @@ public class ProcessService {
 				ad.show();
 			}else if(jun.getNodeType()==NodeType.EXEC){
 				
-				currentId=jun.getNextNodeId();
+				nextJunctionId=jun.getNextNodeId();
 			}else if(jun.getNodeType()==NodeType.END){
-				CommonFn.alertsDialog(this.mContext, "亲，当前流程结束了哦", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog,int which) {
-						dialog.dismiss();
-					}
-					
-				}).show();
+				
 			}
 			if(jun.getNodeType()!=NodeType.SWITCH&&jun.getAction()!=null){
 				Action action=jun.getAction();
@@ -248,13 +260,13 @@ public class ProcessService {
 
 							@Override
 							public void onClick(DialogInterface dialog,int which) {
-								mAppContext.makeTextLong("定义地图："+maps[0]+"经度："+maps[1]+"纬度："+maps[2]);
+								processListener.location(maps[0], maps[1]);
 								dialog.dismiss();
 							}
 							
 						}).show();
 					}else{
-						mAppContext.makeTextLong("定义地图："+maps[0]+"经度："+maps[1]+"纬度："+maps[2]);
+						processListener.location(maps[0], maps[1]);
 					}
 				}else if(action.getType()==ActionType.OPENWEB){
 					final Intent intent=new Intent();
@@ -275,9 +287,22 @@ public class ProcessService {
 					}
 				}
 			}
+			processListener.result(jun);
 		}else{
-			Log.v(TAG,"该节点不存在："+currentId);
+			mAppContext.makeTextLong("当前节点不存在，所在节点：'"+currentJunctionId+"'，流程定义文件有误!");
 		}
+	}
+
+	/**
+	 * 判断当前流程是否已经结束
+	 */
+	public Boolean isProcessEnd(){
+		return currentJunctionId.equals(endJunctionId);
+	}
+	
+	public interface ProcessListener{
+		void location(String mapId,String vertexId);
+		void result(Junction jun);
 	}
 	
 }

@@ -43,6 +43,7 @@ import com.start.model.DepartmentHasRoom;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
+import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.MyLocation;
@@ -52,7 +53,10 @@ import com.start.model.nav.PathSearchResult;
 import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
+import com.start.model.process.Junction;
 import com.start.model.process.ProcessService;
+import com.start.model.process.Junction.NodeType;
+import com.start.model.process.ProcessService.ProcessListener;
 import com.start.service.MapDataAdapter;
 import com.start.service.PathSearchTask;
 import com.start.service.PathSearchTask.PathSearchListener;
@@ -68,7 +72,7 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
  * 
  */
 public class MainActivity extends MapActivity implements OnTouchListener,
-		OnClickListener, OnTapMapClickListener, PathSearchListener {
+		OnClickListener, OnTapMapClickListener, PathSearchListener,ProcessListener {
 
 	private static final String BUNDLEDATA_DATA = "data";
 
@@ -101,7 +105,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private Button mModuleMainFrameIntroduction_btnHospital;
 	private Button mModuleMainFrameIntroduction_btnDepartment;
 	private Button mModuleMainFrameIntroduction_btnDoctor;
-
+	
+	private TextView mModuleMainFrameProcessTitle;
+	private Button mModuleMainFrameProcessNext;
+	
 	Map<String, ViewCollections> mMapViewCollections = new HashMap<String, ViewCollections>();
 
 	private GestureDetector mGestureDetector;
@@ -145,7 +152,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 		new LoadingMapContentDataByRoom().execute();
 		
-		process=new ProcessService(this);
+		process=new ProcessService(this,this);
 		process.init();
 	}
 
@@ -315,7 +322,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mGestureDetector = new GestureDetector(this, new OnTapMapListener(this));
 		
 		// process
-
+		mModuleMainFrameProcessTitle = (TextView) findViewById(R.id.module_main_frame_process_title);
+		mModuleMainFrameProcessNext = (Button) findViewById(R.id.module_main_frame_process_next);
+		mModuleMainFrameProcessNext.setOnClickListener(this);
+		
 		// friend
 
 	}
@@ -586,7 +596,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	public void onClick(View v) {
 		if (v.getId() == R.id.module_main_frame_introduction_btnHospital) {
 			// 医院介绍
-			process.next();
+			
 		} else if (v.getId() == R.id.module_main_frame_introduction_btnDepartment) {
 			// 部门介绍
 			Intent intent = new Intent(this, DepartmentListActivity.class);
@@ -595,21 +605,18 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			// 医生介绍
 			Intent intent = new Intent(this, DoctorListActivity.class);
 			startActivity(intent);
+		} else if (v.getId() == R.id.module_main_frame_process_next) {
+			mModuleMainFrameProcessNext.setText("下一步");
+			if(process.isProcessEnd()){
+				mModuleMainFrameProcessTitle.setText("准备开始");
+				process.init();
+			}else{
+				process.execute();
+			}
 		} else if (v.getId() == R.id.direction) {
 			POI r = (POI) v.getTag();
 
-			MyLocation myLocation = appContext.getMyLocation();
-
-			if (myLocation != null) {
-				PathSearchTask search = new PathSearchTask(this);
-				EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
-						myLocation.getGeoPoint());
-				EndPoint ep = new IndoorEndPoint(mCurrentMapData.getId(),
-						r.getGeoPoint(), r.getVertexId());
-				search.execute(sp, ep);
-			} else {
-				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
-			}
+			location(mCurrentMapData.getId(),r.getVertexId());
 
 		} else if (v.getId() == R.id.poiName) {
 			POI r = (POI) v.getTag();
@@ -817,6 +824,46 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			return listOverlay;
 		}
 
+	}
+
+	@Override
+	public void location(String mapId, String vertexId) {
+
+		if(mCurSel!=1){
+			setCurPoint(1);
+		}
+		
+		Vertex vertex=AppContext.getInstance().getVertexService().findById(vertexId);
+		if(vertex!=null){
+			
+			MyLocation myLocation = appContext.getMyLocation();
+
+			if (myLocation != null) {
+				PathSearchTask search = new PathSearchTask(this);
+				EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+						myLocation.getGeoPoint());
+				EndPoint ep = new IndoorEndPoint(mapId,
+						new GeoPoint(Double.parseDouble(vertex.getLatitude()), 
+								Double.parseDouble(vertex.getLongitude())), 
+								vertexId);
+				search.execute(sp, ep);
+			} else {
+				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
+			}
+		}
+		
+	}
+	
+	@Override
+	public void result(Junction jun) {
+		if(process.isProcessEnd()){
+			mModuleMainFrameProcessNext.setText("重新开始");
+		}else{
+			mModuleMainFrameProcessNext.setText("下一步");
+		}
+		if(jun.getNodeType()!=NodeType.SWITCH){
+			mModuleMainFrameProcessTitle.setText("当前流程的节点："+jun.getTitle());
+		}
 	}
 
 }
