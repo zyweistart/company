@@ -1,6 +1,5 @@
 package com.start.navigation;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -130,6 +129,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	 * 地图上房间的集合
 	 */
 	private Map<String, List<Room>> mRooms;
+	
+	private ProcessService process;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +144,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		this.initMainFrameView();
 
 		new LoadingMapContentDataByRoom().execute();
-
+		
+		process=new ProcessService(this);
+		process.init();
 	}
 
 	@Override
@@ -583,13 +586,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	public void onClick(View v) {
 		if (v.getId() == R.id.module_main_frame_introduction_btnHospital) {
 			// 医院介绍
-			ProcessService process=new ProcessService();
-			try {
-				InputStream in =this.getAssets().open("tmp1.xml");
-				process.buildProcessXML(in);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			process.next();
 		} else if (v.getId() == R.id.module_main_frame_introduction_btnDepartment) {
 			// 部门介绍
 			Intent intent = new Intent(this, DepartmentListActivity.class);

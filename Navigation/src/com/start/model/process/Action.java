@@ -10,30 +10,11 @@ public class Action {
 	
 	private ActionType type; 
 	
-	private String content;
-	
-	/**
-	 * 提示信息
-	 */
 	private String message;
 	
-	//打开浏览器必填
+	private String content;
+	
 	private String url;
-	
-	//定位必填
-	private String latitude;
-	
-	private String longitude;
-
-	
-	
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
 
 	public ActionType getType() {
 		return type;
@@ -51,6 +32,14 @@ public class Action {
 		this.message = message;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -58,21 +47,5 @@ public class Action {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
-
+	
 }

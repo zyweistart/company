@@ -22,7 +22,7 @@ public class Junction {
 	/**
 	 * 除了SWITCH其它节点都可存在
 	 */
-	private List<Action> actions;
+	private Action action;
 	
 	public Junction(String id,String title,NodeType nodeType){
 		this.id=id;
@@ -69,21 +69,24 @@ public class Junction {
 		if(NodeType.SWITCH!=getNodeType()){
 			throw new IllegalArgumentException("setOptions:"+getNodeType());
 		}
+		if(options==null||options.size()<2||options.size()>3){
+			throw new IllegalArgumentException("options size:2 or 3");
+		}
 		this.options = options;
 	}
 
-	public List<Action> getActions() {
+	public Action getAction() {
 		if(NodeType.SWITCH==getNodeType()){
 			throw new IllegalArgumentException("setActions:"+getNodeType());
 		}
-		return actions;
+		return action;
 	}
 
-	public void setActions(List<Action> actions) {
+	public void setAction(Action action) {
 		if(NodeType.SWITCH==getNodeType()){
 			throw new IllegalArgumentException("setActions:"+getNodeType());
 		}
-		this.actions = actions;
+		this.action = action;
 	}
 	
 }
