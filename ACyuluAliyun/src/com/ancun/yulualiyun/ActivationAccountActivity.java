@@ -1,5 +1,7 @@
 package com.ancun.yulualiyun;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -63,9 +65,21 @@ public class ActivationAccountActivity extends CoreActivity{
 			
 			@Override
 			public void onClick(View v) {
-				
-				setResult(WelcomeActivity.RESULT_CODE_REGISTER);
-				finish();
+				new AlertDialog.Builder(ActivationAccountActivity.this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setMessage("亲，当您下次需激活安存语录赠送服务时，可在使用淘宝卖家账号登录云OS后启动安存语录按照提示操作~")
+				.setPositiveButton("确定 ", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						setResult(WelcomeActivity.RESULT_CODE_REGISTER);
+						finish();
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				}).show();
 			}
 		});
 		

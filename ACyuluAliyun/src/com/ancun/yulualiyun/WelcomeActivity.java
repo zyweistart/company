@@ -167,7 +167,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				if(!getAppContext().getYunOSAPI().isSystemLogin()){
 					new AlertDialog.Builder(this)
 					.setIcon(android.R.drawable.ic_dialog_info)
-					.setMessage("如您是淘宝卖家，则您购买的服务套餐中有可能该应用的赠送服务，请使用淘宝卖家账号登陆云OS后登录安存语录以确认，以免影响您正常获赠相关服务。")
+					.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
 					.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

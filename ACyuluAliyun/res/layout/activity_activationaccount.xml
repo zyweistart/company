@@ -67,14 +67,28 @@
 	        android:layout_margin="5.0dip"
 	        android:textSize="@dimen/fontsize_h1"
 	        android:textColor="#9c9c9c"
-	        android:text="温馨提示：需手机本机号码与注册账户（手机号码）一致时才能体验完整的应用服务，激活注册前建议您确认本机号码是否为常用号码"/>
+	        android:text="温馨提示："/>
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5.0dip"
+	        android:textSize="@dimen/fontsize_h1"
+	        android:textColor="#9c9c9c"
+	        android:text="1.该赠送服务仅限首次注册并开通安存语录服务的手机新用户体验"/>
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5.0dip"
+	        android:textSize="@dimen/fontsize_h1"
+	        android:textColor="#9c9c9c"
+	        android:text="2.需手机本机号码与注册账户（手机号码）一致时才能体验完整的应用服务，激活注册前建议您确认本机号码是否为常用号码"/>
 	    <LinearLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:gravity="center_horizontal"
 	        android:layout_margin="25.0dip"
 	        android:layout_gravity="center_horizontal"
-	        android:orientation="horizontal">
+	        android:orientation="vertical">
 	        <ImageButton
 			     android:id="@+id/btn_activation_register2"
 		         android:layout_width="wrap_content"
