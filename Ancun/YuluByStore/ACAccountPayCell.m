@@ -5,7 +5,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 160, 30)];
+        _lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 25, 160, 30)];
         [_lblName setFont:[UIFont systemFontOfSize:15]];
         [_lblName setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
 //        [_lblName setText:@"基础套餐"];
@@ -14,7 +14,7 @@
         [_lblInfo setFont:[UIFont systemFontOfSize:15]];
         [_lblInfo setTextColor:[UIColor colorWithRed:(43/255.0) green:(144/255.0) blue:(209/255.0) alpha:1]];
 //        [_lblInfo setText:@"1分钟 2MB"];
-        [self addSubview:_lblInfo];
+//        [self addSubview:_lblInfo];
         
         if([@"ACAccountPayCell" isEqualToString:reuseIdentifier]) {
             UILabel *lblStart=[[UILabel alloc]initWithFrame:CGRectMake(195, 5, 35, 30)];

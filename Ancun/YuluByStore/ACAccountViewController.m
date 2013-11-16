@@ -47,9 +47,9 @@
         self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
         
         self.tableView=[[UITableView alloc]initWithFrame:
-                        CGRectMake(0, 113,
+                        CGRectMake(0, 93,
                                    self.view.frame.size.width,
-                                   self.view.frame.size.height-113)];
+                                   self.view.frame.size.height-93)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
@@ -62,12 +62,24 @@
         }
         [_refreshHeaderView refreshLastUpdatedDate];
         
+        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
+        [lbl1 setFont:[UIFont systemFontOfSize:15]];
+        [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+        [lbl1 setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
+        [self.view addSubview:lbl1];
+        
+//        UILabel *lbl2=[[UILabel alloc]initWithFrame:CGRectMake(8, 38, 300, 21)];
+//        [lbl2 setFont:[UIFont systemFontOfSize:15]];
+//        [lbl2 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+//        [lbl2 setText:[NSString stringWithFormat:@"到期时间：%@",[[[Config Instance]userInfo]objectForKey:@"comboendtime"]]];
+//        [self.view addSubview:lbl2];
+        
 //        _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
         _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
         [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
         [_lblTip1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip1 setText:@"基础服务套餐: 正在计算..."];
-        [self.view addSubview:_lblTip1];
+//        [self.view addSubview:_lblTip1];
         
         _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
         [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
@@ -80,19 +92,19 @@
         [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
         [_lblTip3 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip3 setText:@"当前可用容量: 正在计算..."];
-        [self.view addSubview:_lblTip3];
+//        [self.view addSubview:_lblTip3];
         
-        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 71, 159, 40)];
+        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 51, 159, 40)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
         [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_leftTopTab];
         
-        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 71, 160, 40)];
+        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 160, 40)];
         [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
         [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
         [self.view addSubview:_rightTopTab];
         
-        _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 107, 159, 4)];
+        _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 87, 159, 4)];
         [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
         [self.view addSubview:_lblSlid];
         
@@ -207,7 +219,7 @@
     [UIView beginAnimations:nil context:nil];//动画开始
     [UIView setAnimationDuration:0.3];
     
-    _lblSlid.frame = CGRectMake(0, 107, 159, 4);
+    _lblSlid.frame = CGRectMake(0, 87, 159, 4);
     
     [UIView commitAnimations];
 }
@@ -228,7 +240,7 @@
     [UIView beginAnimations:nil context:nil];//动画开始
     [UIView setAnimationDuration:0.3];
     
-    _lblSlid.frame = CGRectMake(160, 107, 160, 4);
+    _lblSlid.frame = CGRectMake(160, 87, 160, 4);
     
     [UIView commitAnimations];
 }
