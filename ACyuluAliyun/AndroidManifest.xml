@@ -5,6 +5,7 @@
     
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="17"/>
 
+    <uses-permission android:name="com.aliyun.permission.TYID_SERVICE"/>
     <!-- 允许应用程序使用网络进行数据交换 -->
     <uses-permission android:name="android.permission.INTERNET"/>
 	<!-- 允许程序访问Wi-Fi网络状态信息 -->

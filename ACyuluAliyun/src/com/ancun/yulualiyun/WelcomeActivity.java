@@ -18,6 +18,8 @@ import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.NetConnectManager;
+import com.yunos.boot.SellerServiceHandler;
+import com.yunos.seller.SellerAuthority;
 
 /**
  * 欢迎界面
@@ -42,15 +44,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		//为动画设置监听
 		alphaAnimation.setAnimationListener(this);
 		
-//		new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				SellerServiceHandler handler=new SellerServiceHandler(WelcomeActivity.this);
-//				Log.v(TAG,"getServiceList:"+handler.getServiceList());
-//			}
-//		}).start();
-		
  	}
 	
 	private void forward(){
@@ -66,39 +59,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			getAppContext().getSharedPreferencesUtils().putInteger(Constant.SharedPreferencesConstant.SP_CURRENTVERSIONCODE, curVersionCode);
 			if(FIRST_LOADAPP){
 				getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_FIRST_LOADAPP,false);
-				//如果为首次运行应用则进入引导页
-//				new AlertDialog.Builder(this)
-//				.setCancelable(false)
-//				.setIcon(android.R.drawable.ic_dialog_info)
-//				.setMessage("是否在桌面创建快捷方式")
-//				.setPositiveButton("不，谢谢", new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int whichButton) {
-//						dialog.dismiss();
-//						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
-//						finish();
-//					}
-//				}).setNegativeButton("创建", new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int whichButton) {
-//					    //为程序创建桌面快捷方式
-//					    //同时需要在manifest中设置以下权限：
-//					    //<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-//						Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-//						// 快捷方式的名称
-//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
-//						// 不允许重复创建
-//						shortcut.putExtra("duplicate", false);
-//						Intent respondIntent = new Intent(WelcomeActivity.this, WelcomeActivity.this.getClass());
-//						respondIntent.setAction(WelcomeActivity.this.getPackageName() + "." + WelcomeActivity.this.getLocalClassName());
-//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, respondIntent);
-//						// 快捷方式的图标
-//						ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(WelcomeActivity.this, R.drawable.ic_launcher);
-//						shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
-//						sendBroadcast(shortcut);
-//						dialog.dismiss();
-//						startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
-//						finish();
-//					}
-//				}).show();
 				startActivity(new Intent(WelcomeActivity.this,GuideActivity.class));
 				finish();
 			}else{
@@ -128,7 +88,14 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		verifity();
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+//				verifity();
+				forward();
+			}
+		}).start();
 	}
 	
 	public void verifity(){
@@ -138,112 +105,144 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		if(!SP_ALIYUN_INIT_SET){
 			if(NetConnectManager.isNetWorkAvailable(this)){
 				//是否满足卖家手机条件
-//				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
-//					//网络不可用
-//					AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
-//					aDialog.
-//					setIcon(android.R.drawable.ic_dialog_info).
-//					setMessage("当前网络不可用，请稍候再试").
-//					setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//						@Override
-//						public void onClick(DialogInterface dialog, int which) {
-//							finish();
-//						}
-//					}).show();
-//					return;
-//				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
-//					//普通手机
-//					if(getAppContext().getYunOSAPI().isAliYunPhone()){
-//						
-//						//TODO:引导用户进入正常自主注册开通流程，需确认的问题：默认开通账户类型？所赠体验服务?
-//						
-//					}else{
-//						//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
-//					}
-//					forward();
-//					return;
-//				}
+				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							//网络不可用
+							AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
+							aDialog.
+							setIcon(android.R.drawable.ic_dialog_info).
+							setMessage("当前网络不可用，请稍候再试").
+							setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									finish();
+								}
+							}).show();
+						}
+					});
+					return;
+				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
+					//普通手机
+					getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+					forward();
+					return;
+				}
 				//是否已经使用淘宝卖家账号登录
 				if(!getAppContext().getYunOSAPI().isSystemLogin()){
-					new AlertDialog.Builder(this)
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
-					.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
+					runOnUiThread(new Runnable() {
+						
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							//TODO:去设置卖家账号登录
-							Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
-							startActivity(netIntent);
-							finish();
+						public void run() {
+							new AlertDialog.Builder(WelcomeActivity.this)
+							.setIcon(android.R.drawable.ic_dialog_info)
+							.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
+							.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									//TODO:去设置卖家账号登录
+									Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+									startActivity(netIntent);
+									finish();
+								}
+							}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									forward();
+								}
+							}).show();
 						}
-					}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							forward();
-						}
-					}).show();
+					});
 					return;
 				}
-				//是否尚未激活服务
+				//判断是否尚未激活服务
 				if(!getAppContext().getYunOSAPI().isActivation()){
-					CommonFn.buildDialog(this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
-
-						@Override
-						public void onClick(DialogInterface dialog,int which) {
-							
-							//TODO:点击确认是否跳转至设置激活页面待定
-							
-							forward();
-							
-						}
+					runOnUiThread(new Runnable() {
 						
-					}).show();
+						@Override
+						public void run() {
+							CommonFn.buildDialog(WelcomeActivity.this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface dialog,int which) {
+									
+									//TODO:点击确认是否跳转至设置激活页面待定
+									
+									forward();
+									
+								}
+								
+							}).show();
+						}
+					});
 					return;
 				}
-				//有服务已赠送
-				if(getAppContext().getYunOSAPI().isServiceUse()){
-					CommonFn.buildDialog(this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							
-							//有服务已赠送则下次不再进行检测
-							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-							
-							forward();
-						}
+				
+				int status=getAppContext().getYunOSAPI().isValidServiceStatus();
+				if(status==SellerServiceHandler.RESULT_ACTIVE){
+					runOnUiThread(new Runnable() {
 						
-					}).show();
+						@Override
+						public void run() {
+							//已经赠送
+							CommonFn.buildDialog(WelcomeActivity.this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									
+									//有服务已赠送则下次不再进行检测
+									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+									
+									forward();
+								}
+								
+							}).show();
+						}
+					});
 					return;
-				}
-				//有服务且未赠送
-				if(getAppContext().getYunOSAPI().isValidService()){
+				}else if(status==SellerServiceHandler.RESULT_INACTIVE){
+					//未赠送
 					Intent intent=new Intent(this,ActivationAccountActivity.class);
 					startActivityForResult(intent,REQUEST_CODE_WELCOME);
 					return;
-				}else{
-					//下次不再进行检测
+				}else if(status==SellerServiceHandler.RESULT_EXPIRED||
+						status==SellerServiceHandler.RESULT_NO_SERVICE){
+					//服务不存在或已过期
 					getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-					//进入正常自主注册开通流程，赠送阿里云手机专享体验服务（电商单门版）一个月
+					forward();
+					return;
+				}else{
+					//或其它异常
 					forward();
 					return;
 				}
 			}else{
-				//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
-				AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
-				aDialog.
-				setIcon(android.R.drawable.ic_dialog_info).
-				setMessage("当前无法连接到网络，是否立即进行设置？").
-				setPositiveButton("设置", new DialogInterface.OnClickListener() {
+				runOnUiThread(new Runnable() {
+					
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
-						startActivity(netIntent);
-						finish();
+					public void run() {
+						//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
+						AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
+						aDialog.
+						setIcon(android.R.drawable.ic_dialog_info).
+						setMessage("当前无法连接到网络，是否立即进行设置？").
+						setPositiveButton("设置", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+								startActivity(netIntent);
+								finish();
+							}
+						}).show();
 					}
-				}).show();
+				});
 			}
+		}else{
+			forward();
+			return;
 		}
 	}
 	

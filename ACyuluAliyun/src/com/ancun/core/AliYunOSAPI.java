@@ -6,14 +6,17 @@ import com.yunos.seller.SellerAuthority;
 
 public class AliYunOSAPI {
 
-	@SuppressWarnings("unused")
-	private AppContext mContext;
+	private static final String APPNAME="com.ancun.yulualiyun";
+	
+	private AppContext mAppContext;
 	
 	private SellerAuthority mSellerAuthority;
+//	private SellerServiceHandler mSellerServiceHandler;
 	
 	public AliYunOSAPI(AppContext context){
-		this.mContext=context;
+		this.mAppContext=context;
 		this.mSellerAuthority = new SellerAuthority(context);
+//		this.mSellerServiceHandler = new SellerServiceHandler(context);
 	}
 	
 	/**
@@ -46,6 +49,7 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public Boolean isSystemLogin(){
+//		return mSellerServiceHandler.isSellerAcccountLogin();
 		return true;
 	}
 	
@@ -53,29 +57,34 @@ public class AliYunOSAPI {
 	 * 登录帐号对应的激活码是否已激活
 	 */
 	public Boolean isActivation(){
+		//TODO:登录帐号对应的激活码是否已激活
 		return true;
 	}
 	
 	/**
-	 * 登录帐号对应的激活码和应用服务是否有效[有该服务且还未赠送]
+	 * 验证当前服务的状态
 	 */
-	public Boolean isValidService(){
-		return true;
+	public int isValidServiceStatus(){
+//		Bundle bundle = mSellerServiceHandler.queryPartnerServiceStatus(APPNAME);
+//		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
+//			return bundle.getInt(SellerServiceHandler.KEY_RESULT);
+//		}
+//		return -1;
+		return 2;
 	}
 	
 	/**
 	 * 赠送成功后通知云OS
 	 */
 	public void notifyOSService(){
-		
-	}
-	
-	/**
-	 * TODO：该服务是否已经赠送使用（待定）
-	 * @return
-	 */
-	public Boolean isServiceUse(){
-		return false;
+//		Bundle bundle = mSellerServiceHandler.activePartnerService(APPNAME);
+//		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
+//		    if(SellerServiceHandler.RESULT_ACTIVE==
+//		    		bundle.getInt(SellerServiceHandler.KEY_RESULT)){
+//			    	//赠送激活成功初始设置标记
+//			    	mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+//		    }
+//		}
 	}
 	
 }
