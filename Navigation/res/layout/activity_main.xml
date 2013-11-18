@@ -6,40 +6,6 @@
     android:background="@color/white">
     
 	<include layout="@layout/module_main_header" />
-	<LinearLayout
-        android:id="@+id/query_container"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/search_bar_bg"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/query"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/search_bar_edit_bg"
-            android:drawableLeft="@drawable/search_bar_icon_normal"
-            android:hint="请输入部门或医院ID"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:singleLine="true"
-            android:textColor="#000" />
-
-        <Button
-            android:id="@+id/button_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:background="@drawable/btn_style_eight"
-            android:text="@string/cancel"
-            android:textColor="@android:color/white"
-            android:visibility="gone" />
-    </LinearLayout>
     
 	<LinearLayout 
 	    android:id="@+id/main_content_layout"

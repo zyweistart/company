@@ -92,14 +92,13 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			
 			@Override
 			public void run() {
-//				verifity();
-				forward();
+				verifity();
 			}
 		}).start();
 	}
 	
 	public void verifity(){
-		//TODO:发布时删除该条件语句
+		//TODO:发布时删除该语句
 		boolean SP_ALIYUN_INIT_SET=false;
 //		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
@@ -142,8 +141,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 							.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									//TODO:去设置卖家账号登录
-									Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+									Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
 									startActivity(netIntent);
 									finish();
 								}

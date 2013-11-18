@@ -150,7 +150,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		this.initFooterView();
 		this.initMainFrameView();
 
-		new LoadingMapContentDataByRoom().execute();
+//		new LoadingMapContentDataByRoom().execute();
 		
 		process=new ProcessService(this,this);
 		process.init();

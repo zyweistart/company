@@ -1,7 +1,10 @@
 package com.ancun.core;
 
+import android.os.Bundle;
+
 import com.ancun.utils.StringUtils;
 import com.ancun.yulualiyun.AppContext;
+import com.yunos.boot.SellerServiceHandler;
 import com.yunos.seller.SellerAuthority;
 
 public class AliYunOSAPI {
@@ -11,12 +14,12 @@ public class AliYunOSAPI {
 	private AppContext mAppContext;
 	
 	private SellerAuthority mSellerAuthority;
-//	private SellerServiceHandler mSellerServiceHandler;
+	private SellerServiceHandler mSellerServiceHandler;
 	
 	public AliYunOSAPI(AppContext context){
 		this.mAppContext=context;
 		this.mSellerAuthority = new SellerAuthority(context);
-//		this.mSellerServiceHandler = new SellerServiceHandler(context);
+		this.mSellerServiceHandler = new SellerServiceHandler(context);
 	}
 	
 	/**
@@ -25,6 +28,18 @@ public class AliYunOSAPI {
 	 */
 	public String getUUID(){
 		return StringUtils.random();
+	}
+	
+	/**
+	 * 卖家账号
+	 * @return
+	 */
+	public String sellerAccount(){
+		if(isSystemLogin()){
+			return "";
+		}else{
+			return "";
+		}
 	}
 	
 	/**
@@ -49,8 +64,7 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public Boolean isSystemLogin(){
-//		return mSellerServiceHandler.isSellerAcccountLogin();
-		return true;
+		return mSellerServiceHandler.isSellerAcccountLogin();
 	}
 	
 	/**
@@ -65,26 +79,25 @@ public class AliYunOSAPI {
 	 * 验证当前服务的状态
 	 */
 	public int isValidServiceStatus(){
-//		Bundle bundle = mSellerServiceHandler.queryPartnerServiceStatus(APPNAME);
-//		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
-//			return bundle.getInt(SellerServiceHandler.KEY_RESULT);
-//		}
-//		return -1;
-		return 2;
+		Bundle bundle = mSellerServiceHandler.queryPartnerServiceStatus(APPNAME);
+		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
+			return bundle.getInt(SellerServiceHandler.KEY_RESULT);
+		}
+		return -1;
 	}
 	
 	/**
 	 * 赠送成功后通知云OS
 	 */
 	public void notifyOSService(){
-//		Bundle bundle = mSellerServiceHandler.activePartnerService(APPNAME);
-//		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
-//		    if(SellerServiceHandler.RESULT_ACTIVE==
-//		    		bundle.getInt(SellerServiceHandler.KEY_RESULT)){
-//			    	//赠送激活成功初始设置标记
-//			    	mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-//		    }
-//		}
+		Bundle bundle = mSellerServiceHandler.activePartnerService(APPNAME);
+		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
+		    if(SellerServiceHandler.RESULT_ACTIVE==
+		    		bundle.getInt(SellerServiceHandler.KEY_RESULT)){
+			    	//赠送激活成功初始设置标记
+			    	mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+		    }
+		}
 	}
 	
 }
