@@ -98,10 +98,7 @@
 	</tbody>
 </table>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">备注：</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
-</p>
-<p style="margin-left:21pt;text-indent:-21pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:Wingdings;background-color:transparent;"><span style="color:#000000;">l</span><span style="font-size:7pt;line-height:normal;font-family:'Times New Roman';"></span></span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">需手机本机号码与注册账户（手机号码）一致方能体验完整的应用服务；</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">备注：需手机本机号码与注册账户（手机号码）一致方能体验完整的应用服务；</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">3.2套餐使用有效期</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
@@ -125,19 +122,19 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【下载并注册】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 用户通过安存录音官网（</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">www.95105856.com</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">）或</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">App Store</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">下载安存录音</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，注册并登录账号。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 用户通过安存语录官网（</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">www.95105856.com</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">）或</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">App Store</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">下载安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，注册并登录账号。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【账户充值】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">进入安存录音</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，进入“我的账户”“充值”，选择套餐进行充值购买。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">进入安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，进入“我的账户”“充值”，选择套餐进行充值购买。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【通话录音】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">使用安存录音</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">拨号盘，直接拨打对方电话即可录音；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">使用安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">拨号盘，直接拨打对方电话即可录音；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">使用手机系统拨号盘拨打电话进行通话录音。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
@@ -155,7 +152,7 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【录音收听】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 进入安存录音</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">或官网，查看、收听、下载已保全的通话录音。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 进入安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">或官网，查看、收听、下载已保全的通话录音。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【申请提取码】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
@@ -176,7 +173,7 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【拨号界面】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">录音通话：输入对方号码点击通话按钮，即可使用安存录音进行通话并录音；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">录音通话：输入对方号码点击通话按钮，即可使用安存语录进行通话并录音；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">添加联系人：输入联系人号码，点击右下角</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">"+"</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">可添加号码为新联系人。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
@@ -185,7 +182,7 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【通讯录】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">同步通讯录：安装安存录音</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">后，可同步手机系统通讯录；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">同步通讯录：安装安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">后，可同步手机系统通讯录；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">查找：可通过联系人姓名或拼音首字母查找联系人；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>

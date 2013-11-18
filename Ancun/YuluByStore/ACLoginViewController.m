@@ -102,11 +102,20 @@
     [btnLogin addTarget:self action:@selector(onClickLogin:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnLogin];
     //注册按钮
-    UIButton *btnRegister=[[UIButton alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?450:400, 295, 32)];
+    UIButton *btnRegister=[[UIButton alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?420:370, 295, 32)];
     btnRegister.titleLabel.font=[UIFont systemFontOfSize: 17.0];
     [btnRegister setTitle:@"还没有账户，马上去注册>>" forState:UIControlStateNormal];
     [btnRegister addTarget:self action:@selector(onClickRegister:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnRegister];
+    
+    UILabel *lblTipTxt=[[UILabel alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?450:400, 295, 64)];
+    lblTipTxt.font=[UIFont systemFontOfSize:12.0];
+    [lblTipTxt setNumberOfLines:0];
+    [lblTipTxt setText:@"请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全."];
+    [lblTipTxt setTextColor:[UIColor whiteColor]];
+    [lblTipTxt setBackgroundColor:[UIColor clearColor]];
+    [control addSubview:lblTipTxt];
+    
     //触摸屏幕事件
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     

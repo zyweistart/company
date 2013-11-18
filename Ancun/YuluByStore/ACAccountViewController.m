@@ -387,9 +387,9 @@
                 [cell.lblInfo setText:[NSString stringWithFormat:@"%dMB",auciquotalimit/1024/1024]];
             } else if (ctype==3||ctype==0){
                 if(ctype==3){
-                    [cell.lblName setText:@"基础服务"];
+                    [cell.lblName setText:@"基础月度服务套餐"];
                 }else{
-                    [cell.lblName setText:@"试用套餐"];
+                    [cell.lblName setText:@"新手10分钟免费体验"];
                 }
                 int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
                 [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟 %dMB",rectimelimit/60,auciquotalimit/1024/1024]];

@@ -18,7 +18,7 @@
         [_lblName setText:@"基础套餐"];
         [self addSubview:_lblName];
         
-        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 30)];
+        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 50)];
         [_lblDescription setFont:[UIFont systemFontOfSize:13]];
         [_lblDescription setTextAlignment:NSTextAlignmentLeft];
         [_lblDescription setNumberOfLines:0];
@@ -28,7 +28,7 @@
         [self addSubview:_lblDescription];
         
         UIButton *_btnGoPay=[UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnGoPay setFrame:CGRectMake(250, 10, 60, 40)];
+        [_btnGoPay setFrame:CGRectMake(250, 25, 60, 40)];
         [_btnGoPay setTitle:@"购买" forState:UIControlStateNormal];
         _btnGoPay.layer.cornerRadius=5;
         _btnGoPay.layer.masksToBounds=YES;
