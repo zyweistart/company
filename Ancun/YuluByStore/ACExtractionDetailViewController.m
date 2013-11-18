@@ -105,7 +105,7 @@
             //收接者的号码
             picker.recipients = nil;
             //短信内容
-            picker.body = [NSString stringWithFormat:@"您申请的录音提取码为：%@，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】",[_lbl_accendcode text]];
+            picker.body = [NSString stringWithFormat:@"您申请的录音提取码为：http://www.95105856.com/%@，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】",[_lbl_accendcode text]];
             [self presentViewController:picker animated:YES completion:nil];
         } else {
             [Common alert:@"设备没有短信功能"];
