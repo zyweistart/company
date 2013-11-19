@@ -92,7 +92,8 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			
 			@Override
 			public void run() {
-				verifity();
+				forward();
+//				verifity();
 			}
 		}).start();
 	}

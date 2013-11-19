@@ -924,6 +924,8 @@ public final class R {
         public static final int recordedappealnotarysuccess_title=0x7f080054;
         public static final int recordedremark_title=0x7f080050;
         public static final int regextractioncode_title=0x7f080053;
+        public static final int register_success_tipmsg1=0x7f08005c;
+        public static final int register_success_tipmsg2=0x7f08005d;
         public static final int register_title=0x7f080051;
         public static final int serverclause_title=0x7f08004f;
         public static final int setting_title=0x7f08004a;

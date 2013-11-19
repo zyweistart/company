@@ -17,24 +17,31 @@ import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.start.core.AppConfig;
@@ -54,8 +61,8 @@ import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.model.process.Junction;
-import com.start.model.process.ProcessService;
 import com.start.model.process.Junction.NodeType;
+import com.start.model.process.ProcessService;
 import com.start.model.process.ProcessService.ProcessListener;
 import com.start.service.MapDataAdapter;
 import com.start.service.PathSearchTask;
@@ -72,7 +79,7 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
  * 
  */
 public class MainActivity extends MapActivity implements OnTouchListener,
-		OnClickListener, OnTapMapClickListener, PathSearchListener,ProcessListener {
+		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener {
 
 	private static final String BUNDLEDATA_DATA = "data";
 
@@ -139,6 +146,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	
 	private ProcessService process;
 
+	private EditText mapQuery;
+	private Button mapButtonCancel;
+	private LinearLayout mapLLQueryContentContainer;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -150,7 +161,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		this.initFooterView();
 		this.initMainFrameView();
 
-//		new LoadingMapContentDataByRoom().execute();
+		new LoadingMapContentDataByRoom().execute();
 		
 		process=new ProcessService(this,this);
 		process.init();
@@ -285,6 +296,24 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 		mMainContentLayout = (LinearLayout) findViewById(R.id.main_content_layout);
 		mModuleMainFrameMapContent = (View) findViewById(R.id.module_main_frame_map_content);
+		
+
+		mapQuery=(EditText)findViewById(R.id.module_main_frame_map_query);
+		mapQuery.setOnFocusChangeListener(this);
+		mapQuery.setOnEditorActionListener(this);
+		mapButtonCancel=(Button)findViewById(R.id.module_main_frame_map_button_cancel);
+		mapButtonCancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mapQuery.setText(R.string.empty);
+				mapLLQueryContentContainer.setVisibility(View.GONE);
+				appContext.makeTextLong("点击了取消");
+			}
+		});
+		mapLLQueryContentContainer=(LinearLayout)findViewById(R.id.module_main_frame_map_query_content_container);
+		
+		
 		mModuleMainFrameIntroductionContent = (View) findViewById(R.id.module_main_frame_introduction_content);
 		mModuleMainFrameProcessContent = (View) findViewById(R.id.module_main_frame_process_content);
 		mModuleMainFrameFriendContent = (View) findViewById(R.id.module_main_frame_friend_content);
@@ -864,6 +893,24 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		if(jun.getNodeType()!=NodeType.SWITCH){
 			mModuleMainFrameProcessTitle.setText("当前流程的节点："+jun.getTitle());
 		}
+	}
+
+	@Override
+	public void onFocusChange(View v, boolean hasFocus) {
+		if(hasFocus){
+			mapButtonCancel.setVisibility(View.VISIBLE);
+			mapLLQueryContentContainer.setVisibility(View.VISIBLE);
+		}
+	}
+
+	@Override
+	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		if(actionId == EditorInfo.IME_ACTION_SEARCH){
+			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
+			
+			return true;
+		}
+		return false;
 	}
 
 }

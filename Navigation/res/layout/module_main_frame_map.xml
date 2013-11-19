@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/query_container"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/search_bar_bg"
@@ -15,7 +14,7 @@
         android:orientation="horizontal" >
 
         <EditText
-            android:id="@+id/query"
+            android:id="@+id/module_main_frame_map_query"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
@@ -29,7 +28,7 @@
             android:textColor="#000" />
 
         <Button
-            android:id="@+id/button_cancel"
+            android:id="@+id/module_main_frame_map_button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -61,17 +60,18 @@
 	        android:choiceMode="singleChoice"/>
 	
 	     <LinearLayout
-	         android:id="@+id/query_content_container"
+	         android:id="@+id/module_main_frame_map_query_content_container"
 	         android:layout_width="match_parent"
 	         android:layout_height="match_parent"
-	         android:orientation="vertical">
+	         android:orientation="vertical"
+	         android:visibility="gone">
 	
 	         <LinearLayout
 	             android:layout_width="match_parent"
 	             android:layout_height="wrap_content"
-	             android:background="@drawable/tabs_bar_bg"
 	             android:gravity="center_vertical"
-	             android:orientation="horizontal" >
+	             android:orientation="horizontal"
+	             android:background="@drawable/tabs_bar_bg" >
 	
 	             <TextView
 	                 android:id="@+id/query_tab_department"
@@ -120,7 +120,7 @@
 	         </LinearLayout>
 	
 	         <ListView
-	             android:id="@+id/query_list"
+	             android:id="@+id/module_main_frame_map_query_list"
 	             android:layout_width="match_parent"
 	             android:layout_height="match_parent"
 	             android:background="@android:color/white"/>

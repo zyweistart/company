@@ -110,6 +110,9 @@
     <string name="pull_to_refresh_release_label">松开后刷新</string>
     <string name="pull_to_refresh_refreshing_label">刷新\u2026</string>
     
+    <string name="register_success_tipmsg1">赠送给您的价值60元 “安存语录-阿里云手机用户专享月度体验服务” 已同步开通，敬请体验。</string>
+    <string name="register_success_tipmsg2">赠送给您的价值1200元“安存语录-阿里云手机卖家版专享年度免费服务”已成功领取。</string>
+    
     <string-array name="activity_accountrecharge_duration_spi5_data">
         <item>1</item>
         <item>2</item>
