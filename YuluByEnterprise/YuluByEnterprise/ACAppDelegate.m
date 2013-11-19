@@ -64,8 +64,8 @@
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
-    //获取当前使用的版本号
-    NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleVersion"];
+    //获取当前使用的版本号Version
+    NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleShortVersionString"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if([currentVersionNo floatValue]>lastVersionNo){
         //新安装或升级则使用引导页

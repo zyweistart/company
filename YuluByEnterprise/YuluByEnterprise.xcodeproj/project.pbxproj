@@ -2012,6 +2012,7 @@
 				C9B218D4183B58700058788D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
