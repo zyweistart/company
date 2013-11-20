@@ -88,9 +88,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		//TODO:发布时删除该语句
-		boolean SP_ALIYUN_INIT_SET=false;
-//		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
+		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
 			new Thread(new Runnable() {
 				
@@ -216,6 +214,8 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 								return;
 							}
 						}else{
+							//系统异常：500，未登陆：-101
+							//淘宝账户异常：601，卖家账户等级过低：602
 							forward();
 							return;
 						}

@@ -12,7 +12,7 @@ public final class Constant {
 	 * true:测试环境
 	 * false:正式环境
 	 */
-	public static final boolean SYSTEMTEST=true;
+	public static final boolean SYSTEMTEST=false;
 	
 	public static final String TESTSERVERNO="057156559570";
 
