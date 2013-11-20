@@ -92,8 +92,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			
 			@Override
 			public void run() {
-				forward();
-//				verifity();
+				verifity();
 			}
 		}).start();
 	}
@@ -166,8 +165,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 								@Override
 								public void onClick(DialogInterface dialog,int which) {
-									
-									//TODO:点击确认是否跳转至设置激活页面待定
 									
 									forward();
 									
