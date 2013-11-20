@@ -111,7 +111,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 						public void run() {
 							//网络不可用
 							AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
-							aDialog.
+							aDialog.setCancelable(false).
 							setIcon(android.R.drawable.ic_dialog_info).
 							setMessage("当前网络不可用，请稍候再试").
 							setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -137,6 +137,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 						public void run() {
 							new AlertDialog.Builder(WelcomeActivity.this)
 							.setIcon(android.R.drawable.ic_dialog_info)
+							.setCancelable(false)
 							.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
 							.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
 								@Override
@@ -222,7 +223,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 					public void run() {
 						//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
 						AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
-						aDialog.
+						aDialog.setCancelable(false).
 						setIcon(android.R.drawable.ic_dialog_info).
 						setMessage("当前无法连接到网络，是否立即进行设置？").
 						setPositiveButton("设置", new DialogInterface.OnClickListener() {

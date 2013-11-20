@@ -307,8 +307,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			@Override
 			public void onClick(View v) {
 				mapQuery.setText(R.string.empty);
+				mModuleMainFrameMapContent.requestFocus();
+				mapButtonCancel.setVisibility(View.GONE);
 				mapLLQueryContentContainer.setVisibility(View.GONE);
-				appContext.makeTextLong("点击了取消");
+				((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			}
 		});
 		mapLLQueryContentContainer=(LinearLayout)findViewById(R.id.module_main_frame_map_query_content_container);
