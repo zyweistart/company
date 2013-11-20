@@ -216,7 +216,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 								return;
 							}
 						}else{
-							makeTextLong("错误返回代码："+keyCoe);
 							forward();
 							return;
 						}
