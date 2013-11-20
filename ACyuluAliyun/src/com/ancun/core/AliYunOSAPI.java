@@ -1,8 +1,9 @@
 package com.ancun.core;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 
-import com.ancun.utils.StringUtils;
 import com.ancun.yulualiyun.AppContext;
 import com.yunos.boot.SellerServiceHandler;
 import com.yunos.seller.SellerAuthority;
@@ -27,19 +28,8 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public String getUUID(){
-		return StringUtils.random();
-	}
-	
-	/**
-	 * 卖家账号
-	 * @return
-	 */
-	public String sellerAccount(){
-		if(isSystemLogin()){
-			return "";
-		}else{
-			return "";
-		}
+		TelephonyManager tm = (TelephonyManager)mAppContext.getSystemService(Context.TELEPHONY_SERVICE); 
+		return tm.getDeviceId();
 	}
 	
 	/**
@@ -50,13 +40,6 @@ public class AliYunOSAPI {
 	 */
 	public int getSystemType(){
 		return mSellerAuthority.getSystemType();
-	}
-	
-	/**
-	 * 判断是否为阿里云手机
-	 */
-	public Boolean isAliYunPhone(){
-		return true;
 	}
 	
 	/**
