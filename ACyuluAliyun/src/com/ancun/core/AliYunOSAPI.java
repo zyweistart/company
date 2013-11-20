@@ -78,12 +78,8 @@ public class AliYunOSAPI {
 	/**
 	 * 验证当前服务的状态
 	 */
-	public int isValidServiceStatus(){
-		Bundle bundle = mSellerServiceHandler.queryPartnerServiceStatus(APPNAME);
-		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
-			return bundle.getInt(SellerServiceHandler.KEY_RESULT);
-		}
-		return -1;
+	public Bundle isValidServiceStatus(){
+		return mSellerServiceHandler.queryPartnerServiceStatus(APPNAME);
 	}
 	
 	/**

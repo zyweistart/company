@@ -88,158 +88,163 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				verifity();
-			}
-		}).start();
-	}
-	
-	public void verifity(){
 		//TODO:发布时删除该语句
 		boolean SP_ALIYUN_INIT_SET=false;
 //		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
-			if(NetConnectManager.isNetWorkAvailable(this)){
-				//是否满足卖家手机条件
-				if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
-					runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							//网络不可用
-							AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
-							aDialog.setCancelable(false).
-							setIcon(android.R.drawable.ic_dialog_info).
-							setMessage("当前网络不可用，请稍候再试").
-							setPositiveButton("确定", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									finish();
-								}
-							}).show();
-						}
-					});
-					return;
-				}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
-					//普通手机
-					getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-					forward();
-					return;
-				}
-				//是否已经使用淘宝卖家账号登录
-				if(!getAppContext().getYunOSAPI().isSystemLogin()){
-					runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							new AlertDialog.Builder(WelcomeActivity.this)
-							.setIcon(android.R.drawable.ic_dialog_info)
-							.setCancelable(false)
-							.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
-							.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
-									startActivity(netIntent);
-									finish();
-								}
-							}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									forward();
-								}
-							}).show();
-						}
-					});
-					return;
-				}
-				//判断是否尚未激活服务
-				if(!getAppContext().getYunOSAPI().isActivation()){
-					runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							CommonFn.buildDialog(WelcomeActivity.this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
-
-								@Override
-								public void onClick(DialogInterface dialog,int which) {
-									
-									forward();
-									
-								}
-								
-							}).show();
-						}
-					});
-					return;
-				}
+			new Thread(new Runnable() {
 				
-				int status=getAppContext().getYunOSAPI().isValidServiceStatus();
-				if(status==SellerServiceHandler.RESULT_ACTIVE){
-					runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							//已经赠送
-							CommonFn.buildDialog(WelcomeActivity.this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									
-									//有服务已赠送则下次不再进行检测
-									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-									
-									forward();
-								}
+				@Override
+				public void run() {
+					if(NetConnectManager.isNetWorkAvailable(WelcomeActivity.this)){
+						//是否满足卖家手机条件
+						if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
+							runOnUiThread(new Runnable() {
 								
-							}).show();
+								@Override
+								public void run() {
+									//网络不可用
+									AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
+									aDialog.setCancelable(false).
+									setIcon(android.R.drawable.ic_dialog_info).
+									setMessage("当前网络不可用，请稍候再试").
+									setPositiveButton("确定", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											finish();
+										}
+									}).show();
+								}
+							});
+							return;
+						}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
+							//普通手机
+							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+							forward();
+							return;
 						}
-					});
-					return;
-				}else if(status==SellerServiceHandler.RESULT_INACTIVE){
-					//未赠送
-					Intent intent=new Intent(this,ActivationAccountActivity.class);
-					startActivityForResult(intent,REQUEST_CODE_WELCOME);
-					return;
-				}else if(status==SellerServiceHandler.RESULT_EXPIRED||
-						status==SellerServiceHandler.RESULT_NO_SERVICE){
-					//服务不存在或已过期
-					getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-					forward();
-					return;
-				}else{
-					//或其它异常
-					forward();
-					return;
-				}
-			}else{
-				runOnUiThread(new Runnable() {
-					
-					@Override
-					public void run() {
-						//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
-						AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
-						aDialog.setCancelable(false).
-						setIcon(android.R.drawable.ic_dialog_info).
-						setMessage("当前无法连接到网络，是否立即进行设置？").
-						setPositiveButton("设置", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
-								startActivity(netIntent);
-								finish();
+						//是否已经使用淘宝卖家账号登录
+						if(!getAppContext().getYunOSAPI().isSystemLogin()){
+							runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									new AlertDialog.Builder(WelcomeActivity.this)
+									.setIcon(android.R.drawable.ic_dialog_info)
+									.setCancelable(false)
+									.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
+									.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
+											startActivity(netIntent);
+											finish();
+										}
+									}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											
+											getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+											forward();
+										}
+									}).show();
+								}
+							});
+							return;
+						}
+						//判断是否尚未激活服务
+						if(!getAppContext().getYunOSAPI().isActivation()){
+							runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									CommonFn.buildDialog(WelcomeActivity.this, "如果您购买的服务套餐含有该应用的服务,且尚未激活,请进入“设置关于本机—激活赠送服务”中进行激活", new OnClickListener(){
+
+										@Override
+										public void onClick(DialogInterface dialog,int which) {
+											
+											forward();
+											
+										}
+										
+									}).show();
+								}
+							});
+							return;
+						}
+						
+						Bundle bundle=getAppContext().getYunOSAPI().isValidServiceStatus();
+						int keyCoe=bundle.getInt(SellerServiceHandler.KEY_CODE);
+						if (keyCoe== SellerServiceHandler.CODE_SUCCESS) {
+							int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
+							if(keyResult==SellerServiceHandler.RESULT_ACTIVE){
+								runOnUiThread(new Runnable() {
+									
+									@Override
+									public void run() {
+										//已经赠送
+										CommonFn.buildDialog(WelcomeActivity.this, "您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录", new OnClickListener(){
+
+											@Override
+											public void onClick(DialogInterface dialog,
+													int which) {
+												
+												//有服务已赠送则下次不再进行检测
+												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+												
+												forward();
+											}
+											
+										}).show();
+									}
+								});
+								return;
+							}else if(keyResult==SellerServiceHandler.RESULT_INACTIVE){
+								//未赠送
+								Intent intent=new Intent(WelcomeActivity.this,ActivationAccountActivity.class);
+								startActivityForResult(intent,REQUEST_CODE_WELCOME);
+								return;
+							}else if(keyResult==SellerServiceHandler.RESULT_EXPIRED||
+									keyResult==SellerServiceHandler.RESULT_NO_SERVICE){
+								//服务不存在或已过期
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+								forward();
+								return;
+							}else{
+								//或其它异常
+								forward();
+								return;
 							}
-						}).show();
+						}else{
+							makeTextLong("错误返回代码："+keyCoe);
+							forward();
+							return;
+						}
+					}else{
+						runOnUiThread(new Runnable() {
+							
+							@Override
+							public void run() {
+								//自为防止初始设置时网络未开启而导致激活失效所以首次启动应用如果没有网络则必须设置网络
+								new AlertDialog.Builder(WelcomeActivity.this).
+								setCancelable(false).
+								setIcon(android.R.drawable.ic_dialog_info).
+								setMessage("当前无法连接到网络，是否立即进行设置？").
+								setPositiveButton("设置", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
+										startActivity(netIntent);
+										finish();
+									}
+								}).show();
+							}
+						});
 					}
-				});
-			}
+				}
+			}).start();
 		}else{
 			forward();
-			return;
 		}
 	}
 	
