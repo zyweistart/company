@@ -48,7 +48,9 @@ public class AppContext extends Application {
 	
 	/**
 	 * 阿里云OSAPI接口
+	 * <pre>
 	 * 注：必须在非主线程进行调用
+	 * </pre>
 	 */
 	public AliYunOSAPI getYunOSAPI() {
 		if(yunOSAPI==null){
