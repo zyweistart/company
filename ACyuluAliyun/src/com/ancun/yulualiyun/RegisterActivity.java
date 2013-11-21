@@ -315,8 +315,8 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 						requestParams.put("signupsource","h");
 						requestParams.put("ip", "");
 						requestParams.put("mac", "");
-						requestParams.put("idcode", getAppContext().getYunOSAPI().getUUID());
 						requestParams.put("loginflag", "1");
+						requestParams.put("idcode", getAppContext().getSystemLoginAccount());
 						
 						//用户自主注册开通流程
 						requestParams.put("prodid", "yunos02");
@@ -341,8 +341,15 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 										appr_end_module_tipmsg.setText(R.string.register_success_tipmsg1);
 										if(bundle!=null){
 											if(bundle.getBoolean(ACTIVATION_FLAG,false)){
-												//注册成功后如果为赠送注册则：1.通知OS服务端2.初始设置标记设为TRUE表示下次启动不再检测3.显示注册成功获赠文案
-												getAppContext().getYunOSAPI().notifyOSService();
+												new Thread(new Runnable() {
+													
+													@Override
+													public void run() {
+														//注册成功后如果为赠送注册则：1.通知OS服务端2.初始设置标记设为TRUE表示下次启动不再检测3.显示注册成功获赠文案
+														getAppContext().getYunOSAPI().notifyOSService();
+													}
+												}).start();
+												
 												appr_end_module_tipmsg.setText(R.string.register_success_tipmsg2);
 											}
 										}

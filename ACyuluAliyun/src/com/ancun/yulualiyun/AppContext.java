@@ -7,19 +7,21 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ancun.core.AliYunOSAPI;
 import com.ancun.core.Constant;
 import com.ancun.core.XMLException;
-import com.ancun.core.AliYunOSAPI;
 import com.ancun.model.UIRunnable;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.HttpUtils;
@@ -46,12 +48,37 @@ public class AppContext extends Application {
 	
 	/**
 	 * 阿里云OSAPI接口
+	 * 注：必须在非主线程进行调用
 	 */
 	public AliYunOSAPI getYunOSAPI() {
 		if(yunOSAPI==null){
 			yunOSAPI=new AliYunOSAPI(this);
 		}
 		return yunOSAPI;
+	}
+	
+	private String systemLoginAccount=Constant.EMPTYSTR;
+	
+	/**
+	 * 获取当前系统登录的账户
+	 * 当前方法提前必须先调用getYunOSAPI.isSystemLogin进行验证否则值为空
+	 * @return
+	 */
+	public String getSystemLoginAccount() {
+		return systemLoginAccount;
+	}
+
+	public void setSystemLoginAccount(String systemLoginAccount) {
+		this.systemLoginAccount = systemLoginAccount;
+	}
+
+	/**
+	 * 获取设备的唯一码
+	 * @return
+	 */
+	public String getUUID(){
+		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+		return tm.getDeviceId();
 	}
 	
 	private SharedPreferencesUtils sharedPreferencesUtils=null;

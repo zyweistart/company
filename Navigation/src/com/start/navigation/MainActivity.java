@@ -34,6 +34,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ import android.widget.Toast;
 import com.start.core.AppConfig;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
+import com.start.model.Doctor;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -149,6 +151,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private EditText mapQuery;
 	private Button mapButtonCancel;
 	private LinearLayout mapLLQueryContentContainer;
+	
+//	private ArrayAdapter<Doctor> doctorArrayAdapter;
+//	private ArrayAdapter<Department> departmentArrayAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

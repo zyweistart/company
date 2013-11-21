@@ -1,13 +1,17 @@
 package com.ancun.core;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 
 import com.ancun.yulualiyun.AppContext;
 import com.yunos.boot.SellerServiceHandler;
 import com.yunos.seller.SellerAuthority;
 
+/**
+ * 阿里云接口API
+ * 注：必须在非UI主线程当中调用
+ * @author start
+ *
+ */
 public class AliYunOSAPI {
 
 	private static final String APPNAME="com.ancun.yulualiyun";
@@ -21,15 +25,6 @@ public class AliYunOSAPI {
 		this.mAppContext=context;
 		this.mSellerAuthority = new SellerAuthority(context);
 		this.mSellerServiceHandler = new SellerServiceHandler(context);
-	}
-	
-	/**
-	 * 阿里云设备唯一码，或淘宝账号
-	 * @return
-	 */
-	public String getUUID(){
-		TelephonyManager tm = (TelephonyManager)mAppContext.getSystemService(Context.TELEPHONY_SERVICE); 
-		return tm.getDeviceId();
 	}
 	
 	/**
@@ -47,15 +42,12 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public Boolean isSystemLogin(){
-		return mSellerServiceHandler.isSellerAcccountLogin();
-	}
-	
-	/**
-	 * 登录帐号对应的激活码是否已激活
-	 */
-	public Boolean isActivation(){
-		//TODO:登录帐号对应的激活码是否已激活
-		return true;
+		Boolean status=mSellerServiceHandler.isSellerAcccountLogin();
+		if(status){
+			//TODO:设置当前登录的账户名称当前为UUID
+			mAppContext.setSystemLoginAccount(mAppContext.getUUID());
+		}
+		return status;
 	}
 	
 	/**
