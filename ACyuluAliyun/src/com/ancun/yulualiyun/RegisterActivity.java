@@ -316,7 +316,8 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 						requestParams.put("ip", "");
 						requestParams.put("mac", "");
 						requestParams.put("loginflag", "1");
-						requestParams.put("idcode", getAppContext().getSystemLoginAccount());
+						requestParams.put("idcode", getAppContext().getUUID());
+//						requestParams.put("idcode", getAppContext().getSystemLoginAccount());
 						
 						//用户自主注册开通流程
 						requestParams.put("prodid", "yunos02");
