@@ -143,7 +143,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
 												
-												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+//												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 												forward();
 											}
 										}).show();
