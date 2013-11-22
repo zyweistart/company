@@ -8,6 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.REORDER_TASKS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
@@ -34,11 +35,12 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MainActivity" android:launchMode="singleInstance"/>
-        <activity android:name=".DepartmentListActivity"/>
-        <activity android:name=".DepartmentDetailActivity"/>
-        <activity android:name=".DoctorListActivity"/>
-        <activity android:name=".DoctorDetailActivity"/>
+        <activity android:name=".MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DepartmentListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DepartmentDetailActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DoctorListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DoctorDetailActivity" android:launchMode="singleTask"/>
+        
         <activity android:name=".MoreActivity"/>
         
     </application>

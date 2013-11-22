@@ -8,11 +8,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.ancun.core.AliYunOSAPI;
 import com.ancun.core.Constant;
 import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
@@ -96,14 +98,15 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 					@Override
 					public void run() {
 						//是否满足卖家手机条件
-						if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
+						int systemType=getAppContext().getYunOSAPI().getSystemType();
+						if(systemType==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
 							runOnUiThread(new Runnable() {
 								
 								@Override
 								public void run() {
 									//网络不可用
-									AlertDialog.Builder aDialog = new AlertDialog.Builder(WelcomeActivity.this);
-									aDialog.setCancelable(false).
+									new AlertDialog.Builder(WelcomeActivity.this).
+									setCancelable(false).
 									setIcon(android.R.drawable.ic_dialog_info).
 									setMessage("当前网络不可用，请稍候再试").
 									setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -115,47 +118,55 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 								}
 							});
 							return;
-						}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.NORMAL_PHONE){
+						}else if(systemType==SellerAuthority.NORMAL_PHONE){
 							//普通手机
 							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 							forward();
 							return;
-						}else if(getAppContext().getYunOSAPI().getSystemType()==SellerAuthority.SELLER_PHONE){
+						}else if(systemType==SellerAuthority.SELLER_PHONE){
 							//卖家手机
-							//是否已经使用淘宝卖家账号登录
-							if(!getAppContext().getYunOSAPI().isSystemLogin()){
-								runOnUiThread(new Runnable() {
-									
-									@Override
-									public void run() {
-										new AlertDialog.Builder(WelcomeActivity.this)
-										.setIcon(android.R.drawable.ic_dialog_info)
-										.setCancelable(false)
-										.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
-										.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
-												startActivity(netIntent);
-												finish();
-											}
-										}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												
-//												getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
-												forward();
-											}
-										}).show();
-									}
-								});
-								return;
+							if(!getAppContext().getYunOSAPI().isSellerAcccountLogin()){
+								if(getAppContext().getYunOSAPI().isAccountLogin()){
+									//如果不是用卖家账户登录则走普通流程
+									forward();
+									return;
+								}else{
+									//未登录
+									runOnUiThread(new Runnable() {
+										
+										@Override
+										public void run() {
+											new AlertDialog.Builder(WelcomeActivity.this)
+											.setIcon(android.R.drawable.ic_dialog_info)
+											.setCancelable(false)
+											.setMessage("如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。")
+											.setPositiveButton("现在登录云OS ", new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
+													startActivity(netIntent);
+													finish();
+												}
+											}).setNegativeButton("暂不登录，了解应用先", new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													
+//													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+													forward();
+												}
+											}).show();
+										}
+									});
+									return;
+								}
 							}
 							
 							Bundle bundle=getAppContext().getYunOSAPI().isValidServiceStatus();
 							int keyCoe=bundle.getInt(SellerServiceHandler.KEY_CODE);
+							Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_CODE:"+keyCoe);
 							if (keyCoe== SellerServiceHandler.CODE_SUCCESS) {
 								int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
+								Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_RESULT:"+keyResult);
 								if(keyResult==SellerServiceHandler.RESULT_ACTIVE){
 									runOnUiThread(new Runnable() {
 										
@@ -197,7 +208,23 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 							}else{
 								//系统异常：500，未登陆：-101
 								//淘宝账户异常：601，卖家账户等级过低：602
-								forward();
+								//网络异常:-1,远程服务器异常:-2
+								runOnUiThread(new Runnable() {
+									
+									@Override
+									public void run() {
+										new AlertDialog.Builder(WelcomeActivity.this).
+										setCancelable(false).
+										setIcon(android.R.drawable.ic_dialog_info).
+										setMessage("服务出现异常，请稍候再试").
+										setPositiveButton("确定", new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												finish();
+											}
+										}).show();
+									}
+								});
 								return;
 							}
 						}else{
@@ -222,6 +249,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				}).show();
 			}
 		}else{
+			Log.v(TAG,"已执行初始验证正常模式");
 			forward();
 		}
 	}

@@ -58,21 +58,6 @@ public class AppContext extends Application {
 		}
 		return yunOSAPI;
 	}
-	
-	private String systemLoginAccount=Constant.EMPTYSTR;
-	
-	/**
-	 * 获取当前系统登录的账户
-	 * 当前方法提前必须先调用getYunOSAPI.isSystemLogin进行验证否则值为空
-	 * @return
-	 */
-	public String getSystemLoginAccount() {
-		return systemLoginAccount;
-	}
-
-	public void setSystemLoginAccount(String systemLoginAccount) {
-		this.systemLoginAccount = systemLoginAccount;
-	}
 
 	/**
 	 * 获取设备的唯一码

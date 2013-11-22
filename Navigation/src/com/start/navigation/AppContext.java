@@ -3,8 +3,10 @@ package com.start.navigation;
 import org.mapsforge.core.model.GeoPoint;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 import com.start.model.nav.MyLocation;
@@ -45,6 +47,11 @@ public class AppContext extends Application {
 	
 	public static AppContext getInstance() {
 		return mInstance;
+	}
+	
+	public String getDeviceId(){
+		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+		return tm.getDeviceId();
 	}
 	
 	public SharedPreferencesUtils getSharedPreferencesUtils() {

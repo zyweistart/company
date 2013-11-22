@@ -34,7 +34,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,9 +45,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.start.core.AppConfig;
+import com.start.core.Constant;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
-import com.start.model.Doctor;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -175,6 +174,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Bundle bundle=getIntent().getExtras();
+		if(bundle!=null){
+			String departmentId=bundle.getString(Department.COLUMN_NAME_ID,Constant.EMPTYSTR);
+			appContext.makeTextShort("departmentid:"+departmentId);
+		}
+		
 		if (mCurSel == 0 && !rboIntroduction.isChecked()) {
 			rboIntroduction.setChecked(true);
 			rboMap.setChecked(false);

@@ -1,6 +1,7 @@
 package com.ancun.core;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ancun.yulualiyun.AppContext;
 import com.yunos.boot.SellerServiceHandler;
@@ -13,6 +14,8 @@ import com.yunos.seller.SellerAuthority;
  *
  */
 public class AliYunOSAPI {
+	
+	public static final String TAG="AliYunOSAPI";
 
 	private static final String APPNAME="com.ancun.yulualiyun";
 	
@@ -34,20 +37,29 @@ public class AliYunOSAPI {
 	 * @return
 	 */
 	public int getSystemType(){
-		return mSellerAuthority.getSystemType();
+		int systemType=mSellerAuthority.getSystemType();
+		Log.v(TAG,"getSystemType:"+systemType);
+		return systemType;
 	}
 	
 	/**
-	 * 是否已经使用淘宝账号登录
+	 * 当前是否有账户登录
 	 * @return
 	 */
-	public Boolean isSystemLogin(){
-		Boolean status=mSellerServiceHandler.isSellerAcccountLogin();
-		if(status){
-			//TODO:设置当前登录的账户名称当前为UUID
-			mAppContext.setSystemLoginAccount(mAppContext.getUUID());
-		}
-		return status;
+	public Boolean isAccountLogin(){
+		Boolean isAccountLogin=mSellerServiceHandler.isAccountLogin();
+		Log.v(TAG,"isAccountLogin:"+isAccountLogin);
+		return isAccountLogin;
+	}
+	
+	/**
+	 * 是否卖家账户已登录
+	 * @return
+	 */
+	public Boolean isSellerAcccountLogin(){
+		Boolean isSellerAcccountLogin=mSellerServiceHandler.isSellerAcccountLogin();
+		Log.v(TAG,"isSellerAcccountLogin:"+isSellerAcccountLogin);
+		return isSellerAcccountLogin;
 	}
 	
 	/**
@@ -62,9 +74,12 @@ public class AliYunOSAPI {
 	 */
 	public void notifyOSService(){
 		Bundle bundle = mSellerServiceHandler.activePartnerService(APPNAME);
-		if (bundle.getInt(SellerServiceHandler.KEY_CODE) == SellerServiceHandler.CODE_SUCCESS) {
-		    if(SellerServiceHandler.RESULT_ACTIVE==
-		    		bundle.getInt(SellerServiceHandler.KEY_RESULT)){
+		int keyCode=bundle.getInt(SellerServiceHandler.KEY_CODE);
+		Log.v(TAG,"notifyOSService KEY_CODE:"+keyCode);
+		if (keyCode== SellerServiceHandler.CODE_SUCCESS) {
+			int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
+		    if(SellerServiceHandler.RESULT_ACTIVE==keyResult){
+		    		Log.v(TAG,"notifyOSService KEY_RESULT:"+keyResult);
 			    	//赠送激活成功初始设置标记
 			    	mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 		    }
