@@ -4,7 +4,7 @@
     <!-- 渠道号 -->
 	<property name="apk-market" value="ancun"/>
     <!-- 应用生成目录 -->
-	<property name="app.build.path" value="/Users/start/Desktop"/>
+	<property name="app.build.path" value="/Users/start/Documents/Developer/App"/>
 	<!-- 修改的配置文件 -->
 	<property name="app.file.manifest" value="AndroidManifest.xml"/>
 	<property name="app.file.manifest.bak" value="AndroidManifest_bak.xml"/>
