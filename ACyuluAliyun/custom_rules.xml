@@ -18,7 +18,7 @@
 
     <target name="-pre-build" depends="-set-ver">
         <!-- 把原配置文件先进行备份然后进行文字替换 -->
-        <copy file="${app.file.manifest}" tofile="${app.file.manifest.bak}"/>
+        <copy file="${app.file.manifest}" tofile="${app.file.manifest.bak}" overwrite="true"/>
 		<replace file ="${app.file.manifest}" 
 		    token="android:versionCode=&quot;2013080117&quot;" 
 		    value="android:versionCode=&quot;${var.time}&quot;" 
@@ -33,11 +33,11 @@
     <target name="-post-build" depends="-set-ver">
 		<echo>out.final.file: ${out.final.file}.</echo>
 		<!-- 生成输出到目标文件 -->
-		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\${ant.project.name}-${apk-market}.apk"/>
+		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\${ant.project.name}-${apk-market}.apk" overwrite="true"/>
 		<!-- 生成输出到备份文件 -->
-		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\bak\${var.time}\${ant.project.name}-${apk-market}-${var.time}.apk"/>
+		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\bak\${var.time}\${ant.project.name}-${apk-market}-${var.time}.apk" overwrite="true"/>
 		<!-- 还原配置文件 -->
-		<copy file="${app.file.manifest.bak}" tofile="${app.file.manifest}"/>
+		<copy file="${app.file.manifest.bak}" tofile="${app.file.manifest}" overwrite="true"/>
 		<!-- 删除备份配置文件 -->
 		<delete file="${app.file.manifest.bak}" />
 		<echo>Current android:versionCode: ${var.time}</echo>
