@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="custom_rules" default="debug">
-	<property name="app.upload.path" value="E:\yuluapp\upload"/>
-	<property name="app.web.path" value="E:\xampp\htdocs\"/>
+    
+    <!-- 渠道号 -->
+	<property name="apk-market" value="ancun"/>
+    
+    <!-- 应用生成目录 -->
+	<property name="app.build.path" value="/Users/start/Desktop"/>
+	<!-- 修改的配置文件 -->
 	<property name="app.file.manifest" value="AndroidManifest.xml"/>
 	<property name="app.file.manifest.bak" value="AndroidManifest_bak.xml"/>
+	
     <target name="-set-ver">
-         <echo>   help:-set-ver     datetime.</echo>
 		 <tstamp>
-			<format property="var.time" pattern="yyyyMMddHH" locale="en" />
+			<format property="var.time" pattern="yyyyMMddHHmmss" locale="en" />
 		 </tstamp>
     </target>
 
     <target name="-pre-build" depends="-set-ver">
-		<copy tofile="${app.file.manifest.bak}" overwrite='true' file="${app.file.manifest}">
-		</copy>
-		<replace file ="${app.file.manifest}"
-		token="android:versionCode=&quot;2013080117&quot;" 
-		value="android:versionCode=&quot;${var.time}&quot;"
-		 encoding="UTF-8"
-		/>
-		<replace file ="${app.file.manifest}"
-		token="android:value=&quot;Aliyun Market&quot;" 
-		value="android:value=&quot;${apk-market} Market&quot;"
-		 encoding="UTF-8"
-		/>
+        <!-- 把原配置文件先进行备份然后进行文字替换 -->
+        <copy file="${app.file.manifest}" tofile="${app.file.manifest.bak}"/>
+		<replace file ="${app.file.manifest}" 
+		    token="android:versionCode=&quot;2013080117&quot;" 
+		    value="android:versionCode=&quot;${var.time}&quot;" 
+		    encoding="UTF-8"/>
+		<replace file ="${app.file.manifest}" 
+		    token="android:value=&quot;Aliyun Market&quot;" 
+		    value="android:value=&quot;${apk-market} Market&quot;" 
+		    encoding="UTF-8"/>
     </target>
 
     <!-- Basic Ant + SDK check -->
     <target name="-post-build" depends="-set-ver">
-		<echo>   final.file: ${out.final.file}.</echo>
-		<copy tofile="${app.web.path}\${ant.project.name}-${apk-market}.apk" overwrite='true' file="${out.final.file}">
-		</copy>
-		<copy tofile="${app.upload.path}\${ant.project.name}-${apk-market}-${var.time}.apk" overwrite='true' file="${out.final.file}">
-		</copy>
-		<copy tofile="${app.file.manifest}" overwrite='true' file="${app.file.manifest.bak}"></copy>
+		<echo>out.final.file: ${out.final.file}.</echo>
+		<!-- 生成输出到目标文件 -->
+		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\${ant.project.name}-${apk-market}.apk"/>
+		<!-- 生成输出到备份文件 -->
+		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\bak\${var.time}\${ant.project.name}-${apk-market}-${var.time}.apk"/>
+		<!-- 还原配置文件 -->
+		<copy file="${app.file.manifest.bak}" tofile="${app.file.manifest}"/>
+		<!-- 删除备份配置文件 -->
 		<delete file="${app.file.manifest.bak}" />
-		<echo>current version: ${var.time}</echo>
+		<echo>Current android:versionCode: ${var.time}</echo>
     </target>
 
     <!-- Basic Ant + SDK check -->
     <target name="debug">
          <echo>custom_rules debug</echo>
     </target>
+    
 </project>
