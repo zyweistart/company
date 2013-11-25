@@ -99,26 +99,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 					public void run() {
 						//是否满足卖家手机条件
 						int systemType=getAppContext().getYunOSAPI().getSystemType();
-						if(systemType==SellerAuthority.ERROR_NETWORK_NOT_AVAILABLE){
-							runOnUiThread(new Runnable() {
-								
-								@Override
-								public void run() {
-									//网络不可用
-									new AlertDialog.Builder(WelcomeActivity.this).
-									setCancelable(false).
-									setIcon(android.R.drawable.ic_dialog_info).
-									setMessage("当前网络不可用，请稍候再试").
-									setPositiveButton("确定", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											finish();
-										}
-									}).show();
-								}
-							});
-							return;
-						}else if(systemType==SellerAuthority.NORMAL_PHONE){
+						if(systemType==SellerAuthority.NORMAL_PHONE){
 							//普通手机
 							getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 							forward();
@@ -228,7 +209,24 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 								return;
 							}
 						}else{
-							forward();
+							//ERROR_NETWORK_NOT_AVAILABLE
+							runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									//网络不可用
+									new AlertDialog.Builder(WelcomeActivity.this).
+									setCancelable(false).
+									setIcon(android.R.drawable.ic_dialog_info).
+									setMessage("出错啦，请稍候再试").
+									setPositiveButton("确定", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											finish();
+										}
+									}).show();
+								}
+							});
 							return;
 						}
 					}
