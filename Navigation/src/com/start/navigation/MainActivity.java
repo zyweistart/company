@@ -34,6 +34,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,9 +46,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.start.core.AppConfig;
-import com.start.core.Constant;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
+import com.start.model.Doctor;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -84,10 +85,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 	private static final String BUNDLEDATA_DATA = "data";
 
-	public static final int REQUESTCODE_LOCATION_DEPARTMENT=1;
-	public static final int RESULTCODE_SWITCHTAB_LOCATION_DEPARTMENT=1;
-	public static final int RESULTCODE_LOCATION_DEPARTMENT=2;
-	
 	private AppContext appContext;
 
 	private long lastPressTime;
@@ -151,8 +148,15 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private Button mapButtonCancel;
 	private LinearLayout mapLLQueryContentContainer;
 	
-//	private ArrayAdapter<Doctor> doctorArrayAdapter;
-//	private ArrayAdapter<Department> departmentArrayAdapter;
+	private Boolean isCurrentTabDepartment;
+	private ArrayAdapter<Doctor> doctorArrayAdapter;
+	private ArrayAdapter<Department> departmentArrayAdapter;
+	private ListView mModuleMainFrameMapQueryList;
+	
+	public static String currentLocationDepartmentId;
+	
+	private Button mModuleMainFrameMapQueryContentTabDepartment;
+	private Button mModuleMainFrameMapQueryContentTabDoctor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -174,12 +178,24 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Bundle bundle=getIntent().getExtras();
-		if(bundle!=null){
-			String departmentId=bundle.getString(Department.COLUMN_NAME_ID,Constant.EMPTYSTR);
-			appContext.makeTextShort("departmentid:"+departmentId);
+		if(currentLocationDepartmentId!=null){
+			if(mCurSel!=1){
+				setCurPoint(1);
+			}
+			Department department=appContext.getDepartmentService().findById(currentLocationDepartmentId);
+			if(department!=null){
+				Room room=appContext.getRoomService().findById(department.getMajorRoomId());
+				if(room!=null){
+					
+					mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
+							.getMapDataPositionByMapId(room.getMapId()));
+					setMapFile();
+					tapPOI(room);
+					
+				}
+			}
+			currentLocationDepartmentId=null;
 		}
-		
 		if (mCurSel == 0 && !rboIntroduction.isChecked()) {
 			rboIntroduction.setChecked(true);
 			rboMap.setChecked(false);
@@ -188,37 +204,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			mCurSel = 0;
 			setCurPoint(-1);
 		}
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		//部门定位
-		if(resultCode==RESULTCODE_SWITCHTAB_LOCATION_DEPARTMENT
-				||resultCode==RESULTCODE_LOCATION_DEPARTMENT){
-			
-			mPoiMarkers=new ArrayList<POIMarker>();
-			
-			String departmentId=data.getExtras().getString(Department.COLUMN_NAME_ID);
-			List<DepartmentHasRoom> departmentHasRooms=appContext.getDepartmentHasRoomService().findByDepartmentId(departmentId);
-			for(DepartmentHasRoom dhr:departmentHasRooms){
-				
-				Room room=appContext.getRoomService().findById(dhr.getRoomId());
-				if(room!=null){
-
-					POIMarker marker=new POIMarker(room, Marker.boundCenter(getResources().getDrawable(
-							R.drawable.icon_node)));
-					mPoiMarkers.add(marker);
-					
-				}
-				
-			}
-			
-			updateOverlay();
-			
-		}
-		
 	}
 
 	private void setCurPoint(int index) {
@@ -668,7 +653,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					bundle.putString(Department.COLUMN_NAME_ID, departmentHasRoom.getDepartmentId());
 					Intent intent=new Intent(this,DepartmentDetailActivity.class);
 					intent.putExtras(bundle);
-					startActivityForResult(intent, REQUESTCODE_LOCATION_DEPARTMENT);
+					startActivity(intent);
 				}
 			}
 		} else if (v.getId() == R.id.module_main_header_content_location) {
@@ -679,6 +664,34 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			addMyLocMarker(myLocation);
 		} else if (v.getId() == R.id.module_main_header_content_search) {
 
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
+			if(!isCurrentTabDepartment){
+				isCurrentTabDepartment=true;
+				if(departmentArrayAdapter == null){
+					List<Department> departments=appContext.getDepartmentService().findAll();
+					departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
+				}
+				v.setBackgroundResource(R.drawable.tabs_bar_left_on);
+				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
+				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_doctor) {
+			if(!isCurrentTabDepartment){
+				isCurrentTabDepartment=false;
+				if(doctorArrayAdapter == null){
+					List<Doctor> doctors=appContext.getDoctorService().findAll();
+					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_department, R.id.lvitem_department_name, doctors);
+				}
+				v.setBackgroundResource(R.drawable.tabs_bar_left_on);
+				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				mModuleMainFrameMapQueryList.setAdapter(doctorArrayAdapter);
+				doctorArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_restroom) {
+			appContext.makeTextLong("房间");
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_drinking_water) {
+			appContext.makeTextLong("开水间");
 		}
 	}
 
@@ -791,7 +804,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			super.onPostExecute(result);
 			
 			// 地图数据加载完毕后才把地图视图显示到页面上
-			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_content);
+			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_contentll);
 
 			for (int i = 0; i < result.size(); i++) {
 				MapData md = result.get(i);

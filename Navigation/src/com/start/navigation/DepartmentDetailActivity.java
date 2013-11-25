@@ -64,11 +64,8 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 
 	@Override
 	public void onClick(View v) {
-		Intent intent=new Intent(this,MainActivity.class);
-		Bundle bundle=new Bundle();
-		bundle.putString(Department.COLUMN_NAME_ID, department.getId());
-		intent.putExtras(bundle);
-		startActivity(intent);
+		MainActivity.currentLocationDepartmentId=department.getId();
+		startActivity(new Intent(this,MainActivity.class));
 		finish();
 	}
 	
