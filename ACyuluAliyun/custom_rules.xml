@@ -13,21 +13,21 @@
         <!-- 把原配置文件先进行备份然后进行文字替换 -->
         <copy file="${app.file.manifest}" tofile="${app.file.manifest.temp}" overwrite="true"/>
 		<!-- <replace file ="${app.file.manifest}" 
-		    token="android:versionCode=&quot;2013080117&quot;" 
+		    token="android:versionCode=&quot;${version.code}&quot;" 
 		    value="android:versionCode=&quot;${var.time}&quot;" 
 		    encoding="UTF-8"/> -->
-		<replace file ="${app.file.manifest}" 
-		    token="android:value=&quot;Aliyun Market&quot;" 
+		<!-- <replace file ="${app.file.manifest}" 
+		    token="android:value=&quot;${apk.market} Market&quot;" 
 		    value="android:value=&quot;${apk-market} Market&quot;" 
-		    encoding="UTF-8"/>
+		    encoding="UTF-8"/> -->
     </target>
 
     <!-- Basic Ant + SDK check -->
     <target name="-post-build">
 		<echo>out.final.file: ${out.final.file}.</echo>
-		<!-- 生成输出到目标文件 -->
+		<!-- 生成输出到目标文件中 -->
 		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\current\${ant.project.name}-${apk-market}.apk" overwrite="true"/>
-		<!-- 生成输出到备份文件 -->
+		<!-- 生成输出到历史文件中 -->
 		<copy file="${out.final.file}" tofile="${app.build.path}\${ant.project.name}\history\${var.time}\${ant.project.name}-${apk-market}-${var.time}.apk" overwrite="true"/>
 		<!-- 还原配置文件 -->
 		<copy file="${app.file.manifest.temp}" tofile="${app.file.manifest}" overwrite="true"/>
