@@ -3,7 +3,6 @@
     
     <!-- 渠道号 -->
 	<property name="apk-market" value="ancun"/>
-    
     <!-- 应用生成目录 -->
 	<property name="app.build.path" value="/Users/start/Desktop"/>
 	<!-- 修改的配置文件 -->
@@ -19,14 +18,14 @@
     <target name="-pre-build" depends="-set-ver">
         <!-- 把原配置文件先进行备份然后进行文字替换 -->
         <copy file="${app.file.manifest}" tofile="${app.file.manifest.bak}" overwrite="true"/>
-		<replace file ="${app.file.manifest}" 
+		<!-- <replace file ="${app.file.manifest}" 
 		    token="android:versionCode=&quot;2013080117&quot;" 
 		    value="android:versionCode=&quot;${var.time}&quot;" 
 		    encoding="UTF-8"/>
 		<replace file ="${app.file.manifest}" 
 		    token="android:value=&quot;Aliyun Market&quot;" 
 		    value="android:value=&quot;${apk-market} Market&quot;" 
-		    encoding="UTF-8"/>
+		    encoding="UTF-8"/> -->
     </target>
 
     <!-- Basic Ant + SDK check -->
