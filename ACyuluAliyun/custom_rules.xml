@@ -15,10 +15,10 @@
 		<!-- <replace file ="${app.file.manifest}" 
 		    token="android:versionCode=&quot;${version.code}&quot;" 
 		    value="android:versionCode=&quot;${var.time}&quot;" 
-		    encoding="UTF-8"/> -->
-		<!-- <replace file ="${app.file.manifest}" 
-		    token="android:value=&quot;${apk.market} Market&quot;" 
-		    value="android:value=&quot;${apk-market} Market&quot;" 
+		    encoding="UTF-8"/>
+		<replace file ="${app.file.manifest}" 
+		    token="android:value=&quot;${apk.market}&quot;" 
+		    value="android:value=&quot;${apk-market}&quot;" 
 		    encoding="UTF-8"/> -->
     </target>
 
