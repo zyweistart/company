@@ -94,7 +94,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		boolean SP_ALIYUN_NETWORK_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,true);
 		if(SP_ALIYUN_NETWORK_MESSAGE){
 			final CheckBox cb=new CheckBox(this);
-			cb.setText("不在提示");
+			cb.setText("不再提示");
 			new AlertDialog.Builder(WelcomeActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)

@@ -166,11 +166,11 @@ public abstract class CoreActivity  extends StatActivity {
 		boolean SP_ALIYUN_DIAL_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_DIAL_MESSAGE,true);
 		if(SP_ALIYUN_DIAL_MESSAGE){
 			final CheckBox cb=new CheckBox(this);
-			cb.setText("不在提示");
+			cb.setText("不再提示");
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
-			.setMessage("正在调用你的本机拨号盘进行呼叫")
+			.setMessage("应用正准备调用你的拨号盘进行拨号通话")
 			.setView(cb)
 			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
 				@Override
@@ -180,7 +180,7 @@ public abstract class CoreActivity  extends StatActivity {
 					}
 					inAppDial2(dial);
 				}
-			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
