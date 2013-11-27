@@ -26,6 +26,7 @@
             android:background="@color/transparent"
             android:hint="电话号码"
             android:paddingLeft="10.0dip"
+            android:inputType="phone"
             android:singleLine="true"
             android:textColor="#000000"
             android:textColorHint="#AAAAAA"
