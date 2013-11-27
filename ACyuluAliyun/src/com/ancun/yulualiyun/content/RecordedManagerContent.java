@@ -963,15 +963,14 @@ public class RecordedManagerContent extends CoreScrollContent implements Filtera
 							final String fileno=vh.fileno;
 							new AlertDialog.Builder(getActivity())
 							.setIcon(android.R.drawable.ic_dialog_info)
-							.setTitle("提示！")
-							.setMessage("当前网络环境为移动网络模式，是否确认下载!")
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int whichButton) {
-									new DownloadTask().execute(fileno);
-								}
-							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							.setMessage("录音首次收听前需加载且需消耗一定的网络流量，当前网络环境为移动2G/3G网络，建议在Wifi环境下加载时长较长的通话录音，是否确认在当前网络模式下加载？")
+							.setPositiveButton("否", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									dialog.dismiss();
+								}
+							}).setNegativeButton("是", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+									new DownloadTask().execute(fileno);
 								}
 							}).show();
 						}else{
