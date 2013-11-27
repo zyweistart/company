@@ -32,7 +32,6 @@ import com.ancun.service.RecentService;
 import com.ancun.utils.StringUtils;
 import com.ancun.yulualiyun.AppContext;
 import com.ancun.yulualiyun.R;
-import com.ancun.yulualiyun.content.RecentContent;
 import com.ancun.yulualiyun.content.RecordedManagerContent;
 import com.baidu.mobstat.StatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -209,7 +208,7 @@ public abstract class CoreActivity  extends StatActivity {
 //					ContactService contactService=new ContactService(CoreActivity.this);
 //					contactService.dialByModifyContact(phone);
 					//重新加载最后通话记录
-					((RecentContent)CoreScrollContent.getContentcache().get(RecentContent.class)).isOpenRefreshData=true;
+//					((RecentContent)CoreScrollContent.getContentcache().get(RecentContent.class)).isOpenRefreshData=true;
 					//重新加载我的录音列表
 					((RecordedManagerContent)CoreScrollContent.getContentcache().get(RecordedManagerContent.class)).isOpenRefreshData=true;
 //					((RecordedManagerContent)CoreScrollContent.getContentcache().get(RecordedManagerContent.class)).isLoadCacheData=false;

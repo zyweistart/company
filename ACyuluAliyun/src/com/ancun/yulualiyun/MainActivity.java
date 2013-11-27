@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -334,14 +335,68 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		if(currentIndex==1){
 			if(recentContent.isOpenRefreshData){
 				//加载最近通话记录
-				recentContent.loadData(true);
-				recentContent.isOpenRefreshData=false;
+				boolean SP_ALIYUN_RECRECENT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,true);
+				if(SP_ALIYUN_RECRECENT_MESSAGE){
+					final CheckBox cb=new CheckBox(this);
+					cb.setText("不再提示");
+					new AlertDialog.Builder(this)
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.setCancelable(false)
+					.setMessage("应用正在尝试读取你的通话记录!")
+					.setView(cb)
+					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(cb.isChecked()){
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,false);
+							}
+							recentContent.loadData(true);
+							recentContent.isOpenRefreshData=false;
+						}
+					}).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							recentContent.isOpenRefreshData=false;
+						}
+					}).show();
+				}else{
+					recentContent.loadData(true);
+					recentContent.isOpenRefreshData=false;
+				}
 			}
 		}else if(currentIndex==2){
 			if(contactContent.isOpenRefreshData){
 				//加载通讯录
-				contactContent.loadData(true);
-				contactContent.isOpenRefreshData=false;
+				boolean SP_ALIYUN_READCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,true);
+				if(SP_ALIYUN_READCONTACT_MESSAGE){
+					final CheckBox cb=new CheckBox(this);
+					cb.setText("不再提示");
+					new AlertDialog.Builder(this)
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.setCancelable(false)
+					.setMessage("应用正在尝试读取你的联系人!")
+					.setView(cb)
+					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(cb.isChecked()){
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,false);
+							}
+							contactContent.loadData(true);
+							contactContent.isOpenRefreshData=false;
+						}
+					}).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							contactContent.isOpenRefreshData=false;
+						}
+					}).show();
+				}else{
+					contactContent.loadData(true);
+					contactContent.isOpenRefreshData=false;
+				}
 			}
 		}else if(currentIndex==3){
 			if(recordedManagerContent.isOpenRefreshData){

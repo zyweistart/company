@@ -3,8 +3,10 @@ package com.ancun.yulualiyun.content;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -14,9 +16,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.ancun.core.Constant;
 import com.ancun.core.CoreScrollContent;
 import com.ancun.core.Constant.Auth;
 import com.ancun.yulualiyun.MainActivity;
@@ -252,13 +256,44 @@ public class DialContent extends CoreScrollContent implements OnClickListener , 
 		}else if(v==btnAddContact){
 			//增加联系人
 			if (phone.length()>0) {
-				Intent intent = new Intent(Intent.ACTION_INSERT);
-				intent.setType("vnd.android.cursor.dir/person");
-				intent.setType("vnd.android.cursor.dir/contact");
-				intent.setType("vnd.android.cursor.dir/raw_contact");
-				intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE, phone);
-				intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE_TYPE,android.provider.Contacts.PhonesColumns.TYPE_MOBILE);
-				startActivity(intent);
+				boolean SP_ALIYUN_ADDCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_ADDCONTACT_MESSAGE,true);
+				if(SP_ALIYUN_ADDCONTACT_MESSAGE){
+					final CheckBox cb=new CheckBox(getContext());
+					cb.setText("不再提示");
+					new AlertDialog.Builder(getContext())
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.setCancelable(false)
+					.setMessage("应用将要跳转至本地联系人添加界面")
+					.setView(cb)
+					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(cb.isChecked()){
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_ADDCONTACT_MESSAGE,false);
+							}
+							Intent intent = new Intent(Intent.ACTION_INSERT);
+							intent.setType("vnd.android.cursor.dir/person");
+							intent.setType("vnd.android.cursor.dir/contact");
+							intent.setType("vnd.android.cursor.dir/raw_contact");
+							intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE, phone);
+							intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE_TYPE,android.provider.Contacts.PhonesColumns.TYPE_MOBILE);
+							startActivity(intent);
+						}
+					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					}).show();
+				}else{
+					Intent intent = new Intent(Intent.ACTION_INSERT);
+					intent.setType("vnd.android.cursor.dir/person");
+					intent.setType("vnd.android.cursor.dir/contact");
+					intent.setType("vnd.android.cursor.dir/raw_contact");
+					intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE, phone);
+					intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE_TYPE,android.provider.Contacts.PhonesColumns.TYPE_MOBILE);
+					startActivity(intent);
+				}
 			}else {
 				getAppContext().makeTextShort("请输入号码后，再点击添加联系人");
 			}

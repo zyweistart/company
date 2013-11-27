@@ -94,6 +94,22 @@ public final class Constant {
 		 */
 		public static final String SP_ALIYUN_DIAL_MESSAGE="SP_ALIYUN_DIAL_MESSAGE";
 		/**
+		 * 提示读取通话记录
+		 */
+		public static final String SP_ALIYUN_RECRECENT_MESSAGE="SP_ALIYUN_RECRECENT_MESSAGE";
+		/**
+		 * 提示读取联系人
+		 */
+		public static final String SP_ALIYUN_READCONTACT_MESSAGE="SP_ALIYUN_READCONTACT_MESSAGE";
+		/**
+		 * 添加到通讯录
+		 */
+		public static final String SP_ALIYUN_ADDCONTACT_MESSAGE="SP_ALIYUN_ADDCONTACT_MESSAGE";
+		/**
+		 * 发送短信息
+		 */
+		public static final String SP_ALIYUN_SENDMESSAGE_MESSAGE="SP_ALIYUN_SENDMESSAGE_MESSAGE";
+		/**
 		 * 是否绑定阿里云淘宝账户
 		 */
 		public static final String SP_ALIYUN_INIT_SET="SP_ALIYUN_INIT_SET";
