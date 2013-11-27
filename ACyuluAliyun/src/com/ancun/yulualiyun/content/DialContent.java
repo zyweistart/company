@@ -259,13 +259,18 @@ public class DialContent extends CoreScrollContent implements OnClickListener , 
 				boolean SP_ALIYUN_ADDCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_ADDCONTACT_MESSAGE,true);
 				if(SP_ALIYUN_ADDCONTACT_MESSAGE){
 					final CheckBox cb=new CheckBox(getContext());
-					cb.setText("不再提示");
+					cb.setText("不再显示提醒");
 					new AlertDialog.Builder(getContext())
 					.setIcon(android.R.drawable.ic_dialog_info)
 					.setCancelable(false)
 					.setMessage("将转至手机通讯录新增联系人操作界面并将该联系人添加为手机本地联系人，是否允许操作？")
 					.setView(cb)
-					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+					.setPositiveButton("否", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					}).setNegativeButton("是", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if(cb.isChecked()){
@@ -278,11 +283,6 @@ public class DialContent extends CoreScrollContent implements OnClickListener , 
 							intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE, phone);
 							intent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE_TYPE,android.provider.Contacts.PhonesColumns.TYPE_MOBILE);
 							startActivity(intent);
-						}
-					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
 						}
 					}).show();
 				}else{

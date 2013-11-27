@@ -165,24 +165,24 @@ public abstract class CoreActivity  extends StatActivity {
 		boolean SP_ALIYUN_DIAL_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_DIAL_MESSAGE,true);
 		if(SP_ALIYUN_DIAL_MESSAGE){
 			final CheckBox cb=new CheckBox(this);
-			cb.setText("不再提示");
+			cb.setText("不再显示提醒");
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
 			.setMessage("将启用手机拨打电话功能接入保全平台并呼叫该号码 ，同时将在电信局端对该段通话进行录音保全，确认拨打并保存通话录音？（部分机型通话记录将显示为平台接入号码95105856）")
 			.setView(cb)
-			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+			.setPositiveButton("否", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).setNegativeButton("是", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(cb.isChecked()){
 						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_DIAL_MESSAGE,false);
 					}
 					inAppDial2(dial);
-				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
 				}
 			}).show();
 		}else{

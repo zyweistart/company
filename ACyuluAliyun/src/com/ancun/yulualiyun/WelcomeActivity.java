@@ -94,24 +94,24 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		boolean SP_ALIYUN_NETWORK_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,true);
 		if(SP_ALIYUN_NETWORK_MESSAGE){
 			final CheckBox cb=new CheckBox(this);
-			cb.setText("不再提示");
+			cb.setText("不再显示提醒");
 			new AlertDialog.Builder(WelcomeActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
 			.setMessage("欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中可能会产生网络流量费用，流量资费请咨询当地运营商，是否允许应用建立连接？")
 			.setView(cb)
-			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+			.setPositiveButton("不允许，关闭应用", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			}).setNegativeButton("允许", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(cb.isChecked()){
 						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,false);
 					}
 					execute();
-				}
-			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
 				}
 			}).show();
 		}else{

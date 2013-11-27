@@ -138,13 +138,18 @@ public class RecordedAppealTaobaoExtractionCode extends CoreActivity implements 
              boolean SP_ALIYUN_SENDMESSAGE_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_SENDMESSAGE_MESSAGE,true);
      		if(SP_ALIYUN_SENDMESSAGE_MESSAGE){
      			final CheckBox cb=new CheckBox(this);
-     			cb.setText("不再提示");
+     			cb.setText("不再显示提醒");
      			new AlertDialog.Builder(this)
      			.setIcon(android.R.drawable.ic_dialog_info)
      			.setCancelable(false)
      			.setMessage("该条录音提取码信息将启用手机短信生成功能并以手机短信形式发给对方，短信费用由运营商收取，确认以手机短信形式发送给对方？")
      			.setView(cb)
-     			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+     			.setPositiveButton("否", new DialogInterface.OnClickListener() {
+     				@Override
+     				public void onClick(DialogInterface dialog, int which) {
+     					dialog.dismiss();
+     				}
+     			}).setNegativeButton("是", new DialogInterface.OnClickListener() {
      				@Override
      				public void onClick(DialogInterface dialog, int which) {
      					if(cb.isChecked()){
@@ -160,11 +165,6 @@ public class RecordedAppealTaobaoExtractionCode extends CoreActivity implements 
      		             // 短信内容 
      		             mIntent.putExtra("sms_body",strContent1);
      		             startActivity(mIntent); 
-     				}
-     			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-     				@Override
-     				public void onClick(DialogInterface dialog, int which) {
-     					dialog.dismiss();
      				}
      			}).show();
      		}else{

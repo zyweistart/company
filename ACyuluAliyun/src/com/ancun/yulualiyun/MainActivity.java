@@ -338,25 +338,25 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 				boolean SP_ALIYUN_RECRECENT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,true);
 				if(SP_ALIYUN_RECRECENT_MESSAGE){
 					final CheckBox cb=new CheckBox(this);
-					cb.setText("不再提示");
+					cb.setText("不再显示提醒");
 					new AlertDialog.Builder(this)
 					.setIcon(android.R.drawable.ic_dialog_info)
 					.setCancelable(false)
 					.setMessage("应用将读取本地通话记录，以便您快速呼叫通话记录中的非通讯录联系人并对相关通话进行录音保全，我们不会保存和修改您通话记录中的任何信息。是否允许读取？")
 					.setView(cb)
-					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+					.setPositiveButton("否", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							recentContent.isOpenRefreshData=false;
+						}
+					}).setNegativeButton("是", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if(cb.isChecked()){
 								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,false);
 							}
 							recentContent.loadData(true);
-							recentContent.isOpenRefreshData=false;
-						}
-					}).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
 							recentContent.isOpenRefreshData=false;
 						}
 					}).show();
@@ -371,25 +371,25 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 				boolean SP_ALIYUN_READCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,true);
 				if(SP_ALIYUN_READCONTACT_MESSAGE){
 					final CheckBox cb=new CheckBox(this);
-					cb.setText("不再提示");
+					cb.setText("不再显示提醒");
 					new AlertDialog.Builder(this)
 					.setIcon(android.R.drawable.ic_dialog_info)
 					.setCancelable(false)
 					.setMessage("应用将读取手机本地通讯录，以便您通过客户端快速呼叫通讯录联系人并根据您的需要通话内容进行录音保全，应用不会保存和针对账号绑定通讯录的任何资料。是否允许读取？")
 					.setView(cb)
-					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+					.setPositiveButton("否", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							contactContent.isOpenRefreshData=false;
+						}
+					}).setNegativeButton("是", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if(cb.isChecked()){
 								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,false);
 							}
 							contactContent.loadData(true);
-							contactContent.isOpenRefreshData=false;
-						}
-					}).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
 							contactContent.isOpenRefreshData=false;
 						}
 					}).show();
