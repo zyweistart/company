@@ -12,6 +12,7 @@ import android.text.ClipboardManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ancun.core.Constant;
@@ -125,7 +126,7 @@ public class RecordedAppealTaobaoExtractionCode extends CoreActivity implements 
 	
 	@Override
 	public void onClick(View v) {
-		String strContent=tv_recorded_appeal_taobao_code_url.getText().toString()+tv_recorded_appeal_taobao_code.getText().toString();
+		final String strContent=tv_recorded_appeal_taobao_code_url.getText().toString()+tv_recorded_appeal_taobao_code.getText().toString();
 		switch(v.getId()){
 		case R.id.recorded_appeal_taobao_btn_copy:
 			//复制内容
@@ -134,16 +135,50 @@ public class RecordedAppealTaobaoExtractionCode extends CoreActivity implements 
 			makeTextLong("复制成功");
 			break;
 		case R.id.recorded_appeal_taobao_btn_send_to_mobile:
-             // 联系人地址 
-             Uri smsToUri = Uri.parse("smsto:");
-             Intent mIntent = new Intent(android.content.Intent.ACTION_SENDTO, 
-             smsToUri); 
-             
-             strContent="您申请的录音提取码为："+strContent+" ，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】";
-             
-             // 短信内容 
-             mIntent.putExtra("sms_body",strContent);
-             startActivity(mIntent); 
+             boolean SP_ALIYUN_SENDMESSAGE_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_SENDMESSAGE_MESSAGE,true);
+     		if(SP_ALIYUN_SENDMESSAGE_MESSAGE){
+     			final CheckBox cb=new CheckBox(this);
+     			cb.setText("不再提示");
+     			new AlertDialog.Builder(this)
+     			.setIcon(android.R.drawable.ic_dialog_info)
+     			.setCancelable(false)
+     			.setMessage("该条录音提取码信息将启用手机短信生成功能并以手机短信形式发给对方，短信费用由运营商收取，确认以手机短信形式发送给对方？")
+     			.setView(cb)
+     			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+     				@Override
+     				public void onClick(DialogInterface dialog, int which) {
+     					if(cb.isChecked()){
+     						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_SENDMESSAGE_MESSAGE,false);
+     					}
+     					 // 联系人地址 
+     		             Uri smsToUri = Uri.parse("smsto:");
+     		             Intent mIntent = new Intent(android.content.Intent.ACTION_SENDTO, 
+     		             smsToUri); 
+     		             
+     		             String strContent1="您申请的录音提取码为："+strContent+" ，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】";
+     		             
+     		             // 短信内容 
+     		             mIntent.putExtra("sms_body",strContent1);
+     		             startActivity(mIntent); 
+     				}
+     			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+     				@Override
+     				public void onClick(DialogInterface dialog, int which) {
+     					dialog.dismiss();
+     				}
+     			}).show();
+     		}else{
+     			 // 联系人地址 
+                Uri smsToUri = Uri.parse("smsto:");
+                Intent mIntent = new Intent(android.content.Intent.ACTION_SENDTO, 
+                smsToUri); 
+                
+                String strContent1="您申请的录音提取码为："+strContent+" ，凭该提取码可在官网公开查询、下载本条通话录音，请妥善保管。客服电话:95105856【安存科技】";
+                
+                // 短信内容 
+                mIntent.putExtra("sms_body",strContent1);
+                startActivity(mIntent); 
+     		}
 			break;
 		case R.id.recorded_appeal_taobao_btn_cancel:
 			if(!getAppContext().isAuth(Auth.v4recalter8)){

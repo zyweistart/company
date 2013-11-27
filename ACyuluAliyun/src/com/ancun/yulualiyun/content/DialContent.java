@@ -263,7 +263,7 @@ public class DialContent extends CoreScrollContent implements OnClickListener , 
 					new AlertDialog.Builder(getContext())
 					.setIcon(android.R.drawable.ic_dialog_info)
 					.setCancelable(false)
-					.setMessage("应用将要跳转至本地联系人添加界面")
+					.setMessage("将转至手机通讯录新增联系人操作界面并将该联系人添加为手机本地联系人，是否允许操作？")
 					.setView(cb)
 					.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
 						@Override

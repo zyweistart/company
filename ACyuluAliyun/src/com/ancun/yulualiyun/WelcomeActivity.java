@@ -98,7 +98,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 			new AlertDialog.Builder(WelcomeActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
-			.setMessage("欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中会产生流量费，流量费请咨询当地运营商，是否允许应用建立连接?")
+			.setMessage("欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中可能会产生网络流量费用，流量资费请咨询当地运营商，是否允许应用建立连接？")
 			.setView(cb)
 			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
 				@Override

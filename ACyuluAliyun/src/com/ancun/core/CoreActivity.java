@@ -169,7 +169,7 @@ public abstract class CoreActivity  extends StatActivity {
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
-			.setMessage("应用正准备调用你的拨号盘进行拨号通话")
+			.setMessage("将启用手机拨打电话功能接入保全平台并呼叫该号码 ，同时将在电信局端对该段通话进行录音保全，确认拨打并保存通话录音？（部分机型通话记录将显示为平台接入号码95105856）")
 			.setView(cb)
 			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
 				@Override
