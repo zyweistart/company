@@ -83,6 +83,7 @@
 	                 android:background="@drawable/tabs_bar_left_on"
 	                 android:clickable="true"
 	                 android:gravity="center"
+	                 android:onClick="onClick"
 	                 android:text="部门" />
 	
 	             <TextView
@@ -93,6 +94,7 @@
 	                 android:background="@drawable/tabs_bar_right_off"
 	                 android:clickable="true"
 	                 android:gravity="center"
+	                 android:onClick="onClick"
 	                 android:text="医生" />
 	
 	             <TextView
@@ -104,6 +106,7 @@
 	                 android:background="@drawable/tab_left"
 	                 android:clickable="true"
 	                 android:gravity="center"
+	                 android:onClick="onClick"
 	                 android:text="房间"
 	                 android:textSize="14sp" />
 	
@@ -116,6 +119,7 @@
 	                 android:background="@drawable/tab_right"
 	                 android:clickable="true"
 	                 android:gravity="center"
+	                 android:onClick="onClick"
 	                 android:text="开水间"
 	                 android:textSize="14sp" />
 	         </LinearLayout>

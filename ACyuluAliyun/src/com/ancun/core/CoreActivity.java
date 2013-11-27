@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -22,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ancun.model.UIRunnable;
@@ -161,6 +163,35 @@ public abstract class CoreActivity  extends StatActivity {
 	 * 应用内拔号
 	 */
 	public void inAppDial(final String dial) {
+		boolean SP_ALIYUN_DIAL_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_DIAL_MESSAGE,true);
+		if(SP_ALIYUN_DIAL_MESSAGE){
+			final CheckBox cb=new CheckBox(this);
+			cb.setText("不在提示");
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(false)
+			.setMessage("正在调用你的本机拨号盘进行呼叫")
+			.setView(cb)
+			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(cb.isChecked()){
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_DIAL_MESSAGE,false);
+					}
+					inAppDial2(dial);
+				}
+			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).show();
+		}else{
+			inAppDial2(dial);
+		}
+	}
+	
+	private void inAppDial2(final String dial){
 		if(Constant.noCall.contains(dial)){
 			Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+dial));
 			startActivity(intent);

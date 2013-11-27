@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.ancun.core.AliYunOSAPI;
@@ -90,6 +91,36 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
+		boolean SP_ALIYUN_NETWORK_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,true);
+		if(SP_ALIYUN_NETWORK_MESSAGE){
+			final CheckBox cb=new CheckBox(this);
+			cb.setText("不在提示");
+			new AlertDialog.Builder(WelcomeActivity.this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(false)
+			.setMessage("欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中会产生流量费，流量费请咨询当地运营商，是否允许应用建立连接?")
+			.setView(cb)
+			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(cb.isChecked()){
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,false);
+					}
+					execute();
+				}
+			}).setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			}).show();
+		}else{
+			execute();
+		}
+	}
+	
+	private void execute(){
+//		boolean SP_ALIYUN_INIT_SET=true;
 		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
 			if(NetConnectManager.isNetWorkAvailable(WelcomeActivity.this)){

@@ -5,25 +5,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -42,7 +33,6 @@ import com.ancun.utils.LogUtils;
 import com.ancun.utils.NetConnectManager;
 import com.ancun.utils.PasswordVerityUtils;
 import com.ancun.utils.TimeUtils;
-import com.ancun.widget.DialFloatView;
 import com.ancun.widget.ScrollLayout;
 import com.ancun.yulualiyun.AppContext.LoadMode;
 import com.ancun.yulualiyun.content.ContactContent;
@@ -55,7 +45,6 @@ import com.ancun.yulualiyun.content.RecordedManagerContent;
  */
 public class MainActivity extends CoreActivity implements ScrollLayout.LayoutChangeListener, OnClickListener {
 	
-	private TelephonyManager manager;
 	private InputMethodManager imManager; 
 	
 	private ImageButton activity_main_ibmore; 
@@ -127,8 +116,8 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		
 		imManager=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		//电话监听
-		manager = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
-		manager.listen(new MyPhoneStateListener(),PhoneStateListener.LISTEN_CALL_STATE);
+//		manager = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+//		manager.listen(new MyPhoneStateListener(getAppContext()),PhoneStateListener.LISTEN_CALL_STATE);
 		
 		//网络检测
 		new Thread(new Runnable() {
@@ -447,96 +436,6 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		return activity_main_scrolllayout;
 	}
 
-	/**
-	 * 远程视图全局变量
-	 */
-	private static DialFloatView myFV;
-	/**
-	 * 电话监听
-	 */
-	public class MyPhoneStateListener extends PhoneStateListener {
-		
-		private ImageView ivClose;
-		private WindowManager wm;
-		
-		@Override
-		public void onCallStateChanged(int state, String incomingNumber) {
-			String callDial=getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferencesConstant.SP_CALL_DIAL, Constant.EMPTYSTR);
-			switch (state) {
-			case TelephonyManager.CALL_STATE_OFFHOOK:
-				if(!Constant.EMPTYSTR.equals(callDial)){
-					if(myFV==null){
-						myFV=new DialFloatView(getApplicationContext());
-					    	//获取WindowManager
-					    	wm=(WindowManager)getApplicationContext().getSystemService(WINDOW_SERVICE);
-					    	View view=LayoutInflater.from(MainActivity.this).inflate(R.layout.common_diallistener, null);
-					    	ivClose=(ImageView)view.findViewById(R.id.dial_listener_btn_close);
-		                    ivClose.setOnClickListener(new View.OnClickListener() {		
-								@Override
-								public void onClick(View v) {
-									if(wm!=null&&myFV!=null){
-								        	//在程序退出(Activity销毁）时销毁悬浮窗口
-								        	wm.removeView(myFV);
-								        	myFV=null;
-							        }
-								}
-							});
-					    	TextView tvMessage=(TextView)view.findViewById(R.id.dial_listener_text);
-					    	tvMessage.setText("您正在通过安存语录与"+callDial+"录音通话中…");
-					    	myFV.addView(view);
-				        //设置LayoutParams(全局变量）相关参数
-					    	WindowManager.LayoutParams wmParams = ((AppContext)getApplication()).getMywmParams();
-					    	//设置window type
-				        wmParams.type=LayoutParams.TYPE_PHONE;
-				        //设置图片格式，效果为背景透明
-				        wmParams.format=PixelFormat.RGBA_8888;
-				        //设置Window flag
-				        wmParams.flags=LayoutParams.FLAG_NOT_TOUCH_MODAL | LayoutParams.FLAG_NOT_FOCUSABLE;
-						//下面的flags属性的效果形同“锁定”。
-						//悬浮窗不可触摸，不接受任何事件,同时不影响后面的事件响应。
-						//wmParams.flags=LayoutParams.FLAG_NOT_TOUCH_MODAL 
-						//				   | LayoutParams.FLAG_NOT_FOCUSABLE
-						//				   | LayoutParams.FLAG_NOT_TOUCHABLE;
-				        //调整悬浮窗口至左上角
-				        wmParams.gravity=Gravity.LEFT|Gravity.TOP;
-				        //以屏幕左上角为原点，设置x、y初始值
-				        wmParams.x=0;
-				        wmParams.y=0;
-				        //设置悬浮窗口长宽数据
-				        wmParams.width=android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-				        wmParams.height=android.view.ViewGroup.LayoutParams.WRAP_CONTENT;;
-				        //显示myFloatView图像
-				        wm.addView(myFV, wmParams);
-					}
-				}
-				break;
-			case TelephonyManager.CALL_STATE_IDLE:
-				if(!Constant.EMPTYSTR.equals(callDial)){
-					if(wm!=null&&myFV!=null){
-				        	//在程序退出(Activity销毁）时销毁悬浮窗口
-				        	wm.removeView(myFV);
-				        	myFV=null;
-			        }
-				}
-				getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_CALL_DIAL, Constant.EMPTYSTR);
-				if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_MAINACTIVITY_FLAG, false)){
-					ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-					ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
-					if(!cn.getClassName().equals(MainActivity.class.getName())){
-						//Android4.0以上系统默认打完电话后会跳转到
-						//{act=android.intent.action.VIEW typ=vnd.android.cursor.dir/calls cmp=com.android.contacts/.activities.DialtactsActivity u=0}
-						Intent intent=new Intent(MainActivity.this,MainActivity.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-					}
-				}
-				break;
-			}
-			
-		}
-
-	}
-	
 	private void setWelcomeInfo(){
 		final String prodid=getAppContext().getUserInfo().get("prodid");
 		if(!"".equals(prodid)){

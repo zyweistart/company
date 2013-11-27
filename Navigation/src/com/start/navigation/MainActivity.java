@@ -148,7 +148,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private Button mapButtonCancel;
 	private LinearLayout mapLLQueryContentContainer;
 	
-	private Boolean isCurrentTabDepartment;
+	private Boolean isCurrentTabDepartment=false;
 	private ArrayAdapter<Doctor> doctorArrayAdapter;
 	private ArrayAdapter<Department> departmentArrayAdapter;
 	private ListView mModuleMainFrameMapQueryList;

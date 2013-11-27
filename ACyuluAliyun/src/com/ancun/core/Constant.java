@@ -86,6 +86,14 @@ public final class Constant {
 	 */
 	public final class SharedPreferencesConstant{
 		/**
+		 * 提示网络连接信息
+		 */
+		public static final String SP_ALIYUN_NETWORK_MESSAGE="SP_ALIYUN_NETWORK_MESSAGE";
+		/**
+		 * 提示拨打电话信息
+		 */
+		public static final String SP_ALIYUN_DIAL_MESSAGE="SP_ALIYUN_DIAL_MESSAGE";
+		/**
 		 * 是否绑定阿里云淘宝账户
 		 */
 		public static final String SP_ALIYUN_INIT_SET="SP_ALIYUN_INIT_SET";
