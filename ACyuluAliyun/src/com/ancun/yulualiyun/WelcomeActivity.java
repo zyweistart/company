@@ -120,8 +120,8 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	}
 	
 	private void execute(){
-//		boolean SP_ALIYUN_INIT_SET=true;
-		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
+		boolean SP_ALIYUN_INIT_SET=true;
+//		boolean SP_ALIYUN_INIT_SET=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,false);
 		if(!SP_ALIYUN_INIT_SET){
 			if(NetConnectManager.isNetWorkAvailable(WelcomeActivity.this)){
 				new Thread(new Runnable() {
