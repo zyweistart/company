@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -33,10 +34,9 @@ import com.ancun.utils.StringUtils;
 import com.ancun.yulualiyun.AppContext;
 import com.ancun.yulualiyun.R;
 import com.ancun.yulualiyun.content.RecordedManagerContent;
-import com.baidu.mobstat.StatActivity;
 import com.umeng.analytics.MobclickAgent;
 
-public abstract class CoreActivity  extends StatActivity {
+public abstract class CoreActivity  extends Activity {
 
 	protected final String TAG=this.getClass().getSimpleName();
 	
