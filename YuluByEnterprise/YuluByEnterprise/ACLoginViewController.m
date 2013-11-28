@@ -101,14 +101,8 @@
     [btnLogin setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnLogin addTarget:self action:@selector(onClickLogin:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnLogin];
-    //注册按钮
-    UIButton *btnRegister=[[UIButton alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?420:370, 295, 32)];
-    btnRegister.titleLabel.font=[UIFont systemFontOfSize: 17.0];
-    [btnRegister setTitle:@"还没有账户，马上去注册>>" forState:UIControlStateNormal];
-    [btnRegister addTarget:self action:@selector(onClickRegister:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnRegister];
     
-    UILabel *lblTipTxt=[[UILabel alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?450:400, 295, 64)];
+    UILabel *lblTipTxt=[[UILabel alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?420:370, 295, 64)];
     lblTipTxt.font=[UIFont systemFontOfSize:12.0];
     [lblTipTxt setNumberOfLines:0];
     [lblTipTxt setText:@"请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全."];
@@ -282,14 +276,6 @@
         [_loginHttp setController:self];
         [_loginHttp handle:@"v4Login" signKey:[_txtPassword.text md5] requestParams:requestParams];
     }
-}
-
-//注册
-- (void)onClickRegister:(id)sender {
-    ACRegisterViewController *registerViewController=[[ACRegisterViewController alloc]init];
-    UINavigationController *registerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:registerViewController];
-    registerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
-    [self presentViewController:registerViewControllerNav animated:YES completion:nil];
 }
 
 //忘记密码
