@@ -81,7 +81,7 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
  * 
  */
 public class MainActivity extends MapActivity implements OnTouchListener,
-		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener {
+		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
 	private static final String BUNDLEDATA_DATA = "data";
 
@@ -148,15 +148,15 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private Button mapButtonCancel;
 	private LinearLayout mapLLQueryContentContainer;
 	
-	private Boolean isCurrentTabDepartment=false;
+	private Boolean isTabDepartment=false;
 	private ArrayAdapter<Doctor> doctorArrayAdapter;
 	private ArrayAdapter<Department> departmentArrayAdapter;
 	private ListView mModuleMainFrameMapQueryList;
 	
 	public static String currentLocationDepartmentId;
 	
-	private Button mModuleMainFrameMapQueryContentTabDepartment;
-	private Button mModuleMainFrameMapQueryContentTabDoctor;
+	private TextView mModuleMainFrameMapQueryContentTabDepartment;
+	private TextView mModuleMainFrameMapQueryContentTabDoctor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +178,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
+		mapButtonCancel.setVisibility(View.GONE);
+		mapLLQueryContentContainer.setVisibility(View.GONE);
+		mapQuery.clearFocus();
 		if(currentLocationDepartmentId!=null){
 			if(mCurSel!=1){
 				setCurPoint(1);
@@ -310,7 +313,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		});
 		mapLLQueryContentContainer=(LinearLayout)findViewById(R.id.module_main_frame_map_query_content_container);
 		
-		
 		mModuleMainFrameIntroductionContent = (View) findViewById(R.id.module_main_frame_introduction_content);
 		mModuleMainFrameProcessContent = (View) findViewById(R.id.module_main_frame_process_content);
 		mModuleMainFrameFriendContent = (View) findViewById(R.id.module_main_frame_friend_content);
@@ -346,6 +348,11 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		
 		// map
 		mGestureDetector = new GestureDetector(this, new OnTapMapListener(this));
+		
+		mModuleMainFrameMapQueryContentTabDepartment=(TextView)findViewById(R.id.module_main_frame_map_query_content_tab_department);
+		mModuleMainFrameMapQueryContentTabDoctor=(TextView)findViewById(R.id.module_main_frame_map_query_content_tab_doctor);
+		mModuleMainFrameMapQueryList=(ListView)findViewById(R.id.module_main_frame_map_query_list);
+		mModuleMainFrameMapQueryList.setOnItemClickListener(this);
 		
 		// process
 		mModuleMainFrameProcessTitle = (TextView) findViewById(R.id.module_main_frame_process_title);
@@ -622,7 +629,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	public void onClick(View v) {
 		if (v.getId() == R.id.module_main_frame_introduction_btnHospital) {
 			// 医院介绍
-			
+			Intent intent = new Intent(this, HospitalDetailActivity.class);
+			startActivity(intent);
 		} else if (v.getId() == R.id.module_main_frame_introduction_btnDepartment) {
 			// 部门介绍
 			Intent intent = new Intent(this, DepartmentListActivity.class);
@@ -665,8 +673,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		} else if (v.getId() == R.id.module_main_header_content_search) {
 
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
-			if(!isCurrentTabDepartment){
-				isCurrentTabDepartment=true;
+			if(isTabDepartment){
+				isTabDepartment=false;
 				if(departmentArrayAdapter == null){
 					List<Department> departments=appContext.getDepartmentService().findAll();
 					departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
@@ -677,14 +685,14 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
 			}
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_doctor) {
-			if(!isCurrentTabDepartment){
-				isCurrentTabDepartment=false;
+			if(!isTabDepartment){
+				isTabDepartment=true;
 				if(doctorArrayAdapter == null){
 					List<Doctor> doctors=appContext.getDoctorService().findAll();
 					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_department, R.id.lvitem_department_name, doctors);
 				}
-				v.setBackgroundResource(R.drawable.tabs_bar_left_on);
-				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				v.setBackgroundResource(R.drawable.tabs_bar_right_on);
+				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_off);
 				mModuleMainFrameMapQueryList.setAdapter(doctorArrayAdapter);
 				doctorArrayAdapter.getFilter().filter(mapQuery.getText());
 			}
@@ -936,6 +944,25 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+		if(isTabDepartment){
+			Doctor doctor=(Doctor)adapter.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putString(Doctor._ID, doctor.getId());
+			Intent intent=new Intent(this,DoctorDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}else{
+			Department department=(Department)adapter.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putString(Department.COLUMN_NAME_ID, department.getId());
+			Intent intent=new Intent(this,DepartmentDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
 	}
 
 }

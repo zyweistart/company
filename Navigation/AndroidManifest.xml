@@ -41,6 +41,8 @@
         <activity android:name=".DoctorListActivity" android:launchMode="singleTask"/>
         <activity android:name=".DoctorDetailActivity" android:launchMode="singleTask"/>
         
+        <activity android:name=".HospitalDetailActivity"/>
+        
         <activity android:name=".MoreActivity"/>
         
     </application>
