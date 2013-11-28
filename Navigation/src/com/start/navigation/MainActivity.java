@@ -22,6 +22,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -292,6 +294,28 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mapQuery=(EditText)findViewById(R.id.module_main_frame_map_query);
 		mapQuery.setOnFocusChangeListener(this);
 		mapQuery.setOnEditorActionListener(this);
+		mapQuery.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,int count) {
+				if(isTabDepartment){
+					doctorArrayAdapter.getFilter().filter(s);;
+				}else{
+					departmentArrayAdapter.getFilter().filter(s);
+				}
+			}
+			
+		});
 		mapButtonCancel=(Button)findViewById(R.id.module_main_frame_map_button_cancel);
 		mapButtonCancel.setOnClickListener(new OnClickListener() {
 			
