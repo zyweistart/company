@@ -132,20 +132,21 @@ public final class R {
         public static final int activity_department_list=0x7f030001;
         public static final int activity_doctor_detail=0x7f030002;
         public static final int activity_doctor_list=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int activity_more=0x7f030005;
-        public static final int activity_start=0x7f030006;
-        public static final int lvitem_department=0x7f030007;
-        public static final int lvitem_friendlocation=0x7f030008;
-        public static final int lvitem_mapdata_index=0x7f030009;
-        public static final int module_main_footer=0x7f03000a;
-        public static final int module_main_frame_friend=0x7f03000b;
-        public static final int module_main_frame_introduction=0x7f03000c;
-        public static final int module_main_frame_map=0x7f03000d;
-        public static final int module_main_frame_process=0x7f03000e;
-        public static final int module_main_header=0x7f03000f;
-        public static final int widget_dialog_poi=0x7f030010;
-        public static final int widget_pull_to_refresh_head=0x7f030011;
+        public static final int activity_hospital_detail=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int activity_more=0x7f030006;
+        public static final int activity_start=0x7f030007;
+        public static final int lvitem_department=0x7f030008;
+        public static final int lvitem_friendlocation=0x7f030009;
+        public static final int lvitem_mapdata_index=0x7f03000a;
+        public static final int module_main_footer=0x7f03000b;
+        public static final int module_main_frame_friend=0x7f03000c;
+        public static final int module_main_frame_introduction=0x7f03000d;
+        public static final int module_main_frame_map=0x7f03000e;
+        public static final int module_main_frame_process=0x7f03000f;
+        public static final int module_main_header=0x7f030010;
+        public static final int widget_dialog_poi=0x7f030011;
+        public static final int widget_pull_to_refresh_head=0x7f030012;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
