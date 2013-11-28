@@ -105,7 +105,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 	private TextView mModuleMainHeaderContentTitle;
 	private Button mModuleMainHeaderContentLocation;
-	private Button mModuleMainHeaderContentSearch;
 
 	private Button mModuleMainFrameIntroduction_btnHospital;
 	private Button mModuleMainFrameIntroduction_btnDepartment;
@@ -219,7 +218,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				if (index == 0) {
 					mModuleMainHeaderContentTitle.setText("介绍");
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
-					mModuleMainHeaderContentSearch.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.VISIBLE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
@@ -227,7 +225,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				} else if (index == 1) {
 					mModuleMainHeaderContentTitle.setText("地图");
 					mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
-					mModuleMainHeaderContentSearch.setVisibility(View.VISIBLE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.VISIBLE);
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
@@ -235,7 +232,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				} else if (index == 2) {
 					mModuleMainHeaderContentTitle.setText("流程");
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
-					mModuleMainHeaderContentSearch.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
 					mModuleMainFrameProcessContent.setVisibility(View.VISIBLE);
@@ -243,7 +239,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				} else if (index == 3) {
 					mModuleMainHeaderContentTitle.setText("好友");
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
-					mModuleMainHeaderContentSearch.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
@@ -269,8 +264,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mModuleMainHeaderContentTitle = (TextView) findViewById(R.id.module_main_header_content_title);
 		mModuleMainHeaderContentLocation = (Button) findViewById(R.id.module_main_header_content_location);
 		mModuleMainHeaderContentLocation.setOnClickListener(this);
-		mModuleMainHeaderContentSearch = (Button) findViewById(R.id.module_main_header_content_search);
-		mModuleMainHeaderContentSearch.setOnClickListener(this);
 	}
 
 	/**
@@ -670,8 +663,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
 			addMyLocMarker(myLocation);
-		} else if (v.getId() == R.id.module_main_header_content_search) {
-
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			if(isTabDepartment){
 				isTabDepartment=false;
@@ -931,6 +922,15 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@Override
 	public void onFocusChange(View v, boolean hasFocus) {
 		if(hasFocus){
+			if(departmentArrayAdapter == null){
+				isTabDepartment=false;
+				List<Department> departments=appContext.getDepartmentService().findAll();
+				departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
+				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_on);
+				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
+				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
 			mapButtonCancel.setVisibility(View.VISIBLE);
 			mapLLQueryContentContainer.setVisibility(View.VISIBLE);
 		}
