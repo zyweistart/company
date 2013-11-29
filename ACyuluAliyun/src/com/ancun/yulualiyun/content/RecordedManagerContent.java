@@ -243,7 +243,7 @@ public class RecordedManagerContent extends CoreScrollContent implements Filtera
 					final ViewHolder vh=(ViewHolder)view.getTag();
 					new AlertDialog.Builder(getActivity())
 					.setIcon(android.R.drawable.ic_dialog_info)
-					.setMessage("确认删除该条录音？被录音删除将进入录音回收站，如需还原或彻底删除请登录安存语录官网（www.95105856.com）“我的录音-回收站”进行操作。")
+					.setMessage("确认删除该条录音？")
 					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
 							if(!getAppContext().isAuth(Auth.v4recalter1)){
@@ -253,7 +253,7 @@ public class RecordedManagerContent extends CoreScrollContent implements Filtera
 								//设置文本输入时为密码状态
 								input.setTransformationMethod(PasswordTransformationMethod.getInstance());
 								new AlertDialog.Builder(getActivity())  
-				                .setTitle("请输入登录密码")  
+				                .setMessage("请输入登录密码——被录音删除将进入录音回收站，如需还原或彻底删除请登录安存语录官网“我的录音-回收站”进行操作。")
 				                .setView(input)  
 				                .setPositiveButton("确定",  
 				                        new DialogInterface.OnClickListener() {  
