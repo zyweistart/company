@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_refresh_readcall"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="刷新本地通话记录"/>
+    <item
+        android:id="@+id/action_refresh_contact"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="刷新本地通讯录"/>
+
+</menu>

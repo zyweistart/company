@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
@@ -490,6 +492,24 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 	public ScrollLayout getMainContentLayout() {
 		return activity_main_scrolllayout;
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+	
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	    	if(item.getItemId()==R.id.action_refresh_readcall){
+	    		recentContent.loadData(true);
+			recentContent.isOpenRefreshData=false;
+	    	}else if(item.getItemId()==R.id.action_refresh_contact){
+    			contactContent.loadData(true);
+			contactContent.isOpenRefreshData=false;
+    		}
+    		return super.onOptionsItemSelected(item);
+    }
 
 	private void setWelcomeInfo(){
 		final String prodid=getAppContext().getUserInfo().get("prodid");
