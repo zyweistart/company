@@ -202,7 +202,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 //						DecimalFormat df=new DecimalFormat("#.##");
 //						
 //						Float bquota=Float.parseFloat(getInfoContent().get("bquota"));
-						Float rtsize=Float.parseFloat(entinfo.get("rtsize"));
+						Float rtsize=Float.parseFloat(entinfo.get("nrtsize"));
 //						Float bq=(float)(bquota/1024/1024);
 						Float rt=(float)(rtsize/1024/1024);
 						String noUseV=df.format(bq-rt);
@@ -382,10 +382,10 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 			holder.remark.setText("录音");
 			
 			DecimalFormat df=new DecimalFormat("#.##");
-			int filesize=Integer.parseInt(data.get("filesize"));
+			float filesize=Float.parseFloat(data.get("filesize"));
 			String duration=TimeUtils.secondConvertTime(Integer.parseInt(data.get("duration")));
 			
-			holder.timelong.setText(df.format((float)(filesize/1024))+"MB\n"+duration);
+			holder.timelong.setText(df.format((float)(filesize/1024/1024))+"MB\n"+duration);
 			return convertView;
 		}
 		

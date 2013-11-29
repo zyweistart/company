@@ -243,8 +243,7 @@ public class RecordedManagerContent extends CoreScrollContent implements Filtera
 					final ViewHolder vh=(ViewHolder)view.getTag();
 					new AlertDialog.Builder(getActivity())
 					.setIcon(android.R.drawable.ic_dialog_info)
-					.setTitle("提示！")
-					.setMessage("确定要删除当前录音？")
+					.setMessage("被录音删除将进入录音回收站，如需还原或彻底删除请登录安存语录官网（www.95105856.com）“我的录音-回收站”进行操作。")
 					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
 							if(!getAppContext().isAuth(Auth.v4recalter1)){
