@@ -1,5 +1,6 @@
 package com.ancun.yulualiyun;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class ChangePasswordActivity extends CoreActivity implements
 	@Override
 	public void onClick(View v) {
 		String tvOriginalStr = activity_modifypwd_original.getText().toString();
-		String tvNewStr = activity_modifypwd_etnew.getText().toString();
+		final String tvNewStr = activity_modifypwd_etnew.getText().toString();
 		String tvNewreStr = activity_modifypwd_etrenew.getText().toString();
 		
 		if(StringUtils.isEmpty(tvOriginalStr)){
@@ -88,6 +89,14 @@ public class ChangePasswordActivity extends CoreActivity implements
 									activity_modifypwd_etnew.getWindowToken(),0);
 							imManager.hideSoftInputFromWindow(
 									activity_modifypwd_etrenew.getWindowToken(),0);
+							try {
+								boolean autoLogin= getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN,false);
+								if(autoLogin){
+									getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,StringUtils.doKeyEncrypt(tvNewStr,getAssets().open(Constant.DESKEYKEY)));
+								}
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							runOnUiThread(new Runnable() {
 								
 								@Override

@@ -106,6 +106,10 @@ public final class Constant {
 		 */
 		public static final String SP_ALIYUN_ADDCONTACT_MESSAGE="SP_ALIYUN_ADDCONTACT_MESSAGE";
 		/**
+		 * 搜索提示
+		 */
+		public static final String SP_ALIYUN_SEARCHCOMFIR_MESSAGE="SP_ALIYUN_SEARCHCOMFIR_MESSAGE";
+		/**
 		 * 发送短信息
 		 */
 		public static final String SP_ALIYUN_SENDMESSAGE_MESSAGE="SP_ALIYUN_SENDMESSAGE_MESSAGE";
