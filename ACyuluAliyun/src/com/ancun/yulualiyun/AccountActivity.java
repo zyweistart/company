@@ -202,7 +202,7 @@ public class AccountActivity extends CoreActivity implements OnClickListener {
 //						DecimalFormat df=new DecimalFormat("#.##");
 //						
 //						Float bquota=Float.parseFloat(getInfoContent().get("bquota"));
-						Float rtsize=Float.parseFloat(entinfo.get("nrtsize"));
+						Float rtsize=Float.parseFloat(entinfo.get("rtsize"));
 //						Float bq=(float)(bquota/1024/1024);
 						Float rt=(float)(rtsize/1024/1024);
 						String noUseV=df.format(bq-rt);
