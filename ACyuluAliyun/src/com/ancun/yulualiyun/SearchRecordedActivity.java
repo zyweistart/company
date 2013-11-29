@@ -2,8 +2,10 @@ package com.ancun.yulualiyun;
 
 import java.util.Calendar;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -158,33 +160,43 @@ public class SearchRecordedActivity extends CoreActivity implements  OnClickList
 			}, endYear, endMonth-1,endDay);
 			dialog.show();
 		}else if(v.getId()==R.id.search_content_btnSearch){
-			inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);  
-			
-			Bundle bundle=new Bundle();
-			bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_PHONE, String.valueOf(etPhone.getText()));
-			bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_REMARK, String.valueOf(etRemark.getText()));
-			String startdy=String.valueOf(etStartDay.getText());
-			if("".equals(startdy)){
-				bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_STARTDAY, "");
-			}else{
-				startYear=Integer.parseInt(startdy.substring(0,4));
-				startMonth=Integer.parseInt(startdy.substring(5,7));
-				startDay=Integer.parseInt(startdy.substring(8,10));
-				bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_STARTDAY, getDateDisplayFormat(startYear,startMonth,startDay,""));
-			}
-			String enddy=String.valueOf(etEndDay.getText());
-			if("".equals(enddy)){
-				bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_ENDDAY, "");
-			}else{
-				endYear=Integer.parseInt(enddy.substring(0,4));
-				endMonth=Integer.parseInt(enddy.substring(5,7));
-				endDay=Integer.parseInt(enddy.substring(8,10));
-				bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_ENDDAY, getDateDisplayFormat(endYear,endMonth,endDay,""));
-			}
-			Intent data=new Intent();
-			data.putExtras(bundle);
-			setResult(RecordedManagerContent.RESULTCODE_SEARCHREUSLT,data);
-			finish();
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(false)
+			.setMessage("精确查找后如需返回全部录音信息列表，请先清除所有查询条件哦")
+			.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+					inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);  
+					
+					Bundle bundle=new Bundle();
+					bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_PHONE, String.valueOf(etPhone.getText()));
+					bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_REMARK, String.valueOf(etRemark.getText()));
+					String startdy=String.valueOf(etStartDay.getText());
+					if("".equals(startdy)){
+						bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_STARTDAY, "");
+					}else{
+						startYear=Integer.parseInt(startdy.substring(0,4));
+						startMonth=Integer.parseInt(startdy.substring(5,7));
+						startDay=Integer.parseInt(startdy.substring(8,10));
+						bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_STARTDAY, getDateDisplayFormat(startYear,startMonth,startDay,""));
+					}
+					String enddy=String.valueOf(etEndDay.getText());
+					if("".equals(enddy)){
+						bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_ENDDAY, "");
+					}else{
+						endYear=Integer.parseInt(enddy.substring(0,4));
+						endMonth=Integer.parseInt(enddy.substring(5,7));
+						endDay=Integer.parseInt(enddy.substring(8,10));
+						bundle.putString(RecordedManagerContent.SEARCH_CONTENT_FIELD_ENDDAY, getDateDisplayFormat(endYear,endMonth,endDay,""));
+					}
+					Intent data=new Intent();
+					data.putExtras(bundle);
+					setResult(RecordedManagerContent.RESULTCODE_SEARCHREUSLT,data);
+					finish();
+				}
+			}).show();
 		}
 	}
 	

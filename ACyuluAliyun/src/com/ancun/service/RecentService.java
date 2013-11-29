@@ -148,7 +148,7 @@ public class RecentService extends CoreServiceModel {
 	public List<RecentModel> findCallRecords() {
 		List<RecentModel> recents=new ArrayList<RecentModel>();
 		ContentResolver cr = getContext().getContentResolver();
-		SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		StringBuilder filterName=new StringBuilder();
 		for(int i=0;i<Constant.noCall.size();i++){
 			filterName.append("?");
