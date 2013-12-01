@@ -35,24 +35,24 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".NavigationActivity"/>
+        <activity android:name=".FirstSetMapDataActivity"/>
+        
         <activity android:name=".MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".HospitalDetailActivity"/>
         <activity android:name=".DepartmentListActivity" android:launchMode="singleTask"/>
         <activity android:name=".DepartmentDetailActivity" android:launchMode="singleTask"/>
         <activity android:name=".DoctorListActivity" android:launchMode="singleTask"/>
         <activity android:name=".DoctorDetailActivity" android:launchMode="singleTask"/>
-        
-        <activity android:name=".NavigationActivity"/>
-        <activity android:name=".HospitalDetailActivity"/>
         <activity android:name=".MoreActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".ForgetPwdActivity"/>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".FirstSetMapDataActivity"/>
         <activity android:name=".FriendRelationListActivity"/>
         <activity android:name=".FriendRelationSetActivity"/>
         <activity android:name=".FriendHistoryListActivity"/>
-        <activity android:name=".MapDataListActivity"/>
         <activity android:name=".MapDataDetailActivity"/>
+        <activity android:name=".MapDataListActivity"/>
         
     </application>
 
