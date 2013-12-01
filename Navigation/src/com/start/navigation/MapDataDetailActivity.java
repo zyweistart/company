@@ -14,6 +14,7 @@ public class MapDataDetailActivity extends CoreActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_map_data_detail);
 	}
 
 }

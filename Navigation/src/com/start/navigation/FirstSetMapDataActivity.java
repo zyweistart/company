@@ -14,6 +14,7 @@ public class FirstSetMapDataActivity extends CoreActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_first_set_map_data);
 	}
 
 }

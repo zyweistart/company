@@ -44,6 +44,12 @@
         <activity android:name=".HospitalDetailActivity"/>
         
         <activity android:name=".MoreActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".FriendRelationListActivity"/>
+        <activity android:name=".FriendRelationSetActivity"/>
+        <activity android:name=".FriendHistoryListActivity"/>
+        <activity android:name=".MapDataListActivity"/>
+        <activity android:name=".MapDataDetailActivity"/>
         
     </application>
 
