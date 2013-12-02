@@ -88,6 +88,58 @@ public class XMLUtils {
 			throw new XMLException(e);
 		}
 	}
+	
+	public static Map<String,Map<String,String>>  xmlResolve(String xmlContent) throws XMLException {
+		Document document=null;
+		DocumentBuilder builder=null;
+		DocumentBuilderFactory factory=null;
+		Map<String,Map<String,String>> mapDataContent=new HashMap<String,Map<String,String>>();
+		factory=DocumentBuilderFactory.newInstance();
+		try {
+			builder=factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			throw new XMLException(e);
+		}
+		try {
+			StringReader stringReader  =  new StringReader(xmlContent);
+			InputSource  inputSource  =  new  InputSource(stringReader);
+			document=builder.parse(inputSource);
+		} catch (SAXException e) {
+			throw new XMLException(e);
+		} catch (IOException e) {
+			throw new XMLException(e);
+		}
+		Element root=document.getDocumentElement();
+		NodeList nodeList=root.getElementsByTagName(RequestXmLConstant.INFO);
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			NodeList childNodeList=nodeList.item(i).getChildNodes();
+			Map<String,String> content=new HashMap<String,String>();
+			for (int j = 0; j < childNodeList.getLength();j++) {
+				Node childNode=childNodeList.item(j);
+				content.put(childNode.getNodeName(), childNode.getTextContent());
+			}
+			mapDataContent.put(RequestXmLConstant.INFO, content);
+		}
+		nodeList=root.getElementsByTagName(RequestXmLConstant.CONTENT);
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			NodeList childNodeList=nodeList.item(i).getChildNodes();
+			for (int j = 0; j < childNodeList.getLength();j++) {
+				Node cnl=childNodeList.item(j);
+				NodeList childNode=cnl.getChildNodes();
+				Map<String,String> content=new HashMap<String,String>();
+				for (int k= 0; k< childNode.getLength();k++) {
+					Node cNode=childNode.item(k);
+					content.put(cNode.getNodeName(), cNode.getTextContent());
+				}
+//				if(childNodeList.getLength()==1){
+//					mapDataContent.put(Constant.RequestXmLConstant.CONTENT, content);
+//				}else{
+					mapDataContent.put(cnl.getNodeName(), content);
+//				}
+			}
+		}
+		return mapDataContent;
+	}
 	/**
 	 * 解析服务端返回的XML内容,普通形式
 	 * @throws XMLException 

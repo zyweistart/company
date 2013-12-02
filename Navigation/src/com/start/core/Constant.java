@@ -41,15 +41,14 @@ public final class Constant {
 	
 	public static final int PAGESIZE=8;
 	
-	public final class BundleConstant{
-		/**
-		 * 自动登录标记
-		 */
-		public static final String BUNLE_AUTOLOGINFLAG="autoLoginFlag";
-		/**
-		 * 退出信息
-		 */
-		public static final String BUNLE_EXIT_MSG="exitmsg";
+	/**
+	 * 用户接口
+	 * @author Start
+	 */
+	public final class GlobalURL{
+		
+		public static final String v4Login="v4Login";
+		
 	}
 	
 	/**
@@ -59,11 +58,5 @@ public final class Constant {
 	public final class SharedPreferencesConstant{
 		
 	}
-	/**
-	 * 用户接口
-	 * @author Start
-	 */
-	public final class GlobalURL{
-		
-	}
+	
 }

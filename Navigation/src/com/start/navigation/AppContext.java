@@ -1,5 +1,7 @@
 package com.start.navigation;
 
+import java.util.Map;
+
 import org.mapsforge.core.model.GeoPoint;
 
 import android.app.Application;
@@ -71,7 +73,7 @@ public class AppContext extends Application {
     
 	public void makeTextLong(int resId){
 		Toast.makeText(AppContext.getInstance().getApplicationContext(), resId, Toast.LENGTH_LONG).show();
-}
+	}
 	
     public void makeTextLong(String text){
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
@@ -150,6 +152,31 @@ public class AppContext extends Application {
 			edgeService=new EdgeService(this);
 		}
 		return edgeService;
+	}
+
+	/**
+	 * 当前用户是否已经登录
+	 * @return
+	 */
+	public Boolean isLogin(){
+		return userInfo!=null;
+	}
+	
+	private Map<String,Map<String,String>> userInfo;
+	
+	/**
+	 * 获取当前用户信息
+	 * @return
+	 */
+	public Map<String,String> getUserInfoByKey(String key){
+		if(userInfo!=null){
+			return userInfo.get(key);
+		}
+		return null;
+	}
+	
+	public void setUserInfo(Map<String, Map<String, String>> userInfo) {
+		this.userInfo = userInfo;
 	}
 
 	public MyLocation getMyLocation(){

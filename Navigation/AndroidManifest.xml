@@ -7,11 +7,20 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.REORDER_TASKS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
+	<!-- 允许应用程序读取手机设置状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />  
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    
+    <!-- 允许应用程序对扩展存储设备（如SD卡）进行写入操作 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />   
+    <!-- 允许应用程序使用网络进行数据交换 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 允许程序访问Wi-Fi网络状态信息 -->
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<!-- 允许应用程序访问设备网络状态信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	  
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"

@@ -291,8 +291,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		imMore.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
-				Intent intent = new Intent(MainActivity.this,MoreActivity.class);
-				startActivity(intent);
+//				Intent intent = new Intent(MainActivity.this,MoreActivity.class);
+//				startActivity(intent);
 
 			}
 		});

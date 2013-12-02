@@ -28,13 +28,21 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			startActivity(new Intent(this,LoginActivity.class));
 		} else if (v.getId() == R.id.more_btn_friends_manager) {
 			//好友管理
-			startActivity(new Intent(this,FriendRelationListActivity.class));
+			if(getAppContext().isLogin()){
+				startActivity(new Intent(this,FriendRelationListActivity.class));
+			}else{
+				makeTextShort(R.string.msg_not_login);
+			}
 		} else if (v.getId() == R.id.more_btn_map_manager) {
 			//地图管理
-			startActivity(new Intent(this,MapDataListActivity.class));
+			if(getAppContext().isLogin()){
+				startActivity(new Intent(this,MapDataListActivity.class));
+			}else{
+				makeTextShort(R.string.msg_not_login);
+			}
 		} else if (v.getId() == R.id.more_btn_version_check) {
 			//版本检测
-			
+			makeTextShort(R.string.msg_last_version);
 		}
 	}
 
