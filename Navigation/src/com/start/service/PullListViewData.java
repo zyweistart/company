@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -11,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.start.core.CoreActivity;
 import com.start.model.UIRunnable;
 import com.start.navigation.R;
 import com.start.service.HttpService.LoadMode;
@@ -19,7 +19,7 @@ import com.start.widget.PullToRefreshListView;
 
 public class PullListViewData {
 
-	private CoreActivity activity;
+	private Activity activity;
 	
 	private View layoutView;
 	
@@ -34,7 +34,7 @@ public class PullListViewData {
 	
 	private HttpService httpService;
 	
-	public PullListViewData(CoreActivity activity){
+	public PullListViewData(Activity activity){
 		this.activity=activity;
 		httpService=new HttpService(activity);
 	}
@@ -88,8 +88,9 @@ public class PullListViewData {
             		getOnLoadDataListener().LoadData(LoadMode.HEAD);
 	        }
 	    });
-		
-		getOnLoadDataListener().LoadData(mode);
+		if(mode!=null){
+			getOnLoadDataListener().LoadData(mode);
+		}
 	}
 	
 	//接口

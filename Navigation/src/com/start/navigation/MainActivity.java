@@ -59,6 +59,7 @@ import com.start.model.Doctor;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
+import com.start.model.UIRunnable;
 import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
@@ -73,14 +74,16 @@ import com.start.model.process.Junction;
 import com.start.model.process.Junction.NodeType;
 import com.start.model.process.ProcessService;
 import com.start.model.process.ProcessService.ProcessListener;
+import com.start.service.HttpService.LoadMode;
 import com.start.service.MapDataAdapter;
 import com.start.service.PathSearchTask;
 import com.start.service.PathSearchTask.PathSearchListener;
+import com.start.service.PullListViewData;
+import com.start.service.PullListViewData.OnLoadDataListener;
 import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
-import com.start.widget.PullToRefreshListView;
 
 /**
  * 主界面
@@ -165,7 +168,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
 	
-	private PullToRefreshListView	mModuleMainFrameFriendLocationPullListView;
+	private PullListViewData friendLocationPullListData;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -387,8 +390,42 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mModuleMainFrameProcessNext.setOnClickListener(this);
 		
 		// friend
-		mModuleMainFrameFriendLocationPullListView=(PullToRefreshListView)findViewById(R.id.module_main_frame_friend_location_pulllistview);
-		mModuleMainFrameFriendLocationPullListView.setOnItemClickListener(this);
+		friendLocationPullListData=new PullListViewData(this);
+		friendLocationPullListData.setOnLoadDataListener(
+				new OnLoadDataListener(){
+
+					@Override
+					public void LoadData(LoadMode loadMode) {
+						if(appContext.isLogin()){
+							Map<String,String> requestParams=new HashMap<String,String>();
+							requestParams.put("accessid",Constant.ACCESSID);
+							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.GlobalURL.v4recQry,requestParams,null,new UIRunnable(){
+								@Override
+								public void run() {
+									friendLocationPullListData.getAdapter().notifyDataSetChanged();
+								} 
+							},"reclist","reclist++++");
+						}else{
+							if(mCurSel==3){
+								CommonFn.buildDialog(MainActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										startActivity(new Intent(MainActivity.this,LoginActivity.class));
+									}
+									
+								}).show();
+							}
+							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							friendLocationPullListData.getListview_footer_more().setText(R.string.load_more);
+							friendLocationPullListData.getListview_footer_progress().setVisibility(View.GONE);
+							friendLocationPullListData.getPulllistview().onRefreshComplete();
+						}
+					}
+					
+				});
+		friendLocationPullListData.start(R.id.module_main_frame_friend_location_pulllistview, 
+				new FriendRelationAdapter(friendLocationPullListData));
 	}
 
 	/**
@@ -443,7 +480,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				Polyline arealine = new Polyline(pc,appContext.getPaintStroke());
 				itemList.add(arealine);
 			}
-
 			
 			boolean isSetCenterPoint=true;
 			if (markers != null || routeLine != null) {
@@ -1007,4 +1043,56 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		}
 	}
 
+	public class FriendRelationAdapter extends PullListViewData.DataAdapter{
+		
+		public FriendRelationAdapter(PullListViewData pullListViewData) {
+			pullListViewData.super();
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			FriendRelationViewHolder holder;
+			if (convertView != null && convertView.getId() == R.id.lvitem_friend_content) {
+				holder = (FriendRelationViewHolder) convertView.getTag();
+			}else{
+				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
+				holder = new FriendRelationViewHolder();
+				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
+				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
+				holder.btnLocation.setTag(holder);
+				holder.btnLocation.setVisibility(View.VISIBLE);
+				holder.btnLocation.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
+						if(vh!=null){
+							appContext.makeTextLong(vh.data+"");
+						}
+					}
+					
+				});
+				
+				holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
+				holder.btnRemove.setVisibility(View.VISIBLE);
+				
+				holder.btnAuthorize = (Button) convertView.findViewById(R.id.lvitem_friend_authorize);
+				holder.btnAuthorize.setVisibility(View.GONE);
+				convertView.setTag(holder);
+			}
+			holder.data=friendLocationPullListData.getDataItemList().get(position);
+			holder.name.setText("好友:"+holder.data.get("oppno"));
+			return convertView;
+		}
+		
+		public class FriendRelationViewHolder {
+			Map<String,String> data;
+			TextView name;
+			Button btnLocation;
+			Button btnRemove;
+			Button btnAuthorize;
+		}
+		
+	}
+	
 }
