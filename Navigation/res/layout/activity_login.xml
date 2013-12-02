@@ -7,9 +7,30 @@
     
 	<include layout="@layout/module_main_header" />
     
-	<TextView
+	<EditText 
+	    android:id="@+id/login_account_name"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="医院介绍"/>
+	    android:hint="请输入账户"/>
+	<EditText 
+	    android:id="@+id/login_account_password"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:hint="请输入密码"/>
+	<Button
+	    android:id="@+id/login_btn_account"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="登录"/>
+	<Button
+	    android:id="@+id/login_btn_register"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="注册"/>
+	<Button
+	    android:id="@+id/login_btn_forgetpwd"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="找回密码"/>
 
 </LinearLayout>

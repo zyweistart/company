@@ -27,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -79,6 +80,7 @@ import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
+import com.start.widget.PullToRefreshListView;
 
 /**
  * 主界面
@@ -163,7 +165,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
 	
-	private ListView	mModuleMainFrameFriendLocationList;
+	private PullToRefreshListView	mModuleMainFrameFriendLocationPullListView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -180,8 +182,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		
 		process=new ProcessService(this,this);
 		process.init();
-		Junction startJunction=process.getStartJunction();
-		String fullPath=Constant.PROCESSMAINPATH+startJunction.getImage();
+		String fullPath=Constant.PROCESSMAINPATH+process.getProcessImage();
 		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
 	}
 
@@ -386,8 +387,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mModuleMainFrameProcessNext.setOnClickListener(this);
 		
 		// friend
-		mModuleMainFrameFriendLocationList=(ListView)findViewById(R.id.module_main_frame_friend_location_list);
-		mModuleMainFrameFriendLocationList.setOnItemClickListener(this);
+		mModuleMainFrameFriendLocationPullListView=(PullToRefreshListView)findViewById(R.id.module_main_frame_friend_location_pulllistview);
+		mModuleMainFrameFriendLocationPullListView.setOnItemClickListener(this);
 	}
 
 	/**
@@ -637,7 +638,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			dialog = CommonFn.createPOIDialog(this);
 			break;
 		case Utils.DLG_EXIT_NAVIGATION:
-			dialog = CommonFn.buildDialog(this, R.string.exit_navigation,
+			dialog = CommonFn.buildDialog(this, R.string.msg_exit_navigation,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -670,8 +671,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 			if(process.isProcessEnd()){
 				process.init();
-				Junction startJunction=process.getStartJunction();
-				String fullPath=Constant.PROCESSMAINPATH+startJunction.getImage();
+				String fullPath=Constant.PROCESSMAINPATH+process.getProcessImage();
 				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
 			}else{
 				process.execute();
@@ -952,6 +952,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		}
 		if(jun.getNodeType()!=NodeType.SWITCH){
 			try {
+				Log.v("MainActivity",jun.getTitle()+"image:"+jun.getImage());
 				InputStream is = getAssets().open("med_data/process/"+jun.getImage());
 				mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
 			} catch (IOException e) {

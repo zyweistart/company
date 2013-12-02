@@ -49,6 +49,8 @@ public class ProcessService {
 	
 	private ProcessListener processListener;
 	
+	private String processImage;
+	
 	public ProcessService(Context context,ProcessListener listener){
 		this.mContext=context;
 		this.mAppContext=AppContext.getInstance();
@@ -84,6 +86,8 @@ public class ProcessService {
 		NodeList processList=root.getElementsByTagName("process");
 		for (int i = 0; i < processList.getLength(); i++) {
 			Node process=processList.item(i);
+			NamedNodeMap pnnM=process.getAttributes();
+			setProcessImage(pnnM.getNamedItem("image").getNodeValue());
 			NodeList nodeList=process.getChildNodes();
 			for (int j= 0; j< nodeList.getLength();j++) {
 				Node cNode=nodeList.item(j);
@@ -307,10 +311,16 @@ public class ProcessService {
 		return currentJunctionId.equals(endJunctionId);
 	}
 	
-	public Junction getStartJunction(){
-		return junctions.get(startJunctionId);
+	public String getProcessImage() {
+		return processImage;
 	}
-	
+
+	public void setProcessImage(String processImage) {
+		this.processImage = processImage;
+	}
+
+
+
 	public interface ProcessListener{
 		void location(String mapId,String vertexId);
 		void result(Junction jun);

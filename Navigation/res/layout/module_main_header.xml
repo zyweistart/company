@@ -19,9 +19,9 @@
   	    android:orientation="horizontal">
   	    <Button 
   	        android:id="@+id/module_main_header_content_location"
+  	        android:text="@string/my_location"
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
-  	        android:visibility="gone"
-  	        android:text="定位"/>
+  	        android:visibility="gone"/>
   	</LinearLayout>
 </RelativeLayout>

@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">导航</string>
-
+    <string name="app_name">医院导航</string>
+    <string name="empty"></string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
-    <string name="empty"></string>
+    
+    <string name="my_location">定位</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
     <string name="msg_location_unavailable">当前位置不可用</string>
-    <string name="exit_navigation">退出导航</string>
+    <string name="msg_exit_navigation">退出导航</string>
+    
+    <string name="activity_login">登录</string>
+    <string name="activity_account">账户</string>
+    <string name="activity_password">密码</string>
+    <string name="activity_register">注册</string>
+    <string name="activity_forgetpwd">忘记密码</string>
     
     <string name="frame_introduction_title">介绍</string>
     <string name="frame_map_title">地图</string>
     <string name="frame_process_title">流程</string>
-    <string name="frame_friend_title">好友</string>
-    <string name="frame_more_title">更多</string>
-    
     <string name="frame_process_next_step">下一步</string>
     <string name="frame_process_reset">重新开始</string>
-    
+    <string name="frame_friend_title">好友</string>
+    <string name="frame_more_title">更多</string>
     
     <!-- PullToRefreshListView -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>

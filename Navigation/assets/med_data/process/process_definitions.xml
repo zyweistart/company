@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<process id="导医">
+<process id="导医" image="guide_step_1.png">
     
-    <start id="开始" title="开始" next="急诊/门诊" image="guide_step_1.png"/>
+    <start id="开始" title="开始" next="急诊/门诊" image="guide_step_2.png"/>
     
     <switch id="急诊/门诊" title="急诊/门诊">
         <option id="急诊" next="预诊"/>
- 		<option id="门诊" next="挂号"/>
- 		<option id="就诊" next="挂号"/>
+ 		<option id="门诊" next="预诊"/>
     </switch>
     
-    <node id="预诊" title="预诊" next="挂号" image="guide_step_2.png">
+    <node id="预诊" title="预诊" next="挂号" image="guide_step_4.png">
         <!-- <action type="openweb" message="注意安全哦" url="http://www.qq.com"/> -->
-        <action type="location" message="请挂妇科" content="0101;0009"/>
+        <action type="location" content="0101;0009"/>
         
     </node>
     
-    <node id="挂号" title="挂号" next="结束" image="guide_step_3.png">
-        <action type="dialog" message="不要忘记挂号了"/>
+    <node id="挂号" title="挂号" next="到科室" image="guide_step_5.png">
+        <!-- <action type="openweb" message="注意安全哦" url="http://www.qq.com"/> -->
+        <action type="dialog" message="请挂妇科"/>
+        
     </node>
     
-    <end id="结束" title="结束" image="guide_step_4.png"/>
+    <node id="到科室" title="到科室" next="化验/取药" image="guide_step_6.png">
+        <!-- <action type="openweb" message="注意安全哦" url="http://www.qq.com"/> -->
+        <action type="location" content="0101;0009"/>
+        
+    </node>
     
+    <switch id="化验/取药" title="化验/取药">
+ 		<option id="结束" next="结束"/>
+        <option id="化验" next="结束"/>
+ 		<option id="取药" next="结束"/>
+    </switch>
+    
+    <end id="结束" title="结束" image="guide_step_8.png"/>
 </process>
