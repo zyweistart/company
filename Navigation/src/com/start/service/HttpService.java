@@ -36,13 +36,13 @@ public class HttpService {
 	}
 
 	public void exeNetRequest(final String Url,final Map<String,String> params,final Map<String,String> headerParams,final UIRunnable uiRunnable){
-		this.exeNetRequest(null, Url, params, headerParams, uiRunnable);
+		this.exeNetRequest(mAppContext.getString(R.string.msg_please_wait), Url, params, headerParams, uiRunnable);
 	}
 	
 	public void exeNetRequest(final String tipMsg,final String Url,final Map<String,String> params,final Map<String,String> headerParams,final UIRunnable uiRunnable){
 		if(NetConnectManager.isNetWorkAvailable(mActivity)){
-			mProgressDialog=tipMsg!=null?CommonFn.progressDialog(mActivity, tipMsg):null;
-			if(mProgressDialog!=null){
+			if(tipMsg!=null){
+				mProgressDialog=CommonFn.progressDialog(mActivity, tipMsg);
 				mProgressDialog.show();
 				mProgressDialog.setCancelable(false);
 			}
@@ -70,10 +70,10 @@ public class HttpService {
 							Map<String,String> infoHead=mapXML.get(XMLUtils.RequestXmLConstant.INFO);
 							if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.SUCCESSCODE)){
 								for(String key:mapXML.keySet()){
-									uiRunnable.setInfoContent(mapXML.get(key));
+									uiRunnable.setInfo(mapXML.get(key));
 									break;
 								}
-								uiRunnable.setAllInfoContent(mapXML);
+								uiRunnable.setContent(mapXML);
 								uiRunnable.run();
 							}else{
 								mAppContext.makeTextLong(infoHead.get(XMLUtils.RequestXmLConstant.MSG));

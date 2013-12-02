@@ -46,8 +46,16 @@ public final class Constant {
 	 * @author Start
 	 */
 	public final class GlobalURL{
-		
+		/**
+		 * 登录
+		 */
 		public static final String v4Login="v4Login";
+		/**
+		 * 好友添加
+		 */
+		public static final String v4FriendSet="";
+		
+		public static final String v4recQry="v4recQry";
 		
 	}
 	

@@ -9,9 +9,9 @@ import android.database.Cursor;
 import com.start.core.CoreService;
 import com.start.model.FriendHistory;
 
-public class FriendHistoryservice extends CoreService {
+public class FriendHistoryService extends CoreService {
 
-	public FriendHistoryservice(Context context) {
+	public FriendHistoryService(Context context) {
 		super(context);
 	}
 
@@ -22,7 +22,7 @@ public class FriendHistoryservice extends CoreService {
 				FriendHistory.COLUMN_NAME_ID,
 				FriendHistory.COLUMN_NAME_MYID,
 				FriendHistory.COLUMN_NAME_FRIENDID,
-				FriendHistory.COLUMN_NAME_CTEATETIME},
+				FriendHistory.COLUMN_NAME_UPDATETIME},
 					FriendHistory.COLUMN_NAME_MYID+"=?",new String[]{myId}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
@@ -31,7 +31,7 @@ public class FriendHistoryservice extends CoreService {
 					fh.setId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_ID)));
 					fh.setMyId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_MYID)));
 					fh.setFriendId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_FRIENDID)));
-					fh.setCreateTime(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_CTEATETIME)));
+					fh.setCreateTime(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_UPDATETIME)));
 					fhs.add(fh);
 				} while (cursor.moveToNext());
 			}
@@ -47,7 +47,7 @@ public class FriendHistoryservice extends CoreService {
 				FriendHistory.COLUMN_NAME_ID,
 				FriendHistory.COLUMN_NAME_MYID,
 				FriendHistory.COLUMN_NAME_FRIENDID,
-				FriendHistory.COLUMN_NAME_CTEATETIME},
+				FriendHistory.COLUMN_NAME_UPDATETIME},
 					FriendHistory.COLUMN_NAME_MYID+"=? AND "+
 							FriendHistory.COLUMN_NAME_FRIENDID+"=?,",new String[]{myId,friendId}, null, null, null);
 		try{
@@ -56,7 +56,7 @@ public class FriendHistoryservice extends CoreService {
 				fh.setId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_ID)));
 				fh.setMyId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_MYID)));
 				fh.setFriendId(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_FRIENDID)));
-				fh.setCreateTime(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_CTEATETIME)));
+				fh.setCreateTime(cursor.getString(cursor.getColumnIndex(FriendHistory.COLUMN_NAME_UPDATETIME)));
 				return fh;
 			}
 		}finally{

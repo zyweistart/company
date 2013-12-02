@@ -9,14 +9,14 @@ public class FriendHistory extends CoreModel {
 	
 	public static final String COLUMN_NAME_MYID="myId";
 	public static final String COLUMN_NAME_FRIENDID="friendId";
-	public static final String COLUMN_NAME_CTEATETIME="createTime";
+	public static final String COLUMN_NAME_UPDATETIME="uTime";
 	
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ COLUMN_NAME_ID + " TEXT,"
 			+ COLUMN_NAME_MYID + " TEXT,"
 			+ COLUMN_NAME_FRIENDID + " TEXT,"
-			+ COLUMN_NAME_CTEATETIME + " TEXT"
+			+ COLUMN_NAME_UPDATETIME + " TEXT"
 			+ ");";
 	
 	private String myId;

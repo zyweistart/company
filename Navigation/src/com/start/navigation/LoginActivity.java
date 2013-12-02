@@ -54,8 +54,11 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 					
 					@Override
 					public void run() {
-						makeTextLong(getAllInfoContent()+"");
-//						finish();
+						getAppContext().setUserInfo(getContent());
+						Map<String,String> data=getAppContext().getUserInfoByKey("v4info");
+						Constant.ACCESSID=data.get("accessid");
+						Constant.ACCESSKEY=data.get("accesskey");
+						finish();
 					}
 					
 				});

@@ -4,24 +4,24 @@ import java.util.Map;
 
 public abstract class UIRunnable{
 	
-	private Map<String, String> infoContent;
+	private Map<String, String> info;
 	
-	private Map<String,Map<String,String>> allInfoContent;
+	private Map<String,Map<String,String>> content;
 
-	public Map<String, String> getInfoContent() {
-		return infoContent;
+	public Map<String, String> getInfo() {
+		return info;
 	}
 
-	public void setInfoContent(Map<String, String> infoContent) {
-		this.infoContent = infoContent;
+	public void setInfo(Map<String, String> info) {
+		this.info = info;
 	}
 
-	public Map<String, Map<String, String>> getAllInfoContent() {
-		return allInfoContent;
+	public Map<String, Map<String, String>> getContent() {
+		return content;
 	}
 
-	public void setAllInfoContent(Map<String, Map<String, String>> allInfoContent) {
-		this.allInfoContent = allInfoContent;
+	public void setContent(Map<String, Map<String, String>> content) {
+		this.content = content;
 	}
 
 	public abstract void run();

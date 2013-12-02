@@ -20,6 +20,7 @@ import com.start.service.DepartmentHasRoomService;
 import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
 import com.start.service.EdgeService;
+import com.start.service.FriendHistoryService;
 import com.start.service.MapDataService;
 import com.start.service.RoomAreaService;
 import com.start.service.RoomService;
@@ -43,6 +44,7 @@ public class AppContext extends Application {
     private VertexService vertexService;
     private RoomAreaService roomAreaService;
     private EdgeService edgeService;
+    private FriendHistoryService friendHistoryService;
 
 	@Override
     public void onCreate() {
@@ -139,6 +141,13 @@ public class AppContext extends Application {
 			edgeService=new EdgeService(this);
 		}
 		return edgeService;
+	}
+	
+	public FriendHistoryService getFriendHistoryService() {
+		if(friendHistoryService==null){
+			friendHistoryService=new FriendHistoryService(this);
+		}
+		return friendHistoryService;
 	}
 
 	/**

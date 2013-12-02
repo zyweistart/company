@@ -15,6 +15,14 @@
 	    android:text="登录"/>
 	
 	<Button
+	    android:id="@+id/more_btn_logout"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="onClick"
+	    android:visibility="gone"
+	    android:text="退出"/>
+	
+	<Button
 	    android:id="@+id/more_btn_friends_manager"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"

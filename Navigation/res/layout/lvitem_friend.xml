@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/lvitem_friend_content"
-	android:layout_width="fill_parent" 
-	android:layout_height="wrap_content"
-	android:gravity="center_vertical">
+	android:layout_width="match_parent" 
+	android:layout_height="wrap_content">
 	
     <TextView
         android:id="@+id/lvitem_friend_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    
-    <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查看位置"/>
-        
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="解除关系"/>
-        
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开放位置"/>
-        
-    </LinearLayout>
+        android:layout_alignParentLeft="true"/>
     
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" >
+        
+        <Button
+            android:id="@+id/lvitem_friend_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lvitem_friend_location_txt"
+            android:visibility="gone"/>
+        
+        <Button
+            android:id="@+id/lvitem_friend_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lvitem_friend_remove_txt"
+            android:visibility="gone"/>
+        
+        <Button
+            android:id="@+id/lvitem_friend_authorize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lvitem_friend_authorize_txt"
+            android:visibility="gone"/>
+        
+    </RelativeLayout>
+    
+</RelativeLayout>

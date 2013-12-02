@@ -27,4 +27,9 @@ public class CoreService {
 		sdb.insert(tableName, null, values);
 	}
 	
+	public void update(String tableName,ContentValues values,String whereClause, String[] whereArgs){
+		SQLiteDatabase sdb=this.dbHelper.getWritableDatabase();
+		sdb.update(tableName, values, whereClause, whereArgs);
+	}
+	
 }
