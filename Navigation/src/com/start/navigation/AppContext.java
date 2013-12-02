@@ -8,7 +8,10 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Message;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.start.model.nav.MyLocation;
@@ -63,22 +66,6 @@ public class AppContext extends Application {
 		return sharedPreferencesUtils;
 	}
 	
-	public void makeTextShort(int resId){
-		Toast.makeText(AppContext.getInstance().getApplicationContext(), resId, Toast.LENGTH_SHORT).show();
-    }
-	
-	public void makeTextShort(String text){
-		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-    }
-    
-	public void makeTextLong(int resId){
-		Toast.makeText(AppContext.getInstance().getApplicationContext(), resId, Toast.LENGTH_LONG).show();
-	}
-	
-    public void makeTextLong(String text){
-    		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
-    }
-    
 	public PathSearchResult getPathSearchResult() {
 		return pathSearchResult;
 	}
@@ -182,5 +169,56 @@ public class AppContext extends Application {
 	public MyLocation getMyLocation(){
 		return new MyLocation("0102", new GeoPoint(0.0007388,0.0012458));
 	}
+	
+	public void makeTextShort(int resId) {
+		sendMessage(Toast.LENGTH_SHORT,getString(resId));
+	}
+	
+	public void makeTextShort(String text) {
+		if(!TextUtils.isEmpty(text)){
+			sendMessage(Toast.LENGTH_SHORT,text);
+		}
+	}
+
+	public void makeTextLong(int resId) {
+		sendMessage(Toast.LENGTH_LONG,getString(resId));
+	}
+	
+	public void makeTextLong(String text) {
+		if(!TextUtils.isEmpty(text)){
+			sendMessage(Toast.LENGTH_LONG,text);
+		}
+	}
+	
+	public void sendMessage(int what, Object obj) {
+		Message msg = new Message();
+		msg.what = what;
+		msg.obj = obj;
+		sendMessage(msg);
+	}
+	
+	public void sendMessage(Message msg) {
+		handler.sendMessage(msg);
+	}
+
+	public void sendEmptyMessage(int what) {
+		handler.sendEmptyMessage(what);
+	}
+	
+	public Handler handler = new Handler() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+			switch(msg.what){
+			case Toast.LENGTH_SHORT:
+				Toast.makeText(getApplicationContext(), String.valueOf(msg.obj), Toast.LENGTH_SHORT).show();
+				break;
+			case Toast.LENGTH_LONG:
+				Toast.makeText(getApplicationContext(), String.valueOf(msg.obj), Toast.LENGTH_LONG).show();
+				break;
+			}
+		}
+		
+	};
     
 }
