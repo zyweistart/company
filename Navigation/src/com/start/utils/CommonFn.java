@@ -2,6 +2,7 @@ package com.start.utils;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +10,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
@@ -130,6 +133,16 @@ public class CommonFn {
 		win.setAttributes(params);
 		poiDialog.setCanceledOnTouchOutside(true);
 		return poiDialog;
+	}
+	
+	public static Bitmap convertToBitmap(Context context,String fullPath){
+		try {
+			InputStream is = context.getAssets().open(fullPath);
+			return BitmapFactory.decodeStream(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }

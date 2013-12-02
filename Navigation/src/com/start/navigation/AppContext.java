@@ -61,10 +61,18 @@ public class AppContext extends Application {
 		return sharedPreferencesUtils;
 	}
 	
+	public void makeTextShort(int resId){
+		Toast.makeText(AppContext.getInstance().getApplicationContext(), resId, Toast.LENGTH_SHORT).show();
+    }
+	
 	public void makeTextShort(String text){
 		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
     
+	public void makeTextLong(int resId){
+		Toast.makeText(AppContext.getInstance().getApplicationContext(), resId, Toast.LENGTH_LONG).show();
+}
+	
     public void makeTextLong(String text){
     		Toast.makeText(AppContext.getInstance().getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }

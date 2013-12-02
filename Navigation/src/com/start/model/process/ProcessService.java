@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.start.core.Constant;
 import com.start.core.XMLException;
 import com.start.model.process.Action.ActionType;
 import com.start.model.process.Junction.NodeType;
@@ -53,7 +54,7 @@ public class ProcessService {
 		this.mAppContext=AppContext.getInstance();
 		this.processListener=listener;
 		try {
-			InputStream in =context.getAssets().open("med_data/process/tmp1.xml");
+			InputStream in =context.getAssets().open(Constant.PROCESSMAINPATH+"process_definitions.xml");
 			buildProcessXML(in);
 		} catch (Exception e) {
 			e.printStackTrace();

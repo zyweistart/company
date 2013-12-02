@@ -51,6 +51,7 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.start.core.AppConfig;
+import com.start.core.Constant;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
@@ -162,6 +163,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
 	
+	private ListView	mModuleMainFrameFriendLocationList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -177,13 +180,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		
 		process=new ProcessService(this,this);
 		process.init();
-		try {
-			Junction startJunction=process.getStartJunction();
-			InputStream is = getAssets().open("med_data/process/"+startJunction.getImage());
-			mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Junction startJunction=process.getStartJunction();
+		String fullPath=Constant.PROCESSMAINPATH+startJunction.getImage();
+		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
 	}
 
 	@Override
@@ -228,28 +227,28 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			if (index >= 0 && mFrameViewCount > index) {
 				// 点击当前项刷新
 				if (index == 0) {
-					mModuleMainHeaderContentTitle.setText("介绍");
+					mModuleMainHeaderContentTitle.setText(R.string.frame_introduction_title);
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.VISIBLE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 1) {
-					mModuleMainHeaderContentTitle.setText("地图");
+					mModuleMainHeaderContentTitle.setText(R.string.frame_map_title);
 					mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.VISIBLE);
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 2) {
-					mModuleMainHeaderContentTitle.setText("流程");
+					mModuleMainHeaderContentTitle.setText(R.string.frame_process_title);
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
 					mModuleMainFrameProcessContent.setVisibility(View.VISIBLE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 3) {
-					mModuleMainHeaderContentTitle.setText("好友");
+					mModuleMainHeaderContentTitle.setText(R.string.frame_friend_title);
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
 					mModuleMainFrameMapContent.setVisibility(View.GONE);
@@ -387,7 +386,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mModuleMainFrameProcessNext.setOnClickListener(this);
 		
 		// friend
-
+		mModuleMainFrameFriendLocationList=(ListView)findViewById(R.id.module_main_frame_friend_location_list);
+		mModuleMainFrameFriendLocationList.setOnItemClickListener(this);
 	}
 
 	/**
@@ -667,16 +667,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			Intent intent = new Intent(this, DoctorListActivity.class);
 			startActivity(intent);
 		} else if (v.getId() == R.id.module_main_frame_process_next) {
-			mModuleMainFrameProcessNext.setText("下一步");
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 			if(process.isProcessEnd()){
 				process.init();
-				try {
-					Junction startJunction=process.getStartJunction();
-					InputStream is = getAssets().open("med_data/process/"+startJunction.getImage());
-					mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Junction startJunction=process.getStartJunction();
+				String fullPath=Constant.PROCESSMAINPATH+startJunction.getImage();
+				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
 			}else{
 				process.execute();
 			}
@@ -792,7 +788,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			return;
 		} else {
 			if ((System.currentTimeMillis() - lastPressTime) > 2000) {
-				appContext.makeTextShort("再按一次退出程序");
+				appContext.makeTextShort(R.string.msg_press_again_to_exit);
 				lastPressTime = System.currentTimeMillis();
 			} else {
 				super.onBackPressed();
@@ -941,7 +937,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 								vertexId);
 				search.execute(sp, ep);
 			} else {
-				Toast.makeText(this, "当前位置不可用", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.msg_location_unavailable, Toast.LENGTH_SHORT).show();
 			}
 		}
 		
@@ -950,9 +946,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@Override
 	public void result(Junction jun) {
 		if(process.isProcessEnd()){
-			mModuleMainFrameProcessNext.setText("重新开始");
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_reset);
 		}else{
-			mModuleMainFrameProcessNext.setText("下一步");
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 		}
 		if(jun.getNodeType()!=NodeType.SWITCH){
 			try {
