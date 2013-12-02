@@ -8,6 +8,7 @@ import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
 import com.start.model.Edge;
+import com.start.model.FriendHistory;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -32,6 +33,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 		db.execSQL(Room.CREATE_TABLE_SQL);
 		db.execSQL(RoomArea.CREATE_TABLE_SQL);
 		db.execSQL(Vertex.CREATE_TABLE_SQL);
+		db.execSQL(FriendHistory.CREATE_TABLE_SQL);
 	}
 	
 	@Override
@@ -44,6 +46,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + Room.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + RoomArea.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Vertex.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + FriendHistory.TABLE_NAME);
 		onCreate(db);
 	}
 	
