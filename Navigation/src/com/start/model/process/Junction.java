@@ -24,6 +24,8 @@ public class Junction {
 	 */
 	private Action action;
 	
+	private String image;
+	
 	public Junction(String id,String title,NodeType nodeType){
 		this.id=id;
 		this.title=title;
@@ -87,6 +89,14 @@ public class Junction {
 			throw new IllegalArgumentException("setActions:"+getNodeType());
 		}
 		this.action = action;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

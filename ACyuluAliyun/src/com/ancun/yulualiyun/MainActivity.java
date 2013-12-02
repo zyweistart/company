@@ -336,69 +336,11 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		//初始切换面板时进行数据加载
 		if(currentIndex==1){
 			if(recentContent.isOpenRefreshData){
-				//加载最近通话记录
-				boolean SP_ALIYUN_RECRECENT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,true);
-				if(SP_ALIYUN_RECRECENT_MESSAGE){
-					final CheckBox cb=new CheckBox(this);
-					cb.setText("不再显示提醒");
-					new AlertDialog.Builder(this)
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setCancelable(false)
-					.setMessage("应用将读取本地通话记录，以便您快速呼叫通话记录中的非通讯录联系人并对相关通话进行录音保全，我们不会保存和修改您通话记录中的任何信息。是否允许读取？")
-					.setView(cb)
-					.setPositiveButton("否", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-							recentContent.isOpenRefreshData=false;
-						}
-					}).setNegativeButton("是", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if(cb.isChecked()){
-								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,false);
-							}
-							recentContent.loadData(true);
-							recentContent.isOpenRefreshData=false;
-						}
-					}).show();
-				}else{
-					recentContent.loadData(true);
-					recentContent.isOpenRefreshData=false;
-				}
+				refreshRecentContent();
 			}
 		}else if(currentIndex==2){
 			if(contactContent.isOpenRefreshData){
-				//加载通讯录
-				boolean SP_ALIYUN_READCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,true);
-				if(SP_ALIYUN_READCONTACT_MESSAGE){
-					final CheckBox cb=new CheckBox(this);
-					cb.setText("不再显示提醒");
-					new AlertDialog.Builder(this)
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setCancelable(false)
-					.setMessage("应用将读取手机本地通讯录，以便您通过客户端快速呼叫通讯录联系人并根据您的需要通话内容进行录音保全，应用不会保存和针对账号绑定通讯录的任何资料。是否允许读取？")
-					.setView(cb)
-					.setPositiveButton("否", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-							contactContent.isOpenRefreshData=false;
-						}
-					}).setNegativeButton("是", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if(cb.isChecked()){
-								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,false);
-							}
-							contactContent.loadData(true);
-							contactContent.isOpenRefreshData=false;
-						}
-					}).show();
-				}else{
-					contactContent.loadData(true);
-					contactContent.isOpenRefreshData=false;
-				}
+				refreshContactContent();
 			}
 		}else if(currentIndex==3){
 			if(recordedManagerContent.isOpenRefreshData){
@@ -502,15 +444,78 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	    	if(item.getItemId()==R.id.action_refresh_readcall){
-	    		recentContent.loadData(true);
-			recentContent.isOpenRefreshData=false;
+	    		refreshRecentContent();
 	    	}else if(item.getItemId()==R.id.action_refresh_contact){
-    			contactContent.loadData(true);
-			contactContent.isOpenRefreshData=false;
+	    		refreshContactContent();
     		}
     		return super.onOptionsItemSelected(item);
     }
 
+    private void refreshRecentContent(){
+    		//加载最近通话记录
+		boolean SP_ALIYUN_RECRECENT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,true);
+		if(SP_ALIYUN_RECRECENT_MESSAGE){
+			final CheckBox cb=new CheckBox(this);
+			cb.setText("不再显示提醒");
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(false)
+			.setMessage("应用将读取本地通话记录，以便您快速呼叫通话记录中的非通讯录联系人并对相关通话进行录音保全，我们不会保存和修改您通话记录中的任何信息。是否允许读取？")
+			.setView(cb)
+			.setPositiveButton("否", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					recentContent.isOpenRefreshData=false;
+				}
+			}).setNegativeButton("是", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(cb.isChecked()){
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_RECRECENT_MESSAGE,false);
+					}
+					recentContent.loadData(true);
+					recentContent.isOpenRefreshData=false;
+				}
+			}).show();
+		}else{
+			recentContent.loadData(true);
+			recentContent.isOpenRefreshData=false;
+		}
+    }
+    private void refreshContactContent(){
+    	//加载通讯录
+		boolean SP_ALIYUN_READCONTACT_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,true);
+		if(SP_ALIYUN_READCONTACT_MESSAGE){
+			final CheckBox cb=new CheckBox(this);
+			cb.setText("不再显示提醒");
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(false)
+			.setMessage("应用将读取手机本地通讯录，以便您通过客户端快速呼叫通讯录联系人并根据您的需要通话内容进行录音保全，应用不会保存和针对账号绑定通讯录的任何资料。是否允许读取？")
+			.setView(cb)
+			.setPositiveButton("否", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					contactContent.isOpenRefreshData=false;
+				}
+			}).setNegativeButton("是", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(cb.isChecked()){
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_READCONTACT_MESSAGE,false);
+					}
+					contactContent.loadData(true);
+					contactContent.isOpenRefreshData=false;
+				}
+			}).show();
+		}else{
+			contactContent.loadData(true);
+			contactContent.isOpenRefreshData=false;
+		}
+    }
+    
 	private void setWelcomeInfo(){
 		final String prodid=getAppContext().getUserInfo().get("prodid");
 		if(!"".equals(prodid)){
