@@ -14,6 +14,8 @@
     <string name="frame_friend_title">好友</string>
     <string name="frame_more_title">更多</string>
     
+    <string name="frame_process_next_step">下一步</string>
+    
     <!-- PullToRefreshListView -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">松开后刷新</string>

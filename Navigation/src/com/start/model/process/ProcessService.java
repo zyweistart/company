@@ -53,7 +53,7 @@ public class ProcessService {
 		this.mAppContext=AppContext.getInstance();
 		this.processListener=listener;
 		try {
-			InputStream in =context.getAssets().open("tmp1.xml");
+			InputStream in =context.getAssets().open("med_data/process/tmp1.xml");
 			buildProcessXML(in);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,7 +95,9 @@ public class ProcessService {
 					id=nnM.getNamedItem("id").getNodeValue();
 					String title=nnM.getNamedItem("title").getNodeValue();
 					String next=nnM.getNamedItem("next").getNodeValue();
+					String image=nnM.getNamedItem("image").getNodeValue();
 					jun=new Junction(id,title,NodeType.START);
+					jun.setImage(image);
 					jun.setNextNodeId(next);
 					startJunctionId=id;
 				}else if("switch".equals(nodeName)){
@@ -118,12 +120,16 @@ public class ProcessService {
 					id=nnM.getNamedItem("id").getNodeValue();
 					String title=nnM.getNamedItem("title").getNodeValue();
 					String next=nnM.getNamedItem("next").getNodeValue();
+					String image=nnM.getNamedItem("image").getNodeValue();
 					jun=new Junction(id,title,NodeType.EXEC);
+					jun.setImage(image);
 					jun.setNextNodeId(next);
 				}else if("end".equals(nodeName)){
 					id=nnM.getNamedItem("id").getNodeValue();
 					String title=nnM.getNamedItem("title").getNodeValue();
+					String image=nnM.getNamedItem("image").getNodeValue();
 					jun=new Junction(id,title,NodeType.END);
+					jun.setImage(image);
 					endJunctionId=id;
 				}
 				if("start".equals(nodeName)
@@ -298,6 +304,10 @@ public class ProcessService {
 	 */
 	public Boolean isProcessEnd(){
 		return currentJunctionId.equals(endJunctionId);
+	}
+	
+	public Junction getStartJunction(){
+		return junctions.get(startJunctionId);
 	}
 	
 	public interface ProcessListener{

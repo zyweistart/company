@@ -1,5 +1,7 @@
 package com.start.navigation;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -112,7 +115,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private Button mModuleMainFrameIntroduction_btnDepartment;
 	private Button mModuleMainFrameIntroduction_btnDoctor;
 	
-	private TextView mModuleMainFrameProcessTitle;
+	private ImageView mModuleMainFrameProcessImage;
 	private Button mModuleMainFrameProcessNext;
 	
 	Map<String, ViewCollections> mMapViewCollections = new HashMap<String, ViewCollections>();
@@ -174,6 +177,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		
 		process=new ProcessService(this,this);
 		process.init();
+		try {
+			Junction startJunction=process.getStartJunction();
+			InputStream is = getAssets().open("med_data/process/"+startJunction.getImage());
+			mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -372,7 +382,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		mModuleMainFrameMapQueryList.setOnItemClickListener(this);
 		
 		// process
-		mModuleMainFrameProcessTitle = (TextView) findViewById(R.id.module_main_frame_process_title);
+		mModuleMainFrameProcessImage = (ImageView) findViewById(R.id.module_main_frame_process_image);
 		mModuleMainFrameProcessNext = (Button) findViewById(R.id.module_main_frame_process_next);
 		mModuleMainFrameProcessNext.setOnClickListener(this);
 		
@@ -659,8 +669,14 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		} else if (v.getId() == R.id.module_main_frame_process_next) {
 			mModuleMainFrameProcessNext.setText("下一步");
 			if(process.isProcessEnd()){
-				mModuleMainFrameProcessTitle.setText("准备开始");
 				process.init();
+				try {
+					Junction startJunction=process.getStartJunction();
+					InputStream is = getAssets().open("med_data/process/"+startJunction.getImage());
+					mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}else{
 				process.execute();
 			}
@@ -939,7 +955,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			mModuleMainFrameProcessNext.setText("下一步");
 		}
 		if(jun.getNodeType()!=NodeType.SWITCH){
-			mModuleMainFrameProcessTitle.setText("当前流程的节点："+jun.getTitle());
+			try {
+				InputStream is = getAssets().open("med_data/process/"+jun.getImage());
+				mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
