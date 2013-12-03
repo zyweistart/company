@@ -78,10 +78,6 @@ public final class Constant {
 		 * 当前使用的数据文件编号
 		 */
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
-		/**
-		 * 是否有流程定义
-		 */
-		public static final String ISPROCESS="ISPROCESS";
 		
 	}
 	
