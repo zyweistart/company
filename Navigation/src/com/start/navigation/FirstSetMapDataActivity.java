@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.start.core.Constant;
 import com.start.core.CoreActivity;
 
 /**
@@ -33,8 +34,10 @@ public class FirstSetMapDataActivity extends CoreActivity implements OnClickList
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode==REQUEST_SET_DATA){
-			startActivity(new Intent(this,MainActivity.class));
-			finish();
+			if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
+				startActivity(new Intent(this,MainActivity.class));
+				finish();
+			}
 		}
 	}
 	

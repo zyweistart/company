@@ -42,9 +42,6 @@ public final class Constant {
 	 */
 	public static final String TMPDIRFILE="/navigation/tmp/";
 
-	
-	public static final String PROCESSMAINPATH="med_data/process/";
-	
 	public final static int LISTVIEW_DATA_MORE = 0x01;
 	public final static int LISTVIEW_DATA_LOADING = 0x02;
 	public final static int LISTVIEW_DATA_FULL = 0x03;

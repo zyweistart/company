@@ -12,6 +12,7 @@
     <string name="msg_downloading_datafile">正在下载数据文件</string>
     <string name="msg_decompressing_datafile">正在解压数据文件</string>
     <string name="msg_importing_datafile">正在导入数据文件</string>
+    <string name="msg_switching_datafile">数据切换成功</string>
     <string name="msg_download_success">下载成功</string>
     <string name="msg_please_wait">请稍候</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
@@ -39,6 +40,7 @@
     <string name="frame_introduction_title">介绍</string>
     <string name="frame_map_title">地图</string>
     <string name="frame_process_title">流程</string>
+    <string name="frame_process_not_definitions">当前数据不存在流程定义</string>
     <string name="frame_process_next_step">下一步</string>
     <string name="frame_process_reset">重新开始</string>
     <string name="frame_friend_title">好友</string>

@@ -33,7 +33,7 @@ import com.start.navigation.R;
 import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 
-public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
+public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 
 	private static final String DEBUG_TAG = "ImportDataFileTask";
 	
@@ -42,11 +42,14 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 	private  Context mContext;
 	private AppContext mAppContext;
 	private CoreService mCoreService;
+	private String fileno;
 	
-	public ImportDataFileTask(Context context) {
+	public ImportDataFileTask(Context context,String fileno) {
 		this.mContext=context;
+		this.fileno=fileno;
 		this.mAppContext = AppContext.getInstance();
 		this.mCoreService=new CoreService(mAppContext);
+		
 	}
 	
 	@Override
@@ -57,8 +60,7 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(String... params) {
-		String fileno=params[0];
+	protected Boolean doInBackground(Void... params) {
 		String externalStorageDirectory=Environment.getExternalStorageDirectory().getPath();
 		String folderPath=externalStorageDirectory+Constant.DATADIRFILE+fileno+"/";
 		File dataDir=new File(folderPath+"mapdata/");
@@ -97,7 +99,7 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 				for(MapData md:mds){
 					File mapDataFile=new File(dataDir,md.getId()+".map");
 					if(mapDataFile.exists()){
-						importMap(mapDataFile);
+						importMap(mapDataFile,fileno+"/mapdata/"+md.getId()+".map");
 					}
 				}
 				flag=true;
@@ -111,7 +113,7 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 		if(processDir.exists()){
 			try {
 				for (String fileName : processDir.list()) {
-					importProcess(new File(processDir,fileName));
+					importProcess(new File(processDir,fileName),fileno+"/process/"+fileName);
 				}
 //				mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.ISPROCESS, true);
 				flag=true;
@@ -268,21 +270,21 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 		}
 	}
 	
-	private void importMap(File mapData) throws IOException {
+	private void importMap(File mapData,String absolutePath) throws IOException {
 		InputStream is = null;
 		try {
 			is = new FileInputStream(mapData);
-			Utils.writeStreamToExternalStorage(mAppContext, is, mapData.getAbsolutePath());
+			Utils.writeStreamToExternalStorage(mAppContext, is, absolutePath);
 		} finally {
 			Utils.closeInputStream(is);
 		}
 	}
 	
-	private void importProcess(File mapData) throws IOException {
+	private void importProcess(File mapData,String absolutePath) throws IOException {
 		InputStream is = null;
 		try {
 			is = new FileInputStream(mapData);
-			Utils.writeStreamToExternalStorage(mAppContext, is, mapData.getAbsolutePath());
+			Utils.writeStreamToExternalStorage(mAppContext, is, absolutePath);
 		} finally {
 			Utils.closeInputStream(is);
 		}

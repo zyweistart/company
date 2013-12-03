@@ -40,8 +40,7 @@ public class StartActivity extends CoreActivity implements AnimationListener{
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		String CURRENTDATAFILENO=getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferences.CURRENTDATAFILENO, Constant.EMPTYSTR);
-		if(Constant.EMPTYSTR.equals(CURRENTDATAFILENO)){
+		if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
 			startActivity(new Intent(StartActivity.this, FirstSetMapDataActivity.class));
 		}else{
 			startActivity(new Intent(StartActivity.this, MainActivity.class));

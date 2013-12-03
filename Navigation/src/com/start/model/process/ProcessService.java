@@ -1,5 +1,7 @@
 package com.start.model.process;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -24,12 +26,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.start.core.Constant;
 import com.start.core.XMLException;
 import com.start.model.process.Action.ActionType;
 import com.start.model.process.Junction.NodeType;
 import com.start.navigation.AppContext;
 import com.start.utils.CommonFn;
+import com.start.utils.Utils;
 
 public class ProcessService {
 	
@@ -56,8 +58,8 @@ public class ProcessService {
 		this.mAppContext=AppContext.getInstance();
 		this.processListener=listener;
 		try {
-			InputStream in =context.getAssets().open(Constant.PROCESSMAINPATH+"process_definitions.xml");
-			buildProcessXML(in);
+			File dataFile=new File(Utils.getFile(mContext,mAppContext.getCurrentDataNo()),"process/process_definitions.xml");
+			buildProcessXML(new FileInputStream(dataFile));
 		} catch (Exception e) {
 			e.printStackTrace();
 			mAppContext.makeTextLong("流程文件定义出错:"+e.getMessage());
@@ -307,8 +309,8 @@ public class ProcessService {
 		return currentJunctionId.equals(endJunctionId);
 	}
 	
-	public String getProcessImage() {
-		return processImage;
+	public File getProcessImageFile() {
+		return new File(Utils.getFile(mContext,mAppContext.getCurrentDataNo()),"process/"+processImage);
 	}
 
 	public void setProcessImage(String processImage) {

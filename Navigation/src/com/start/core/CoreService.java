@@ -1,5 +1,7 @@
 package com.start.core;
 
+import com.start.navigation.AppContext;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,9 +10,11 @@ public class CoreService {
 
 	private Context mContext;
 	private SQLiteDBHelper dbHelper;
+	private AppContext mAppContext;
 	
 	public CoreService(Context context){
 		this.mContext=context;
+		this.mAppContext=AppContext.getInstance();
 		this.dbHelper=new SQLiteDBHelper(mContext);
 	}
 	
@@ -30,6 +34,10 @@ public class CoreService {
 	public void update(String tableName,ContentValues values,String whereClause, String[] whereArgs){
 		SQLiteDatabase sdb=this.dbHelper.getWritableDatabase();
 		sdb.update(tableName, values, whereClause, whereArgs);
+	}
+	
+	public String getCurrentDataNo(){
+		return mAppContext.getCurrentDataNo();
 	}
 	
 }

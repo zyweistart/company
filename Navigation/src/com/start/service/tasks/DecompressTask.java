@@ -12,13 +12,15 @@ import com.start.navigation.R;
 import com.start.utils.CommonFn;
 import com.start.utils.ZipUtils;
 
-public class DecompressTask extends AsyncTask<String, Float, Boolean> {
+public class DecompressTask extends AsyncTask<Void, Float, Boolean> {
 
 	private Context mContext;
 	private ProgressDialog pDialog;
+	private String fileno;
 	
-	public DecompressTask(Context context){
+	public DecompressTask(Context context,String fileno){
 		this.mContext=context;
+		this.fileno=fileno;
 	}
 
 	@Override
@@ -29,8 +31,7 @@ public class DecompressTask extends AsyncTask<String, Float, Boolean> {
 	}
 	
 	@Override
-	protected Boolean doInBackground(String... params) {
-		final String fileno=params[0];
+	protected Boolean doInBackground(Void... params) {
 		String externalStorageDirectory=Environment.getExternalStorageDirectory().getPath();
 		File decompressFile=new File(new File(externalStorageDirectory+Constant.TMPDIRFILE),fileno);
 		if(decompressFile.exists()){
@@ -41,8 +42,7 @@ public class DecompressTask extends AsyncTask<String, Float, Boolean> {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally{
-				//TODO:只要执行结束则删除
-//				decompressFile.delete();
+				decompressFile.delete();
 			}
 		}
 		return false;

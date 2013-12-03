@@ -24,14 +24,16 @@ import com.start.utils.MD5;
 import com.start.utils.StringUtils;
 import com.start.utils.XMLUtils;
 
-public class DownloadTask extends AsyncTask<String, Float, File> {
+public class DownloadTask extends AsyncTask<Void, Float, File> {
 
 	private Context mContext;
 	private AppContext mAppContext;
 	private ProgressDialog pDialog;
+	private String fileno;
 	
-	public DownloadTask(Context context){
+	public DownloadTask(Context context,String fileno){
 		this.mContext=context;
+		this.fileno=fileno;
 		this.mAppContext=AppContext.getInstance();
 	}
 
@@ -68,8 +70,7 @@ public class DownloadTask extends AsyncTask<String, Float, File> {
 	}
 
 	@Override
-	protected File doInBackground(String... params) {
-		final String fileno=params[0];
+	protected File doInBackground(Void... params) {
 		String dxternalStorageDirectory=Environment.getExternalStorageDirectory().getPath();
 		File tempDirFile=new File(dxternalStorageDirectory+Constant.TMPDIRFILE);
 		if(!tempDirFile.exists()){

@@ -26,7 +26,9 @@ public class DepartmentService extends CoreService {
 				Department.COLUMN_NAME_ID,
 				Department.COLUMN_NAME_NAME,
 				Department.COLUMN_NAME_INTRODUCTION,
-				Department.COLUMN_NAME_MAJORROOMID},null,null, null, null, null);
+				Department.COLUMN_NAME_MAJORROOMID},
+				Department.COLUMN_NAME_FILENO+"=?",
+				new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -51,7 +53,9 @@ public class DepartmentService extends CoreService {
 				Department.COLUMN_NAME_ID,
 				Department.COLUMN_NAME_NAME,
 				Department.COLUMN_NAME_INTRODUCTION,
-				Department.COLUMN_NAME_MAJORROOMID},Department.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+				Department.COLUMN_NAME_MAJORROOMID},
+				Department.COLUMN_NAME_ID+"=? AND "+Department.COLUMN_NAME_FILENO+"=?",
+				new String[]{Id,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {

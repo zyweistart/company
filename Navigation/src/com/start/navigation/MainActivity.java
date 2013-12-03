@@ -1,7 +1,6 @@
 package com.start.navigation;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +22,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -52,7 +49,6 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import com.start.core.AppConfig;
 import com.start.core.Constant;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
@@ -187,8 +183,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		
 		process=new ProcessService(this,this);
 		process.init();
-		String fullPath=Constant.PROCESSMAINPATH+process.getProcessImage();
-		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
+		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
 	}
 
 	@Override
@@ -247,12 +242,17 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 2) {
-					mModuleMainHeaderContentTitle.setText(R.string.frame_process_title);
-					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
-					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
-					mModuleMainFrameMapContent.setVisibility(View.GONE);
-					mModuleMainFrameProcessContent.setVisibility(View.VISIBLE);
-					mModuleMainFrameFriendContent.setVisibility(View.GONE);
+					File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),"process");
+					if(dataFile.exists()){
+						mModuleMainHeaderContentTitle.setText(R.string.frame_process_title);
+						mModuleMainHeaderContentLocation.setVisibility(View.GONE);
+						mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
+						mModuleMainFrameMapContent.setVisibility(View.GONE);
+						mModuleMainFrameProcessContent.setVisibility(View.VISIBLE);
+						mModuleMainFrameFriendContent.setVisibility(View.GONE);
+					}else{
+						appContext.makeTextLong(R.string.frame_process_not_definitions);
+					}
 				} else if (index == 3) {
 					mModuleMainHeaderContentTitle.setText(R.string.frame_friend_title);
 					mModuleMainHeaderContentLocation.setVisibility(View.GONE);
@@ -719,8 +719,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 			if(process.isProcessEnd()){
 				process.init();
-				String fullPath=Constant.PROCESSMAINPATH+process.getProcessImage();
-				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(this,fullPath));
+				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
 			}else{
 				process.execute();
 			}
@@ -893,10 +892,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				MapData md = result.get(i);
 				ViewCollections vc = new ViewCollections();
 
-				String path = String.format("%1$s/%2$s.map",
-						AppConfig.CONFIG_DATA_PATH_MEDMAP, md.getId());
-				FileOpenResult openResult = vc.getMapView().setMapFile(
-						Utils.getFile(MainActivity.this, path));
+				String path = String.format("mapdata/%1$s.map",md.getId());
+				File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),path);
+				FileOpenResult openResult = vc.getMapView().setMapFile(dataFile);
 				if (!openResult.isSuccess()) {
 					return;
 				}
@@ -999,13 +997,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 		}
 		if(jun.getNodeType()!=NodeType.SWITCH){
-			try {
-				Log.v("MainActivity",jun.getTitle()+"image:"+jun.getImage());
-				InputStream is = getAssets().open("med_data/process/"+jun.getImage());
-				mModuleMainFrameProcessImage.setImageBitmap(BitmapFactory.decodeStream(is));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			File dataFile=new File(Utils.getFile(this,appContext.getCurrentDataNo()),"process/"+jun.getImage());
+			mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(dataFile));
 		}
 	}
 

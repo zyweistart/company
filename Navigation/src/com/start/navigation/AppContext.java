@@ -14,6 +14,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.start.core.Constant;
 import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
 import com.start.service.DepartmentHasRoomService;
@@ -229,5 +230,13 @@ public class AppContext extends Application {
 		}
 		
 	};
-    
+	
+    /**
+     * 当前的使用数据编号
+     * @return
+     */
+	public String getCurrentDataNo(){
+		return getSharedPreferencesUtils().getString(Constant.SharedPreferences.CURRENTDATAFILENO, Constant.EMPTYSTR);
+	}
+	
 }

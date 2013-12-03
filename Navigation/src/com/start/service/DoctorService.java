@@ -29,7 +29,9 @@ public class DoctorService extends CoreService {
 					Doctor.COLUMN_NAME_TITLE,
 					Doctor.COLUMN_NAME_SPECIALTY,
 					Doctor.COLUMN_NAME_INTRODUCTION,
-					Doctor.COLUMN_NAME_DEPARTMENTID},null,null, null, null, null);
+					Doctor.COLUMN_NAME_DEPARTMENTID},
+					Doctor.COLUMN_NAME_FILENO+"=?",
+					new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -61,7 +63,8 @@ public class DoctorService extends CoreService {
 					Doctor.COLUMN_NAME_SPECIALTY,
 					Doctor.COLUMN_NAME_INTRODUCTION,
 					Doctor.COLUMN_NAME_DEPARTMENTID},
-					Doctor.COLUMN_NAME_DEPARTMENTID+"=?",new String[]{departmentId}, null, null, null);
+					Doctor.COLUMN_NAME_DEPARTMENTID+"=? AND "+Doctor.COLUMN_NAME_FILENO+"=?",
+					new String[]{departmentId,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -92,7 +95,9 @@ public class DoctorService extends CoreService {
 					Doctor.COLUMN_NAME_TITLE,
 					Doctor.COLUMN_NAME_SPECIALTY,
 					Doctor.COLUMN_NAME_INTRODUCTION,
-					Doctor.COLUMN_NAME_DEPARTMENTID},Doctor.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+					Doctor.COLUMN_NAME_DEPARTMENTID},
+					Doctor.COLUMN_NAME_ID+"=? AND "+Doctor.COLUMN_NAME_FILENO+"=?",
+					new String[]{Id,getCurrentDataNo()},null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {

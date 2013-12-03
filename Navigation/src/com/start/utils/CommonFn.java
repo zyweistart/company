@@ -1,6 +1,8 @@
 package com.start.utils;
 
 import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -135,13 +137,24 @@ public class CommonFn {
 		return poiDialog;
 	}
 	
-	public static Bitmap convertToBitmap(Context context,String fullPath){
+	public static Bitmap convertToBitmap(File file){
+		InputStream is=null;
 		try {
-			InputStream is = context.getAssets().open(fullPath);
+			is = new FileInputStream(file);
 			return BitmapFactory.decodeStream(is);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}finally{
+			if(is!=null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally{
+					is=null;
+				}
+			}
 		}
 	}
 	

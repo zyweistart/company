@@ -25,7 +25,9 @@ public class MapDataService extends CoreService {
 				new String[]{
 					MapData.COLUMN_NAME_ID,
 					MapData.COLUMN_NAME_NAME,
-					MapData.COLUMN_NAME_VERTEXID},null,null, null, null, null);
+					MapData.COLUMN_NAME_VERTEXID},
+					MapData.COLUMN_NAME_FILENO+"=?",
+					new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -48,7 +50,9 @@ public class MapDataService extends CoreService {
 				new String[]{
 				MapData.COLUMN_NAME_ID,
 				MapData.COLUMN_NAME_NAME,
-				MapData.COLUMN_NAME_VERTEXID},MapData.COLUMN_NAME_ID+"=?",new String[]{Id}, null, null, null);
+				MapData.COLUMN_NAME_VERTEXID},
+				MapData.COLUMN_NAME_ID+"=? AND "+MapData.COLUMN_NAME_FILENO+"=?",
+				new String[]{Id,getCurrentDataNo()},null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
