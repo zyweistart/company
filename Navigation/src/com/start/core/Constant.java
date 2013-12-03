@@ -32,6 +32,17 @@ public final class Constant {
 	 */
 	public static final String EMPTYSTR="";
 	
+	/**
+	 * 数据主目录
+	 */
+	public static final String DATADIRFILE="/navigation/data/";
+	
+	/**
+	 * 临时目录
+	 */
+	public static final String TMPDIRFILE="/navigation/tmp/";
+
+	
 	public static final String PROCESSMAINPATH="med_data/process/";
 	
 	public final static int LISTVIEW_DATA_MORE = 0x01;
@@ -54,6 +65,8 @@ public final class Constant {
 		 * 好友添加
 		 */
 		public static final String v4FriendSet="";
+		
+		public static final String v4DataFileDownload="v4recDown";
 		
 		public static final String v4recQry="v4recQry";
 		

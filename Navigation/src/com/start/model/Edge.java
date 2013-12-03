@@ -12,6 +12,7 @@ public class Edge extends CoreModel {
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ _ID + " TEXT,"
+			+ COLUMN_NAME_FILENO + " TEXT,"
 			+ COLUMN_NAME_VERTEXSTARTID + " TEXT,"
 			+ COLUMN_NAME_VERTEXENDID + " TEXT"
 			+ ");";

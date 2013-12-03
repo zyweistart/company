@@ -7,7 +7,11 @@
     <string name="cancel">取消</string>
     <string name="my_location">定位</string>
     <string name="add">添加</string>
+    <string name="prompt">温馨提示</string>
     
+    <string name="msg_downloading_datafile">正在下载数据文件</string>
+    <string name="msg_decompressing_datafile">正在处理数据文件</string>
+    <string name="msg_download_success">下载成功</string>
     <string name="msg_please_wait">请稍候</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
     <string name="msg_location_unavailable">当前位置不可用</string>
@@ -16,6 +20,7 @@
     <string name="msg_last_version">当前版本已经是最新</string>
     <string name="msg_network_connecterror">网络连接不可用，请检查网络设置</string>
     <string name="msg_error_please_try_again">糟糕，好像出错了，抱歉请稍后重试下吧</string>
+    <string name="msg_use_mobile_data">当前网络环境为移动2G/3G网络，建议在Wifi环境下载,是否继续？</string>
     
     <string name="activity_login">登录</string>
     <string name="activity_account">账户</string>
@@ -26,6 +31,9 @@
     <string name="lvitem_friend_location_txt">查看位置</string>
     <string name="lvitem_friend_remove_txt">解除关系</string>
     <string name="lvitem_friend_authorize_txt">开放位置</string>
+    <string name="lvitem_mapdata_download_txt">下载</string>
+    <string name="lvitem_mapdata_use_txt">使用</string>
+    <string name="lvitem_mapdata_detail_txt">详细</string>
     
     <string name="frame_introduction_title">介绍</string>
     <string name="frame_map_title">地图</string>

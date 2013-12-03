@@ -61,12 +61,6 @@ public class FriendHistoryListActivity extends CoreActivity {
 				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
 				holder = new FriendHistoryViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
-				holder.btnLocation.setVisibility(View.GONE);
-				
-				holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
-				holder.btnRemove.setVisibility(View.GONE);
-				
 				holder.btnAuthorize = (Button) convertView.findViewById(R.id.lvitem_friend_authorize);
 				holder.btnAuthorize.setVisibility(View.VISIBLE);
 				holder.btnAuthorize.setTag(holder);
@@ -91,8 +85,6 @@ public class FriendHistoryListActivity extends CoreActivity {
 		
 		public class FriendHistoryViewHolder {
 			TextView name;
-			Button btnLocation;
-			Button btnRemove;
 			Button btnAuthorize;
 		}
 	}

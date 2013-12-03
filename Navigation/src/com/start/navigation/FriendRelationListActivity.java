@@ -94,9 +94,6 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
 				holder = new FriendRelationViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
-				holder.btnLocation.setVisibility(View.GONE);
-				
 				holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
 				holder.btnRemove.setTag(holder);
 				holder.btnRemove.setVisibility(View.VISIBLE);
@@ -111,9 +108,6 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 					}
 					
 				});
-				
-				holder.btnAuthorize = (Button) convertView.findViewById(R.id.lvitem_friend_authorize);
-				holder.btnAuthorize.setVisibility(View.GONE);
 				convertView.setTag(holder);
 			}
 			holder.data=friendRelationData.getDataItemList().get(position);
@@ -124,9 +118,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 		public class FriendRelationViewHolder {
 			Map<String,String> data;
 			TextView name;
-			Button btnLocation;
 			Button btnRemove;
-			Button btnAuthorize;
 		}
 		
 	}

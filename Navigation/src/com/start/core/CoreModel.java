@@ -5,6 +5,7 @@ import android.provider.BaseColumns;
 public abstract class CoreModel implements BaseColumns {
 
 	public static final String COLUMN_NAME_ID=_ID;
+	public static final String COLUMN_NAME_FILENO="FILENO";
 	
 	private String id;
 

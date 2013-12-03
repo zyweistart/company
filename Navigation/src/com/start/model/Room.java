@@ -25,6 +25,7 @@ public class Room extends CoreModel implements POI {
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ COLUMN_NAME_ID + " TEXT,"
+			+ COLUMN_NAME_FILENO + " TEXT,"
 			+ COLUMN_NAME_MAPID + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_VERTEXID + " TEXT"

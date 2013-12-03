@@ -83,116 +83,112 @@ public class ProcessService {
 			throw new XMLException(e);
 		}
 		Element root=document.getDocumentElement();
-		NodeList processList=root.getElementsByTagName("process");
-		for (int i = 0; i < processList.getLength(); i++) {
-			Node process=processList.item(i);
-			NamedNodeMap pnnM=process.getAttributes();
-			setProcessImage(pnnM.getNamedItem("image").getNodeValue());
-			NodeList nodeList=process.getChildNodes();
-			for (int j= 0; j< nodeList.getLength();j++) {
-				Node cNode=nodeList.item(j);
-				NodeList aoChildList=cNode.getChildNodes();
-				String nodeName=cNode.getNodeName().toLowerCase();
-				NamedNodeMap nnM=cNode.getAttributes();
-				Junction jun=null;
-				String id=null;
-				if("start".equals(nodeName)){
-					id=nnM.getNamedItem("id").getNodeValue();
-					String title=nnM.getNamedItem("title").getNodeValue();
-					String next=nnM.getNamedItem("next").getNodeValue();
-					String image=nnM.getNamedItem("image").getNodeValue();
-					jun=new Junction(id,title,NodeType.START);
-					jun.setImage(image);
-					jun.setNextNodeId(next);
-					startJunctionId=id;
-				}else if("switch".equals(nodeName)){
-					id=nnM.getNamedItem("id").getNodeValue();
-					String title=nnM.getNamedItem("title").getNodeValue();
-					jun=new Junction(id,title,NodeType.SWITCH);
-					List<Option> options=new ArrayList<Option>();
-					for (int l= 0; l< aoChildList.getLength();l++) {
-						Node actionNode=aoChildList.item(l);
-						if("option".equals(actionNode.getNodeName().toLowerCase())){
-							NamedNodeMap actionNNM=actionNode.getAttributes();
-							String oId=actionNNM.getNamedItem("id").getNodeValue().toLowerCase();
-							String oNext=actionNNM.getNamedItem("next").getNodeValue();
-							Option option=new Option(oId,oNext);
-							options.add(option);
-						}
+		NamedNodeMap pnnM=root.getAttributes();
+		setProcessImage(pnnM.getNamedItem("image").getNodeValue());
+		NodeList nodeList=root.getChildNodes();
+		for (int j= 0; j< nodeList.getLength();j++) {
+			Node cNode=nodeList.item(j);
+			NodeList aoChildList=cNode.getChildNodes();
+			String nodeName=cNode.getNodeName().toLowerCase();
+			NamedNodeMap nnM=cNode.getAttributes();
+			Junction jun=null;
+			String id=null;
+			if("start".equals(nodeName)){
+				id=nnM.getNamedItem("id").getNodeValue();
+				String title=nnM.getNamedItem("title").getNodeValue();
+				String next=nnM.getNamedItem("next").getNodeValue();
+				String image=nnM.getNamedItem("image").getNodeValue();
+				jun=new Junction(id,title,NodeType.START);
+				jun.setImage(image);
+				jun.setNextNodeId(next);
+				startJunctionId=id;
+			}else if("switch".equals(nodeName)){
+				id=nnM.getNamedItem("id").getNodeValue();
+				String title=nnM.getNamedItem("title").getNodeValue();
+				jun=new Junction(id,title,NodeType.SWITCH);
+				List<Option> options=new ArrayList<Option>();
+				for (int l= 0; l< aoChildList.getLength();l++) {
+					Node actionNode=aoChildList.item(l);
+					if("option".equals(actionNode.getNodeName().toLowerCase())){
+						NamedNodeMap actionNNM=actionNode.getAttributes();
+						String oId=actionNNM.getNamedItem("id").getNodeValue().toLowerCase();
+						String oNext=actionNNM.getNamedItem("next").getNodeValue();
+						Option option=new Option(oId,oNext);
+						options.add(option);
 					}
-					jun.setOptions(options);
-				}else if("node".equals(nodeName)){
-					id=nnM.getNamedItem("id").getNodeValue();
-					String title=nnM.getNamedItem("title").getNodeValue();
-					String next=nnM.getNamedItem("next").getNodeValue();
-					String image=nnM.getNamedItem("image").getNodeValue();
-					jun=new Junction(id,title,NodeType.EXEC);
-					jun.setImage(image);
-					jun.setNextNodeId(next);
-				}else if("end".equals(nodeName)){
-					id=nnM.getNamedItem("id").getNodeValue();
-					String title=nnM.getNamedItem("title").getNodeValue();
-					String image=nnM.getNamedItem("image").getNodeValue();
-					jun=new Junction(id,title,NodeType.END);
-					jun.setImage(image);
-					endJunctionId=id;
 				}
-				if("start".equals(nodeName)
-						||"node".equals(nodeName)
-						||"end".equals(nodeName)){
-					for (int l= 0; l< aoChildList.getLength();l++) {
-						Node actionNode=aoChildList.item(l);
-						if("action".equals(actionNode.getNodeName().toLowerCase())){
-							NamedNodeMap actionNNM=actionNode.getAttributes();
-							Node node=actionNNM.getNamedItem("type");
+				jun.setOptions(options);
+			}else if("node".equals(nodeName)){
+				id=nnM.getNamedItem("id").getNodeValue();
+				String title=nnM.getNamedItem("title").getNodeValue();
+				String next=nnM.getNamedItem("next").getNodeValue();
+				String image=nnM.getNamedItem("image").getNodeValue();
+				jun=new Junction(id,title,NodeType.EXEC);
+				jun.setImage(image);
+				jun.setNextNodeId(next);
+			}else if("end".equals(nodeName)){
+				id=nnM.getNamedItem("id").getNodeValue();
+				String title=nnM.getNamedItem("title").getNodeValue();
+				String image=nnM.getNamedItem("image").getNodeValue();
+				jun=new Junction(id,title,NodeType.END);
+				jun.setImage(image);
+				endJunctionId=id;
+			}
+			if("start".equals(nodeName)
+					||"node".equals(nodeName)
+					||"end".equals(nodeName)){
+				for (int l= 0; l< aoChildList.getLength();l++) {
+					Node actionNode=aoChildList.item(l);
+					if("action".equals(actionNode.getNodeName().toLowerCase())){
+						NamedNodeMap actionNNM=actionNode.getAttributes();
+						Node node=actionNNM.getNamedItem("type");
+						if(node==null){
+							throw new XMLException("动作类型不能为空");
+						}
+						String type=node.getNodeValue().toLowerCase();
+						Action action=new Action();
+						if("dialog".equals(type)){
+							node=actionNNM.getNamedItem("message");
 							if(node==null){
-								throw new XMLException("动作类型不能为空");
+								throw new XMLException("对话框动作消息不能为空");
 							}
-							String type=node.getNodeValue().toLowerCase();
-							Action action=new Action();
-							if("dialog".equals(type)){
-								node=actionNNM.getNamedItem("message");
-								if(node==null){
-									throw new XMLException("对话框动作消息不能为空");
-								}
+							action.setMessage(node.getNodeValue());
+							action.setType(ActionType.DIALOG);
+						}else if("location".equals(type)){
+							node=actionNNM.getNamedItem("message");
+							if(node!=null){
 								action.setMessage(node.getNodeValue());
-								action.setType(ActionType.DIALOG);
-							}else if("location".equals(type)){
-								node=actionNNM.getNamedItem("message");
-								if(node!=null){
-									action.setMessage(node.getNodeValue());
-								}
-								node=actionNNM.getNamedItem("content");
-								if(node==null){
-									throw new XMLException("位置动作内容不能为空");
-								}
-								action.setContent(node.getNodeValue());
-								action.setType(ActionType.LOCATION);
-							}else if("openweb".equals(type)){
-								node=actionNNM.getNamedItem("message");
-								if(node!=null){
-									action.setMessage(node.getNodeValue());
-								}
-								node=actionNNM.getNamedItem("url");
-								if(node==null){
-									throw new XMLException("打开浏览器动作url不能为空");
-								}
-								String url=node.getNodeValue();
-								action.setUrl(url);
-								action.setType(ActionType.OPENWEB);
 							}
-							
-							jun.setAction(action);
+							node=actionNNM.getNamedItem("content");
+							if(node==null){
+								throw new XMLException("位置动作内容不能为空");
+							}
+							action.setContent(node.getNodeValue());
+							action.setType(ActionType.LOCATION);
+						}else if("openweb".equals(type)){
+							node=actionNNM.getNamedItem("message");
+							if(node!=null){
+								action.setMessage(node.getNodeValue());
+							}
+							node=actionNNM.getNamedItem("url");
+							if(node==null){
+								throw new XMLException("打开浏览器动作url不能为空");
+							}
+							String url=node.getNodeValue();
+							action.setUrl(url);
+							action.setType(ActionType.OPENWEB);
 						}
+						
+						jun.setAction(action);
 					}
-					
 				}
-				if("start".equals(nodeName)
-						||"switch".equals(nodeName)
-						||"node".equals(nodeName)
-						||"end".equals(nodeName)){
-					junctions.put(id, jun);
-				}
+				
+			}
+			if("start".equals(nodeName)
+					||"switch".equals(nodeName)
+					||"node".equals(nodeName)
+					||"end".equals(nodeName)){
+				junctions.put(id, jun);
 			}
 		}
 	}
@@ -318,8 +314,6 @@ public class ProcessService {
 	public void setProcessImage(String processImage) {
 		this.processImage = processImage;
 	}
-
-
 
 	public interface ProcessListener{
 		void location(String mapId,String vertexId);

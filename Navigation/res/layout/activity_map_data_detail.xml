@@ -8,18 +8,23 @@
 	<include layout="@layout/module_main_header" />
     
 	<TextView
+	    android:id="@+id/activity_map_data_description_txt"
 	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="医院地图数据详细"/>
+	    android:layout_height="wrap_content"/>
+	
 	<Button
 	    android:id="@+id/activity_map_data_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="下载数据"/>
+        android:onClick="onClick"
+        android:text="@string/lvitem_mapdata_download_txt"/>
+	
 	<Button
 	    android:id="@+id/activity_map_data_use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="马上使用"/>
+        android:onClick="onClick"
+        android:visibility="gone"
+        android:text="@string/lvitem_mapdata_use_txt"/>
 	
 </LinearLayout>

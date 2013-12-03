@@ -18,6 +18,7 @@ import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -94,6 +95,7 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 public class MainActivity extends MapActivity implements OnTouchListener,
 		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
+	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
 	private static final String BUNDLEDATA_DATA = "data";
 
 	private AppContext appContext;
@@ -407,11 +409,21 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 							},"reclist","reclist++++");
 						}else{
 							if(mCurSel==3){
-								CommonFn.buildDialog(MainActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+								new AlertDialog.Builder(MainActivity.this).
+								setMessage(R.string.msg_not_login).
+								setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 									
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										startActivity(new Intent(MainActivity.this,LoginActivity.class));
+										startActivityForResult(new Intent(MainActivity.this,LoginActivity.class), 
+												REQUEST_CODE_REFRESH_FRIEND_LOCATION);
+									}
+									
+								}).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
 									}
 									
 								}).show();
@@ -425,7 +437,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					
 				});
 		friendLocationPullListData.start(R.id.module_main_frame_friend_location_pulllistview, 
-				new FriendRelationAdapter(friendLocationPullListData));
+				new FriendLocationAdapter(friendLocationPullListData));
 	}
 
 	/**
@@ -816,7 +828,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onBackPressed() {
-		if (appContext.getPathSearchResult() != null) {
+		if (mCurSel==1&&appContext.getPathSearchResult() != null) {
 			showDialog(Utils.DLG_EXIT_NAVIGATION);
 		} else if (mPoiMarkers != null) {
 			mPoiMarkers = null;
@@ -1042,10 +1054,22 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			startActivity(intent);
 		}
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode==REQUEST_CODE_REFRESH_FRIEND_LOCATION){
+			if(mCurSel==3){
+				if(appContext.isLogin()){
+					friendLocationPullListData.getOnLoadDataListener().LoadData(LoadMode.INIT);
+				}
+			}
+		}
+	}
 
-	public class FriendRelationAdapter extends PullListViewData.DataAdapter{
+	public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 		
-		public FriendRelationAdapter(PullListViewData pullListViewData) {
+		public FriendLocationAdapter(PullListViewData pullListViewData) {
 			pullListViewData.super();
 		}
 
@@ -1072,12 +1096,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					}
 					
 				});
-				
-				holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
-				holder.btnRemove.setVisibility(View.VISIBLE);
-				
-				holder.btnAuthorize = (Button) convertView.findViewById(R.id.lvitem_friend_authorize);
-				holder.btnAuthorize.setVisibility(View.GONE);
 				convertView.setTag(holder);
 			}
 			holder.data=friendLocationPullListData.getDataItemList().get(position);
@@ -1089,8 +1107,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			Map<String,String> data;
 			TextView name;
 			Button btnLocation;
-			Button btnRemove;
-			Button btnAuthorize;
 		}
 		
 	}

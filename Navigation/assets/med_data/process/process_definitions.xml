@@ -27,10 +27,18 @@
     </node>
     
     <switch id="化验/取药" title="化验/取药">
+        <option id="化验" next="化验/检查"/>
  		<option id="结束" next="结束"/>
-        <option id="化验" next="结束"/>
- 		<option id="取药" next="结束"/>
+ 		<option id="取药" next="取药"/>
     </switch>
+    
+    <node id="化验/检查" title="化验/检查" next="结束" image="guide_step_13.png"/>
+    
+    <node id="取药" title="取药" next="结束" image="guide_step_19.png">
+        <!-- <action type="openweb" message="注意安全哦" url="http://www.qq.com"/> -->
+        <action type="location" content="0101;0009"/>
+        
+    </node>
     
     <end id="结束" title="结束" image="guide_step_8.png"/>
 </process>

@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/lvitem_mapdata_content"
 	android:layout_width="match_parent" 
-	android:layout_height="wrap_content"
-	android:gravity="center_vertical"
-	android:orientation="horizontal" >
+	android:layout_height="wrap_content">
 	
     <TextView
         android:id="@+id/lvitem_mapdata_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     
-</LinearLayout>
+    <LinearLayout 
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <Button
+            android:id="@+id/lvitem_mapdata_btn_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lvitem_mapdata_download_txt"/>
+        
+        <Button
+            android:id="@+id/lvitem_mapdata_btn_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/lvitem_mapdata_use_txt"/>
+        
+        <Button
+            android:id="@+id/lvitem_mapdata_btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lvitem_mapdata_detail_txt"/>
+        
+    </LinearLayout>
+    
+</RelativeLayout>
