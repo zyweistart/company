@@ -10,7 +10,8 @@
     <string name="prompt">温馨提示</string>
     
     <string name="msg_downloading_datafile">正在下载数据文件</string>
-    <string name="msg_decompressing_datafile">正在处理数据文件</string>
+    <string name="msg_decompressing_datafile">正在解压数据文件</string>
+    <string name="msg_importing_datafile">正在导入数据文件</string>
     <string name="msg_download_success">下载成功</string>
     <string name="msg_please_wait">请稍候</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>

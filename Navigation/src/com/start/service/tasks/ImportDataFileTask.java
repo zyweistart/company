@@ -1,4 +1,4 @@
-package com.start.service;
+package com.start.service.tasks;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -27,27 +28,41 @@ import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
 import com.start.model.Vertex;
+import com.start.navigation.AppContext;
+import com.start.navigation.R;
+import com.start.utils.CommonFn;
+import com.start.utils.Utils;
 
 public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 
 	private static final String DEBUG_TAG = "ImportDataFileTask";
 	
 	private String message;
-	
-	private Context mContext;
+	private ProgressDialog pDialog;
+	private  Context mContext;
+	private AppContext mAppContext;
 	private CoreService mCoreService;
 	
 	public ImportDataFileTask(Context context) {
-		this.mContext = context;
-		this.mCoreService=new CoreService(mContext);
+		this.mContext=context;
+		this.mAppContext = AppContext.getInstance();
+		this.mCoreService=new CoreService(mAppContext);
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		pDialog=CommonFn.progressDialog(mContext, mContext.getString(R.string.msg_importing_datafile));
+		pDialog.show();
+		pDialog.setCancelable(false);
 	}
 
 	@Override
 	protected Boolean doInBackground(String... params) {
 		String fileno=params[0];
 		String externalStorageDirectory=Environment.getExternalStorageDirectory().getPath();
-		String folderPath=externalStorageDirectory+Constant.DATADIRFILE+fileno;
-		File dataDir=new File(folderPath);
+		String folderPath=externalStorageDirectory+Constant.DATADIRFILE+fileno+"/";
+		File dataDir=new File(folderPath+"mapdata/");
+		Boolean flag=false;
 		if(dataDir.exists()){
 			try {
 				for (String fileName : dataDir.list()) {
@@ -78,22 +93,45 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 						break;
 					}
 				}
-				return true;
-			} catch (IOException e) {
-				message = "Failed to import config data.";
+				List<MapData> mds=mAppContext.getMapDataService().findAll();
+				for(MapData md:mds){
+					File mapDataFile=new File(dataDir,md.getId()+".map");
+					if(mapDataFile.exists()){
+						importMap(mapDataFile);
+					}
+				}
+				flag=true;
+			} catch (Exception e) {
+				flag=false;
+				message = "Failed to import data.";
 				Log.e(DEBUG_TAG, e.getMessage());
 			}
 		}
-		return false;
+		File processDir=new File(folderPath+"process/");
+		if(processDir.exists()){
+			try {
+				for (String fileName : processDir.list()) {
+					importProcess(new File(processDir,fileName));
+				}
+//				mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.ISPROCESS, true);
+				flag=true;
+			}catch(Exception e){
+				flag=false;
+				message = "Failed to import process.";
+				Log.e(DEBUG_TAG, e.getMessage());
+			}
+		}else{
+//			mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.ISPROCESS, false);
+		}
+		return flag;
 	}
+	
 	
 	@Override
 	protected void onPostExecute(Boolean result) {
-		super.onPostExecute(result);
-		if (result) {
-			Toast.makeText(mContext, "导入成功", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+		pDialog.dismiss();
+		if (!result) {
+			Toast.makeText(mAppContext, message, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -230,17 +268,25 @@ public class ImportDataFileTask extends AsyncTask<String, Void, Boolean> {
 		}
 	}
 	
-	//TODO:导入地图
-//	private void importMap(String mapFileName) throws IOException {
-//		String filePath = String.format("%1$s/%2$s", AppConfig.CONFIG_DATA_PATH_MEDMAP, mapFileName);
-//		InputStream is = null;
-//		try {
-//			is = mAssetManager.open(filePath);
-//			Utils.writeStreamToExternalStorage(mContext, is, filePath);
-//		} finally {
-//			Utils.closeInputStream(is);
-//		}
-//	}
+	private void importMap(File mapData) throws IOException {
+		InputStream is = null;
+		try {
+			is = new FileInputStream(mapData);
+			Utils.writeStreamToExternalStorage(mAppContext, is, mapData.getAbsolutePath());
+		} finally {
+			Utils.closeInputStream(is);
+		}
+	}
+	
+	private void importProcess(File mapData) throws IOException {
+		InputStream is = null;
+		try {
+			is = new FileInputStream(mapData);
+			Utils.writeStreamToExternalStorage(mAppContext, is, mapData.getAbsolutePath());
+		} finally {
+			Utils.closeInputStream(is);
+		}
+	}
 	
 	private List<String[]> readFileData(File file) throws IOException{
 		InputStream is = null;

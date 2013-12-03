@@ -76,7 +76,15 @@ public final class Constant {
 	 * SharedPreferences常量
 	 * @author Start
 	 */
-	public final class SharedPreferencesConstant{
+	public final class SharedPreferences{
+		/**
+		 * 当前使用的数据文件编号
+		 */
+		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
+		/**
+		 * 是否有流程定义
+		 */
+		public static final String ISPROCESS="ISPROCESS";
 		
 	}
 	

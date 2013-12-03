@@ -27,9 +27,9 @@ import com.start.core.CoreActivity;
 import com.start.model.UIRunnable;
 import com.start.navigation.MapDataListActivity.MapDataPullListAdapter.MapDataViewHolder;
 import com.start.service.HttpService.LoadMode;
-import com.start.service.ImportDataFileTask;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
+import com.start.service.tasks.ImportDataFileTask;
 import com.start.utils.CommonFn;
 import com.start.utils.HttpUtils;
 import com.start.utils.MD5;
@@ -145,9 +145,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 	public void onClick(View v) {
 		final MapDataViewHolder vh=(MapDataViewHolder)v.getTag();
 		if(vh==null)return;
-		new ImportDataFileTask(MapDataListActivity.this).execute(vh.fileno);
-		
-//		if(v.getId()==R.id.lvitem_mapdata_btn_download){
+		if(v.getId()==R.id.lvitem_mapdata_btn_download){
 //			if(NetConnectManager.isMobilenetwork(this)){
 //				new AlertDialog.Builder(this)
 //				.setIcon(android.R.drawable.ic_dialog_info)
@@ -164,17 +162,17 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 //			}else{
 //				new DownloadTask().execute(vh.fileno);
 //			}
-//		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
-//			//使用当前数据
-//			
-//			
-//		}else if(v.getId()==R.id.lvitem_mapdata_btn_detail){
+			new DecompressTask().execute("a586054a207abc9fe4fe4945e5c666dc");
+		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
+			//使用当前数据
+			new ImportDataFileTask(this).execute("a586054a207abc9fe4fe4945e5c666dc");
+		}else if(v.getId()==R.id.lvitem_mapdata_btn_detail){
 //			Bundle bundle=new Bundle();
 //			bundle.putString(FILENO, vh.fileno);
 //			Intent intent=new Intent(this,MapDataDetailActivity.class);
 //			intent.putExtras(bundle);
 //			startActivity(intent);
-//		}
+		}
 	}
 	
 	public class DownloadTask extends AsyncTask<String, Float, File> {
