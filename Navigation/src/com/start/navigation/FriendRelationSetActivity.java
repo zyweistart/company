@@ -32,7 +32,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 		setContentView(R.layout.activity_friend_relation_set);
 		setCurrentActivityTitle(R.string.activity_title_friend_relation_set);
 		mFriendFelationSetEtContent=(EditText)findViewById(R.id.friend_relation_set_et_content);
-		
+		makeTextLong(getAppContext().getMyID());
 	}
 
 	@Override

@@ -8,21 +8,33 @@
     
     <Button 
         android:id="@+id/module_main_frame_introduction_btn_hospital"
-        android:layout_width="wrap_content"
+        android:layout_width="200.0dip"
         android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
         android:onClick="onClick"
+        android:background="@drawable/bg1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_hospital"/>
     <Button 
         android:id="@+id/module_main_frame_introduction_btn_department"
-        android:layout_width="wrap_content"
+        android:layout_width="200.0dip"
         android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
         android:onClick="onClick"
+        android:background="@drawable/bg1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_doctor"/>
     <Button 
         android:id="@+id/module_main_frame_introduction_btn_doctor"
-        android:layout_width="wrap_content"
+        android:layout_width="200.0dip"
         android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
         android:onClick="onClick"
+        android:background="@drawable/bg1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_department"/>
     
 </LinearLayout>

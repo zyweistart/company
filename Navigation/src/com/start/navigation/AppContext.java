@@ -159,6 +159,20 @@ public class AppContext extends Application {
 		return userInfo!=null;
 	}
 	
+	/**
+	 * 获取当前登录账户的唯一码
+	 * @return
+	 */
+	public String getMyID(){
+		if(userInfo!=null){
+			Map<String,String> data=getUserInfoByKey("v4info");
+			if(data!=null){
+				return data.get("phone");
+			}
+		}
+		return null;
+	}
+	
 	private Map<String,Map<String,String>> userInfo;
 	
 	/**
