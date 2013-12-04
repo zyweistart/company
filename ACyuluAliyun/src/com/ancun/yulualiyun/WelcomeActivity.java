@@ -193,7 +193,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 														int which) {
 													
 													//有服务已赠送则下次不再进行检测
-//													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 													
 													forward();
 												}
