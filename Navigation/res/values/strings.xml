@@ -29,7 +29,7 @@
     <string name="activity_account">账户</string>
     <string name="activity_password">密码</string>
     <string name="activity_register">注册</string>
-    <string name="activity_forgetpwd">忘记密码</string>
+    <string name="activity_forgetpwd">找回密码</string>
     
     <string name="lvitem_friend_location_txt">查看位置</string>
     <string name="lvitem_friend_remove_txt">解除关系</string>
@@ -37,6 +37,18 @@
     <string name="lvitem_mapdata_download_txt">下载</string>
     <string name="lvitem_mapdata_use_txt">使用</string>
     <string name="lvitem_mapdata_detail_txt">详细</string>
+    
+    <string name="activity_title_hospital_detail">医院介绍</string>
+    <string name="activity_title_doctor_list">医生列表</string>
+    <string name="activity_title_doctor_detail">医生介绍</string>
+    <string name="activity_title_department_list">部门列表</string>
+    <string name="activity_title_department_detail">部门介绍</string>
+    <string name="activity_title_friend_relation_list">好友列表</string>
+    <string name="activity_title_friend_relation_set">开位位置</string>
+    <string name="activity_title_friend_history_list">历史好友</string>
+    <string name="activity_title_map_data_list">数据列表</string>
+    <string name="activity_title_map_data_detail">数据详细</string>
+    <string name="activity_title__more">更多</string>
     
     <string name="frame_introduction_title">介绍</string>
     <string name="frame_introduction_hospital">医院介绍</string>
@@ -48,7 +60,7 @@
     <string name="frame_process_next_step">下一步</string>
     <string name="frame_process_reset">重新开始</string>
     <string name="frame_friend_title">好友</string>
-    <string name="frame_more_title">更多</string>
+    
     
     <string name="load_more">更多</string>
     <string name="load_ing">加载中···</string>

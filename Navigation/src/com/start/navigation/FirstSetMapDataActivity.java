@@ -34,7 +34,7 @@ public class FirstSetMapDataActivity extends CoreActivity implements OnClickList
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode==REQUEST_SET_DATA){
-			if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
+			if(!Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
 				startActivity(new Intent(this,MainActivity.class));
 				finish();
 			}

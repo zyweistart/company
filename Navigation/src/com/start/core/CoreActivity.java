@@ -1,8 +1,10 @@
 package com.start.core;
 
 import android.app.Activity;
+import android.widget.TextView;
 
 import com.start.navigation.AppContext;
+import com.start.navigation.R;
 import com.start.service.HttpService;
 
 public abstract class CoreActivity extends Activity{
@@ -37,5 +39,12 @@ public abstract class CoreActivity extends Activity{
 	public void makeTextLong(String text){
 		getAppContext().makeTextLong(text);
     }
+	
+	public void setCurrentActivityTitle(int resId){
+		TextView tv=(TextView)findViewById(R.id.module_main_header_content_title);
+		if(tv!=null){
+			tv.setText(resId);
+		}
+	}
 	
 }

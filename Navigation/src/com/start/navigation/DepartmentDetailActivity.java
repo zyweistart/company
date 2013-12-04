@@ -19,13 +19,13 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 
 	private Department department;
 	
-	private TextView mModuleMainHeaderContentTitle;
 	private Button mModuleMainHeaderContentLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_department_detail);
+		setCurrentActivityTitle(R.string.activity_title_department_detail);
 		
 		initHeaderView();
 		
@@ -55,8 +55,6 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 	 * 初始化头部视图
 	 */
 	private void initHeaderView() {
-		mModuleMainHeaderContentTitle = (TextView) findViewById(R.id.module_main_header_content_title);
-		mModuleMainHeaderContentTitle.setText("部门详细");
 		mModuleMainHeaderContentLocation = (Button) findViewById(R.id.module_main_header_content_location);
 		mModuleMainHeaderContentLocation.setOnClickListener(this);
 		mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);

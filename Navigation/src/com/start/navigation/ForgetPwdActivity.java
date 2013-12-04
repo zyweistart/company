@@ -15,6 +15,7 @@ public class ForgetPwdActivity extends CoreActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_forget_pwd);
+		setCurrentActivityTitle(R.string.activity_forgetpwd);
 	}
 
 }

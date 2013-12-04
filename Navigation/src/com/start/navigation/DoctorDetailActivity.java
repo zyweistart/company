@@ -24,6 +24,7 @@ public class DoctorDetailActivity extends CoreActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_detail);
+		setCurrentActivityTitle(R.string.activity_title_doctor_detail);
 		
 		String doctorId=getIntent().getExtras().getString(Doctor.COLUMN_NAME_ID);
 		doctor=getAppContext().getDoctorService().findById(doctorId);

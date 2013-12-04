@@ -588,10 +588,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,int count) {
-				if(isTabDepartment){
-					doctorArrayAdapter.getFilter().filter(s);;
-				}else{
-					departmentArrayAdapter.getFilter().filter(s);
+				if(s!=null){
+					if(isTabDepartment){
+						doctorArrayAdapter.getFilter().filter(s);;
+					}else{
+						departmentArrayAdapter.getFilter().filter(s);
+					}
 				}
 			}
 			

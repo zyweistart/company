@@ -30,6 +30,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_relation_set);
+		setCurrentActivityTitle(R.string.activity_title_friend_relation_set);
 		mFriendFelationSetEtContent=(EditText)findViewById(R.id.friend_relation_set_et_content);
 		
 	}

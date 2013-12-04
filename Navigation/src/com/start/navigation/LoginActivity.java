@@ -29,6 +29,8 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		setCurrentActivityTitle(R.string.activity_login);
+		
 		etName=(EditText)findViewById(R.id.login_account_name);
 		etPassword=(EditText)findViewById(R.id.login_account_password);
 	}

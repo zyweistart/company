@@ -29,6 +29,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_data_detail);
+		setCurrentActivityTitle(R.string.activity_title_map_data_detail);
 		Bundle bundle=getIntent().getExtras();
 		if(bundle!=null){
 			fileno=bundle.getString(MapDataListActivity.FILENO);

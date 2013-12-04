@@ -15,6 +15,7 @@ public class RegisterActivity extends CoreActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		setCurrentActivityTitle(R.string.activity_register);
 	}
 
 }

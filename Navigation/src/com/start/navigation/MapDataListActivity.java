@@ -39,6 +39,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_data_list);
+		setCurrentActivityTitle(R.string.activity_title_map_data_list);
 		
 		mapDataPullListData=new PullListViewData(this);
 		mapDataPullListData.setOnLoadDataListener(

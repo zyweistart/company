@@ -31,6 +31,7 @@ public class DepartmentListActivity extends CoreActivity implements OnItemClickL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_department_list);
+		setCurrentActivityTitle(R.string.activity_title_department_list);
 		
 		departments=getAppContext().getDepartmentService().findAll();
 		

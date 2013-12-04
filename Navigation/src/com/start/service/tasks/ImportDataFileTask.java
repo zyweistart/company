@@ -95,7 +95,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 						break;
 					}
 				}
-				List<MapData> mds=mAppContext.getMapDataService().findAll();
+				List<MapData> mds=mAppContext.getMapDataService().findAll(fileno);
 				for(MapData md:mds){
 					File mapDataFile=new File(dataDir,md.getId()+".map");
 					if(mapDataFile.exists()){

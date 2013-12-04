@@ -15,6 +15,7 @@ public class HospitalDetailActivity extends CoreActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hospital_detail);
+		setCurrentActivityTitle(R.string.activity_title_hospital_detail);
 	}
 
 }

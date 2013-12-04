@@ -33,7 +33,8 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_list);
-
+		setCurrentActivityTitle(R.string.activity_title_doctor_list);
+		
 		Bundle bundle=getIntent().getExtras();
 		if(bundle!=null){
 			String departmentId=bundle.getString(Department.COLUMN_NAME_ID);
