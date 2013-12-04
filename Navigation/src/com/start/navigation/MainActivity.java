@@ -303,6 +303,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			setMapFile();
 			addMyLocMarker(myLocation);
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
+			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(isTabDepartment){
 				isTabDepartment=false;
 				if(departmentArrayAdapter == null){
@@ -315,11 +316,12 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
 			}
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_doctor) {
+			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(!isTabDepartment){
 				isTabDepartment=true;
 				if(doctorArrayAdapter == null){
 					List<Doctor> doctors=appContext.getDoctorService().findAll();
-					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_department, R.id.lvitem_department_name, doctors);
+					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_doctor, R.id.lvitem_doctor_name, doctors);
 				}
 				v.setBackgroundResource(R.drawable.tabs_bar_right_on);
 				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_off);

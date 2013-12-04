@@ -14,7 +14,7 @@
     <string name="msg_importing_datafile">正在导入数据文件</string>
     <string name="msg_switching_datafile">数据切换成功</string>
     <string name="msg_download_success">下载成功</string>
-    <string name="msg_path_searching">路线查询中...</string>
+    <string name="msg_path_searching">路线查询中</string>
     <string name="msg_please_wait">请稍候</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
     <string name="msg_location_unavailable">当前位置不可用</string>

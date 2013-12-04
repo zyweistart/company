@@ -6,4 +6,7 @@
     
 	<color name="black">#000000</color>
 	<color name="white">#FFFFFF</color>
+	
+	<color name="lvitem_textcolor">#555555</color>
+	
 </resources>

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" 
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/lvitem_department_content"
-	android:layout_width="fill_parent" 
+	android:layout_width="match_parent" 
 	android:layout_height="wrap_content"
-	android:gravity="center_vertical">
+	android:padding="5.0dip">
 	
     <TextView
         android:id="@+id/lvitem_department_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/lvitem_textcolor"
+        android:textSize="@dimen/lvitem_textsize1"/>
     
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/bakchat_submenu_normal"
+        android:contentDescription="@string/empty"/>
+    
+</RelativeLayout>

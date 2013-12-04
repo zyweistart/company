@@ -2,17 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/lvitem_friend_content"
 	android:layout_width="match_parent" 
-	android:layout_height="wrap_content">
+	android:layout_height="wrap_content"
+	android:padding="5.0dip">
 	
     <TextView
         android:id="@+id/lvitem_friend_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"/>
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/lvitem_textcolor"
+        android:textSize="@dimen/lvitem_textsize1"/>
     
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_alignParentRight="true" >
         
         <Button

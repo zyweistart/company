@@ -25,7 +25,9 @@ public class RoomAreaService extends CoreService {
 					RoomArea.COLUMN_NAME_ID,
 					RoomArea.COLUMN_NAME_ROOMID,
 					RoomArea.COLUMN_NAME_LATITUDE,
-					RoomArea.COLUMN_NAME_LONGITUDE},RoomArea.COLUMN_NAME_ROOMID+"=?",new String[]{roomId}, null, null, null);
+					RoomArea.COLUMN_NAME_LONGITUDE},
+					RoomArea.COLUMN_NAME_ROOMID+" = ? AND "+RoomArea.COLUMN_NAME_FILENO+" = ?",
+					new String[]{roomId,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {

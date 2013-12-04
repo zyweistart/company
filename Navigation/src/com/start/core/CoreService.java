@@ -27,13 +27,27 @@ public class CoreService {
 	}
 
 	public void insert(String tableName,ContentValues values){
-		SQLiteDatabase sdb=this.dbHelper.getWritableDatabase();
-		sdb.insert(tableName, null, values);
+		SQLiteDatabase sdb=null;
+		try{
+			sdb=this.dbHelper.getWritableDatabase();
+			sdb.insert(tableName, null, values);
+		}finally{
+			if(sdb!=null){
+				sdb.close();
+			}
+		}
 	}
 	
 	public void update(String tableName,ContentValues values,String whereClause, String[] whereArgs){
-		SQLiteDatabase sdb=this.dbHelper.getWritableDatabase();
-		sdb.update(tableName, values, whereClause, whereArgs);
+		SQLiteDatabase sdb=null;
+		try{
+			sdb=this.dbHelper.getWritableDatabase();
+			sdb.update(tableName, values, whereClause, whereArgs);
+		}finally{
+			if(sdb!=null){
+				sdb.close();
+			}
+		}
 	}
 	
 	public String getCurrentDataNo(){

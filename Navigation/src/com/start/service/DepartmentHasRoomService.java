@@ -21,7 +21,9 @@ public class DepartmentHasRoomService extends CoreService {
 				new String[]{
 				DepartmentHasRoom.COLUMN_NAME_ID,
 				DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID,
-				DepartmentHasRoom.COLUMN_NAME_ROOMID},null,null, null, null, null);
+				DepartmentHasRoom.COLUMN_NAME_ROOMID},
+				DepartmentHasRoom.COLUMN_NAME_FILENO+" = ?",
+				new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -45,7 +47,8 @@ public class DepartmentHasRoomService extends CoreService {
 				DepartmentHasRoom.COLUMN_NAME_ID,
 				DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID,
 				DepartmentHasRoom.COLUMN_NAME_ROOMID},
-				DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID+"=?",new String[]{departmentId}, null, null, null);
+				DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID+" = ? AND "+DepartmentHasRoom.COLUMN_NAME_FILENO+" = ?",
+				new String[]{departmentId,getCurrentDataNo()},null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -68,7 +71,8 @@ public class DepartmentHasRoomService extends CoreService {
 				DepartmentHasRoom.COLUMN_NAME_ID,
 				DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID,
 				DepartmentHasRoom.COLUMN_NAME_ROOMID},
-				DepartmentHasRoom.COLUMN_NAME_ROOMID+"=?",new String[]{roomId}, null, null, null);
+				DepartmentHasRoom.COLUMN_NAME_ROOMID+" = ? AND "+DepartmentHasRoom.COLUMN_NAME_FILENO+" = ?",
+				new String[]{roomId,getCurrentDataNo()},null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				DepartmentHasRoom departmentHasRoom = new DepartmentHasRoom();

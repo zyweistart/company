@@ -73,12 +73,12 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
-			if (convertView != null && convertView.getId() == R.id.lvitem_department_content) {
+			if (convertView != null && convertView.getId() == R.id.lvitem_doctor_content) {
 				holder = (ViewHolder) convertView.getTag();
 			} else {
-				convertView = LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.lvitem_department, null);
+				convertView = LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.lvitem_doctor, null);
 				holder=new ViewHolder();
-				holder.tvName=(TextView)convertView.findViewById(R.id.lvitem_department_name);
+				holder.tvName=(TextView)convertView.findViewById(R.id.lvitem_doctor_name);
 				
 				convertView.setTag(holder);
 			}

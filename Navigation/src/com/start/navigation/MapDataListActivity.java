@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +20,8 @@ import com.start.navigation.MapDataListActivity.MapDataPullListAdapter.MapDataVi
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
-import com.start.service.tasks.DownloadTask;
+import com.start.service.tasks.ImportDataFileTask;
 import com.start.utils.CommonFn;
-import com.start.utils.NetConnectManager;
 import com.start.utils.Utils;
 
 /**
@@ -105,7 +103,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 			}
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
 			holder.fileno=data.get(FILENO);
-			holder.name.setText(data.get(FILENO));
+			holder.name.setText("浙江省人民医院");
 			File dataFile=Utils.getFile(MapDataListActivity.this, holder.fileno);
 			if(dataFile.exists()){
 				holder.download.setVisibility(View.GONE);
@@ -135,22 +133,23 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		final MapDataViewHolder vh=(MapDataViewHolder)v.getTag();
 		if(vh==null)return;
 		if(v.getId()==R.id.lvitem_mapdata_btn_download){
-			if(NetConnectManager.isMobilenetwork(this)){
-				new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setMessage(R.string.msg_use_mobile_data)
-				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						dialog.dismiss();
-					}
-				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
-					}
-				}).show();
-			}else{
-				new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
-			}
+//			if(NetConnectManager.isMobilenetwork(this)){
+//				new AlertDialog.Builder(this)
+//				.setIcon(android.R.drawable.ic_dialog_info)
+//				.setMessage(R.string.msg_use_mobile_data)
+//				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int whichButton) {
+//						dialog.dismiss();
+//					}
+//				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int whichButton) {
+//						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+//					}
+//				}).show();
+//			}else{
+//				new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+//			}
+			new ImportDataFileTask(this,"a586054a207abc9fe4fe4945e5c666dc").execute();
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
 			//使用当前数据
 			getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
