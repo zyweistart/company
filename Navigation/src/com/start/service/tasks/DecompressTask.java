@@ -14,9 +14,9 @@ import com.start.utils.ZipUtils;
 
 public class DecompressTask extends AsyncTask<Void, Float, Boolean> {
 
+	private String fileno;
 	private Context mContext;
 	private ProgressDialog pDialog;
-	private String fileno;
 	
 	public DecompressTask(Context context,String fileno){
 		this.mContext=context;
@@ -52,7 +52,7 @@ public class DecompressTask extends AsyncTask<Void, Float, Boolean> {
 	protected void onPostExecute(Boolean result) {
 		pDialog.dismiss();
 		if(result){
-			
+			new ImportDataFileTask(mContext,fileno).execute();
 		}
 	}
 	

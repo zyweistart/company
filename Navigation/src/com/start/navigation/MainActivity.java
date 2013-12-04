@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -75,6 +74,7 @@ import com.start.service.HttpService.LoadMode;
 import com.start.service.MapDataAdapter;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
+import com.start.service.adapter.FriendLocationAdapter;
 import com.start.service.tasks.PathSearchTask;
 import com.start.service.tasks.PathSearchTask.PathSearchListener;
 import com.start.utils.CommonFn;
@@ -91,11 +91,12 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 public class MainActivity extends MapActivity implements OnTouchListener,
 		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
-	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
 	private static final String BUNDLEDATA_DATA = "data";
+	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
+	
+	public static String currentLocationDepartmentId;
 
 	private AppContext appContext;
-
 	private long lastPressTime;
 	private int mCurSel;
 	private int mFrameViewCount;
@@ -105,66 +106,36 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	private RadioButton rboFriend;
 	private ImageView imMore;
 	private RadioButton[] mButtons;
-
 	private LinearLayout mMainContentLayout;
 	private View mModuleMainFrameMapContent;
 	private View mModuleMainFrameIntroductionContent;
 	private View mModuleMainFrameProcessContent;
 	private View mModuleMainFrameFriendContent;
-
+	
 	private TextView mModuleMainHeaderContentTitle;
 	private Button mModuleMainHeaderContentLocation;
-
-	private Button mModuleMainFrameIntroduction_btnHospital;
-	private Button mModuleMainFrameIntroduction_btnDepartment;
-	private Button mModuleMainFrameIntroduction_btnDoctor;
 	
-	private ImageView mModuleMainFrameProcessImage;
-	private Button mModuleMainFrameProcessNext;
-	
-	Map<String, ViewCollections> mMapViewCollections = new HashMap<String, ViewCollections>();
-
 	private GestureDetector mGestureDetector;
-	/**
-	 * 当前使用的地图
-	 */
-	private MapData mCurrentMapData;
-	/**
-	 * 当前选重的房间标记集合
-	 */
-	private List<POIMarker> mPoiMarkers;
-	/**
-	 * 我的位置覆盖图
-	 */
-	private MyLocationMarker mMyLocMarker;
-	/**
-	 * 地图索引视图列表
-	 */
-	private ListView mMapIndexListView;
-	/**
-	 * 地图索引适配器
-	 */
-	private MapDataAdapter mMapDataAdapter;
-	/**
-	 * 地图上房间的集合
-	 */
-	private Map<String, List<Room>> mRooms;
-	
-	private ProcessService process;
-
-	private EditText mapQuery;
-	private Button mapButtonCancel;
+	private MapData mCurrentMapData;//当前使用的地图
+	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
+	private MyLocationMarker mMyLocMarker;//我的位置覆盖图
+	private ListView mMapIndexListView;//地图索引视图列表
+	private MapDataAdapter mMapDataAdapter;//地图索引适配器
+	private Map<String, List<Room>> mRooms;//地图上房间的集合
+	private EditText mapQuery;//搜索框
+	private Button mapButtonCancel;//搜索取消按钮
 	private LinearLayout mapLLQueryContentContainer;
-	
 	private Boolean isTabDepartment=false;
 	private ArrayAdapter<Doctor> doctorArrayAdapter;
 	private ArrayAdapter<Department> departmentArrayAdapter;
 	private ListView mModuleMainFrameMapQueryList;
-	
-	public static String currentLocationDepartmentId;
-	
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
+	private Map<String, ViewCollections> mMapViewCollections = new HashMap<String, ViewCollections>();
+	
+	private ProcessService process;
+	private Button mModuleMainFrameProcessNext;
+	private ImageView mModuleMainFrameProcessImage;
 	
 	private PullListViewData friendLocationPullListData;
 	
@@ -179,7 +150,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		this.initFooterView();
 		this.initMainFrameView();
 
-		new LoadingMapContentDataByRoom().execute();
+		this.LoadingContentData();
 		
 		process=new ProcessService(this,this);
 		process.init();
@@ -220,6 +191,304 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		}
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode==REQUEST_CODE_REFRESH_FRIEND_LOCATION){
+			if(mCurSel==3){
+				if(appContext.isLogin()){
+					friendLocationPullListData.getOnLoadDataListener().LoadData(LoadMode.INIT);
+				}
+			}
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+		if (id == Utils.DLG_POI) {
+			POI poi = (POI) args.getSerializable(BUNDLEDATA_DATA);
+			((TextView) dialog.findViewById(R.id.poiName)).setText(poi
+					.getName());
+			dialog.findViewById(R.id.direction).setTag(poi);
+			dialog.findViewById(R.id.poiName).setTag(poi);
+//			if (mPOIMarker != null) {
+				dialog.getWindow().getAttributes().y = -50;
+//			} else {
+//				dialog.getWindow().getAttributes().y = 0;
+//			}
+			return;
+		} else {
+			super.onPrepareDialog(id, dialog, args);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		switch (id) {
+		case Utils.DLG_SEARCH_OPTION:
+			// dialog = createSearchOptionDialog();
+			break;
+		case Utils.DLG_POI:
+			dialog = CommonFn.createPOIDialog(this);
+			break;
+		case Utils.DLG_EXIT_NAVIGATION:
+			dialog = CommonFn.buildDialog(this, R.string.msg_exit_navigation,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							appContext.setPathSearchResult(null);
+							updateOverlay();
+						}
+					});
+			break;
+		default:
+			dialog = super.onCreateDialog(id);
+		}
+		return dialog;
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		mGestureDetector.onTouchEvent(event);
+		return false;
+	}
+	
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.module_main_frame_introduction_btn_hospital) {
+			// 医院介绍
+			Intent intent = new Intent(this, HospitalDetailActivity.class);
+			startActivity(intent);
+		} else if (v.getId() == R.id.module_main_frame_introduction_btn_department) {
+			// 部门介绍
+			Intent intent = new Intent(this, DepartmentListActivity.class);
+			startActivity(intent);
+		} else if (v.getId() == R.id.module_main_frame_introduction_btn_doctor) {
+			// 医生介绍
+			Intent intent = new Intent(this, DoctorListActivity.class);
+			startActivity(intent);
+		} else if (v.getId() == R.id.module_main_frame_process_next) {
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
+			if(process.isProcessEnd()){
+				process.init();
+				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
+			}else{
+				process.execute();
+			}
+		} else if (v.getId() == R.id.direction) {
+			POI r = (POI) v.getTag();
+			Vertex vertex=AppContext.getInstance().getVertexService().findById(r.getVertexId());
+			if(vertex!=null){
+				location(mCurrentMapData.getId(),vertex.getLatitude(),vertex.getLongitude());
+			}
+		} else if (v.getId() == R.id.poiName) {
+			POI r = (POI) v.getTag();
+			if(r!=null){
+				DepartmentHasRoom departmentHasRoom=appContext.getDepartmentHasRoomService().findByRoomId(r.getId());
+				if(departmentHasRoom!=null){
+					Bundle bundle=new Bundle();
+					bundle.putString(Department.COLUMN_NAME_ID, departmentHasRoom.getDepartmentId());
+					Intent intent=new Intent(this,DepartmentDetailActivity.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
+			}
+		} else if (v.getId() == R.id.module_main_header_content_location) {
+			MyLocation myLocation = appContext.getMyLocation();
+			mCurrentMapData = mMapDataAdapter.getItem(
+					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+			setMapFile();
+			addMyLocMarker(myLocation);
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
+			if(isTabDepartment){
+				isTabDepartment=false;
+				if(departmentArrayAdapter == null){
+					List<Department> departments=appContext.getDepartmentService().findAll();
+					departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
+				}
+				v.setBackgroundResource(R.drawable.tabs_bar_left_on);
+				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
+				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_doctor) {
+			if(!isTabDepartment){
+				isTabDepartment=true;
+				if(doctorArrayAdapter == null){
+					List<Doctor> doctors=appContext.getDoctorService().findAll();
+					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_department, R.id.lvitem_department_name, doctors);
+				}
+				v.setBackgroundResource(R.drawable.tabs_bar_right_on);
+				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_off);
+				mModuleMainFrameMapQueryList.setAdapter(doctorArrayAdapter);
+				doctorArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_restroom) {
+			appContext.makeTextLong("房间");
+		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_drinking_water) {
+			appContext.makeTextLong("开水间");
+		}
+	}
+
+	@Override
+	public void onClickAt(float xPixel, float yPixel) {
+		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
+
+		Projection projection = vc.getMapView().getProjection();
+		if (projection == null) {
+			return;
+		}
+
+		GeoPoint g = projection.fromPixels((int) xPixel, (int) yPixel);
+
+		if (mPoiMarkers != null) {
+			for(POIMarker marker:mPoiMarkers){
+				POI poi = marker.getPOI();
+				if (poi.inside(g)) {
+					tapPOI(poi);
+					return;
+				}
+			}
+		}
+
+		if (mRooms.isEmpty()) {
+			return;
+		}
+
+		List<Room> rooms = mRooms.get(mCurrentMapData.getId());
+		for (Room r : rooms) {
+			if (r.inside(g)) {
+				tapPOI(r);
+				return;
+			}
+		}
+	}
+
+	@Override
+	public void onGetResult(PathSearchResult result) {
+		mPoiMarkers=null;
+		if (result.getType() == PathSearchResult.Type.IN_BUILDING) {
+			setMapFile();
+		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
+			// NavRoute route = result.indoorRouteStart;
+
+		} else if (result.getType() == PathSearchResult.Type.OUTDOOR_INDOOR) {
+			finish();
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onBackPressed() {
+		if (mCurSel==1&&appContext.getPathSearchResult() != null) {
+			showDialog(Utils.DLG_EXIT_NAVIGATION);
+		} else if (mPoiMarkers != null) {
+			mPoiMarkers = null;
+			updateOverlay();
+			return;
+		} else {
+			if ((System.currentTimeMillis() - lastPressTime) > 2000) {
+				appContext.makeTextShort(R.string.msg_press_again_to_exit);
+				lastPressTime = System.currentTimeMillis();
+			} else {
+				super.onBackPressed();
+			}
+		}
+	}
+
+	@Override
+	public void result(Junction jun) {
+		if(process.isProcessEnd()){
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_reset);
+		}else{
+			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
+		}
+		if(jun.getNodeType()!=NodeType.SWITCH){
+			File dataFile=new File(Utils.getFile(this,appContext.getCurrentDataNo()),"process/"+jun.getImage());
+			mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(dataFile));
+		}
+	}
+	
+	@Override
+	public void location(String mapId, String vertexId) {
+		Vertex vertex=AppContext.getInstance().getVertexService().findById(vertexId);
+		if(vertex!=null){
+			location(mapId,vertex.getLatitude(),vertex.getLongitude());
+		}
+	}
+	
+	@Override
+	public void location(String mapId, String latitude,String longitude) {
+
+		if(mCurSel!=1){
+			setCurPoint(1);
+		}
+		
+		MyLocation myLocation = appContext.getMyLocation();
+
+		if (myLocation != null) {
+			PathSearchTask search = new PathSearchTask(this);
+			EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+					myLocation.getGeoPoint());
+			EndPoint ep = new IndoorEndPoint(mapId,
+					new GeoPoint(Double.parseDouble(latitude), 
+							Double.parseDouble(longitude)));
+			search.execute(sp, ep);
+		} else {
+			Toast.makeText(this, R.string.msg_location_unavailable, Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+
+	@Override
+	public void onFocusChange(View v, boolean hasFocus) {
+		if(hasFocus){
+			if(departmentArrayAdapter == null){
+				isTabDepartment=false;
+				List<Department> departments=appContext.getDepartmentService().findAll();
+				departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
+				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_on);
+				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
+				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
+				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
+			}
+			mapButtonCancel.setVisibility(View.VISIBLE);
+			mapLLQueryContentContainer.setVisibility(View.VISIBLE);
+		}
+	}
+
+	@Override
+	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		if(actionId == EditorInfo.IME_ACTION_SEARCH){
+			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
+			
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+		if(isTabDepartment){
+			Doctor doctor=(Doctor)adapter.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putString(Doctor._ID, doctor.getId());
+			Intent intent=new Intent(this,DoctorDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}else{
+			Department department=(Department)adapter.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putString(Department.COLUMN_NAME_ID, department.getId());
+			Intent intent=new Intent(this,DepartmentDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
+	}
+	
 	private void setCurPoint(int index) {
 		if (mCurSel != index) {
 			if(index==-1){
@@ -267,13 +536,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			}
 		}
 	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		mGestureDetector.onTouchEvent(event);
-		return false;
-	}
-
+	
 	/**
 	 * 初始化头部视图
 	 */
@@ -371,16 +634,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	 */
 	private void initMainFrameView() {
 		// introduction
-		mModuleMainFrameIntroduction_btnHospital = (Button) findViewById(R.id.module_main_frame_introduction_btnHospital);
-		mModuleMainFrameIntroduction_btnHospital.setOnClickListener(this);
-		mModuleMainFrameIntroduction_btnDepartment = (Button) findViewById(R.id.module_main_frame_introduction_btnDepartment);
-		mModuleMainFrameIntroduction_btnDepartment.setOnClickListener(this);
-		mModuleMainFrameIntroduction_btnDoctor = (Button) findViewById(R.id.module_main_frame_introduction_btnDoctor);
-		mModuleMainFrameIntroduction_btnDoctor.setOnClickListener(this);
 		
 		// map
 		mGestureDetector = new GestureDetector(this, new OnTapMapListener(this));
-		
 		mModuleMainFrameMapQueryContentTabDepartment=(TextView)findViewById(R.id.module_main_frame_map_query_content_tab_department);
 		mModuleMainFrameMapQueryContentTabDoctor=(TextView)findViewById(R.id.module_main_frame_map_query_content_tab_doctor);
 		mModuleMainFrameMapQueryList=(ListView)findViewById(R.id.module_main_frame_map_query_list);
@@ -389,7 +645,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		// process
 		mModuleMainFrameProcessImage = (ImageView) findViewById(R.id.module_main_frame_process_image);
 		mModuleMainFrameProcessNext = (Button) findViewById(R.id.module_main_frame_process_next);
-		mModuleMainFrameProcessNext.setOnClickListener(this);
 		
 		// friend
 		friendLocationPullListData=new PullListViewData(this);
@@ -401,13 +656,19 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 						if(appContext.isLogin()){
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("accessid",Constant.ACCESSID);
-							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.GlobalURL.v4recQry,requestParams,null,new UIRunnable(){
+							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nFriendLocationList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									friendLocationPullListData.getAdapter().notifyDataSetChanged();
 								} 
 							},"reclist","reclist++++");
 						}else{
+							
+							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							friendLocationPullListData.getListview_footer_more().setText(R.string.load_more);
+							friendLocationPullListData.getListview_footer_progress().setVisibility(View.GONE);
+							friendLocationPullListData.getPulllistview().onRefreshComplete();
+							
 							if(mCurSel==3){
 								new AlertDialog.Builder(MainActivity.this).
 								setMessage(R.string.msg_not_login).
@@ -428,18 +689,69 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 									
 								}).show();
 							}
-							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
-							friendLocationPullListData.getListview_footer_more().setText(R.string.load_more);
-							friendLocationPullListData.getListview_footer_progress().setVisibility(View.GONE);
-							friendLocationPullListData.getPulllistview().onRefreshComplete();
+							
 						}
 					}
 					
 				});
 		friendLocationPullListData.start(R.id.module_main_frame_friend_location_pulllistview, 
-				new FriendLocationAdapter(friendLocationPullListData));
+				new FriendLocationAdapter(this,friendLocationPullListData));
 	}
 
+	/**
+	 * 加载数据
+	 */
+	private void LoadingContentData(){
+		
+		mRooms=appContext.getRoomService().findAllPullMap();
+		List<MapData> mapDatas=appContext.getMapDataService().findAll();
+		
+		// 地图数据加载完毕后才把地图视图显示到页面上
+		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_contentll);
+
+		for (int i = 0; i < mapDatas.size(); i++) {
+			MapData md = mapDatas.get(i);
+			ViewCollections vc = new ViewCollections();
+
+			String path = String.format("mapdata/%1$s.map",md.getId());
+			File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),path);
+			FileOpenResult openResult = vc.getMapView().setMapFile(dataFile);
+			if (!openResult.isSuccess()) {
+				return;
+			}
+
+			container.addView(vc.getMapView(), 0);
+			
+			mMapViewCollections.put(md.getId(), vc);
+		}
+
+		mMapDataAdapter = new MapDataAdapter(getLayoutInflater());
+		mMapDataAdapter.setData(mapDatas);
+
+		mMapIndexListView = (ListView) findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
+		mMapIndexListView.setAdapter(mMapDataAdapter);
+		mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				MapData md = (MapData) view.getTag();
+				// 只有当点击的索引不同时才会进行切换
+				if (!md.getId().equals(mCurrentMapData.getId())) {
+					mCurrentMapData = md;
+					setMapFile();
+				}
+			}
+
+		});
+		
+		//初始显示地图为用户所在的位置地图
+		MyLocation myLocation=appContext.getMyLocation();
+		mCurrentMapData =mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+
+		setMapFile();
+	}
+	
 	/**
 	 * 设置视图的地图数据文件
 	 */
@@ -653,287 +965,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 
 		vc.getMapView().getMapViewPosition().setCenter(poi.getGeoPoint());
 	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
-		if (id == Utils.DLG_POI) {
-			POI poi = (POI) args.getSerializable(BUNDLEDATA_DATA);
-			((TextView) dialog.findViewById(R.id.poiName)).setText(poi
-					.getName());
-			dialog.findViewById(R.id.direction).setTag(poi);
-			dialog.findViewById(R.id.poiName).setTag(poi);
-//			if (mPOIMarker != null) {
-				dialog.getWindow().getAttributes().y = -50;
-//			} else {
-//				dialog.getWindow().getAttributes().y = 0;
-//			}
-			return;
-		} else {
-			super.onPrepareDialog(id, dialog, args);
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		Dialog dialog = null;
-		switch (id) {
-		case Utils.DLG_SEARCH_OPTION:
-			// dialog = createSearchOptionDialog();
-			break;
-		case Utils.DLG_POI:
-			dialog = CommonFn.createPOIDialog(this);
-			break;
-		case Utils.DLG_EXIT_NAVIGATION:
-			dialog = CommonFn.buildDialog(this, R.string.msg_exit_navigation,
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							appContext.setPathSearchResult(null);
-							updateOverlay();
-						}
-					});
-			break;
-		default:
-			dialog = super.onCreateDialog(id);
-		}
-		return dialog;
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.module_main_frame_introduction_btnHospital) {
-			// 医院介绍
-			Intent intent = new Intent(this, HospitalDetailActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.module_main_frame_introduction_btnDepartment) {
-			// 部门介绍
-			Intent intent = new Intent(this, DepartmentListActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.module_main_frame_introduction_btnDoctor) {
-			// 医生介绍
-			Intent intent = new Intent(this, DoctorListActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.module_main_frame_process_next) {
-			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
-			if(process.isProcessEnd()){
-				process.init();
-				mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
-			}else{
-				process.execute();
-			}
-		} else if (v.getId() == R.id.direction) {
-			POI r = (POI) v.getTag();
-
-			location(mCurrentMapData.getId(),r.getVertexId());
-
-		} else if (v.getId() == R.id.poiName) {
-			POI r = (POI) v.getTag();
-			if(r!=null){
-				DepartmentHasRoom departmentHasRoom=appContext.getDepartmentHasRoomService().findByRoomId(r.getId());
-				if(departmentHasRoom!=null){
-					Bundle bundle=new Bundle();
-					bundle.putString(Department.COLUMN_NAME_ID, departmentHasRoom.getDepartmentId());
-					Intent intent=new Intent(this,DepartmentDetailActivity.class);
-					intent.putExtras(bundle);
-					startActivity(intent);
-				}
-			}
-		} else if (v.getId() == R.id.module_main_header_content_location) {
-			MyLocation myLocation = appContext.getMyLocation();
-			mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
-					.getMapDataPositionByMapId(myLocation.getMapId()));
-			setMapFile();
-			addMyLocMarker(myLocation);
-		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
-			if(isTabDepartment){
-				isTabDepartment=false;
-				if(departmentArrayAdapter == null){
-					List<Department> departments=appContext.getDepartmentService().findAll();
-					departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
-				}
-				v.setBackgroundResource(R.drawable.tabs_bar_left_on);
-				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
-				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
-				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
-			}
-		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_doctor) {
-			if(!isTabDepartment){
-				isTabDepartment=true;
-				if(doctorArrayAdapter == null){
-					List<Doctor> doctors=appContext.getDoctorService().findAll();
-					doctorArrayAdapter = new ArrayAdapter<Doctor>(this, R.layout.lvitem_department, R.id.lvitem_department_name, doctors);
-				}
-				v.setBackgroundResource(R.drawable.tabs_bar_right_on);
-				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_off);
-				mModuleMainFrameMapQueryList.setAdapter(doctorArrayAdapter);
-				doctorArrayAdapter.getFilter().filter(mapQuery.getText());
-			}
-		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_restroom) {
-			appContext.makeTextLong("房间");
-		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_drinking_water) {
-			appContext.makeTextLong("开水间");
-		}
-	}
-
-	@Override
-	public void onClickAt(float xPixel, float yPixel) {
-		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
-
-		Projection projection = vc.getMapView().getProjection();
-		if (projection == null) {
-			return;
-		}
-
-		GeoPoint g = projection.fromPixels((int) xPixel, (int) yPixel);
-
-		if (mPoiMarkers != null) {
-			for(POIMarker marker:mPoiMarkers){
-				POI poi = marker.getPOI();
-				if (poi.inside(g)) {
-					tapPOI(poi);
-					return;
-				}
-			}
-		}
-
-		if (mRooms.isEmpty()) {
-			return;
-		}
-
-		List<Room> rooms = mRooms.get(mCurrentMapData.getId());
-		for (Room r : rooms) {
-			if (r.inside(g)) {
-				tapPOI(r);
-				return;
-			}
-		}
-	}
-
-	@Override
-	public void onGetResult(PathSearchResult result) {
-		mPoiMarkers=null;
-		if (result.getType() == PathSearchResult.Type.IN_BUILDING) {
-			setMapFile();
-		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
-			// NavRoute route = result.indoorRouteStart;
-
-		} else if (result.getType() == PathSearchResult.Type.OUTDOOR_INDOOR) {
-			finish();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onBackPressed() {
-		if (mCurSel==1&&appContext.getPathSearchResult() != null) {
-			showDialog(Utils.DLG_EXIT_NAVIGATION);
-		} else if (mPoiMarkers != null) {
-			mPoiMarkers = null;
-			updateOverlay();
-			return;
-		} else {
-			if ((System.currentTimeMillis() - lastPressTime) > 2000) {
-				appContext.makeTextShort(R.string.msg_press_again_to_exit);
-				lastPressTime = System.currentTimeMillis();
-			} else {
-				super.onBackPressed();
-			}
-		}
-	}
-
-	/**
-	 * 加载所有房间数据
-	 * 
-	 * @author start
-	 * 
-	 */
-	private class LoadingMapContentDataByRoom extends
-			AsyncTask<Void, Void, Map<String, List<Room>>> {
-
-		@Override
-		protected Map<String, List<Room>> doInBackground(Void... params) {
-			return appContext.getRoomService().findAllPullMap();
-		}
-
-		@Override
-		protected void onPostExecute(Map<String, List<Room>> result) {
-			super.onPostExecute(result);
-			mRooms = result;
-			// 等加载完房间数据后再加载地图数据
-			new LoadingMapContentDataByMapData().execute();
-		}
-
-	};
-
-	/**
-	 * 加载所有地图数据
-	 * 
-	 * @author start
-	 * 
-	 */
-	private class LoadingMapContentDataByMapData extends
-			AsyncTask<Void, Void, List<MapData>> {
-
-		@Override
-		protected List<MapData> doInBackground(Void... params) {
-			return appContext.getMapDataService().findAll();
-		}
-
-		@Override
-		protected void onPostExecute(List<MapData> result) {
-			super.onPostExecute(result);
-			
-			// 地图数据加载完毕后才把地图视图显示到页面上
-			ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_contentll);
-
-			for (int i = 0; i < result.size(); i++) {
-				MapData md = result.get(i);
-				ViewCollections vc = new ViewCollections();
-
-				String path = String.format("mapdata/%1$s.map",md.getId());
-				File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),path);
-				FileOpenResult openResult = vc.getMapView().setMapFile(dataFile);
-				if (!openResult.isSuccess()) {
-					return;
-				}
-
-				container.addView(vc.getMapView(), 0);
-				
-				mMapViewCollections.put(md.getId(), vc);
-			}
-
-			mMapDataAdapter = new MapDataAdapter(getLayoutInflater());
-			mMapDataAdapter.setData(result);
-
-			mMapIndexListView = (ListView) findViewById(R.id.module_main_frame_map_content_mapdataindexlist);
-			mMapIndexListView.setAdapter(mMapDataAdapter);
-			mMapIndexListView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					MapData md = (MapData) view.getTag();
-					// 只有当点击的索引不同时才会进行切换
-					if (!md.getId().equals(mCurrentMapData.getId())) {
-						mCurrentMapData = md;
-						setMapFile();
-					}
-				}
-
-			});
-			
-			//初始显示地图为用户所在的位置地图
-			MyLocation myLocation=appContext.getMyLocation();
-			mCurrentMapData =mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
-
-			setMapFile();
-
-		}
-
-	};
-
+	
 	private class ViewCollections {
 
 		private MapView mapView;
@@ -959,149 +991,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			return listOverlay;
 		}
 
-	}
-
-	@Override
-	public void location(String mapId, String vertexId) {
-
-		if(mCurSel!=1){
-			setCurPoint(1);
-		}
-		
-		Vertex vertex=AppContext.getInstance().getVertexService().findById(vertexId);
-		if(vertex!=null){
-			
-			MyLocation myLocation = appContext.getMyLocation();
-
-			if (myLocation != null) {
-				PathSearchTask search = new PathSearchTask(this);
-				EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
-						myLocation.getGeoPoint());
-				EndPoint ep = new IndoorEndPoint(mapId,
-						new GeoPoint(Double.parseDouble(vertex.getLatitude()), 
-								Double.parseDouble(vertex.getLongitude())), 
-								vertexId);
-				search.execute(sp, ep);
-			} else {
-				Toast.makeText(this, R.string.msg_location_unavailable, Toast.LENGTH_SHORT).show();
-			}
-		}
-		
-	}
-	
-	@Override
-	public void result(Junction jun) {
-		if(process.isProcessEnd()){
-			mModuleMainFrameProcessNext.setText(R.string.frame_process_reset);
-		}else{
-			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
-		}
-		if(jun.getNodeType()!=NodeType.SWITCH){
-			File dataFile=new File(Utils.getFile(this,appContext.getCurrentDataNo()),"process/"+jun.getImage());
-			mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(dataFile));
-		}
-	}
-
-	@Override
-	public void onFocusChange(View v, boolean hasFocus) {
-		if(hasFocus){
-			if(departmentArrayAdapter == null){
-				isTabDepartment=false;
-				List<Department> departments=appContext.getDepartmentService().findAll();
-				departmentArrayAdapter = new ArrayAdapter<Department>(this, R.layout.lvitem_department, R.id.lvitem_department_name, departments);
-				mModuleMainFrameMapQueryContentTabDepartment.setBackgroundResource(R.drawable.tabs_bar_left_on);
-				mModuleMainFrameMapQueryContentTabDoctor.setBackgroundResource(R.drawable.tabs_bar_right_off);
-				mModuleMainFrameMapQueryList.setAdapter(departmentArrayAdapter);
-				departmentArrayAdapter.getFilter().filter(mapQuery.getText());
-			}
-			mapButtonCancel.setVisibility(View.VISIBLE);
-			mapLLQueryContentContainer.setVisibility(View.VISIBLE);
-		}
-	}
-
-	@Override
-	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-		if(actionId == EditorInfo.IME_ACTION_SEARCH){
-			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
-			
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-		if(isTabDepartment){
-			Doctor doctor=(Doctor)adapter.getItemAtPosition(position);
-			Bundle bundle=new Bundle();
-			bundle.putString(Doctor._ID, doctor.getId());
-			Intent intent=new Intent(this,DoctorDetailActivity.class);
-			intent.putExtras(bundle);
-			startActivity(intent);
-		}else{
-			Department department=(Department)adapter.getItemAtPosition(position);
-			Bundle bundle=new Bundle();
-			bundle.putString(Department.COLUMN_NAME_ID, department.getId());
-			Intent intent=new Intent(this,DepartmentDetailActivity.class);
-			intent.putExtras(bundle);
-			startActivity(intent);
-		}
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode==REQUEST_CODE_REFRESH_FRIEND_LOCATION){
-			if(mCurSel==3){
-				if(appContext.isLogin()){
-					friendLocationPullListData.getOnLoadDataListener().LoadData(LoadMode.INIT);
-				}
-			}
-		}
-	}
-
-	public class FriendLocationAdapter extends PullListViewData.DataAdapter{
-		
-		public FriendLocationAdapter(PullListViewData pullListViewData) {
-			pullListViewData.super();
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			FriendRelationViewHolder holder;
-			if (convertView != null && convertView.getId() == R.id.lvitem_friend_content) {
-				holder = (FriendRelationViewHolder) convertView.getTag();
-			}else{
-				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
-				holder = new FriendRelationViewHolder();
-				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
-				holder.btnLocation.setTag(holder);
-				holder.btnLocation.setVisibility(View.VISIBLE);
-				holder.btnLocation.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
-						if(vh!=null){
-							appContext.makeTextLong(vh.data+"");
-						}
-					}
-					
-				});
-				convertView.setTag(holder);
-			}
-			holder.data=friendLocationPullListData.getDataItemList().get(position);
-			holder.name.setText("好友:"+holder.data.get("oppno"));
-			return convertView;
-		}
-		
-		public class FriendRelationViewHolder {
-			Map<String,String> data;
-			TextView name;
-			Button btnLocation;
-		}
-		
 	}
 	
 }

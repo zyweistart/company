@@ -165,7 +165,6 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 												@Override
 												public void onClick(DialogInterface dialog, int which) {
 													
-//													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 													forward();
 												}
 											}).show();
@@ -194,7 +193,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 														int which) {
 													
 													//有服务已赠送则下次不再进行检测
-													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+//													getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 													
 													forward();
 												}
@@ -211,7 +210,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 								}else if(keyResult==SellerServiceHandler.RESULT_EXPIRED||
 										keyResult==SellerServiceHandler.RESULT_NO_SERVICE){
 									//服务不存在或已过期
-									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
+//									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_INIT_SET,true);
 									forward();
 									return;
 								}else{

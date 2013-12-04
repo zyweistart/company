@@ -16,6 +16,7 @@ import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.NavRoute;
 import com.start.model.nav.PathSearchResult;
 import com.start.navigation.AppContext;
+import com.start.navigation.R;
 
 public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> {
 
@@ -35,7 +36,7 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 		super.onPreExecute();
 		
 		// Show a loading progress dialog
-		dialog = ProgressDialog.show(this.context, null, "正在查询中...", true, true, new OnCancelListener() {
+		dialog = ProgressDialog.show(this.context, null, context.getString(R.string.msg_path_searching), true, true, new OnCancelListener() {
 
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -59,7 +60,13 @@ public class PathSearchTask extends AsyncTask<EndPoint, Void, PathSearchResult> 
 			Graph g = new Graph();
 			g.init();
 			
-			NavRoute r = searchInMap(g, sp.getGeoPoint(), ep.getMapId()+ep.getVertex(), sp.getMapId());
+			NavRoute r;
+			if(ep.getVertex()!=null){
+				r = searchInMap(g, sp.getGeoPoint(), ep.getMapId()+ep.getVertex(), sp.getMapId());
+			}else{
+				Vertex v = g.getClosestVertex(ep.getGeoPoint(),ep.getMapId());
+				r = searchInMap(g, sp.getGeoPoint(), ep.getMapId()+v.getId(), sp.getMapId());
+			}
 			
 			result.indoorRouteEnd = r;
 			result.type = PathSearchResult.Type.IN_BUILDING;

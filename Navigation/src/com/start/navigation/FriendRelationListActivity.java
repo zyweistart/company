@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.start.core.Constant;
 import com.start.core.CoreActivity;
@@ -18,6 +16,7 @@ import com.start.model.UIRunnable;
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
+import com.start.service.adapter.FriendRelationAdapter;
 import com.start.utils.CommonFn;
 
 /**
@@ -40,32 +39,33 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 		mModuleMainHeaderContentAdd = (Button) findViewById(R.id.module_main_header_content_add);
 		mModuleMainHeaderContentAdd.setOnClickListener(this);
 		mModuleMainHeaderContentAdd.setVisibility(View.VISIBLE);
-	}
+		
+		friendRelationData=new PullListViewData(this);
+		friendRelationData.setOnLoadDataListener(
+				new OnLoadDataListener(){
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if(!getAppContext().isLogin()){
-			
-			CommonFn.buildDialog(this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(FriendRelationListActivity.this,LoginActivity.class));
-				}
-				
-			}).show();
-			
-		}else{
-			friendRelationData=new PullListViewData(this);
-			friendRelationData.setOnLoadDataListener(
-					new OnLoadDataListener(){
-
-						@Override
-						public void LoadData(LoadMode loadMode) {
+					@Override
+					public void LoadData(LoadMode loadMode) {
+						if(!getAppContext().isLogin()){
+							
+							friendRelationData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							friendRelationData.getListview_footer_more().setText(R.string.load_more);
+							friendRelationData.getListview_footer_progress().setVisibility(View.GONE);
+							friendRelationData.getPulllistview().onRefreshComplete();
+							
+							CommonFn.buildDialog(FriendRelationListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									startActivity(new Intent(FriendRelationListActivity.this,LoginActivity.class));
+								}
+								
+							}).show();
+							
+						}else{
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("accessid",Constant.ACCESSID);
-							friendRelationData.sendPullToRefreshListViewNetRequest(loadMode,Constant.GlobalURL.v4recQry,requestParams,null,new UIRunnable(){
+							friendRelationData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									friendRelationData.getAdapter().notifyDataSetChanged();
@@ -73,56 +73,13 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 							},"reclist","reclist"+TAG);
 						}
 						
-					});
-			friendRelationData.start(R.id.activity_friend_relation_pulllistview, 
-					new FriendRelationAdapter(friendRelationData));
-		}
-	}
-	
-	public class FriendRelationAdapter extends PullListViewData.DataAdapter{
-		
-		public FriendRelationAdapter(PullListViewData pullListViewData) {
-			pullListViewData.super();
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			FriendRelationViewHolder holder;
-			if (convertView != null && convertView.getId() == R.id.lvitem_friend_content) {
-				holder = (FriendRelationViewHolder) convertView.getTag();
-			}else{
-				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
-				holder = new FriendRelationViewHolder();
-				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
-				holder.btnRemove.setTag(holder);
-				holder.btnRemove.setVisibility(View.VISIBLE);
-				holder.btnRemove.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
-						if(vh!=null){
-							makeTextLong(vh.data+"");
-						}
 					}
 					
 				});
-				convertView.setTag(holder);
-			}
-			holder.data=friendRelationData.getDataItemList().get(position);
-			holder.name.setText("好友:"+holder.data.get("oppno"));
-			return convertView;
-		}
-		
-		public class FriendRelationViewHolder {
-			Map<String,String> data;
-			TextView name;
-			Button btnRemove;
-		}
-		
+		friendRelationData.start(R.id.activity_friend_relation_pulllistview, 
+				new FriendRelationAdapter(this,friendRelationData));
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		Intent intent=new Intent(this,FriendRelationSetActivity.class);

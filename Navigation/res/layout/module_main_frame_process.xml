@@ -14,5 +14,6 @@
         android:id="@+id/module_main_frame_process_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="@string/frame_process_next_step"/>
 </LinearLayout>

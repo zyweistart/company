@@ -43,7 +43,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("friendId", friendId);
-				getHttpService().exeNetRequest(Constant.GlobalURL.v4FriendSet,requestParams,null,new UIRunnable() {
+				getHttpService().exeNetRequest(Constant.ServerAPI.nOpenLocation,requestParams,null,new UIRunnable() {
 					
 					@Override
 					public void run() {

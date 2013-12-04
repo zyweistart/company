@@ -15,64 +15,68 @@ public final class Constant {
 	public static final String RESTURL=SYSTEMTEST?
 			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
 			"http://server.ancun.com:3391/rest/RestService";//正式地址
-	/**
-	 * 通行证编号
-	 */
+	
 	public static String ACCESSID="";
-	/**
-	 * 通行证密钥
-	 */
 	public static String ACCESSKEY="";
-	/**
-	 * 应用默认编码
-	 */
-	public static final String ENCODE="UTF-8";
-	/**
-	 * 空字符
-	 */
 	public static final String EMPTYSTR="";
+	public static final String ENCODE="UTF-8";
+	public static final int PAGESIZE=8;
 	
-	/**
-	 * 数据主目录
-	 */
-	public static final String DATADIRFILE="/navigation/data/";
-	
-	/**
-	 * 临时目录
-	 */
-	public static final String TMPDIRFILE="/navigation/tmp/";
+	public static final String DATADIRFILE="/navigation/data/";//数据主目录
+	public static final String TMPDIRFILE="/navigation/tmp/";//临时目录
 
 	public final static int LISTVIEW_DATA_MORE = 0x01;
 	public final static int LISTVIEW_DATA_LOADING = 0x02;
 	public final static int LISTVIEW_DATA_FULL = 0x03;
 	public final static int LISTVIEW_DATA_EMPTY = 0x04;
 	
-	public static final int PAGESIZE=8;
-	
-	/**
-	 * 用户接口
-	 * @author Start
-	 */
-	public final class GlobalURL{
+	public final class ServerAPI{
 		/**
 		 * 登录
 		 */
-		public static final String v4Login="v4Login";
+		public static final String nLogin="v4Login";
 		/**
-		 * 好友添加
+		 * 注册
 		 */
-		public static final String v4FriendSet="";
-		
-		public static final String v4DataFileDownload="v4recDown";
-		
-		public static final String v4recQry="v4recQry";
-		
+		public static final String nRegister="";
+		/**
+		 * 忘记密码
+		 */
+		public static final String nForgetPwd="";
+		/**
+		 * 获取好友位置列表
+		 */
+		public static final String nFriendLocationList="v4recQry";
+		/**
+		 * 获取已开放的好友列表
+		 */
+		public static final String nOpenFriendList="v4recQry";
+		/**
+		 * 对好友开放位置信息
+		 */
+		public static final String nOpenLocation="";
+		/**
+		 * 上传位置信息
+		 */
+		public static final String nUploadMyLocation="";
+		/**
+		 * 数据文件获取列表
+		 */
+		public static final String nDataFileList="v4recQry";
+		/**
+		 * 数据文件详细
+		 */
+		public static final String nDataFileDetail="";
+		/**
+		 * 数据文件下载
+		 */
+		public static final String nDataFileDownload="v4recDown";
+		/**
+		 * 检测版本更新
+		 */
+		public static final String nVersionCheck="";
 	}
 	
-	/**
-	 * SharedPreferences常量
-	 * @author Start
-	 */
 	public final class SharedPreferences{
 		/**
 		 * 当前使用的数据文件编号

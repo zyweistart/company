@@ -50,7 +50,7 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 				requestParams.put("mac", "");
 				Map<String,String> headerParams=new HashMap<String,String>();
 				headerParams.put("sign", MD5.md5(password));
-				getHttpService().exeNetRequest(Constant.GlobalURL.v4Login,requestParams,headerParams,new UIRunnable() {
+				getHttpService().exeNetRequest(Constant.ServerAPI.nLogin,requestParams,headerParams,new UIRunnable() {
 					
 					@Override
 					public void run() {

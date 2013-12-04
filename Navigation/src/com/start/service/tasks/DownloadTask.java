@@ -82,7 +82,7 @@ public class DownloadTask extends AsyncTask<Void, Float, File> {
 				Map<String,String> pars=new HashMap<String,String>();
 				pars.put("accessid",Constant.ACCESSID);
 				pars.put("fileno",fileno);
-				String requestContent = XMLUtils.builderRequestXml(Constant.GlobalURL.v4DataFileDownload, pars);
+				String requestContent = XMLUtils.builderRequestXml(Constant.ServerAPI.nDataFileDownload, pars);
 				Map<String,String> requestHeader=new HashMap<String,String>();
 				requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),Constant.ACCESSKEY));
 				HttpResponse response=HttpUtils.requestDownServer(requestHeader, requestContent);
@@ -158,7 +158,7 @@ public class DownloadTask extends AsyncTask<Void, Float, File> {
 	protected void onPostExecute(File result) {
 		pDialog.dismiss();
 		if(result.exists()){
-			
+			new DecompressTask(mContext,"a586054a207abc9fe4fe4945e5c666dc").execute();
 		}
 	}
 }

@@ -14,6 +14,7 @@
     <string name="msg_importing_datafile">正在导入数据文件</string>
     <string name="msg_switching_datafile">数据切换成功</string>
     <string name="msg_download_success">下载成功</string>
+    <string name="msg_path_searching">路线查询中...</string>
     <string name="msg_please_wait">请稍候</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
     <string name="msg_location_unavailable">当前位置不可用</string>
@@ -38,6 +39,9 @@
     <string name="lvitem_mapdata_detail_txt">详细</string>
     
     <string name="frame_introduction_title">介绍</string>
+    <string name="frame_introduction_hospital">医院介绍</string>
+    <string name="frame_introduction_doctor">部门介绍</string>
+    <string name="frame_introduction_department">医生介绍</string>
     <string name="frame_map_title">地图</string>
     <string name="frame_process_title">流程</string>
     <string name="frame_process_not_definitions">当前数据不存在流程定义</string>

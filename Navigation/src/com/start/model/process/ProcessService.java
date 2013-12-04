@@ -35,6 +35,8 @@ import com.start.utils.Utils;
 
 public class ProcessService {
 	
+	private static final String PROCESSDEFINITIONS="process_definitions.xml";
+	
 	private String currentJunctionId;
 	
 	private String nextJunctionId;
@@ -58,7 +60,7 @@ public class ProcessService {
 		this.mAppContext=AppContext.getInstance();
 		this.processListener=listener;
 		try {
-			File dataFile=new File(Utils.getFile(mContext,mAppContext.getCurrentDataNo()),"process/process_definitions.xml");
+			File dataFile=new File(Utils.getFile(mContext,mAppContext.getCurrentDataNo()),"process/"+PROCESSDEFINITIONS);
 			buildProcessXML(new FileInputStream(dataFile));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -318,8 +320,9 @@ public class ProcessService {
 	}
 
 	public interface ProcessListener{
-		void location(String mapId,String vertexId);
 		void result(Junction jun);
+		void location(String mapId,String vertexId);
+		void location(String mapId, String latitude,String longitude);
 	}
 	
 }

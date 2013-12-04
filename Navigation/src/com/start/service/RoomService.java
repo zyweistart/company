@@ -28,7 +28,9 @@ public class RoomService extends CoreService {
 					Room.COLUMN_NAME_ID,
 					Room.COLUMN_NAME_MAPID,
 					Room.COLUMN_NAME_NAME,
-					Room.COLUMN_NAME_VERTEXID},null,null, null, null, null);
+					Room.COLUMN_NAME_VERTEXID},
+					Room.COLUMN_NAME_FILENO+"=?",
+					new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {
@@ -56,7 +58,9 @@ public class RoomService extends CoreService {
 					Room.COLUMN_NAME_ID,
 					Room.COLUMN_NAME_MAPID,
 					Room.COLUMN_NAME_NAME,
-					Room.COLUMN_NAME_VERTEXID},Room.COLUMN_NAME_ID+"=?",new String[]{id}, null, null, null);
+					Room.COLUMN_NAME_VERTEXID},
+					Room.COLUMN_NAME_ID+"=? AND "+Room.COLUMN_NAME_FILENO+"=?",
+					new String[]{id,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
 				do {

@@ -18,23 +18,23 @@ public abstract class CoreActivity extends Activity{
 		return httpService;
 	}
 
-	protected AppContext getAppContext(){
+	public AppContext getAppContext(){
 		return AppContext.getInstance();
 	}
 	
-	protected void makeTextShort(int resId){
+	public void makeTextShort(int resId){
 		getAppContext().makeTextShort(resId);
     }
 	
-	protected void makeTextShort(String text){
+	public void makeTextShort(String text){
 		getAppContext().makeTextShort(text);
     }
     
-	protected void makeTextLong(int resId){
+	public void makeTextLong(int resId){
 		getAppContext().makeTextLong(resId);
     }
 	
-	protected void makeTextLong(String text){
+	public void makeTextLong(String text){
 		getAppContext().makeTextLong(text);
     }
 	

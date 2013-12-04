@@ -1,56 +1,66 @@
 package com.start.service.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckedTextView;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.start.navigation.MainActivity;
 import com.start.navigation.R;
+import com.start.service.PullListViewData;
 
-public class FriendLocationAdapter extends BaseAdapter {
+public class FriendLocationAdapter extends PullListViewData.DataAdapter{
+		
+		private MainActivity mActivity;
+		private PullListViewData mPullListViewData;
 	
-	private List<Map<String,String>> datas=new ArrayList<Map<String,String>>();
-
-	private LayoutInflater inflater;
-
-	public FriendLocationAdapter(LayoutInflater layoutInflater) {
-		this.inflater = layoutInflater;
-	}
-	
-	@Override
-	public int getCount() {
-		return datas.size();
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return datas.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.lvitem_mapdata_index, parent, false);
+		public FriendLocationAdapter(MainActivity activity,PullListViewData pullListViewData) {
+			pullListViewData.super();
+			this.mActivity=activity;
+			this.mPullListViewData=pullListViewData;
 		}
-		((CheckedTextView) convertView).setText(datas.get(position).toString());
-		return convertView;
-	}
-	
-	public void setData(List<Map<String,String>> datas){
-		if(datas!=null){
-			this.datas=datas;
-			this.notifyDataSetChanged();
-		}
-	}
 
-}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			FriendRelationViewHolder holder;
+			if (convertView != null && convertView.getId() == R.id.lvitem_friend_content) {
+				holder = (FriendRelationViewHolder) convertView.getTag();
+			}else{
+				convertView = mActivity.getLayoutInflater().inflate(R.layout.lvitem_friend, null);
+				holder = new FriendRelationViewHolder();
+				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
+				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
+				holder.btnLocation.setTag(holder);
+				holder.btnLocation.setVisibility(View.VISIBLE);
+				holder.btnLocation.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
+						if(vh!=null){
+//							Map<String,String> data=vh.data;
+//							String mapId=data.get("mapId");
+//							String latitude=data.get("latitude");
+//							String longitude=data.get("longitude");
+							mActivity.location("0101","0.0007071","0.0012444");
+						}
+					}
+					
+				});
+				convertView.setTag(holder);
+			}
+			holder.data=mPullListViewData.getDataItemList().get(position);
+			holder.name.setText("好友:"+holder.data.get("oppno"));
+			return convertView;
+		}
+		
+		public class FriendRelationViewHolder {
+			Map<String,String> data;
+			TextView name;
+			Button btnLocation;
+		}
+		
+	}

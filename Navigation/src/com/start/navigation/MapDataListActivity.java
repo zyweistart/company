@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,9 @@ import com.start.navigation.MapDataListActivity.MapDataPullListAdapter.MapDataVi
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
-import com.start.service.tasks.ImportDataFileTask;
+import com.start.service.tasks.DownloadTask;
 import com.start.utils.CommonFn;
+import com.start.utils.NetConnectManager;
 import com.start.utils.Utils;
 
 /**
@@ -39,32 +41,33 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_data_list);
-	}
+		
+		mapDataPullListData=new PullListViewData(this);
+		mapDataPullListData.setOnLoadDataListener(
+				new OnLoadDataListener(){
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if(!getAppContext().isLogin()){
-			
-			CommonFn.buildDialog(this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MapDataListActivity.this,LoginActivity.class));
-				}
-				
-			}).show();
-			
-		}else{
-			mapDataPullListData=new PullListViewData(this);
-			mapDataPullListData.setOnLoadDataListener(
-					new OnLoadDataListener(){
-
-						@Override
-						public void LoadData(LoadMode loadMode) {
+					@Override
+					public void LoadData(LoadMode loadMode) {
+						if(!getAppContext().isLogin()){
+							
+							mapDataPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							mapDataPullListData.getListview_footer_more().setText(R.string.load_more);
+							mapDataPullListData.getListview_footer_progress().setVisibility(View.GONE);
+							mapDataPullListData.getPulllistview().onRefreshComplete();
+							
+							CommonFn.buildDialog(MapDataListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									startActivity(new Intent(MapDataListActivity.this,LoginActivity.class));
+								}
+								
+							}).show();
+							
+						}else{
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("accessid",Constant.ACCESSID);
-							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.GlobalURL.v4recQry,requestParams,null,new UIRunnable(){
+							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nDataFileList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									mapDataPullListData.getAdapter().notifyDataSetChanged();
@@ -72,12 +75,14 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 							},"reclist","reclist"+TAG);
 						}
 						
-					});
-			mapDataPullListData.start(R.id.activity_map_data_pulllistview, 
-					new MapDataPullListAdapter(mapDataPullListData));
-		}
+					}
+					
+				});
+		mapDataPullListData.start(R.id.activity_map_data_pulllistview, 
+				new MapDataPullListAdapter(mapDataPullListData));
+		
 	}
-	
+
 	public class MapDataPullListAdapter extends PullListViewData.DataAdapter{
 		
 		public MapDataPullListAdapter(PullListViewData pullListViewData) {
@@ -94,11 +99,8 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				holder = new MapDataViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_mapdata_name);
 				holder.download = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_download);
-				holder.download.setOnClickListener(MapDataListActivity.this);
 				holder.use = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_use);
-				holder.use.setOnClickListener(MapDataListActivity.this);
 				holder.detail = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_detail);
-				holder.detail.setOnClickListener(MapDataListActivity.this);
 				convertView.setTag(holder);
 			}
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
@@ -133,24 +135,22 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		final MapDataViewHolder vh=(MapDataViewHolder)v.getTag();
 		if(vh==null)return;
 		if(v.getId()==R.id.lvitem_mapdata_btn_download){
-//			if(NetConnectManager.isMobilenetwork(this)){
-//				new AlertDialog.Builder(this)
-//				.setIcon(android.R.drawable.ic_dialog_info)
-//				.setMessage(R.string.msg_use_mobile_data)
-//				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int whichButton) {
-//						dialog.dismiss();
-//					}
-//				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int whichButton) {
-//						new DownloadTask(MapDataListActivity.this).execute(vh.fileno);
-//					}
-//				}).show();
-//			}else{
-//				new DownloadTask(MapDataListActivity.this).execute(vh.fileno);
-//			}
-//			new DecompressTask(this,"a586054a207abc9fe4fe4945e5c666dc").execute();
-			new ImportDataFileTask(this,"a586054a207abc9fe4fe4945e5c666dc").execute();
+			if(NetConnectManager.isMobilenetwork(this)){
+				new AlertDialog.Builder(this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setMessage(R.string.msg_use_mobile_data)
+				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+					}
+				}).show();
+			}else{
+				new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+			}
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
 			//使用当前数据
 			getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
