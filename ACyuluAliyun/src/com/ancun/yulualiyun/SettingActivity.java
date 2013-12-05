@@ -290,6 +290,7 @@ public class SettingActivity extends CoreActivity implements OnClickListener {
 		}else if (v == llSettingChangePassword) {
 			startActivity(new Intent(this, ChangePasswordActivity.class)); 
 		}else if (v == llSettingLoginAgain) {
+			getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN, false);
 			setResult(Constant.SETTING_RELOGIN);
 			finish();
 		}else if (v == llSettingQuit) {

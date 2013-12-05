@@ -70,6 +70,9 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//显示菜单键
+		getWindow().setFlags(0x08000000, 0x08000000);
+		
 		main_tip_content=(TextView)findViewById(R.id.main_tip_content);
 		
 		//我的账户

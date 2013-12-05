@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.ancun.core.AliYunOSAPI;
 import com.ancun.core.Constant;
 import com.ancun.core.CoreActivity;
 import com.ancun.model.UIRunnable;
@@ -25,8 +23,6 @@ import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.MD5;
 import com.ancun.utils.StringUtils;
-import com.yunos.boot.SellerServiceHandler;
-import com.yunos.seller.SellerAuthority;
 
 public class LoginActivity extends CoreActivity implements OnClickListener {
 	
@@ -190,44 +186,44 @@ public class LoginActivity extends CoreActivity implements OnClickListener {
 								@Override
 								public void run() {
 									
-									//是否满足卖家手机条件
-									int systemType=getAppContext().getYunOSAPI().getSystemType();
-									if(systemType==SellerAuthority.SELLER_PHONE){
-										//卖家手机
-										if(getAppContext().getYunOSAPI().isSellerAcccountLogin()){
-											Bundle bundle=getAppContext().getYunOSAPI().isValidServiceStatus();
-											int keyCoe=bundle.getInt(SellerServiceHandler.KEY_CODE);
-											Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_CODE:"+keyCoe);
-											if (keyCoe== SellerServiceHandler.CODE_SUCCESS) {
-												int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
-												Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_RESULT:"+keyResult);
-												if(keyResult==SellerServiceHandler.RESULT_INACTIVE){
+//									//是否满足卖家手机条件
+//									int systemType=getAppContext().getYunOSAPI().getSystemType();
+//									if(systemType==SellerAuthority.SELLER_PHONE){
+//										//卖家手机
+//										if(getAppContext().getYunOSAPI().isSellerAcccountLogin()){
+//											Bundle bundle=getAppContext().getYunOSAPI().isValidServiceStatus();
+//											int keyCoe=bundle.getInt(SellerServiceHandler.KEY_CODE);
+//											Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_CODE:"+keyCoe);
+//											if (keyCoe== SellerServiceHandler.CODE_SUCCESS) {
+//												int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
+//												Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_RESULT:"+keyResult);
+//												if(keyResult==SellerServiceHandler.RESULT_INACTIVE){
 													//未赠送
 													Intent intent=new Intent(LoginActivity.this,ActivationAccountActivity.class);
 													startActivityForResult(intent,WelcomeActivity.REQUEST_CODE_WELCOME);
-													return;
-												}
-											}
-										}
-									}
+//													return;
+//												}
+//											}
+//										}
+//									}
 									
-									runOnUiThread(new Runnable() {
-										
-										@Override
-										public void run() {
-											
-											new AlertDialog.Builder(LoginActivity.this).
-											setIcon(android.R.drawable.ic_dialog_info).
-											setMessage("当前淘宝ID所含安存语录服务已被激活过或暂时无法激活，请关闭应用稍后再试，或确认下当前登录云OS的淘宝ID是否为购买卖家手机套餐时所用的卖家账号，不便之处还请见谅啦").
-											setPositiveButton("确定", new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialog, int which) {
-													dialog.dismiss();
-												}
-											}).show();
-											
-										}
-									});
+//									runOnUiThread(new Runnable() {
+//										
+//										@Override
+//										public void run() {
+//											
+//											new AlertDialog.Builder(LoginActivity.this).
+//											setIcon(android.R.drawable.ic_dialog_info).
+//											setMessage("当前淘宝ID所含安存语录服务已被激活过或暂时无法激活，请关闭应用稍后再试，或确认下当前登录云OS的淘宝ID是否为购买卖家手机套餐时所用的卖家账号，不便之处还请见谅啦").
+//											setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//												@Override
+//												public void onClick(DialogInterface dialog, int which) {
+//													dialog.dismiss();
+//												}
+//											}).show();
+//											
+//										}
+//									});
 									
 								}
 							}).start();
