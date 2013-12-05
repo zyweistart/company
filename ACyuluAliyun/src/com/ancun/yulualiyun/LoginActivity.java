@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -95,12 +96,10 @@ public class LoginActivity extends CoreActivity implements OnClickListener {
 		inputMethodManager.hideSoftInputFromWindow(et_activity_login_password.getWindowToken(), 0);
 		if(v  == btn_activity_login){
 			getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
-			final String account=et_activity_login_account.getText().toString();
-			final String password=et_activity_login_password.getText().toString();
-			if(account==null||"".equals(account)){
-				makeTextShort("账号输入错误");
-			}else if(password==null||"".equals(password)){
-				makeTextShort("密码输入错误");
+			final String account=String.valueOf(et_activity_login_account.getText());
+			final String password=String.valueOf(et_activity_login_password.getText());
+			if(TextUtils.isEmpty(account)||TextUtils.isEmpty(password)){
+				makeTextShort("账号或密码不能为空");
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("username", account);

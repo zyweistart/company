@@ -65,4 +65,11 @@
         android:textColor="#ff000000"
         android:textSize="18.0sp"
         android:visibility="gone" />
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_3"
+        android:textSize="@dimen/fontsize_h0"
+        android:textColor="#ff0000"
+        android:text="尊敬的用户，短信验证码经由短信通道统一发送，部分手机安全软件可能会针对短信通道发送信息做默认拦截处理，如您长时间且多次尝试均未收到验证码信息，建议您查看手机安全软件的拦截信息以确认验证码未被误拦截。" />
 </LinearLayout>
