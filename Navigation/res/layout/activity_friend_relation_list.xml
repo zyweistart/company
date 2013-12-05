@@ -10,7 +10,7 @@
 	<com.start.widget.PullToRefreshListView
         android:id="@+id/activity_friend_relation_pulllistview"
         android:cacheColorHint="#00000000"
-        android:divider="#f3f3f3"
+        android:divider="#e5e5e5"
         android:dividerHeight="1dp"
         android:listSelector="#f3f3f3"
         android:choiceMode="singleChoice"

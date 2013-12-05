@@ -10,6 +10,8 @@
 	<ListView 
 	    android:id="@+id/module_main_frame_department_list"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"/>
+	    android:layout_height="match_parent"
+	    android:divider="#e5e5e5"
+        android:dividerHeight="1dp"/>
 	
 </LinearLayout>

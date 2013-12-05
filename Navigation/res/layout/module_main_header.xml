@@ -25,10 +25,10 @@
             android:background="@drawable/bar_location_selector"
   	        android:visibility="gone"/>
   	    <Button 
-  	        android:id="@+id/module_main_header_content_add"
-  	        android:text="@string/add"
+  	        android:id="@+id/module_main_header_content_click"
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
+  	        android:onClick="onClick"
   	        android:visibility="gone"/>
   	</LinearLayout>
 </RelativeLayout>

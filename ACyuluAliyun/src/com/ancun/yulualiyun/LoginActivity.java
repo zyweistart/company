@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.ancun.core.AliYunOSAPI;
 import com.ancun.core.Constant;
 import com.ancun.core.CoreActivity;
 import com.ancun.model.UIRunnable;
@@ -23,6 +25,8 @@ import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.MD5;
 import com.ancun.utils.StringUtils;
+import com.yunos.boot.SellerServiceHandler;
+import com.yunos.seller.SellerAuthority;
 
 public class LoginActivity extends CoreActivity implements OnClickListener {
 	
@@ -163,10 +167,106 @@ public class LoginActivity extends CoreActivity implements OnClickListener {
 			}
 		}else if(v==btn_activity_login_regsiter){
 			//注册界面
-			startActivity(new Intent(this,RegisterActivity.class));
+			new AlertDialog.Builder(this).
+			setIcon(android.R.drawable.ic_dialog_info).
+			setMessage("如您为淘宝卖家且所购卖家手机套餐中包含该应用服务，请点击“偶是掌柜” 激活开通套餐所含安存语录服务；\n非淘宝卖家或所购卖家手机套餐中不含该应用服务，点击“普通注册”开通现在也可获赠月度免费体验服务~\n特别提醒掌柜们：同一手机号码仅可激活一种类型赠送服务，如选择普通注册则可能导致卖家手机套餐中所含该应用服务无法正常获取~").
+			setPositiveButton("偶是掌柜，激活开通", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					new AlertDialog.Builder(LoginActivity.this).
+					setIcon(android.R.drawable.ic_dialog_info).
+					setMessage("亲，激活卖家手机套餐所含安存语录服务前，需确认已使用购买套餐时的淘宝卖家ID成功登录云OS，恭请掌柜的先行确认下何如？").
+					setPositiveButton("拨冗亲自去查看下云OS登录状态", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
+							startActivity(netIntent);
+						}
+					}).setNegativeButton("确认OK，激活服务，赶紧的", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							new Thread(new Runnable() {
+							
+								@Override
+								public void run() {
+									
+									//是否满足卖家手机条件
+									int systemType=getAppContext().getYunOSAPI().getSystemType();
+									if(systemType==SellerAuthority.SELLER_PHONE){
+										//卖家手机
+										if(getAppContext().getYunOSAPI().isSellerAcccountLogin()){
+											Bundle bundle=getAppContext().getYunOSAPI().isValidServiceStatus();
+											int keyCoe=bundle.getInt(SellerServiceHandler.KEY_CODE);
+											Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_CODE:"+keyCoe);
+											if (keyCoe== SellerServiceHandler.CODE_SUCCESS) {
+												int keyResult=bundle.getInt(SellerServiceHandler.KEY_RESULT);
+												Log.v(AliYunOSAPI.TAG,"isValidServiceStatus KEY_RESULT:"+keyResult);
+												if(keyResult==SellerServiceHandler.RESULT_INACTIVE){
+													//未赠送
+													Intent intent=new Intent(LoginActivity.this,ActivationAccountActivity.class);
+													startActivityForResult(intent,WelcomeActivity.REQUEST_CODE_WELCOME);
+													return;
+												}
+											}
+										}
+									}
+									
+									runOnUiThread(new Runnable() {
+										
+										@Override
+										public void run() {
+											
+											new AlertDialog.Builder(LoginActivity.this).
+											setIcon(android.R.drawable.ic_dialog_info).
+											setMessage("当前淘宝ID所含安存语录服务已被激活过或暂时无法激活，请关闭应用稍后再试，或确认下当前登录云OS的淘宝ID是否为购买卖家手机套餐时所用的卖家账号，不便之处还请见谅啦").
+											setPositiveButton("确定", new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													dialog.dismiss();
+												}
+											}).show();
+											
+										}
+									});
+									
+								}
+							}).start();
+						}
+					}).show();
+				}
+			}).setNegativeButton("普通注册", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+					startActivity(intent);
+				}
+			}).show();
 		}else if(v==btn_activity_login_forgetpwd){
 			//忘记密码
 			startActivity(new Intent(this,ForgetpwdActivity.class));
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode==WelcomeActivity.REQUEST_CODE_WELCOME){
+			if(resultCode==WelcomeActivity.RESULT_CODE_REGISTER){
+				String phone=getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferencesConstant.SP_ACCOUNT,Constant.EMPTYSTR);
+				et_activity_login_account.setText(phone);
+				cb_activity_login_autologin.setChecked(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_AUTOLOGIN, false));
+				if(!Constant.EMPTYSTR.equals(phone)){
+					String password =  getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferencesConstant.SP_PASSWORD,Constant.EMPTYSTR);
+					if(!Constant.EMPTYSTR.equals(password)){
+						try {
+							et_activity_login_password.setText(StringUtils.doKeyDecrypt(password,getAssets().open(Constant.DESKEYKEY)));
+							btn_activity_login.performClick();
+						} catch (IOException e) {
+							LogUtils.logError(e);
+						}
+					}
+				}
+			}
 		}
 	}
 	

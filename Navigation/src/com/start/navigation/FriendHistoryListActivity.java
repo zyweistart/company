@@ -1,18 +1,26 @@
 package com.start.navigation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.start.core.Constant;
 import com.start.core.CoreActivity;
 import com.start.model.FriendHistory;
+import com.start.model.UIRunnable;
+import com.start.utils.CommonFn;
 
 /**
  * 好友历史列表
@@ -22,7 +30,8 @@ import com.start.model.FriendHistory;
 public class FriendHistoryListActivity extends CoreActivity {
 
 	private ListView mFriendHistoryList;
-	private List<FriendHistory> dataItemList;
+	private FriendHistoryAdapter mFriendHistoryAdapter;
+	private List<FriendHistory> mDataItemList=new ArrayList<FriendHistory>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +39,43 @@ public class FriendHistoryListActivity extends CoreActivity {
 		setContentView(R.layout.activity_friend_history_list);
 		setCurrentActivityTitle(R.string.activity_title_friend_history_list);
 		
-		dataItemList=getAppContext().getFriendHistoryService().findAllByMyId("");
-		
+		mFriendHistoryAdapter=new FriendHistoryAdapter();
 		mFriendHistoryList=(ListView)findViewById(R.id.activity_friend_history_list);
-		mFriendHistoryList.setAdapter(new FriendHistoryAdapter());
+		mFriendHistoryList.setAdapter(mFriendHistoryAdapter);
+		
+		//加载数据
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				mDataItemList=getAppContext().getFriendHistoryService().findAllByMyId(getAppContext().getMyID());
+				return !mDataItemList.isEmpty();
+			}
+
+			@Override
+			protected void onPostExecute(Boolean result) {
+				if(result){
+					mFriendHistoryAdapter.notifyDataSetChanged();
+				}
+				super.onPostExecute(result);
+			}
+			
+		}.execute();
+		
 	}
+	
+	
 	
 	public class FriendHistoryAdapter extends  BaseAdapter{
 		
 		@Override
 		public int getCount() {
-			return dataItemList.size();
+			return mDataItemList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return  dataItemList.get(position);
+			return  mDataItemList.get(position);
 		}
 
 		@Override
@@ -62,7 +92,7 @@ public class FriendHistoryListActivity extends CoreActivity {
 				convertView = getLayoutInflater().inflate(R.layout.lvitem_friend, null);
 				holder = new FriendHistoryViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnAuthorize = (Button) convertView.findViewById(R.id.lvitem_friend_authorize);
+				holder.btnAuthorize = (ImageButton) convertView.findViewById(R.id.lvitem_friend_authorize);
 				holder.btnAuthorize.setVisibility(View.VISIBLE);
 				holder.btnAuthorize.setTag(holder);
 				holder.btnAuthorize.setOnClickListener(new OnClickListener() {
@@ -71,6 +101,25 @@ public class FriendHistoryListActivity extends CoreActivity {
 					public void onClick(View v) {
 						FriendHistoryViewHolder vh=(FriendHistoryViewHolder)v.getTag();
 						if(vh!=null){
+							CommonFn.alertsDialog(FriendHistoryListActivity.this, "确定要对该好友开放自己的位置信息吗?", new DialogInterface.OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Map<String,String> requestParams=new HashMap<String,String>();
+									Map<String,String> headerParams=new HashMap<String,String>();
+									headerParams.put("sign", "");
+									getHttpService().exeNetRequest(Constant.ServerAPI.nOpenLocation,requestParams,headerParams,new UIRunnable() {
+										
+										@Override
+										public void run() {
+											makeTextLong("放开位置成功");
+										}
+										
+									});
+								}
+								
+							}).show();
 							
 						}
 					}
@@ -79,15 +128,16 @@ public class FriendHistoryListActivity extends CoreActivity {
 				
 				convertView.setTag(holder);
 			}
-			FriendHistory fh=dataItemList.get(position);
-			holder.name.setText("好友:"+fh.getFriendId());
+			FriendHistory fh=mDataItemList.get(position);
+			holder.name.setText(fh.getFriendId());
 			return convertView;
 		}
 		
 		public class FriendHistoryViewHolder {
 			TextView name;
-			Button btnAuthorize;
+			ImageButton btnAuthorize;
 		}
+		
 	}
 
 }

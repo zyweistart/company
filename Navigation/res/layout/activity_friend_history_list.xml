@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:choiceMode="singleChoice"
-        android:divider="#415c71"
+        android:divider="#e5e5e5"
         android:dividerHeight="1dp"
         android:fadingEdge="none"
         android:fadeScrollbars="true"

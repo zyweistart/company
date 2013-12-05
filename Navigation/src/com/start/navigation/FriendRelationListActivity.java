@@ -30,16 +30,20 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 	
 	private PullListViewData friendRelationData;
 	
-	public static final int RESULT_REFRESH_CODE=222;
+	public static final int REQUEST_CODE_LOGIN_REFRESH=222;
+	public static final int REQUEST_CODE_SET_REFRESH=333;
+	public static final int RESULT_CODE_SET_REFRESH=444;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_relation_list);
 		setCurrentActivityTitle(R.string.activity_title_friend_relation_list);
-		mModuleMainHeaderContentAdd = (Button) findViewById(R.id.module_main_header_content_add);
-		mModuleMainHeaderContentAdd.setOnClickListener(this);
+		
+		mModuleMainHeaderContentAdd = (Button) findViewById(R.id.module_main_header_content_click);
+		mModuleMainHeaderContentAdd.setText("添加");
 		mModuleMainHeaderContentAdd.setVisibility(View.VISIBLE);
+		
 		
 		friendRelationData=new PullListViewData(this);
 		friendRelationData.setOnLoadDataListener(
@@ -58,7 +62,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									startActivity(new Intent(FriendRelationListActivity.this,LoginActivity.class));
+									startActivityForResult(new Intent(FriendRelationListActivity.this,LoginActivity.class), REQUEST_CODE_LOGIN_REFRESH);
 								}
 								
 							}).show();
@@ -83,15 +87,21 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 	
 	@Override
 	public void onClick(View v) {
-		Intent intent=new Intent(this,FriendRelationSetActivity.class);
-		startActivityForResult(intent, 0);
+		startActivityForResult(new Intent(this,FriendRelationSetActivity.class), REQUEST_CODE_SET_REFRESH);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode==RESULT_REFRESH_CODE){
-			friendRelationData.getPulllistview().clickRefresh();
+		if(getAppContext().isLogin()){
+			if(requestCode==REQUEST_CODE_LOGIN_REFRESH){
+				friendRelationData.getOnLoadDataListener().LoadData(LoadMode.INIT);
+			}else if(requestCode==REQUEST_CODE_SET_REFRESH){
+				if(resultCode==RESULT_CODE_SET_REFRESH){
+					makeTextLong("已添加新成员刷新");
+//					friendRelationData.getPulllistview().clickRefresh();
+				}
+			}
 		}
 	}
 

@@ -54,7 +54,7 @@ public final class Constant {
 		/**
 		 * 对好友开放位置信息
 		 */
-		public static final String nOpenLocation="";
+		public static final String nOpenLocation="serverinfoGet";
 		/**
 		 * 上传位置信息
 		 */

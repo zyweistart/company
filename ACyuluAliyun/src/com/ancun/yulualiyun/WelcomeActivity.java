@@ -30,7 +30,7 @@ import com.yunos.seller.SellerAuthority;
  */
 public class WelcomeActivity extends CoreActivity implements AnimationListener {
 	
-	private static final int REQUEST_CODE_WELCOME=111;
+	public static final int REQUEST_CODE_WELCOME=111;
 	public static final int RESULT_CODE_REGISTER=111;
 	
 	@Override
