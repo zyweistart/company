@@ -41,9 +41,13 @@ public abstract class CoreActivity extends Activity{
     }
 	
 	public void setCurrentActivityTitle(int resId){
+		setCurrentActivityTitle(getString(resId));
+	}
+	
+	public void setCurrentActivityTitle(String title){
 		TextView tv=(TextView)findViewById(R.id.module_main_header_content_title);
 		if(tv!=null){
-			tv.setText(resId);
+			tv.setText(title);
 		}
 	}
 	

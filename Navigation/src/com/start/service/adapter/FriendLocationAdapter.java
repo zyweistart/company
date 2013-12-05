@@ -5,7 +5,7 @@ import java.util.Map;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.start.navigation.MainActivity;
@@ -32,7 +32,7 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 				convertView = mActivity.getLayoutInflater().inflate(R.layout.lvitem_friend, null);
 				holder = new FriendRelationViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-				holder.btnLocation = (Button) convertView.findViewById(R.id.lvitem_friend_location);
+				holder.btnLocation = (ImageButton) convertView.findViewById(R.id.lvitem_friend_location);
 				holder.btnLocation.setTag(holder);
 				holder.btnLocation.setVisibility(View.VISIBLE);
 				holder.btnLocation.setOnClickListener(new OnClickListener() {
@@ -60,7 +60,7 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 		public class FriendRelationViewHolder {
 			Map<String,String> data;
 			TextView name;
-			Button btnLocation;
+			ImageButton btnLocation;
 		}
 		
 	}

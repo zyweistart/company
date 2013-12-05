@@ -50,13 +50,13 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 		} else if(v.getId() == R.id.more_btn_logout){
 			//用户退出
 			
-		} else if (v.getId() == R.id.more_btn_friends_manager) {
+		} else if (v.getId() == R.id.more_frame_friends_manager) {
 			//好友管理
 			startActivity(new Intent(this,FriendRelationListActivity.class));
-		} else if (v.getId() == R.id.more_btn_map_manager) {
+		} else if (v.getId() == R.id.more_frame_map_manager) {
 			//地图管理
 			startActivity(new Intent(this,MapDataListActivity.class));
-		} else if (v.getId() == R.id.more_btn_version_check) {
+		} else if (v.getId() == R.id.more_frame_version_check) {
 			//版本检测
 			makeTextShort(R.string.msg_last_version);
 		}

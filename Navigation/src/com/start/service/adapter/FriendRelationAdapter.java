@@ -5,7 +5,7 @@ import java.util.Map;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.start.core.CoreActivity;
@@ -32,7 +32,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 			convertView = mActivity.getLayoutInflater().inflate(R.layout.lvitem_friend, null);
 			holder = new FriendRelationViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.lvitem_friend_name);
-			holder.btnRemove = (Button) convertView.findViewById(R.id.lvitem_friend_remove);
+			holder.btnRemove = (ImageButton) convertView.findViewById(R.id.lvitem_friend_remove);
 			holder.btnRemove.setTag(holder);
 			holder.btnRemove.setVisibility(View.VISIBLE);
 			holder.btnRemove.setOnClickListener(new OnClickListener() {
@@ -56,7 +56,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 	public class FriendRelationViewHolder {
 		Map<String,String> data;
 		TextView name;
-		Button btnRemove;
+		ImageButton btnRemove;
 	}
 	
 }

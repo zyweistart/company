@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.start.core.CoreActivity;
@@ -12,6 +13,7 @@ import com.start.model.Department;
 
 /**
  * 科室详细
+ * 
  * @author start
  *
  */
@@ -25,15 +27,18 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_department_detail);
-		setCurrentActivityTitle(R.string.activity_title_department_detail);
 		
-		initHeaderView();
+		mModuleMainHeaderContentLocation = (Button) findViewById(R.id.module_main_header_content_location);
+		mModuleMainHeaderContentLocation.setOnClickListener(this);
+		mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
 		
 		String departmentId=getIntent().getExtras().getString(Department.COLUMN_NAME_ID);
 		department=getAppContext().getDepartmentService().findById(departmentId);
+		if(department!=null){
+			setCurrentActivityTitle(department.getName());
+		}
 		
-		
-		Button btnDoctorList=(Button)findViewById(R.id.department_detail_btndoctorlist);
+		RelativeLayout btnDoctorList=(RelativeLayout)findViewById(R.id.department_detail_doctorlist);
 		btnDoctorList.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -46,25 +51,18 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 			}
 		});
 		
-		TextView tvDetailContent=(TextView)findViewById(R.id.department_detail_content);
-		tvDetailContent.setText("departmentId:"+department.getId()+"---"+department.getName());
+		TextView tvDetailContent=(TextView)findViewById(R.id.activity_department_detail_content);
+		tvDetailContent.setText(department.getIntroduction());
 		
-	}
-
-	/**
-	 * 初始化头部视图
-	 */
-	private void initHeaderView() {
-		mModuleMainHeaderContentLocation = (Button) findViewById(R.id.module_main_header_content_location);
-		mModuleMainHeaderContentLocation.setOnClickListener(this);
-		mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	public void onClick(View v) {
-		MainActivity.currentLocationDepartmentId=department.getId();
-		startActivity(new Intent(this,MainActivity.class));
-		finish();
+		if(v.getId()==R.id.module_main_header_content_location){
+			MainActivity.currentLocationDepartmentId=department.getId();
+			startActivity(new Intent(this,MainActivity.class));
+			finish();
+		}
 	}
 	
 }

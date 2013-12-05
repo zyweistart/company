@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.start.core.Constant;
@@ -97,9 +97,9 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				convertView = getLayoutInflater().inflate(R.layout.lvitem_mapdata, null);
 				holder = new MapDataViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_mapdata_name);
-				holder.download = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_download);
-				holder.use = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_use);
-				holder.detail = (Button) convertView.findViewById(R.id.lvitem_mapdata_btn_detail);
+				holder.download = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_download);
+				holder.use = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_use);
+				holder.detail = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_detail);
 				convertView.setTag(holder);
 			}
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
@@ -122,9 +122,9 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		public class MapDataViewHolder {
 			String fileno;
 			TextView name;
-			Button download;
-			Button use;
-			Button detail;
+			ImageButton download;
+			ImageButton use;
+			ImageButton detail;
 		}
 		
 	}

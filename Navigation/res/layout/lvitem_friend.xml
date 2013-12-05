@@ -18,27 +18,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10.0dip" >
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_friend_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lvitem_friend_location_txt"
+            android:background="@drawable/bg_location_selector"
+            android:contentDescription="@string/empty"
             android:visibility="gone"/>
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_friend_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lvitem_friend_remove_txt"
+            android:background="@drawable/bg_relieve_selector"
+            android:contentDescription="@string/empty"
             android:visibility="gone"/>
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_friend_authorize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lvitem_friend_authorize_txt"
+            android:background="@drawable/bg_location_selector"
+            android:contentDescription="@string/empty"
             android:visibility="gone"/>
         
     </RelativeLayout>

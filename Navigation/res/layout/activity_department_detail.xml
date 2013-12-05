@@ -7,15 +7,35 @@
     
 	<include layout="@layout/module_main_header" />
 
-	<Button
-	    android:id="@+id/department_detail_btndoctorlist"
-	    android:layout_width="wrap_content"
+	<RelativeLayout 
+	    android:id="@+id/department_detail_doctorlist"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="医生列表"/>
+	    android:background="@drawable/tabs_bar_bg"
+	    android:padding="10.0dip">
 	
-	<TextView 
-	    android:id="@+id/department_detail_content"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"/>
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentLeft="true"
+	        android:textColor="@color/lvitem_textcolor"
+	        android:textSize="@dimen/lvitem_textsize1"
+	        android:text="医生列表"/>
+	    
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+	        android:src="@drawable/bakchat_submenu_normal"
+	        android:contentDescription="@string/empty"/>
+	    
+	</RelativeLayout>
+	
+	<TextView
+	    	 android:id="@+id/activity_department_detail_content" 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"/>
 	
 </LinearLayout>

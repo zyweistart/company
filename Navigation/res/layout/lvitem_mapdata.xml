@@ -19,29 +19,34 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10.0dip"
         android:orientation="horizontal">
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_mapdata_btn_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40.0dip"
+            android:layout_height="40.0dip"
             android:onClick="onClick"
-            android:text="@string/lvitem_mapdata_download_txt"/>
+            android:background="@drawable/bg_download_selector"
+            android:contentDescription="@string/empty"/>
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_mapdata_btn_use"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40.0dip"
+            android:layout_height="40.0dip"
             android:onClick="onClick"
             android:visibility="gone"
-            android:text="@string/lvitem_mapdata_use_txt"/>
+            android:background="@drawable/bg_relieve_selector"
+            android:contentDescription="@string/empty"/>
         
-        <Button
+        <ImageButton
             android:id="@+id/lvitem_mapdata_btn_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40.0dip"
+            android:layout_height="40.0dip"
+            android:layout_marginLeft="5.0dip"
             android:onClick="onClick"
-            android:text="@string/lvitem_mapdata_detail_txt"/>
+            android:background="@drawable/bg_search_selector"
+            android:contentDescription="@string/empty"/>
         
     </LinearLayout>
     
