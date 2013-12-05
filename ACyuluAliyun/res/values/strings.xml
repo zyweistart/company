@@ -125,4 +125,64 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+    
+    <string name="msg_1">当前版本：</string>
+    <string name="msg_2">淘宝卖家手机卖家专享年度免费服务</string>
+    <string name="msg_3">淘宝卖家手机（阿里云OS）专享月度体验服务</string>
+    <string name="msg_4">通话录音存储空间：剩余0MB，已用0MB</string>
+    <string name="msg_5">已赠送基础服务套餐0个月，剩余未赠送套餐0个月</string>
+    <string name="msg_6">录音</string>
+    <string name="msg_7">激活赠送服务</string>
+    <string name="msg_8">亲，当您下次需激活安存语录赠送服务时，可在使用淘宝卖家账号登录云OS后启动安存语录按照提示操作~</string>
+    <string name="msg_9">亲，激活卖家手机套餐所含安存语录服务前，需确认已使用购买套餐时的淘宝卖家ID成功登录云OS，恭请掌柜的先行确认下何如？</string>
+    <string name="msg_10">当前淘宝ID所含安存语录服务已被激活过或暂时无法激活，请关闭应用稍后再试，或确认下当前登录云OS的淘宝ID是否为购买卖家手机套餐时所用的卖家账号，不便之处还请见谅啦</string>
+    <string name="msg_11">如您为淘宝卖家且所购卖家手机套餐中包含该应用服务，请点击“偶是掌柜” 激活开通套餐所含安存语录服务；\n非淘宝卖家或所购卖家手机套餐中不含该应用服务，点击“普通注册”开通现在也可获赠月度免费体验服务~\n特别提醒掌柜们：同一手机号码仅可激活一种类型赠送服务，如选择普通注册则可能导致卖家手机套餐中所含该应用服务无法正常获取~</string>
+    <string name="msg_12">欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中可能会产生网络流量费用，流量资费请咨询当地运营商，是否允许应用建立连接？</string>
+    <string name="msg_13">如您为淘宝卖家，则您购买的服务套餐中可能包含该应用的赠送服务，请使用淘宝卖家账号登录云OS后重新登录安存语录以确认，以免影响您正常获赠该应用相关服务。</string>
+    <string name="msg_14">您购买的服务套餐中所包含该应用服务已激活，请确认本机号码同注册号码相同 并登录</string>
+    <string name="msg_15">登录超时</string>
+    <string name="msg_16">用户名或密码有误</string>
+    <string name="msg_17">账号或密码不能为空</string>
+    <string name="msg_18">仅适用于企业及机构手机用户</string>
+    <string name="msg_19">拨冗亲自去查看下云OS登录状态</string>
+    <string name="msg_20">确认OK，激活服务，赶紧的</string>
+    <string name="msg_21">普通注册</string>
+    <string name="msg_22">不再显示提醒</string>
+    <string name="msg_23">不允许，关闭应用</string>
+    <string name="msg_24">允许</string>
+    <string name="msg_25">现在登录云OS</string>
+    <string name="msg_26">暂不登录，了解应用先</string>
+    <string name="msg_27">服务出现异常，请稍候再试</string>
+    <string name="msg_28">出错啦，请稍候再试</string>
+    <string name="msg_29">当前无法连接到网络，是否立即进行设置？</string>
+    <string name="msg_30">您使用的版本过低，请立即升级！否则可能无法正常使用。</string>
+    <string name="msg_31">检测到新版本，是否升级？</string>
+    <string name="msg_32">立即升级</string>
+    <string name="msg_33">以后再说</string>
+    <string name="msg_34">立即修改</string>
+    <string name="msg_35">再按一次退出程序</string>
+    <string name="msg_36">您的密码过于简单,存在严重的安全隐患,建议您及时修改 ,以免造成录音被误删等不必要的麻烦和损失。</string>
+    <string name="msg_37">应用将读取本地通话记录，以便您快速呼叫通话记录中的非通讯录联系人并对相关通话进行录音保全，我们不会保存和修改您通话记录中的任何信息。是否允许读取？</string>
+    <string name="msg_38">应用将读取手机本地通讯录，以便您通过客户端快速呼叫通讯录联系人并根据您的需要通话内容进行录音保全，应用不会保存和针对账号绑定通讯录的任何资料。是否允许读取？</string>
+    <string name="msg_39">请输入登录密码——被录音删除将进入录音回收站，如需还原或彻底删除请登录安存语录官网“我的录音-回收站”进行操作。</string>
+    <string name="msg_40">确认删除该条录音？</string>
+    <string name="msg_41">暂无权限</string>
+    <string name="msg_42">删除录音文件必须输入密码！</string>
+    <string name="msg_43">编辑</string>
+    <string name="msg_44">未下载</string>
+    <string name="msg_45">录音文件下载</string>
+    <string name="msg_46">提示</string>
+    <string name="msg_47">糟糕，好像出错了，请稍候再试！</string>
+    <string name="msg_48">录音首次收听前需加载且需消耗一定的网络流量，当前网络环境为移动2G/3G网络，建议在Wifi环境下加载时长较长的通话录音，是否确认在当前网络模式下加载？</string>
+    <string name="msg_49">反馈成功</string>
+    <string name="msg_50">凭提取码可在官网公开查询、验证本条通话录音，确定申请？</string>
+    <string name="msg_51">您确定将该录音提交至公证机构申办公证吗？</string>
+    <string name="msg_52">您确定要取消该录音申办公证吗？</string>
+    <string name="msg_53">撤销成功</string>
+    <string name="msg_54">该条录音提取码信息将启用手机短信生成功能并以手机短信形式发给对方，短信费用由运营商收取，确认以手机短信形式发送给对方？</string>
+    <string name="msg_55">是否撤销提取？</string>
+    <string name="msg_56">录音备注修改成功</string>
+    <string name="msg_57">开始日期不能大于结束日期</string>
+    <string name="msg_58">精确查找后如需返回全部录音信息列表，请先清除所有查询条件哦</string>
+    
 </resources>
