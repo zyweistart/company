@@ -32,7 +32,6 @@ public class AppContext extends Application {
 	
 	private static AppContext mInstance;
     private SharedPreferencesUtils sharedPreferencesUtils;
-    
     private PathSearchResult pathSearchResult;
     
     private Paint mPaintStroke;
