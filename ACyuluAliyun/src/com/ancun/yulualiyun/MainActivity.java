@@ -125,6 +125,10 @@ public class MainActivity extends CoreActivity implements ScrollLayout.LayoutCha
 //		manager = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
 //		manager.listen(new MyPhoneStateListener(getAppContext()),PhoneStateListener.LISTEN_CALL_STATE);
 		
+		if("1".equals(getAppContext().getUserInfo().get("usertype"))){
+			getAppContext().reLogin(this, "仅适用于企业及机构手机用户");
+		}
+		
 		//网络检测
 		new Thread(new Runnable() {
 			
