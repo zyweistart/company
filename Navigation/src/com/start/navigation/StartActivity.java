@@ -41,7 +41,8 @@ public class StartActivity extends CoreActivity implements AnimationListener{
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
-			startActivity(new Intent(StartActivity.this, FirstSetMapDataActivity.class));
+//			startActivity(new Intent(StartActivity.this, FirstSetMapDataActivity.class));
+			startActivity(new Intent(StartActivity.this, FriendRelationSetActivity.class));
 		}else{
 			startActivity(new Intent(StartActivity.this, MainActivity.class));
 		}

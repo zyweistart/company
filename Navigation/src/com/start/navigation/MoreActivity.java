@@ -1,12 +1,20 @@
 package com.start.navigation;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
+import com.start.core.Constant;
 import com.start.core.CoreActivity;
+import com.start.model.UIRunnable;
 
 /**
  * 设置
@@ -17,8 +25,8 @@ import com.start.core.CoreActivity;
 public class MoreActivity extends CoreActivity implements OnClickListener {
 
 	
-	private Button btnLogin;
-	private Button btnLogout;
+	private LinearLayout llLogin;
+	private LinearLayout llLogout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,39 +34,90 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 		setContentView(R.layout.activity_more);
 		setCurrentActivityTitle(R.string.activity_title__more);
 		
-		btnLogin=(Button)findViewById(R.id.more_btn_login);
-		btnLogout=(Button)findViewById(R.id.more_btn_logout);
+		llLogin=(LinearLayout)findViewById(R.id.more_login);
+		llLogout=(LinearLayout)findViewById(R.id.more_logout);
+		
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if(getAppContext().isLogin()){
-			btnLogin.setVisibility(View.GONE);
-			btnLogout.setVisibility(View.VISIBLE);
+			llLogin.setVisibility(View.GONE);
+			llLogout.setVisibility(View.VISIBLE);
 		}else{
-			btnLogin.setVisibility(View.VISIBLE);
-			btnLogout.setVisibility(View.GONE);
+			llLogin.setVisibility(View.VISIBLE);
+			llLogout.setVisibility(View.GONE);
 		}
 	}
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.more_btn_login) {
+		if (v.getId() == R.id.more_login) {
 			//用户登录
 			startActivity(new Intent(this,LoginActivity.class));
-		} else if(v.getId() == R.id.more_btn_logout){
+		} else if (v.getId() == R.id.more_logout) {
 			//用户退出
-			
-		} else if (v.getId() == R.id.more_frame_friends_manager) {
+		} else if (v.getId() == R.id.more_friend_relation_manager) {
 			//好友管理
 			startActivity(new Intent(this,FriendRelationListActivity.class));
-		} else if (v.getId() == R.id.more_frame_map_manager) {
+		} else if (v.getId() == R.id.more_data_file_manager) {
 			//地图管理
 			startActivity(new Intent(this,MapDataListActivity.class));
-		} else if (v.getId() == R.id.more_frame_version_check) {
+		} else if (v.getId() == R.id.more_new_version_check) {
 			//版本检测
-			makeTextShort(R.string.msg_last_version);
+			Map<String,String> requestParams=new HashMap<String,String>();
+			requestParams.put("type","6");
+			requestParams.put("termtype","7");
+			Map<String,String> headerParams=new HashMap<String,String>();
+			headerParams.put("sign","");
+			getHttpService().exeNetRequest(Constant.ServerAPI.nVersionCheck,requestParams,headerParams,new UIRunnable() {
+				
+				@Override
+				public void run() {
+					Map<String,String> data=getContent().get("versioninfo");
+					final Integer maxVersion=Integer.parseInt(data.get("maxverno"));
+					final Integer minVersion=Integer.parseInt(data.get("minverno"));
+					final String url=data.get("url");
+					final int currentVersionCode=getAppContext().getSharedPreferencesUtils().getInteger(Constant.SharedPreferences.SP_CURRENTVERSIONCODE,0);
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							if(minVersion>currentVersionCode){
+								new AlertDialog.Builder(MoreActivity.this)
+								.setMessage(R.string.msg_have_new_version_1)
+								.setCancelable(false)
+								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+										startActivity(fIntent);
+										finish();
+									}
+								}).show();
+							}else if(maxVersion>currentVersionCode){
+								new AlertDialog.Builder(MoreActivity.this)
+								.setIcon(android.R.drawable.ic_dialog_info)
+								.setMessage(R.string.msg_have_new_version_2)
+								.setPositiveButton("立即升级", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+//										new DownloadAppTask().execute(url);
+									}
+								}).setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+										dialog.dismiss();
+									}
+								}).show();
+							}else{
+								makeTextLong(R.string.msg_last_version);
+							}
+						}
+						
+					});
+				}
+			});
+			
+			
 		}
 	}
 

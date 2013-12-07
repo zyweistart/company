@@ -62,6 +62,7 @@ public class CommonFn {
 		setIcon(android.R.drawable.ic_dialog_info).
 		setTitle("提示！").
 		setMessage("当前无法连接到网络，是否立即进行设置？").
+		setCancelable(false).
 		setPositiveButton("取消", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

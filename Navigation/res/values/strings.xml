@@ -20,6 +20,8 @@
     <string name="msg_location_unavailable">当前位置不可用</string>
     <string name="msg_exit_navigation">退出导航</string>
     <string name="msg_not_login">还没有登录请先登录</string>
+    <string name="msg_have_new_version_1">您使用的版本过低，请立即升级！否则可能无法正常使用。</string>
+    <string name="msg_have_new_version_2">检测到新版本，是否升级？</string>
     <string name="msg_last_version">当前版本已经是最新</string>
     <string name="msg_network_connecterror">网络连接不可用，请检查网络设置</string>
     <string name="msg_error_please_try_again">糟糕，好像出错了，抱歉请稍后重试下吧</string>

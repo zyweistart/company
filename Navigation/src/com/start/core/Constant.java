@@ -74,7 +74,7 @@ public final class Constant {
 		/**
 		 * 检测版本更新
 		 */
-		public static final String nVersionCheck="";
+		public static final String nVersionCheck="versioninfoGet";
 	}
 	
 	public final class SharedPreferences{
@@ -82,6 +82,8 @@ public final class Constant {
 		 * 当前使用的数据文件编号
 		 */
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
+		
+		public static final String SP_CURRENTVERSIONCODE="SP_CURRENTVERSIONCODE";
 		
 	}
 	
