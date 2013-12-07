@@ -101,13 +101,13 @@
 	    android:paddingRight="5.0dip">
 	    
         <CheckBox 
+            android:id="@+id/login_ck_autologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             android:background="@null"
             android:button="@null"
-            android:checked="true"
             android:drawableLeft="@drawable/checkbox_bg"
             android:textColor="#878883"
 		    android:textSize="15.0dip"

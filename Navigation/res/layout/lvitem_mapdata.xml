@@ -4,15 +4,25 @@
 	android:layout_width="match_parent" 
 	android:layout_height="wrap_content"
 	android:padding="5.0dip">
-	
-    <TextView
-        android:id="@+id/lvitem_mapdata_name"
-        android:layout_width="wrap_content"
+	<LinearLayout 
+	    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
-        android:textColor="@color/lvitem_textcolor"
-        android:textSize="@dimen/lvitem_textsize1"/>
+        android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/lvitem_mapdata_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#0a7771"
+	        android:textSize="@dimen/lvitem_textsize1"/>
+	    <TextView
+	        android:id="@+id/lvitem_mapdata_description"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10.0dip"
+	        android:textSize="13.0dip"/>
+	</LinearLayout>
     
     <LinearLayout 
         android:layout_width="wrap_content"

@@ -58,6 +58,9 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			startActivity(new Intent(this,LoginActivity.class));
 		} else if (v.getId() == R.id.more_logout) {
 			//用户退出
+			getAppContext().setUserInfo(null);
+			llLogin.setVisibility(View.VISIBLE);
+			llLogout.setVisibility(View.GONE);
 		} else if (v.getId() == R.id.more_friend_relation_manager) {
 			//好友管理
 			startActivity(new Intent(this,FriendRelationListActivity.class));
@@ -92,6 +95,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 									public void onClick(DialogInterface dialog, int whichButton) {
 										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
 										startActivity(fIntent);
+										setResult(Constant.ActivityResultCode.EXITAPP);
 										finish();
 									}
 								}).show();
@@ -117,6 +121,21 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 				}
 			});
 			
+		}else if(v.getId()==R.id.more_btn_exit_app){
+			
+			new AlertDialog.Builder(MoreActivity.this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setMessage(R.string.msg_exit_app)
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					setResult(Constant.ActivityResultCode.EXITAPP);
+					finish();
+				}
+			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					dialog.dismiss();
+				}
+			}).show();
 			
 		}
 	}

@@ -97,6 +97,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				convertView = getLayoutInflater().inflate(R.layout.lvitem_mapdata, null);
 				holder = new MapDataViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.lvitem_mapdata_name);
+				holder.description = (TextView) convertView.findViewById(R.id.lvitem_mapdata_description);
 				holder.download = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_download);
 				holder.use = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_use);
 				holder.detail = (ImageButton) convertView.findViewById(R.id.lvitem_mapdata_btn_detail);
@@ -105,6 +106,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
 			holder.fileno=data.get(FILENO);
 			holder.name.setText("浙江省人民医院");
+			holder.description.setText("数据包大小：13MB");
 			File dataFile=Utils.getFile(MapDataListActivity.this, holder.fileno);
 			if(dataFile.exists()){
 				holder.download.setVisibility(View.GONE);
@@ -122,6 +124,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		public class MapDataViewHolder {
 			String fileno;
 			TextView name;
+			TextView description;
 			ImageButton download;
 			ImageButton use;
 			ImageButton detail;

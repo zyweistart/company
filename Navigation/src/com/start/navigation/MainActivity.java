@@ -201,6 +201,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				}
 			}
 		}
+		if(resultCode==Constant.ActivityResultCode.EXITAPP){
+			finish();
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -562,7 +565,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			public void onClick(View v) {
 
 				Intent intent = new Intent(MainActivity.this,MoreActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent,0);
 
 			}
 		});

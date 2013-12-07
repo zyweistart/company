@@ -35,6 +35,7 @@
                android:textSize="20.0dip"
                android:text="登录" />
        </LinearLayout>
+       
        <LinearLayout
            android:id="@+id/more_logout"
            android:layout_width="match_parent"
@@ -145,5 +146,16 @@
        </LinearLayout>
              
    </LinearLayout>
+   
+	<Button
+	    android:id="@+id/more_btn_exit_app"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/bg2_selector"
+	    android:textColor="@color/white"
+	    android:textSize="20.0dip"
+	    android:layout_margin="10.0dip"
+	    android:onClick="onClick"
+	    android:text="退出应用"/>
 	
 </LinearLayout>

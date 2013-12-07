@@ -77,6 +77,15 @@ public final class Constant {
 		public static final String nVersionCheck="versioninfoGet";
 	}
 	
+	/**
+	 * Activity返回代码
+	 * @author start
+	 *
+	 */
+	public final class ActivityResultCode{
+		public static final int EXITAPP=9991;
+	}
+	
 	public final class SharedPreferences{
 		/**
 		 * 当前使用的数据文件编号
@@ -84,6 +93,10 @@ public final class Constant {
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
 		
 		public static final String SP_CURRENTVERSIONCODE="SP_CURRENTVERSIONCODE";
+		
+		public static final String LOGIN_ACCOUNT="LOGIN_ACCOUNT";
+		public static final String LOGIN_PASSWORD="LOGIN_PASSWORD";
+		public static final String LOGIN_AUTOLOGIN="LOGIN_AUTOLOGIN";
 		
 	}
 	
