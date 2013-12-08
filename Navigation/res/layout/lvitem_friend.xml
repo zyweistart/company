@@ -41,7 +41,7 @@
             android:id="@+id/lvitem_friend_authorize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_location_selector"
+            android:background="@drawable/bg_authorize_selector"
             android:contentDescription="@string/empty"
             android:visibility="gone"/>
         

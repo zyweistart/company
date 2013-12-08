@@ -108,7 +108,7 @@
 	                 android:gravity="center"
 	                 android:onClick="onClick"
 	                 android:text="房间"
-	                 android:textSize="14sp" />
+	                 android:textSize="14sp"/>
 	
 	             <TextView
 	                 android:id="@+id/module_main_frame_map_query_content_tab_drinking_water"
@@ -121,7 +121,7 @@
 	                 android:gravity="center"
 	                 android:onClick="onClick"
 	                 android:text="开水间"
-	                 android:textSize="14sp" />
+	                 android:textSize="14sp"/>
 	         </LinearLayout>
 	
 	         <ListView

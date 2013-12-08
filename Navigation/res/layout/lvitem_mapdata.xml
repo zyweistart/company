@@ -46,7 +46,7 @@
             android:layout_height="40.0dip"
             android:onClick="onClick"
             android:visibility="gone"
-            android:background="@drawable/bg_relieve_selector"
+            android:background="@drawable/bg_use_selector"
             android:contentDescription="@string/empty"/>
         
         <ImageButton
