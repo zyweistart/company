@@ -103,7 +103,8 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 		}else if(v.getId()==R.id.login_btn_register){
 			startActivity(new Intent(this,RegisterActivity.class));
 		}else if(v.getId()==R.id.login_btn_forgetpwd){
-			startActivity(new Intent(this,ForgetPwdActivity.class));
+//			startActivity(new Intent(this,ForgetPwdActivity.class));
+			makeTextLong("暂无该功能请联系管理员");
 		}
 	}
 

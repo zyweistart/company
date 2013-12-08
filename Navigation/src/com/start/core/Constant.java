@@ -38,7 +38,7 @@ public final class Constant {
 		/**
 		 * 注册
 		 */
-		public static final String nRegister="";
+		public static final String nRegister="v4Signup";
 		/**
 		 * 忘记密码
 		 */

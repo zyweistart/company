@@ -98,8 +98,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 				friendRelationData.getOnLoadDataListener().LoadData(LoadMode.INIT);
 			}else if(requestCode==REQUEST_CODE_SET_REFRESH){
 				if(resultCode==RESULT_CODE_SET_REFRESH){
-					makeTextLong("已添加新成员刷新");
-//					friendRelationData.getPulllistview().clickRefresh();
+					friendRelationData.getPulllistview().clickRefresh();
 				}
 			}
 		}

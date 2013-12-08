@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import com.start.core.Constant;
 import com.start.core.CoreActivity;
 import com.start.model.FriendHistory;
 import com.start.model.UIRunnable;
-import com.start.utils.CommonFn;
 
 /**
  * 好友历史列表
@@ -101,11 +101,12 @@ public class FriendHistoryListActivity extends CoreActivity {
 					public void onClick(View v) {
 						FriendHistoryViewHolder vh=(FriendHistoryViewHolder)v.getTag();
 						if(vh!=null){
-							CommonFn.alertsDialog(FriendHistoryListActivity.this, "确定要对该好友开放自己的位置信息吗?", new DialogInterface.OnClickListener(){
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
+							new AlertDialog.Builder(FriendHistoryListActivity.this)
+							.setIcon(android.R.drawable.ic_dialog_info)
+							.setMessage("确定要对该好友开放自己的位置信息吗?")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+									
 									Map<String,String> requestParams=new HashMap<String,String>();
 									Map<String,String> headerParams=new HashMap<String,String>();
 									headerParams.put("sign", "");
@@ -113,12 +114,17 @@ public class FriendHistoryListActivity extends CoreActivity {
 										
 										@Override
 										public void run() {
+											
 											makeTextLong("放开位置成功");
 										}
 										
 									});
+									
 								}
-								
+							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+									dialog.dismiss();
+								}
 							}).show();
 							
 						}

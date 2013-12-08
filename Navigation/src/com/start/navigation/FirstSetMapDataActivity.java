@@ -21,6 +21,7 @@ public class FirstSetMapDataActivity extends CoreActivity implements OnClickList
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first_set_map_data);
+		setCurrentActivityTitle("初始设置");
 	}
 
 	@Override

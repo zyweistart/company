@@ -2,6 +2,8 @@ package com.start.service.adapter;
 
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -41,11 +43,24 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 					public void onClick(View v) {
 						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
 						if(vh!=null){
-//							Map<String,String> data=vh.data;
-//							String mapId=data.get("mapId");
-//							String latitude=data.get("latitude");
-//							String longitude=data.get("longitude");
-							mActivity.location("0101","0.0007071","0.0012444");
+							
+							new AlertDialog.Builder(mActivity)
+							.setIcon(android.R.drawable.ic_dialog_info)
+							.setMessage("确定导航到当前好友的位置点吗?")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+//									Map<String,String> data=vh.data;
+//									String mapId=data.get("mapId");
+//									String latitude=data.get("latitude");
+//									String longitude=data.get("longitude");
+									mActivity.location("0101","0.0007071","0.0012444");
+								}
+							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+									dialog.dismiss();
+								}
+							}).show();
+							
 						}
 					}
 					

@@ -63,6 +63,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 							
 							@Override
 							public void run() {
+								setResult(FriendRelationListActivity.RESULT_CODE_SET_REFRESH);
 								makeTextLong("开放好友位置成功");
 								mFriendFelationSetEtContent.setText(getString(R.string.empty));
 								String myId=getAppContext().getMyID();
@@ -83,6 +84,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 											new String[]{myId,friendId,fileno});
 								}
 							}
+							
 						});
 						
 					}

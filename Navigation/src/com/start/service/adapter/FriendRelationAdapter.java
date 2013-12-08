@@ -2,6 +2,8 @@ package com.start.service.adapter;
 
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -41,7 +43,21 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 				public void onClick(View v) {
 					FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
 					if(vh!=null){
-						mActivity.makeTextLong("解除关系");
+						
+						new AlertDialog.Builder(mActivity)
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setMessage("解除关系后，好友将无法定位到你的位置")
+						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								mActivity.makeTextLong("解除关系");
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								dialog.dismiss();
+							}
+						}).show();
+						
+						
 					}
 				}
 				

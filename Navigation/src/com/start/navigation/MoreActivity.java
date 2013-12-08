@@ -58,9 +58,27 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			startActivity(new Intent(this,LoginActivity.class));
 		} else if (v.getId() == R.id.more_logout) {
 			//用户退出
-			getAppContext().setUserInfo(null);
-			llLogin.setVisibility(View.VISIBLE);
-			llLogout.setVisibility(View.GONE);
+			new AlertDialog.Builder(MoreActivity.this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setMessage("确定退出登录吗？")
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					Boolean isChecked=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
+					if(isChecked){
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
+						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
+						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
+					}
+					getAppContext().setUserInfo(null);
+					llLogin.setVisibility(View.VISIBLE);
+					llLogout.setVisibility(View.GONE);
+				}
+			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					dialog.dismiss();
+				}
+			}).show();
+			
 		} else if (v.getId() == R.id.more_friend_relation_manager) {
 			//好友管理
 			startActivity(new Intent(this,FriendRelationListActivity.class));

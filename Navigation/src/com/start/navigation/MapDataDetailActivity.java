@@ -50,25 +50,49 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.activity_map_data_download){
-			if(NetConnectManager.isMobilenetwork(this)){
-				new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setMessage(R.string.msg_use_mobile_data)
-				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						dialog.dismiss();
-					}
-				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
+			
+			new AlertDialog.Builder(MapDataDetailActivity.this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setMessage("确定下载当前数据包吗？")
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					if(NetConnectManager.isMobilenetwork(MapDataDetailActivity.this)){
+						new AlertDialog.Builder(MapDataDetailActivity.this)
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setMessage(R.string.msg_use_mobile_data)
+						.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								dialog.dismiss();
+							}
+						}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								new DownloadTask(MapDataDetailActivity.this,fileno).execute();
+							}
+						}).show();
+					}else{
 						new DownloadTask(MapDataDetailActivity.this,fileno).execute();
 					}
-				}).show();
-			}else{
-				new DownloadTask(MapDataDetailActivity.this,fileno).execute();
-			}
+				}
+			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					dialog.dismiss();
+				}
+			}).show();
 		}else if(v.getId()==R.id.activity_map_data_use){
-			getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, fileno);
-			makeTextLong(R.string.msg_switching_datafile);
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setMessage("确定切换当前数据包为主数据吗？")
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					//使用当前数据
+					getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, fileno);
+					makeTextLong(R.string.msg_switching_datafile);
+				}
+			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					dialog.dismiss();
+				}
+			}).show();
 		}
 	}
 

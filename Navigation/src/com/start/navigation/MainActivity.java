@@ -197,7 +197,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		if(requestCode==REQUEST_CODE_REFRESH_FRIEND_LOCATION){
 			if(mCurSel==3){
 				if(appContext.isLogin()){
-					friendLocationPullListData.getOnLoadDataListener().LoadData(LoadMode.INIT);
+					friendLocationPullListData.getPulllistview().clickRefresh();
 				}
 			}
 		}
@@ -216,9 +216,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			dialog.findViewById(R.id.direction).setTag(poi);
 			dialog.findViewById(R.id.poiName).setTag(poi);
 //			if (mPOIMarker != null) {
-				dialog.getWindow().getAttributes().y = -50;
+//				dialog.getWindow().getAttributes().y = -50;
 //			} else {
-//				dialog.getWindow().getAttributes().y = 0;
+				dialog.getWindow().getAttributes().y = 0;
 //			}
 			return;
 		} else {
@@ -376,6 +376,8 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 	public void onGetResult(PathSearchResult result) {
 		mPoiMarkers=null;
 		if (result.getType() == PathSearchResult.Type.IN_BUILDING) {
+			IndoorEndPoint ep=(IndoorEndPoint)result.getEndPoint();
+			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(ep.getMapId()));
 			setMapFile();
 		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
 			// NavRoute route = result.indoorRouteStart;
