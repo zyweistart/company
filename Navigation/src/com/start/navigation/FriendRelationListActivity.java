@@ -41,7 +41,6 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 		setCurrentActivityTitle(R.string.activity_title_friend_relation_list);
 		
 		mModuleMainHeaderContentAdd = (Button) findViewById(R.id.module_main_header_content_click);
-		mModuleMainHeaderContentAdd.setText("添加");
 		mModuleMainHeaderContentAdd.setVisibility(View.VISIBLE);
 		
 		

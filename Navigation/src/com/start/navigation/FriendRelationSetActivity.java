@@ -35,7 +35,6 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 		setCurrentActivityTitle(R.string.activity_title_friend_relation_set);
 		
 		mModuleMainHeaderContentAdd = (Button) findViewById(R.id.module_main_header_content_click);
-		mModuleMainHeaderContentAdd.setText("添加历史");
 		mModuleMainHeaderContentAdd.setVisibility(View.VISIBLE);
 		
 		mFriendFelationSetEtContent=(EditText)findViewById(R.id.friend_relation_set_et_content);

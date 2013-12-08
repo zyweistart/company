@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:background="@drawable/bg1"
+        android:background="@drawable/bg1_selector"
 	    android:layout_marginTop="10.0dip"
 	    android:layout_marginLeft="15.0dip"
 	    android:layout_marginRight="15.0dip"

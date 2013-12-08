@@ -28,7 +28,13 @@
   	        android:id="@+id/module_main_header_content_click"
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
+  	        android:background="@drawable/bg4_selector"
+  	        android:textColor="@color/white"
+  	        android:padding="0dip"
+  	        android:layout_margin="2.0dip"
   	        android:onClick="onClick"
+  	        android:textSize="30.0dip"
+  	        android:text="+"
   	        android:visibility="gone"/>
   	</LinearLayout>
 </RelativeLayout>

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5.0dip"
         android:onClick="onClick"
-        android:background="@drawable/bg1"
+        android:background="@drawable/bg1_selector"
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_hospital"/>
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5.0dip"
         android:onClick="onClick"
-        android:background="@drawable/bg1"
+        android:background="@drawable/bg1_selector"
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_doctor"/>
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5.0dip"
         android:onClick="onClick"
-        android:background="@drawable/bg1"
+        android:background="@drawable/bg1_selector"
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:text="@string/frame_introduction_department"/>
