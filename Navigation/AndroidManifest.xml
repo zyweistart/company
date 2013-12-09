@@ -55,8 +55,8 @@
         <activity android:name=".DoctorDetailActivity" android:launchMode="singleTask"/>
         <activity android:name=".MoreActivity"/>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".ForgetPwdActivity"/>
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".ForgetPwdActivity"/>
         <activity android:name=".FriendRelationListActivity"/>
         <activity android:name=".FriendRelationSetActivity"/>
         <activity android:name=".FriendHistoryListActivity"/>

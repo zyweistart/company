@@ -51,7 +51,7 @@ public class PullListViewData {
 	
 	public void start(int pulllistviewId,DataAdapter adapter,final OnItemClickListener itemClick,LoadMode mode){
 		this.adapter=adapter;
-		listview_footer = activity.getLayoutInflater().inflate(R.layout.common_listview_footer, null);
+		listview_footer = activity.getLayoutInflater().inflate(R.layout.widget_pull_to_refresh_footer, null);
 		listview_footer_more = (TextView)listview_footer.findViewById(R.id.listview_foot_more);
 		listview_footer_progress = (ProgressBar)listview_footer.findViewById(R.id.listview_foot_progress);
 		listview_footer.setOnClickListener(new OnClickListener() {
