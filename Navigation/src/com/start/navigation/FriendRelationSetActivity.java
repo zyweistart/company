@@ -51,9 +51,10 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 				makeTextLong("好友ID不能为空");
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
-				Map<String,String> headerParams=new HashMap<String,String>();
-				headerParams.put("sign", "");
-				getHttpService().exeNetRequest(Constant.ServerAPI.nOpenLocation,requestParams,headerParams,new UIRunnable() {
+				requestParams.put("accessid", Constant.ACCESSID);
+				requestParams.put("account", friendId);
+				requestParams.put("flag", "1");
+				getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
 					
 					@Override
 					public void run() {

@@ -164,12 +164,12 @@ public class AppContext extends Application {
 	 */
 	public String getMyID(){
 		if(userInfo!=null){
-			Map<String,String> data=getUserInfoByKey("v4info");
+			Map<String,String> data=getUserInfoByKey("userinfo");
 			if(data!=null){
-				return data.get("phone");
+				return data.get("email");
 			}
 		}
-		return null;
+		return Constant.EMPTYSTR;
 	}
 	
 	private Map<String,Map<String,String>> userInfo;

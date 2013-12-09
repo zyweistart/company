@@ -27,7 +27,8 @@ public class FirstSetMapDataActivity extends CoreActivity implements OnClickList
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.activity_first_set_map_data_btn_set){
-			startActivityForResult(new Intent(this,MapDataListActivity.class), REQUEST_SET_DATA);
+//			startActivityForResult(new Intent(this,MapDataListActivity.class), REQUEST_SET_DATA);
+			startActivityForResult(new Intent(this,FriendRelationListActivity.class), REQUEST_SET_DATA);
 		}
 	}
 

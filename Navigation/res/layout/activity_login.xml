@@ -55,7 +55,7 @@
 			    android:onClick="onClick"
 			    android:padding="5.0dip"
 			    android:textSize="17.0dip"
-			    android:text="18368013123"
+			    android:text="4544242@qq.com"
 			    android:hint="请输入账户"/>
 	    </LinearLayout>
 	    

@@ -70,13 +70,11 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 				makeTextShort("密码不能为空");
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
-				requestParams.put("username", username);
-				requestParams.put("loginsource", "h");
-				requestParams.put("ip", "");
-				requestParams.put("mac", "");
+				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
+				requestParams.put("account", username);
 				Map<String,String> headerParams=new HashMap<String,String>();
 				headerParams.put("sign", MD5.md5(password));
-				getHttpService().exeNetRequest(Constant.ServerAPI.nLogin,requestParams,headerParams,new UIRunnable() {
+				getHttpService().exeNetRequest(Constant.ServerAPI.userLogin,requestParams,headerParams,new UIRunnable() {
 					
 					@Override
 					public void run() {
@@ -91,7 +89,7 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 						}
 						
 						getAppContext().setUserInfo(getContent());
-						Map<String,String> data=getAppContext().getUserInfoByKey("v4info");
+						Map<String,String> data=getAppContext().getUserInfoByKey("userinfo");
 						Constant.ACCESSID=data.get("accessid");
 						Constant.ACCESSKEY=data.get("accesskey");
 						

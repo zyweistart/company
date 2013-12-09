@@ -23,8 +23,8 @@ public final class Constant {
 			"e75cf0bee6850378bdb606e13172018e":
 			"e75cf0bee6850378bdb606e13172018e";
 	public static final String ACCESSKEY_LOCAL=SYSTEMTEST?
-			"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=":
-			"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=";
+			"NDBmOTE2NWZlYTdhZWNlNTE0OTQyYmYxMWNjNGI0NTg=":
+			"NDBmOTE2NWZlYTdhZWNlNTE0OTQyYmYxMWNjNGI0NTg=";
 	
 	public static final int PAGESIZE=8;
 	public static final String EMPTYSTR="";
@@ -42,7 +42,7 @@ public final class Constant {
 		/**
 		 * 登录
 		 */
-		public static final String nLogin="v4Login";
+		public static final String userLogin="userLogin";
 		/**
 		 * 注册
 		 */
@@ -52,6 +52,15 @@ public final class Constant {
 		 */
 		public static final String uacodeGet="uacodeGet";
 		/**
+		 * 我开放位置权限的好友查询
+		 */
+		public static final String nOpenFriendList="ufriendoQuery";
+		/**
+		 * 对好友开放位置权限管理
+		 */
+		public static final String ufriendoDeal="ufriendoDeal";
+		
+		/**
 		 * 忘记密码
 		 */
 		public static final String nForgetPwd="";
@@ -59,10 +68,6 @@ public final class Constant {
 		 * 获取好友位置列表
 		 */
 		public static final String nFriendLocationList="v4recQry";
-		/**
-		 * 获取已开放的好友列表
-		 */
-		public static final String nOpenFriendList="v4recQry";
 		/**
 		 * 对好友开放位置信息
 		 */

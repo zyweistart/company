@@ -15,6 +15,7 @@ import com.start.core.Constant;
 import com.start.core.CoreActivity;
 import com.start.model.UIRunnable;
 import com.start.utils.CommonFn;
+import com.start.utils.MD5;
 
 /**
  * 注册
@@ -46,10 +47,10 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.register_btn_send){
-			String userName=String.valueOf(etUserName.getText());
-			String code=String.valueOf(etCode.getText());
-			String password=String.valueOf(etPassword.getText());
-			String rePassword=String.valueOf(etRePassword.getText());
+			final String userName=String.valueOf(etUserName.getText());
+			final String code=String.valueOf(etCode.getText());
+			final String password=String.valueOf(etPassword.getText());
+			final String rePassword=String.valueOf(etRePassword.getText());
 			if(TextUtils.isEmpty(userName)){
 				makeTextLong("用户名不能为空");
 			}else if(TextUtils.isEmpty(code)){
@@ -62,7 +63,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
 				requestParams.put("email", userName);
-				requestParams.put("pwd", password);
+				requestParams.put("pwd", MD5.md5(password));
 				requestParams.put("authcode", code);
 				requestParams.put("loginflag", "1");
 				Map<String,String> headerParams=new HashMap<String,String>();
@@ -75,7 +76,17 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								
+								CommonFn.alertsDialog(RegisterActivity.this, "注册成功",new DialogInterface.OnClickListener(){
+
+									@Override
+									public void onClick(DialogInterface dialog,int which) {
+										getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, true);
+										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, userName);
+										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, password);
+										finish();
+									}
+									
+								}).show();
 							}
 						});
 					}

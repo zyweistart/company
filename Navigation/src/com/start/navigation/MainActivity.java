@@ -665,12 +665,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 						if(appContext.isLogin()){
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("accessid",Constant.ACCESSID);
+							requestParams.put("orderby","2");
 							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nFriendLocationList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									friendLocationPullListData.getAdapter().notifyDataSetChanged();
 								} 
-							},"reclist","reclist++++");
+							},"friendlist","friendlist");
 						}else{
 							
 							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);

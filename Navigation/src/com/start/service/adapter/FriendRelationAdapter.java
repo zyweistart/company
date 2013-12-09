@@ -1,5 +1,6 @@
 package com.start.service.adapter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import android.app.AlertDialog;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.start.core.Constant;
 import com.start.core.CoreActivity;
+import com.start.model.UIRunnable;
 import com.start.navigation.R;
 import com.start.service.PullListViewData;
 
@@ -41,7 +44,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 				
 				@Override
 				public void onClick(View v) {
-					FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
+					final FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
 					if(vh!=null){
 						
 						new AlertDialog.Builder(mActivity)
@@ -49,7 +52,33 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 						.setMessage("解除关系后，好友将无法定位到你的位置")
 						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int whichButton) {
-								mActivity.makeTextLong("解除关系");
+								
+								Map<String,String> requestParams=new HashMap<String,String>();
+								requestParams.put("accessid", Constant.ACCESSID);
+								requestParams.put("account", vh.data.get("email"));
+								requestParams.put("flag", "2");
+								mActivity.getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
+									
+									@Override
+									public void run() {
+										
+										mActivity.makeTextLong("解除成功，好友将无法定位到你的位置!");
+										
+										mActivity.runOnUiThread(new Runnable() {
+											
+											@Override
+											public void run() {
+												
+												mPullListViewData.getPulllistview().clickRefresh();
+												
+											}
+											
+										});
+										
+									}
+									
+								});
+								
 							}
 						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int whichButton) {
@@ -65,7 +94,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 			convertView.setTag(holder);
 		}
 		holder.data=mPullListViewData.getDataItemList().get(position);
-		holder.name.setText("好友:"+holder.data.get("oppno"));
+		holder.name.setText(holder.data.get("email"));
 		return convertView;
 	}
 	

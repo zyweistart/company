@@ -64,8 +64,6 @@ public class FriendHistoryListActivity extends CoreActivity {
 		
 	}
 	
-	
-	
 	public class FriendHistoryAdapter extends  BaseAdapter{
 		
 		@Override
@@ -99,7 +97,7 @@ public class FriendHistoryListActivity extends CoreActivity {
 					
 					@Override
 					public void onClick(View v) {
-						FriendHistoryViewHolder vh=(FriendHistoryViewHolder)v.getTag();
+						final FriendHistoryViewHolder vh=(FriendHistoryViewHolder)v.getTag();
 						if(vh!=null){
 							new AlertDialog.Builder(FriendHistoryListActivity.this)
 							.setIcon(android.R.drawable.ic_dialog_info)
@@ -108,14 +106,16 @@ public class FriendHistoryListActivity extends CoreActivity {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									
 									Map<String,String> requestParams=new HashMap<String,String>();
-									Map<String,String> headerParams=new HashMap<String,String>();
-									headerParams.put("sign", "");
-									getHttpService().exeNetRequest(Constant.ServerAPI.nOpenLocation,requestParams,headerParams,new UIRunnable() {
+									requestParams.put("accessid", Constant.ACCESSID);
+									requestParams.put("account", vh.account);
+									requestParams.put("flag", "1");
+									getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
 										
 										@Override
 										public void run() {
 											
-											makeTextLong("放开位置成功");
+											makeTextLong("开放好友位置成功");
+											
 										}
 										
 									});
@@ -135,11 +135,13 @@ public class FriendHistoryListActivity extends CoreActivity {
 				convertView.setTag(holder);
 			}
 			FriendHistory fh=mDataItemList.get(position);
+			holder.account=fh.getFriendId();
 			holder.name.setText(fh.getFriendId());
 			return convertView;
 		}
 		
 		public class FriendHistoryViewHolder {
+			String account;
 			TextView name;
 			ImageButton btnAuthorize;
 		}
