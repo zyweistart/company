@@ -48,7 +48,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 		} else if(v.getId()==R.id.friend_relation_set_btn_add){
 			final String friendId=String.valueOf(mFriendFelationSetEtContent.getText());
 			if(TextUtils.isEmpty(friendId)){
-				makeTextLong("好友ID不能为空");
+				makeTextLong(R.string.msg_friendid_not_empty);
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid", Constant.ACCESSID);
@@ -64,7 +64,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 							@Override
 							public void run() {
 								setResult(FriendRelationListActivity.RESULT_CODE_SET_REFRESH);
-								makeTextLong("开放好友位置成功");
+								makeTextLong(R.string.msg_open_mylocation_success);
 								mFriendFelationSetEtContent.setText(getString(R.string.empty));
 								String myId=getAppContext().getMyID();
 								String fileno=getAppContext().getCurrentDataNo();

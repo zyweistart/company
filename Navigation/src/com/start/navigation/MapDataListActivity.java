@@ -141,8 +141,8 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		if(v.getId()==R.id.lvitem_mapdata_btn_download){
 			new AlertDialog.Builder(MapDataListActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage("确定下载当前数据包吗？")
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setMessage(R.string.msg_use_mobile_data)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 //					if(NetConnectManager.isMobilenetwork(MapDataListActivity.this)){
 //						new AlertDialog.Builder(MapDataListActivity.this)
@@ -163,7 +163,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 					new DecompressTask(MapDataListActivity.this,"4544242@qq.com").execute();
 //					new ImportDataFileTask(MapDataListActivity.this,"4544242@qq.com").execute();
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}
@@ -171,14 +171,14 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
 			new AlertDialog.Builder(MapDataListActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage("确定切换当前数据包为主数据吗？")
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setMessage(R.string.msg_sure_switch_current_data)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					//使用当前数据
 					getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
 					makeTextLong(R.string.msg_switching_datafile);
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}

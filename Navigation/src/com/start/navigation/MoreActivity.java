@@ -60,8 +60,8 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			//用户退出
 			new AlertDialog.Builder(MoreActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage("确定退出登录吗？")
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setMessage(R.string.msg_you_are_sure_logout)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					Boolean isChecked=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
 					if(isChecked){
@@ -73,7 +73,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 					llLogin.setVisibility(View.VISIBLE);
 					llLogout.setVisibility(View.GONE);
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}
@@ -109,7 +109,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 								new AlertDialog.Builder(MoreActivity.this)
 								.setMessage(R.string.msg_have_new_version_1)
 								.setCancelable(false)
-								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+								.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog, int whichButton) {
 										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
 										startActivity(fIntent);
@@ -121,11 +121,11 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 								new AlertDialog.Builder(MoreActivity.this)
 								.setIcon(android.R.drawable.ic_dialog_info)
 								.setMessage(R.string.msg_have_new_version_2)
-								.setPositiveButton("立即升级", new DialogInterface.OnClickListener() {
+								.setPositiveButton(R.string.msg_upgrade_now, new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog, int whichButton) {
 //										new DownloadAppTask().execute(url);
 									}
-								}).setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+								}).setNegativeButton(R.string.msg_later, new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog, int whichButton) {
 										dialog.dismiss();
 									}
@@ -144,12 +144,12 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			new AlertDialog.Builder(MoreActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setMessage(R.string.msg_exit_app)
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					setResult(Constant.ActivityResultCode.EXITAPP);
 					finish();
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}

@@ -53,8 +53,8 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 			
 			new AlertDialog.Builder(MapDataDetailActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage("确定下载当前数据包吗？")
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setMessage(R.string.msg_sure_download_data)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					if(NetConnectManager.isMobilenetwork(MapDataDetailActivity.this)){
 						new AlertDialog.Builder(MapDataDetailActivity.this)
@@ -73,7 +73,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 						new DownloadTask(MapDataDetailActivity.this,fileno).execute();
 					}
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}
@@ -81,14 +81,14 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 		}else if(v.getId()==R.id.activity_map_data_use){
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage("确定切换当前数据包为主数据吗？")
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setMessage(R.string.msg_sure_switch_current_data)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					//使用当前数据
 					getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, fileno);
 					makeTextLong(R.string.msg_switching_datafile);
 				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					dialog.dismiss();
 				}

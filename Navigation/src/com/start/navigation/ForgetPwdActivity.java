@@ -77,7 +77,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.alertsDialog(ForgetPwdActivity.this, "找回密码成功",new DialogInterface.OnClickListener(){
+								CommonFn.alertsDialog(ForgetPwdActivity.this, R.string.msg_forgetpwd_success,new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog,int which) {
@@ -96,7 +96,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 		}else if(v.getId()==R.id.register_btn_send_code){
 			String userName=String.valueOf(etUserName.getText());
 			if(TextUtils.isEmpty(userName)){
-				makeTextLong("用户名不能为空");
+				makeTextLong(R.string.msg_account_not_empty);
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
@@ -112,7 +112,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.alertsDialog(ForgetPwdActivity.this, "验证码已发送，请查看你的邮箱！", new DialogInterface.OnClickListener(){
+								CommonFn.buildDialog(ForgetPwdActivity.this, R.string.msg_send_code_success, new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog, int which) {

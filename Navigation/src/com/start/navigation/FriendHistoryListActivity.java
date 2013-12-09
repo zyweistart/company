@@ -101,8 +101,8 @@ public class FriendHistoryListActivity extends CoreActivity {
 						if(vh!=null){
 							new AlertDialog.Builder(FriendHistoryListActivity.this)
 							.setIcon(android.R.drawable.ic_dialog_info)
-							.setMessage("确定要对该好友开放自己的位置信息吗?")
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							.setMessage(R.string.msg_sure_open_location)
+							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									
 									Map<String,String> requestParams=new HashMap<String,String>();
@@ -114,14 +114,14 @@ public class FriendHistoryListActivity extends CoreActivity {
 										@Override
 										public void run() {
 											
-											makeTextLong("开放好友位置成功");
+											makeTextLong(R.string.msg_open_mylocation_success);
 											
 										}
 										
 									});
 									
 								}
-							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									dialog.dismiss();
 								}

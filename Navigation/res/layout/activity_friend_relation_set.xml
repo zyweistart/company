@@ -15,7 +15,7 @@
 	    android:layout_marginTop="25.0dip"
 	    android:layout_marginLeft="15.0dip"
 	    android:layout_marginRight="15.0dip"
-	    android:hint="请输入好友账户ID"/>
+	    android:hint="@string/msg_hint_friendid"/>
 	
 	<Button 
         android:id="@+id/friend_relation_set_btn_add"
@@ -28,6 +28,6 @@
 	    android:layout_marginRight="15.0dip"
         android:textColor="@color/white"
         android:textSize="22.0dip"
-        android:text="开放位置权限"/>
+        android:text="@string/msg_open_mylocation"/>
 
 </LinearLayout>
