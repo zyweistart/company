@@ -38,13 +38,13 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:padding="5.0dip"
+	        android:gravity="center_vertical"
 	        android:orientation="horizontal">
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-			    android:textSize="17.0dip"
-			    android:textColor="#020202"
-	            android:text="账号"/>
+	        <ImageView 
+	            android:layout_width="25.0dip"
+	            android:layout_height="25.0dip"
+	            android:src="@drawable/ic_more_account"
+	            android:contentDescription="@string/empty"/>
 	        <EditText 
 			    android:id="@+id/login_account_name"
 			    android:layout_width="match_parent"
@@ -68,13 +68,13 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:padding="5.0dip"
+	        android:gravity="center_vertical"
 	        android:orientation="horizontal">
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-			    android:textSize="17.0dip"
-			    android:textColor="#020202"
-	            android:text="密码"/>
+	        <ImageView 
+	            android:layout_width="25.0dip"
+	            android:layout_height="25.0dip"
+	            android:src="@drawable/ic_more_pwd"
+	            android:contentDescription="@string/empty"/>
 	        <EditText 
 			    android:id="@+id/login_account_password"
 			    android:layout_width="match_parent"

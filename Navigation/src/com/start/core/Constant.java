@@ -10,7 +10,7 @@ public final class Constant {
 	 * true:测试环境
 	 * false:正式环境
 	 */
-	public static final boolean SYSTEMTEST=true;
+	public static final boolean SYSTEMTEST=false;
 
 	public static final String RESTURL=SYSTEMTEST?
 			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
@@ -18,11 +18,17 @@ public final class Constant {
 	
 	public static String ACCESSID="";
 	public static String ACCESSKEY="";
-	public static String ACCESSID_LOCAL="e75cf0bee6850378bdb606e13172018e";
-	public static String ACCESSKEY_LOCAL="aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=";
+	
+	public static final String ACCESSID_LOCAL=SYSTEMTEST?
+			"e75cf0bee6850378bdb606e13172018e":
+			"e75cf0bee6850378bdb606e13172018e";
+	public static final String ACCESSKEY_LOCAL=SYSTEMTEST?
+			"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=":
+			"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=";
+	
+	public static final int PAGESIZE=8;
 	public static final String EMPTYSTR="";
 	public static final String ENCODE="UTF-8";
-	public static final int PAGESIZE=8;
 	
 	public static final String DATADIRFILE="/navigation/data/";//数据主目录
 	public static final String TMPDIRFILE="/navigation/tmp/";//临时目录
@@ -40,7 +46,7 @@ public final class Constant {
 		/**
 		 * 注册
 		 */
-		public static final String nRegister="v4Signup";
+		public static final String userReg="userReg";
 		/**
 		 * 获取验证码
 		 */

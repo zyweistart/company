@@ -60,13 +60,14 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 				makeTextLong("两次密码输入不一致");
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
-				requestParams.put("signupsource","h");
-				requestParams.put("ip", "");
-				requestParams.put("mac", "");
+				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
+				requestParams.put("email", userName);
+				requestParams.put("pwd", password);
+				requestParams.put("authcode", code);
 				requestParams.put("loginflag", "1");
 				Map<String,String> headerParams=new HashMap<String,String>();
-				headerParams.put("sign", "");
-				getHttpService().exeNetRequest(Constant.ServerAPI.nRegister,requestParams,headerParams,new UIRunnable() {
+				headerParams.put("sign", Constant.ACCESSKEY_LOCAL);
+				getHttpService().exeNetRequest(Constant.ServerAPI.userReg,requestParams,headerParams,new UIRunnable() {
 					
 					@Override
 					public void run() {
