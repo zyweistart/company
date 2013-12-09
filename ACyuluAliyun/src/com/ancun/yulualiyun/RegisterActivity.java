@@ -211,7 +211,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 			setSubmitBtnAble(false);
 			btnRegisterNextStep.setText("提交验证码");
 
-			getVerifityCode();
+//			getVerifityCode();
 			break;
 		case STATUS_PASSWORD_MODULE:
 			linearLayoutMobileNumModule.setVisibility(View.GONE);
@@ -264,7 +264,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 					}else if(!((CheckBox)findViewById(R.id.appr_checkbox_readProtocol)).isChecked()){
 						makeTextShort("请先阅读并同意《安存语录服务条款》");
 					}else{
-						setCurrRegisterView(nextStatusModule);
+						getVerifityCode();
 					}
 					break;
 				case STATUS_CODE_MODULE:
@@ -421,24 +421,33 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 					dialog.dismiss();
 					Map<String,String> infoHead=mapXML.get(Constant.RequestXmLConstant.INFO);
 					if(infoHead.get(Constant.RequestXmLConstant.CODE).equals(Constant.RequestXmLConstant.SUCCESSCODE)){
-						
-					}else if(infoHead.get(Constant.RequestXmLConstant.CODE).equals("120169")){
-						//号码已存在则暂时不提示
+						if(currentStatusModule==STATUS_NUM_MODULE){
+							runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									setCurrRegisterView(nextStatusModule);
+								}
+								
+							});
+						}
+						while(isCountRun){
+							try{
+								Thread.sleep(1000);
+								sendEmptyMessage(SUCCESS);
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+//					}else if(infoHead.get(Constant.RequestXmLConstant.CODE).equals("120169")){
+//						//号码已存在则暂时不提示
 					}else{
 						//号码已经存在或有误
 						makeTextLong(infoHead.get(Constant.RequestXmLConstant.MSG));
 					}
 				}catch(Exception e){
 					dialog.dismiss();
-					makeTextLong("糟糕，好像出错了，请稍候再试！");
-				}
-				while(isCountRun){
-					try{
-						Thread.sleep(1000);
-						sendEmptyMessage(SUCCESS);
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
+					makeTextLong(getString(R.string.app_error_please_try_again));
 				}
 			};
 		}.start();

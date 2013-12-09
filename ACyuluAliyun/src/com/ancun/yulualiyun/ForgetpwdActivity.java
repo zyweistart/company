@@ -224,7 +224,7 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 
 			btnRegisterNextStep.setText("提交验证码");
 
-			getVerifityCode();
+//			getVerifityCode();
 			break;
 		case STATUS_PASSWORD_MODULE:
 			linearLayoutMobileNumModule.setVisibility(View.GONE);
@@ -274,7 +274,7 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 						makeTextLong("手机号码不能为空");
 						return;
 					} else {
-						setCurrRegisterView(nextStatusModule);
+						getVerifityCode();
 					}
 					break;
 				case STATUS_CODE_MODULE:
@@ -398,9 +398,28 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 					if (infoHead.get(Constant.RequestXmLConstant.CODE).equals(
 							Constant.RequestXmLConstant.SUCCESSCODE)) {
 
+						if(currentStatusModule==STATUS_NUM_MODULE){
+							runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									setCurrRegisterView(nextStatusModule);
+								}
+								
+							});
+						}
+						while (isCountRun) {
+							try {
+								Thread.sleep(1000);
+								sendEmptyMessage(SUCCESS);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
 					} else if (infoHead.get(Constant.RequestXmLConstant.CODE)
 							.equals("120020")) {
 						// 用户不存在
+						makeTextLong("当前号码未开通");
 					} else {
 						// 号码已经存在或有误
 						makeTextLong(infoHead
@@ -408,16 +427,9 @@ public class ForgetpwdActivity extends CoreActivity implements OnClickListener {
 					}
 				} catch (Exception e) {
 					dialog.dismiss();
-					makeTextLong("糟糕，好像出错了，请稍候再试！");
+					makeTextLong(getString(R.string.app_error_please_try_again));
 				}
-				while (isCountRun) {
-					try {
-						Thread.sleep(1000);
-						sendEmptyMessage(SUCCESS);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+				
 			};
 		}.start();
 	}
