@@ -14,10 +14,12 @@ public final class Constant {
 
 	public static final String RESTURL=SYSTEMTEST?
 			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
-			"http://server.ancun.com:3391/rest/RestService";//正式地址
+			"http://account.chinacloudapp.cn:81/http/HttpService";//正式地址
 	
 	public static String ACCESSID="";
 	public static String ACCESSKEY="";
+	public static String ACCESSID_LOCAL="e75cf0bee6850378bdb606e13172018e";
+	public static String ACCESSKEY_LOCAL="aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ=";
 	public static final String EMPTYSTR="";
 	public static final String ENCODE="UTF-8";
 	public static final int PAGESIZE=8;
@@ -39,6 +41,10 @@ public final class Constant {
 		 * 注册
 		 */
 		public static final String nRegister="v4Signup";
+		/**
+		 * 获取验证码
+		 */
+		public static final String uacodeGet="uacodeGet";
 		/**
 		 * 忘记密码
 		 */

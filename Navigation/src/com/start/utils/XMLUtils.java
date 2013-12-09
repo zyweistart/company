@@ -63,10 +63,10 @@ public class XMLUtils {
                    serializer.startTag("","action");  
                    serializer.text(url);  
                    serializer.endTag("","action");
-                //请求时间
-                   serializer.startTag("","reqtime");  
-                   serializer.text(TimeUtils.getSysTimeLong());  
-                   serializer.endTag("","reqtime");
+//                //请求时间
+//                   serializer.startTag("","reqtime");  
+//                   serializer.text(TimeUtils.getSysTimeLong());  
+//                   serializer.endTag("","reqtime");
                 serializer.endTag("","common");
                 
                  //请求的主体内容

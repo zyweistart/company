@@ -41,87 +41,135 @@
 		
 	</LinearLayout>
 	
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="15.0dip"
-	    android:layout_marginLeft="10.0dip"
-	    android:layout_marginRight="10.0dip"
-	    android:padding="5.0dip"
-	    android:background="@drawable/more_frame"
-	    android:orientation="vertical">
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center_vertical"
-	        android:orientation="horizontal">
-	        <ImageView 
-	            android:layout_width="25.0dip"
-	            android:layout_height="25.0dip"
-	            android:src="@drawable/ic_more_pwd"
-	            android:contentDescription="@string/empty"/>
-	        <EditText 
-			    android:id="@+id/register_et_new_password"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    style="?android:attr/textViewStyle"
-			    android:inputType="textPassword"
-	     		android:background="@null" 
-	     		android:textColor="@null"
-			    android:onClick="onClick"
-			    android:padding="5.0dip"
-			    android:textSize="17.0dip"
-			    android:hint="6-20个英文字母或者数字"/>
-	    </LinearLayout>
-		
-	</LinearLayout>
-	
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="15.0dip"
-	    android:layout_marginLeft="10.0dip"
-	    android:layout_marginRight="10.0dip"
-	    android:padding="5.0dip"
-	    android:background="@drawable/more_frame"
-	    android:orientation="vertical">
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center_vertical"
-	        android:orientation="horizontal">
-	        <ImageView 
-	            android:layout_width="25.0dip"
-	            android:layout_height="25.0dip"
-	            android:src="@drawable/ic_more_pwd"
-	            android:contentDescription="@string/empty"/>
-	        <EditText 
-			    android:id="@+id/register_et_re_new_password"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    style="?android:attr/textViewStyle"
-			    android:inputType="textPassword"
-	     		android:background="@null" 
-	     		android:textColor="@null"
-			    android:onClick="onClick"
-			    android:padding="5.0dip"
-			    android:textSize="17.0dip"
-			    android:hint="6-20个英文字母或者数字"/>
-	    </LinearLayout>
-		
-	</LinearLayout>
-	
 	<Button 
-        android:id="@+id/register_btn_send"
+        android:id="@+id/register_btn_send_code"
         android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="15.0dip"
 	    android:layout_marginLeft="10.0dip"
 	    android:layout_marginRight="10.0dip"
         android:onClick="onClick"
-        android:background="@drawable/bg3_selector"
+        android:background="@drawable/bg4_selector"
         android:textColor="@color/white"
-        android:textSize="22.0dip"
-        android:text="注册"/>
+        android:textSize="18.0dip"
+        android:text="发送验证码"/>
+	
+	<LinearLayout 
+	    android:id="@+id/register_ll_main_framework"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:visibility="gone"
+	    android:layout_marginLeft="10.0dip"
+	    android:layout_marginRight="10.0dip">
+	    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="15.0dip"
+		    android:padding="5.0dip"
+		    android:background="@drawable/more_frame"
+		    android:orientation="vertical">
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		        android:orientation="horizontal">
+		        <ImageView 
+		            android:layout_width="25.0dip"
+		            android:layout_height="25.0dip"
+		            android:src="@drawable/ic_more_code"
+		            android:contentDescription="@string/empty"/>
+		        <EditText 
+				    android:id="@+id/register_et_code"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    style="?android:attr/textViewStyle"
+		     		android:background="@null" 
+		     		android:textColor="@null"
+				    android:onClick="onClick"
+				    android:padding="5.0dip"
+				    android:textSize="17.0dip"
+				    android:hint="请输入验证码"/>
+		    </LinearLayout>
+			
+		</LinearLayout>
+		
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="15.0dip"
+		    android:padding="5.0dip"
+		    android:background="@drawable/more_frame"
+		    android:orientation="vertical">
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		        android:orientation="horizontal">
+		        <ImageView 
+		            android:layout_width="25.0dip"
+		            android:layout_height="25.0dip"
+		            android:src="@drawable/ic_more_pwd"
+		            android:contentDescription="@string/empty"/>
+		        <EditText 
+				    android:id="@+id/register_et_new_password"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    style="?android:attr/textViewStyle"
+				    android:inputType="textPassword"
+		     		android:background="@null" 
+		     		android:textColor="@null"
+				    android:onClick="onClick"
+				    android:padding="5.0dip"
+				    android:textSize="17.0dip"
+				    android:hint="6-20个英文字母或者数字"/>
+		    </LinearLayout>
+			
+		</LinearLayout>
+		
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="15.0dip"
+		    android:padding="5.0dip"
+		    android:background="@drawable/more_frame"
+		    android:orientation="vertical">
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		        android:orientation="horizontal">
+		        <ImageView 
+		            android:layout_width="25.0dip"
+		            android:layout_height="25.0dip"
+		            android:src="@drawable/ic_more_pwd"
+		            android:contentDescription="@string/empty"/>
+		        <EditText 
+				    android:id="@+id/register_et_re_new_password"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    style="?android:attr/textViewStyle"
+				    android:inputType="textPassword"
+		     		android:background="@null" 
+		     		android:textColor="@null"
+				    android:onClick="onClick"
+				    android:padding="5.0dip"
+				    android:textSize="17.0dip"
+				    android:hint="6-20个英文字母或者数字"/>
+		    </LinearLayout>
+			
+		</LinearLayout>
+		
+		<Button 
+	        android:id="@+id/register_btn_send"
+	        android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="15.0dip"
+	        android:onClick="onClick"
+	        android:background="@drawable/bg3_selector"
+	        android:textColor="@color/white"
+	        android:textSize="22.0dip"
+	        android:text="注册"/>
+	</LinearLayout>
 
 </LinearLayout>
