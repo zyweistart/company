@@ -36,7 +36,7 @@
 			    android:onClick="onClick"
 			    android:padding="5.0dip"
 			    android:textSize="17.0dip"
-			    android:hint="请输入账户"/>
+			    android:hint="@string/msg_hint_account"/>
 	    </LinearLayout>
 		
 	</LinearLayout>
@@ -52,7 +52,7 @@
         android:background="@drawable/bg4_selector"
         android:textColor="@color/white"
         android:textSize="18.0dip"
-        android:text="发送验证码"/>
+        android:text="@string/msg_send_code"/>
 	
 	<LinearLayout 
 	    android:id="@+id/register_ll_main_framework"
@@ -89,7 +89,7 @@
 				    android:onClick="onClick"
 				    android:padding="5.0dip"
 				    android:textSize="17.0dip"
-				    android:hint="请输入验证码"/>
+				    android:hint="@string/msg_hint_code"/>
 		    </LinearLayout>
 			
 		</LinearLayout>
@@ -122,7 +122,7 @@
 				    android:onClick="onClick"
 				    android:padding="5.0dip"
 				    android:textSize="17.0dip"
-				    android:hint="6-20个英文字母或者数字"/>
+				    android:hint="@string/msg_hint_password"/>
 		    </LinearLayout>
 			
 		</LinearLayout>
@@ -155,7 +155,7 @@
 				    android:onClick="onClick"
 				    android:padding="5.0dip"
 				    android:textSize="17.0dip"
-				    android:hint="6-20个英文字母或者数字"/>
+				    android:hint="@string/msg_hint_password"/>
 		    </LinearLayout>
 			
 		</LinearLayout>
@@ -169,7 +169,7 @@
 	        android:background="@drawable/bg3_selector"
 	        android:textColor="@color/white"
 	        android:textSize="22.0dip"
-	        android:text="注册"/>
+	        android:text="@string/ok"/>
 	</LinearLayout>
 
 </LinearLayout>

@@ -40,17 +40,17 @@ public final class Constant {
 	
 	public final class ServerAPI{
 		/**
-		 * 登录
+		 * 验证码获取
 		 */
-		public static final String userLogin="userLogin";
+		public static final String uacodeGet="uacodeGet";
 		/**
 		 * 注册
 		 */
 		public static final String userReg="userReg";
 		/**
-		 * 获取验证码
+		 * 登录
 		 */
-		public static final String uacodeGet="uacodeGet";
+		public static final String userLogin="userLogin";
 		/**
 		 * 我开放位置权限的好友查询
 		 */
@@ -76,14 +76,6 @@ public final class Constant {
 		 * 上传位置信息
 		 */
 		public static final String nUploadMyLocation="";
-		/**
-		 * 数据文件获取列表
-		 */
-		public static final String nDataFileList="v4recQry";
-		/**
-		 * 数据文件详细
-		 */
-		public static final String nDataFileDetail="";
 		/**
 		 * 数据文件下载
 		 */

@@ -65,9 +65,9 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 			final String username=String.valueOf(etName.getText());
 			final String password=String.valueOf(etPassword.getText());
 			if(TextUtils.isEmpty(username)){
-				makeTextShort("账号不能为空");
+				makeTextShort(R.string.msg_account_not_empty);
 			}else if(TextUtils.isEmpty(password)){
-				makeTextShort("密码不能为空");
+				makeTextShort(R.string.msg_password_not_empty);
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
@@ -101,8 +101,7 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 		}else if(v.getId()==R.id.login_btn_register){
 			startActivity(new Intent(this,RegisterActivity.class));
 		}else if(v.getId()==R.id.login_btn_forgetpwd){
-//			startActivity(new Intent(this,ForgetPwdActivity.class));
-			makeTextLong("暂无该功能请联系管理员");
+			startActivity(new Intent(this,ForgetPwdActivity.class));
 		}
 	}
 

@@ -21,7 +21,7 @@ import com.start.navigation.MapDataListActivity.MapDataPullListAdapter.MapDataVi
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
-import com.start.service.tasks.ImportDataFileTask;
+import com.start.service.tasks.DecompressTask;
 import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 
@@ -34,7 +34,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 
 	private PullListViewData mapDataPullListData;
 	
-	public static final String FILENO="fileno";
+	public static final String FILENO="email";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +67,13 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 						}else{
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("accessid",Constant.ACCESSID);
-							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nDataFileList,requestParams,null,new UIRunnable(){
+							requestParams.put("orderby","2");
+							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									mapDataPullListData.getAdapter().notifyDataSetChanged();
 								} 
-							},"reclist","reclist"+TAG);
+							},"friendlist","friendlist"+TAG);
 						}
 						
 					}
@@ -159,7 +160,8 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 //					}else{
 //						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
 //					}
-					new ImportDataFileTask(MapDataListActivity.this,"a586054a207abc9fe4fe4945e5c666dc").execute();
+					new DecompressTask(MapDataListActivity.this,"4544242@qq.com").execute();
+//					new ImportDataFileTask(MapDataListActivity.this,"4544242@qq.com").execute();
 				}
 			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {

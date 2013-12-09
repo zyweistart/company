@@ -52,13 +52,13 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 			final String password=String.valueOf(etPassword.getText());
 			final String rePassword=String.valueOf(etRePassword.getText());
 			if(TextUtils.isEmpty(userName)){
-				makeTextLong("用户名不能为空");
+				makeTextLong(R.string.msg_account_not_empty);
 			}else if(TextUtils.isEmpty(code)){
-				makeTextLong("验证码不能为空");
+				makeTextLong(R.string.msg_code_not_empty);
 			}else if(TextUtils.isEmpty(password)){
-				makeTextLong("密码不能为空");
+				makeTextLong(R.string.msg_password_not_empty);
 			}else if(!password.equals(rePassword)){
-				makeTextLong("两次密码输入不一致");
+				makeTextLong(R.string.msg_two_password_not_diff);
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid",Constant.ACCESSID_LOCAL);
@@ -76,7 +76,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.alertsDialog(RegisterActivity.this, "注册成功",new DialogInterface.OnClickListener(){
+								CommonFn.buildDialog(RegisterActivity.this, R.string.msg_register_success,new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog,int which) {
