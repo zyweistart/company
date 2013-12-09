@@ -10,7 +10,7 @@ public final class Constant {
 	 * true:测试环境
 	 * false:正式环境
 	 */
-	public static final boolean SYSTEMTEST=true;
+	public static final boolean SYSTEMTEST=false;
 
 	public static final String RESTURL=SYSTEMTEST?
 			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
