@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.start.navigation.MainActivity;
+import com.start.navigation.HospitalMainActivity;
 import com.start.navigation.R;
 import com.start.service.PullListViewData;
 
 public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 		
-		private MainActivity mActivity;
+		private HospitalMainActivity mActivity;
 		private PullListViewData mPullListViewData;
 	
-		public FriendLocationAdapter(MainActivity activity,PullListViewData pullListViewData) {
+		public FriendLocationAdapter(HospitalMainActivity activity,PullListViewData pullListViewData) {
 			pullListViewData.super();
 			this.mActivity=activity;
 			this.mPullListViewData=pullListViewData;

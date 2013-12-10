@@ -87,10 +87,10 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
  * @author start
  * 
  */
-public class MainActivity extends MapActivity implements OnTouchListener,
+public class HospitalMainActivity extends MapActivity implements OnTouchListener,
 		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
-	private static final String TAG="MainActivity";
+	private static final String TAG="HospitalMainActivity";
 	private static final String BUNDLEDATA_DATA = "data";
 	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
 	
@@ -520,7 +520,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 2) {
-					File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),"process");
+					File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),"process");
 					if(dataFile.exists()){
 						mModuleMainHeaderContentTitle.setText(R.string.frame_process_title);
 						mModuleMainHeaderContentLocation.setVisibility(View.GONE);
@@ -568,7 +568,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		imMore.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
-				Intent intent = new Intent(MainActivity.this,MoreActivity.class);
+				Intent intent = new Intent(HospitalMainActivity.this,MoreActivity.class);
 				startActivityForResult(intent,0);
 
 			}
@@ -681,13 +681,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 							friendLocationPullListData.getPulllistview().onRefreshComplete();
 							
 							if(mCurSel==3){
-								new AlertDialog.Builder(MainActivity.this).
+								new AlertDialog.Builder(HospitalMainActivity.this).
 								setMessage(R.string.msg_not_login).
 								setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 									
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										startActivityForResult(new Intent(MainActivity.this,LoginActivity.class), 
+										startActivityForResult(new Intent(HospitalMainActivity.this,LoginActivity.class), 
 												REQUEST_CODE_REFRESH_FRIEND_LOCATION);
 									}
 									
@@ -725,7 +725,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			ViewCollections vc = new ViewCollections();
 
 			String path = String.format("mapdata/%1$s.map",md.getId());
-			File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),path);
+			File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),path);
 			FileOpenResult openResult = vc.getMapView().setMapFile(dataFile);
 			if (!openResult.isSuccess()) {
 				return;
@@ -982,10 +982,10 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		private ListOverlay listOverlay;
 
 		public ViewCollections() {
-			mapView = new MapView(MainActivity.this);
+			mapView = new MapView(HospitalMainActivity.this);
 			mapView.setBuiltInZoomControls(true);
 			mapView.setClickable(true);
-			mapView.setOnTouchListener(MainActivity.this);
+			mapView.setOnTouchListener(HospitalMainActivity.this);
 
 			listOverlay = new ListOverlay();
 			mapView.getOverlays().add(listOverlay);

@@ -13,6 +13,8 @@
     <string name="logout">注销</string>
     <string name="register">注册</string>
     
+    <string name="msg_navigation_hospital">医院导航</string>
+    <string name="msg_navigation_library">图书馆</string>
     <string name="msg_exit_app">退出应用</string>
     <string name="msg_sure_exit_app">确定要退出该应用吗？</string>
     <string name="msg_exit_navigation">退出导航</string>
@@ -76,6 +78,7 @@
     <string name="msg_tab_restroom">房间</string>
     <string name="msg_tab_drinking_water">开水间</string>
     
+    <string name="activity_title_navigation">项目导航</string>
     <string name="activity_title_first_set_mapdata">初始设置</string>
     <string name="activity_title_hospital_detail">医院介绍</string>
     <string name="activity_title_doctor_list">医生列表</string>

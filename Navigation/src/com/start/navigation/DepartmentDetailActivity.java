@@ -59,8 +59,8 @@ public class DepartmentDetailActivity extends CoreActivity implements OnClickLis
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.module_main_header_content_location){
-			MainActivity.currentLocationDepartmentId=department.getId();
-			startActivity(new Intent(this,MainActivity.class));
+			HospitalMainActivity.currentLocationDepartmentId=department.getId();
+			startActivity(new Intent(this,HospitalMainActivity.class));
 			finish();
 		}
 	}

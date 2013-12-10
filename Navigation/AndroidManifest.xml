@@ -45,9 +45,9 @@
         </activity>
         
         <activity android:name=".NavigationActivity"/>
-        <activity android:name=".FirstSetMapDataActivity"/>
         
-        <activity android:name=".MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".FirstSetMapDataActivity"/>
+        <activity android:name=".HospitalMainActivity" android:launchMode="singleTask"/>
         <activity android:name=".HospitalDetailActivity"/>
         <activity android:name=".DepartmentListActivity" android:launchMode="singleTask"/>
         <activity android:name=".DepartmentDetailActivity" android:launchMode="singleTask"/>
