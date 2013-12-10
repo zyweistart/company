@@ -13,6 +13,8 @@
     <string name="logout">注销</string>
     <string name="register">注册</string>
     
+    <string name="msg_exit_app">退出应用</string>
+    <string name="msg_sure_exit_app">确定要退出该应用吗？</string>
     <string name="msg_exit_navigation">退出导航</string>
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
     <string name="msg_please_wait">请稍候···</string>
@@ -30,7 +32,6 @@
     <string name="msg_first_set_data_tip">目前还没有指定要访问的医院，是否马上去切换使用？</string>
     <string name="msg_data_manager">数据管理</string>
     <string name="msg_not_login">还没有登录请先登录</string>
-    <string name="msg_exit_app">确认退出应用吗？</string>
     <string name="msg_doctor_list">医生列表</string>
     <string name="msg_open_location">开放位置权限</string>
     <string name="msg_switching_datafile_success">数据切换成功</string>

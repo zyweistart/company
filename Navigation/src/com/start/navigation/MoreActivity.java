@@ -140,7 +140,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			
 			new AlertDialog.Builder(MoreActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage(R.string.msg_exit_app)
+			.setMessage(R.string.msg_sure_exit_app)
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					setResult(Constant.ActivityResultCode.EXITAPP);
