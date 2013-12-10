@@ -16,9 +16,6 @@ public final class Constant {
 			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
 			"http://account.chinacloudapp.cn:81/http/HttpService";//正式地址
 	
-	public static String ACCESSID="";
-	public static String ACCESSKEY="";
-	
 	public static final String ACCESSID_LOCAL=SYSTEMTEST?
 			"e75cf0bee6850378bdb606e13172018e":
 			"e75cf0bee6850378bdb606e13172018e";

@@ -69,7 +69,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
 						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
 					}
-					getAppContext().setUserInfo(null);
+					getAppContext().initUserInfo(null);
 					llLogin.setVisibility(View.VISIBLE);
 					llLogout.setVisibility(View.GONE);
 				}

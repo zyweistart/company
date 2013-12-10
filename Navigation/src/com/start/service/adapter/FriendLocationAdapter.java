@@ -46,8 +46,8 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 							
 							new AlertDialog.Builder(mActivity)
 							.setIcon(android.R.drawable.ic_dialog_info)
-							.setMessage("确定导航到当前好友的位置点吗?")
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							.setMessage(R.string.msg_sure_navigation_to_friend_location)
+							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 //									Map<String,String> data=vh.data;
 //									String mapId=data.get("mapId");
@@ -55,7 +55,7 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 //									String longitude=data.get("longitude");
 									mActivity.location("0101","0.0007071","0.0012444");
 								}
-							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									dialog.dismiss();
 								}
@@ -68,7 +68,7 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 				convertView.setTag(holder);
 			}
 			holder.data=mPullListViewData.getDataItemList().get(position);
-			holder.name.setText("好友:"+holder.data.get("oppno"));
+			holder.name.setText(holder.data.get("email"));
 			return convertView;
 		}
 		

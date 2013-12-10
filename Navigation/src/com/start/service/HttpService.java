@@ -50,15 +50,18 @@ public class HttpService {
 				@Override
 				public void run() {
 					try{
-						String requestContent = XMLUtils.builderRequestXml(Url, params);
 						//请求头内容
 						Map<String,String> requestHeader=new HashMap<String,String>();
 						if(headerParams!=null){
 							requestHeader.putAll(headerParams);
 						}
+						if(!requestHeader.containsKey("sign")){
+							params.put("accessid", mAppContext.getAccessID());
+						}
+						String requestContent = XMLUtils.builderRequestXml(Url, params);
 						//签名为特殊处理key为不存在时默认用ACCESSKEY签名为""用MD5否则用传入的值进行签名
 						if(!requestHeader.containsKey("sign")){
-							requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),Constant.ACCESSKEY));
+							requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),mAppContext.getAccessKEY()));
 						}else{
 							requestHeader.put("sign","".equals(requestHeader.get("sign"))?
 									MD5.md5(requestContent):
@@ -70,13 +73,11 @@ public class HttpService {
 							Map<String,String> infoHead=mapXML.get(XMLUtils.RequestXmLConstant.INFO);
 							String code=infoHead.get(XMLUtils.RequestXmLConstant.CODE);
 							if(XMLUtils.RequestXmLConstant.SUCCESSCODE.equals(code)){
-								for(String key:mapXML.keySet()){
-									uiRunnable.setInfo(mapXML.get(key));
-									break;
-								}
 								uiRunnable.setContent(mapXML);
 								uiRunnable.run();
-							}else if("120020".equals(code)||"110036".equals(code)){
+							}else if("110036".equals(code)){
+								//120020:用户不存在
+								//110036:签名不匹配或密码不正确
 								mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
 								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
 								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
@@ -93,6 +94,7 @@ public class HttpService {
 					}finally{
 						if (mProgressDialog != null) {
 							mProgressDialog.dismiss();
+							mProgressDialog=null;
 						}
 					}
 				}}).start();
@@ -181,15 +183,18 @@ public class HttpService {
 						}
 						requestParams.put("currentpage",String.valueOf(currentPage));
 						requestParams.put("pagesize", String.valueOf(Constant.PAGESIZE));
-						String requestContent = XMLUtils.builderRequestXml(Url, requestParams);
 						//请求头内容
 						Map<String,String> requestHeader=new HashMap<String,String>();
 						if(headerParams!=null){
 							requestHeader.putAll(headerParams);
 						}
+						if(!requestParams.containsKey("sign")){
+							requestParams.put("accessid", mAppContext.getAccessID());
+						}
+						String requestContent = XMLUtils.builderRequestXml(Url, requestParams);
 						//签名为特殊处理key为不存在时默认用ACCESSKEY签名为""用MD5否则用传入的值进行签名
 						if(!requestHeader.containsKey("sign")){
-							requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),Constant.ACCESSKEY));
+							requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),mAppContext.getAccessKEY()));
 						}else{
 							requestHeader.put("sign","".equals(requestHeader.get("sign"))?
 									MD5.md5(requestContent):

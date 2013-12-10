@@ -20,7 +20,7 @@
 	    <ImageView 
             android:layout_width="25.0dip"
             android:layout_height="25.0dip"
-            android:src="@drawable/ic_more_account"
+            android:src="@drawable/ic_more_pwd"
             android:contentDescription="@string/empty"/>
         <EditText 
 		    android:id="@+id/modify_et_old_password"

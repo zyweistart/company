@@ -52,6 +52,8 @@
     <string name="msg_send_code_success">验证码已发送，请查看你的邮箱！</string>
     <string name="msg_you_are_sure_logout">确定退出登录吗?</string>
     <string name="msg_friend_manager">好友管理</string>
+    <string name="msg_relieve_friend_relation_success">解除成功，好友将无法定位到你的位置!</string>
+    <string name="msg_sure_navigation_to_friend_location">确定导航到当前好友的位置点吗?</string>
     <string name="msg_sure_open_location">确定要对该好友开放自己的位置信息吗?</string>
     <string name="msg_login_error">用户名或密码有误</string>
     <string name="msg_app_title">就医导航系统</string>
@@ -67,6 +69,11 @@
     <string name="msg_hint_old_password">请输入原密码</string>
     <string name="msg_hint_password">数字或者英文字母</string>
     <string name="msg_hint_friendid">请输入好友账户ID</string>
+    <string name="msg_hint_search_department_doctor">请输入部门或医院ID</string>
+    <string name="msg_tab_department">部门</string>
+    <string name="msg_tab_doctor">医生</string>
+    <string name="msg_tab_restroom">房间</string>
+    <string name="msg_tab_drinking_water">开水间</string>
     
     <string name="activity_title_first_set_mapdata">初始设置</string>
     <string name="activity_title_hospital_detail">医院介绍</string>

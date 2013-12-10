@@ -668,7 +668,6 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 					public void LoadData(LoadMode loadMode) {
 						if(appContext.isLogin()){
 							Map<String,String> requestParams=new HashMap<String,String>();
-							requestParams.put("accessid",Constant.ACCESSID);
 							requestParams.put("orderby","2");
 							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nFriendLocationList,requestParams,null,new UIRunnable(){
 								@Override

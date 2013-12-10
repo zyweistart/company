@@ -88,10 +88,7 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 							getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
 						}
 						
-						getAppContext().setUserInfo(getContent());
-						Map<String,String> data=getAppContext().getUserInfoByKey("userinfo");
-						Constant.ACCESSID=data.get("accessid");
-						Constant.ACCESSKEY=data.get("accesskey");
+						getAppContext().initUserInfo(getContent());
 						
 						finish();
 					}

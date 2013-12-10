@@ -158,6 +158,23 @@ public class AppContext extends Application {
 		return userInfo!=null;
 	}
 	
+	private Map<String,Map<String,String>> userInfo;
+	
+	/**
+	 * 获取当前用户信息
+	 * @return
+	 */
+	public Map<String,String> getUserInfoByKey(String key){
+		if(userInfo!=null){
+			return userInfo.get(key);
+		}
+		return null;
+	}
+	
+	public void initUserInfo(Map<String, Map<String, String>> userInfo) {
+		this.userInfo = userInfo;
+	}
+	
 	/**
 	 * 获取当前登录账户的唯一码
 	 * @return
@@ -172,23 +189,26 @@ public class AppContext extends Application {
 		return Constant.EMPTYSTR;
 	}
 	
-	private Map<String,Map<String,String>> userInfo;
-	
-	/**
-	 * 获取当前用户信息
-	 * @return
-	 */
-	public Map<String,String> getUserInfoByKey(String key){
+	public String getAccessID(){
 		if(userInfo!=null){
-			return userInfo.get(key);
+			Map<String,String> data=getUserInfoByKey("userinfo");
+			if(data!=null){
+				return data.get("accessid");
+			}
 		}
-		return null;
-	}
-	
-	public void setUserInfo(Map<String, Map<String, String>> userInfo) {
-		this.userInfo = userInfo;
+		return Constant.EMPTYSTR;
 	}
 
+	public String getAccessKEY(){
+		if(userInfo!=null){
+			Map<String,String> data=getUserInfoByKey("userinfo");
+			if(data!=null){
+				return data.get("accesskey");
+			}
+		}
+		return Constant.EMPTYSTR;
+	}
+	
 	public MyLocation getMyLocation(){
 		return new MyLocation("0102", new GeoPoint(0.0007388,0.0012458));
 	}

@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:background="@drawable/search_bar_edit_bg"
             android:drawableLeft="@drawable/search_bar_icon_normal"
-            android:hint="请输入部门或医院ID"
+            android:hint="@string/msg_hint_search_department_doctor"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:singleLine="true"
@@ -84,7 +84,7 @@
 	                 android:clickable="true"
 	                 android:gravity="center"
 	                 android:onClick="onClick"
-	                 android:text="部门" />
+	                 android:text="@string/msg_tab_department" />
 	
 	             <TextView
 	                 android:id="@+id/module_main_frame_map_query_content_tab_doctor"
@@ -95,7 +95,7 @@
 	                 android:clickable="true"
 	                 android:gravity="center"
 	                 android:onClick="onClick"
-	                 android:text="医生" />
+	                 android:text="@string/msg_tab_doctor" />
 	
 	             <TextView
 	                 android:id="@+id/module_main_frame_map_query_content_tab_restroom"
@@ -107,7 +107,7 @@
 	                 android:clickable="true"
 	                 android:gravity="center"
 	                 android:onClick="onClick"
-	                 android:text="房间"
+	                 android:text="@string/msg_tab_restroom"
 	                 android:textSize="14sp"/>
 	
 	             <TextView
@@ -120,7 +120,7 @@
 	                 android:clickable="true"
 	                 android:gravity="center"
 	                 android:onClick="onClick"
-	                 android:text="开水间"
+	                 android:text="@string/msg_tab_drinking_water"
 	                 android:textSize="14sp"/>
 	         </LinearLayout>
 	

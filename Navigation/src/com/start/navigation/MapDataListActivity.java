@@ -66,7 +66,6 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 							
 						}else{
 							Map<String,String> requestParams=new HashMap<String,String>();
-							requestParams.put("accessid",Constant.ACCESSID);
 							requestParams.put("orderby","2");
 							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,null,new UIRunnable(){
 								@Override

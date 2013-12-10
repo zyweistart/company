@@ -75,7 +75,6 @@ public class ModifyPwdActivity extends CoreActivity implements OnClickListener {
 				makeTextLong(R.string.msg_two_password_not_diff);
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
-				requestParams.put("accessid",Constant.ACCESSID);
 				requestParams.put("pwdo", MD5.md5(oldPassword));
 				requestParams.put("pwdn", MD5.md5(newPassword));
 				getHttpService().exeNetRequest(Constant.ServerAPI.userpwdMod,requestParams,null,new UIRunnable() {

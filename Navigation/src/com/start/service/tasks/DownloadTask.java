@@ -80,11 +80,11 @@ public class DownloadTask extends AsyncTask<Void, Float, File> {
 		if(!downFile.exists()){
 			try{
 				Map<String,String> pars=new HashMap<String,String>();
-				pars.put("accessid",Constant.ACCESSID);
+				pars.put("accessid",mAppContext.getAccessID());
 				pars.put("fileno",fileno);
 				String requestContent = XMLUtils.builderRequestXml(Constant.ServerAPI.nDataFileDownload, pars);
 				Map<String,String> requestHeader=new HashMap<String,String>();
-				requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),Constant.ACCESSKEY));
+				requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),mAppContext.getAccessKEY()));
 				HttpResponse response=HttpUtils.requestDownServer(requestHeader, requestContent);
 				if(response!=null&&response.getStatusLine().getStatusCode()==200){
 					int len=-1;

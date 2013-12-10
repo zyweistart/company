@@ -54,7 +54,6 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 							public void onClick(DialogInterface dialog, int whichButton) {
 								
 								Map<String,String> requestParams=new HashMap<String,String>();
-								requestParams.put("accessid", Constant.ACCESSID);
 								requestParams.put("account", vh.data.get("email"));
 								requestParams.put("flag", "2");
 								mActivity.getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
@@ -62,7 +61,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 									@Override
 									public void run() {
 										
-										mActivity.makeTextLong("解除成功，好友将无法定位到你的位置!");
+										mActivity.makeTextLong(R.string.msg_relieve_friend_relation_success);
 										
 										mActivity.runOnUiThread(new Runnable() {
 											
@@ -80,7 +79,7 @@ public class FriendRelationAdapter extends PullListViewData.DataAdapter{
 								});
 								
 							}
-						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int whichButton) {
 								dialog.dismiss();
 							}

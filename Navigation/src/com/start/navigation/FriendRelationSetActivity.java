@@ -58,7 +58,6 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 				setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						Map<String,String> requestParams=new HashMap<String,String>();
-						requestParams.put("accessid", Constant.ACCESSID);
 						requestParams.put("account", friendId);
 						requestParams.put("flag", "1");
 						getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {

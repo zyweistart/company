@@ -106,7 +106,6 @@ public class FriendHistoryListActivity extends CoreActivity {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									
 									Map<String,String> requestParams=new HashMap<String,String>();
-									requestParams.put("accessid", Constant.ACCESSID);
 									requestParams.put("account", vh.account);
 									requestParams.put("flag", "1");
 									getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
