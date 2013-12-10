@@ -34,7 +34,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		setCurrentActivityTitle(R.string.activity_register);
+		setCurrentActivityTitle(R.string.register);
 		
 		etUserName=(EditText)findViewById(R.id.register_forgetpwd_et_username);
 		etCode=(EditText)findViewById(R.id.register_forgetpwd_et_code);

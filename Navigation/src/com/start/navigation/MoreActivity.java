@@ -32,7 +32,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_more);
-		setCurrentActivityTitle(R.string.activity_title__more);
+		setCurrentActivityTitle(R.string.activity_title_more);
 		
 		llLogin=(LinearLayout)findViewById(R.id.more_login);
 		llLogout=(LinearLayout)findViewById(R.id.more_logout);

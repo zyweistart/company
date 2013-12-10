@@ -22,7 +22,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:onClick="onClick"
-        android:text="@string/lvitem_mapdata_download_txt"/>
+        android:text="@string/download"/>
 	
 	<Button 
         android:id="@+id/activity_map_data_use"
@@ -33,7 +33,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:onClick="onClick"
-        android:text="@string/lvitem_mapdata_use_txt"
+        android:text="@string/use"
         android:visibility="gone"/>
 	
 </LinearLayout>

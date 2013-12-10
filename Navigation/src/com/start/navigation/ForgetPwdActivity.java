@@ -35,7 +35,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_forget_pwd);
-		setCurrentActivityTitle(R.string.activity_forgetpwd);
+		setCurrentActivityTitle(R.string.activity_title_forgetpwd);
 		
 		etUserName=(EditText)findViewById(R.id.register_forgetpwd_et_username);
 		etCode=(EditText)findViewById(R.id.register_forgetpwd_et_code);

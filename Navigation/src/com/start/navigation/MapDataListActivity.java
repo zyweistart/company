@@ -176,7 +176,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				public void onClick(DialogInterface dialog, int whichButton) {
 					//使用当前数据
 					getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
-					makeTextLong(R.string.msg_switching_datafile);
+					makeTextLong(R.string.msg_switching_datafile_success);
 				}
 			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {

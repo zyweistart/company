@@ -25,6 +25,6 @@
         android:background="@drawable/bg4_selector"
         android:textColor="@color/white"
         android:textSize="22.0dip"
-        android:text="@string/msg_go_to_switch_data"/>
+        android:text="@string/msg_goto_switch_data"/>
 
 </LinearLayout>
