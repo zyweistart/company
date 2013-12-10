@@ -68,13 +68,19 @@ public class HttpService {
 						final Map<String, Map<String, String>> mapXML=XMLUtils.xmlResolve(xmlContent);
 						if(!mapXML.isEmpty()){
 							Map<String,String> infoHead=mapXML.get(XMLUtils.RequestXmLConstant.INFO);
-							if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.SUCCESSCODE)){
+							String code=infoHead.get(XMLUtils.RequestXmLConstant.CODE);
+							if(XMLUtils.RequestXmLConstant.SUCCESSCODE.equals(code)){
 								for(String key:mapXML.keySet()){
 									uiRunnable.setInfo(mapXML.get(key));
 									break;
 								}
 								uiRunnable.setContent(mapXML);
 								uiRunnable.run();
+							}else if("120020".equals(code)||"110036".equals(code)){
+								mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
+								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
+								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
+								mAppContext.makeTextLong(R.string.msg_login_error);
 							}else{
 								mAppContext.makeTextLong(infoHead.get(XMLUtils.RequestXmLConstant.MSG));
 							}

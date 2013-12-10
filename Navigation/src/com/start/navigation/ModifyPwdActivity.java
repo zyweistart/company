@@ -3,6 +3,7 @@ package com.start.navigation;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,18 +46,20 @@ public class ModifyPwdActivity extends CoreActivity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 		if(!getAppContext().isLogin()){
-			CommonFn.buildDialog(this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setMessage(R.string.msg_not_login)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
 					startActivity(new Intent(ModifyPwdActivity.this,LoginActivity.class));
 				}
-				
+			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					finish();
+				}
 			}).show();
 		}
 	}
-
-
 
 	@Override
 	public void onClick(View v) {
@@ -75,9 +78,7 @@ public class ModifyPwdActivity extends CoreActivity implements OnClickListener {
 				requestParams.put("accessid",Constant.ACCESSID);
 				requestParams.put("pwd", MD5.md5(oldPassword));
 				requestParams.put("pwdn", MD5.md5(newPassword));
-				Map<String,String> headerParams=new HashMap<String,String>();
-				headerParams.put("sign", "");
-				getHttpService().exeNetRequest(Constant.ServerAPI.userpwdMod,requestParams,headerParams,new UIRunnable() {
+				getHttpService().exeNetRequest(Constant.ServerAPI.userpwdMod,requestParams,null,new UIRunnable() {
 					
 					@Override
 					public void run() {

@@ -36,17 +36,17 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 		setContentView(R.layout.activity_register);
 		setCurrentActivityTitle(R.string.activity_register);
 		
-		etUserName=(EditText)findViewById(R.id.register_et_username);
-		etCode=(EditText)findViewById(R.id.register_et_code);
-		etPassword=(EditText)findViewById(R.id.register_et_new_password);
-		etRePassword=(EditText)findViewById(R.id.register_et_re_new_password);
-		registerMainFramework=(LinearLayout)findViewById(R.id.register_ll_main_framework);
+		etUserName=(EditText)findViewById(R.id.register_forgetpwd_et_username);
+		etCode=(EditText)findViewById(R.id.register_forgetpwd_et_code);
+		etPassword=(EditText)findViewById(R.id.register_forgetpwd_et_new_password);
+		etRePassword=(EditText)findViewById(R.id.register_forgetpwd_et_re_new_password);
+		registerMainFramework=(LinearLayout)findViewById(R.id.register_forgetpwd_ll_main_framework);
 		
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.register_btn_send){
+		if(v.getId()==R.id.register_forgetpwd_btn_send){
 			final String userName=String.valueOf(etUserName.getText());
 			final String code=String.valueOf(etCode.getText());
 			final String password=String.valueOf(etPassword.getText());
@@ -92,7 +92,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 					}
 				});
 			}
-		}else if(v.getId()==R.id.register_btn_send_code){
+		}else if(v.getId()==R.id.register_forgetpwd_btn_send_code){
 			String userName=String.valueOf(etUserName.getText());
 			if(TextUtils.isEmpty(userName)){
 				makeTextLong(R.string.msg_account_not_empty);

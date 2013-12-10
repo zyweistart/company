@@ -27,12 +27,13 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    style="?android:attr/textViewStyle"
+		    android:inputType="textPassword"
      		android:background="@null" 
      		android:textColor="@null"
 		    android:onClick="onClick"
 		    android:padding="5.0dip"
 		    android:textSize="17.0dip"
-		    android:hint="@string/msg_hint_password"/>
+		    android:hint="@string/msg_hint_old_password"/>
 		
 	</LinearLayout>
 	

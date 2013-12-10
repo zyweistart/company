@@ -144,7 +144,7 @@
     <string name="msg_16">用户名或密码有误</string>
     <string name="msg_17">账号或密码不能为空</string>
     <string name="msg_18">仅适用于企业及机构手机用户</string>
-    <string name="msg_19">拨冗亲自去查看下云OS登录状态</string>
+    <string name="msg_19">查看云OS当前登陆账号及状态</string>
     <string name="msg_20">确认OK，激活服务，赶紧的</string>
     <string name="msg_21">普通注册</string>
     <string name="msg_22">不再显示提醒</string>

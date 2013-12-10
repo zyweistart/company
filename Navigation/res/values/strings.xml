@@ -34,6 +34,7 @@
     <string name="msg_exit_app">确认退出应用吗？</string>
     <string name="msg_hint_account">请输入账户</string>
     <string name="msg_hint_code">请输入验证码</string>
+    <string name="msg_hint_old_password">请输入原密码</string>
     <string name="msg_hint_password">数字或者英文字母</string>
     <string name="msg_send_code">发送验证码</string>
     <string name="msg_doctor_list">医生列表</string>
@@ -58,6 +59,7 @@
     <string name="msg_open_mylocation">开放位置权限</string>
     <string name="msg_open_mylocation_success">开放好友位置成功</string>
     <string name="msg_sure_open_location">确定要对该好友开放自己的位置信息吗?</string>
+    <string name="msg_login_error">用户名或密码有误</string>
     <string name="activity_login_app_title">就医导航系统</string>
     <string name="activity_login_autologin">自动登录</string>
     <string name="activity_login_not_account_gotto_register">还没有账号，马上去注册>></string>
