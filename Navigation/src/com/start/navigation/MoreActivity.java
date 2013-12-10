@@ -138,7 +138,8 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 					});
 				}
 			});
-			
+		}else if(v.getId()==R.id.more_modifypwd){
+			startActivity(new Intent(this,ModifyPwdActivity.class));
 		}else if(v.getId()==R.id.more_btn_exit_app){
 			
 			new AlertDialog.Builder(MoreActivity.this)
