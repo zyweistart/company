@@ -1,4 +1,4 @@
-package com.start.navigation;
+package com.start.navigation.hospital;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.start.core.CoreActivity;
 import com.start.model.Department;
+import com.start.navigation.R;
 
 /**
  * 科室详细

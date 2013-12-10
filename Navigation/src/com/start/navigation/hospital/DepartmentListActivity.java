@@ -1,4 +1,4 @@
-package com.start.navigation;
+package com.start.navigation.hospital;
 
 import java.util.List;
 
@@ -15,40 +15,29 @@ import android.widget.TextView;
 
 import com.start.core.CoreActivity;
 import com.start.model.Department;
-import com.start.model.Doctor;
+import com.start.navigation.R;
 
 /**
- * 医生列表
+ * 科室列表
  * @author start
  *
  */
-public class DoctorListActivity extends CoreActivity  implements OnItemClickListener{
-
+public class DepartmentListActivity extends CoreActivity implements OnItemClickListener{
 	
-	private List<Doctor> doctors;
+	private List<Department> departments;
 	
 	private ListView departmentListView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_doctor_list);
-		setCurrentActivityTitle(R.string.activity_title_doctor_list);
+		setContentView(R.layout.activity_department_list);
+		setCurrentActivityTitle(R.string.activity_title_department_list);
 		
-		Bundle bundle=getIntent().getExtras();
-		if(bundle!=null){
-			String departmentId=bundle.getString(Department.COLUMN_NAME_ID);
-			if(departmentId!=null){
-				doctors=getAppContext().getDoctorService().findByDepartmentId(departmentId);
-			}else{
-				doctors=getAppContext().getDoctorService().findAll();
-			}
-		}else{
-			doctors=getAppContext().getDoctorService().findAll();
-		}
+		departments=getAppContext().getDepartmentService().findAll();
 		
 		DataAdapter adapter=new DataAdapter();
-		departmentListView=(ListView)findViewById(R.id.module_main_frame_doctor_list);
+		departmentListView=(ListView)findViewById(R.id.module_main_frame_department_list);
 		departmentListView.setAdapter(adapter);
 		departmentListView.setOnItemClickListener(this);
 		
@@ -58,12 +47,12 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 
 		@Override
 		public int getCount() {
-			return doctors.size();
+			return departments.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return doctors.get(position);
+			return departments.get(position);
 		}
 
 		@Override
@@ -74,39 +63,39 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
-			if (convertView != null && convertView.getId() == R.id.lvitem_doctor_content) {
+			if (convertView != null && convertView.getId() == R.id.lvitem_department_content) {
 				holder = (ViewHolder) convertView.getTag();
 			} else {
-				convertView = LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.lvitem_doctor, null);
+				convertView = LayoutInflater.from(DepartmentListActivity.this).inflate(R.layout.lvitem_department, null);
 				holder=new ViewHolder();
-				holder.tvName=(TextView)convertView.findViewById(R.id.lvitem_doctor_name);
+				holder.tvName=(TextView)convertView.findViewById(R.id.lvitem_department_name);
 				
 				convertView.setTag(holder);
 			}
 			
-			Doctor doctor=doctors.get(position);
-			holder.doctor=doctor;
-			holder.tvName.setText(doctor.getName());
+			Department department=departments.get(position);
+			holder.department=department;
+			holder.tvName.setText(department.getName());
 			return convertView;
 		}
 		
 	}
-
+	
 	private class ViewHolder{
-		
-		private Doctor doctor;
 		
 		private TextView tvName;
 		
+		private Department department;
+		
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		ViewHolder vh=(ViewHolder)arg1.getTag();
 		if(vh!=null){
 			Bundle bundle=new Bundle();
-			bundle.putString(Doctor._ID, vh.doctor.getId());
-			Intent intent=new Intent(this,DoctorDetailActivity.class);
+			bundle.putString(Department.COLUMN_NAME_ID, vh.department.getId());
+			Intent intent=new Intent(this,DepartmentDetailActivity.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
 		}

@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.start.navigation.HospitalMainActivity;
 import com.start.navigation.R;
+import com.start.navigation.hospital.HospitalMainActivity;
 import com.start.service.PullListViewData;
 
 public class FriendLocationAdapter extends PullListViewData.DataAdapter{

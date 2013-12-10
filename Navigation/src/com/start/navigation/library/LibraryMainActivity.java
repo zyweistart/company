@@ -1,4 +1,4 @@
-package com.start.navigation;
+package com.start.navigation.library;
 
 import com.start.core.CoreActivity;
 

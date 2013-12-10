@@ -1,4 +1,4 @@
-package com.start.navigation;
+package com.start.navigation.hospital;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View.OnClickListener;
 
 import com.start.core.Constant;
 import com.start.core.CoreActivity;
+import com.start.navigation.MapDataListActivity;
+import com.start.navigation.R;
 
 /**
  * 首次设置地图数据页面

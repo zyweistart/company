@@ -1,8 +1,9 @@
-package com.start.navigation;
+package com.start.navigation.hospital;
 
 import android.os.Bundle;
 
 import com.start.core.CoreActivity;
+import com.start.navigation.R;
 
 /**
  * 医院详细

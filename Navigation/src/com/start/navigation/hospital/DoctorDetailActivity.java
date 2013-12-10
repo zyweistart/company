@@ -1,10 +1,11 @@
-package com.start.navigation;
+package com.start.navigation.hospital;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.start.core.CoreActivity;
 import com.start.model.Doctor;
+import com.start.navigation.R;
 
 /**
  * 医生详细
