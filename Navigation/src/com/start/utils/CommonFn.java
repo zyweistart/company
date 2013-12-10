@@ -17,7 +17,6 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -26,24 +25,6 @@ import com.start.widget.POIDialog;
 
 public class CommonFn {
 
-	/**
-	 * 获取本机号码
-	 */
-	public static String getPhoneNumber(Context context){ 
-		//创建电话管理器
-		TelephonyManager mTelephonyMgr;    
-		//获取系统固定号码
-		mTelephonyMgr = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-		//返回手机号码
-		String phone=mTelephonyMgr.getLine1Number();
-		if(phone==null){
-			return "";
-		}else if(phone.length()==11){
-			return phone;
-		}
-		return "";
-	}
-	
 	public static ProgressDialog progressDialog(Context context,String message){
 		ProgressDialog dialog = new ProgressDialog(context);
 		if(message!=null){
@@ -53,6 +34,7 @@ public class CommonFn {
 		dialog.setCancelable(true);
 		return dialog;
 	}
+	
 	/**
 	 * 弹出网络设置对话框
 	 */
@@ -60,15 +42,14 @@ public class CommonFn {
 		AlertDialog.Builder aDialog = new AlertDialog.Builder(context);
 		aDialog.
 		setIcon(android.R.drawable.ic_dialog_info).
-		setTitle("提示！").
-		setMessage("当前无法连接到网络，是否立即进行设置？").
+		setMessage(R.string.msg_network_connecterror).
 		setCancelable(false).
-		setPositiveButton("取消", new DialogInterface.OnClickListener() {
+		setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
-		}).setNeutralButton("设置", new DialogInterface.OnClickListener() {
+		}).setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Intent netIntent=new Intent(Settings.ACTION_SETTINGS);
@@ -98,33 +79,14 @@ public class CommonFn {
 		return false;
 	}
 	
-	public static void close(Closeable closable) {
-		if (closable != null) {
-			try {
-				closable.close();
-			} catch (IOException e) {
-			}
-		}
+	public static AlertDialog alertDialog(Context context, int resId, DialogInterface.OnClickListener positiveButtonListener) {
+		return alertDialog(context, context.getString(resId), positiveButtonListener);
 	}
 	
-	public static AlertDialog alertsDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setMessage(message);
-		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
-		return builder.create();
-	}
-	
-	public static AlertDialog alertsDialog(Context context, String message, DialogInterface.OnClickListener positiveButtonListener) {
+	public static AlertDialog alertDialog(Context context, String message, DialogInterface.OnClickListener positiveButtonListener) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setMessage(message);
 		builder.setCancelable(false);
-		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
-		return builder.create();
-	}
-	
-	public static AlertDialog buildDialog(Context context, int message, DialogInterface.OnClickListener positiveButtonListener) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setMessage(message);
 		builder.setPositiveButton(context.getString(R.string.ok), positiveButtonListener);
 		return builder.create();
 	}
@@ -147,14 +109,18 @@ public class CommonFn {
 			e.printStackTrace();
 			return null;
 		}finally{
-			if(is!=null){
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}finally{
-					is=null;
-				}
+			close(is);
+		}
+	}
+	
+	public static void close(Closeable closable) {
+		if (closable != null) {
+			try {
+				closable.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				closable=null;
 			}
 		}
 	}

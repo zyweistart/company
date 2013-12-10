@@ -239,7 +239,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 			dialog = CommonFn.createPOIDialog(this);
 			break;
 		case Utils.DLG_EXIT_NAVIGATION:
-			dialog = CommonFn.buildDialog(this, R.string.msg_exit_navigation,
+			dialog = CommonFn.alertDialog(this, R.string.msg_exit_navigation,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

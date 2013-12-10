@@ -57,7 +57,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 							friendRelationData.getListview_footer_progress().setVisibility(View.GONE);
 							friendRelationData.getPulllistview().onRefreshComplete();
 							
-							CommonFn.buildDialog(FriendRelationListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+							CommonFn.alertDialog(FriendRelationListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {

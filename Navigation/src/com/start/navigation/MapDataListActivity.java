@@ -55,7 +55,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 							mapDataPullListData.getListview_footer_progress().setVisibility(View.GONE);
 							mapDataPullListData.getPulllistview().onRefreshComplete();
 							
-							CommonFn.buildDialog(MapDataListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
+							CommonFn.alertDialog(MapDataListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {

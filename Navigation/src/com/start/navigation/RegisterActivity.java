@@ -76,7 +76,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.buildDialog(RegisterActivity.this, R.string.msg_register_success,new DialogInterface.OnClickListener(){
+								CommonFn.alertDialog(RegisterActivity.this, R.string.msg_register_success,new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog,int which) {
@@ -111,7 +111,7 @@ public class RegisterActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.alertsDialog(RegisterActivity.this, R.string.msg_send_code_success, new DialogInterface.OnClickListener(){
+								CommonFn.alertDialog(RegisterActivity.this, R.string.msg_send_code_success, new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog, int which) {

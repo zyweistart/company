@@ -77,7 +77,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.alertsDialog(ForgetPwdActivity.this, R.string.msg_forgetpwd_success,new DialogInterface.OnClickListener(){
+								CommonFn.alertDialog(ForgetPwdActivity.this, R.string.msg_forgetpwd_success,new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog,int which) {
@@ -112,7 +112,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 							
 							@Override
 							public void run() {
-								CommonFn.buildDialog(ForgetPwdActivity.this, R.string.msg_send_code_success, new DialogInterface.OnClickListener(){
+								CommonFn.alertDialog(ForgetPwdActivity.this, R.string.msg_send_code_success, new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog, int which) {

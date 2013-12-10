@@ -3,7 +3,9 @@ package com.start.navigation;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,47 +52,59 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 			if(TextUtils.isEmpty(friendId)){
 				makeTextLong(R.string.msg_friendid_not_empty);
 			}else{
-				Map<String,String> requestParams=new HashMap<String,String>();
-				requestParams.put("accessid", Constant.ACCESSID);
-				requestParams.put("account", friendId);
-				requestParams.put("flag", "1");
-				getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
-					
-					@Override
-					public void run() {
-						
-						runOnUiThread(new Runnable() {
+				new AlertDialog.Builder(this).
+				setIcon(android.R.drawable.ic_dialog_info).
+				setMessage(R.string.msg_sure_open_location).
+				setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						Map<String,String> requestParams=new HashMap<String,String>();
+						requestParams.put("accessid", Constant.ACCESSID);
+						requestParams.put("account", friendId);
+						requestParams.put("flag", "1");
+						getHttpService().exeNetRequest(Constant.ServerAPI.ufriendoDeal,requestParams,null,new UIRunnable() {
 							
 							@Override
 							public void run() {
-								setResult(FriendRelationListActivity.RESULT_CODE_SET_REFRESH);
-								makeTextLong(R.string.msg_open_mylocation_success);
-								mFriendFelationSetEtContent.setText(getString(R.string.empty));
-								String myId=getAppContext().getMyID();
-								String fileno=getAppContext().getCurrentDataNo();
-								FriendHistory fh=getAppContext().getFriendHistoryService().findByMyIdAndFriendId(myId, friendId);
-								ContentValues values=new ContentValues();
-								values.put(FriendHistory.COLUMN_NAME_FILENO, fileno);
-								values.put(FriendHistory.COLUMN_NAME_MYID, myId);
-								values.put(FriendHistory.COLUMN_NAME_FRIENDID, friendId);
-								values.put(FriendHistory.COLUMN_NAME_UPDATETIME, TimeUtils.getSysdate());
-								if(fh==null){
-									getAppContext().getFriendHistoryService().insert(FriendHistory.TABLE_NAME, values);
-								}else{
-									getAppContext().getFriendHistoryService().update(FriendHistory.TABLE_NAME, values,
-											FriendHistory.COLUMN_NAME_MYID+" = ? AND "+
-													FriendHistory.COLUMN_NAME_FRIENDID+" = ? AND "+
-														FriendHistory.COLUMN_NAME_FILENO+" = ?",
-											new String[]{myId,friendId,fileno});
-								}
+								
+								runOnUiThread(new Runnable() {
+									
+									@Override
+									public void run() {
+										setResult(FriendRelationListActivity.RESULT_CODE_SET_REFRESH);
+										makeTextLong(R.string.msg_open_mylocation_success);
+										mFriendFelationSetEtContent.setText(getString(R.string.empty));
+										String myId=getAppContext().getMyID();
+										String fileno=getAppContext().getCurrentDataNo();
+										FriendHistory fh=getAppContext().getFriendHistoryService().findByMyIdAndFriendId(myId, friendId);
+										ContentValues values=new ContentValues();
+										values.put(FriendHistory.COLUMN_NAME_FILENO, fileno);
+										values.put(FriendHistory.COLUMN_NAME_MYID, myId);
+										values.put(FriendHistory.COLUMN_NAME_FRIENDID, friendId);
+										values.put(FriendHistory.COLUMN_NAME_UPDATETIME, TimeUtils.getSysdate());
+										if(fh==null){
+											getAppContext().getFriendHistoryService().insert(FriendHistory.TABLE_NAME, values);
+										}else{
+											getAppContext().getFriendHistoryService().update(FriendHistory.TABLE_NAME, values,
+													FriendHistory.COLUMN_NAME_MYID+" = ? AND "+
+															FriendHistory.COLUMN_NAME_FRIENDID+" = ? AND "+
+																FriendHistory.COLUMN_NAME_FILENO+" = ?",
+													new String[]{myId,friendId,fileno});
+										}
+									}
+									
+								});
+								
 							}
 							
 						});
-						
 					}
-					
-				});
+				}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).show();
 			}
+			
 		}
 	}
 

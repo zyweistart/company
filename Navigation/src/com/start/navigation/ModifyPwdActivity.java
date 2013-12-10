@@ -76,7 +76,7 @@ public class ModifyPwdActivity extends CoreActivity implements OnClickListener {
 			}else{
 				Map<String,String> requestParams=new HashMap<String,String>();
 				requestParams.put("accessid",Constant.ACCESSID);
-				requestParams.put("pwd", MD5.md5(oldPassword));
+				requestParams.put("pwdo", MD5.md5(oldPassword));
 				requestParams.put("pwdn", MD5.md5(newPassword));
 				getHttpService().exeNetRequest(Constant.ServerAPI.userpwdMod,requestParams,null,new UIRunnable() {
 					
@@ -87,7 +87,7 @@ public class ModifyPwdActivity extends CoreActivity implements OnClickListener {
 							@Override
 							public void run() {
 								
-								CommonFn.alertsDialog(ModifyPwdActivity.this, R.string.msg_modifypwd_success,new DialogInterface.OnClickListener(){
+								CommonFn.alertDialog(ModifyPwdActivity.this, R.string.msg_modifypwd_success,new DialogInterface.OnClickListener(){
 
 									@Override
 									public void onClick(DialogInterface dialog,int which) {

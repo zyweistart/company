@@ -5,6 +5,7 @@
     <string name="empty"></string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
+    <string name="settings">设置</string>
     <string name="prompt">温馨提示</string>
     <string name="download">下载</string>
     <string name="use">使用</string>

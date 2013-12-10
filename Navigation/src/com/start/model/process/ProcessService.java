@@ -256,7 +256,7 @@ public class ProcessService {
 			if(jun.getNodeType()!=NodeType.SWITCH&&jun.getAction()!=null){
 				Action action=jun.getAction();
 				if(action.getType()==ActionType.DIALOG){
-					CommonFn.alertsDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
+					CommonFn.alertDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog,int which) {
@@ -267,7 +267,7 @@ public class ProcessService {
 				}else if(action.getType()==ActionType.LOCATION){
 					final String[] maps=action.getContent().split(";");
 					if(action.getMessage()!=null){
-						CommonFn.alertsDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
+						CommonFn.alertDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog,int which) {
@@ -284,7 +284,7 @@ public class ProcessService {
 					intent.setAction(Intent.ACTION_VIEW);
 					intent.setData(Uri.parse(action.getUrl()));
 					if(action.getMessage()!=null){
-						CommonFn.alertsDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
+						CommonFn.alertDialog(this.mContext, action.getMessage(), new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog,int which) {
