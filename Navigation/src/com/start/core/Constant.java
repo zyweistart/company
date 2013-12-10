@@ -99,17 +99,16 @@ public final class Constant {
 	}
 	
 	public final class SharedPreferences{
-		/**
-		 * 当前使用的数据文件编号
-		 */
+		//当前使用的数据文件编号
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
-		
-		public static final String SP_CURRENTVERSIONCODE="SP_CURRENTVERSIONCODE";
-		
-		public static final String LOGIN_ACCOUNT="LOGIN_ACCOUNT";
-		public static final String LOGIN_PASSWORD="LOGIN_PASSWORD";
+		//当前版本号
+		public static final String CURRENTVERSIONCODE="CURRENTVERSIONCODE";
+		//自动登录
 		public static final String LOGIN_AUTOLOGIN="LOGIN_AUTOLOGIN";
-		
+		//当前登录的账号
+		public static final String LOGIN_ACCOUNT="LOGIN_ACCOUNT";
+		//当前登录的密码
+		public static final String LOGIN_PASSWORD="LOGIN_PASSWORD";
 	}
 	
 }

@@ -93,6 +93,13 @@
     <string name="frame_process_reset">重新开始</string>
     <string name="frame_friend_title">好友</string>
     
+    <string name="process_2">动作类型不能为空</string>
+    <string name="process_1">对话框动作消息不能为空</string>
+    <string name="process_3">位置动作内容不能为空</string>
+    <string name="process_4">打开浏览器动作url不能为空</string>
+    <string name="process_5">流程文件定义出错:</string>
+    <string name="process_6">当前节点不存在，所在节点：流程定义文件有误!</string>
+    
     <string name="load_more">更多</string>
     <string name="load_ing">加载中···</string>
     <string name="load_full">已加载全部</string>

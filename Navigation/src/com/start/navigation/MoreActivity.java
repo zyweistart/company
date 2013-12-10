@@ -100,7 +100,7 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 					final Integer maxVersion=Integer.parseInt(data.get("maxverno"));
 					final Integer minVersion=Integer.parseInt(data.get("minverno"));
 					final String url=data.get("url");
-					final int currentVersionCode=getAppContext().getSharedPreferencesUtils().getInteger(Constant.SharedPreferences.SP_CURRENTVERSIONCODE,0);
+					final int currentVersionCode=getAppContext().getSharedPreferencesUtils().getInteger(Constant.SharedPreferences.CURRENTVERSIONCODE,0);
 					runOnUiThread(new Runnable() {
 						
 						@Override
