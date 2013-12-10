@@ -10,6 +10,7 @@
     <string name="prompt">温馨提示</string>
     
     <string name="msg_press_again_to_exit">再按一次退出应用</string>
+    <string name="msg_locationing">正在定位中</string>
     <string name="msg_location_unavailable">当前位置不可用</string>
     <string name="msg_path_searching">路线查询中</string>
     <string name="msg_exit_navigation">退出导航</string>
@@ -42,9 +43,11 @@
     <string name="msg_open_location">开放位置权限</string>
     <string name="msg_register_success">注册成功</string>
     <string name="msg_forgetpwd_success">找回密码成功</string>
+    <string name="msg_modifypwd_success">修改密码成功</string>
     <string name="msg_data_manager">数据管理</string>
     <string name="msg_new_version_check">新版本检测</string>
     <string name="msg_account_not_empty">用户名不能为空</string>
+    <string name="msg_old_password_not_empty">旧密码不能为空</string>
     <string name="msg_password_not_empty">密码不能为空</string>
     <string name="msg_code_not_empty">验证码不能为空</string>
     <string name="msg_two_password_not_diff">两次密码输入不一致</string>

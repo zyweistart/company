@@ -91,6 +91,7 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 public class MainActivity extends MapActivity implements OnTouchListener,
 		OnClickListener, OnTapMapClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
+	private static final String TAG="MainActivity";
 	private static final String BUNDLEDATA_DATA = "data";
 	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
 	
@@ -300,11 +301,14 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				}
 			}
 		} else if (v.getId() == R.id.module_main_header_content_location) {
+			appContext.makeTextLong(R.string.msg_locationing);
+			
 			MyLocation myLocation = appContext.getMyLocation();
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
 			addMyLocMarker(myLocation);
+			
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(isTabDepartment){
@@ -671,7 +675,7 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 								public void run() {
 									friendLocationPullListData.getAdapter().notifyDataSetChanged();
 								} 
-							},"friendlist","friendlist");
+							},"friendlist","friendlist"+TAG);
 						}else{
 							
 							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);

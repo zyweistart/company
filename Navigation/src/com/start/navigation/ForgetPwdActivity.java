@@ -69,7 +69,7 @@ public class ForgetPwdActivity extends CoreActivity implements OnClickListener {
 				requestParams.put("loginflag", "1");
 				Map<String,String> headerParams=new HashMap<String,String>();
 				headerParams.put("sign", Constant.ACCESSKEY_LOCAL);
-				getHttpService().exeNetRequest(Constant.ServerAPI.userReg,requestParams,headerParams,new UIRunnable() {
+				getHttpService().exeNetRequest(Constant.ServerAPI.userpwdReset,requestParams,headerParams,new UIRunnable() {
 					
 					@Override
 					public void run() {

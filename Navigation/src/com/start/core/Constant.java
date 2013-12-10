@@ -48,9 +48,17 @@ public final class Constant {
 		 */
 		public static final String userReg="userReg";
 		/**
+		 * 密码重置
+		 */
+		public static final String userpwdReset="userpwdReset";
+		/**
 		 * 登录
 		 */
 		public static final String userLogin="userLogin";
+		/**
+		 * 密码修改
+		 */
+		public static final String userpwdMod="userpwdMod";
 		/**
 		 * 我开放位置权限的好友查询
 		 */
@@ -59,15 +67,10 @@ public final class Constant {
 		 * 对好友开放位置权限管理
 		 */
 		public static final String ufriendoDeal="ufriendoDeal";
-		
-		/**
-		 * 忘记密码
-		 */
-		public static final String nForgetPwd="";
 		/**
 		 * 获取好友位置列表
 		 */
-		public static final String nFriendLocationList="v4recQry";
+		public static final String nFriendLocationList="ufriendoQuery";
 		/**
 		 * 对好友开放位置信息
 		 */
