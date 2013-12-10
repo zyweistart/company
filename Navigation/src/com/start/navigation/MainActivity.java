@@ -54,7 +54,6 @@ import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
 import com.start.model.MapData;
 import com.start.model.Room;
-import com.start.model.RoomArea;
 import com.start.model.UIRunnable;
 import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
@@ -301,14 +300,13 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				}
 			}
 		} else if (v.getId() == R.id.module_main_header_content_location) {
+			//TODO:在此插入用户的定位及位置上传代码
 			appContext.makeTextLong(R.string.msg_locationing);
-			
 			MyLocation myLocation = appContext.getMyLocation();
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
 			addMyLocMarker(myLocation);
-			
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(isTabDepartment){
@@ -336,9 +334,9 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 				doctorArrayAdapter.getFilter().filter(mapQuery.getText());
 			}
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_restroom) {
-			appContext.makeTextLong("房间");
+			appContext.makeTextLong(R.string.msg_tab_restroom);
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_drinking_water) {
-			appContext.makeTextLong("开水间");
+			appContext.makeTextLong(R.string.msg_tab_drinking_water);
 		}
 	}
 
@@ -803,20 +801,19 @@ public class MainActivity extends MapActivity implements OnTouchListener,
 		synchronized (itemList) {
 			itemList.clear();
 
-			// TODO:添加房间区域,该IF为测试代码可删除
-			if (mRooms != null) {
-				List<Room> rooms = mRooms.get(mCurrentMapData.getId());
-				List<GeoPoint> gps = new ArrayList<GeoPoint>();
-				for (Room r : rooms) {
-					List<RoomArea> ras = appContext.getRoomAreaService().findAllByRoomId(r.getId());
-					for (RoomArea ra : ras) {
-						gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
-					}
-				}
-				PolygonalChain pc = new PolygonalChain(gps);
-				Polyline arealine = new Polyline(pc,appContext.getPaintStroke());
-				itemList.add(arealine);
-			}
+//			if (mRooms != null) {
+//				List<Room> rooms = mRooms.get(mCurrentMapData.getId());
+//				List<GeoPoint> gps = new ArrayList<GeoPoint>();
+//				for (Room r : rooms) {
+//					List<RoomArea> ras = appContext.getRoomAreaService().findAllByRoomId(r.getId());
+//					for (RoomArea ra : ras) {
+//						gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
+//					}
+//				}
+//				PolygonalChain pc = new PolygonalChain(gps);
+//				Polyline arealine = new Polyline(pc,appContext.getPaintStroke());
+//				itemList.add(arealine);
+//			}
 			
 			boolean isSetCenterPoint=true;
 			if (markers != null || routeLine != null) {

@@ -55,7 +55,6 @@
 			    android:onClick="onClick"
 			    android:padding="5.0dip"
 			    android:textSize="17.0dip"
-			    android:text="4544242@qq.com"
 			    android:hint="@string/msg_hint_account"/>
 	    </LinearLayout>
 	    
@@ -86,7 +85,6 @@
 			    android:onClick="onClick"
 			    android:padding="5.0dip"
 			    android:textSize="17.0dip"
-			    android:text="123456@"
 			    android:hint="@string/msg_hint_password"/>
 	    </LinearLayout>
 		
