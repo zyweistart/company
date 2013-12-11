@@ -175,7 +175,7 @@ public class LoginActivity extends CoreActivity implements OnClickListener {
 					new AlertDialog.Builder(LoginActivity.this).
 					setIcon(android.R.drawable.ic_dialog_info).
 					setMessage("亲，激活卖家手机套餐所含安存语录服务前，需确认已使用购买套餐时的淘宝卖家ID成功登录云OS，恭请掌柜的先行确认下何如？").
-					setPositiveButton("查看云OS当前登陆账号及状态", new DialogInterface.OnClickListener() {
+					setPositiveButton("查看云OS当前登陆账号状态", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Intent netIntent=new Intent("com.yunos.account.action.LOGIN");
