@@ -671,6 +671,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 						if(appContext.isLogin()){
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("orderby","2");
+							requestParams.put("recordno",appContext.getCurrentDataNo());
 							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nFriendLocationList,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
