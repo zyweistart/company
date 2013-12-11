@@ -10,13 +10,13 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.start.core.Constant;
+import com.start.core.CoreActivity;
 import com.start.navigation.AppContext;
 import com.start.navigation.R;
 import com.start.utils.HttpUtils;
@@ -26,12 +26,12 @@ import com.start.utils.XMLUtils;
 
 public class DownloadTask extends AsyncTask<Void, Float, File> {
 
-	private Context mContext;
+	private CoreActivity mContext;
 	private AppContext mAppContext;
 	private ProgressDialog pDialog;
 	private String fileno;
 	
-	public DownloadTask(Context context,String fileno){
+	public DownloadTask(CoreActivity context,String fileno){
 		this.mContext=context;
 		this.fileno=fileno;
 		this.mAppContext=AppContext.getInstance();
@@ -80,11 +80,11 @@ public class DownloadTask extends AsyncTask<Void, Float, File> {
 		if(!downFile.exists()){
 			try{
 				Map<String,String> pars=new HashMap<String,String>();
-				pars.put("accessid",mAppContext.getAccessID());
-				pars.put("fileno",fileno);
-				String requestContent = XMLUtils.builderRequestXml(Constant.ServerAPI.nDataFileDownload, pars);
+				pars.put("accessid",Constant.ACCESSID_LOCAL);
+				pars.put("recordno",fileno);
+				String requestContent = XMLUtils.builderRequestXml(Constant.ServerAPI.hospitalDownload, pars);
 				Map<String,String> requestHeader=new HashMap<String,String>();
-				requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),mAppContext.getAccessKEY()));
+				requestHeader.put("sign",StringUtils.signatureHmacSHA1(MD5.md5(requestContent),Constant.ACCESSKEY_LOCAL));
 				HttpResponse response=HttpUtils.requestDownServer(requestHeader, requestContent);
 				if(response!=null&&response.getStatusLine().getStatusCode()==200){
 					int len=-1;

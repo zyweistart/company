@@ -3,11 +3,11 @@ package com.start.service.tasks;
 import java.io.File;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.start.core.Constant;
+import com.start.core.CoreActivity;
 import com.start.navigation.R;
 import com.start.utils.CommonFn;
 import com.start.utils.ZipUtils;
@@ -15,10 +15,10 @@ import com.start.utils.ZipUtils;
 public class DecompressTask extends AsyncTask<Void, Float, Boolean> {
 
 	private String fileno;
-	private Context mContext;
+	private CoreActivity mContext;
 	private ProgressDialog pDialog;
 	
-	public DecompressTask(Context context,String fileno){
+	public DecompressTask(CoreActivity context,String fileno){
 		this.mContext=context;
 		this.fileno=fileno;
 	}

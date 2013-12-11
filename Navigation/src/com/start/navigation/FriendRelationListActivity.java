@@ -69,7 +69,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 						}else{
 							Map<String,String> requestParams=new HashMap<String,String>();
 							requestParams.put("orderby","2");
-							friendRelationData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,null,new UIRunnable(){
+							friendRelationData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.ufriendoQuery,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									friendRelationData.getAdapter().notifyDataSetChanged();

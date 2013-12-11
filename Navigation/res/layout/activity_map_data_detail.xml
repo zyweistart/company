@@ -22,7 +22,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
         android:onClick="onClick"
-        android:text="@string/download"/>
+        android:text="@string/download"
+        android:visibility="gone"/>
 	
 	<Button 
         android:id="@+id/activity_map_data_use"

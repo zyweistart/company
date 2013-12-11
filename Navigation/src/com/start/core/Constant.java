@@ -59,31 +59,37 @@ public final class Constant {
 		/**
 		 * 我开放位置权限的好友查询
 		 */
-		public static final String nOpenFriendList="ufriendoQuery";
+		public static final String ufriendoQuery="ufriendoQuery";
 		/**
 		 * 对好友开放位置权限管理
 		 */
 		public static final String ufriendoDeal="ufriendoDeal";
 		/**
-		 * 获取好友位置列表
+		 * 医院查询
 		 */
-		public static final String nFriendLocationList="ufriendoQuery";
+		public static final String hospitalQuery="hospitalQuery";
 		/**
-		 * 对好友开放位置信息
+		 * 医院详细
 		 */
-		public static final String nOpenLocation="serverinfoGet";
+		public static final String hospitalDetail="hospitalDetail";
+		/**
+		 * 数据文件下载
+		 */
+		public static final String hospitalDownload="hospitalDownload";
+		
 		/**
 		 * 上传位置信息
 		 */
 		public static final String nUploadMyLocation="";
 		/**
-		 * 数据文件下载
+		 * 获取好友位置列表
 		 */
-		public static final String nDataFileDownload="v4recDown";
+		public static final String nFriendLocationList="ufriendoQuery";
 		/**
 		 * 检测版本更新
 		 */
 		public static final String nVersionCheck="versioninfoGet";
+		
 	}
 	
 	/**

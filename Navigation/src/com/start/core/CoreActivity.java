@@ -1,6 +1,8 @@
 package com.start.core;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.TextView;
 
 import com.start.navigation.AppContext;
@@ -50,5 +52,18 @@ public abstract class CoreActivity extends Activity{
 			tv.setText(title);
 		}
 	}
+	
+	public static final int HANDLERUPDATEMAINTHREAD=0x438217;
+	
+	public Handler handler = new Handler() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+			onMainUpdate(msg.what);
+		}
+		
+	};
+	
+	protected void onMainUpdate(int what){}
 	
 }

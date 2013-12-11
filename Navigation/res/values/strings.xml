@@ -77,6 +77,8 @@
     <string name="msg_tab_doctor">医生</string>
     <string name="msg_tab_restroom">房间</string>
     <string name="msg_tab_drinking_water">开水间</string>
+    <string name="msg_current_useing_data">该数据包当前已经正在使用中</string>
+    <string name="msg_current_data_file_size">数据文件大小:%sMB</string>
     
     <string name="activity_title_navigation">项目导航</string>
     <string name="activity_title_first_set_mapdata">初始设置</string>

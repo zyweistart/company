@@ -11,14 +11,13 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.start.core.AppConfig;
 import com.start.core.Constant;
+import com.start.core.CoreActivity;
 import com.start.core.CoreService;
 import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
@@ -39,12 +38,12 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 	
 	private String message;
 	private ProgressDialog pDialog;
-	private  Context mContext;
+	private  CoreActivity mContext;
 	private AppContext mAppContext;
 	private CoreService mCoreService;
 	private String fileno;
 	
-	public ImportDataFileTask(Context context,String fileno) {
+	public ImportDataFileTask(CoreActivity context,String fileno) {
 		this.mContext=context;
 		this.fileno=fileno;
 		this.mAppContext = AppContext.getInstance();
@@ -132,8 +131,10 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 	@Override
 	protected void onPostExecute(Boolean result) {
 		pDialog.dismiss();
-		if (!result) {
-			Toast.makeText(mAppContext, message, Toast.LENGTH_SHORT).show();
+		if (result) {
+			mContext.handler.sendEmptyMessage(CoreActivity.HANDLERUPDATEMAINTHREAD);
+		}else{
+			mAppContext.makeTextShort(message);
 		}
 	}
 	

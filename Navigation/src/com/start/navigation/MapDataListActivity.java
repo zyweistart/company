@@ -1,6 +1,7 @@
 package com.start.navigation;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 
 	private PullListViewData mapDataPullListData;
 	
-	public static final String FILENO="email";
+	public static final String FILENO="recordno";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +52,15 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 						
 						Map<String,String> requestParams=new HashMap<String,String>();
 						requestParams.put("accessid",Constant.ACCESSID_LOCAL);
-						requestParams.put("orderby","2");
+						requestParams.put("name","");
 						Map<String,String> headerParams=new HashMap<String,String>();
 						headerParams.put("sign", Constant.ACCESSKEY_LOCAL);
-						mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,headerParams,new UIRunnable(){
+						mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.hospitalQuery,requestParams,headerParams,new UIRunnable(){
 							@Override
 							public void run() {
 								mapDataPullListData.getAdapter().notifyDataSetChanged();
 							} 
-						},"friendlist","friendlist"+TAG);
+						},"hospitallist","hospitallist"+TAG);
 						
 					}
 					
@@ -92,12 +93,20 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 			}
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
 			holder.fileno=data.get(FILENO);
-			holder.name.setText("浙江省人民医院");
-			holder.description.setText("数据包大小：13MB");
+			holder.name.setText(data.get("name"));
+			String filesize=data.get("filesize");
+			DecimalFormat df=new DecimalFormat("#.##");
+			Float bquota=Float.parseFloat(filesize);
+			Float bq=(float)(bquota/1024/1024);
+			holder.description.setText(String.format(getString(R.string.msg_current_data_file_size), df.format(bq)));
 			File dataFile=Utils.getFile(MapDataListActivity.this, holder.fileno);
 			if(dataFile.exists()){
 				holder.download.setVisibility(View.GONE);
-				holder.use.setVisibility(View.VISIBLE);
+				if(getAppContext().getCurrentDataNo().equals(holder.fileno)){
+					holder.use.setVisibility(View.GONE);
+				}else{
+					holder.use.setVisibility(View.VISIBLE);
+				}
 			}else{
 				holder.download.setVisibility(View.VISIBLE);
 				holder.use.setVisibility(View.GONE);
@@ -124,54 +133,54 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 		final MapDataViewHolder vh=(MapDataViewHolder)v.getTag();
 		if(vh==null)return;
 		if(v.getId()==R.id.lvitem_mapdata_btn_download){
-			new AlertDialog.Builder(MapDataListActivity.this)
-			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage(R.string.msg_use_mobile_data)
-			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					if(NetConnectManager.isMobilenetwork(MapDataListActivity.this)){
-						new AlertDialog.Builder(MapDataListActivity.this)
-						.setIcon(android.R.drawable.ic_dialog_info)
-						.setMessage(R.string.msg_use_mobile_data)
-						.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int whichButton) {
-								dialog.dismiss();
-							}
-						}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int whichButton) {
-								new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
-							}
-						}).show();
-					}else{
+			if(NetConnectManager.isMobilenetwork(MapDataListActivity.this)){
+				new AlertDialog.Builder(MapDataListActivity.this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setMessage(R.string.msg_use_mobile_data)
+				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
 						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
 					}
-				}
-			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					dialog.dismiss();
-				}
-			}).show();
+				}).show();
+			}else{
+				new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+			}
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_use){
-			new AlertDialog.Builder(MapDataListActivity.this)
-			.setIcon(android.R.drawable.ic_dialog_info)
-			.setMessage(R.string.msg_sure_switch_current_data)
-			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					//使用当前数据
-					getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
-					makeTextLong(R.string.msg_switching_datafile_success);
-				}
-			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					dialog.dismiss();
-				}
-			}).show();
+			if(!getAppContext().getCurrentDataNo().equals(vh.fileno)){
+				new AlertDialog.Builder(MapDataListActivity.this)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setMessage(R.string.msg_sure_switch_current_data)
+				.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						//使用当前数据
+						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
+						makeTextLong(R.string.msg_switching_datafile_success);
+					}
+				}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).show();
+			}else{
+				makeTextLong(R.string.msg_current_useing_data);
+			}
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_detail){
 			Bundle bundle=new Bundle();
 			bundle.putString(FILENO, vh.fileno);
 			Intent intent=new Intent(this,MapDataDetailActivity.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
+		}
+	}
+	
+	@Override
+	protected void onMainUpdate(int what){
+		if(what==HANDLERUPDATEMAINTHREAD){
+			mapDataPullListData.getAdapter().notifyDataSetChanged();
 		}
 	}
 	
