@@ -94,24 +94,54 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 		boolean SP_ALIYUN_NETWORK_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,true);
 		if(SP_ALIYUN_NETWORK_MESSAGE){
 			final CheckBox cb=new CheckBox(this);
-			cb.setText("不再显示提醒");
+			cb.setText(R.string.msg_22);
 			new AlertDialog.Builder(WelcomeActivity.this)
 			.setIcon(android.R.drawable.ic_dialog_info)
 			.setCancelable(false)
-			.setMessage("欢迎使用安存语录客户端软件，客户端使用完全免费，在使用过程中可能会产生网络流量费用，流量资费请咨询当地运营商，是否允许应用建立连接？")
+			.setMessage(R.string.msg_12)
 			.setView(cb)
-			.setPositiveButton("不允许，关闭应用", new DialogInterface.OnClickListener() {
+			.setPositiveButton(R.string.msg_23, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
 				}
-			}).setNegativeButton("允许", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(R.string.msg_24, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(cb.isChecked()){
 						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_ALIYUN_NETWORK_MESSAGE,false);
 					}
-					execute();
+					boolean SP_IS_USE_UMENG_MESSAGE=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG_MESSAGE,true);
+					if(SP_IS_USE_UMENG_MESSAGE){
+						final CheckBox cb1=new CheckBox(WelcomeActivity.this);
+						cb1.setText(R.string.msg_22);
+						new AlertDialog.Builder(WelcomeActivity.this)
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setCancelable(false)
+						.setMessage(R.string.msg_59)
+						.setView(cb1)
+						.setPositiveButton("同意", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if(cb1.isChecked()){
+									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG_MESSAGE,false);
+								}
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG,true);
+								execute();
+							}
+						}).setNegativeButton(R.string.msg_33, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if(cb1.isChecked()){
+									getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG_MESSAGE,false);
+								}
+								getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG,false);
+								execute();
+							}
+						}).show();
+					}else{
+						execute();
+					}
 				}
 			}).show();
 		}else{

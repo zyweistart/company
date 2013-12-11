@@ -86,6 +86,11 @@ public final class Constant {
 	 */
 	public final class SharedPreferencesConstant{
 		/**
+		 * 是否起用有盟统计
+		 */
+		public static final String SP_IS_USE_UMENG="SP_IS_USE_UMENG";
+		public static final String SP_IS_USE_UMENG_MESSAGE="SP_IS_USE_UMENG_MESSAGE";
+		/**
 		 * 提示网络连接信息
 		 */
 		public static final String SP_ALIYUN_NETWORK_MESSAGE="SP_ALIYUN_NETWORK_MESSAGE";

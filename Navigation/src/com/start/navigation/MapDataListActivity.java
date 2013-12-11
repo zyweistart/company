@@ -21,8 +21,8 @@ import com.start.navigation.MapDataListActivity.MapDataPullListAdapter.MapDataVi
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
-import com.start.service.tasks.DecompressTask;
-import com.start.utils.CommonFn;
+import com.start.service.tasks.DownloadTask;
+import com.start.utils.NetConnectManager;
 import com.start.utils.Utils;
 
 /**
@@ -48,32 +48,18 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 
 					@Override
 					public void LoadData(LoadMode loadMode) {
-						if(!getAppContext().isLogin()){
-							
-							mapDataPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
-							mapDataPullListData.getListview_footer_more().setText(R.string.load_more);
-							mapDataPullListData.getListview_footer_progress().setVisibility(View.GONE);
-							mapDataPullListData.getPulllistview().onRefreshComplete();
-							
-							CommonFn.alertDialog(MapDataListActivity.this, R.string.msg_not_login, new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									startActivity(new Intent(MapDataListActivity.this,LoginActivity.class));
-								}
-								
-							}).show();
-							
-						}else{
-							Map<String,String> requestParams=new HashMap<String,String>();
-							requestParams.put("orderby","2");
-							mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,null,new UIRunnable(){
-								@Override
-								public void run() {
-									mapDataPullListData.getAdapter().notifyDataSetChanged();
-								} 
-							},"friendlist","friendlist"+TAG);
-						}
+						
+						Map<String,String> requestParams=new HashMap<String,String>();
+						requestParams.put("accessid",Constant.ACCESSID_LOCAL);
+						requestParams.put("orderby","2");
+						Map<String,String> headerParams=new HashMap<String,String>();
+						headerParams.put("sign", Constant.ACCESSKEY_LOCAL);
+						mapDataPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nOpenFriendList,requestParams,headerParams,new UIRunnable(){
+							@Override
+							public void run() {
+								mapDataPullListData.getAdapter().notifyDataSetChanged();
+							} 
+						},"friendlist","friendlist"+TAG);
 						
 					}
 					
@@ -143,24 +129,22 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 			.setMessage(R.string.msg_use_mobile_data)
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-//					if(NetConnectManager.isMobilenetwork(MapDataListActivity.this)){
-//						new AlertDialog.Builder(MapDataListActivity.this)
-//						.setIcon(android.R.drawable.ic_dialog_info)
-//						.setMessage(R.string.msg_use_mobile_data)
-//						.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int whichButton) {
-//								dialog.dismiss();
-//							}
-//						}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int whichButton) {
-//								new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
-//							}
-//						}).show();
-//					}else{
-//						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
-//					}
-					new DecompressTask(MapDataListActivity.this,"4544242@qq.com").execute();
-//					new ImportDataFileTask(MapDataListActivity.this,"4544242@qq.com").execute();
+					if(NetConnectManager.isMobilenetwork(MapDataListActivity.this)){
+						new AlertDialog.Builder(MapDataListActivity.this)
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setMessage(R.string.msg_use_mobile_data)
+						.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								dialog.dismiss();
+							}
+						}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+							}
+						}).show();
+					}else{
+						new DownloadTask(MapDataListActivity.this,vh.fileno).execute();
+					}
 				}
 			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {

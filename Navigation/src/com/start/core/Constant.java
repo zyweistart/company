@@ -95,6 +95,10 @@ public final class Constant {
 		public static final int EXITAPP=9991;
 	}
 	
+	public final class Bundle{
+		public static final String RELOGINMESSAGE="RELOGINMESSAGE";
+	}
+	
 	public final class SharedPreferences{
 		//当前使用的数据文件编号
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";

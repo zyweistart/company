@@ -86,18 +86,22 @@ public abstract class CoreActivity  extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		//测试环境下不做统计日志提交
 		if(!Constant.SYSTEMTEST){
-			//测试环境下不做统计日志提交
-			MobclickAgent.onResume(this);
+			if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG, true)){
+				MobclickAgent.onResume(this);
+			}
 		}
 	}
 	
 	@Override
 	public void onPause() {
 		super.onPause();
+		//测试环境下不做统计日志提交
 		if(!Constant.SYSTEMTEST){
-			//测试环境下不做统计日志提交
-			MobclickAgent.onPause(this);
+			if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferencesConstant.SP_IS_USE_UMENG, true)){
+				MobclickAgent.onPause(this);
+			}
 		}
 	}
 

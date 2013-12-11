@@ -158,7 +158,7 @@ public class DownloadTask extends AsyncTask<Void, Float, File> {
 	protected void onPostExecute(File result) {
 		pDialog.dismiss();
 		if(result.exists()){
-			new DecompressTask(mContext,"a586054a207abc9fe4fe4945e5c666dc").execute();
+			new DecompressTask(mContext,fileno).execute();
 		}
 	}
 }

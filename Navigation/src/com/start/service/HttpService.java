@@ -6,6 +6,8 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.start.core.Constant;
 import com.start.model.UIRunnable;
 import com.start.navigation.AppContext;
+import com.start.navigation.LoginActivity;
 import com.start.navigation.R;
 import com.start.utils.CommonFn;
 import com.start.utils.HttpUtils;
@@ -82,6 +85,8 @@ public class HttpService {
 								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
 								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
 								mAppContext.makeTextLong(R.string.msg_login_error);
+							}else if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.LOGINERROR)){
+								reLogin("登录超时");
 							}else{
 								mAppContext.makeTextLong(infoHead.get(XMLUtils.RequestXmLConstant.MSG));
 							}
@@ -188,7 +193,7 @@ public class HttpService {
 						if(headerParams!=null){
 							requestHeader.putAll(headerParams);
 						}
-						if(!requestParams.containsKey("sign")){
+						if(!requestHeader.containsKey("sign")){
 							requestParams.put("accessid", mAppContext.getAccessID());
 						}
 						String requestContent = XMLUtils.builderRequestXml(Url, requestParams);
@@ -231,8 +236,7 @@ public class HttpService {
 									}
 								});
 							}else if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.LOGINERROR)){
-//								reLogin(activity,infoHead.get(Constant.RequestXmLConstant.MSG));
-//								mAppContext.reLogin(mAppContext, "登录超时");
+								reLogin("登录超时");
 							}else if("110042".equals(infoHead.get(XMLUtils.RequestXmLConstant.CODE))){
 								//暂无记录
 								if(loadMode==LoadMode.HEAD){
@@ -314,6 +318,16 @@ public class HttpService {
 		HEAD,
 		//尾部刷新
 		FOOT
+	}
+	
+	public void reLogin(String message){
+		mAppContext.initUserInfo(null);
+		Bundle bundle=new Bundle();
+		bundle.putString("", message);
+		bundle.putString("", message);
+		Intent intent=new Intent(mActivity,LoginActivity.class);
+		intent.putExtras(bundle);
+		mActivity.startActivityForResult(intent, 0);
 	}
 	
 }
