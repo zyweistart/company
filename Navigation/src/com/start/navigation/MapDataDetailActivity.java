@@ -38,7 +38,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 		btnUse=(Button)findViewById(R.id.activity_map_data_use);
 		Bundle bundle=getIntent().getExtras();
 		if(bundle!=null){
-			fileno=bundle.getString(MapDataListActivity.FILENO);
+			fileno=bundle.getString(MapDataListActivity.RECORDNO);
 			Map<String,String> requestParams=new HashMap<String,String>();
 			requestParams.put("accessid",Constant.ACCESSID_LOCAL);
 			requestParams.put("recordno",fileno);

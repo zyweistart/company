@@ -35,7 +35,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 
 	private PullListViewData mapDataPullListData;
 	
-	public static final String FILENO="recordno";
+	public static final String RECORDNO="recordno";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				convertView.setTag(holder);
 			}
 			Map<String,String> data=mapDataPullListData.getDataItemList().get(position);
-			holder.fileno=data.get(FILENO);
+			holder.fileno=data.get(RECORDNO);
 			holder.name.setText(data.get("name"));
 			String filesize=data.get("filesize");
 			DecimalFormat df=new DecimalFormat("#.##");
@@ -170,7 +170,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 			}
 		}else if(v.getId()==R.id.lvitem_mapdata_btn_detail){
 			Bundle bundle=new Bundle();
-			bundle.putString(FILENO, vh.fileno);
+			bundle.putString(RECORDNO, vh.fileno);
 			Intent intent=new Intent(this,MapDataDetailActivity.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
