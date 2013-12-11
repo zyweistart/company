@@ -13,7 +13,7 @@ public class MapData extends CoreModel {
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ _ID + " TEXT,"
-			+ COLUMN_NAME_FILENO + " TEXT,"
+			+ COLUMN_NAME_NO + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_VERTEXID + " TEXT"
 			+ ");";

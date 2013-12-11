@@ -14,7 +14,7 @@ public class Department extends CoreModel {
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ COLUMN_NAME_ID + " TEXT,"
-			+ COLUMN_NAME_FILENO + " TEXT,"
+			+ COLUMN_NAME_NO + " TEXT,"
 			+ COLUMN_NAME_NAME + " TEXT,"
 			+ COLUMN_NAME_INTRODUCTION + " TEXT,"
 			+ COLUMN_NAME_MAJORROOMID + " TEXT"

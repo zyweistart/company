@@ -24,7 +24,7 @@ public class FriendHistoryService extends CoreService {
 				FriendHistory.COLUMN_NAME_FRIENDID,
 				FriendHistory.COLUMN_NAME_UPDATETIME},
 					FriendHistory.COLUMN_NAME_MYID+"=? AND "+
-						FriendHistory.COLUMN_NAME_FILENO+"=?",
+						FriendHistory.COLUMN_NAME_NO+"=?",
 						new String[]{myId,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
@@ -52,7 +52,7 @@ public class FriendHistoryService extends CoreService {
 				FriendHistory.COLUMN_NAME_UPDATETIME},
 				FriendHistory.COLUMN_NAME_MYID+"=? AND "+
 						FriendHistory.COLUMN_NAME_FRIENDID+"=? AND "+
-						FriendHistory.COLUMN_NAME_FILENO+"=?",
+						FriendHistory.COLUMN_NAME_NO+"=?",
 						new String[]{myId,friendId,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){

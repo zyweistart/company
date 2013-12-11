@@ -114,15 +114,12 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 				for (String fileName : processDir.list()) {
 					importProcess(new File(processDir,fileName),fileno+"/process/"+fileName);
 				}
-//				mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.ISPROCESS, true);
 				flag=true;
 			}catch(Exception e){
 				flag=false;
 				message = "Failed to import process.";
 				Log.e(DEBUG_TAG, e.getMessage());
 			}
-		}else{
-//			mAppContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.ISPROCESS, false);
 		}
 		return flag;
 	}
@@ -144,7 +141,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==4){
 					ContentValues values=new ContentValues();
-					values.put(Department.COLUMN_NAME_FILENO, fileno);
+					values.put(Department.COLUMN_NAME_NO, fileno);
 					values.put(Department._ID, data[0]);
 					values.put(Department.COLUMN_NAME_NAME, data[1]);
 					values.put(Department.COLUMN_NAME_INTRODUCTION, data[2]);
@@ -161,7 +158,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==2){
 					ContentValues values=new ContentValues();
-					values.put(DepartmentHasRoom.COLUMN_NAME_FILENO, fileno);
+					values.put(DepartmentHasRoom.COLUMN_NAME_NO, fileno);
 					values.put(DepartmentHasRoom.COLUMN_NAME_DEPARTMENTID, data[0]);
 					values.put(DepartmentHasRoom.COLUMN_NAME_ROOMID, data[1]);
 					mCoreService.insert(DepartmentHasRoom.TABLE_NAME,values);
@@ -176,7 +173,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==4){
 					ContentValues values=new ContentValues();
-					values.put(Room.COLUMN_NAME_FILENO, fileno);
+					values.put(Room.COLUMN_NAME_NO, fileno);
 					values.put(Room.COLUMN_NAME_MAPID, data[0]);
 					values.put(Room._ID, data[1]);
 					values.put(Room.COLUMN_NAME_NAME, data[2]);
@@ -193,7 +190,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==3){
 					ContentValues values=new ContentValues();
-					values.put(RoomArea.COLUMN_NAME_FILENO, fileno);
+					values.put(RoomArea.COLUMN_NAME_NO, fileno);
 					values.put(RoomArea.COLUMN_NAME_ROOMID, data[0]);
 					values.put(RoomArea.COLUMN_NAME_LATITUDE, data[1]);
 					values.put(RoomArea.COLUMN_NAME_LONGITUDE, data[2]);
@@ -209,7 +206,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==7){
 					ContentValues values=new ContentValues();
-					values.put(Doctor.COLUMN_NAME_FILENO, fileno);
+					values.put(Doctor.COLUMN_NAME_NO, fileno);
 					values.put(Doctor._ID, data[0]);
 					values.put(Doctor.COLUMN_NAME_NAME, data[1]);
 					values.put(Doctor.COLUMN_NAME_SEX, data[2]);
@@ -229,7 +226,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==4){
 					ContentValues values=new ContentValues();
-					values.put(Vertex.COLUMN_NAME_FILENO, fileno);
+					values.put(Vertex.COLUMN_NAME_NO, fileno);
 					values.put(Vertex.COLUMN_NAME_MAPID, data[0]);
 					values.put(Vertex.COLUMN_NAME_ID, data[1]);
 					values.put(Vertex.COLUMN_NAME_LATITUDE, data[2]);
@@ -246,7 +243,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==2){
 					ContentValues values=new ContentValues();
-					values.put(MapData.COLUMN_NAME_FILENO, fileno);
+					values.put(MapData.COLUMN_NAME_NO, fileno);
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
 					mCoreService.insert(MapData.TABLE_NAME,values);
@@ -261,7 +258,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 			for(String[] data:datas){
 				if(data.length==3){
 					ContentValues values=new ContentValues();
-					values.put(Edge.COLUMN_NAME_FILENO, fileno);
+					values.put(Edge.COLUMN_NAME_NO, fileno);
 					values.put(Edge._ID, data[0]);
 					values.put(Edge.COLUMN_NAME_VERTEXSTARTID, data[1]);
 					values.put(Edge.COLUMN_NAME_VERTEXENDID, data[2]);

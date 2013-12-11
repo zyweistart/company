@@ -12,7 +12,7 @@ public class DepartmentHasRoom extends CoreModel {
 	public static final String CREATE_TABLE_SQL = 
 			"CREATE TABLE " + TABLE_NAME + " ("
 			+ _ID + " INTEGER PRIMARY KEY,"
-			+ COLUMN_NAME_FILENO + " TEXT,"
+			+ COLUMN_NAME_NO + " TEXT,"
 			+ COLUMN_NAME_DEPARTMENTID + " TEXT,"
 			+ COLUMN_NAME_ROOMID + " TEXT"
 			+ ");";

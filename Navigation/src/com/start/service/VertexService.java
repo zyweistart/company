@@ -26,7 +26,7 @@ public class VertexService extends CoreService {
 					Vertex.COLUMN_NAME_MAPID,
 					Vertex.COLUMN_NAME_LATITUDE,
 					Vertex.COLUMN_NAME_LONGITUDE},
-					Vertex.COLUMN_NAME_ID+" = ? AND "+Vertex.COLUMN_NAME_FILENO+" = ?",
+					Vertex.COLUMN_NAME_ID+" = ? AND "+Vertex.COLUMN_NAME_NO+" = ?",
 					new String[]{id,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
@@ -56,7 +56,7 @@ public class VertexService extends CoreService {
 					Vertex.COLUMN_NAME_MAPID,
 					Vertex.COLUMN_NAME_LATITUDE,
 					Vertex.COLUMN_NAME_LONGITUDE},
-					Vertex.COLUMN_NAME_FILENO+" = ?",
+					Vertex.COLUMN_NAME_NO+" = ?",
 					new String[]{getCurrentDataNo()},
 					null, null, null);
 		try{
@@ -87,7 +87,7 @@ public class VertexService extends CoreService {
 					Vertex.COLUMN_NAME_MAPID,
 					Vertex.COLUMN_NAME_LATITUDE,
 					Vertex.COLUMN_NAME_LONGITUDE},
-					Vertex.COLUMN_NAME_MAPID+" = ? AND "+Vertex.COLUMN_NAME_FILENO+" = ?",
+					Vertex.COLUMN_NAME_MAPID+" = ? AND "+Vertex.COLUMN_NAME_NO+" = ?",
 					new String[]{mapId,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){

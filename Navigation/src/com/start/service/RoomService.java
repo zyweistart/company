@@ -29,7 +29,7 @@ public class RoomService extends CoreService {
 					Room.COLUMN_NAME_MAPID,
 					Room.COLUMN_NAME_NAME,
 					Room.COLUMN_NAME_VERTEXID},
-					Room.COLUMN_NAME_FILENO+" = ?",
+					Room.COLUMN_NAME_NO+" = ?",
 					new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){
@@ -59,7 +59,7 @@ public class RoomService extends CoreService {
 					Room.COLUMN_NAME_MAPID,
 					Room.COLUMN_NAME_NAME,
 					Room.COLUMN_NAME_VERTEXID},
-					Room.COLUMN_NAME_ID+" = ? AND "+Room.COLUMN_NAME_FILENO+" = ?",
+					Room.COLUMN_NAME_ID+" = ? AND "+Room.COLUMN_NAME_NO+" = ?",
 					new String[]{id,getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){

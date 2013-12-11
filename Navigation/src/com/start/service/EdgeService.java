@@ -26,7 +26,7 @@ public class EdgeService extends CoreService {
 				Edge.COLUMN_NAME_ID,
 				Edge.COLUMN_NAME_VERTEXSTARTID,
 				Edge.COLUMN_NAME_VERTEXENDID},
-				Edge.COLUMN_NAME_FILENO+" = ?",
+				Edge.COLUMN_NAME_NO+" = ?",
 				new String[]{getCurrentDataNo()}, null, null, null);
 		try{
 			if(cursor.moveToFirst()){

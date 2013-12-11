@@ -76,7 +76,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 										String fileno=getAppContext().getCurrentDataNo();
 										FriendHistory fh=getAppContext().getFriendHistoryService().findByMyIdAndFriendId(myId, friendId);
 										ContentValues values=new ContentValues();
-										values.put(FriendHistory.COLUMN_NAME_FILENO, fileno);
+										values.put(FriendHistory.COLUMN_NAME_NO, fileno);
 										values.put(FriendHistory.COLUMN_NAME_MYID, myId);
 										values.put(FriendHistory.COLUMN_NAME_FRIENDID, friendId);
 										values.put(FriendHistory.COLUMN_NAME_UPDATETIME, TimeUtils.getSysdate());
@@ -86,7 +86,7 @@ public class FriendRelationSetActivity extends CoreActivity implements OnClickLi
 											getAppContext().getFriendHistoryService().update(FriendHistory.TABLE_NAME, values,
 													FriendHistory.COLUMN_NAME_MYID+" = ? AND "+
 															FriendHistory.COLUMN_NAME_FRIENDID+" = ? AND "+
-																FriendHistory.COLUMN_NAME_FILENO+" = ?",
+																FriendHistory.COLUMN_NAME_NO+" = ?",
 													new String[]{myId,friendId,fileno});
 										}
 									}

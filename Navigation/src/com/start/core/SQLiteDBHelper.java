@@ -16,8 +16,8 @@ import com.start.model.Vertex;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
 
-	private static final String DATABASE_NAME="med_map.db";
 	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME="navigation.db";
 	
 	public SQLiteDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
