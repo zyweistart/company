@@ -63,15 +63,32 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			.setMessage(R.string.msg_you_are_sure_logout)
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					Boolean isChecked=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
-					if(isChecked){
-						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
-						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
-						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
-					}
-					getAppContext().initUserInfo(null);
-					llLogin.setVisibility(View.VISIBLE);
-					llLogout.setVisibility(View.GONE);
+					
+					Map<String,String> requestParams=new HashMap<String,String>();
+					getHttpService().exeNetRequest(Constant.ServerAPI.userLogout,requestParams,null,new UIRunnable() {
+						
+						@Override
+						public void run() {
+							
+							runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() {
+									Boolean isChecked=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
+									if(isChecked){
+										getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false);
+										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
+										getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
+									}
+									getAppContext().initUserInfo(null);
+									llLogin.setVisibility(View.VISIBLE);
+									llLogout.setVisibility(View.GONE);
+								}
+								
+							});
+						}
+					});
+					
 				}
 			}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {

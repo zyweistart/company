@@ -85,6 +85,10 @@ public final class Constant {
 		 * 数据文件下载
 		 */
 		public static final String hospitalDownload="hospitalDownload";
+		/**
+		 * 检测版本更新
+		 */
+		public static final String appverGet="appverGet";
 		
 		/**
 		 * 上传位置信息
@@ -94,10 +98,6 @@ public final class Constant {
 		 * 获取好友位置列表
 		 */
 		public static final String nFriendLocationList="ufriendoQuery";
-		/**
-		 * 检测版本更新
-		 */
-		public static final String appverGet="appverGet";
 		
 	}
 	

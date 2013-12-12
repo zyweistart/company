@@ -54,7 +54,7 @@
     <string name="msg_two_password_not_diff">两次密码输入不一致</string>
     <string name="msg_friendid_not_empty">好友ID不能为空</string>
     <string name="msg_send_code_success">验证码已发送，请查看你的邮箱！</string>
-    <string name="msg_you_are_sure_logout">确定退出登录吗?</string>
+    <string name="msg_you_are_sure_logout">确定退出登录，并清除自己的位置信息吗?</string>
     <string name="msg_friend_manager">好友管理</string>
     <string name="msg_relieve_friend_relation_success">解除成功，好友将无法定位到你的位置!</string>
     <string name="msg_sure_navigation_to_friend_location">确定导航到当前好友的位置点吗?</string>
