@@ -126,7 +126,6 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private MapData mCurrentMapData;//当前使用的地图
 	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
 	private ArrayItemizedOverlay mMyLocOverlay;
-//	private OverlayItem mMyLocMarker;//我的位置覆盖图
 	private MyLocationMarker mMyLocMarker;
 	private ListView mMapIndexListView;//地图索引视图列表
 	private MapDataAdapter mMapDataAdapter;//地图索引适配器
@@ -329,10 +328,8 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		} else if (v.getId() == R.id.module_main_header_content_location) {
 			//TODO:在此插入用户的定位及位置上传代码
 			appContext.makeTextLong(R.string.msg_locationing);
-//			MyLocation myLocation = appContext.getMyLocation();
-//			0.0007377;0.0010457
-			MyLocation myLocation =new MyLocation("0102", new GeoPoint(0.0006463,0.0014099));
-			
+			MyLocation myLocation = appContext.getMyLocation();
+//			MyLocation myLocation =new MyLocation("0102", new GeoPoint(0.0006463,0.0014099));
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
