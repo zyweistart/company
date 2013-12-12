@@ -2,7 +2,7 @@ package com.start.model.overlay;
 
 import java.io.Serializable;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 public interface POI extends Serializable {
 

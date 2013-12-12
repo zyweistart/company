@@ -2,7 +2,7 @@ package com.start.model;
 
 import java.util.List;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import com.start.core.CoreModel;
 import com.start.model.nav.Lasso;
@@ -119,7 +119,7 @@ public class Room extends CoreModel implements POI {
 			mPolyY[i]=Double.parseDouble(ras.get(i).getLongitude());
 		}
 		Lasso lasso=new Lasso(mPolyX,mPolyY,ras.size());
-		return lasso.contains(p.latitude, p.longitude);
+		return lasso.contains(p.getLatitude(), p.getLongitude());
 	}
 
 }

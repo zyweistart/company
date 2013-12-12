@@ -38,7 +38,7 @@ public abstract class CoreActivity extends Activity{
 		}
 		return httpService;
 	}
-
+	
 	public AppContext getAppContext(){
 		return AppContext.getInstance();
 	}

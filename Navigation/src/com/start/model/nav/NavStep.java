@@ -2,7 +2,7 @@ package com.start.model.nav;
 
 import java.util.ArrayList;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import com.start.model.Vertex;
 

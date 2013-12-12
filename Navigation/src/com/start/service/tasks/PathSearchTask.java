@@ -1,6 +1,6 @@
 package com.start.service.tasks;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import android.app.ProgressDialog;
 import android.content.Context;

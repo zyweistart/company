@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import android.util.Log;
 
@@ -70,7 +70,7 @@ public class Graph extends ArrayList<LinkedList<Short>> {
 	 */
 	public Vertex getClosestVertex(GeoPoint geoPoint,String mapId) {
 		double minDist = Double.MAX_VALUE;
-		double longitude = geoPoint.longitude, latitude = geoPoint.latitude;
+		double longitude = geoPoint.getLongitude(), latitude = geoPoint.getLatitude();
 
 		Vertex target = null;
 		for (Vertex v : vertexMap.values()) {

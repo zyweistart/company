@@ -1,8 +1,12 @@
 package com.start.navigation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.start.core.Constant;
 import com.start.core.CoreActivity;
+import com.start.model.UIRunnable;
 
 /**
  * 设置
@@ -82,58 +87,59 @@ public class MoreActivity extends CoreActivity implements OnClickListener {
 			startActivity(new Intent(this,MapDataListActivity.class));
 		} else if (v.getId() == R.id.more_new_version_check) {
 			//版本检测
-			makeTextLong(R.string.msg_last_version);
-//			Map<String,String> requestParams=new HashMap<String,String>();
-//			requestParams.put("type","6");
-//			requestParams.put("termtype","7");
-//			Map<String,String> headerParams=new HashMap<String,String>();
-//			headerParams.put("sign","");
-//			getHttpService().exeNetRequest(Constant.ServerAPI.nVersionCheck,requestParams,headerParams,new UIRunnable() {
-//				
-//				@Override
-//				public void run() {
-//					Map<String,String> data=getContent().get("versioninfo");
-//					final Integer maxVersion=Integer.parseInt(data.get("maxverno"));
-//					final Integer minVersion=Integer.parseInt(data.get("minverno"));
-//					final String url=data.get("url");
-//					final int currentVersionCode=getAppContext().getSharedPreferencesUtils().getInteger(Constant.SharedPreferences.CURRENTVERSIONCODE,0);
-//					runOnUiThread(new Runnable() {
-//						
-//						@Override
-//						public void run() {
-//							if(minVersion>currentVersionCode){
-//								new AlertDialog.Builder(MoreActivity.this)
-//								.setMessage(R.string.msg_have_new_version_1)
-//								.setCancelable(false)
-//								.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//									public void onClick(DialogInterface dialog, int whichButton) {
-//										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
-//										startActivity(fIntent);
-//										setResult(Constant.ActivityResultCode.EXITAPP);
-//										finish();
-//									}
-//								}).show();
-//							}else if(maxVersion>currentVersionCode){
-//								new AlertDialog.Builder(MoreActivity.this)
-//								.setIcon(android.R.drawable.ic_dialog_info)
-//								.setMessage(R.string.msg_have_new_version_2)
-//								.setPositiveButton(R.string.msg_upgrade_now, new DialogInterface.OnClickListener() {
-//									public void onClick(DialogInterface dialog, int whichButton) {
-////										new DownloadAppTask().execute(url);
-//									}
-//								}).setNegativeButton(R.string.msg_later, new DialogInterface.OnClickListener() {
-//									public void onClick(DialogInterface dialog, int whichButton) {
-//										dialog.dismiss();
-//									}
-//								}).show();
-//							}else{
-//								makeTextLong(R.string.msg_last_version);
-//							}
-//						}
-//						
-//					});
-//				}
-//			});
+			Map<String,String> requestParams=new HashMap<String,String>();
+			requestParams.put("accessid",Constant.ACCESSID_LOCAL);
+			requestParams.put("termtype","1");
+			Map<String,String> headerParams=new HashMap<String,String>();
+			headerParams.put("sign",Constant.ACCESSKEY_LOCAL);
+			getHttpService().exeNetRequest(Constant.ServerAPI.appverGet,requestParams,headerParams,new UIRunnable() {
+				
+				@Override
+				public void run() {
+					
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							Map<String,String> data=getContent().get("appverinfo");
+							final Integer maxVersion=Integer.parseInt(data.get("maxversionno"));
+							final Integer minVersion=Integer.parseInt(data.get("minversionno"));
+							final String url=data.get("site");
+							int currentVersionCode=getAppContext().getCurrentVersionCode();
+							if(minVersion>currentVersionCode){
+								new AlertDialog.Builder(MoreActivity.this)
+								.setMessage(R.string.msg_have_new_version_1)
+								.setCancelable(false)
+								.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+										startActivity(fIntent);
+										setResult(Constant.ActivityResultCode.EXITAPP);
+										finish();
+									}
+								}).show();
+							}else if(maxVersion>currentVersionCode){
+								new AlertDialog.Builder(MoreActivity.this)
+								.setIcon(android.R.drawable.ic_dialog_info)
+								.setMessage(R.string.msg_have_new_version_2)
+								.setPositiveButton(R.string.msg_upgrade_now, new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+										Intent fIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+										startActivity(fIntent);
+									}
+								}).setNegativeButton(R.string.msg_later, new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+										dialog.dismiss();
+									}
+								}).show();
+							}else{
+								makeTextLong(R.string.msg_last_version);
+							}
+						}
+						
+					});
+				}
+			});
 		}else if(v.getId()==R.id.more_modifypwd){
 			startActivity(new Intent(this,ModifyPwdActivity.class));
 		}else if(v.getId()==R.id.more_btn_exit_app){

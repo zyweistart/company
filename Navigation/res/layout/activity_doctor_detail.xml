@@ -7,6 +7,33 @@
     
 	<include layout="@layout/module_main_header" />
 	
+	<RelativeLayout 
+	    android:id="@+id/doctor_detail_department"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/tabs_bar_bg"
+	    android:onClick="onClick"
+	    android:padding="10.0dip">
+	
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentLeft="true"
+	        android:textColor="@color/lvitem_textcolor"
+	        android:textSize="@dimen/lvitem_textsize1"
+	        android:text="所属部门"/>
+	    
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+	        android:src="@drawable/more_arrow"
+	        android:contentDescription="@string/empty"/>
+	    
+	</RelativeLayout>
+	
 	<TextView
 	    	 android:id="@+id/activity_doctor_detail_content" 
          android:layout_width="match_parent"

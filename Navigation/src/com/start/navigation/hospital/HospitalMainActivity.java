@@ -9,12 +9,12 @@ import java.util.Map;
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
-import org.mapsforge.android.maps.overlay.ListOverlay;
-import org.mapsforge.android.maps.overlay.Marker;
+import org.mapsforge.android.maps.overlay.ArrayItemizedOverlay;
+import org.mapsforge.android.maps.overlay.ArrayWayOverlay;
+import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
-import org.mapsforge.android.maps.overlay.PolygonalChain;
-import org.mapsforge.android.maps.overlay.Polyline;
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.android.maps.overlay.OverlayWay;
+import org.mapsforge.core.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.app.AlertDialog;
@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -73,8 +74,8 @@ import com.start.navigation.AppContext;
 import com.start.navigation.LoginActivity;
 import com.start.navigation.MoreActivity;
 import com.start.navigation.R;
-import com.start.service.HttpService.LoadMode;
 import com.start.service.HttpService;
+import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
 import com.start.service.adapter.FriendLocationAdapter;
@@ -124,7 +125,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private GestureDetector mGestureDetector;
 	private MapData mCurrentMapData;//当前使用的地图
 	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
-	private MyLocationMarker mMyLocMarker;//我的位置覆盖图
+	private ArrayItemizedOverlay mMyLocOverlay;
+//	private OverlayItem mMyLocMarker;//我的位置覆盖图
+	private MyLocationMarker mMyLocMarker;
 	private ListView mMapIndexListView;//地图索引视图列表
 	private MapDataAdapter mMapDataAdapter;//地图索引适配器
 	private Map<String, List<Room>> mRooms;//地图上房间的集合
@@ -137,7 +140,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private ListView mModuleMainFrameMapQueryList;
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
-	private Map<String, ViewCollections> mMapViewCollections = new HashMap<String, ViewCollections>();
+	private Map<String, MapView> mMapViewCollections = new HashMap<String, MapView>();
 	
 	private ProcessService process;
 	private Button mModuleMainFrameProcessNext;
@@ -177,15 +180,22 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				setCurPoint(1);
 			}
 			Department department=appContext.getDepartmentService().findById(currentLocationDepartmentId);
-			if(department!=null){
-				Room room=appContext.getRoomService().findById(department.getMajorRoomId());
+			List<DepartmentHasRoom> departmentHasRooms=appContext.getDepartmentHasRoomService().findByDepartmentId(currentLocationDepartmentId);
+			for(DepartmentHasRoom dhr:departmentHasRooms){
+				Room room=appContext.getRoomService().findById(dhr.getRoomId());
 				if(room!=null){
-					
-					mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
-							.getMapDataPositionByMapId(room.getMapId()));
-					setMapFile();
-					tapPOI(room);
-					
+					if(mPoiMarkers==null){
+						mPoiMarkers=new ArrayList<POIMarker>();
+					}
+					mPoiMarkers.add(new POIMarker(room, getResources().getDrawable(R.drawable.icon_node)));
+					if(department!=null){
+						if(department.getMajorRoomId().equals(room.getId())){
+							mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
+									.getMapDataPositionByMapId(room.getMapId()));
+							setMapFile();
+							tapPOI(room);
+						}
+					}
 				}
 			}
 			currentLocationDepartmentId=null;
@@ -319,7 +329,10 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		} else if (v.getId() == R.id.module_main_header_content_location) {
 			//TODO:在此插入用户的定位及位置上传代码
 			appContext.makeTextLong(R.string.msg_locationing);
-			MyLocation myLocation = appContext.getMyLocation();
+//			MyLocation myLocation = appContext.getMyLocation();
+//			0.0007377;0.0010457
+			MyLocation myLocation =new MyLocation("0102", new GeoPoint(0.0006463,0.0014099));
+			
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
@@ -359,9 +372,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 
 	@Override
 	public void onClickAt(float xPixel, float yPixel) {
-		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
+		MapView mv = mMapViewCollections.get(mCurrentMapData.getId());
 
-		Projection projection = vc.getMapView().getProjection();
+		Projection projection = mv.getProjection();
 		if (projection == null) {
 			return;
 		}
@@ -740,18 +753,23 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 
 		for (int i = 0; i < mapDatas.size(); i++) {
 			MapData md = mapDatas.get(i);
-			ViewCollections vc = new ViewCollections();
+			MapView mapView;
+			mapView = new MapView(HospitalMainActivity.this);
+			mapView.setBuiltInZoomControls(true);
+			mapView.setClickable(true);
+			mapView.setOnTouchListener(HospitalMainActivity.this);
+			mapView.setVisibility(View.GONE);
 
 			String path = String.format("mapdata/%1$s.map",md.getId());
 			File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),path);
-			FileOpenResult openResult = vc.getMapView().setMapFile(dataFile);
+			FileOpenResult openResult = mapView.setMapFile(dataFile);
 			if (!openResult.isSuccess()) {
 				return;
 			}
-
-			container.addView(vc.getMapView(), 0);
+			mapView.getController().setZoom(20);
+			container.addView(mapView, 0);
 			
-			mMapViewCollections.put(md.getId(), vc);
+			mMapViewCollections.put(md.getId(), mapView);
 		}
 
 		mMapDataAdapter = new MapDataAdapter(getLayoutInflater());
@@ -794,11 +812,11 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
 
 		for (String mapId : mMapViewCollections.keySet()) {
-			ViewCollections vc = mMapViewCollections.get(mapId);
+			MapView mv = mMapViewCollections.get(mapId);
 			if (mapId.equals(mCurrentMapData.getId())) {
-				vc.getMapView().setVisibility(View.VISIBLE);
+				mv.setVisibility(View.VISIBLE);
 			} else {
-				vc.getMapView().setVisibility(View.GONE);
+				mv.setVisibility(View.GONE);
 			}
 		}
 
@@ -810,68 +828,59 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	 */
 	private void updateOverlay() {
 
-		ArrayList<OverlayItem> markers = getMarkers();
-		Polyline routeLine = getRouteLine();
+		MapView mv = mMapViewCollections.get(mCurrentMapData.getId());
 
-		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
-
-		List<OverlayItem> itemList = vc.getListOverlay().getOverlayItems();
+		List<Overlay> itemList = mv.getOverlays();
 		synchronized (itemList) {
 			itemList.clear();
-
-//			if (mRooms != null) {
-//				List<Room> rooms = mRooms.get(mCurrentMapData.getId());
-//				List<GeoPoint> gps = new ArrayList<GeoPoint>();
-//				for (Room r : rooms) {
-//					List<RoomArea> ras = appContext.getRoomAreaService().findAllByRoomId(r.getId());
-//					for (RoomArea ra : ras) {
-//						gps.add(new GeoPoint(Double.parseDouble(ra.getLatitude()), Double.parseDouble(ra.getLongitude())));
-//					}
-//				}
-//				PolygonalChain pc = new PolygonalChain(gps);
-//				Polyline arealine = new Polyline(pc,appContext.getPaintStroke());
-//				itemList.add(arealine);
-//			}
 			
-			boolean isSetCenterPoint=true;
-			if (markers != null || routeLine != null) {
-				if (markers != null) {
-					itemList.addAll(markers);
-				}
-				if (routeLine != null) {
-					itemList.add(routeLine);
-				}
+			//添加我的位置覆盖点
+			MyLocation myLocation = appContext.getMyLocation();
+//			addMyLocMarker(myLocation);
+			if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
+				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
+				mMyLocOverlay = new ArrayItemizedOverlay(d);
+				mMyLocMarker=new MyLocationMarker(myLocation, d);
+				mMyLocOverlay.addItem(mMyLocMarker);
+				itemList.add(mMyLocOverlay);
 			}
 			
-			MyLocation myLocation = appContext.getMyLocation();
-			addMyLocMarker(myLocation);
+			//覆盖点
+			ArrayItemizedOverlay overlay=getArrayItemizedOverlay();
+			if (overlay != null) {
+				itemList.add(overlay);
+			}
+			
+			//路线
+			ArrayWayOverlay ways=getWayOverlay();
+			if (ways != null) {
+				itemList.add(ways);
+			}
 			
 			if(mPoiMarkers!=null){
-				ArrayList<OverlayItem> poiMarkers = new ArrayList<OverlayItem>();
+				Boolean isSetCenterPoint=true;
+				Drawable d=getResources().getDrawable(R.drawable.icon_node);
+				ArrayItemizedOverlay poiOverlays=new ArrayItemizedOverlay(d);
 				for(POIMarker marker:mPoiMarkers){
 					if(mCurrentMapData.getId().equals(marker.getPOI().getMapId())){
-						poiMarkers.add(marker);
+						poiOverlays.addItem(marker);
 						if(isSetCenterPoint){
 							// 设置当前第一个目标位置点为中心点
-							vc.getMapView().getMapViewPosition().setCenter(marker.getPOI().getGeoPoint());
+							mv.setCenter(marker.getPOI().getGeoPoint());
 							isSetCenterPoint=false;
 						}
 					}
 				}
-				itemList.addAll(poiMarkers);
+				itemList.add(poiOverlays);
 			}
-			
-			if(isSetCenterPoint){
-				vc.getMapView().getMapViewPosition().setCenter(vc.getMapView().getMapViewPosition().getCenter());
-			}
-			
 		}
+		
 	}
 
 	/**
 	 * 获取地图上的覆盖图
 	 */
-	private ArrayList<OverlayItem> getMarkers() {
+	private ArrayItemizedOverlay getArrayItemizedOverlay() {
 		PathSearchResult res = appContext.getPathSearchResult();
 		if (res == null) {
 			return null;
@@ -887,31 +896,22 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			return null;
 		}
 
-		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
+		MapView mv = mMapViewCollections.get(mCurrentMapData.getId());
 
-		vc.getMapView().getMapViewPosition()
-				.setCenter(step.getStart().getGeoPoint());
-		ArrayList<OverlayItem> markers = new ArrayList<OverlayItem>();
-		Marker lineStart = new Marker(step.getStart().getGeoPoint(),
-				Marker.boundCenter(getResources().getDrawable(
-						R.drawable.icon_node)));
-		markers.add(lineStart);
+		mv.setCenter(step.getStart().getGeoPoint());
+		
+		ArrayItemizedOverlay arrayItems = new ArrayItemizedOverlay(getResources().getDrawable(R.drawable.icon_node));
+		arrayItems.addItem(new OverlayItem(step.getStart().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
 
 		if (step.getEnd() != null) {
-			Marker lineEnd = new Marker(step.getEnd().getGeoPoint(),
-					Marker.boundCenter(getResources().getDrawable(
-							R.drawable.icon_node)));
-			markers.add(lineEnd);
+			arrayItems.addItem(new OverlayItem(step.getEnd().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
 		}
 
 		if (res.getStartPoint() instanceof IndoorEndPoint) {
 			IndoorEndPoint start = (IndoorEndPoint) res.getStartPoint();
 			// 如果终点位置在当前地图上则添加起点覆盖图
 			if (start.getMapId().equals(mCurrentMapData.getId())) {
-				Marker searchStart = new Marker(start.getGeoPoint(),
-						Marker.boundCenterBottom(getResources().getDrawable(
-								R.drawable.icon_nav_start)));
-				markers.add(searchStart);
+				arrayItems.addItem(new OverlayItem(start.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_start))));
 			}
 		}
 
@@ -919,20 +919,16 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			IndoorEndPoint end = (IndoorEndPoint) res.getEndPoint();
 			// 如果终点在当前地图则添加终点覆盖图
 			if (end.getMapId().equals(mCurrentMapData.getId())) {
-				Marker searchEnd = new Marker(end.getGeoPoint(),
-						Marker.boundCenterBottom(getResources().getDrawable(
-								R.drawable.icon_nav_end)));
-				markers.add(searchEnd);
+				arrayItems.addItem(new OverlayItem(end.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_end))));
 			}
 		}
-
-		return markers;
+		return arrayItems;
 	}
 
 	/**
 	 * 获取地图上覆盖的路线
 	 */
-	private Polyline getRouteLine() {
+	private ArrayWayOverlay getWayOverlay() {
 
 		PathSearchResult result = appContext.getPathSearchResult();
 		if (result == null) {
@@ -948,13 +944,16 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if (step == null) {
 			return null;
 		}
-
-		Polyline routeLine = null;
-		if (step.size() > 1) {
-			PolygonalChain pc = new PolygonalChain(step);
-			routeLine = new Polyline(pc, appContext.getPaintStroke());
+		
+		OverlayWay way = new OverlayWay();
+		GeoPoint[][] nodes = new GeoPoint[1][step.size()];
+		for (int i = 0; i < step.size(); i++) {
+			nodes[0][i] = step.get(i);
 		}
-		return routeLine;
+		way.setWayNodes(nodes);
+		ArrayWayOverlay ways = new ArrayWayOverlay(null, appContext.getPaintStroke());
+		ways.addWay(way);
+		return ways;
 	}
 
 	/**
@@ -963,23 +962,20 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private void addMyLocMarker(MyLocation myLocation) {
 		// 如果当前定位的位置与当前的地图相同则添加位置标记
 		if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
-			if (mMyLocMarker == null) {
-				mMyLocMarker = new MyLocationMarker(myLocation,
-						Marker.boundCenter(getResources().getDrawable(
-								R.drawable.ic_my_loc)));
-			} else {
-				mMyLocMarker.updateLocation(myLocation);
+			
+			if(mMyLocOverlay==null){
+				MapView mv = mMapViewCollections.get(mCurrentMapData.getId());
+				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
+				mMyLocOverlay = new ArrayItemizedOverlay(d);
+				mMyLocMarker=new MyLocationMarker(myLocation, d);
+				mMyLocOverlay.addItem(mMyLocMarker);
+				mv.getOverlays().add(mMyLocOverlay);
+			}else{
+				mMyLocOverlay.clear();
+				mMyLocMarker.setPoint(myLocation.getGeoPoint());
+				mMyLocOverlay.addItem(mMyLocMarker);
 			}
-
-			ViewCollections vc = mMapViewCollections.get(mCurrentMapData
-					.getId());
-
-			List<OverlayItem> itemList = vc.getListOverlay().getOverlayItems();
-			synchronized (itemList) {
-				if (!itemList.contains(mMyLocMarker)) {
-					itemList.add(mMyLocMarker);
-				}
-			}
+			
 		}
 	}
 
@@ -989,36 +985,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		data.putSerializable(BUNDLEDATA_DATA, poi);
 		showDialog(Utils.DLG_POI, data);
 
-		ViewCollections vc = mMapViewCollections.get(mCurrentMapData.getId());
+		MapView mv = mMapViewCollections.get(mCurrentMapData.getId());
 
-		vc.getMapView().getMapViewPosition().setCenter(poi.getGeoPoint());
-	}
-	
-	private class ViewCollections {
-
-		private MapView mapView;
-		private ListOverlay listOverlay;
-
-		public ViewCollections() {
-			mapView = new MapView(HospitalMainActivity.this);
-			mapView.setBuiltInZoomControls(true);
-			mapView.setClickable(true);
-			mapView.setOnTouchListener(HospitalMainActivity.this);
-
-			listOverlay = new ListOverlay();
-			mapView.getOverlays().add(listOverlay);
-
-			mapView.setVisibility(View.GONE);
-		}
-
-		public MapView getMapView() {
-			return mapView;
-		}
-
-		public ListOverlay getListOverlay() {
-			return listOverlay;
-		}
-
+		mv.setCenter(poi.getGeoPoint());
 	}
 	
 }

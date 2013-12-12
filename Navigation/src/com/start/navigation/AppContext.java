@@ -2,10 +2,12 @@ package com.start.navigation;
 
 import java.util.Map;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
@@ -59,6 +61,16 @@ public class AppContext extends Application {
 	public String getDeviceId(){
 		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
 		return tm.getDeviceId();
+	}
+	
+	public int getCurrentVersionCode(){
+		try {
+			PackageInfo packInfo = getPackageManager().getPackageInfo(getPackageName(),0);
+			return packInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	public SharedPreferencesUtils getSharedPreferencesUtils() {

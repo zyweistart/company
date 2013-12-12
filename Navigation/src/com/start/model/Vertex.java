@@ -1,6 +1,6 @@
 package com.start.model;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 import com.start.core.CoreModel;
 

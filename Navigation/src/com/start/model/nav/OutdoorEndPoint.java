@@ -1,6 +1,6 @@
 package com.start.model.nav;
 
-import org.mapsforge.core.model.GeoPoint;
+import org.mapsforge.core.GeoPoint;
 
 public class OutdoorEndPoint implements EndPoint {
 

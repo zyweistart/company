@@ -1,9 +1,13 @@
 package com.start.navigation.hospital;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.start.core.CoreActivity;
+import com.start.model.Department;
 import com.start.model.Doctor;
 import com.start.navigation.R;
 
@@ -12,15 +16,17 @@ import com.start.navigation.R;
  * @author start
  *
  */
-public class DoctorDetailActivity extends CoreActivity{
+public class DoctorDetailActivity extends CoreActivity implements OnClickListener{
 
+	private Doctor doctor;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_detail);
 		
 		String doctorId=getIntent().getExtras().getString(Doctor.COLUMN_NAME_ID);
-		Doctor doctor=getAppContext().getDoctorService().findById(doctorId);
+		doctor=getAppContext().getDoctorService().findById(doctorId);
 		if(doctor!=null){
 			setCurrentActivityTitle(doctor.getName());
 			TextView tv=(TextView)findViewById(R.id.activity_doctor_detail_content);
@@ -29,6 +35,17 @@ public class DoctorDetailActivity extends CoreActivity{
 			finish();
 		}
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v.getId()==R.id.doctor_detail_department){
+			Bundle bundle=new Bundle();
+			bundle.putString(Department.COLUMN_NAME_ID, doctor.getDepartmentId());
+			Intent intent=new Intent(this,DepartmentDetailActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
 	}
 
 }

@@ -12,6 +12,6 @@ public class MyLocationMarker extends POIMarker {
 	
 	public void updateLocation(MyLocation newLocation) {
 		this.poi = newLocation;
-		setGeoPoint(newLocation.getGeoPoint());
+		setPoint(newLocation.getGeoPoint());
 	}
 }

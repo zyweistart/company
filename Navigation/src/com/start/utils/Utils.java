@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.mapsforge.core.GeoPoint;
+
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -152,8 +154,8 @@ public class Utils {
 	 * @param longitude
 	 * @return
 	 */
-	public static org.mapsforge.core.model.GeoPoint toMFPoint(double latitude, double longitude) {
-		return new org.mapsforge.core.model.GeoPoint(latitude, longitude);
+	public static GeoPoint toMFPoint(double latitude, double longitude) {
+		return new GeoPoint(latitude, longitude);
 	}
 
 	/**

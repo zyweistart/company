@@ -97,7 +97,7 @@ public final class Constant {
 		/**
 		 * 检测版本更新
 		 */
-		public static final String nVersionCheck="versioninfoGet";
+		public static final String appverGet="appverGet";
 		
 	}
 	
