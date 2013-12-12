@@ -14,6 +14,7 @@ import com.start.core.Constant;
 import com.start.core.CoreActivity;
 import com.start.model.UIRunnable;
 import com.start.service.HttpService.LoadMode;
+import com.start.service.HttpService;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
 import com.start.service.adapter.FriendRelationAdapter;
@@ -52,7 +53,7 @@ public class FriendRelationListActivity extends CoreActivity implements OnClickL
 					public void LoadData(LoadMode loadMode) {
 						if(!getAppContext().isLogin()){
 							
-							friendRelationData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							friendRelationData.getPulllistview().setTag(HttpService.LISTVIEW_DATA_MORE);
 							friendRelationData.getListview_footer_more().setText(R.string.load_more);
 							friendRelationData.getListview_footer_progress().setVisibility(View.GONE);
 							friendRelationData.getPulllistview().onRefreshComplete();

@@ -28,6 +28,11 @@ import com.start.widget.PullToRefreshListView;
 
 public class HttpService {
 	
+	public final static int LISTVIEW_DATA_MORE = 0x01;
+	public final static int LISTVIEW_DATA_LOADING = 0x02;
+	public final static int LISTVIEW_DATA_FULL = 0x03;
+	public final static int LISTVIEW_DATA_EMPTY = 0x04;
+	
 	private Activity mActivity;
 	private AppContext mAppContext;
 	
@@ -132,7 +137,7 @@ public class HttpService {
 						for(Map<String,String> content:mapXML.get(DATALIST)){
 							listDatas.add(content);
 						}
-						pListView.setTag(Constant.LISTVIEW_DATA_MORE);
+						pListView.setTag(LISTVIEW_DATA_MORE);
 						mFooterMoreTitle.setText(R.string.load_more);
 						mFooterMoreProgressBar.setVisibility(View.GONE);
 						mActivity.runOnUiThread(new Runnable() {
@@ -157,8 +162,8 @@ public class HttpService {
 			} catch (Exception e) {
 				scrollEnd = false;
 			}
-			if(scrollEnd&&StringUtils.toInt(pListView.getTag())==Constant.LISTVIEW_DATA_MORE){
-				pListView.setTag(Constant.LISTVIEW_DATA_LOADING);
+			if(scrollEnd&&StringUtils.toInt(pListView.getTag())==LISTVIEW_DATA_MORE){
+				pListView.setTag(LISTVIEW_DATA_LOADING);
 				mFooterMoreTitle.setText(R.string.load_ing);
 				mFooterMoreProgressBar.setVisibility(View.VISIBLE);
 			}else{
@@ -269,21 +274,21 @@ public class HttpService {
 								//如果当前为刷新状态获取的数据为空
 								if(flag){
 									if(num>=Constant.PAGESIZE){
-										pListView.setTag(Constant.LISTVIEW_DATA_MORE);
+										pListView.setTag(LISTVIEW_DATA_MORE);
 										mFooterMoreTitle.setText(R.string.load_more);
 									}else{
 										//加载完毕
-										pListView.setTag(Constant.LISTVIEW_DATA_FULL);
+										pListView.setTag(LISTVIEW_DATA_FULL);
 										mFooterMoreTitle.setText(R.string.load_full);
 									}
 								}else{
 									if(loadMode==LoadMode.FOOT){
 										//加载完毕
-										pListView.setTag(Constant.LISTVIEW_DATA_FULL);
+										pListView.setTag(LISTVIEW_DATA_FULL);
 										mFooterMoreTitle.setText(R.string.load_full);
 									}else{
 										//数据为空
-										pListView.setTag(Constant.LISTVIEW_DATA_EMPTY);
+										pListView.setTag(LISTVIEW_DATA_EMPTY);
 										mFooterMoreTitle.setText(R.string.load_empty);
 									}
 								}
@@ -299,7 +304,7 @@ public class HttpService {
 				}}).start();
 		}else{
 			CommonFn.settingNetwork(mActivity);
-			pListView.setTag(Constant.LISTVIEW_DATA_MORE);
+			pListView.setTag(LISTVIEW_DATA_MORE);
 			mFooterMoreTitle.setText(R.string.load_more);
 			mFooterMoreProgressBar.setVisibility(View.GONE);
 			if(loadMode==LoadMode.HEAD){

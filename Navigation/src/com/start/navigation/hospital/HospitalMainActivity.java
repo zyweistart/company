@@ -74,6 +74,7 @@ import com.start.navigation.LoginActivity;
 import com.start.navigation.MoreActivity;
 import com.start.navigation.R;
 import com.start.service.HttpService.LoadMode;
+import com.start.service.HttpService;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
 import com.start.service.adapter.FriendLocationAdapter;
@@ -680,7 +681,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 							},"friendlist","friendlist"+TAG);
 						}else{
 							
-							friendLocationPullListData.getPulllistview().setTag(Constant.LISTVIEW_DATA_MORE);
+							friendLocationPullListData.getPulllistview().setTag(HttpService.LISTVIEW_DATA_MORE);
 							friendLocationPullListData.getListview_footer_more().setText(R.string.load_more);
 							friendLocationPullListData.getListview_footer_progress().setVisibility(View.GONE);
 							friendLocationPullListData.getPulllistview().onRefreshComplete();

@@ -8,10 +8,27 @@ import android.widget.TextView;
 import com.start.navigation.AppContext;
 import com.start.navigation.R;
 import com.start.service.HttpService;
+import com.umeng.analytics.MobclickAgent;
 
 public abstract class CoreActivity extends Activity{
 
 	protected final String TAG=this.getClass().getSimpleName();
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(!Constant.ISTEST){
+			MobclickAgent.onResume(this);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if(!Constant.ISTEST){
+			MobclickAgent.onPause(this);
+		}
+	}
 	
 	private HttpService httpService;
 	
