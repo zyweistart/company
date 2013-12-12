@@ -49,8 +49,9 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 		if(bundle!=null){
 			makeTextLong(bundle.getString(Constant.Bundle.RELOGINMESSAGE));
 		}
-		if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false)){
-			ckAutoLogin.setChecked(true);
+		Boolean isChecked=getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, true);
+		ckAutoLogin.setChecked(isChecked);
+		if(isChecked){
 			String account=getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
 			if(!TextUtils.isEmpty(account)){
 				etName.setText(account);

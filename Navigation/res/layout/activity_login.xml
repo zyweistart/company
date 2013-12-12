@@ -106,7 +106,6 @@
             android:layout_alignParentLeft="true"
             android:background="@null"
             android:button="@null"
-            android:checked="true"
             android:drawableLeft="@drawable/checkbox_bg"
             android:textColor="#878883"
 		    android:textSize="15.0dip"
