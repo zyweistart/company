@@ -13,6 +13,7 @@
     <string name="logout">注销</string>
     <string name="register">注册</string>
     
+    <string name="msg_login_timeout">登录超时</string>
     <string name="msg_navigation_hospital">医院导航</string>
     <string name="msg_navigation_library">图书馆</string>
     <string name="msg_exit_app">退出应用</string>

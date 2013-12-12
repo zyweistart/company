@@ -91,7 +91,7 @@ public class HttpService {
 								mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
 								mAppContext.makeTextLong(R.string.msg_login_error);
 							}else if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.LOGINERROR)){
-								reLogin("登录超时");
+								reLogin(R.string.msg_login_timeout);
 							}else{
 								mAppContext.makeTextLong(infoHead.get(XMLUtils.RequestXmLConstant.MSG));
 							}
@@ -241,7 +241,7 @@ public class HttpService {
 									}
 								});
 							}else if(infoHead.get(XMLUtils.RequestXmLConstant.CODE).equals(XMLUtils.RequestXmLConstant.LOGINERROR)){
-								reLogin("登录超时");
+								reLogin(R.string.msg_login_timeout);
 							}else if("110042".equals(infoHead.get(XMLUtils.RequestXmLConstant.CODE))){
 								//暂无记录
 								if(loadMode==LoadMode.HEAD){
@@ -325,14 +325,26 @@ public class HttpService {
 		FOOT
 	}
 	
+	/**
+	 * 重新登录
+	 * @param resId
+	 */
+	public void reLogin(int resId){
+		reLogin(mActivity.getString(resId));
+	}
+	
+	/**
+	 * 重新登录
+	 * @param message
+	 */
 	public void reLogin(String message){
 		mAppContext.initUserInfo(null);
+		mAppContext.getSharedPreferencesUtils().putString(Constant.SharedPreferences.LOGIN_PASSWORD, Constant.EMPTYSTR);
 		Bundle bundle=new Bundle();
-		bundle.putString("", message);
-		bundle.putString("", message);
+		bundle.putString(Constant.Bundle.RELOGINMESSAGE, message);
 		Intent intent=new Intent(mActivity,LoginActivity.class);
 		intent.putExtras(bundle);
-		mActivity.startActivityForResult(intent, 0);
+		mActivity.startActivity(intent);
 	}
 	
 }

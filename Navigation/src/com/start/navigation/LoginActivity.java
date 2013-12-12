@@ -45,6 +45,10 @@ public class LoginActivity extends CoreActivity implements  OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Bundle bundle=getIntent().getExtras();
+		if(bundle!=null){
+			makeTextLong(bundle.getString(Constant.Bundle.RELOGINMESSAGE));
+		}
 		if(getAppContext().getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.LOGIN_AUTOLOGIN, false)){
 			ckAutoLogin.setChecked(true);
 			String account=getAppContext().getSharedPreferencesUtils().getString(Constant.SharedPreferences.LOGIN_ACCOUNT, Constant.EMPTYSTR);
