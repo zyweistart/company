@@ -120,7 +120,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 	
 	@Override
 	protected void onMainUpdate(int what){
-		if(what==HANDLERUPDATEMAINTHREAD){
+		if(what==Constant.Handler.HANDLERUPDATEMAINTHREAD){
 			btnDownload.setVisibility(View.GONE);
 			btnUse.setVisibility(View.VISIBLE);
 		}

@@ -129,7 +129,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 	protected void onPostExecute(Boolean result) {
 		pDialog.dismiss();
 		if (result) {
-			mContext.handler.sendEmptyMessage(CoreActivity.HANDLERUPDATEMAINTHREAD);
+			mContext.handler.sendEmptyMessage(Constant.Handler.HANDLERUPDATEMAINTHREAD);
 		}else{
 			mAppContext.makeTextShort(message);
 		}

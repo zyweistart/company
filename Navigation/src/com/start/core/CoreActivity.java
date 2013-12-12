@@ -70,8 +70,6 @@ public abstract class CoreActivity extends Activity{
 		}
 	}
 	
-	public static final int HANDLERUPDATEMAINTHREAD=0x438217;
-	
 	public Handler handler = new Handler() {
 		
 		@Override

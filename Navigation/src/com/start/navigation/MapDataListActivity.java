@@ -179,7 +179,7 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 	
 	@Override
 	protected void onMainUpdate(int what){
-		if(what==HANDLERUPDATEMAINTHREAD){
+		if(what==Constant.Handler.HANDLERUPDATEMAINTHREAD){
 			mapDataPullListData.getAdapter().notifyDataSetChanged();
 		}
 	}

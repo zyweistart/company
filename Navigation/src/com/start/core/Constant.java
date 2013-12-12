@@ -27,9 +27,19 @@ public final class Constant {
 	public static final String EMPTYSTR="";
 	public static final String ENCODE="UTF-8";
 	
-	public static final String DATADIRFILE="/navigation/data/";//数据主目录
-	public static final String TMPDIRFILE="/navigation/tmp/";//临时目录
+	//数据主目录
+	public static final String DATADIRFILE="/navigation/data/";
+	//临时目录
+	public static final String TMPDIRFILE="/navigation/tmp/";
 
+	public final class ActivityResultCode{
+		public static final int EXITAPP=9991;
+	}
+	
+	public final class Bundle{
+		public static final String RELOGINMESSAGE="RELOGINMESSAGE";
+	}
+	
 	public final class ServerAPI{
 		/**
 		 * 验证码获取
@@ -87,14 +97,6 @@ public final class Constant {
 		
 	}
 	
-	public final class ActivityResultCode{
-		public static final int EXITAPP=9991;
-	}
-	
-	public final class Bundle{
-		public static final String RELOGINMESSAGE="RELOGINMESSAGE";
-	}
-	
 	public final class SharedPreferences{
 		//当前使用的数据文件编号
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
@@ -106,6 +108,10 @@ public final class Constant {
 		public static final String LOGIN_ACCOUNT="LOGIN_ACCOUNT";
 		//当前登录的密码
 		public static final String LOGIN_PASSWORD="LOGIN_PASSWORD";
+	}
+	
+	public final class Handler{
+		public static final int HANDLERUPDATEMAINTHREAD=0x438217;
 	}
 	
 }
