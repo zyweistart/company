@@ -85,6 +85,7 @@ import com.start.utils.CommonFn;
 import com.start.utils.Utils;
 import com.start.widget.OnTapMapListener;
 import com.start.widget.OnTapMapListener.OnTapMapClickListener;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 主界面
@@ -165,6 +166,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(!Constant.ISTEST){
+			MobclickAgent.onResume(this);
+		}
 		mapButtonCancel.setVisibility(View.GONE);
 		mapLLQueryContentContainer.setVisibility(View.GONE);
 		mapQuery.clearFocus();
@@ -195,7 +199,15 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			setCurPoint(-1);
 		}
 	}
-
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if(!Constant.ISTEST){
+			MobclickAgent.onPause(this);
+		}
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

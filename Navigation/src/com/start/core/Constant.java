@@ -54,6 +54,10 @@ public final class Constant {
 		 */
 		public static final String userpwdReset="userpwdReset";
 		/**
+		 * 退出
+		 */
+		public static final String userLogout="userLogout";
+		/**
 		 * 登录
 		 */
 		public static final String userLogin="userLogin";

@@ -106,6 +106,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 						//使用当前数据
 						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, fileno);
 						makeTextLong(R.string.msg_switching_datafile_success);
+						handler.sendEmptyMessage(Constant.Handler.HANDLERUPDATEMAINTHREAD);
 					}
 				}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
@@ -121,8 +122,13 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 	@Override
 	protected void onMainUpdate(int what){
 		if(what==Constant.Handler.HANDLERUPDATEMAINTHREAD){
-			btnDownload.setVisibility(View.GONE);
-			btnUse.setVisibility(View.VISIBLE);
+			if(!getAppContext().getCurrentDataNo().equals(fileno)){
+				btnDownload.setVisibility(View.GONE);
+				btnUse.setVisibility(View.VISIBLE);
+			}else{
+				btnDownload.setVisibility(View.GONE);
+				btnUse.setVisibility(View.GONE);
+			}
 		}
 	}
 
