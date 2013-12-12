@@ -96,7 +96,7 @@ public class LogUtils {
 	}
 
 	public static void logError(Exception e) {
-		if(Constant.SYSTEMTEST){
+		if(Constant.ISTEST){
 			e.printStackTrace();
 		}
 		log(ERROR, e.getLocalizedMessage()+"====>"+e.getMessage());

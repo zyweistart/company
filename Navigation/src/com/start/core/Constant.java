@@ -10,16 +10,16 @@ public final class Constant {
 	 * true:测试环境
 	 * false:正式环境
 	 */
-	public static final boolean SYSTEMTEST=false;
+	public static final boolean ISTEST=true;
 
-	public static final String RESTURL=SYSTEMTEST?
-			"http://115.236.89.210:8888/accore/http/HttpService"://公司外网
+	public static final String RESTURL=ISTEST?
+			"http://account.chinacloudapp.cn:81/http/HttpService"://公司外网
 			"http://account.chinacloudapp.cn:81/http/HttpService";//正式地址
 	
-	public static final String ACCESSID_LOCAL=SYSTEMTEST?
+	public static final String ACCESSID_LOCAL=ISTEST?
 			"e75cf0bee6850378bdb606e13172018e":
 			"e75cf0bee6850378bdb606e13172018e";
-	public static final String ACCESSKEY_LOCAL=SYSTEMTEST?
+	public static final String ACCESSKEY_LOCAL=ISTEST?
 			"NDBmOTE2NWZlYTdhZWNlNTE0OTQyYmYxMWNjNGI0NTg=":
 			"NDBmOTE2NWZlYTdhZWNlNTE0OTQyYmYxMWNjNGI0NTg=";
 	
@@ -92,11 +92,6 @@ public final class Constant {
 		
 	}
 	
-	/**
-	 * Activity返回代码
-	 * @author start
-	 *
-	 */
 	public final class ActivityResultCode{
 		public static final int EXITAPP=9991;
 	}
