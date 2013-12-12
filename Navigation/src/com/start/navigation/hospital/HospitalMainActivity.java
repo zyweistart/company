@@ -178,24 +178,26 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			if(mCurSel!=1){
 				setCurPoint(1);
 			}
+			Room majorRoom=null;
+			mPoiMarkers=new ArrayList<POIMarker>();
 			Department department=appContext.getDepartmentService().findById(currentLocationDepartmentId);
 			List<DepartmentHasRoom> departmentHasRooms=appContext.getDepartmentHasRoomService().findByDepartmentId(currentLocationDepartmentId);
 			for(DepartmentHasRoom dhr:departmentHasRooms){
 				Room room=appContext.getRoomService().findById(dhr.getRoomId());
 				if(room!=null){
-					if(mPoiMarkers==null){
-						mPoiMarkers=new ArrayList<POIMarker>();
-					}
 					mPoiMarkers.add(new POIMarker(room, getResources().getDrawable(R.drawable.icon_node)));
 					if(department!=null){
 						if(department.getMajorRoomId().equals(room.getId())){
-							mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
-									.getMapDataPositionByMapId(room.getMapId()));
-							setMapFile();
-							tapPOI(room);
+							majorRoom=room;
 						}
 					}
 				}
+			}
+			if(majorRoom!=null){
+				mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
+						.getMapDataPositionByMapId(majorRoom.getMapId()));
+				setMapFile();
+				tapPOI(majorRoom);
 			}
 			currentLocationDepartmentId=null;
 		}
