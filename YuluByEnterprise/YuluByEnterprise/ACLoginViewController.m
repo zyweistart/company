@@ -126,9 +126,13 @@
         [[Config Instance] setIsLogin:YES];
         [[Config Instance] setIsCalculateTotal:YES];
         [[Config Instance] setUserInfo:[[response mainData] objectForKey:@"v4info"]];
+        
+        
+        
+        
         //企业版用户无法登录
-        if([@"2" isEqualToString:[[[Config Instance]userInfo]objectForKey:@"usertype"]]) {
-            [Common alert:@"您的号码属于政企用户，目前尚不能使用APP登录，如需通话录音可直接拨打95105856"];
+        if([@"1" isEqualToString:[[[Config Instance]userInfo]objectForKey:@"usertype"]]) {
+            [Common alert:@"仅适用于企业及机构手机用户"];
             return;
         }
         [[Config Instance] setCacheKey:[NSString stringWithFormat:@"cache_%@",phone]];
@@ -170,7 +174,7 @@
         _tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              dialViewControllerNav,
                                              contactViewControllerNav,
-                                             accountViewControllerNav,
+//                                             accountViewControllerNav,
                                              recordingManagerViewControllerNav,
                                              moreViewControllerNav,
                                              nil];

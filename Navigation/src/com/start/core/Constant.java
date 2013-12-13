@@ -89,15 +89,14 @@ public final class Constant {
 		 * 检测版本更新
 		 */
 		public static final String appverGet="appverGet";
-		
 		/**
-		 * 上传位置信息
+		 * 用户位置上报
 		 */
-		public static final String nUploadMyLocation="";
+		public static final String userposReport="userposReport";
 		/**
-		 * 获取好友位置列表
+		 * 向我开放位置权限的好友查询
 		 */
-		public static final String nFriendLocationList="ufriendoQuery";
+		public static final String ufriendiQuery="ufriendiQuery";
 		
 	}
 	

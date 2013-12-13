@@ -2,8 +2,6 @@ package com.start.navigation;
 
 import java.util.Map;
 
-import org.mapsforge.core.GeoPoint;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -222,7 +220,8 @@ public class AppContext extends Application {
 	}
 	
 	public MyLocation getMyLocation(){
-		return new MyLocation("0102", new GeoPoint(0.0007388,0.0012458));
+//		return new MyLocation("0102", "0.0007388","0.0012458");
+		return new MyLocation("0102", "0.0006463","0.0014099");
 	}
 	
 	public void makeTextShort(int resId) {

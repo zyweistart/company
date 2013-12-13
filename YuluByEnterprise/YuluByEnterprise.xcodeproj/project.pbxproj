@@ -622,10 +622,10 @@
 		C9B21A17183B58FE0058788D /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		C9B21A18183B58FE0058788D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		C9B21A19183B58FE0058788D /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		C9B21A1A183B58FE0058788D /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
-		C9B21A1B183B58FE0058788D /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
-		C9B21A1C183B58FE0058788D /* NSString+OAURLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OAURLEncodingAdditions.h"; sourceTree = "<group>"; };
-		C9B21A1D183B58FE0058788D /* NSString+OAURLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OAURLEncodingAdditions.m"; sourceTree = "<group>"; };
+		C9B21A1A183B58FE0058788D /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+MutableDeepCopy.h"; path = "../NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
+		C9B21A1B183B58FE0058788D /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+MutableDeepCopy.m"; path = "../NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
+		C9B21A1C183B58FE0058788D /* NSString+OAURLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+OAURLEncodingAdditions.h"; path = "../NSString+OAURLEncodingAdditions.h"; sourceTree = "<group>"; };
+		C9B21A1D183B58FE0058788D /* NSString+OAURLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+OAURLEncodingAdditions.m"; path = "../NSString+OAURLEncodingAdditions.m"; sourceTree = "<group>"; };
 		C9B21A1F183B58FE0058788D /* aboutus-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutus-568h@2x.png"; sourceTree = "<group>"; };
 		C9B21A20183B58FE0058788D /* aboutus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutus@2x.png"; sourceTree = "<group>"; };
 		C9B21A21183B58FE0058788D /* button_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gb.png; sourceTree = "<group>"; };
@@ -1022,6 +1022,10 @@
 		C9B21933183B58FE0058788D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C9B21A1A183B58FE0058788D /* NSDictionary+MutableDeepCopy.h */,
+				C9B21A1B183B58FE0058788D /* NSDictionary+MutableDeepCopy.m */,
+				C9B21A1C183B58FE0058788D /* NSString+OAURLEncodingAdditions.h */,
+				C9B21A1D183B58FE0058788D /* NSString+OAURLEncodingAdditions.m */,
 				C9B21934183B58FE0058788D /* BaseRefreshTableViewController.h */,
 				C9B21935183B58FE0058788D /* BaseRefreshTableViewController.m */,
 				C9B21936183B58FE0058788D /* BaseTableViewController.h */,
@@ -1565,10 +1569,6 @@
 				C95151BD185AA0650033FEA0 /* View */,
 				C95151BC185A9FF80033FEA0 /* Cell */,
 				C95151BB185A9FB70033FEA0 /* Controller */,
-				C9B21A1A183B58FE0058788D /* NSDictionary+MutableDeepCopy.h */,
-				C9B21A1B183B58FE0058788D /* NSDictionary+MutableDeepCopy.m */,
-				C9B21A1C183B58FE0058788D /* NSString+OAURLEncodingAdditions.h */,
-				C9B21A1D183B58FE0058788D /* NSString+OAURLEncodingAdditions.m */,
 				C95151BA185A9FAE0033FEA0 /* XIB */,
 			);
 			name = UI;

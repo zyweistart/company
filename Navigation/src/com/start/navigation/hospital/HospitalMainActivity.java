@@ -146,7 +146,8 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private ImageView mModuleMainFrameProcessImage;
 	
 	private PullListViewData friendLocationPullListData;
-	
+	private HttpService httpService;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -154,6 +155,8 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 
 		appContext = AppContext.getInstance();
 
+		httpService=new HttpService(this);
+		
 		this.initHeaderView();
 		this.initFooterView();
 		this.initMainFrameView();
@@ -328,14 +331,30 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				}
 			}
 		} else if (v.getId() == R.id.module_main_header_content_location) {
-			//TODO:在此插入用户的定位及位置上传代码
 			appContext.makeTextLong(R.string.msg_locationing);
-			MyLocation myLocation = appContext.getMyLocation();
-//			MyLocation myLocation =new MyLocation("0102", new GeoPoint(0.0006463,0.0014099));
+			final MyLocation myLocation = appContext.getMyLocation();
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
 			addMyLocMarker(myLocation);
+			//未登录则不上报位置信息
+			if(appContext.isLogin()){
+				Map<String,String> requestParams=new HashMap<String,String>();
+				requestParams.put("maprecordno",appContext.getCurrentDataNo());
+				requestParams.put("submapno", myLocation.getMapId());
+				requestParams.put("latitude", myLocation.getLatitude());
+				requestParams.put("longitude", myLocation.getLongitude());
+				httpService.exeNetRequest(null,Constant.ServerAPI.userposReport,requestParams,null,new UIRunnable() {
+					
+					@Override
+					public void run() {
+						
+						appContext.makeTextLong("已成功定位");
+						
+					}
+				});
+			}
+			
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(isTabDepartment){
@@ -695,9 +714,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 					public void LoadData(LoadMode loadMode) {
 						if(appContext.isLogin()){
 							Map<String,String> requestParams=new HashMap<String,String>();
+							requestParams.put("maprecordno",appContext.getCurrentDataNo());
 							requestParams.put("orderby","2");
-							requestParams.put("recordno",appContext.getCurrentDataNo());
-							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.nFriendLocationList,requestParams,null,new UIRunnable(){
+							friendLocationPullListData.sendPullToRefreshListViewNetRequest(loadMode,Constant.ServerAPI.ufriendiQuery,requestParams,null,new UIRunnable(){
 								@Override
 								public void run() {
 									friendLocationPullListData.getAdapter().notifyDataSetChanged();
@@ -945,10 +964,26 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		}
 		
 		OverlayWay way = new OverlayWay();
-		GeoPoint[][] nodes = new GeoPoint[1][step.size()];
-		for (int i = 0; i < step.size(); i++) {
+		int size=step.size();
+		GeoPoint[][] nodes = new GeoPoint[1][size];
+		for (int i = 0; i < size; i++) {
 			nodes[0][i] = step.get(i);
 		}
+		
+//		if (result.getStartPoint() instanceof IndoorEndPoint) {
+//			IndoorEndPoint start = (IndoorEndPoint) result.getStartPoint();
+//			if (start.getMapId().equals(mCurrentMapData.getId())) {
+//				nodes[0][++size]=start.getGeoPoint();
+//			}
+//		}
+//
+//		if (result.getEndPoint() instanceof IndoorEndPoint) {
+//			IndoorEndPoint end = (IndoorEndPoint) result.getEndPoint();
+//			if (end.getMapId().equals(mCurrentMapData.getId())) {
+//				nodes[0][++size]=end.getGeoPoint();
+//			}
+//		}
+		
 		way.setWayNodes(nodes);
 		ArrayWayOverlay ways = new ArrayWayOverlay(null, appContext.getPaintStroke());
 		ways.addWay(way);

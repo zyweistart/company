@@ -4,12 +4,14 @@ import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.start.navigation.AppContext;
 import com.start.navigation.R;
 import com.start.navigation.hospital.HospitalMainActivity;
 import com.start.service.PullListViewData;
@@ -18,11 +20,13 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 		
 		private HospitalMainActivity mActivity;
 		private PullListViewData mPullListViewData;
+		private AppContext mAppContext;
 	
 		public FriendLocationAdapter(HospitalMainActivity activity,PullListViewData pullListViewData) {
 			pullListViewData.super();
 			this.mActivity=activity;
 			this.mPullListViewData=pullListViewData;
+			this.mAppContext=AppContext.getInstance();
 		}
 
 		@Override
@@ -41,7 +45,7 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 					
 					@Override
 					public void onClick(View v) {
-						FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
+						final FriendRelationViewHolder vh=(FriendRelationViewHolder)v.getTag();
 						if(vh!=null){
 							
 							new AlertDialog.Builder(mActivity)
@@ -49,11 +53,15 @@ public class FriendLocationAdapter extends PullListViewData.DataAdapter{
 							.setMessage(R.string.msg_sure_navigation_to_friend_location)
 							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
-//									Map<String,String> data=vh.data;
-//									String mapId=data.get("mapId");
-//									String latitude=data.get("latitude");
-//									String longitude=data.get("longitude");
-									mActivity.location("0101","0.0007071","0.0012444");
+									Map<String,String> data=vh.data;
+									String mapId=data.get("submapno");
+									String latitude=data.get("latitude");
+									String longitude=data.get("longitude");
+									if(!TextUtils.isEmpty(mapId)&&!TextUtils.isEmpty(latitude)&&!TextUtils.isEmpty(longitude)){
+										mActivity.location(mapId,latitude,longitude);
+									}else{
+										mAppContext.makeTextLong(R.string.msg_location_unavailable);
+									}
 								}
 							}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
