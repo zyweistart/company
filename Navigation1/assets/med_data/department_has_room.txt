@@ -1,3 +1,0 @@
-departmentId,roomId
-1;0101018
-2;0101005
