@@ -126,7 +126,7 @@ public class HttpService {
 			final UIRunnable uiRunnable,
 			final String DATALIST,
 			final String TAGName){
-		final String CACHE_TAG=String.format("%s",TAGName);
+		final String CACHE_TAG=String.format("%s,%s",mAppContext.getMyID(),TAGName);
 		if(loadMode==LoadMode.INIT){
 			String xmlContent=mAppContext.getSharedPreferencesUtils().getString(CACHE_TAG, Constant.EMPTYSTR);
 			if(!StringUtils.isEmpty(xmlContent)){
