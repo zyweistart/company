@@ -116,7 +116,11 @@
 }
 
 - (IBAction)cancelextraction:(id)sender{
-    [Common actionSheet:self message:@"确定撤销提取？" tag:1];
+    if([[Config Instance]isAuth:auth_v4recalter8]){
+        [Common actionSheet:self message:@"确定撤销提取？" tag:1];
+    }else{
+        [Common alert:@"暂无权限"];
+    }
 }
 
 - (void)back:(id)sender{

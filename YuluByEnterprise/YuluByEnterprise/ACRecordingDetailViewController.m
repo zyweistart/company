@@ -201,10 +201,14 @@
 }
 
 - (IBAction)notary:(id)sender {
-    if([[_mainData objectForKey:@"cerflag"] isEqualToString:@"1"]){
-        [Common actionSheet:self message:@"您确定将该录音提交至公证机构申办公证吗？" tag:1];
-    }else if([[_mainData objectForKey:@"cerflag"] isEqualToString:@"2"]){
-        [Common actionSheet:self message:@"您确定要取消该录音申办公证吗？" tag:2];
+    if([[Config Instance] isMaster]){
+        if([[_mainData objectForKey:@"cerflag"] isEqualToString:@"1"]){
+            [Common actionSheet:self message:@"您确定将该录音提交至公证机构申办公证吗？" tag:1];
+        }else if([[_mainData objectForKey:@"cerflag"] isEqualToString:@"2"]){
+            [Common actionSheet:self message:@"您确定要取消该录音申办公证吗？" tag:2];
+        }
+    }else{
+        [Common alert:@"暂无权限"];
     }
 }
 
@@ -220,7 +224,11 @@
         [_recordingDetailHttp setRequestCode:REQUESTCODE_ACExtractionDetailViewController_view];
         [_recordingDetailHttp loginhandle:@"v4recAcccode" requestParams:requestParams];
     }else if([[_mainData objectForKey:@"accstatus"] isEqualToString:@"2"]){
-        [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
+        if([[Config Instance]isAuth:auth_v4recalter8]){
+            [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
+        }else{
+            [Common alert:@"暂无权限"];
+        }
     }
 }
 
@@ -231,22 +239,26 @@
 
 //提交备注
 - (void)submitRemark:(id)sender{
-    NSString *remark=_tv_remark.text;
-    if([remark isEqualToString:@""]){
-        [Common alert:@"请输入备注内容"];
-    } else if([remark length]>100) {
-        [Common alert:@"备注长度请在100字以内"];
-    } else {
-        [_tv_remark resignFirstResponder];
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:_fileno forKey:@"fileno"];
-        [requestParams setObject:remark forKey:@"remark"];
-        _recordingDetailHttp=[[HttpRequest alloc]init];
-        [_recordingDetailHttp setDelegate:self];
-        [_recordingDetailHttp setController:self];
-        [_recordingDetailHttp setIsShowMessage:YES];
-        [_recordingDetailHttp setRequestCode:REQUESTCODE_SUBMITREMARK];
-        [_recordingDetailHttp loginhandle:@"v4recRemark" requestParams:requestParams];
+    if([[Config Instance]isAuth:auth_v4recremark]){
+        NSString *remark=_tv_remark.text;
+        if([remark isEqualToString:@""]){
+            [Common alert:@"请输入备注内容"];
+        } else if([remark length]>100) {
+            [Common alert:@"备注长度请在100字以内"];
+        } else {
+            [_tv_remark resignFirstResponder];
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:_fileno forKey:@"fileno"];
+            [requestParams setObject:remark forKey:@"remark"];
+            _recordingDetailHttp=[[HttpRequest alloc]init];
+            [_recordingDetailHttp setDelegate:self];
+            [_recordingDetailHttp setController:self];
+            [_recordingDetailHttp setIsShowMessage:YES];
+            [_recordingDetailHttp setRequestCode:REQUESTCODE_SUBMITREMARK];
+            [_recordingDetailHttp loginhandle:@"v4recRemark" requestParams:requestParams];
+        }
+    }else{
+        [Common alert:@"暂无权限"];
     }
 }
 

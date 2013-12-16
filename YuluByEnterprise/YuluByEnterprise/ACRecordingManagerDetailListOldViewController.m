@@ -264,16 +264,20 @@
             [_playerView player:path dictionary:dictionary];
         }else{
             if([[Config Instance]isLogin]){
-                NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-                [requestParams setObject:@"1" forKey:@"status"];
-                [requestParams setObject:fileno forKey:@"fileno"];
-                _managerHttp=[[HttpRequest alloc]init];
-                [_managerHttp setDelegate:self];
-                [_managerHttp setIsFileDownload:YES];
-                [_managerHttp setPropertys:dictionary];
-                [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
-                [_managerHttp setController:self];
-                [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
+                if([[Config Instance]isAuth:auth_v4recdown1]){
+                    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+                    [requestParams setObject:@"1" forKey:@"status"];
+                    [requestParams setObject:fileno forKey:@"fileno"];
+                    _managerHttp=[[HttpRequest alloc]init];
+                    [_managerHttp setDelegate:self];
+                    [_managerHttp setIsFileDownload:YES];
+                    [_managerHttp setPropertys:dictionary];
+                    [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
+                    [_managerHttp setController:self];
+                    [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
+                }else{
+                    [Common alert:@"暂无权限"];
+                }
             }else{
                 [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
                 [Common noLoginAlert:self];
@@ -300,16 +304,20 @@
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if([self.dataItemArray count]>[indexPath row]){
         if(editingStyle==UITableViewCellEditingStyleDelete){
-            _currentDictionary=[[NSMutableDictionary alloc]initWithDictionary:[self.dataItemArray objectAtIndex:indexPath.row]];
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:@"请输入密码"
-                                  message:@"录音删除后将无法恢复，确定删除?"
-                                  delegate:self
-                                  cancelButtonTitle:@"确定"
-                                  otherButtonTitles:@"取消",nil];
-            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-            alert.tag=1;
-            [alert show];
+            if([[Config Instance]isAuth:auth_v4recalter1]){
+                _currentDictionary=[[NSMutableDictionary alloc]initWithDictionary:[self.dataItemArray objectAtIndex:indexPath.row]];
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:@"请输入密码"
+                                      message:@"录音删除后将无法恢复，确定删除?"
+                                      delegate:self
+                                      cancelButtonTitle:@"确定"
+                                      otherButtonTitles:@"取消",nil];
+                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                alert.tag=1;
+                [alert show];
+            }else{
+                [Common alert:@"暂无权限"];
+            }
         }
     }
 }
@@ -319,13 +327,16 @@
         [_playerView stop];
     }
     if([self.dataItemArray count]>[indexPath row]){
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
-        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
-        [detailViewController setResultDelegate:self];
-        detailViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailViewController animated:YES];
-        
+        if([[Config Instance]isAuth:auth_v4recget1]){
+            NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+            ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
+            [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
+            [detailViewController setResultDelegate:self];
+            detailViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:detailViewController animated:YES];
+        }else{
+            [Common alert:@"暂无权限"];
+        }
     }
 }
 
@@ -343,35 +354,40 @@
 
 - (void) reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
-        _reloading = YES;
-        [self.tableView reloadData];
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"1" forKey:@"status"];
-        [requestParams setObject:@"" forKey:@"calltype"];
-        [requestParams setObject:@"2" forKey:@"rectype"];
-        [requestParams setObject:@"" forKey:@"oppno"];
-        [requestParams setObject:@"" forKey:@"callerno"];
-        [requestParams setObject:@"" forKey:@"calledno"];
-        [requestParams setObject:@"" forKey:@"begintime"];
-        [requestParams setObject:@"" forKey:@"endtime"];
-        [requestParams setObject:@"" forKey:@"durmin"];
-        [requestParams setObject:@"" forKey:@"durmax"];
-        [requestParams setObject:@"" forKey:@"licno"];
-        [requestParams setObject:@"" forKey:@"accstatus"];
-        [requestParams setObject:@"" forKey:@"cerflag"];
-        [requestParams setObject:@"" forKey:@"remark"];
-        [requestParams setObject:@"1" forKey:@"phoneflag"];
-        [requestParams setObject:@"" forKey:@"userno"];
-        [requestParams setObject:@"" forKey:@"phone"];
-        [requestParams setObject:@"" forKey:@"grouprecordno"];
-        [requestParams setObject:@"" forKey:@"groupflag"];
-        [requestParams setObject:@"desc" forKey:@"ordersort"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _managerHttp=[[HttpRequest alloc]init];
-        [_managerHttp setDelegate:self];
-        [_managerHttp setController:self];
-        [_managerHttp loginhandle:@"v4recQry" requestParams:requestParams];
+        if([[Config Instance]isAuth:auth_4recqry1]){
+            _reloading = YES;
+            [self.tableView reloadData];
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:@"1" forKey:@"status"];
+            [requestParams setObject:@"" forKey:@"calltype"];
+            [requestParams setObject:@"2" forKey:@"rectype"];
+            [requestParams setObject:@"" forKey:@"oppno"];
+            [requestParams setObject:@"" forKey:@"callerno"];
+            [requestParams setObject:@"" forKey:@"calledno"];
+            [requestParams setObject:@"" forKey:@"begintime"];
+            [requestParams setObject:@"" forKey:@"endtime"];
+            [requestParams setObject:@"" forKey:@"durmin"];
+            [requestParams setObject:@"" forKey:@"durmax"];
+            [requestParams setObject:@"" forKey:@"licno"];
+            [requestParams setObject:@"" forKey:@"accstatus"];
+            [requestParams setObject:@"" forKey:@"cerflag"];
+            [requestParams setObject:@"" forKey:@"remark"];
+            [requestParams setObject:@"1" forKey:@"phoneflag"];
+            [requestParams setObject:@"" forKey:@"userno"];
+            [requestParams setObject:@"" forKey:@"phone"];
+            [requestParams setObject:@"" forKey:@"grouprecordno"];
+            [requestParams setObject:@"" forKey:@"groupflag"];
+            [requestParams setObject:@"desc" forKey:@"ordersort"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
+            _managerHttp=[[HttpRequest alloc]init];
+            [_managerHttp setDelegate:self];
+            [_managerHttp setController:self];
+            [_managerHttp loginhandle:@"v4recQry" requestParams:requestParams];
+        }else{
+            [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+            [Common alert:@"暂无权限"];
+        }
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];

@@ -28,4 +28,25 @@ static Config * instance = nil;
     return [@"1" isEqualToString:[[[Config Instance] userInfo] objectForKey:@"uflag"]];
 }
 
+- (BOOL) isMaster {
+    return [@"1" isEqualToString:[[[Config Instance] userInfo] objectForKey:@"masterflag"]];
+}
+
+- (BOOL)isAuth:(NSString*)authName {
+    
+    if([self isMaster]){
+        return YES;
+    }
+    
+    for (NSMutableDictionary *dic in [[Config Instance]userAuthList]) {
+        
+        if([authName isEqualToString:[dic objectForKey:@"authcode"]]){
+            return YES;
+        }
+        
+    }
+    
+    return NO;
+}
+
 @end

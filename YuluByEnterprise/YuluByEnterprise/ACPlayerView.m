@@ -223,10 +223,14 @@
 //申办取消出证
 - (IBAction)notary:(id)sender{
     [self stop];
-    if([[_dictionary objectForKey:@"cerflag"] isEqualToString:@"1"]){
-        [Common actionSheet:self message:@"您确定将该录音提交至公证机构申办公证吗？" tag:1];
-    }else if([[_dictionary objectForKey:@"cerflag"] isEqualToString:@"2"]){
-        [Common actionSheet:self message:@"您确定要取消该录音申办公证吗？" tag:2];
+    if([[Config Instance] isMaster]){
+        if([[_dictionary objectForKey:@"cerflag"] isEqualToString:@"1"]){
+            [Common actionSheet:self message:@"您确定将该录音提交至公证机构申办公证吗？" tag:1];
+        }else if([[_dictionary objectForKey:@"cerflag"] isEqualToString:@"2"]){
+            [Common actionSheet:self message:@"您确定要取消该录音申办公证吗？" tag:2];
+        }
+    }else{
+        [Common alert:@"暂无权限"];
     }
 }
 
@@ -244,7 +248,11 @@
         [_playerViewHttp setRequestCode:REQUESTCODE_ACExtractionDetailViewController_view];
         [_playerViewHttp loginhandle:@"v4recAcccode" requestParams:requestParams];
     }else if([[_dictionary objectForKey:@"accstatus"] isEqualToString:@"2"]){
-        [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
+        if([[Config Instance]isAuth:auth_v4recalter8]){
+            [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
+        }else{
+            [Common alert:@"暂无权限"];
+        }
     }
 }
 

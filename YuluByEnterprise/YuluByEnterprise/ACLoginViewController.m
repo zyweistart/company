@@ -126,11 +126,11 @@
         [[Config Instance] setIsLogin:YES];
         [[Config Instance] setIsCalculateTotal:YES];
         [[Config Instance] setUserInfo:[[response mainData] objectForKey:@"v4info"]];
-        
-        
-        
-        
-        //企业版用户无法登录
+        if(![[Config Instance]isMaster]){
+            //如果为主账户则解析权限列表
+           [[Config Instance] setUserAuthList:[XML analysisAuth:[response responseString]]]; 
+        }
+        //个人用户无法登录
         if([@"1" isEqualToString:[[[Config Instance]userInfo]objectForKey:@"usertype"]]) {
             [Common alert:@"仅适用于企业及机构手机用户"];
             return;

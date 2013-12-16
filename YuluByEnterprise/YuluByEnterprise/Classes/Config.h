@@ -24,6 +24,8 @@
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息
 @property (strong,nonatomic) NSMutableDictionary *userInfo;
+//用户授权列表
+@property (strong,nonatomic) NSMutableArray *userAuthList;
 //登陆代理
 @property (strong,nonatomic) NSObject<ResultDelegate> *loginResultDelegate;
 //联系人
@@ -40,5 +42,9 @@
 + (void)resetConfig;
 
 - (BOOL)isOldUser;
+
+- (BOOL)isMaster;
+
+- (BOOL)isAuth:(NSString*)authName;
 
 @end

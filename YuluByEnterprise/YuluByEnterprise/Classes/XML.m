@@ -116,8 +116,8 @@
     return response;
 }
 
-+ (NSMutableDictionary*)analysisAuth:(NSString*)xmlContent{
-    __block NSMutableDictionary *mainDataDics=[[NSMutableDictionary alloc]init];
++ (NSMutableArray*)analysisAuth:(NSString*)xmlContent{
+    __block NSMutableArray *nsArr=[[NSMutableArray alloc]init];
     
     TBXML *xml = [[TBXML alloc] initWithXMLString:xmlContent error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -125,24 +125,24 @@
     TBXMLElement *content = [TBXML childElementNamed:@"content" parentElement:root];
     if(content){
         
-        __block NSMutableArray *nsArr=[[NSMutableArray alloc]init];
-        
         [TBXML iterateElementsForQuery:@"*" fromElement:content withBlock:^(TBXMLElement *te){
             TBXMLElement *mainData = [TBXML childElementNamed:[TBXML elementName:te] parentElement:content];
             if([@"authlist" isEqualToString:[TBXML elementName:mainData]]){
-                NSMutableDictionary *dicContent=[[NSMutableDictionary alloc]init];
+                
                 [TBXML iterateElementsForQuery:@"*" fromElement:mainData withBlock:^(TBXMLElement *chte){
-                    
-                    NSLog([TBXML elementName:chte]);
-                    
-                    [dicContent setObject:[TBXML textForElement:chte] forKey:[TBXML elementName:chte]];
+                    __block NSMutableDictionary *dicContent=[[NSMutableDictionary alloc]init];
+                    [TBXML iterateElementsForQuery:@"*" fromElement:chte withBlock:^(TBXMLElement *chte1){
+                        
+                        [dicContent setObject:[TBXML textForElement:chte1] forKey:[TBXML elementName:chte1]];
+                        
+                    }];
+                    [nsArr addObject:dicContent];
                 }];
-                [mainDataDics setObject:dicContent forKey:[TBXML elementName:te]];
             }
         }];
 
     }
-    return mainDataDics;
+    return nsArr;
 }
 
 

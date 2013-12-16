@@ -72,6 +72,20 @@
 #define RESULTCODE_ACRecordingDetailViewController_back 222
 #define RESULTCODE_ACExtractionDetailViewController_back 2
 #define RESULTCODE_ACRechargeConfirmViewController_back 21111
+
+//录音查询
+#define auth_4recqry1 @"v4recqry1"
+//录音详情查看
+#define auth_v4recget1 @"v4recget1"
+//录音备注修改
+#define auth_v4recremark @"v4recremark"
+//录音收听下载
+#define auth_v4recdown1 @"v4recdown1"
+//录音删除
+#define auth_v4recalter1 @"v4recalter1"
+//录音撤销提取
+#define auth_v4recalter8 @"v4recalter8"
+
 #ifdef TEST
 //测试环境定义的常量
 #define PHONENUMBER @"057156559570"

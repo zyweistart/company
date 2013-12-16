@@ -4,4 +4,6 @@
 
 + (Response*)analysis:(NSString*)xmlContent;
 
++ (NSMutableArray*)analysisAuth:(NSString*)xmlContent;
+
 @end

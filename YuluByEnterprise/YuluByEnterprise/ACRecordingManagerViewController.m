@@ -157,20 +157,26 @@ static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
 }
 
 - (void)reloadTableViewDataSource {
+    
 	if([[Config Instance]isLogin]) {
-        _reloading = YES;
-        [self.tableView reloadData];
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"" forKey:@"oppno"];
-        [requestParams setObject:@"" forKey:@"begintime"];
-        [requestParams setObject:@"" forKey:@"endtime"];
-        [requestParams setObject:@"desc" forKey:@"ordersort"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _loadDataHttp=[[HttpRequest alloc]init];
-        [_loadDataHttp setDelegate:self];
-        [_loadDataHttp setController:self];
-        [_loadDataHttp loginhandle:@"v4recStat" requestParams:requestParams];
+        if([[Config Instance]isAuth:auth_4recqry1]){
+            _reloading = YES;
+            [self.tableView reloadData];
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:@"" forKey:@"oppno"];
+            [requestParams setObject:@"" forKey:@"begintime"];
+            [requestParams setObject:@"" forKey:@"endtime"];
+            [requestParams setObject:@"desc" forKey:@"ordersort"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
+            _loadDataHttp=[[HttpRequest alloc]init];
+            [_loadDataHttp setDelegate:self];
+            [_loadDataHttp setController:self];
+            [_loadDataHttp loginhandle:@"v4recStat" requestParams:requestParams];
+        }else{
+            [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+            [Common alert:@"暂无权限"];
+        }
     } else {
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];
