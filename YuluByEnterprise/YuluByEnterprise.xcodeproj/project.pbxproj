@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C97805AA1860188000DB9DAA /* ACRecordingManagerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97805A91860188000DB9DAA /* ACRecordingManagerListViewController.m */; };
 		C9B218B9183B58700058788D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B218B8183B58700058788D /* UIKit.framework */; };
 		C9B218BB183B58700058788D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B218BA183B58700058788D /* Foundation.framework */; };
 		C9B218BD183B58700058788D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B218BC183B58700058788D /* CoreGraphics.framework */; };
@@ -313,6 +314,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C97805A81860188000DB9DAA /* ACRecordingManagerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingManagerListViewController.h; sourceTree = "<group>"; };
+		C97805A91860188000DB9DAA /* ACRecordingManagerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerListViewController.m; sourceTree = "<group>"; };
 		C9B218B5183B58700058788D /* YuluByEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YuluByEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B218B8183B58700058788D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C9B218BA183B58700058788D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -855,8 +858,6 @@
 		C95151BB185A9FB70033FEA0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C9B2191B183B58FE0058788D /* ACRechargeViewController.h */,
-				C9B2191C183B58FE0058788D /* ACRechargeViewController.m */,
 				C9B218D5183B58FD0058788D /* ACAboutUsViewController.h */,
 				C9B218D6183B58FD0058788D /* ACAboutUsViewController.m */,
 				C9B218DD183B58FD0058788D /* ACAccountViewController.h */,
@@ -891,12 +892,16 @@
 				C9B21916183B58FE0058788D /* ACRechargeByAppStoreViewController.m */,
 				C9B21917183B58FE0058788D /* ACRechargeConfirmViewController.h */,
 				C9B21918183B58FE0058788D /* ACRechargeConfirmViewController.m */,
+				C9B2191B183B58FE0058788D /* ACRechargeViewController.h */,
+				C9B2191C183B58FE0058788D /* ACRechargeViewController.m */,
 				C9B21923183B58FE0058788D /* ACRecordingDetailViewController.h */,
 				C9B21924183B58FE0058788D /* ACRecordingDetailViewController.m */,
 				C9B21927183B58FE0058788D /* ACRecordingManagerDetailListOldViewController.h */,
 				C9B21928183B58FE0058788D /* ACRecordingManagerDetailListOldViewController.m */,
 				C9B21929183B58FE0058788D /* ACRecordingManagerDetailListViewController.h */,
 				C9B2192A183B58FE0058788D /* ACRecordingManagerDetailListViewController.m */,
+				C97805A81860188000DB9DAA /* ACRecordingManagerListViewController.h */,
+				C97805A91860188000DB9DAA /* ACRecordingManagerListViewController.m */,
 				C9B2192B183B58FE0058788D /* ACRecordingManagerViewController.h */,
 				C9B2192C183B58FE0058788D /* ACRecordingManagerViewController.m */,
 				C9B2192D183B58FE0058788D /* ACRegisterViewController.h */,
@@ -1917,6 +1922,7 @@
 				C9B21B36183B58FF0058788D /* MyViewController.m in Sources */,
 				C9B21B37183B58FF0058788D /* NSDictionary+MutableDeepCopy.m in Sources */,
 				C9B21B38183B58FF0058788D /* NSString+OAURLEncodingAdditions.m in Sources */,
+				C97805AA1860188000DB9DAA /* ACRecordingManagerListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
