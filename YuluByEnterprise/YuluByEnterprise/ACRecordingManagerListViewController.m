@@ -222,112 +222,237 @@
     }
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [_searchResults count];
+    }else{
+        if([self.dataItemArray count]>0){
+            if(_pageSize>[self.dataItemArray count]){
+                return [self.dataItemArray count];
+            }else{
+                return [self.dataItemArray count]+1;
+            }
+        }else{
+            return 1;
+        }
+    }
+}
+
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
         return 60;
     }else{
-        return 50;
+        if([self.dataItemArray count]>[indexPath row]){
+            return 60;
+        }else{
+            return 50;
+        }
     }
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
-        static NSString *cellReuseIdentifier=@"ACRecordingDetailCellIdentifier";
-        ACRecordingDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-        if(!cell){
-            cell = [[ACRecordingDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
-        }
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-        NSString *fileno=[dictionary objectForKey:@"fileno"];
-        NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"calledno"]];
-        if(name==nil){
-            name=[dictionary objectForKey:@"calledno"];
-        }
-        cell.lblDate.text=name;
-        //创建文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        //获取路径
-        //1、参数NSDocumentDirectory要获取的那种路径
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-        //2、得到相应的Documents的路径
-        NSString* documentDirectory = [paths objectAtIndex:0];
-        //3、更改到待操作的目录下
-        [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
-        NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
-        //如果录音文件存在都直接播放
-        if([fileManager fileExistsAtPath:path]){
-            cell.lblDownloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if([_searchResults count]>[indexPath row]){
+            static NSString *cellReuseIdentifier=@"ACRecordingDetailCellIdentifier";
+            ACRecordingDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+            if(!cell){
+                cell = [[ACRecordingDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+            }
+            NSMutableDictionary *dictionary=[_searchResults objectAtIndex:[indexPath row]];
+            NSString *fileno=[dictionary objectForKey:@"fileno"];
+            NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"calledno"]];
+            if(name==nil){
+                name=[dictionary objectForKey:@"calledno"];
+            }
+            cell.lblDate.text=name;
+            //创建文件管理器
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            //获取路径
+            //1、参数NSDocumentDirectory要获取的那种路径
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //2、得到相应的Documents的路径
+            NSString* documentDirectory = [paths objectAtIndex:0];
+            //3、更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
+            NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
+            //如果录音文件存在都直接播放
+            if([fileManager fileExistsAtPath:path]){
+                cell.lblDownloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
+            }else{
+                cell.lblDownloadflag.text=@"未下载";
+            }
+            NSString *remark=[dictionary objectForKey:@"remark"];
+            if([remark isEqualToString:@""]){
+                cell.lblRemark.textColor=[UIColor lightGrayColor];
+                cell.lblRemark.text=@"添加备注";
+            }else{
+                cell.lblRemark.textColor=[UIColor blackColor];
+                cell.lblRemark.text=remark;
+            }
+            return cell;
         }else{
-            cell.lblDownloadflag.text=@"未下载";
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
+                                                 currentPage:_currentPage];
         }
-        NSString *remark=[dictionary objectForKey:@"remark"];
-        if([remark isEqualToString:@""]){
-            cell.lblRemark.textColor=[UIColor lightGrayColor];
-            cell.lblRemark.text=@"添加备注";
-        }else{
-            cell.lblRemark.textColor=[UIColor blackColor];
-            cell.lblRemark.text=remark;
-        }
-        return cell;
+
     }else{
-        return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
-                                             currentPage:_currentPage];
+        if([self.dataItemArray count]>[indexPath row]){
+            static NSString *cellReuseIdentifier=@"ACRecordingDetailCellIdentifier";
+            ACRecordingDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+            if(!cell){
+                cell = [[ACRecordingDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+            }
+            NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+            NSString *fileno=[dictionary objectForKey:@"fileno"];
+            NSString* name=[[[Config Instance]contact] objectForKey:[dictionary objectForKey:@"calledno"]];
+            if(name==nil){
+                name=[dictionary objectForKey:@"calledno"];
+            }
+            cell.lblDate.text=name;
+            //创建文件管理器
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            //获取路径
+            //1、参数NSDocumentDirectory要获取的那种路径
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //2、得到相应的Documents的路径
+            NSString* documentDirectory = [paths objectAtIndex:0];
+            //3、更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
+            NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
+            //如果录音文件存在都直接播放
+            if([fileManager fileExistsAtPath:path]){
+                cell.lblDownloadflag.text=[Common secondConvertFormatTimerByCn:[dictionary objectForKey:@"duration"]];
+            }else{
+                cell.lblDownloadflag.text=@"未下载";
+            }
+            NSString *remark=[dictionary objectForKey:@"remark"];
+            if([remark isEqualToString:@""]){
+                cell.lblRemark.textColor=[UIColor lightGrayColor];
+                cell.lblRemark.text=@"添加备注";
+            }else{
+                cell.lblRemark.textColor=[UIColor blackColor];
+                cell.lblRemark.text=remark;
+            }
+            return cell;
+        }else{
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:_loadOver andIsLoading:_reloading
+                                                 currentPage:_currentPage];
+        }
     }
+    
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath{
-    //选择录音前先暂停
-    [_playerView stop];
-    if([self.dataItemArray count]>[indexPath row]){
-        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-        NSString *fileno=[dictionary objectForKey:@"fileno"];
-        
-        //创建文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        //获取路径
-        //1、参数NSDocumentDirectory要获取的那种路径
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-        //2、得到相应的Documents的路径
-        NSString* documentDirectory = [paths objectAtIndex:0];
-        //3、更改到待操作的目录下
-        [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
-        NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
-        
-        //如果录音文件存在都直接播放
-        if([fileManager fileExistsAtPath:path]){
-            [_playerView player:path dictionary:dictionary];
-        }else{
-            if([[Config Instance]isLogin]){
-                if([[Config Instance]isAuth:auth_v4recdown1]){
-                    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-                    [requestParams setObject:@"1" forKey:@"status"];
-                    [requestParams setObject:fileno forKey:@"fileno"];
-                    _managerHttp=[[HttpRequest alloc]init];
-                    [_managerHttp setDelegate:self];
-                    [_managerHttp setIsFileDownload:YES];
-                    [_managerHttp setPropertys:dictionary];
-                    [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
-                    [_managerHttp setController:self];
-                    [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
-                }else{
-                    [Common alert:@"暂无权限"];
-                }
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        //选择录音前先暂停
+        [_playerView stop];
+        if([_searchResults count]>[indexPath row]){
+            NSMutableDictionary *dictionary=[_searchResults objectAtIndex:[indexPath row]];
+            NSString *fileno=[dictionary objectForKey:@"fileno"];
+            
+            //创建文件管理器
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            //获取路径
+            //1、参数NSDocumentDirectory要获取的那种路径
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //2、得到相应的Documents的路径
+            NSString* documentDirectory = [paths objectAtIndex:0];
+            //3、更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
+            NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
+            
+            //如果录音文件存在都直接播放
+            if([fileManager fileExistsAtPath:path]){
+                [_playerView player:path dictionary:dictionary];
             }else{
-                [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
-                [Common noLoginAlert:self];
+                if([[Config Instance]isLogin]){
+                    if([[Config Instance]isAuth:auth_v4recdown1]){
+                        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+                        [requestParams setObject:@"1" forKey:@"status"];
+                        [requestParams setObject:fileno forKey:@"fileno"];
+                        _managerHttp=[[HttpRequest alloc]init];
+                        [_managerHttp setDelegate:self];
+                        [_managerHttp setIsFileDownload:YES];
+                        [_managerHttp setPropertys:dictionary];
+                        [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
+                        [_managerHttp setController:self];
+                        [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
+                    }else{
+                        [Common alert:@"暂无权限"];
+                    }
+                }else{
+                    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+                    [Common noLoginAlert:self];
+                }
             }
+        }else{
+            _currentPage++;
+            [self reloadTableViewDataSource];
         }
+
     }else{
-        _currentPage++;
-        [self reloadTableViewDataSource];
+        //选择录音前先暂停
+        [_playerView stop];
+        if([self.dataItemArray count]>[indexPath row]){
+            NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+            NSString *fileno=[dictionary objectForKey:@"fileno"];
+            
+            //创建文件管理器
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            //获取路径
+            //1、参数NSDocumentDirectory要获取的那种路径
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //2、得到相应的Documents的路径
+            NSString* documentDirectory = [paths objectAtIndex:0];
+            //3、更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[documentDirectory stringByExpandingTildeInPath]];
+            NSString *path = [documentDirectory stringByAppendingPathComponent:fileno];
+            
+            //如果录音文件存在都直接播放
+            if([fileManager fileExistsAtPath:path]){
+                [_playerView player:path dictionary:dictionary];
+            }else{
+                if([[Config Instance]isLogin]){
+                    if([[Config Instance]isAuth:auth_v4recdown1]){
+                        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+                        [requestParams setObject:@"1" forKey:@"status"];
+                        [requestParams setObject:fileno forKey:@"fileno"];
+                        _managerHttp=[[HttpRequest alloc]init];
+                        [_managerHttp setDelegate:self];
+                        [_managerHttp setIsFileDownload:YES];
+                        [_managerHttp setPropertys:dictionary];
+                        [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
+                        [_managerHttp setController:self];
+                        [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
+                    }else{
+                        [Common alert:@"暂无权限"];
+                    }
+                }else{
+                    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+                    [Common noLoginAlert:self];
+                }
+            }
+        }else{
+            _currentPage++;
+            [self reloadTableViewDataSource];
+        }
+       
     }
 }
 
 - (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
-        return YES;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if([_searchResults count]>[indexPath row]){
+            return YES;
+        }else{
+            return NO;
+        }
     }else{
-        return NO;
+        if([self.dataItemArray count]>[indexPath row]){
+            return YES;
+        }else{
+            return NO;
+        }
     }
 }
 
@@ -336,42 +461,82 @@
 }
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.dataItemArray count]>[indexPath row]){
-        if(editingStyle==UITableViewCellEditingStyleDelete){
-            if([[Config Instance]isAuth:auth_v4recalter1]){
-                _currentDictionary=[[NSMutableDictionary alloc]initWithDictionary:[self.dataItemArray objectAtIndex:indexPath.row]];
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:@"请输入密码"
-                                      message:@"录音删除后将无法恢复，确定删除?"
-                                      delegate:self
-                                      cancelButtonTitle:@"确定"
-                                      otherButtonTitles:@"取消",nil];
-                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-                alert.tag=1;
-                [alert show];
-            }else{
-                [Common alert:@"暂无权限"];
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if([_searchResults count]>[indexPath row]){
+            if(editingStyle==UITableViewCellEditingStyleDelete){
+                if([[Config Instance]isAuth:auth_v4recalter1]){
+                    _currentDictionary=[[NSMutableDictionary alloc]initWithDictionary:[_searchResults objectAtIndex:indexPath.row]];
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle:@"请输入密码"
+                                          message:@"录音删除后将无法恢复，确定删除?"
+                                          delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:@"取消",nil];
+                    [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                    alert.tag=1;
+                    [alert show];
+                }else{
+                    [Common alert:@"暂无权限"];
+                }
+            }
+        }
+    }else{
+        if([self.dataItemArray count]>[indexPath row]){
+            if(editingStyle==UITableViewCellEditingStyleDelete){
+                if([[Config Instance]isAuth:auth_v4recalter1]){
+                    _currentDictionary=[[NSMutableDictionary alloc]initWithDictionary:[self.dataItemArray objectAtIndex:indexPath.row]];
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle:@"请输入密码"
+                                          message:@"录音删除后将无法恢复，确定删除?"
+                                          delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:@"取消",nil];
+                    [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                    alert.tag=1;
+                    [alert show];
+                }else{
+                    [Common alert:@"暂无权限"];
+                }
             }
         }
     }
+    
+    
 }
 
 - (void)tableView:(UITableView*)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath*)indexPath{
     if(_playerView){
         [_playerView stop];
     }
-    if([self.dataItemArray count]>[indexPath row]){
-        if([[Config Instance]isAuth:auth_v4recget1]){
-            NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-            ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
-            [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
-            [detailViewController setResultDelegate:self];
-            detailViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:detailViewController animated:YES];
-        }else{
-            [Common alert:@"暂无权限"];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if([_searchResults count]>[indexPath row]){
+            if([[Config Instance]isAuth:auth_v4recget1]){
+                NSMutableDictionary *dictionary=[_searchResults objectAtIndex:[indexPath row]];
+                ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
+                [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
+                [detailViewController setResultDelegate:self];
+                detailViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:detailViewController animated:YES];
+            }else{
+                [Common alert:@"暂无权限"];
+            }
+        }
+    }else{
+        if([self.dataItemArray count]>[indexPath row]){
+            if([[Config Instance]isAuth:auth_v4recget1]){
+                NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+                ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
+                [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
+                [detailViewController setResultDelegate:self];
+                detailViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:detailViewController animated:YES];
+            }else{
+                [Common alert:@"暂无权限"];
+            }
         }
     }
+    
 }
 
 
