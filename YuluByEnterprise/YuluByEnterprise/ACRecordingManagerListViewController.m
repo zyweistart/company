@@ -11,6 +11,9 @@
 
 @implementation ACRecordingManagerListViewController{
     HttpRequest *_managerHttp;
+    NSMutableArray *_searchResults;
+    UISearchBar *_searchBar;
+    UISearchDisplayController *_searchDisplayController;
 }
 
 - (id)init {
@@ -30,9 +33,9 @@
                                          [_playerView frame].size.height)];
         [self.view addSubview:_playerView];
         self.tableView=[[UITableView alloc]initWithFrame:
-                        CGRectMake(0, 0,
+                        CGRectMake(0, 44,
                                    self.view.frame.size.width,
-                                   self.view.frame.size.height-_playerView.frame.size.height)];
+                                   self.view.frame.size.height-_playerView.frame.size.height-44)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
@@ -43,9 +46,43 @@
             [self.tableView addSubview:view];
             _refreshHeaderView = view;
         }
+        
+        _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0,0,320, 44)];
+        [_searchBar sizeToFit];
+        _searchBar.delegate = self;
+        [self.view addSubview:_searchBar];
+        
+        _searchDisplayController =[[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
+        
+        _searchDisplayController.searchResultsDelegate= self;
+        _searchDisplayController.searchResultsDataSource = self;
+        _searchDisplayController.delegate = self;
+        
+        _searchResults=[[NSMutableArray alloc]init];
+        
     }
     self=[super init];
     return self;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController*)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    
+    [_searchResults removeAllObjects];
+    
+    if(searchString) {
+        for(NSMutableDictionary *d in self.dataItemArray){
+            NSString *name=[d objectForKey:@"oppno"];
+            BOOL flag=NO;
+            if ([name rangeOfString:searchString options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                //原文查找
+                flag=YES;
+            }
+            if(flag) {
+                [_searchResults addObject:d];
+            }
+        }
+    }
+    return YES;
 }
 
 - (void)viewDidLoad{
@@ -341,13 +378,6 @@
 
 #pragma mark -
 #pragma mark Custom Methods
-
-- (void)back:(id)sencder{
-    if(_playerView){
-        [_playerView stop];
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void) reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
