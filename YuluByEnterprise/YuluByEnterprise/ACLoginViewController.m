@@ -163,7 +163,7 @@
         }
         accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //录音管理
-        UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerListViewController alloc]init]];
+        UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
         recordingManagerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];

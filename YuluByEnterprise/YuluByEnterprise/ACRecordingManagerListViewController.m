@@ -136,7 +136,12 @@
         [fileManager moveItemAtPath:tmpPath toPath:path error:nil];
         
         [_playerView player:path dictionary:[response propertys]];
+        NSIndexPath *selected=[self.tableView indexPathForSelectedRow];
+        //重新加载数据
         [self.tableView reloadData];
+        if(selected){
+            [self.tableView selectRowAtIndexPath:selected animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
     }else if(reqCode==REQUESTCODE_REMOVE){
         if([response successFlag]){
             [Common notificationMessage:@"删除成功" inView:self.view];
