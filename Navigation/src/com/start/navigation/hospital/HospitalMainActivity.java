@@ -966,17 +966,33 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		
 		OverlayWay way = new OverlayWay();
 		int size=step.size();
-		GeoPoint[][] nodes = new GeoPoint[1][size];
-		for (int i = 0; i < size; i++) {
-			nodes[0][i] = step.get(i);
-		}
-		
-//		if (result.getStartPoint() instanceof IndoorEndPoint) {
-//			IndoorEndPoint start = (IndoorEndPoint) result.getStartPoint();
-//			if (start.getMapId().equals(mCurrentMapData.getId())) {
-//				nodes[0][++size]=start.getGeoPoint();
-//			}
+		GeoPoint[][] nodes;
+//		GeoPoint[][] nodes = new GeoPoint[1][size];
+//		for (int i = 0; i < size; i++) {
+//			nodes[0][i] = step.get(i);
 //		}
+		
+		if (result.getStartPoint() instanceof IndoorEndPoint) {
+			IndoorEndPoint start = (IndoorEndPoint) result.getStartPoint();
+			if (start.getMapId().equals(mCurrentMapData.getId())) {
+				size=size+1;
+				nodes = new GeoPoint[1][size];
+				nodes[0][0]=start.getGeoPoint();
+				for (int i = 1; i < size; i++) {
+					nodes[0][i] = step.get(i-1);
+				}
+			}else{
+				nodes = new GeoPoint[1][size];
+				for (int i = 0; i < size; i++) {
+					nodes[0][i] = step.get(i);
+				}
+			}
+		}else{
+			nodes = new GeoPoint[1][size];
+			for (int i = 0; i < size; i++) {
+				nodes[0][i] = step.get(i);
+			}
+		}
 //
 //		if (result.getEndPoint() instanceof IndoorEndPoint) {
 //			IndoorEndPoint end = (IndoorEndPoint) result.getEndPoint();
