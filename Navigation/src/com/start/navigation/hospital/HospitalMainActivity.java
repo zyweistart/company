@@ -426,8 +426,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	public void onGetResult(PathSearchResult result) {
 		mPoiMarkers=null;
 		if (result.getType() == PathSearchResult.Type.IN_BUILDING) {
-			IndoorEndPoint ep=(IndoorEndPoint)result.getEndPoint();
-			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(ep.getMapId()));
+//			IndoorEndPoint ep=(IndoorEndPoint)result.getEndPoint();
+			IndoorEndPoint sp=(IndoorEndPoint)result.getStartPoint();
+			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(sp.getMapId()));
 			setMapFile();
 		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
 			// NavRoute route = result.indoorRouteStart;

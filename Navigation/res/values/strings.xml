@@ -8,6 +8,7 @@
     <string name="settings">设置</string>
     <string name="prompt">温馨提示</string>
     <string name="download">下载</string>
+    <string name="redownload">重新下载</string>
     <string name="use">使用</string>
     <string name="login">登录</string>
     <string name="logout">注销</string>
@@ -24,12 +25,14 @@
     <string name="msg_locationing">正在定位中···</string>
     <string name="msg_path_searching">路线查询中···</string>
     <string name="msg_downloading_datafile">正在下载数据文件···</string>
+    <string name="msg_clear_datafile">正在清除原始数据文件···</string>
     <string name="msg_decompressing_datafile">正在解压数据文件···</string>
     <string name="msg_importing_datafile">正在导入数据文件···</string>
     <string name="msg_location_unavailable">当前位置不可用</string>
     <string name="msg_network_connecterror">网络连接不可用，请检查网络设置</string>
     <string name="msg_error_please_try_again">糟糕，好像出错了，抱歉请稍后重试下吧</string>
     <string name="msg_use_mobile_data">当前网络环境为移动2G/3G网络，建议在Wifi环境下载,是否继续？</string>
+    <string name="msg_use_mobile_data_re_download">确定需要重新下载数据包文件吗？</string>
     <string name="msg_sure_download_data">确定下载当前数据包吗？</string>
     <string name="msg_sure_switch_current_data">确定切换当前数据包为主数据吗？</string>
     <string name="msg_first_set_data_tip">目前还没有指定要访问的医院，是否马上去切换使用？</string>

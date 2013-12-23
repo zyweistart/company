@@ -26,6 +26,18 @@
         android:visibility="gone"/>
 	
 	<Button 
+        android:id="@+id/activity_map_data_re_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
+        android:background="@drawable/bg1_selector"
+        android:textColor="@color/white"
+        android:textSize="@dimen/lvitem_textsize1"
+        android:onClick="onClick"
+        android:text="@string/redownload"
+        android:visibility="gone"/>
+	
+	<Button 
         android:id="@+id/activity_map_data_use"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -154,16 +154,16 @@ public class MapDataListActivity extends CoreActivity implements OnClickListener
 				new AlertDialog.Builder(MapDataListActivity.this)
 				.setIcon(android.R.drawable.ic_dialog_info)
 				.setMessage(R.string.msg_sure_switch_current_data)
-				.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						//使用当前数据
 						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, vh.fileno);
 						makeTextLong(R.string.msg_switching_datafile_success);
 						handler.sendEmptyMessage(Constant.Handler.HANDLERUPDATEMAINTHREAD);
-					}
-				}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						dialog.dismiss();
 					}
 				}).show();
 			}else{
