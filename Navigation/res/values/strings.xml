@@ -17,6 +17,7 @@
     <string name="msg_login_timeout">登录超时</string>
     <string name="msg_navigation_hospital">医院导航</string>
     <string name="msg_navigation_library">图书馆</string>
+    <string name="msg_show_map">查看地图</string>
     <string name="msg_exit_app">退出应用</string>
     <string name="msg_sure_exit_app">确定要退出该应用吗？</string>
     <string name="msg_exit_navigation">退出导航</string>

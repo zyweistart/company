@@ -23,6 +23,6 @@
         android:background="@drawable/bg1_selector"
         android:textColor="@color/white"
         android:textSize="@dimen/lvitem_textsize1"
-        android:text="查看地图"/>
+        android:text="@string/msg_show_map"/>
 
 </LinearLayout>
