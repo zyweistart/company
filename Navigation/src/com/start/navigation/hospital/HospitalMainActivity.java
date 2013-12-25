@@ -101,6 +101,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private static final String BUNDLEDATA_DATA = "data";
 	public static final int REQUEST_CODE_REFRESH_FRIEND_LOCATION=111;
 	
+	public static boolean ShowMainData=false;
 	public static String currentLocationDepartmentId;
 
 	private AppContext appContext;
@@ -147,7 +148,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	
 	private PullListViewData friendLocationPullListData;
 	private HttpService httpService;
-		
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -173,6 +174,20 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		super.onResume();
 		if(!Constant.ISTEST){
 			MobclickAgent.onResume(this);
+		}
+		if(ShowMainData){
+			List<MapData> mds=appContext.getMapDataService().findMainData();
+			for(MapData md:mds){
+				if(mCurSel!=1){
+					setCurPoint(1);
+				}
+				if(!md.getId().equals(mCurrentMapData.getId())){
+					mCurrentMapData=md;
+					setMapFile();
+					break;
+				}
+			}
+			ShowMainData=false;
 		}
 		mapButtonCancel.setVisibility(View.GONE);
 		mapLLQueryContentContainer.setVisibility(View.GONE);

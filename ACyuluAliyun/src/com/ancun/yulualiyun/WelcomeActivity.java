@@ -1,5 +1,6 @@
 package com.ancun.yulualiyun;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 
 import com.ancun.core.AliYunOSAPI;
 import com.ancun.core.Constant;
-import com.ancun.core.CoreActivity;
 import com.ancun.utils.CommonFn;
 import com.ancun.utils.LogUtils;
 import com.ancun.utils.NetConnectManager;
@@ -28,10 +28,14 @@ import com.yunos.seller.SellerAuthority;
  * 欢迎界面
  * @author Start
  */
-public class WelcomeActivity extends CoreActivity implements AnimationListener {
+public class WelcomeActivity extends Activity implements AnimationListener {
 	
 	public static final int REQUEST_CODE_WELCOME=111;
 	public static final int RESULT_CODE_REGISTER=111;
+	
+	public AppContext getAppContext(){
+		return (AppContext)getApplication();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -309,7 +313,7 @@ public class WelcomeActivity extends CoreActivity implements AnimationListener {
 				}).show();
 			}
 		}else{
-			Log.v(TAG,"已执行初始验证正常模式");
+//			Log.v(TAG,"已执行初始验证正常模式");
 			forward();
 		}
 	}

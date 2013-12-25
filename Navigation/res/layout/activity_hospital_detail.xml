@@ -11,5 +11,18 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="当前医院的介绍"/>
+	
+	<Button 
+        android:id="@+id/hotspital_detail_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40.0dp"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:onClick="onClick"
+        android:background="@drawable/bg1_selector"
+        android:textColor="@color/white"
+        android:textSize="@dimen/lvitem_textsize1"
+        android:text="查看地图"/>
 
 </LinearLayout>
