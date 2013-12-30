@@ -103,6 +103,8 @@ public final class Constant {
 	public final class SharedPreferences{
 		//当前使用的数据文件编号
 		public static final String CURRENTDATAFILENO="CURRENTDATAFILENO";
+		//是否切换了地图数据包
+		public static final String SWITCHMAPDATAFLAG="SWITCHMAPDATAFLAG";
 		//当前版本号
 		public static final String CURRENTVERSIONCODE="CURRENTVERSIONCODE";
 		//自动登录

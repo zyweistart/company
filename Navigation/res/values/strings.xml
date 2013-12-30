@@ -41,7 +41,7 @@
     <string name="msg_not_login">还没有登录请先登录</string>
     <string name="msg_doctor_list">医生列表</string>
     <string name="msg_open_location">开放位置权限</string>
-    <string name="msg_switching_datafile_success">数据切换成功，请退出应用后重新登录</string>
+    <string name="msg_switching_datafile_success">数据切换成功</string>
     <string name="msg_download_success">下载成功</string>
     <string name="msg_register_success">注册成功</string>
     <string name="msg_forgetpwd_success">找回密码成功</string>

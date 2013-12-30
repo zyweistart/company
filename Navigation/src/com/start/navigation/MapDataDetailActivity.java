@@ -143,6 +143,7 @@ public class MapDataDetailActivity extends CoreActivity implements OnClickListen
 						//使用当前数据
 						getAppContext().getSharedPreferencesUtils().putString(Constant.SharedPreferences.CURRENTDATAFILENO, fileno);
 						makeTextLong(R.string.msg_switching_datafile_success);
+						getAppContext().getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, true);
 						handler.sendEmptyMessage(Constant.Handler.HANDLERUPDATEMAINTHREAD);
 					}
 				}).show();

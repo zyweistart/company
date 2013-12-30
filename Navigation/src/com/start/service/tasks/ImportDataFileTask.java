@@ -241,13 +241,14 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 		List<String[]> datas=readFileData(new File(dataDir,fileName));
 		if(datas!=null){
 			for(String[] data:datas){
-				if(data.length==4){
+				if(data.length==5){
 					ContentValues values=new ContentValues();
 					values.put(MapData.COLUMN_NAME_NO, fileno);
 					values.put(MapData._ID, data[0]);
 					values.put(MapData.COLUMN_NAME_NAME, data[1]);
 					values.put(MapData.COLUMN_NAME_DISPLAY, data[2]);
 					values.put(MapData.COLUMN_NAME_MAIN, data[3]);
+					values.put(MapData.COLUMN_NAME_MAINID, data[4]);
 					mCoreService.insert(MapData.TABLE_NAME,values);
 				}
 			}

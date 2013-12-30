@@ -1,5 +1,6 @@
 package com.start.service.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import com.start.navigation.R;
 
 public class MapDataAdapter extends BaseAdapter {
 	
-	private List<MapData> mapDatas;
+	private List<MapData> mapDatas=new ArrayList<MapData>();
 
 	private LayoutInflater inflater;
 
@@ -48,7 +49,7 @@ public class MapDataAdapter extends BaseAdapter {
 	}
 	
 	public void setData(List<MapData> mapDatas){
-		if(mapDatas!=null){
+		if(mapDatas!=null&&!mapDatas.isEmpty()){
 			this.mapDatas=mapDatas;
 			this.notifyDataSetChanged();
 		}
