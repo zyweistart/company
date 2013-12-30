@@ -1,7 +1,5 @@
 package com.start.service.tasks;
 
-import java.io.File;
-
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
@@ -9,8 +7,6 @@ import com.start.core.CoreActivity;
 import com.start.navigation.AppContext;
 import com.start.navigation.R;
 import com.start.utils.CommonFn;
-import com.start.utils.FileUtils;
-import com.start.utils.Utils;
 
 public class ReDownloadTask extends AsyncTask<Void, Float, Boolean> {
 
@@ -34,10 +30,7 @@ public class ReDownloadTask extends AsyncTask<Void, Float, Boolean> {
 	
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		File dataFile=Utils.getFile(mContext, fileno);
-		if(FileUtils.delFolder(dataFile.getAbsolutePath())){
-			mAppContext.getDepartmentService().clearAll();
-		}
+		mAppContext.getDepartmentService().clearAll();
 		return true;
 	}
 

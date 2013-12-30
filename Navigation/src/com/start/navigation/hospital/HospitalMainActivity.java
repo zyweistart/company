@@ -185,6 +185,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			//消除导航数据
 			appContext.setPathSearchResult(null);
 			this.loadData();
+			updateOverlay();
 			appContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false);
 		}
 		
@@ -350,6 +351,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 					List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mainMapData.getId());
 					if(!mapDatas.isEmpty()){
 						mMapDataAdapter.setData(mapDatas);
+						mMapIndexListView.setVisibility(View.VISIBLE);
 						MyLocation myLocation=appContext.getMyLocation();
 						for(int i=0;i<mapDatas.size();i++){
 							mCurrentMapData=mapDatas.get(i);
@@ -381,6 +383,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			if(mCurrentMapData.isMain()){
 				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getId());
 				mMapDataAdapter.setData(mapDatas);
+				mMapIndexListView.setVisibility(View.VISIBLE);
 			}
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
@@ -480,6 +483,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			if(mCurrentMapData.isMain()){
 				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getId());
 				mMapDataAdapter.setData(mapDatas);
+				mMapIndexListView.setVisibility(View.VISIBLE);
 			}
 			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(sp.getMapId()));
 			setMapFile();
@@ -862,6 +866,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if(mCurrentMapData==null||!mCurrentMapData.isMain()){
 			List<MapData> mds=appContext.getMapDataService().findMainData();
 			mMapDataAdapter.setData(mds);
+			mMapIndexListView.setVisibility(View.GONE);
 			if(mds.size()>0){
 				mCurrentMapData=mds.get(0);
 				setMapFile();
