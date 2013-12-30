@@ -105,6 +105,8 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	public static String currentLocationDepartmentId;
 
 	private AppContext appContext;
+	private HttpService httpService;
+	
 	private long lastPressTime;
 	private int mCurSel;
 	private int mFrameViewCount;
@@ -125,6 +127,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private Button mModuleMainHeaderContentLocation;
 	
 	private GestureDetector mGestureDetector;
+	private MapView mMapView;
 	private MapData mCurrentMapData;//当前使用的地图
 	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
 	private ArrayItemizedOverlay mMyLocOverlay;
@@ -142,14 +145,11 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	private TextView mModuleMainFrameMapQueryContentTabDepartment;
 	private TextView mModuleMainFrameMapQueryContentTabDoctor;
 	
-	private MapView mMapView;
-	
 	private ProcessService process;
 	private Button mModuleMainFrameProcessNext;
 	private ImageView mModuleMainFrameProcessImage;
 	
 	private PullListViewData friendLocationPullListData;
-	private HttpService httpService;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -157,16 +157,15 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		setContentView(R.layout.activity_main);
 
 		appContext = AppContext.getInstance();
-
 		httpService=new HttpService(this);
 		
 		this.initHeaderView();
 		this.initFooterView();
 		this.initMainFrameView();
 
-		mRooms=appContext.getRoomService().findAllPullMap();
-		this.loadMainMapData();
-		this.loadProcess();
+		if(!appContext.getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false)){
+			this.loadData();
+		}
 		
 	}
 	
@@ -176,23 +175,25 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if(!Constant.ISTEST){
 			MobclickAgent.onResume(this);
 		}
+		//搜索框重置
+		mapButtonCancel.setVisibility(View.GONE);
+		mapLLQueryContentContainer.setVisibility(View.GONE);
+		mapQuery.clearFocus();
 		
 		//是否重新加载切换数据包后的数据
-		Boolean SWITCHMAPDATAFLAG=appContext.getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false);
-		if(SWITCHMAPDATAFLAG){
-			mRooms=appContext.getRoomService().findAllPullMap();
-			this.loadMainMapData();
-			this.loadProcess();
+		if(appContext.getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false)){
+			//消除导航数据
+			appContext.setPathSearchResult(null);
+			this.loadData();
 			appContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false);
 		}
 		
+		//显示园区地图
 		if(ShowMainData){
 			this.loadMainMapData();
 			ShowMainData=false;
 		}
-		mapButtonCancel.setVisibility(View.GONE);
-		mapLLQueryContentContainer.setVisibility(View.GONE);
-		mapQuery.clearFocus();
+		
 		if(currentLocationDepartmentId!=null){
 			if(mCurSel!=1){
 				setCurPoint(1);
@@ -220,6 +221,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			}
 			currentLocationDepartmentId=null;
 		}
+		
 		if (mCurSel == 0 && !rboIntroduction.isChecked()) {
 			rboIntroduction.setChecked(true);
 			rboMap.setChecked(false);
@@ -268,9 +270,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			dialog.findViewById(R.id.direction).setTag(poi);
 			dialog.findViewById(R.id.poiName).setTag(poi);
 //			if (mPOIMarker != null) {
-				dialog.getWindow().getAttributes().y = -50;
+//				dialog.getWindow().getAttributes().y = -50;
 //			} else {
-//				dialog.getWindow().getAttributes().y = 0;
+				dialog.getWindow().getAttributes().y = 0;
 //			}
 			return;
 		} else {
@@ -759,10 +761,10 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		mModuleMainFrameMapQueryList.setOnItemClickListener(this);
 		// 地图数据加载完毕后才把地图视图显示到页面上
 		ViewGroup container = (ViewGroup) findViewById(R.id.module_main_frame_map_contentll);
-		mMapView = new MapView(HospitalMainActivity.this);
+		mMapView = new MapView(this);
 		mMapView.setBuiltInZoomControls(true);
 		mMapView.setClickable(true);
-		mMapView.setOnTouchListener(HospitalMainActivity.this);
+		mMapView.setOnTouchListener(this);
 		mMapView.getController().setZoom(20);
 		container.addView(mMapView, 0);
 
@@ -842,6 +844,14 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				new FriendLocationAdapter(this,friendLocationPullListData));
 	}
 	
+	private void loadData(){
+		mRooms=appContext.getRoomService().findAllPullMap();
+		this.loadMainMapData();
+		process=new ProcessService(this,this);
+		process.init();
+		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
+	}
+	
 	/**
 	 * 加载园区地图平面图
 	 */
@@ -857,15 +867,6 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				setMapFile();
 			}
 		}
-	}
-	
-	/**
-	 * 加载流程信息
-	 */
-	private void loadProcess(){
-		process=new ProcessService(this,this);
-		process.init();
-		mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(process.getProcessImageFile()));
 	}
 	
 	/**
