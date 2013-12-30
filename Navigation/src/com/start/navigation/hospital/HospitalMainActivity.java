@@ -167,6 +167,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		mRooms=appContext.getRoomService().findAllPullMap();
 		this.loadMainMapData();
 		this.loadProcess();
+		
 	}
 	
 	@Override
@@ -184,6 +185,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			this.loadProcess();
 			appContext.getSharedPreferencesUtils().putBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false);
 		}
+		
 		if(ShowMainData){
 			this.loadMainMapData();
 			ShowMainData=false;
@@ -256,14 +258,19 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		if (id == Utils.DLG_POI) {
 			POI poi = (POI) args.getSerializable(BUNDLEDATA_DATA);
-			((TextView) dialog.findViewById(R.id.poiName)).setText(poi
-					.getName());
+			if(mCurrentMapData.isMain()){
+				((TextView) dialog.findViewById(R.id.poiName)).setText("进入 "+poi
+						.getName());
+			}else{
+				((TextView) dialog.findViewById(R.id.poiName)).setText(poi
+						.getName());
+			}
 			dialog.findViewById(R.id.direction).setTag(poi);
 			dialog.findViewById(R.id.poiName).setTag(poi);
 //			if (mPOIMarker != null) {
-//				dialog.getWindow().getAttributes().y = -50;
+				dialog.getWindow().getAttributes().y = -50;
 //			} else {
-				dialog.getWindow().getAttributes().y = 0;
+//				dialog.getWindow().getAttributes().y = 0;
 //			}
 			return;
 		} else {
@@ -338,7 +345,19 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				MapData mainMapData=appContext.getMapDataService().findById(r.getMapId());
 				//如果点击的名称为园区平面图上的名称则进入该楼房中
 				if(mainMapData.isMain()){
-					this.loadMapData(mainMapData.getId());
+					List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mainMapData.getId());
+					if(!mapDatas.isEmpty()){
+						mMapDataAdapter.setData(mapDatas);
+						MyLocation myLocation=appContext.getMyLocation();
+						for(int i=0;i<mapDatas.size();i++){
+							mCurrentMapData=mapDatas.get(i);
+							if(myLocation.getMapId().equals(mapDatas.get(i).getId())){
+								mCurrentMapData =mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+								break;
+							}
+						}
+						setMapFile();
+					}
 				}else{
 					DepartmentHasRoom departmentHasRoom=appContext.getDepartmentHasRoomService().findByRoomId(r.getId());
 					if(departmentHasRoom!=null){
@@ -356,9 +375,15 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		} else if (v.getId() == R.id.module_main_header_content_location) {
 			appContext.makeTextLong(R.string.msg_locationing);
 			final MyLocation myLocation = appContext.getMyLocation();
+			
+			if(mCurrentMapData.isMain()){
+				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getId());
+				mMapDataAdapter.setData(mapDatas);
+			}
 			mCurrentMapData = mMapDataAdapter.getItem(
 					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
 			setMapFile();
+			
 			addMyLocMarker(myLocation);
 			//未登录则不上报位置信息
 			if(appContext.isLogin()){
@@ -831,28 +856,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				mCurrentMapData=mds.get(0);
 				setMapFile();
 			}
-		} else {
-			//TODO:当前为园区平面图
-			appContext.makeTextLong("当前为园区平面图");
 		}
-	}
-	
-	/**
-	 * 加载地图数据
-	 */
-	private void loadMapData(String mainMapId){
-		List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mainMapId);
-		if(!mapDatas.isEmpty()){
-			mMapDataAdapter.setData(mapDatas);
-			
-			//1.显示当前用户所在位置的平面图
-			MyLocation myLocation=appContext.getMyLocation();
-			mCurrentMapData =mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
-			
-			//2.默认显示第一层平面图
-			setMapFile();
-		}
-		
 	}
 	
 	/**
