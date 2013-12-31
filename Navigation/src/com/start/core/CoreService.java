@@ -70,15 +70,15 @@ public class CoreService {
 		}
 	}
 	
-	public void clearAll(){
-		delete(Department.TABLE_NAME, Department.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(DepartmentHasRoom.TABLE_NAME, DepartmentHasRoom.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(Doctor.TABLE_NAME, Doctor.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(Edge.TABLE_NAME, MapData.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(MapData.TABLE_NAME, MapData.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(Room.TABLE_NAME, Room.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(RoomArea.TABLE_NAME, RoomArea.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
-		delete(Vertex.TABLE_NAME, Vertex.COLUMN_NAME_NO+"=?", new String[]{getCurrentDataNo()});
+	public void clearAll(String dataNo){
+		delete(Department.TABLE_NAME, Department.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(DepartmentHasRoom.TABLE_NAME, DepartmentHasRoom.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(Doctor.TABLE_NAME, Doctor.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(Edge.TABLE_NAME, MapData.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(MapData.TABLE_NAME, MapData.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(Room.TABLE_NAME, Room.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(RoomArea.TABLE_NAME, RoomArea.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(Vertex.TABLE_NAME, Vertex.COLUMN_NAME_NO+"=?", new String[]{dataNo});
 	}
 	
 	public String getCurrentDataNo(){

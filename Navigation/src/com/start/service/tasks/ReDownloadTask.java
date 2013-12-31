@@ -30,7 +30,7 @@ public class ReDownloadTask extends AsyncTask<Void, Float, Boolean> {
 	
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		mAppContext.getDepartmentService().clearAll();
+		mAppContext.getDepartmentService().clearAll(fileno);
 		return true;
 	}
 

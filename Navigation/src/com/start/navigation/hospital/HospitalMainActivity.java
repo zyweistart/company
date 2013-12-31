@@ -191,6 +191,10 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		
 		//显示园区地图
 		if(ShowMainData){
+			//切换至平面图视图
+			if(mCurSel!=1){
+				setCurPoint(1);
+			}
 			this.loadMainMapData();
 			ShowMainData=false;
 		}
@@ -620,7 +624,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 1) {
-					mModuleMainHeaderContentTitle.setText(R.string.frame_map_title);
+					mModuleMainHeaderContentTitle.setText(mCurrentMapData.getName());
 					mModuleMainHeaderContentPark.setVisibility(View.VISIBLE);
 					mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
@@ -860,9 +864,6 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	 * 加载园区地图平面图
 	 */
 	private void loadMainMapData(){
-		if(mCurSel!=1){
-			setCurPoint(1);
-		}
 		if(mCurrentMapData==null||!mCurrentMapData.isMain()){
 			List<MapData> mds=appContext.getMapDataService().findMainData();
 			mMapDataAdapter.setData(mds);
@@ -881,7 +882,9 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if (mCurrentMapData == null) {
 			return;
 		}
-		
+		if(mCurSel==1){
+			mModuleMainHeaderContentTitle.setText(mCurrentMapData.getName());
+		}
 		// 设置当前地图索引选重状态
 		mMapIndexListView.setItemChecked(mMapDataAdapter
 				.getMapDataPositionByMapId(mCurrentMapData.getId()), true);

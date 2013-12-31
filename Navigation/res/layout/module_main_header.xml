@@ -19,10 +19,10 @@
   	    android:orientation="horizontal">
   	    <Button
   	        android:id="@+id/module_main_header_content_park"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32.0dip"
+            android:layout_height="32.0dip"
             android:layout_marginRight="8dp"
-            android:text="园区"
+            android:background="@drawable/bar_park_selector"
   	        android:visibility="gone"/>
   	    <Button
   	        android:id="@+id/module_main_header_content_location"
