@@ -23,6 +23,7 @@ import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
 import com.start.model.Edge;
+import com.start.model.Introduction;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -91,6 +92,9 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 						break;
 					case AppConfig.TYPE_VERTEX:
 						importVertex(dataDir,fileno,fileName);
+						break;
+					case AppConfig.TYPE_INTRODUCTION:
+						importIntroduction(dataDir,fileno,fileName);
 						break;
 					}
 				}
@@ -232,6 +236,20 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 					values.put(Vertex.COLUMN_NAME_LATITUDE, data[2]);
 					values.put(Vertex.COLUMN_NAME_LONGITUDE, data[3]);
 					mCoreService.insert(Vertex.TABLE_NAME,values);
+				}
+			}
+		}
+	}
+	
+	private void importIntroduction(File dataDir,String fileno,String fileName) throws IOException {
+		List<String[]> datas=readFileData(new File(dataDir,fileName));
+		if(datas!=null){
+			for(String[] data:datas){
+				if(data.length==1){
+					ContentValues values=new ContentValues();
+					values.put(Introduction.COLUMN_NAME_NO, fileno);
+					values.put(Introduction.COLUMN_NAME_CONTENT, data[0]);
+					mCoreService.insert(Introduction.TABLE_NAME,values);
 				}
 			}
 		}

@@ -22,6 +22,7 @@ public class AppConfig {
 	public static final String F_ROOM="room.txt";
 	public static final String F_ROOMAREA="roomarea.txt";
 	public static final String F_VERTEX="vertex.txt";
+	public static final String F_INTRODUCTION="introduction.txt";
 	
 	// Configuration file type
 	public static final int TYPE_UNKNOWN = -1;
@@ -34,6 +35,7 @@ public class AppConfig {
 	public static final int TYPE_DOCTOR =6;
 	public static final int TYPE_ROOMAREA =7;
 	public static final int TYPE_MAP = 8;
+	public static final int TYPE_INTRODUCTION = 9;
 
 	// File extension matcher
 	private static final HashMap<String, Integer> mFileExtMatcher = new HashMap<String, Integer>();
@@ -54,6 +56,7 @@ public class AppConfig {
 		mFileExtMatcher.put(F_ROOM, TYPE_ROOM);
 		mFileExtMatcher.put(F_ROOMAREA, TYPE_ROOMAREA);
 		mFileExtMatcher.put(F_VERTEX, TYPE_VERTEX);
+		mFileExtMatcher.put(F_INTRODUCTION, TYPE_INTRODUCTION);
 	}
 
 	public static int getFileType(String fileName) {
