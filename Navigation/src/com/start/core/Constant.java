@@ -113,6 +113,7 @@ public final class Constant {
 		public static final String LOGIN_ACCOUNT="LOGIN_ACCOUNT";
 		//当前登录的密码
 		public static final String LOGIN_PASSWORD="LOGIN_PASSWORD";
+		public static final String USERLOCATION="USERLOCATION";
 	}
 	
 	public final class Handler{

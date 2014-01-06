@@ -1,6 +1,7 @@
 package com.start.navigation;
 
 import java.util.Map;
+import java.util.Random;
 
 import android.app.Application;
 import android.content.Context;
@@ -22,6 +23,7 @@ import com.start.service.DepartmentService;
 import com.start.service.DoctorService;
 import com.start.service.EdgeService;
 import com.start.service.FriendHistoryService;
+import com.start.service.IntroductionService;
 import com.start.service.MapDataService;
 import com.start.service.RoomAreaService;
 import com.start.service.RoomService;
@@ -45,6 +47,7 @@ public class AppContext extends Application {
     private RoomAreaService roomAreaService;
     private EdgeService edgeService;
     private FriendHistoryService friendHistoryService;
+    private IntroductionService introductionService;
 
 	@Override
     public void onCreate() {
@@ -159,6 +162,13 @@ public class AppContext extends Application {
 		}
 		return friendHistoryService;
 	}
+	
+	public IntroductionService getIntroductionService() {
+		if(introductionService==null){
+			introductionService=new IntroductionService(this);
+		}
+		return introductionService;
+	}
 
 	/**
 	 * 当前用户是否已经登录
@@ -219,9 +229,75 @@ public class AppContext extends Application {
 		return Constant.EMPTYSTR;
 	}
 	
+	/**
+	 * 获取位置信息
+	 * @return
+	 */
 	public MyLocation getMyLocation(){
-		return new MyLocation("0102", "0.0007388","0.0012458");
-//		return new MyLocation("0102", "0.0006463","0.0014099");
+		String data=getSharedPreferencesUtils().getString(Constant.SharedPreferences.USERLOCATION, Constant.EMPTYSTR);
+		if(Constant.EMPTYSTR.equals(data)){
+			return locate();
+		}else{
+			String[] info=data.split(";");
+			return new MyLocation(info[0], info[1],info[2]);
+		}
+	}
+	
+	/**
+	 * TODO:定位代码需修改
+	 * @return
+	 */
+	public MyLocation locate(){
+		Random random=new Random();
+		int n=random.nextInt(10);
+//		int n=2;
+		
+		String mapId="0102";
+		String latitude="0.0007388";
+		String longitude="0.0012458";
+		if(n==0){
+			mapId="0102";
+			latitude="0.0007388";
+			longitude="0.0012458";
+		}else if(n==1){
+			mapId="0101";
+			latitude="0.0007377";
+			longitude="0.0011027";
+		}else if(n==2){
+			mapId="0001";
+			latitude="0.02802874";
+			longitude="0.0070907";
+		}else if(n==3){
+			mapId="0102";
+			latitude="0.0006441";
+			longitude="0.0013508";
+		}else if(n==4){
+			mapId="0101";
+			latitude="0.0003701";
+			longitude="0.0012527";
+		}else if(n==5){
+			mapId="0101";
+			latitude="0.0005539";
+			longitude="0.0015959";
+		}else if(n==6){
+			mapId="0101";
+			latitude="0.0006452";
+			longitude="0.0015063";
+		}else if(n==7){
+			mapId="0101";
+			latitude="0.0007394";
+			longitude="0.0013539";
+		}else if(n==8){
+			mapId="0101";
+			latitude="0.0007741";
+			longitude="0.0012984";
+		}else if(n==9){
+			mapId="0101";
+			latitude="0.0003689";
+			longitude="0.0012149";
+		}
+		getSharedPreferencesUtils().putString(Constant.SharedPreferences.USERLOCATION, mapId+";"+latitude+";"+longitude);
+		return new MyLocation(mapId, latitude,longitude);
 	}
 	
 	public void makeTextShort(int resId) {

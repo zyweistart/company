@@ -34,6 +34,14 @@
 	    
 	</RelativeLayout>
 	
+	<ImageView
+        android:id="@+id/activity_doctor_detail_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10.0dip"
+        android:src="@drawable/ic_doctor"
+        android:contentDescription="@string/empty"/>
+	
 	<TextView
 	    	 android:id="@+id/activity_doctor_detail_content" 
          android:layout_width="match_parent"

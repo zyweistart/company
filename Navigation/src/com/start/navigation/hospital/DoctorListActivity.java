@@ -1,8 +1,10 @@
 package com.start.navigation.hospital;
 
+import java.io.File;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.start.core.CoreActivity;
 import com.start.model.Department;
 import com.start.model.Doctor;
 import com.start.navigation.R;
+import com.start.utils.Utils;
 
 /**
  * 医生列表
@@ -81,11 +85,18 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 				convertView = LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.lvitem_doctor, null);
 				holder=new ViewHolder();
 				holder.tvName=(TextView)convertView.findViewById(R.id.lvitem_doctor_name);
-				
+				holder.tvHead=(ImageView)convertView.findViewById(R.id.lvitem_doctor_head);
+				holder.tvHead.setVisibility(View.VISIBLE);
 				convertView.setTag(holder);
 			}
 			
 			Doctor doctor=doctors.get(position);
+			File dataFile=Utils.getFile(DoctorListActivity.this, getAppContext().getCurrentDataNo()+"/doctor_head/"+doctor.getId()+".png");
+			if(dataFile.exists()){
+				holder.tvHead.setImageBitmap(BitmapFactory.decodeFile(dataFile.getAbsolutePath()));
+			}else{
+				holder.tvHead.setBackgroundResource(R.drawable.ic_doctor);
+			}
 			holder.doctor=doctor;
 			holder.tvName.setText(doctor.getName());
 			return convertView;
@@ -98,6 +109,7 @@ public class DoctorListActivity extends CoreActivity  implements OnItemClickList
 		private Doctor doctor;
 		
 		private TextView tvName;
+		private ImageView tvHead;
 		
 	}
 	

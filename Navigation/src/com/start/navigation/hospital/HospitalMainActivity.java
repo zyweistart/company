@@ -78,6 +78,7 @@ import com.start.service.HttpService;
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;
 import com.start.service.PullListViewData.OnLoadDataListener;
+import com.start.service.UserLocationReport;
 import com.start.service.adapter.FriendLocationAdapter;
 import com.start.service.adapter.MapDataAdapter;
 import com.start.service.tasks.PathSearchTask;
@@ -105,7 +106,6 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	public static String currentLocationDepartmentId;
 
 	private AppContext appContext;
-	private HttpService httpService;
 	
 	private long lastPressTime;
 	private int mCurSel;
@@ -151,13 +151,15 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 	
 	private PullListViewData friendLocationPullListData;
 	
+	private UpdateLocation mUpdateLocation;
+	private UserLocationReport mUserLocation;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		appContext = AppContext.getInstance();
-		httpService=new HttpService(this);
 		
 		this.initHeaderView();
 		this.initFooterView();
@@ -166,6 +168,12 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if(!appContext.getSharedPreferencesUtils().getBoolean(Constant.SharedPreferences.SWITCHMAPDATAFLAG, false)){
 			this.loadData();
 		}
+		
+		mUpdateLocation=new UpdateLocation();
+		mUpdateLocation.start();
+		
+		mUserLocation=new UserLocationReport(this);
+		mUserLocation.start();
 		
 	}
 	
@@ -245,6 +253,14 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		}
 	}
 	
+	
+	@Override
+	protected void onDestroy() {
+		mUpdateLocation.setFlag(false);
+		mUserLocation.setFlag(false);
+		super.onDestroy();
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -381,36 +397,21 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			//切换至园区平面图
 			this.loadMainMapData();
 		} else if (v.getId() == R.id.module_main_header_content_location) {
-			appContext.makeTextLong(R.string.msg_locationing);
-			final MyLocation myLocation = appContext.getMyLocation();
+//			appContext.makeTextLong(R.string.msg_locationing);
+			final MyLocation myLocation = appContext.locate();
 			
+			mCurrentMapData=appContext.getMapDataService().findById(myLocation.getMapId());
 			if(mCurrentMapData.isMain()){
-				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getId());
+				mMapIndexListView.setVisibility(View.GONE);
+			}else{
+				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
 				mMapDataAdapter.setData(mapDatas);
 				mMapIndexListView.setVisibility(View.VISIBLE);
 			}
-			mCurrentMapData = mMapDataAdapter.getItem(
-					mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+			
 			setMapFile();
 			
-			addMyLocMarker(myLocation);
-			//未登录则不上报位置信息
-			if(appContext.isLogin()){
-				Map<String,String> requestParams=new HashMap<String,String>();
-				requestParams.put("maprecordno",appContext.getCurrentDataNo());
-				requestParams.put("submapno", myLocation.getMapId());
-				requestParams.put("latitude", myLocation.getLatitude());
-				requestParams.put("longitude", myLocation.getLongitude());
-				httpService.exeNetRequest(null,Constant.ServerAPI.userposReport,requestParams,null,new UIRunnable() {
-					
-					@Override
-					public void run() {
-						
-						appContext.makeTextLong("已成功定位");
-						
-					}
-				});
-			}
+//			addMyLocMarker(myLocation);
 			
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
@@ -885,9 +886,12 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if(mCurSel==1){
 			mModuleMainHeaderContentTitle.setText(mCurrentMapData.getName());
 		}
-		// 设置当前地图索引选重状态
-		mMapIndexListView.setItemChecked(mMapDataAdapter
-				.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
+		
+		if(!mCurrentMapData.isMain()){
+			// 设置当前地图索引选重状态
+			mMapIndexListView.setItemChecked(mMapDataAdapter
+					.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
+		}
 		
 		String path = String.format("mapdata/%1$s.map",mCurrentMapData.getId());
 		File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),path);
@@ -1079,6 +1083,10 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 				mMyLocOverlay.addItem(mMyLocMarker);
 			}
 			
+		}else{
+			if(mMyLocOverlay!=null){
+				mMyLocOverlay.clear();
+			}
 		}
 	}
 
@@ -1090,5 +1098,36 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 
 		mMapView.setCenter(poi.getGeoPoint());
 	}
+	
+	private class UpdateLocation extends Thread{
+		
+		private Boolean flag;
+		
+		public UpdateLocation(){
+			flag=true;
+		}
+		
+		public void setFlag(Boolean flag) {
+			this.flag = flag;
+		}
+		
+		@Override
+		public void run() {
+			while(true&&flag){
+				if(mCurrentMapData!=null){
+					//每5秒定位一次
+					MyLocation myLocation=appContext.locate();
+					addMyLocMarker(myLocation);
+				}
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
 	
 }

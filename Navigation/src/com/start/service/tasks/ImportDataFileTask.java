@@ -112,11 +112,24 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 				Log.e(DEBUG_TAG, e.getMessage());
 			}
 		}
+		File doctorPic=new File(dataDir,"doctor_head");
+		if(doctorPic.exists()){
+			try {
+				for (String fileName : doctorPic.list()) {
+					importData(new File(doctorPic,fileName),fileno+"/doctor_head/"+fileName);
+				}
+				flag=true;
+			}catch(Exception e){
+				flag=false;
+				message = "Failed to import doctor head.";
+				Log.e(DEBUG_TAG, e.getMessage());
+			}
+		}
 		File processDir=new File(folderPath+"process/");
 		if(processDir.exists()){
 			try {
 				for (String fileName : processDir.list()) {
-					importProcess(new File(processDir,fileName),fileno+"/process/"+fileName);
+					importData(new File(processDir,fileName),fileno+"/process/"+fileName);
 				}
 				flag=true;
 			}catch(Exception e){
@@ -242,14 +255,27 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 	}
 	
 	private void importIntroduction(File dataDir,String fileno,String fileName) throws IOException {
-		List<String[]> datas=readFileData(new File(dataDir,fileName));
-		if(datas!=null){
-			for(String[] data:datas){
-				if(data.length==1){
-					ContentValues values=new ContentValues();
-					values.put(Introduction.COLUMN_NAME_NO, fileno);
-					values.put(Introduction.COLUMN_NAME_CONTENT, data[0]);
-					mCoreService.insert(Introduction.TABLE_NAME,values);
+		
+		InputStream is = null;
+		BufferedReader br=null;
+		try {
+			String line = null;
+			is = new FileInputStream(new File(dataDir,fileName));
+			br = new BufferedReader(new InputStreamReader(is));
+			StringBuilder sb=new StringBuilder();
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+			ContentValues values=new ContentValues();
+			values.put(Introduction.COLUMN_NAME_NO, fileno);
+			values.put(Introduction.COLUMN_NAME_CONTENT, sb.toString());
+			mCoreService.insert(Introduction.TABLE_NAME,values);
+		} finally {
+			if(is!=null){
+				try {
+					is.close();
+				} finally {
+					is=null;
 				}
 			}
 		}
@@ -299,7 +325,7 @@ public class ImportDataFileTask extends AsyncTask<Void, Void, Boolean> {
 		}
 	}
 	
-	private void importProcess(File mapData,String absolutePath) throws IOException {
+	private void importData(File mapData,String absolutePath) throws IOException {
 		InputStream is = null;
 		try {
 			is = new FileInputStream(mapData);

@@ -5,7 +5,6 @@ import android.database.Cursor;
 
 import com.start.core.CoreService;
 import com.start.model.Introduction;
-import com.start.model.Room;
 
 public class IntroductionService extends CoreService {
 
@@ -14,7 +13,7 @@ public class IntroductionService extends CoreService {
 	}
 	
 	public Introduction findCurrentIntroduction(){
-		Cursor cursor = getDbHelper().getReadableDatabase().query(Room.TABLE_NAME, 
+		Cursor cursor = getDbHelper().getReadableDatabase().query(Introduction.TABLE_NAME, 
 				new String[]{
 					Introduction.COLUMN_NAME_ID,
 					Introduction.COLUMN_NAME_CONTENT},

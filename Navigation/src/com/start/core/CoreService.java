@@ -8,6 +8,7 @@ import com.start.model.Department;
 import com.start.model.DepartmentHasRoom;
 import com.start.model.Doctor;
 import com.start.model.Edge;
+import com.start.model.Introduction;
 import com.start.model.MapData;
 import com.start.model.Room;
 import com.start.model.RoomArea;
@@ -79,6 +80,7 @@ public class CoreService {
 		delete(Room.TABLE_NAME, Room.COLUMN_NAME_NO+"=?", new String[]{dataNo});
 		delete(RoomArea.TABLE_NAME, RoomArea.COLUMN_NAME_NO+"=?", new String[]{dataNo});
 		delete(Vertex.TABLE_NAME, Vertex.COLUMN_NAME_NO+"=?", new String[]{dataNo});
+		delete(Introduction.TABLE_NAME, Introduction.COLUMN_NAME_NO+"=?", new String[]{dataNo});
 	}
 	
 	public String getCurrentDataNo(){
