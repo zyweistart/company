@@ -1,5 +1,6 @@
 package com.start.navigation;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.start.core.Constant;
+import com.start.model.Vertex;
 import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
 import com.start.service.DepartmentHasRoomService;
@@ -244,58 +246,16 @@ public class AppContext extends Application {
 	}
 	
 	/**
-	 * TODO:定位代码需修改
+	 * TODO:定位代码需修改目前为随机获取
 	 * @return
 	 */
 	public MyLocation locate(){
 		Random random=new Random();
-		int n=random.nextInt(10);
-//		int n=2;
-		
-		String mapId="0102";
-		String latitude="0.0007388";
-		String longitude="0.0012458";
-		if(n==0){
-			mapId="0102";
-			latitude="0.0007388";
-			longitude="0.0012458";
-		}else if(n==1){
-			mapId="0101";
-			latitude="0.0007377";
-			longitude="0.0011027";
-		}else if(n==2){
-			mapId="0001";
-			latitude="0.02802874";
-			longitude="0.0070907";
-		}else if(n==3){
-			mapId="0102";
-			latitude="0.0006441";
-			longitude="0.0013508";
-		}else if(n==4){
-			mapId="0101";
-			latitude="0.0003701";
-			longitude="0.0012527";
-		}else if(n==5){
-			mapId="0101";
-			latitude="0.0005539";
-			longitude="0.0015959";
-		}else if(n==6){
-			mapId="0101";
-			latitude="0.0006452";
-			longitude="0.0015063";
-		}else if(n==7){
-			mapId="0101";
-			latitude="0.0007394";
-			longitude="0.0013539";
-		}else if(n==8){
-			mapId="0101";
-			latitude="0.0007741";
-			longitude="0.0012984";
-		}else if(n==9){
-			mapId="0101";
-			latitude="0.0003689";
-			longitude="0.0012149";
-		}
+		List<Vertex> vertexs=getVertexService().findAll();
+		Vertex v=vertexs.get(random.nextInt(vertexs.size()));
+		String mapId=v.getMapId();
+		String latitude=v.getLatitude();
+		String longitude=v.getLongitude();
 		getSharedPreferencesUtils().putString(Constant.SharedPreferences.USERLOCATION, mapId+";"+latitude+";"+longitude);
 		return new MyLocation(mapId, latitude,longitude);
 	}
