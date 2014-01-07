@@ -245,11 +245,8 @@ public class AppContext extends Application {
 		}
 	}
 	
-	/**
-	 * TODO:定位代码需修改目前为随机获取
-	 * @return
-	 */
 	public MyLocation locate(){
+		//TODO:定位代码需修改目前为随机获取
 		Random random=new Random();
 		List<Vertex> vertexs=getVertexService().findAll();
 		Vertex v=vertexs.get(random.nextInt(vertexs.size()));

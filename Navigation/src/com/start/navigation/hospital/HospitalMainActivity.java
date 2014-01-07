@@ -169,12 +169,6 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			this.loadData();
 		}
 		
-		mUpdateLocation=new UpdateLocation();
-		mUpdateLocation.start();
-		
-		mUserLocation=new UserLocationReport(this);
-		mUserLocation.start();
-		
 	}
 	
 	@Override
@@ -243,6 +237,12 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 			mCurSel = 0;
 			setCurPoint(-1);
 		}
+		
+		mUpdateLocation=new UpdateLocation();
+		mUpdateLocation.start();
+		
+		mUserLocation=new UserLocationReport(this);
+		mUserLocation.start();
 	}
 	
 	@Override
@@ -251,16 +251,12 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if(!Constant.ISTEST){
 			MobclickAgent.onPause(this);
 		}
-	}
-	
-	
-	@Override
-	protected void onDestroy() {
+		
 		mUpdateLocation.setFlag(false);
 		mUserLocation.setFlag(false);
-		super.onDestroy();
+		
 	}
-
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -1115,7 +1111,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		public void run() {
 			while(true&&flag){
 				if(mCurrentMapData!=null){
-					//每5秒定位一次
+					//每3秒定位一次
 					MyLocation myLocation=appContext.locate();
 					addMyLocMarker(myLocation);
 				}
