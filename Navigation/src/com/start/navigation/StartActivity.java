@@ -7,7 +7,10 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 
+import com.start.core.Constant;
 import com.start.core.CoreActivity;
+import com.start.navigation.hospital.FirstSetMapDataActivity;
+import com.start.navigation.hospital.HospitalMainActivity;
 
 /**
  * 开始页
@@ -39,7 +42,12 @@ public class StartActivity extends CoreActivity implements AnimationListener{
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		startActivity(new Intent(StartActivity.this, NavigationActivity.class));
+		if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
+			startActivity(new Intent(this, FirstSetMapDataActivity.class));
+		}else{
+			startActivity(new Intent(this, HospitalMainActivity.class));
+		}
+//		startActivity(new Intent(StartActivity.this, NavigationActivity.class));
 		finish();
 	}
 	
