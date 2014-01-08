@@ -10,8 +10,6 @@ import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.ArrayItemizedOverlay;
 import org.mapsforge.android.maps.overlay.ArrayWayOverlay;
 import org.mapsforge.android.maps.overlay.Overlay;
-import org.mapsforge.android.maps.overlay.OverlayItem;
-import org.mapsforge.android.maps.overlay.OverlayWay;
 import org.mapsforge.core.GeoPoint;
 
 import android.app.AlertDialog;
@@ -55,8 +53,6 @@ import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.MyLocation;
-import com.start.model.nav.NavRoute;
-import com.start.model.nav.NavStep;
 import com.start.model.nav.PathSearchResult;
 import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
@@ -119,10 +115,7 @@ public class HospitalMainActivity extends MapManager implements
 	private Button mModuleMainHeaderContentPark;
 	private Button mModuleMainHeaderContentLocation;
 	
-	private MapData mCurrentMapData;//当前使用的地图
 	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
-	private ArrayItemizedOverlay mMyLocOverlay;
-	private MyLocationMarker mMyLocMarker;
 	private ListView mMapIndexListView;//地图索引视图列表
 	private MapDataAdapter mMapDataAdapter;//地图索引适配器
 	private Map<String, List<Room>> mRooms;//地图上房间的集合
@@ -206,14 +199,7 @@ public class HospitalMainActivity extends MapManager implements
 					if(department!=null){
 						if(department.getMajorRoomId().equals(room.getId())){
 							
-							mCurrentMapData=appContext.getMapDataService().findById(room.getMapId());
-							if(mCurrentMapData.isMain()){
-								mMapIndexListView.setVisibility(View.GONE);
-							}else{
-								List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
-								mMapDataAdapter.setData(mapDatas);
-								mMapIndexListView.setVisibility(View.VISIBLE);
-							}
+							setCurrentMapData(appContext.getMapDataService().findById(room.getMapId()));
 							
 							setMapFile();
 							tapPOI(room);
@@ -273,7 +259,7 @@ public class HospitalMainActivity extends MapManager implements
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		if (id == Utils.DLG_POI) {
 			POI poi = (POI) args.getSerializable(BUNDLEDATA_DATA);
-			if(mCurrentMapData.isMain()){
+			if(getCurrentMapData().isMain()){
 				((TextView) dialog.findViewById(R.id.poiName)).setText("进入 "+poi
 						.getName());
 			}else{
@@ -346,7 +332,7 @@ public class HospitalMainActivity extends MapManager implements
 			POI r = (POI) v.getTag();
 			Vertex vertex=AppContext.getInstance().getVertexService().findById(r.getVertexId());
 			if(vertex!=null){
-				location(mCurrentMapData.getId(),vertex.getLatitude(),vertex.getLongitude());
+				location(getCurrentMapData().getId(),vertex.getLatitude(),vertex.getLongitude());
 			}
 		} else if (v.getId() == R.id.poiName) {
 			POI r = (POI) v.getTag();
@@ -357,12 +343,11 @@ public class HospitalMainActivity extends MapManager implements
 					List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mainMapData.getId());
 					if(!mapDatas.isEmpty()){
 						mMapDataAdapter.setData(mapDatas);
-						mMapIndexListView.setVisibility(View.VISIBLE);
 						MyLocation myLocation=appContext.getMyLocation();
 						for(int i=0;i<mapDatas.size();i++){
-							mCurrentMapData=mapDatas.get(i);
+							setCurrentMapData(mapDatas.get(i));
 							if(myLocation.getMapId().equals(mapDatas.get(i).getId())){
-								mCurrentMapData =mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId()));
+								setCurrentMapData(mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(myLocation.getMapId())));
 								break;
 							}
 						}
@@ -386,14 +371,7 @@ public class HospitalMainActivity extends MapManager implements
 //			appContext.makeTextLong(R.string.msg_locationing);
 			final MyLocation myLocation = appContext.locate();
 			
-			mCurrentMapData=appContext.getMapDataService().findById(myLocation.getMapId());
-			if(mCurrentMapData.isMain()){
-				mMapIndexListView.setVisibility(View.GONE);
-			}else{
-				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
-				mMapDataAdapter.setData(mapDatas);
-				mMapIndexListView.setVisibility(View.VISIBLE);
-			}
+			setCurrentMapData(appContext.getMapDataService().findById(myLocation.getMapId()));
 			
 			setMapFile();
 			
@@ -456,7 +434,7 @@ public class HospitalMainActivity extends MapManager implements
 			return;
 		}
 
-		List<Room> rooms = mRooms.get(mCurrentMapData.getId());
+		List<Room> rooms = mRooms.get(getCurrentMapData().getId());
 		for (Room r : rooms) {
 			if (r.inside(g)) {
 				tapPOI(r);
@@ -472,14 +450,7 @@ public class HospitalMainActivity extends MapManager implements
 //			IndoorEndPoint ep=(IndoorEndPoint)result.getEndPoint();
 			IndoorEndPoint sp=(IndoorEndPoint)result.getStartPoint();
 			
-			mCurrentMapData=appContext.getMapDataService().findById(sp.getMapId());
-			if(mCurrentMapData.isMain()){
-				mMapIndexListView.setVisibility(View.GONE);
-			}else{
-				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
-				mMapDataAdapter.setData(mapDatas);
-				mMapIndexListView.setVisibility(View.VISIBLE);
-			}
+			setCurrentMapData(appContext.getMapDataService().findById(sp.getMapId()));
 			
 			setMapFile();
 		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
@@ -615,7 +586,7 @@ public class HospitalMainActivity extends MapManager implements
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 1) {
-					mModuleMainHeaderContentTitle.setText(mCurrentMapData.getName());
+					mModuleMainHeaderContentTitle.setText(getCurrentMapData().getName());
 					mModuleMainHeaderContentPark.setVisibility(View.VISIBLE);
 					mModuleMainHeaderContentLocation.setVisibility(View.VISIBLE);
 					mModuleMainFrameIntroductionContent.setVisibility(View.GONE);
@@ -771,8 +742,8 @@ public class HospitalMainActivity extends MapManager implements
 					int position, long id) {
 				MapData md = (MapData) view.getTag();
 				// 只有当点击的索引不同时才会进行切换
-				if (!md.getId().equals(mCurrentMapData.getId())) {
-					mCurrentMapData = md;
+				if (!md.getId().equals(getCurrentMapData().getId())) {
+					setCurrentMapData(md);
 					setMapFile();
 				}
 			}
@@ -848,12 +819,11 @@ public class HospitalMainActivity extends MapManager implements
 	 * 加载园区地图平面图
 	 */
 	private void loadMainMapData(){
-		if(mCurrentMapData==null||!mCurrentMapData.isMain()){
+		if(getCurrentMapData()==null||!getCurrentMapData().isMain()){
 			List<MapData> mds=appContext.getMapDataService().findMainData();
 			mMapDataAdapter.setData(mds);
-			mMapIndexListView.setVisibility(View.GONE);
 			if(mds.size()>0){
-				mCurrentMapData=mds.get(0);
+				setCurrentMapData(mds.get(0));
 				setMapFile();
 			}
 		}
@@ -863,20 +833,23 @@ public class HospitalMainActivity extends MapManager implements
 	 * 设置视图的地图数据文件
 	 */
 	private void setMapFile() {
-		if (mCurrentMapData == null) {
-			return;
-		}
+		
 		if(mCurSel==1){
-			mModuleMainHeaderContentTitle.setText(mCurrentMapData.getName());
+			mModuleMainHeaderContentTitle.setText(getCurrentMapData().getName());
 		}
 		
-		if(!mCurrentMapData.isMain()){
+		if(getCurrentMapData().isMain()){
+			mMapIndexListView.setVisibility(View.GONE);
+		}else{
+			List<MapData> mapDatas=appContext.getMapDataService().findByMainId(getCurrentMapData().getMainid());
+			mMapDataAdapter.setData(mapDatas);
 			// 设置当前地图索引选重状态
 			mMapIndexListView.setItemChecked(mMapDataAdapter
-					.getMapDataPositionByMapId(mCurrentMapData.getId()), true);
+					.getMapDataPositionByMapId(getCurrentMapData().getId()), true);
+			mMapIndexListView.setVisibility(View.VISIBLE);
 		}
 		
-		String path = String.format("mapdata/%1$s.map",mCurrentMapData.getId());
+		String path = String.format("mapdata/%1$s.map",getCurrentMapData().getId());
 		File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),path);
 		if (setMapFile(dataFile)) {
 			updateOverlay();
@@ -894,10 +867,11 @@ public class HospitalMainActivity extends MapManager implements
 		synchronized (itemList) {
 			itemList.clear();
 			
+			PathSearchResult res = appContext.getPathSearchResult();
 			//添加我的位置覆盖点
 			MyLocation myLocation = appContext.getMyLocation();
-//			addMyLocMarker(myLocation);
-			if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
+			if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
+//				addMyLocMarker(myLocation);
 				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
 				mMyLocOverlay = new ArrayItemizedOverlay(d);
 				mMyLocMarker=new MyLocationMarker(myLocation, d);
@@ -906,13 +880,13 @@ public class HospitalMainActivity extends MapManager implements
 			}
 			
 			//覆盖点
-			ArrayItemizedOverlay overlay=getArrayItemizedOverlay();
+			ArrayItemizedOverlay overlay=getArrayItemizedOverlay(res);
 			if (overlay != null) {
 				itemList.add(overlay);
 			}
 			
 			//路线
-			ArrayWayOverlay ways=getWayOverlay();
+			ArrayWayOverlay ways=getWayOverlay(res);
 			if (ways != null) {
 				itemList.add(ways);
 			}
@@ -922,7 +896,7 @@ public class HospitalMainActivity extends MapManager implements
 				Drawable d=getResources().getDrawable(R.drawable.icon_node);
 				ArrayItemizedOverlay poiOverlays=new ArrayItemizedOverlay(d);
 				for(POIMarker marker:mPoiMarkers){
-					if(mCurrentMapData.getId().equals(marker.getPOI().getMapId())){
+					if(getCurrentMapData().getId().equals(marker.getPOI().getMapId())){
 						poiOverlays.addItem(marker);
 						if(isSetCenterPoint){
 							// 设置当前第一个目标位置点为中心点
@@ -935,141 +909,6 @@ public class HospitalMainActivity extends MapManager implements
 			}
 		}
 		
-	}
-
-	/**
-	 * 获取地图上的覆盖图
-	 */
-	private ArrayItemizedOverlay getArrayItemizedOverlay() {
-		PathSearchResult res = appContext.getPathSearchResult();
-		if (res == null) {
-			return null;
-		}
-
-		NavRoute route = res.getRoute();
-		if (route == null) {
-			return null;
-		}
-
-		NavStep step = route.getStep(mCurrentMapData.getId());
-		if (step == null) {
-			return null;
-		}
-
-		getMapView().setCenter(step.getStart().getGeoPoint());
-		
-		ArrayItemizedOverlay arrayItems = new ArrayItemizedOverlay(getResources().getDrawable(R.drawable.icon_node));
-		arrayItems.addItem(new OverlayItem(step.getStart().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
-
-		if (step.getEnd() != null) {
-			arrayItems.addItem(new OverlayItem(step.getEnd().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
-		}
-
-		if (res.getStartPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint start = (IndoorEndPoint) res.getStartPoint();
-			// 如果终点位置在当前地图上则添加起点覆盖图
-			if (start.getMapId().equals(mCurrentMapData.getId())) {
-				arrayItems.addItem(new OverlayItem(start.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_start))));
-			}
-		}
-
-		if (res.getEndPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint end = (IndoorEndPoint) res.getEndPoint();
-			// 如果终点在当前地图则添加终点覆盖图
-			if (end.getMapId().equals(mCurrentMapData.getId())) {
-				arrayItems.addItem(new OverlayItem(end.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_end))));
-			}
-		}
-		return arrayItems;
-	}
-
-	/**
-	 * 获取地图上覆盖的路线
-	 */
-	private ArrayWayOverlay getWayOverlay() {
-
-		PathSearchResult result = appContext.getPathSearchResult();
-		if (result == null) {
-			return null;
-		}
-
-		NavRoute route = result.getRoute();
-		if (route == null) {
-			return null;
-		}
-
-		NavStep step = route.getStep(mCurrentMapData.getId());
-		if (step == null) {
-			return null;
-		}
-		
-		OverlayWay way = new OverlayWay();
-		int size=step.size();
-		GeoPoint[][] nodes;
-//		GeoPoint[][] nodes = new GeoPoint[1][size];
-//		for (int i = 0; i < size; i++) {
-//			nodes[0][i] = step.get(i);
-//		}
-		
-		if (result.getStartPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint start = (IndoorEndPoint) result.getStartPoint();
-			if (start.getMapId().equals(mCurrentMapData.getId())) {
-				size=size+1;
-				nodes = new GeoPoint[1][size];
-				nodes[0][0]=start.getGeoPoint();
-				for (int i = 1; i < size; i++) {
-					nodes[0][i] = step.get(i-1);
-				}
-			}else{
-				nodes = new GeoPoint[1][size];
-				for (int i = 0; i < size; i++) {
-					nodes[0][i] = step.get(i);
-				}
-			}
-		}else{
-			nodes = new GeoPoint[1][size];
-			for (int i = 0; i < size; i++) {
-				nodes[0][i] = step.get(i);
-			}
-		}
-//
-//		if (result.getEndPoint() instanceof IndoorEndPoint) {
-//			IndoorEndPoint end = (IndoorEndPoint) result.getEndPoint();
-//			if (end.getMapId().equals(mCurrentMapData.getId())) {
-//				nodes[0][++size]=end.getGeoPoint();
-//			}
-//		}
-		
-		way.setWayNodes(nodes);
-		ArrayWayOverlay ways = new ArrayWayOverlay(null, appContext.getPaintStroke());
-		ways.addWay(way);
-		return ways;
-	}
-
-	/**
-	 * 添加用户位置标记
-	 */
-	private void addMyLocMarker(MyLocation myLocation) {
-		// 如果当前定位的位置与当前的地图相同则添加位置标记
-		if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
-			
-			if(mMyLocOverlay==null){
-				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
-				mMyLocOverlay = new ArrayItemizedOverlay(d);
-				mMyLocMarker=new MyLocationMarker(myLocation, d);
-				mMyLocOverlay.addItem(mMyLocMarker);
-				getMapView().getOverlays().add(mMyLocOverlay);
-			}else{
-				mMyLocOverlay.clear();
-				mMyLocMarker.setPoint(myLocation.getGeoPoint());
-				mMyLocOverlay.addItem(mMyLocMarker);
-			}
-			
-		}else{
-			if(mMyLocOverlay!=null){
-				mMyLocOverlay.clear();
-			}
-		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1096,7 +935,7 @@ public class HospitalMainActivity extends MapManager implements
 		@Override
 		public void run() {
 			while(true&&flag){
-				if(mCurrentMapData!=null){
+				if(getCurrentMapData()!=null){
 					
 					runOnUiThread(new Runnable() {
 						
