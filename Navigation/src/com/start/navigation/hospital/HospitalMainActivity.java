@@ -196,7 +196,6 @@ public class HospitalMainActivity extends MapManager implements
 			if(mCurSel!=1){
 				setCurPoint(1);
 			}
-			Room majorRoom=null;
 			mPoiMarkers=new ArrayList<POIMarker>();
 			Department department=appContext.getDepartmentService().findById(currentLocationDepartmentId);
 			List<DepartmentHasRoom> departmentHasRooms=appContext.getDepartmentHasRoomService().findByDepartmentId(currentLocationDepartmentId);
@@ -206,16 +205,22 @@ public class HospitalMainActivity extends MapManager implements
 					mPoiMarkers.add(new POIMarker(room, getResources().getDrawable(R.drawable.icon_node)));
 					if(department!=null){
 						if(department.getMajorRoomId().equals(room.getId())){
-							majorRoom=room;
+							
+							mCurrentMapData=appContext.getMapDataService().findById(room.getMapId());
+							if(mCurrentMapData.isMain()){
+								mMapIndexListView.setVisibility(View.GONE);
+							}else{
+								List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
+								mMapDataAdapter.setData(mapDatas);
+								mMapIndexListView.setVisibility(View.VISIBLE);
+							}
+							
+							setMapFile();
+							tapPOI(room);
+							break;
 						}
 					}
 				}
-			}
-			if(majorRoom!=null){
-				mCurrentMapData = mMapDataAdapter.getItem(mMapDataAdapter
-						.getMapDataPositionByMapId(majorRoom.getMapId()));
-				setMapFile();
-				tapPOI(majorRoom);
 			}
 			currentLocationDepartmentId=null;
 		}
@@ -1102,17 +1107,17 @@ public class HospitalMainActivity extends MapManager implements
 								MyLocation myLocation=appContext.locate();
 								addMyLocMarker(myLocation);
 								//TODO：路线定位
-								PathSearchResult psr=appContext.getPathSearchResult();
-								if(psr!=null){
-									if (myLocation != null) {
-										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
-										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
-												myLocation.getGeoPoint());
-										search.execute(sp, psr.getEndPoint());
-									} else {
-										appContext.makeTextLong( R.string.msg_location_unavailable);
-									}
-								}
+//								PathSearchResult psr=appContext.getPathSearchResult();
+//								if(psr!=null){
+//									if (myLocation != null) {
+//										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
+//										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+//												myLocation.getGeoPoint());
+//										search.execute(sp, psr.getEndPoint());
+//									} else {
+//										appContext.makeTextLong( R.string.msg_location_unavailable);
+//									}
+//								}
 							}
 						}
 					});
