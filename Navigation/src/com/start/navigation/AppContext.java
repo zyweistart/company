@@ -8,8 +8,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.TelephonyManager;
@@ -37,8 +35,6 @@ public class AppContext extends Application {
 	private static AppContext mInstance;
     private SharedPreferencesUtils sharedPreferencesUtils;
     private PathSearchResult pathSearchResult;
-    
-    private Paint mPaintStroke;
     
     private DoctorService doctorService;
     private DepartmentService departmentService;
@@ -89,17 +85,6 @@ public class AppContext extends Application {
 
 	public void setPathSearchResult(PathSearchResult pathSearchResult) {
 		this.pathSearchResult = pathSearchResult;
-	}
-
-	public Paint getPaintStroke(){
-		if(mPaintStroke==null){
-			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-			mPaintStroke.setStyle(Paint.Style.STROKE);
-			mPaintStroke.setColor(Color.BLUE);
-			mPaintStroke.setAlpha(96);
-			mPaintStroke.setStrokeWidth(5);
-		}
-		return mPaintStroke;
 	}
     
     public DoctorService getDoctorService() {

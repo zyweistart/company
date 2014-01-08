@@ -10,8 +10,6 @@ import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.ArrayItemizedOverlay;
 import org.mapsforge.android.maps.overlay.ArrayWayOverlay;
 import org.mapsforge.android.maps.overlay.Overlay;
-import org.mapsforge.android.maps.overlay.OverlayItem;
-import org.mapsforge.android.maps.overlay.OverlayWay;
 import org.mapsforge.core.GeoPoint;
 
 import android.app.AlertDialog;
@@ -55,10 +53,7 @@ import com.start.model.Vertex;
 import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.MyLocation;
-import com.start.model.nav.NavRoute;
-import com.start.model.nav.NavStep;
 import com.start.model.nav.PathSearchResult;
-import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.model.process.Junction;
@@ -121,8 +116,6 @@ public class HospitalMainActivity extends MapManager implements
 	
 	private MapData mCurrentMapData;//当前使用的地图
 	private List<POIMarker> mPoiMarkers;//当前选重的房间标记集合
-	private ArrayItemizedOverlay mMyLocOverlay;
-	private MyLocationMarker mMyLocMarker;
 	private ListView mMapIndexListView;//地图索引视图列表
 	private MapDataAdapter mMapDataAdapter;//地图索引适配器
 	private Map<String, List<Room>> mRooms;//地图上房间的集合
@@ -885,29 +878,27 @@ public class HospitalMainActivity extends MapManager implements
 	 */
 	private void updateOverlay() {
 
+		String currentMapId=mCurrentMapData.getId();
+		PathSearchResult res = appContext.getPathSearchResult();
+		
 		List<Overlay> itemList = getMapView().getOverlays();
 		synchronized (itemList) {
 			itemList.clear();
 			
 			//添加我的位置覆盖点
 			MyLocation myLocation = appContext.getMyLocation();
-//			addMyLocMarker(myLocation);
-			if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
-				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
-				mMyLocOverlay = new ArrayItemizedOverlay(d);
-				mMyLocMarker=new MyLocationMarker(myLocation, d);
-				mMyLocOverlay.addItem(mMyLocMarker);
-				itemList.add(mMyLocOverlay);
+			if (myLocation.getMapId().equals(currentMapId)) {
+				addMyLocMarker(itemList,myLocation,currentMapId);
 			}
 			
 			//覆盖点
-			ArrayItemizedOverlay overlay=getArrayItemizedOverlay();
+			ArrayItemizedOverlay overlay=getArrayItemizedOverlay(res,currentMapId);
 			if (overlay != null) {
 				itemList.add(overlay);
 			}
 			
 			//路线
-			ArrayWayOverlay ways=getWayOverlay();
+			ArrayWayOverlay ways=getWayOverlay(res,currentMapId);
 			if (ways != null) {
 				itemList.add(ways);
 			}
@@ -917,7 +908,7 @@ public class HospitalMainActivity extends MapManager implements
 				Drawable d=getResources().getDrawable(R.drawable.icon_node);
 				ArrayItemizedOverlay poiOverlays=new ArrayItemizedOverlay(d);
 				for(POIMarker marker:mPoiMarkers){
-					if(mCurrentMapData.getId().equals(marker.getPOI().getMapId())){
+					if(currentMapId.equals(marker.getPOI().getMapId())){
 						poiOverlays.addItem(marker);
 						if(isSetCenterPoint){
 							// 设置当前第一个目标位置点为中心点
@@ -930,141 +921,6 @@ public class HospitalMainActivity extends MapManager implements
 			}
 		}
 		
-	}
-
-	/**
-	 * 获取地图上的覆盖图
-	 */
-	private ArrayItemizedOverlay getArrayItemizedOverlay() {
-		PathSearchResult res = appContext.getPathSearchResult();
-		if (res == null) {
-			return null;
-		}
-
-		NavRoute route = res.getRoute();
-		if (route == null) {
-			return null;
-		}
-
-		NavStep step = route.getStep(mCurrentMapData.getId());
-		if (step == null) {
-			return null;
-		}
-
-		getMapView().setCenter(step.getStart().getGeoPoint());
-		
-		ArrayItemizedOverlay arrayItems = new ArrayItemizedOverlay(getResources().getDrawable(R.drawable.icon_node));
-		arrayItems.addItem(new OverlayItem(step.getStart().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
-
-		if (step.getEnd() != null) {
-			arrayItems.addItem(new OverlayItem(step.getEnd().getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_node))));
-		}
-
-		if (res.getStartPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint start = (IndoorEndPoint) res.getStartPoint();
-			// 如果终点位置在当前地图上则添加起点覆盖图
-			if (start.getMapId().equals(mCurrentMapData.getId())) {
-				arrayItems.addItem(new OverlayItem(start.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_start))));
-			}
-		}
-
-		if (res.getEndPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint end = (IndoorEndPoint) res.getEndPoint();
-			// 如果终点在当前地图则添加终点覆盖图
-			if (end.getMapId().equals(mCurrentMapData.getId())) {
-				arrayItems.addItem(new OverlayItem(end.getGeoPoint(), null, null, ArrayItemizedOverlay.boundCenter(getResources().getDrawable(R.drawable.icon_nav_end))));
-			}
-		}
-		return arrayItems;
-	}
-
-	/**
-	 * 获取地图上覆盖的路线
-	 */
-	private ArrayWayOverlay getWayOverlay() {
-
-		PathSearchResult result = appContext.getPathSearchResult();
-		if (result == null) {
-			return null;
-		}
-
-		NavRoute route = result.getRoute();
-		if (route == null) {
-			return null;
-		}
-
-		NavStep step = route.getStep(mCurrentMapData.getId());
-		if (step == null) {
-			return null;
-		}
-		
-		OverlayWay way = new OverlayWay();
-		int size=step.size();
-		GeoPoint[][] nodes;
-//		GeoPoint[][] nodes = new GeoPoint[1][size];
-//		for (int i = 0; i < size; i++) {
-//			nodes[0][i] = step.get(i);
-//		}
-		
-		if (result.getStartPoint() instanceof IndoorEndPoint) {
-			IndoorEndPoint start = (IndoorEndPoint) result.getStartPoint();
-			if (start.getMapId().equals(mCurrentMapData.getId())) {
-				size=size+1;
-				nodes = new GeoPoint[1][size];
-				nodes[0][0]=start.getGeoPoint();
-				for (int i = 1; i < size; i++) {
-					nodes[0][i] = step.get(i-1);
-				}
-			}else{
-				nodes = new GeoPoint[1][size];
-				for (int i = 0; i < size; i++) {
-					nodes[0][i] = step.get(i);
-				}
-			}
-		}else{
-			nodes = new GeoPoint[1][size];
-			for (int i = 0; i < size; i++) {
-				nodes[0][i] = step.get(i);
-			}
-		}
-//
-//		if (result.getEndPoint() instanceof IndoorEndPoint) {
-//			IndoorEndPoint end = (IndoorEndPoint) result.getEndPoint();
-//			if (end.getMapId().equals(mCurrentMapData.getId())) {
-//				nodes[0][++size]=end.getGeoPoint();
-//			}
-//		}
-		
-		way.setWayNodes(nodes);
-		ArrayWayOverlay ways = new ArrayWayOverlay(null, appContext.getPaintStroke());
-		ways.addWay(way);
-		return ways;
-	}
-
-	/**
-	 * 添加用户位置标记
-	 */
-	private void addMyLocMarker(MyLocation myLocation) {
-		// 如果当前定位的位置与当前的地图相同则添加位置标记
-		if (myLocation.getMapId().equals(mCurrentMapData.getId())) {
-			
-			if(mMyLocOverlay==null){
-				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
-				mMyLocOverlay = new ArrayItemizedOverlay(d);
-				mMyLocMarker=new MyLocationMarker(myLocation, d);
-				mMyLocOverlay.addItem(mMyLocMarker);
-				getMapView().getOverlays().add(mMyLocOverlay);
-			}else{
-				mMyLocOverlay.clear();
-				mMyLocMarker.setPoint(myLocation.getGeoPoint());
-				mMyLocOverlay.addItem(mMyLocMarker);
-			}
-			
-		}else{
-			if(mMyLocOverlay!=null){
-				mMyLocOverlay.clear();
-			}
-		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1098,21 +954,21 @@ public class HospitalMainActivity extends MapManager implements
 						@Override
 						public void run() {
 							if(mCurSel==1){
-								
+								String currentMapId=mCurrentMapData.getId();
 								MyLocation myLocation=appContext.locate();
-								addMyLocMarker(myLocation);
+								addMyLocMarker(null,myLocation,currentMapId);
 								//TODO：路线定位
-								PathSearchResult psr=appContext.getPathSearchResult();
-								if(psr!=null){
-									if (myLocation != null) {
-										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
-										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
-												myLocation.getGeoPoint());
-										search.execute(sp, psr.getEndPoint());
-									} else {
-										appContext.makeTextLong( R.string.msg_location_unavailable);
-									}
-								}
+//								PathSearchResult psr=appContext.getPathSearchResult();
+//								if(psr!=null){
+//									if (myLocation != null) {
+//										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
+//										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+//												myLocation.getGeoPoint());
+//										search.execute(sp, psr.getEndPoint());
+//									} else {
+//										appContext.makeTextLong( R.string.msg_location_unavailable);
+//									}
+//								}
 							}
 						}
 					});
