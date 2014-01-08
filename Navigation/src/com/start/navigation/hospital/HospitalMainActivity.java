@@ -481,12 +481,16 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		if (result.getType() == PathSearchResult.Type.IN_BUILDING) {
 //			IndoorEndPoint ep=(IndoorEndPoint)result.getEndPoint();
 			IndoorEndPoint sp=(IndoorEndPoint)result.getStartPoint();
+			
+			mCurrentMapData=appContext.getMapDataService().findById(sp.getMapId());
 			if(mCurrentMapData.isMain()){
-				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getId());
+				mMapIndexListView.setVisibility(View.GONE);
+			}else{
+				List<MapData> mapDatas=appContext.getMapDataService().findByMainId(mCurrentMapData.getMainid());
 				mMapDataAdapter.setData(mapDatas);
 				mMapIndexListView.setVisibility(View.VISIBLE);
 			}
-			mCurrentMapData=mMapDataAdapter.getItem(mMapDataAdapter.getMapDataPositionByMapId(sp.getMapId()));
+			
 			setMapFile();
 		} else if (result.getType() == PathSearchResult.Type.BETWEEN_BUILDING) {
 			// NavRoute route = result.indoorRouteStart;
@@ -522,7 +526,7 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		}else{
 			mModuleMainFrameProcessNext.setText(R.string.frame_process_next_step);
 		}
-		if(jun.getNodeType()!=NodeType.SWITCH){
+		if(jun.getNodeType()!=NodeType.SWITCH&&jun.getNodeType()!=NodeType.END){
 			File dataFile=new File(Utils.getFile(this,appContext.getCurrentDataNo()),"process/"+jun.getImage());
 			mModuleMainFrameProcessImage.setImageBitmap(CommonFn.convertToBitmap(dataFile));
 		}
@@ -1111,11 +1115,33 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		public void run() {
 			while(true&&flag){
 				if(mCurrentMapData!=null){
-					//每3秒定位一次
-					MyLocation myLocation=appContext.locate();
-					addMyLocMarker(myLocation);
+					
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							if(mCurSel==1){
+								
+								MyLocation myLocation=appContext.locate();
+								addMyLocMarker(myLocation);
+								
+								PathSearchResult psr=appContext.getPathSearchResult();
+								if(psr!=null){
+									if (myLocation != null) {
+										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
+										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+												myLocation.getGeoPoint());
+										search.execute(sp, psr.getEndPoint());
+									} else {
+										appContext.makeTextLong( R.string.msg_location_unavailable);
+									}
+								}
+							}
+						}
+					});
 				}
 				try {
+					//每3秒定位一次
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -1124,6 +1150,5 @@ public class HospitalMainActivity extends MapActivity implements OnTouchListener
 		}
 		
 	}
-	
 	
 }
