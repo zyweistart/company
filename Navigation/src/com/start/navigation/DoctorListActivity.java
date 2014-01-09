@@ -1,4 +1,4 @@
-package com.start.navigation.hospital;
+package com.start.navigation;
 
 import java.io.File;
 import java.util.List;

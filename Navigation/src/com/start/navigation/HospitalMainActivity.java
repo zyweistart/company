@@ -1,4 +1,4 @@
-package com.start.navigation.hospital;
+package com.start.navigation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,10 +61,6 @@ import com.start.model.process.Junction;
 import com.start.model.process.Junction.NodeType;
 import com.start.model.process.ProcessService;
 import com.start.model.process.ProcessService.ProcessListener;
-import com.start.navigation.AppContext;
-import com.start.navigation.LoginActivity;
-import com.start.navigation.MoreActivity;
-import com.start.navigation.R;
 import com.start.service.HttpService;
 import com.start.service.HttpService.LoadMode;
 import com.start.service.PullListViewData;

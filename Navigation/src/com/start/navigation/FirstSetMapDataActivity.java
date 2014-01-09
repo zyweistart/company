@@ -1,4 +1,4 @@
-package com.start.navigation.hospital;
+package com.start.navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.View.OnClickListener;
 
 import com.start.core.Constant;
 import com.start.core.CoreActivity;
-import com.start.navigation.MapDataListActivity;
 import com.start.navigation.R;
 
 /**

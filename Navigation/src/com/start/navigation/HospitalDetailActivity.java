@@ -1,4 +1,4 @@
-package com.start.navigation.hospital;
+package com.start.navigation;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -7,8 +7,6 @@ import android.view.View.OnClickListener;
 
 import com.start.core.Constant;
 import com.start.core.CoreActivity;
-import com.start.navigation.hospital.FirstSetMapDataActivity;
-import com.start.navigation.hospital.HospitalMainActivity;
 
 /**
  * 导航

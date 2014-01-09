@@ -55,13 +55,13 @@
         </activity>
         <activity android:name=".NavigationActivity"/>
         
-        <activity android:name=".hospital.FirstSetMapDataActivity"/>
-        <activity android:name=".hospital.HospitalMainActivity" android:launchMode="singleTask"/>
-        <activity android:name=".hospital.HospitalDetailActivity"/>
-        <activity android:name=".hospital.DepartmentListActivity" android:launchMode="singleTask"/>
-        <activity android:name=".hospital.DepartmentDetailActivity" android:launchMode="singleTask"/>
-        <activity android:name=".hospital.DoctorListActivity" android:launchMode="singleTask"/>
-        <activity android:name=".hospital.DoctorDetailActivity" android:launchMode="singleTask"/>
+        <activity android:name=".FirstSetMapDataActivity"/>
+        <activity android:name=".HospitalMainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".HospitalDetailActivity"/>
+        <activity android:name=".DoctorListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DoctorDetailActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DepartmentListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".DepartmentDetailActivity" android:launchMode="singleTask"/>
         
         <activity android:name=".MoreActivity"/>
         <activity android:name=".LoginActivity"/>
