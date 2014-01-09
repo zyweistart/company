@@ -80,7 +80,7 @@ import com.umeng.analytics.MobclickAgent;
  * @author start
  * 
  */
-public class HospitalMainActivity extends MapManager implements 
+public class MainActivity extends MapManager implements 
 		OnClickListener,OnEditorActionListener, OnFocusChangeListener, PathSearchListener,ProcessListener,OnItemClickListener {
 
 	private static final String TAG="HospitalMainActivity";
@@ -590,7 +590,7 @@ public class HospitalMainActivity extends MapManager implements
 					mModuleMainFrameProcessContent.setVisibility(View.GONE);
 					mModuleMainFrameFriendContent.setVisibility(View.GONE);
 				} else if (index == 2) {
-					File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),"process");
+					File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),"process");
 					if(dataFile.exists()){
 						mModuleMainHeaderContentTitle.setText(R.string.frame_process_title);
 						mModuleMainHeaderContentPark.setVisibility(View.GONE);
@@ -642,7 +642,7 @@ public class HospitalMainActivity extends MapManager implements
 		imMore.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
-				Intent intent = new Intent(HospitalMainActivity.this,MoreActivity.class);
+				Intent intent = new Intent(MainActivity.this,MoreActivity.class);
 				startActivityForResult(intent,0);
 
 			}
@@ -775,13 +775,13 @@ public class HospitalMainActivity extends MapManager implements
 							friendLocationPullListData.getPulllistview().onRefreshComplete();
 							
 							if(mCurSel==3){
-								new AlertDialog.Builder(HospitalMainActivity.this).
+								new AlertDialog.Builder(MainActivity.this).
 								setMessage(R.string.msg_not_login).
 								setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 									
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										startActivityForResult(new Intent(HospitalMainActivity.this,LoginActivity.class), 
+										startActivityForResult(new Intent(MainActivity.this,LoginActivity.class), 
 												REQUEST_CODE_REFRESH_FRIEND_LOCATION);
 									}
 									
@@ -846,7 +846,7 @@ public class HospitalMainActivity extends MapManager implements
 		}
 		
 		String path = String.format("mapdata/%1$s.map",getCurrentMapData().getId());
-		File dataFile=new File(Utils.getFile(HospitalMainActivity.this,appContext.getCurrentDataNo()),path);
+		File dataFile=new File(Utils.getFile(MainActivity.this,appContext.getCurrentDataNo()),path);
 		if (setMapFile(dataFile)) {
 			updateOverlay();
 		}else{
@@ -945,7 +945,7 @@ public class HospitalMainActivity extends MapManager implements
 								PathSearchResult psr=appContext.getPathSearchResult();
 								if(psr!=null){
 									if (myLocation != null) {
-										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
+										PathSearchTask search = new PathSearchTask(MainActivity.this);
 										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
 												myLocation.getGeoPoint());
 										search.execute(sp, psr.getEndPoint());

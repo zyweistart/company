@@ -28,7 +28,7 @@ public class NavigationActivity extends CoreActivity implements OnClickListener{
 			if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
 				startActivity(new Intent(this, FirstSetMapDataActivity.class));
 			}else{
-				startActivity(new Intent(this, HospitalMainActivity.class));
+				startActivity(new Intent(this, MainActivity.class));
 			}
 			finish();
 		}else if(v.getId()==R.id.navigation_library){

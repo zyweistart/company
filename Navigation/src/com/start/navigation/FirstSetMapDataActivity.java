@@ -37,7 +37,7 @@ public class FirstSetMapDataActivity extends CoreActivity implements OnClickList
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode==REQUEST_SET_DATA){
 			if(!Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
-				startActivity(new Intent(this,HospitalMainActivity.class));
+				startActivity(new Intent(this,MainActivity.class));
 				finish();
 			}
 		}

@@ -43,7 +43,7 @@ public class StartActivity extends CoreActivity implements AnimationListener{
 		if(Constant.EMPTYSTR.equals(getAppContext().getCurrentDataNo())){
 			startActivity(new Intent(this, FirstSetMapDataActivity.class));
 		}else{
-			startActivity(new Intent(this, HospitalMainActivity.class));
+			startActivity(new Intent(this, MainActivity.class));
 		}
 //		startActivity(new Intent(StartActivity.this, NavigationActivity.class));
 		finish();

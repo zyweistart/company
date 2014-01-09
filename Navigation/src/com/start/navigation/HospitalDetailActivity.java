@@ -36,8 +36,8 @@ public class HospitalDetailActivity extends CoreActivity implements OnClickListe
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.hotspital_detail_show){
-			HospitalMainActivity.ShowMainData=true;
-			startActivity(new Intent(this,HospitalMainActivity.class));
+			MainActivity.ShowMainData=true;
+			startActivity(new Intent(this,MainActivity.class));
 			finish();
 		}
 	}
