@@ -946,17 +946,17 @@ public class HospitalMainActivity extends MapManager implements
 								MyLocation myLocation=appContext.locate();
 								addMyLocMarker(myLocation);
 								//TODO：路线定位
-//								PathSearchResult psr=appContext.getPathSearchResult();
-//								if(psr!=null){
-//									if (myLocation != null) {
-//										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
-//										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
-//												myLocation.getGeoPoint());
-//										search.execute(sp, psr.getEndPoint());
-//									} else {
-//										appContext.makeTextLong( R.string.msg_location_unavailable);
-//									}
-//								}
+								PathSearchResult psr=appContext.getPathSearchResult();
+								if(psr!=null){
+									if (myLocation != null) {
+										PathSearchTask search = new PathSearchTask(HospitalMainActivity.this);
+										EndPoint sp = new IndoorEndPoint(myLocation.getMapId(),
+												myLocation.getGeoPoint());
+										search.execute(sp, psr.getEndPoint());
+									} else {
+										appContext.makeTextLong( R.string.msg_location_unavailable);
+									}
+								}
 							}
 						}
 					});
