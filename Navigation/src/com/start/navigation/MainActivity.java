@@ -54,7 +54,6 @@ import com.start.model.nav.EndPoint;
 import com.start.model.nav.IndoorEndPoint;
 import com.start.model.nav.MyLocation;
 import com.start.model.nav.PathSearchResult;
-import com.start.model.overlay.MyLocationMarker;
 import com.start.model.overlay.POI;
 import com.start.model.overlay.POIMarker;
 import com.start.model.process.Junction;
@@ -860,49 +859,44 @@ public class MainActivity extends MapManager implements
 	private void updateOverlay() {
 
 		List<Overlay> itemList = getMapView().getOverlays();
-		synchronized (itemList) {
-			itemList.clear();
-			
-			PathSearchResult res = appContext.getPathSearchResult();
-			//添加我的位置覆盖点
-			MyLocation myLocation = appContext.getMyLocation();
-			if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
-//				addMyLocMarker(myLocation);
-				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
-				mMyLocOverlay = new ArrayItemizedOverlay(d);
-				mMyLocMarker=new MyLocationMarker(myLocation, d);
-				mMyLocOverlay.addItem(mMyLocMarker);
-				itemList.add(mMyLocOverlay);
-			}
-			
-			//覆盖点
-			ArrayItemizedOverlay overlay=getArrayItemizedOverlay(res);
-			if (overlay != null) {
-				itemList.add(overlay);
-			}
-			
-			//路线
-			ArrayWayOverlay ways=getWayOverlay(res);
-			if (ways != null) {
-				itemList.add(ways);
-			}
-			
-			if(mPoiMarkers!=null){
-				Boolean isSetCenterPoint=true;
-				Drawable d=getResources().getDrawable(R.drawable.icon_node);
-				ArrayItemizedOverlay poiOverlays=new ArrayItemizedOverlay(d);
-				for(POIMarker marker:mPoiMarkers){
-					if(getCurrentMapData().getId().equals(marker.getPOI().getMapId())){
-						poiOverlays.addItem(marker);
-						if(isSetCenterPoint){
-							// 设置当前第一个目标位置点为中心点
-							getMapView().setCenter(marker.getPOI().getGeoPoint());
-							isSetCenterPoint=false;
-						}
+		itemList.clear();
+		
+		//添加我的位置覆盖点
+		MyLocation myLocation = appContext.getMyLocation();
+		
+		if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
+			addMyLocMarker(myLocation,itemList);
+		}
+		
+		PathSearchResult res = appContext.getPathSearchResult();
+		
+		//覆盖点
+		ArrayItemizedOverlay overlay=getArrayItemizedOverlay(res);
+		if (overlay != null) {
+			itemList.add(overlay);
+		}
+		
+		//路线
+		ArrayWayOverlay ways=getWayOverlay(res);
+		if (ways != null) {
+			itemList.add(ways);
+		}
+		
+		if(mPoiMarkers!=null){
+			Boolean isSetCenterPoint=true;
+			Drawable d=getResources().getDrawable(R.drawable.icon_node);
+			ArrayItemizedOverlay poiOverlays=new ArrayItemizedOverlay(d);
+			for(POIMarker marker:mPoiMarkers){
+				if(getCurrentMapData().getId().equals(marker.getPOI().getMapId())){
+					poiOverlays.addItem(marker);
+					if(isSetCenterPoint){
+						// 设置当前第一个目标位置点为中心点
+						getMapView().setCenter(marker.getPOI().getGeoPoint());
+						isSetCenterPoint=false;
 					}
 				}
-				itemList.add(poiOverlays);
 			}
+			itemList.add(poiOverlays);
 		}
 		
 	}

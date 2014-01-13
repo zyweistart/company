@@ -1,12 +1,14 @@
 package com.start.core;
 
 import java.io.File;
+import java.util.List;
 
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.ArrayItemizedOverlay;
 import org.mapsforge.android.maps.overlay.ArrayWayOverlay;
+import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.OverlayWay;
 import org.mapsforge.core.GeoPoint;
@@ -34,14 +36,18 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 public abstract class MapManager  extends MapActivity implements OnTouchListener,OnTapMapClickListener{
 
 	private MapView mMapView;
-	protected ArrayItemizedOverlay mMyLocOverlay;
-	protected MyLocationMarker mMyLocMarker;
+	private ArrayItemizedOverlay mMyLocOverlay;
+	private MyLocationMarker mMyLocMarker;
 	private GestureDetector mGestureDetector;
 	
 	private Paint mPaintStroke;
 	
 	private MapData mCurrentMapData;//当前使用的地图
 
+	/**
+	 * 获取路线定位样式
+	 * @return
+	 */
 	public Paint getPaintStroke(){
 		if(mPaintStroke==null){
 			mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -53,19 +59,36 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 		return mPaintStroke;
 	}
 	
+	/**
+	 * 获取当前所在的地图对象
+	 * @return
+	 */
 	public MapData getCurrentMapData() {
 		return mCurrentMapData;
 	}
 
+	/**
+	 * 设置当前所在地图的对象
+	 * @param currentMapData
+	 */
 	public void setCurrentMapData(MapData currentMapData) {
 		this.mCurrentMapData = currentMapData;
 	}
 
+	/**
+	 * 设置并打开显示地图
+	 * @param mapFile
+	 * @return
+	 */
 	public Boolean setMapFile(File mapFile) {
 		FileOpenResult openResult = getMapView().setMapFile(mapFile);
 		return openResult.isSuccess();
 	}
 
+	/**
+	 * 获取并初始化地图视图
+	 * @return
+	 */
 	public MapView getMapView() {
 		if(mMapView==null){
 			mMapView = new MapView(this);
@@ -77,6 +100,10 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 		return mMapView;
 	}
 
+	/**
+	 * 获取地图触摸对象
+	 * @return
+	 */
 	public GestureDetector getGestureDetector() {
 		if(mGestureDetector==null){
 			mGestureDetector = new GestureDetector(this,new OnTapMapListener(this));
@@ -85,7 +112,7 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 	}
 	
 	/**
-	 * 触摸点击地图时触发
+	 * 触摸地图时触发
 	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
@@ -94,7 +121,7 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 	}
 	
 	/**
-	 * 触摸点击地图时触发
+	 * 点击地图某点时触发
 	 */
 	@Override
 	public void onClickAt(float x, float y) {
@@ -212,26 +239,31 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 	}
 	
 	/**
-	 * 添加用户位置标记
+	 * 添加用户位置标记首次添加
+	 * @param myLocation
+	 * @param itemList
+	 */
+	public void addMyLocMarker(MyLocation myLocation,List<Overlay> itemList) {
+		Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
+		mMyLocOverlay = new ArrayItemizedOverlay(d);
+		mMyLocMarker=new MyLocationMarker(myLocation, d);
+		mMyLocOverlay.addItem(mMyLocMarker);
+		itemList.add(mMyLocOverlay);
+	}
+	
+	/**
+	 * 添加用户位置标记必须先掉用
+	 * addMyLocMarker(MyLocation myLocation,List<Overlay> itemList)
 	 */
 	public void addMyLocMarker(MyLocation myLocation) {
 		// 如果当前定位的位置与当前的地图相同则添加位置标记
-		if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
-			if(mMyLocOverlay==null){
-				Drawable d=getResources().getDrawable(R.drawable.ic_my_loc);
-				mMyLocOverlay = new ArrayItemizedOverlay(d);
-				mMyLocMarker=new MyLocationMarker(myLocation, d);
-				mMyLocOverlay.addItem(mMyLocMarker);
-				getMapView().getOverlays().add(mMyLocOverlay);
-			}else{
-				mMyLocOverlay.clear();
+		if(mMyLocOverlay!=null){
+			mMyLocOverlay.clear();
+			if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
 				mMyLocMarker.setPoint(myLocation.getGeoPoint());
 				mMyLocOverlay.addItem(mMyLocMarker);
 			}
-		}else{
-			if(mMyLocOverlay!=null){
-				mMyLocOverlay.clear();
-			}
+			getMapView().refreshDrawableState();
 		}
 	}
 	
