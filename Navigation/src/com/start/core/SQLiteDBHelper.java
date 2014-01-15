@@ -30,12 +30,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 		db.execSQL(DepartmentHasRoom.CREATE_TABLE_SQL);
 		db.execSQL(Doctor.CREATE_TABLE_SQL);
 		db.execSQL(Edge.CREATE_TABLE_SQL);
+		db.execSQL(FriendHistory.CREATE_TABLE_SQL);
+		db.execSQL(Introduction.CREATE_TABLE_SQL);
 		db.execSQL(MapData.CREATE_TABLE_SQL);
 		db.execSQL(Room.CREATE_TABLE_SQL);
 		db.execSQL(RoomArea.CREATE_TABLE_SQL);
 		db.execSQL(Vertex.CREATE_TABLE_SQL);
-		db.execSQL(Introduction.CREATE_TABLE_SQL);
-		db.execSQL(FriendHistory.CREATE_TABLE_SQL);
 	}
 	
 	@Override
@@ -44,12 +44,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + DepartmentHasRoom.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Doctor.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Edge.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + FriendHistory.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + Introduction.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + MapData.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Room.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + RoomArea.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Vertex.TABLE_NAME);
-		db.execSQL("DROP TABLE IF EXISTS " + Introduction.TABLE_NAME);
-		db.execSQL("DROP TABLE IF EXISTS " + FriendHistory.TABLE_NAME);
 		onCreate(db);
 	}
 	
