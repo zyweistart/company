@@ -370,8 +370,6 @@ public class MainActivity extends MapManager implements
 			
 			setMapFile();
 			
-//			addMyLocMarker(myLocation);
-			
 		} else if (v.getId() == R.id.module_main_frame_map_query_content_tab_department) {
 			((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mapQuery.getWindowToken(), 0);
 			if(isTabDepartment){
@@ -864,7 +862,7 @@ public class MainActivity extends MapManager implements
 		//添加我的位置覆盖点
 		MyLocation myLocation = appContext.getMyLocation();
 		
-		if (myLocation.getMapId().equals(getCurrentMapData().getId())) {
+		if (getCurrentMapData().getId().equals(myLocation.getMapId())) {
 			addMyLocMarker(myLocation,itemList);
 		}
 		

@@ -36,16 +36,17 @@ import com.start.widget.OnTapMapListener.OnTapMapClickListener;
 public abstract class MapManager  extends MapActivity implements OnTouchListener,OnTapMapClickListener{
 
 	private MapView mMapView;
-	private ArrayItemizedOverlay mMyLocOverlay;
-	private MyLocationMarker mMyLocMarker;
 	private GestureDetector mGestureDetector;
 	
 	private Paint mPaintStroke;
 	
 	private MapData mCurrentMapData;//当前使用的地图
-
+	private ArrayItemizedOverlay mMyLocOverlay;
+	private MyLocationMarker mMyLocMarker;
+	
 	/**
 	 * 获取路线定位样式
+	 * 注：如需自定义请重载
 	 * @return
 	 */
 	public Paint getPaintStroke(){
@@ -60,22 +61,6 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 	}
 	
 	/**
-	 * 获取当前所在的地图对象
-	 * @return
-	 */
-	public MapData getCurrentMapData() {
-		return mCurrentMapData;
-	}
-
-	/**
-	 * 设置当前所在地图的对象
-	 * @param currentMapData
-	 */
-	public void setCurrentMapData(MapData currentMapData) {
-		this.mCurrentMapData = currentMapData;
-	}
-
-	/**
 	 * 设置并打开显示地图
 	 * @param mapFile
 	 * @return
@@ -87,6 +72,7 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 
 	/**
 	 * 获取并初始化地图视图
+	 * 如需设置更新条件请在首次调用时进行设置
 	 * @return
 	 */
 	public MapView getMapView() {
@@ -129,6 +115,22 @@ public abstract class MapManager  extends MapActivity implements OnTouchListener
 		if (projection == null) {
 			return;
 		}
+	}
+	
+	/**
+	 * 获取当前所在的地图对象
+	 * @return
+	 */
+	public MapData getCurrentMapData() {
+		return mCurrentMapData;
+	}
+
+	/**
+	 * 设置当前所在地图的对象
+	 * @param currentMapData
+	 */
+	public void setCurrentMapData(MapData currentMapData) {
+		this.mCurrentMapData = currentMapData;
 	}
 	
 	/**
