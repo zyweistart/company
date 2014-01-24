@@ -1,5 +1,5 @@
 //
-//  STViewController.h
+//  STProjectSiteViewController.h
 //  ElectricianRun
 //
 //  Created by Start on 1/24/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STViewController : UIViewController
+@interface STProjectSiteViewController : UIViewController
 
 @end
