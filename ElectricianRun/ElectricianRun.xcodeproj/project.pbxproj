@@ -30,6 +30,25 @@
 		C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */; };
 		C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D218923F8400A7FAB8 /* STLoginViewController.m */; };
 		C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */; };
+		C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56418934AC8003A412E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9B2A57018934AC8003A412E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56618934AC8003A412E /* blackArrow.png */; };
+		C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56718934AC8003A412E /* blackArrow@2x.png */; };
+		C9B2A57218934AC8003A412E /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56818934AC8003A412E /* blueArrow.png */; };
+		C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56918934AC8003A412E /* blueArrow@2x.png */; };
+		C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9B2A57518934AC8003A412E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56C18934AC8003A412E /* grayArrow.png */; };
+		C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56D18934AC8003A412E /* grayArrow@2x.png */; };
+		C9B2A57A18934B2B003A412E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57918934B2B003A412E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57C18934BBE003A412E /* STNewsListViewController.m */; };
+		C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */; };
+		C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A58218934C97003A412E /* STDataMonitoringViewController.m */; };
+		C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */; };
+		C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A58918934E54003A412E /* STDataMonitoringLineViewController.m */; };
+		C9B2A58D18934EA0003A412E /* STDataMonitoringLineDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A58C18934EA0003A412E /* STDataMonitoringLineDetailViewController.m */; };
+		C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A58F18934EE9003A412E /* STDataMonitoringLineDetailListViewController.m */; };
+		C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */; };
+		C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */; };
+		C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +99,38 @@
 		C93C74D218923F8400A7FAB8 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
 		C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetupViewController.h; sourceTree = "<group>"; };
 		C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetupViewController.m; sourceTree = "<group>"; };
+		C9B2A56318934AC8003A412E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		C9B2A56418934AC8003A412E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		C9B2A56618934AC8003A412E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		C9B2A56718934AC8003A412E /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		C9B2A56818934AC8003A412E /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		C9B2A56918934AC8003A412E /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		C9B2A56A18934AC8003A412E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		C9B2A56C18934AC8003A412E /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		C9B2A56D18934AC8003A412E /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		C9B2A57818934B2B003A412E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		C9B2A57918934B2B003A412E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		C9B2A57B18934BBE003A412E /* STNewsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNewsListViewController.h; sourceTree = "<group>"; };
+		C9B2A57C18934BBE003A412E /* STNewsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNewsListViewController.m; sourceTree = "<group>"; };
+		C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNewsDetailViewController.h; sourceTree = "<group>"; };
+		C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNewsDetailViewController.m; sourceTree = "<group>"; };
+		C9B2A58118934C97003A412E /* STDataMonitoringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringViewController.h; sourceTree = "<group>"; };
+		C9B2A58218934C97003A412E /* STDataMonitoringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringViewController.m; sourceTree = "<group>"; };
+		C9B2A58518934D9C003A412E /* STTaskAuditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditViewController.h; sourceTree = "<group>"; };
+		C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditViewController.m; sourceTree = "<group>"; };
+		C9B2A58818934E54003A412E /* STDataMonitoringLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineViewController.h; sourceTree = "<group>"; };
+		C9B2A58918934E54003A412E /* STDataMonitoringLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringLineViewController.m; sourceTree = "<group>"; };
+		C9B2A58B18934EA0003A412E /* STDataMonitoringLineDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineDetailViewController.h; sourceTree = "<group>"; };
+		C9B2A58C18934EA0003A412E /* STDataMonitoringLineDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringLineDetailViewController.m; sourceTree = "<group>"; };
+		C9B2A58E18934EE9003A412E /* STDataMonitoringLineDetailListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineDetailListViewController.h; sourceTree = "<group>"; };
+		C9B2A58F18934EE9003A412E /* STDataMonitoringLineDetailListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringLineDetailListViewController.m; sourceTree = "<group>"; };
+		C9B2A59118934FCF003A412E /* STTaskAuditMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditMapViewController.h; sourceTree = "<group>"; };
+		C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditMapViewController.m; sourceTree = "<group>"; };
+		C9B2A59418935012003A412E /* STTaskAuditRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditRecordViewController.h; sourceTree = "<group>"; };
+		C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecordViewController.m; sourceTree = "<group>"; };
+		C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildViewController.h; sourceTree = "<group>"; };
+		C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditBuildViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,12 +190,15 @@
 		C93C7486189235E400A7FAB8 /* ElectricianRun */ = {
 			isa = PBXGroup;
 			children = (
-				C93C74C118923E4000A7FAB8 /* UI */,
+				C9B2A56018934AC8003A412E /* Classes */,
 				C93C7498189235E500A7FAB8 /* Images.xcassets */,
+				C9B2A56118934AC8003A412E /* Librarys */,
 				C93C7492189235E500A7FAB8 /* Main.storyboard */,
+				C9B2A56E18934AC8003A412E /* Resource */,
 				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
 				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
 				C93C7487189235E400A7FAB8 /* Supporting Files */,
+				C93C74C118923E4000A7FAB8 /* UI */,
 			);
 			path = ElectricianRun;
 			sourceTree = "<group>";
@@ -181,14 +235,13 @@
 		C93C74C118923E4000A7FAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 				C93C74C518923EC700A7FAB8 /* STCalculateViewController.h */,
 				C93C74C618923EC700A7FAB8 /* STCalculateViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
 				C93C74BB18923C2A00A7FAB8 /* STMyeViewController.h */,
 				C93C74BC18923C2A00A7FAB8 /* STMyeViewController.m */,
-				C93C74CE18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.h */,
-				C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */,
 				C93C74CB18923F1100A7FAB8 /* STProjectSiteViewController.h */,
 				C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */,
 				C93C74C818923EE500A7FAB8 /* STScanningViewController.h */,
@@ -201,8 +254,94 @@
 				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
 				C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */,
 				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
+				C9B2A57B18934BBE003A412E /* STNewsListViewController.h */,
+				C9B2A57C18934BBE003A412E /* STNewsListViewController.m */,
+				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
+				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		C9B2A56018934AC8003A412E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C9B2A56118934AC8003A412E /* Librarys */ = {
+			isa = PBXGroup;
+			children = (
+				C9B2A57718934B2B003A412E /* ASIHTTP */,
+				C9B2A56218934AC8003A412E /* MBProgressHUD */,
+				C9B2A56518934AC8003A412E /* RefreshTableHeaderView */,
+			);
+			path = Librarys;
+			sourceTree = "<group>";
+		};
+		C9B2A56218934AC8003A412E /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				C9B2A56318934AC8003A412E /* MBProgressHUD.h */,
+				C9B2A56418934AC8003A412E /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		C9B2A56518934AC8003A412E /* RefreshTableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				C9B2A56618934AC8003A412E /* blackArrow.png */,
+				C9B2A56718934AC8003A412E /* blackArrow@2x.png */,
+				C9B2A56818934AC8003A412E /* blueArrow.png */,
+				C9B2A56918934AC8003A412E /* blueArrow@2x.png */,
+				C9B2A56A18934AC8003A412E /* EGORefreshTableHeaderView.h */,
+				C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */,
+				C9B2A56C18934AC8003A412E /* grayArrow.png */,
+				C9B2A56D18934AC8003A412E /* grayArrow@2x.png */,
+			);
+			path = RefreshTableHeaderView;
+			sourceTree = "<group>";
+		};
+		C9B2A56E18934AC8003A412E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		C9B2A57718934B2B003A412E /* ASIHTTP */ = {
+			isa = PBXGroup;
+			children = (
+				C9B2A57818934B2B003A412E /* Reachability.h */,
+				C9B2A57918934B2B003A412E /* Reachability.m */,
+			);
+			path = ASIHTTP;
+			sourceTree = "<group>";
+		};
+		C9B2A58418934C9D003A412E /* TransformerSubstation */ = {
+			isa = PBXGroup;
+			children = (
+				C9B2A58E18934EE9003A412E /* STDataMonitoringLineDetailListViewController.h */,
+				C9B2A58F18934EE9003A412E /* STDataMonitoringLineDetailListViewController.m */,
+				C9B2A58B18934EA0003A412E /* STDataMonitoringLineDetailViewController.h */,
+				C9B2A58C18934EA0003A412E /* STDataMonitoringLineDetailViewController.m */,
+				C9B2A58818934E54003A412E /* STDataMonitoringLineViewController.h */,
+				C9B2A58918934E54003A412E /* STDataMonitoringLineViewController.m */,
+				C9B2A58118934C97003A412E /* STDataMonitoringViewController.h */,
+				C9B2A58218934C97003A412E /* STDataMonitoringViewController.m */,
+				C93C74CE18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.h */,
+				C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */,
+				C9B2A58518934D9C003A412E /* STTaskAuditViewController.h */,
+				C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */,
+				C9B2A59118934FCF003A412E /* STTaskAuditMapViewController.h */,
+				C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */,
+				C9B2A59418935012003A412E /* STTaskAuditRecordViewController.h */,
+				C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */,
+				C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */,
+				C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */,
+			);
+			name = TransformerSubstation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +422,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */,
+				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
 				C93C748B189235E400A7FAB8 /* InfoPlist.strings in Resources */,
+				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
+				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
+				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
+				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
+				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
 				C93C7494189235E500A7FAB8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,17 +448,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9B2A58D18934EA0003A412E /* STDataMonitoringLineDetailViewController.m in Sources */,
+				C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */,
 				C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */,
+				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
+				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
+				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
 				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
+				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
+				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
+				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
+				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */,
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
 				C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */,
+				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
+				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
+				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
+				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +681,7 @@
 				C93C74B1189235E500A7FAB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C93C74B2189235E500A7FAB8 /* Build configuration list for PBXNativeTarget "ElectricianRunTests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +690,7 @@
 				C93C74B4189235E500A7FAB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
