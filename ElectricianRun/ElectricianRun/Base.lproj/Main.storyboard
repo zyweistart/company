@@ -15,13 +15,25 @@
                     <view key="view" contentMode="scaleToFill" id="jZt-dw-W3U">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNb-rf-6M6">
+                                <rect key="frame" x="137" y="332" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClick:" destination="Pcp-Dj-D5C" eventType="touchUpInside" id="jgZ-NI-dvQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="rtT-rv-yIK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zmy-Ac-GBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="-1347"/>
+            <point key="canvasLocation" x="-130" y="-1352"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="vTk-Wb-dLV">

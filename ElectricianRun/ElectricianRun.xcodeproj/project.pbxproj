@@ -30,6 +30,8 @@
 		C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */; };
 		C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D218923F8400A7FAB8 /* STLoginViewController.m */; };
 		C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */; };
+		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
+		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
 		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
 		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
@@ -110,6 +112,17 @@
 		C93C74D218923F8400A7FAB8 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
 		C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetupViewController.h; sourceTree = "<group>"; };
 		C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetupViewController.m; sourceTree = "<group>"; };
+		C9488CF218A77002006008C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C9488CF418A7700A006008C3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C9488CF618A77010006008C3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		C9488CF818A77016006008C3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C9488CFA18A77025006008C3 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		C9488CFC18A7702E006008C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		C9488CFD18A7702E006008C3 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		C9488D0018A77D16006008C3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		C9488D0118A77D16006008C3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		C9488D0418A781A0006008C3 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
 		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
 		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
@@ -209,6 +222,13 @@
 		C93C747F189235E400A7FAB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9488CFC18A7702E006008C3 /* AddressBook.framework */,
+				C9488CFD18A7702E006008C3 /* AddressBookUI.framework */,
+				C9488CFA18A77025006008C3 /* libiconv.dylib */,
+				C9488CF818A77016006008C3 /* CoreMedia.framework */,
+				C9488CF618A77010006008C3 /* CoreVideo.framework */,
+				C9488CF418A7700A006008C3 /* AudioToolbox.framework */,
+				C9488CF218A77002006008C3 /* AVFoundation.framework */,
 				C93C7480189235E400A7FAB8 /* Foundation.framework */,
 				C93C7482189235E400A7FAB8 /* CoreGraphics.framework */,
 				C93C7484189235E400A7FAB8 /* UIKit.framework */,
@@ -325,6 +345,10 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C9488D0018A77D16006008C3 /* NSString+Utils.h */,
+				C9488D0118A77D16006008C3 /* NSString+Utils.m */,
+				C9488D0418A781A0006008C3 /* HttpRequest.h */,
+				C9488D0518A781A0006008C3 /* HttpRequest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -397,14 +421,14 @@
 				C9B2A58218934C97003A412E /* STDataMonitoringViewController.m */,
 				C93C74CE18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.h */,
 				C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */,
-				C9B2A58518934D9C003A412E /* STTaskAuditViewController.h */,
-				C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */,
+				C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */,
+				C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */,
 				C9B2A59118934FCF003A412E /* STTaskAuditMapViewController.h */,
 				C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */,
 				C9B2A59418935012003A412E /* STTaskAuditRecordViewController.h */,
 				C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */,
-				C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */,
-				C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */,
+				C9B2A58518934D9C003A412E /* STTaskAuditViewController.h */,
+				C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */,
 			);
 			name = TransformerSubstation;
 			sourceTree = "<group>";
@@ -534,9 +558,11 @@
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
+				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */,
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
+				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
 				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
