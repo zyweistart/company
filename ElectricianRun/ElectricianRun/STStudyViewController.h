@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EColumnChart.h"
 
-@interface STStudyViewController : UIViewController
+@interface STStudyViewController : UIViewController<EColumnChartDelegate, EColumnChartDataSource>
+
+@property (strong, nonatomic) EColumnChart *eColumnChart;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end

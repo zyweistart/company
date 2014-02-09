@@ -30,6 +30,17 @@
 		C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74CF18923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m */; };
 		C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D218923F8400A7FAB8 /* STLoginViewController.m */; };
 		C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */; };
+		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
+		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
+		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
+		C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */; };
+		C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */; };
+		C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DC18A74FDD005CC2AC /* EFloatBox.m */; };
+		C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */; };
+		C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CF18A7438700EA865D /* ETFoursquareImages.m */; };
+		C9A809D418A743E700EA865D /* bridge.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D118A743E700EA865D /* bridge.png */; };
+		C9A809D518A743E700EA865D /* horses.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D218A743E700EA865D /* horses.png */; };
+		C9A809D618A743E700EA865D /* surfer.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D318A743E700EA865D /* surfer.png */; };
 		C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56418934AC8003A412E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A57018934AC8003A412E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56618934AC8003A412E /* blackArrow.png */; };
 		C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56718934AC8003A412E /* blackArrow@2x.png */; };
@@ -99,6 +110,25 @@
 		C93C74D218923F8400A7FAB8 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
 		C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetupViewController.h; sourceTree = "<group>"; };
 		C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetupViewController.m; sourceTree = "<group>"; };
+		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
+		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
+		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
+		C98568D418A74FDD005CC2AC /* EColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumn.m; sourceTree = "<group>"; };
+		C98568D518A74FDD005CC2AC /* EColumnChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnChart.h; sourceTree = "<group>"; };
+		C98568D618A74FDD005CC2AC /* EColumnChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnChart.m; sourceTree = "<group>"; };
+		C98568D718A74FDD005CC2AC /* EColumnChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnChartLabel.h; sourceTree = "<group>"; };
+		C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnChartLabel.m; sourceTree = "<group>"; };
+		C98568D918A74FDD005CC2AC /* EColumnDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnDataModel.h; sourceTree = "<group>"; };
+		C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnDataModel.m; sourceTree = "<group>"; };
+		C98568DB18A74FDD005CC2AC /* EFloatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFloatBox.h; sourceTree = "<group>"; };
+		C98568DC18A74FDD005CC2AC /* EFloatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFloatBox.m; sourceTree = "<group>"; };
+		C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMainTabBarController.h; sourceTree = "<group>"; };
+		C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMainTabBarController.m; sourceTree = "<group>"; };
+		C9A809CE18A7438700EA865D /* ETFoursquareImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETFoursquareImages.h; sourceTree = "<group>"; };
+		C9A809CF18A7438700EA865D /* ETFoursquareImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETFoursquareImages.m; sourceTree = "<group>"; };
+		C9A809D118A743E700EA865D /* bridge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bridge.png; sourceTree = "<group>"; };
+		C9A809D218A743E700EA865D /* horses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horses.png; sourceTree = "<group>"; };
+		C9A809D318A743E700EA865D /* surfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surfer.png; sourceTree = "<group>"; };
 		C9B2A56318934AC8003A412E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C9B2A56418934AC8003A412E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C9B2A56618934AC8003A412E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -190,13 +220,13 @@
 		C93C7486189235E400A7FAB8 /* ElectricianRun */ = {
 			isa = PBXGroup;
 			children = (
-				C9B2A56018934AC8003A412E /* Classes */,
+				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
+				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
 				C93C7498189235E500A7FAB8 /* Images.xcassets */,
+				C9B2A56018934AC8003A412E /* Classes */,
 				C9B2A56118934AC8003A412E /* Librarys */,
 				C93C7492189235E500A7FAB8 /* Main.storyboard */,
 				C9B2A56E18934AC8003A412E /* Resource */,
-				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
-				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
 				C93C7487189235E400A7FAB8 /* Supporting Files */,
 				C93C74C118923E4000A7FAB8 /* UI */,
 			);
@@ -258,8 +288,38 @@
 				C9B2A57C18934BBE003A412E /* STNewsListViewController.m */,
 				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
 				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
+				C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */,
+				C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		C98568D018A74FDD005CC2AC /* EChart */ = {
+			isa = PBXGroup;
+			children = (
+				C98568D118A74FDD005CC2AC /* EColor.h */,
+				C98568D218A74FDD005CC2AC /* EColor.m */,
+				C98568D318A74FDD005CC2AC /* EColumn.h */,
+				C98568D418A74FDD005CC2AC /* EColumn.m */,
+				C98568D518A74FDD005CC2AC /* EColumnChart.h */,
+				C98568D618A74FDD005CC2AC /* EColumnChart.m */,
+				C98568D718A74FDD005CC2AC /* EColumnChartLabel.h */,
+				C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */,
+				C98568D918A74FDD005CC2AC /* EColumnDataModel.h */,
+				C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */,
+				C98568DB18A74FDD005CC2AC /* EFloatBox.h */,
+				C98568DC18A74FDD005CC2AC /* EFloatBox.m */,
+			);
+			path = EChart;
+			sourceTree = "<group>";
+		};
+		C9A809CD18A7438700EA865D /* ETFoursquareImages */ = {
+			isa = PBXGroup;
+			children = (
+				C9A809CE18A7438700EA865D /* ETFoursquareImages.h */,
+				C9A809CF18A7438700EA865D /* ETFoursquareImages.m */,
+			);
+			path = ETFoursquareImages;
 			sourceTree = "<group>";
 		};
 		C9B2A56018934AC8003A412E /* Classes */ = {
@@ -272,6 +332,8 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C98568D018A74FDD005CC2AC /* EChart */,
+				C9A809CD18A7438700EA865D /* ETFoursquareImages */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9B2A56218934AC8003A412E /* MBProgressHUD */,
 				C9B2A56518934AC8003A412E /* RefreshTableHeaderView */,
@@ -306,6 +368,9 @@
 		C9B2A56E18934AC8003A412E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C9A809D118A743E700EA865D /* bridge.png */,
+				C9A809D218A743E700EA865D /* horses.png */,
+				C9A809D318A743E700EA865D /* surfer.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -421,12 +486,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9A809D618A743E700EA865D /* surfer.png in Resources */,
 				C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */,
 				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
+				C9A809D518A743E700EA865D /* horses.png in Resources */,
 				C93C748B189235E400A7FAB8 /* InfoPlist.strings in Resources */,
 				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
 				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
 				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
+				C9A809D418A743E700EA865D /* bridge.png in Resources */,
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
 				C93C7494189235E500A7FAB8 /* Main.storyboard in Resources */,
@@ -455,21 +523,29 @@
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
+				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
 				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
 				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
+				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
+				C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
+				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */,
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
+				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
+				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
+				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
 				C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */,
 				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
+				C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
