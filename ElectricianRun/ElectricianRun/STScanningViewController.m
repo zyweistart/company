@@ -18,21 +18,25 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"扫描操作";
+        
+        self.navigationItem.title=@"用户注册";
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    //隐藏顶部bar栏
+    self.navigationController.navigationBarHidden=NO;
+    
+    UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(162.7,95, 73.85, 80)];
+    btnF5.titleLabel.font=[UIFont systemFontOfSize: 10.0];
+    [btnF5 setTitle:@"扫描操作" forState:UIControlStateNormal];
+    [btnF5 setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:btnF5];
+    
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

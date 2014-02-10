@@ -33,6 +33,8 @@
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
+		C967A0DE18A89D8A00BD268D /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DB18A89D8A00BD268D /* Animator.m */; };
+		C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */; };
 		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
 		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
 		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
@@ -134,6 +136,10 @@
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C95EDEB518A7BC7C00CA80B4 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		C95EDEB618A7BC7C00CA80B4 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		C967A0DA18A89D8A00BD268D /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
+		C967A0DB18A89D8A00BD268D /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animator.m; sourceTree = "<group>"; };
+		C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerDelegate.h; sourceTree = "<group>"; };
+		C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerDelegate.m; sourceTree = "<group>"; };
 		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
 		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
 		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
@@ -313,31 +319,31 @@
 		C93C74C118923E4000A7FAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 				C93C74C518923EC700A7FAB8 /* STCalculateViewController.h */,
 				C93C74C618923EC700A7FAB8 /* STCalculateViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
+				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
+				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
+				C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */,
+				C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */,
 				C93C74BB18923C2A00A7FAB8 /* STMyeViewController.h */,
 				C93C74BC18923C2A00A7FAB8 /* STMyeViewController.m */,
+				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
+				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
+				C9B2A57B18934BBE003A412E /* STNewsListViewController.h */,
+				C9B2A57C18934BBE003A412E /* STNewsListViewController.m */,
 				C93C74CB18923F1100A7FAB8 /* STProjectSiteViewController.h */,
 				C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */,
 				C93C74C818923EE500A7FAB8 /* STScanningViewController.h */,
 				C93C74C918923EE500A7FAB8 /* STScanningViewController.m */,
+				C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */,
+				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
 				C93C74BE18923E3200A7FAB8 /* STStudyViewController.h */,
 				C93C74BF18923E3200A7FAB8 /* STStudyViewController.m */,
 				C93C74C218923EA900A7FAB8 /* STUserExperienceViewController.h */,
 				C93C74C318923EA900A7FAB8 /* STUserExperienceViewController.m */,
-				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
-				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
-				C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */,
-				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
-				C9B2A57B18934BBE003A412E /* STNewsListViewController.h */,
-				C9B2A57C18934BBE003A412E /* STNewsListViewController.m */,
-				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
-				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
-				C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */,
-				C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */,
+				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -402,6 +408,10 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C967A0DA18A89D8A00BD268D /* Animator.h */,
+				C967A0DB18A89D8A00BD268D /* Animator.m */,
+				C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */,
+				C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */,
 				C9488D0018A77D16006008C3 /* NSString+Utils.h */,
 				C9488D0118A77D16006008C3 /* NSString+Utils.m */,
 				C9488D0418A781A0006008C3 /* HttpRequest.h */,
@@ -608,8 +618,10 @@
 				C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */,
 				C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */,
 				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
+				C967A0DE18A89D8A00BD268D /* Animator.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
+				C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
 				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,

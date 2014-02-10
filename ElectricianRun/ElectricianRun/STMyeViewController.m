@@ -8,6 +8,8 @@
 
 #import "STMyeViewController.h"
 
+#import "NavigationControllerDelegate.h"
+
 @interface STMyeViewController ()
 
 @end
@@ -18,21 +20,28 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    UIButton *btnF1=[[UIButton alloc]initWithFrame:CGRectMake(5,10, 152.5, 80)];
+    btnF1.titleLabel.font=[UIFont systemFontOfSize: 10.0];
+    [btnF1 setTitle:@"用户体验" forState:UIControlStateNormal];
+    [btnF1 setBackgroundColor:[UIColor purpleColor]];
+    [btnF1 addTarget:self action:@selector(onClickOperating:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnF1];
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)onClickOperating:(id)sender {
+    
+    UIViewController *view=[[UIViewController alloc]init];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end
