@@ -10,7 +10,6 @@
 
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
-#import "HttpRequest.h"
 
 #define IMAGEHEIGHT 160
 
@@ -49,26 +48,23 @@
     NSString *URL=@"checkMobileValid.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-//    [p setObject:@"imei" forKey:@"zhangyy"];
-//    [p setObject:@"authentication" forKey:[@"8888AA" md5]];
-//    [p setObject:@"Type" forKey:@"2"];
-//    [p setObject:@"IsEncode" forKey:@"2"];
-
-    NSMutableString *urlString=[[NSMutableString alloc]initWithString:@"http://122.224.247.221:7003/WEB/mobile/"];
-    [urlString appendString:URL];
+    [p setObject:@"zhangyy" forKey:@"imei"];
+    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:@"2" forKey:@"Type"];
+    [p setObject:@"2" forKey:@"IsEncode"];
     
-    if(p!=nil&&[p count]>0){
-        [urlString appendString:@"?"];
-        
-        for(NSString *key in p){
-            [urlString appendFormat:@"%@=%@&",key,[p objectForKey:key]];
-        }
-        
-    }
-    NSLog(@"%@",urlString);
-    
-//    _hRequest=[[HttpRequest alloc]init];
-//    [_hRequest start:URL params:p];
+    _hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    [_hRequest setIsShowMessage:YES];
+    [_hRequest start:URL params:p];
     
 }
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
+    NSLog(@"json:%@",[response resultJSON]);
+}
+
+- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error{
+    NSLog(@"requestFailed");
+}
+
 @end

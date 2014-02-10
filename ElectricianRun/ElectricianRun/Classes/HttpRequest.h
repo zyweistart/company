@@ -8,8 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HttpRequest : NSObject<NSURLConnectionDataDelegate>
+#import "Response.h"
 
-- (void)start:(NSString*)URL params:(NSMutableDictionary*)params;
+@protocol HttpRequestDelegate
+
+@optional
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode;
+- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error;
+
+@end
+
+@interface HttpRequest : NSObject<UIActionSheetDelegate,NSURLConnectionDataDelegate>
+
+//请求编号
+@property int responseCode;
+//是否显示提示信息
+@property BOOL isShowMessage;
+//是否为文件下载
+@property BOOL isFileDownload;
+//请求时的提示信息
+@property (strong,nonatomic) NSString *message;
+//当前请求的控制器
+@property (strong,nonatomic) UIViewController *controller;
+//代理对象
+@property (strong,nonatomic) NSObject<HttpRequestDelegate> *delegate;
+
+//是否已连接网络
++ (BOOL)isNetworkConnection;
+
+- (id)init:(UIViewController*)controler delegate:(NSObject<HttpRequestDelegate>*)delegate responseCode:(int)repCode;
+
+- (void)start:(NSString*)URL params:(NSMutableDictionary*)p;
 
 @end

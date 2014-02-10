@@ -32,6 +32,7 @@
 		C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */; };
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
+		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
 		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
 		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
 		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
@@ -43,6 +44,14 @@
 		C9A809D418A743E700EA865D /* bridge.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D118A743E700EA865D /* bridge.png */; };
 		C9A809D518A743E700EA865D /* horses.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D218A743E700EA865D /* horses.png */; };
 		C9A809D618A743E700EA865D /* surfer.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A809D318A743E700EA865D /* surfer.png */; };
+		C9AC1DD618A86C4A004E96CC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD518A86C4A004E96CC /* Common.m */; };
+		C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DDD18A86DF7004E96CC /* ATMHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE018A86DF7004E96CC /* ATMHudQueueItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE218A86DF7004E96CC /* ATMHudView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE418A86DF7004E96CC /* ATMProgressLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56418934AC8003A412E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A57018934AC8003A412E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56618934AC8003A412E /* blackArrow.png */; };
 		C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56718934AC8003A412E /* blackArrow@2x.png */; };
@@ -123,6 +132,8 @@
 		C9488D0118A77D16006008C3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		C9488D0418A781A0006008C3 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		C95EDEB518A7BC7C00CA80B4 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		C95EDEB618A7BC7C00CA80B4 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
 		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
 		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
 		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
@@ -142,6 +153,23 @@
 		C9A809D118A743E700EA865D /* bridge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bridge.png; sourceTree = "<group>"; };
 		C9A809D218A743E700EA865D /* horses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horses.png; sourceTree = "<group>"; };
 		C9A809D318A743E700EA865D /* surfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surfer.png; sourceTree = "<group>"; };
+		C9AC1DD418A86C4A004E96CC /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		C9AC1DD518A86C4A004E96CC /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		C9AC1DD818A86CE9004E96CC /* GCDiscreetNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDiscreetNotificationView.h; sourceTree = "<group>"; };
+		C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDiscreetNotificationView.m; sourceTree = "<group>"; };
+		C9AC1DDC18A86DF7004E96CC /* ATMHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHud.h; sourceTree = "<group>"; };
+		C9AC1DDD18A86DF7004E96CC /* ATMHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHud.m; sourceTree = "<group>"; };
+		C9AC1DDE18A86DF7004E96CC /* ATMHudDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudDelegate.h; sourceTree = "<group>"; };
+		C9AC1DDF18A86DF7004E96CC /* ATMHudQueueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudQueueItem.h; sourceTree = "<group>"; };
+		C9AC1DE018A86DF7004E96CC /* ATMHudQueueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHudQueueItem.m; sourceTree = "<group>"; };
+		C9AC1DE118A86DF7004E96CC /* ATMHudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudView.h; sourceTree = "<group>"; };
+		C9AC1DE218A86DF7004E96CC /* ATMHudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHudView.m; sourceTree = "<group>"; };
+		C9AC1DE318A86DF7004E96CC /* ATMProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMProgressLayer.h; sourceTree = "<group>"; };
+		C9AC1DE418A86DF7004E96CC /* ATMProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMProgressLayer.m; sourceTree = "<group>"; };
+		C9AC1DE518A86DF7004E96CC /* ATMSoundFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMSoundFX.h; sourceTree = "<group>"; };
+		C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMSoundFX.m; sourceTree = "<group>"; };
+		C9AC1DE718A86DF7004E96CC /* ATMTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMTextLayer.h; sourceTree = "<group>"; };
+		C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMTextLayer.m; sourceTree = "<group>"; };
 		C9B2A56318934AC8003A412E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C9B2A56418934AC8003A412E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C9B2A56618934AC8003A412E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -342,6 +370,35 @@
 			path = ETFoursquareImages;
 			sourceTree = "<group>";
 		};
+		C9AC1DD718A86CE9004E96CC /* GCDiscreetNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				C9AC1DD818A86CE9004E96CC /* GCDiscreetNotificationView.h */,
+				C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */,
+			);
+			path = GCDiscreetNotificationView;
+			sourceTree = "<group>";
+		};
+		C9AC1DDB18A86DF7004E96CC /* ATMHud */ = {
+			isa = PBXGroup;
+			children = (
+				C9AC1DDC18A86DF7004E96CC /* ATMHud.h */,
+				C9AC1DDE18A86DF7004E96CC /* ATMHudDelegate.h */,
+				C9AC1DDF18A86DF7004E96CC /* ATMHudQueueItem.h */,
+				C9AC1DE118A86DF7004E96CC /* ATMHudView.h */,
+				C9AC1DE318A86DF7004E96CC /* ATMProgressLayer.h */,
+				C9AC1DE518A86DF7004E96CC /* ATMSoundFX.h */,
+				C9AC1DE718A86DF7004E96CC /* ATMTextLayer.h */,
+				C9AC1DDD18A86DF7004E96CC /* ATMHud.m */,
+				C9AC1DE018A86DF7004E96CC /* ATMHudQueueItem.m */,
+				C9AC1DE218A86DF7004E96CC /* ATMHudView.m */,
+				C9AC1DE418A86DF7004E96CC /* ATMProgressLayer.m */,
+				C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */,
+				C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */,
+			);
+			path = ATMHud;
+			sourceTree = "<group>";
+		};
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +406,10 @@
 				C9488D0118A77D16006008C3 /* NSString+Utils.m */,
 				C9488D0418A781A0006008C3 /* HttpRequest.h */,
 				C9488D0518A781A0006008C3 /* HttpRequest.m */,
+				C95EDEB518A7BC7C00CA80B4 /* Response.h */,
+				C95EDEB618A7BC7C00CA80B4 /* Response.m */,
+				C9AC1DD418A86C4A004E96CC /* Common.h */,
+				C9AC1DD518A86C4A004E96CC /* Common.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -356,9 +417,11 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
+				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C98568D018A74FDD005CC2AC /* EChart */,
 				C9A809CD18A7438700EA865D /* ETFoursquareImages */,
-				C9B2A57718934B2B003A412E /* ASIHTTP */,
+				C9AC1DD718A86CE9004E96CC /* GCDiscreetNotificationView */,
 				C9B2A56218934AC8003A412E /* MBProgressHUD */,
 				C9B2A56518934AC8003A412E /* RefreshTableHeaderView */,
 			);
@@ -542,14 +605,18 @@
 			files = (
 				C9B2A58D18934EA0003A412E /* STDataMonitoringLineDetailViewController.m in Sources */,
 				C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */,
+				C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */,
 				C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */,
 				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
+				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
 				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,
+				C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
 				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
+				C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
 				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
 				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
@@ -564,11 +631,16 @@
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
+				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
+				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
+				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
 				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
 				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
+				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
 				C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */,
 				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
+				C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
 				C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */,
