@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STMyeViewController : UIViewController
+@interface STMyeViewController : BaseUIViewController
 
 @end

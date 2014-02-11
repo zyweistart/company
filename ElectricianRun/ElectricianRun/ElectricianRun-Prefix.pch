@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
 
 
+    #import "BaseUIViewController.h"
     #import "HttpRequest.h"
-
+    #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
 #endif

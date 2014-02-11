@@ -7,6 +7,7 @@
 //
 
 #import "STProjectSiteViewController.h"
+#import "STScanningViewController.h"
 
 @interface STProjectSiteViewController ()
 
@@ -18,7 +19,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -26,13 +27,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	UIButton * scanButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [scanButton setTitle:@"扫描" forState:UIControlStateNormal];
+    scanButton.frame = CGRectMake(100, 100, 120, 40);
+    [scanButton addTarget:self action:@selector(setupCamera) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:scanButton];
+    
 }
-
-- (void)didReceiveMemoryWarning
+-(void)setupCamera
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    STScanningViewController * rt = [[STScanningViewController alloc]init];
+    [self presentViewController:rt animated:YES completion:^{
+        
+    }];
 }
 
 @end

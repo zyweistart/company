@@ -33,6 +33,8 @@
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
+		C964482D18AA19D600D0C1C9 /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C964482B18AA19D600D0C1C9 /* line@2x.png */; };
+		C964482E18AA19D600D0C1C9 /* pick_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C964482C18AA19D600D0C1C9 /* pick_bg@2x.png */; };
 		C967A0DE18A89D8A00BD268D /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DB18A89D8A00BD268D /* Animator.m */; };
 		C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */; };
 		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
@@ -73,6 +75,10 @@
 		C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */; };
 		C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */; };
 		C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */; };
+		C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */; };
+		C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */; };
+		C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */; };
+		C9EF51F218AA0CF500CFBE06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9488CF218A77002006008C3 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,18 +130,14 @@
 		C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetupViewController.h; sourceTree = "<group>"; };
 		C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetupViewController.m; sourceTree = "<group>"; };
 		C9488CF218A77002006008C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C9488CF418A7700A006008C3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		C9488CF618A77010006008C3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		C9488CF818A77016006008C3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		C9488CFA18A77025006008C3 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		C9488CFC18A7702E006008C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		C9488CFD18A7702E006008C3 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		C9488D0018A77D16006008C3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		C9488D0118A77D16006008C3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		C9488D0418A781A0006008C3 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C95EDEB518A7BC7C00CA80B4 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		C95EDEB618A7BC7C00CA80B4 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		C964482B18AA19D600D0C1C9 /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
+		C964482C18AA19D600D0C1C9 /* pick_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pick_bg@2x.png"; sourceTree = "<group>"; };
 		C967A0DA18A89D8A00BD268D /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
 		C967A0DB18A89D8A00BD268D /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animator.m; sourceTree = "<group>"; };
 		C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerDelegate.h; sourceTree = "<group>"; };
@@ -208,6 +210,12 @@
 		C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecordViewController.m; sourceTree = "<group>"; };
 		C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildViewController.h; sourceTree = "<group>"; };
 		C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditBuildViewController.m; sourceTree = "<group>"; };
+		C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGuideViewController.h; sourceTree = "<group>"; };
+		C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGuideViewController.m; sourceTree = "<group>"; };
+		C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
+		C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
+		C9EF51B018A9E00A00CFBE06 /* STUserExperienceAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserExperienceAlarmViewController.h; sourceTree = "<group>"; };
+		C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserExperienceAlarmViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9EF51F218AA0CF500CFBE06 /* AVFoundation.framework in Frameworks */,
 				C93C7483189235E400A7FAB8 /* CoreGraphics.framework in Frameworks */,
 				C93C7485189235E400A7FAB8 /* UIKit.framework in Frameworks */,
 				C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */,
@@ -256,12 +265,6 @@
 		C93C747F189235E400A7FAB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C9488CFC18A7702E006008C3 /* AddressBook.framework */,
-				C9488CFD18A7702E006008C3 /* AddressBookUI.framework */,
-				C9488CFA18A77025006008C3 /* libiconv.dylib */,
-				C9488CF818A77016006008C3 /* CoreMedia.framework */,
-				C9488CF618A77010006008C3 /* CoreVideo.framework */,
-				C9488CF418A7700A006008C3 /* AudioToolbox.framework */,
 				C9488CF218A77002006008C3 /* AVFoundation.framework */,
 				C93C7480189235E400A7FAB8 /* Foundation.framework */,
 				C93C7482189235E400A7FAB8 /* CoreGraphics.framework */,
@@ -321,6 +324,8 @@
 			children = (
 				C93C74C518923EC700A7FAB8 /* STCalculateViewController.h */,
 				C93C74C618923EC700A7FAB8 /* STCalculateViewController.m */,
+				C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */,
+				C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
 				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
@@ -341,6 +346,8 @@
 				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
 				C93C74BE18923E3200A7FAB8 /* STStudyViewController.h */,
 				C93C74BF18923E3200A7FAB8 /* STStudyViewController.m */,
+				C9EF51B018A9E00A00CFBE06 /* STUserExperienceAlarmViewController.h */,
+				C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */,
 				C93C74C218923EA900A7FAB8 /* STUserExperienceViewController.h */,
 				C93C74C318923EA900A7FAB8 /* STUserExperienceViewController.m */,
 				C9B2A58418934C9D003A412E /* TransformerSubstation */,
@@ -420,6 +427,8 @@
 				C95EDEB618A7BC7C00CA80B4 /* Response.m */,
 				C9AC1DD418A86C4A004E96CC /* Common.h */,
 				C9AC1DD518A86C4A004E96CC /* Common.m */,
+				C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */,
+				C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -465,6 +474,8 @@
 		C9B2A56E18934AC8003A412E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C964482B18AA19D600D0C1C9 /* line@2x.png */,
+				C964482C18AA19D600D0C1C9 /* pick_bg@2x.png */,
 				C9A809D118A743E700EA865D /* bridge.png */,
 				C9A809D218A743E700EA865D /* horses.png */,
 				C9A809D318A743E700EA865D /* surfer.png */,
@@ -583,11 +594,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C964482E18AA19D600D0C1C9 /* pick_bg@2x.png in Resources */,
 				C9A809D618A743E700EA865D /* surfer.png in Resources */,
 				C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */,
 				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
 				C9A809D518A743E700EA865D /* horses.png in Resources */,
 				C93C748B189235E400A7FAB8 /* InfoPlist.strings in Resources */,
+				C964482D18AA19D600D0C1C9 /* line@2x.png in Resources */,
 				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
 				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
 				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
@@ -638,6 +651,7 @@
 				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
+				C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */,
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
@@ -647,8 +661,10 @@
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
 				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
+				C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */,
 				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
 				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
+				C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */,
 				C93C74D018923F3A00A7FAB8 /* STMyTransformerSubstationViewController.m in Sources */,
 				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
@@ -783,11 +799,16 @@
 		C93C74B0189235E500A7FAB8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/ZBarSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -796,11 +817,16 @@
 		C93C74B1189235E500A7FAB8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/ZBarSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

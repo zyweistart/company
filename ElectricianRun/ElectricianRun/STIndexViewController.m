@@ -8,12 +8,14 @@
 
 #import "STIndexViewController.h"
 #import "NavigationControllerDelegate.h"
+#import "STUserExperienceViewController.h"
+#import "STProjectSiteViewController.h"
 #import "STScanningViewController.h"
 
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
 
-#define IMAGEHEIGHT 200
+#define IMAGEHEIGHT 140
 
 @interface STIndexViewController ()
 
@@ -88,15 +90,10 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    //隐藏顶部bar栏
-    self.navigationController.navigationBarHidden=YES;
-}
-
 //用户体验
 - (void)onClickUserExperience:(id)sender {
-    NSLog(@"用户体验");
+    UINavigationController *userExperienceViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceViewController alloc]init]];
+    [self presentViewController:userExperienceViewControllerNav animated:YES completion:nil];
 }
 //我管辖的变电站
 - (void)onClickJurisdiction:(id)sender {
@@ -112,11 +109,8 @@
 }
 //扫描操作
 - (void)onClickOperating:(id)sender {
-    STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
-//    [self.navigationController pushViewController:scanningViewController animated:YES];
-    
-    UIViewController *view=[[UIViewController alloc]init];
-    [self.navigationController pushViewController:view animated:YES];
+    UINavigationController *projectSiteViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STProjectSiteViewController alloc]init]];
+    [self presentViewController:projectSiteViewControllerNav animated:YES completion:nil];
 }
 //在线计算
 - (void)onClickCalculation:(id)sender {

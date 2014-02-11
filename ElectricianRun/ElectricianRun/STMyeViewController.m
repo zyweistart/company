@@ -29,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.view.backgroundColor=[UIColor whiteColor];
+    
+    self.tabBarController.tabBarItem.title=@"我的E电工";
+    
     UIButton *btnF1=[[UIButton alloc]initWithFrame:CGRectMake(5,10, 152.5, 80)];
     btnF1.titleLabel.font=[UIFont systemFontOfSize: 10.0];
     [btnF1 setTitle:@"用户体验" forState:UIControlStateNormal];
