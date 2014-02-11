@@ -10,15 +10,12 @@
 		C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
 		C93C7483189235E400A7FAB8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7482189235E400A7FAB8 /* CoreGraphics.framework */; };
 		C93C7485189235E400A7FAB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7484189235E400A7FAB8 /* UIKit.framework */; };
-		C93C748B189235E400A7FAB8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C93C7489189235E400A7FAB8 /* InfoPlist.strings */; };
 		C93C748D189235E400A7FAB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C748C189235E400A7FAB8 /* main.m */; };
 		C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C7490189235E500A7FAB8 /* STAppDelegate.m */; };
-		C93C7494189235E500A7FAB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C93C7492189235E500A7FAB8 /* Main.storyboard */; };
 		C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C93C7498189235E500A7FAB8 /* Images.xcassets */; };
 		C93C74A0189235E500A7FAB8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C749F189235E500A7FAB8 /* XCTest.framework */; };
 		C93C74A1189235E500A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
 		C93C74A2189235E500A7FAB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7484189235E400A7FAB8 /* UIKit.framework */; };
-		C93C74AA189235E500A7FAB8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C93C74A8189235E500A7FAB8 /* InfoPlist.strings */; };
 		C93C74AC189235E500A7FAB8 /* ElectricianRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74AB189235E500A7FAB8 /* ElectricianRunTests.m */; };
 		C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74B918923C1400A7FAB8 /* STIndexViewController.m */; };
 		C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74BC18923C2A00A7FAB8 /* STMyeViewController.m */; };
@@ -75,6 +72,7 @@
 		C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */; };
 		C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */; };
 		C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */; };
+		C9C22DE518AA62B800ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DE718AA62B800ACF787 /* Main.storyboard */; };
 		C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */; };
 		C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */; };
 		C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */; };
@@ -97,17 +95,14 @@
 		C93C7482189235E400A7FAB8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C93C7484189235E400A7FAB8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C93C7488189235E400A7FAB8 /* ElectricianRun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElectricianRun-Info.plist"; sourceTree = "<group>"; };
-		C93C748A189235E400A7FAB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C93C748C189235E400A7FAB8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C93C748E189235E400A7FAB8 /* ElectricianRun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ElectricianRun-Prefix.pch"; sourceTree = "<group>"; };
 		C93C748F189235E500A7FAB8 /* STAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAppDelegate.h; sourceTree = "<group>"; };
 		C93C7490189235E500A7FAB8 /* STAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAppDelegate.m; sourceTree = "<group>"; };
-		C93C7493189235E500A7FAB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C93C7498189235E500A7FAB8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C93C749E189235E500A7FAB8 /* ElectricianRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElectricianRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93C749F189235E500A7FAB8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C93C74A7189235E500A7FAB8 /* ElectricianRunTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElectricianRunTests-Info.plist"; sourceTree = "<group>"; };
-		C93C74A9189235E500A7FAB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C93C74AB189235E500A7FAB8 /* ElectricianRunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElectricianRunTests.m; sourceTree = "<group>"; };
 		C93C74B818923C1400A7FAB8 /* STIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIndexViewController.h; sourceTree = "<group>"; };
 		C93C74B918923C1400A7FAB8 /* STIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIndexViewController.m; sourceTree = "<group>"; };
@@ -210,6 +205,7 @@
 		C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecordViewController.m; sourceTree = "<group>"; };
 		C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildViewController.h; sourceTree = "<group>"; };
 		C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditBuildViewController.m; sourceTree = "<group>"; };
+		C9C22DE618AA62B800ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGuideViewController.h; sourceTree = "<group>"; };
 		C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGuideViewController.m; sourceTree = "<group>"; };
 		C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
@@ -277,12 +273,12 @@
 		C93C7486189235E400A7FAB8 /* ElectricianRun */ = {
 			isa = PBXGroup;
 			children = (
+				C9C22DE718AA62B800ACF787 /* Main.storyboard */,
 				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
 				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
 				C93C7498189235E500A7FAB8 /* Images.xcassets */,
 				C9B2A56018934AC8003A412E /* Classes */,
 				C9B2A56118934AC8003A412E /* Librarys */,
-				C93C7492189235E500A7FAB8 /* Main.storyboard */,
 				C9B2A56E18934AC8003A412E /* Resource */,
 				C93C7487189235E400A7FAB8 /* Supporting Files */,
 				C93C74C118923E4000A7FAB8 /* UI */,
@@ -294,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				C93C7488189235E400A7FAB8 /* ElectricianRun-Info.plist */,
-				C93C7489189235E400A7FAB8 /* InfoPlist.strings */,
 				C93C748C189235E400A7FAB8 /* main.m */,
 				C93C748E189235E400A7FAB8 /* ElectricianRun-Prefix.pch */,
 			);
@@ -314,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				C93C74A7189235E500A7FAB8 /* ElectricianRunTests-Info.plist */,
-				C93C74A8189235E500A7FAB8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -577,6 +571,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = C93C7474189235E400A7FAB8;
 			productRefGroup = C93C747E189235E400A7FAB8 /* Products */;
@@ -599,15 +594,14 @@
 				C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */,
 				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
 				C9A809D518A743E700EA865D /* horses.png in Resources */,
-				C93C748B189235E400A7FAB8 /* InfoPlist.strings in Resources */,
 				C964482D18AA19D600D0C1C9 /* line@2x.png in Resources */,
 				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
+				C9C22DE518AA62B800ACF787 /* Main.storyboard in Resources */,
 				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
 				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
 				C9A809D418A743E700EA865D /* bridge.png in Resources */,
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
-				C93C7494189235E500A7FAB8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,7 +609,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C93C74AA189235E500A7FAB8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,28 +690,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C93C7489189235E400A7FAB8 /* InfoPlist.strings */ = {
+		C9C22DE718AA62B800ACF787 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C93C748A189235E400A7FAB8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C93C7492189235E500A7FAB8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C93C7493189235E500A7FAB8 /* Base */,
+				C9C22DE618AA62B800ACF787 /* zh-Hans */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C93C74A8189235E500A7FAB8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C93C74A9189235E500A7FAB8 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
