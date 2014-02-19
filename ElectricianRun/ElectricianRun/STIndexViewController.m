@@ -7,17 +7,23 @@
 //
 
 #import "STIndexViewController.h"
-#import "NavigationControllerDelegate.h"
+#import "STUserExperienceAlarmViewController.h"
 #import "STUserExperienceViewController.h"
 #import "STProjectSiteViewController.h"
-#import "STScanningViewController.h"
+#import "STScanningOperationViewController.h"
+#import "STCalculateViewController.h"
+
+#import "STDataMonitoringViewController.h"
+#import "STAlarmManagerViewController.h"
+#import "STTaskManagerViewController.h"
+#import "STTaskAuditViewController.h"
 
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
 
 #define IMAGEHEIGHT 140
 
-@interface STIndexViewController ()
+@interface STIndexViewController () <UITabBarControllerDelegate>
 
 @end
 
@@ -92,29 +98,62 @@
 
 //用户体验
 - (void)onClickUserExperience:(id)sender {
-    UINavigationController *userExperienceViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceViewController alloc]init]];
-    [self presentViewController:userExperienceViewControllerNav animated:YES completion:nil];
+    
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
+    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
+    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
 }
+
 //我管辖的变电站
 - (void)onClickJurisdiction:(id)sender {
-    NSLog(@"我管辖的变电站");
+    //数据监测
+     UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
+    dtaMonitoringViewControllerNav.tabBarItem.title=@"数据监测";
+    //报警管理
+    UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
+    alarmManagerViewControllerNav.tabBarItem.title=@"报警管理";
+    //任务管理
+    UINavigationController *taskManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskManagerViewController alloc]init]];
+    taskManagerViewControllerNav.title=@"任务管理";
+    taskManagerViewControllerNav.tabBarItem.title=@"任务管理";
+    //任务稽核
+    UINavigationController *taskAuditViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskAuditViewController alloc]init]];
+    taskAuditViewControllerNav.title=@"任务稽核";
+    taskAuditViewControllerNav.tabBarItem.title=@"任务稽核";
+    
+    UITabBarController *_tabBarController = [[UITabBarController alloc] init];
+    [_tabBarController.view setBackgroundColor:[UIColor whiteColor]];
+    _tabBarController.delegate = self;
+    _tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                             dtaMonitoringViewControllerNav,
+                                             alarmManagerViewControllerNav,
+                                             taskManagerViewControllerNav,
+                                             taskAuditViewControllerNav,nil];
+    [self presentViewController:_tabBarController animated:YES completion:nil];
 }
+
 //调试工具
 - (void)onClickDebug:(id)sender {
     NSLog(@"调试工具");
 }
+
 //工程建站
 - (void)onClickSite:(id)sender {
-    NSLog(@"工程建站");
-}
-//扫描操作
-- (void)onClickOperating:(id)sender {
     UINavigationController *projectSiteViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STProjectSiteViewController alloc]init]];
     [self presentViewController:projectSiteViewControllerNav animated:YES completion:nil];
 }
+
+//扫描操作
+- (void)onClickOperating:(id)sender {
+    UINavigationController *scanningOperationViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STScanningOperationViewController alloc]init]];
+    [self presentViewController:scanningOperationViewControllerNav animated:YES completion:nil];
+}
+
 //在线计算
 - (void)onClickCalculation:(id)sender {
-    NSLog(@"在线计算");
+    UINavigationController *calculateViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STCalculateViewController alloc]init]];
+    [self presentViewController:calculateViewControllerNav animated:YES completion:nil];
 }
 
 //- (IBAction)onClick:(id)sender {

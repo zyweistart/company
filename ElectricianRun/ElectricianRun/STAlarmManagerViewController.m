@@ -1,24 +1,24 @@
 //
-//  STMyTransformerSubstationViewController.m
+//  STAlarmManagerViewController.m
 //  ElectricianRun
-//  我管辖的变电站
-//  Created by Start on 1/24/14.
+//  报警管理
+//  Created by Start on 2/20/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
-#import "STMyTransformerSubstationViewController.h"
+#import "STAlarmManagerViewController.h"
 
-@interface STMyTransformerSubstationViewController ()
+@interface STAlarmManagerViewController ()
 
 @end
 
-@implementation STMyTransformerSubstationViewController
+@implementation STAlarmManagerViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"报警管理";
     }
     return self;
 }

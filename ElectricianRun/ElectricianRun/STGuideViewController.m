@@ -11,6 +11,7 @@
 #import "STIndexViewController.h"
 #import "STStudyViewController.h"
 #import "STMyeViewController.h"
+#import "STUserExperienceAlarmViewController.h"
 
 
 @interface STGuideViewController ()
@@ -61,5 +62,11 @@
                                          myeViewControllerNav,
                                          nil];
     [self presentViewController:_mainTabBarController animated:YES completion:nil];
+    
+    
+//    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
+//    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
+//    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
 }
 @end

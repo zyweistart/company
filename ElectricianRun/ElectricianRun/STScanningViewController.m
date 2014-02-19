@@ -120,8 +120,6 @@
     _preview.frame =CGRectMake(20,110,280,280);
     [self.view.layer insertSublayer:self.preview atIndex:0];
     
-    
-    
     // Start
     [_session startRunning];
 }
@@ -141,7 +139,7 @@
     [self dismissViewControllerAnimated:YES completion:^
      {
          [timer invalidate];
-         NSLog(@"%@",stringValue);
+         [_delegate success:stringValue];
      }];
 }
 

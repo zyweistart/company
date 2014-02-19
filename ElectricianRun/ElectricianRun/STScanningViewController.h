@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+@protocol ScanningDelegate
+
+@optional
+- (void)success:(NSString*)value;
+
+@end
+
 @interface STScanningViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate>
 {
     int num;
@@ -21,4 +28,7 @@
 @property (strong,nonatomic)AVCaptureSession * session;
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
 @property (nonatomic, retain) UIImageView * line;
+
+@property (strong,nonatomic) id<ScanningDelegate> delegate;
+
 @end
