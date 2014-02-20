@@ -14,6 +14,11 @@
 		C922445C18B5F7B900D0B923 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C922445B18B5F7B900D0B923 /* MapKit.framework */; };
 		C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */; };
 		C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */; };
+		C922446F18B623E200D0B923 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C922446518B623E200D0B923 /* MJRefresh.bundle */; };
+		C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446818B623E200D0B923 /* MJRefreshBaseView.m */; };
+		C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446A18B623E200D0B923 /* MJRefreshConst.m */; };
+		C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446C18B623E200D0B923 /* MJRefreshFooterView.m */; };
+		C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */; };
 		C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C924B16C18B39E3D00B998F9 /* STChartViewController.m */; };
 		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
 		C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA718B512E000E4AE0A /* BaseTableViewController.m */; };
@@ -113,6 +118,16 @@
 		C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerExpandedCellIdentifierCell.m; sourceTree = "<group>"; };
 		C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerExpandingCellIdentifierCell.h; sourceTree = "<group>"; };
 		C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerExpandingCellIdentifierCell.m; sourceTree = "<group>"; };
+		C922446518B623E200D0B923 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		C922446618B623E200D0B923 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		C922446718B623E200D0B923 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		C922446818B623E200D0B923 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		C922446918B623E200D0B923 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		C922446A18B623E200D0B923 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		C922446B18B623E200D0B923 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		C922446C18B623E200D0B923 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		C922446D18B623E200D0B923 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		C924B16B18B39E3D00B998F9 /* STChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartViewController.h; sourceTree = "<group>"; };
 		C924B16C18B39E3D00B998F9 /* STChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartViewController.m; sourceTree = "<group>"; };
 		C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
@@ -296,6 +311,23 @@
 				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		C922446418B623E200D0B923 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				C922446518B623E200D0B923 /* MJRefresh.bundle */,
+				C922446618B623E200D0B923 /* MJRefresh.h */,
+				C922446718B623E200D0B923 /* MJRefreshBaseView.h */,
+				C922446818B623E200D0B923 /* MJRefreshBaseView.m */,
+				C922446918B623E200D0B923 /* MJRefreshConst.h */,
+				C922446A18B623E200D0B923 /* MJRefreshConst.m */,
+				C922446B18B623E200D0B923 /* MJRefreshFooterView.h */,
+				C922446C18B623E200D0B923 /* MJRefreshFooterView.m */,
+				C922446D18B623E200D0B923 /* MJRefreshHeaderView.h */,
+				C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		C93C7474189235E400A7FAB8 = {
@@ -499,6 +531,7 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C922446418B623E200D0B923 /* MJRefresh */,
 				C909821918B45E6500703D47 /* ARLineChart */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
@@ -671,6 +704,7 @@
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */,
 				C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */,
+				C922446F18B623E200D0B923 /* MJRefresh.bundle in Resources */,
 				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,6 +747,9 @@
 				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
 				C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */,
 				C909822018B45E6500703D47 /* ARLineChartCommon.m in Sources */,
+				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
+				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
+				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
 				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
@@ -729,6 +766,7 @@
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
+				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,

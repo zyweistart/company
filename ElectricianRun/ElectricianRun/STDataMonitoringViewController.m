@@ -45,33 +45,21 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
-    }else{
-       cell.textLabel.text=@"更多";
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        STDataMonitoringLineViewController *dataMonitoringLineViewController=[[STDataMonitoringLineViewController alloc]initWithData:dictionary];
-        [self.navigationController pushViewController:dataMonitoringLineViewController animated:YES];
-    }else{
-        _currentPage++;
-        [self reloadTableViewDataSource];
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+    STDataMonitoringLineViewController *dataMonitoringLineViewController=[[STDataMonitoringLineViewController alloc]initWithData:dictionary];
+    [self.navigationController pushViewController:dataMonitoringLineViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-    
-	_reloading = YES;
     
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     

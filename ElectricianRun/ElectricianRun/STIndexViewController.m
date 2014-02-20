@@ -12,6 +12,7 @@
 #import "STProjectSiteViewController.h"
 #import "STScanningOperationViewController.h"
 #import "STCalculateViewController.h"
+#import "STMyeViewController.h"
 
 #import "STDataMonitoringViewController.h"
 #import "STAlarmManagerViewController.h"
@@ -136,7 +137,8 @@
 
 //调试工具
 - (void)onClickDebug:(id)sender {
-    NSLog(@"调试工具");
+    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
+    [self presentViewController:myeViewControllerNav animated:YES completion:nil];
 }
 
 //工程建站

@@ -46,40 +46,20 @@
 #pragma mark - UITableView data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger count=[self.dataItemArray count];
 	if (self.expandedIndexPath) {
-        if(_pageCount==_currentPage){
-            return count+1;
-        } else {
-            return count+1+1;
-        }
-	} else {
-        if(_pageCount==_currentPage){
-            return count;
-        } else {
-            return count+1;
-        }
+        return [self.dataItemArray count]+1;
+    } else {
+        return [self.dataItemArray count];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSUInteger count=[self.dataItemArray count];
-    NSUInteger row=[indexPath row];
-	if (self.expandedIndexPath) {
-        if(row+1+1==count){
-            return 40;
-        }else{
-            if ([indexPath isEqual:self.expandedIndexPath]) {
-                return 100;
-            } else {
-                return 40;
-            }
-        }
-	} else {
+    if ([indexPath isEqual:self.expandedIndexPath]) {
+        return 100;
+    } else {
         return 40;
     }
-    
 }
 
 #pragma mark - UITableView delegate
@@ -109,13 +89,6 @@ static NSString *cellIdentifier2 = @"ExpandingCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-            
-    }else{
-//        _currentPage++;
-//        [self reloadTableViewDataSource];
-    }
     
     // disable touch on expanded cell
 	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
@@ -164,6 +137,7 @@ static NSString *cellIdentifier2 = @"ExpandingCellIdentifier";
 
 - (NSIndexPath *)actualIndexPathForTappedIndexPath:(NSIndexPath *)indexPath
 {
+    
 	if (self.expandedIndexPath && [indexPath row] > [self.expandedIndexPath row]) {
 		return [NSIndexPath indexPathForRow:[indexPath row] - 1 inSection:[indexPath section]];
 	}
@@ -176,7 +150,7 @@ static NSString *cellIdentifier2 = @"ExpandingCellIdentifier";
 
 - (void)reloadTableViewDataSource{
     
-	_reloading = YES;
+//	_reloading = YES;
     
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     

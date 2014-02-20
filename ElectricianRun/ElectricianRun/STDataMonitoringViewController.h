@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseRefreshTableViewController.h"
+#import "BaseTableViewController.h"
 
-@interface STDataMonitoringViewController : BaseRefreshTableViewController
+@interface STDataMonitoringViewController : BaseTableViewController
 
 @end
