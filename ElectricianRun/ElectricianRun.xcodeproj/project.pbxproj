@@ -10,7 +10,6 @@
 		C909822018B45E6500703D47 /* ARLineChartCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821B18B45E6500703D47 /* ARLineChartCommon.m */; };
 		C909822118B45E6500703D47 /* ARLineChartContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821D18B45E6500703D47 /* ARLineChartContentView.m */; };
 		C909822218B45E6500703D47 /* ARLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821F18B45E6500703D47 /* ARLineChartView.m */; };
-		C922445A18B5E03800D0B923 /* STMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C922445918B5E03800D0B923 /* STMapViewController.m */; };
 		C922445C18B5F7B900D0B923 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C922445B18B5F7B900D0B923 /* MapKit.framework */; };
 		C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */; };
 		C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */; };
@@ -52,6 +51,11 @@
 		C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */; };
 		C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */; };
 		C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DC18A74FDD005CC2AC /* EFloatBox.m */; };
+		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
+		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
+		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
+		C98F54AD18B651660032AE8B /* STTaskAuditRecord2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54AC18B651660032AE8B /* STTaskAuditRecord2ViewController.m */; };
+		C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54AF18B651710032AE8B /* STTaskAuditRecord3ViewController.m */; };
 		C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */; };
 		C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CF18A7438700EA865D /* ETFoursquareImages.m */; };
 		C9AC1DD618A86C4A004E96CC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD518A86C4A004E96CC /* Common.m */; };
@@ -111,8 +115,6 @@
 		C909821D18B45E6500703D47 /* ARLineChartContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartContentView.m; sourceTree = "<group>"; };
 		C909821E18B45E6500703D47 /* ARLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineChartView.h; sourceTree = "<group>"; };
 		C909821F18B45E6500703D47 /* ARLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartView.m; sourceTree = "<group>"; };
-		C922445818B5E03800D0B923 /* STMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapViewController.h; sourceTree = "<group>"; };
-		C922445918B5E03800D0B923 /* STMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapViewController.m; sourceTree = "<group>"; };
 		C922445B18B5F7B900D0B923 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C922445E18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerExpandedCellIdentifierCell.h; sourceTree = "<group>"; };
 		C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerExpandedCellIdentifierCell.m; sourceTree = "<group>"; };
@@ -189,6 +191,16 @@
 		C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnDataModel.m; sourceTree = "<group>"; };
 		C98568DB18A74FDD005CC2AC /* EFloatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFloatBox.h; sourceTree = "<group>"; };
 		C98568DC18A74FDD005CC2AC /* EFloatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFloatBox.m; sourceTree = "<group>"; };
+		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
+		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
+		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
+		C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditBuildDetailViewController.m; sourceTree = "<group>"; };
+		C98F54A818B6515A0032AE8B /* STTaskAuditRecord1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditRecord1ViewController.h; sourceTree = "<group>"; };
+		C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecord1ViewController.m; sourceTree = "<group>"; };
+		C98F54AB18B651660032AE8B /* STTaskAuditRecord2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditRecord2ViewController.h; sourceTree = "<group>"; };
+		C98F54AC18B651660032AE8B /* STTaskAuditRecord2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecord2ViewController.m; sourceTree = "<group>"; };
+		C98F54AE18B651710032AE8B /* STTaskAuditRecord3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditRecord3ViewController.h; sourceTree = "<group>"; };
+		C98F54AF18B651710032AE8B /* STTaskAuditRecord3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecord3ViewController.m; sourceTree = "<group>"; };
 		C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMainTabBarController.h; sourceTree = "<group>"; };
 		C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMainTabBarController.m; sourceTree = "<group>"; };
 		C9A809CE18A7438700EA865D /* ETFoursquareImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETFoursquareImages.h; sourceTree = "<group>"; };
@@ -506,24 +518,26 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C967A0DA18A89D8A00BD268D /* Animator.h */,
+				C967A0DB18A89D8A00BD268D /* Animator.m */,
+				C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */,
+				C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */,
 				C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */,
 				C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */,
 				C933FEA618B512E000E4AE0A /* BaseTableViewController.h */,
 				C933FEA718B512E000E4AE0A /* BaseTableViewController.m */,
-				C967A0DA18A89D8A00BD268D /* Animator.h */,
-				C967A0DB18A89D8A00BD268D /* Animator.m */,
+				C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */,
+				C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */,
+				C9AC1DD418A86C4A004E96CC /* Common.h */,
+				C9AC1DD518A86C4A004E96CC /* Common.m */,
+				C9488D0418A781A0006008C3 /* HttpRequest.h */,
+				C9488D0518A781A0006008C3 /* HttpRequest.m */,
 				C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */,
 				C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */,
 				C9488D0018A77D16006008C3 /* NSString+Utils.h */,
 				C9488D0118A77D16006008C3 /* NSString+Utils.m */,
-				C9488D0418A781A0006008C3 /* HttpRequest.h */,
-				C9488D0518A781A0006008C3 /* HttpRequest.m */,
 				C95EDEB518A7BC7C00CA80B4 /* Response.h */,
 				C95EDEB618A7BC7C00CA80B4 /* Response.m */,
-				C9AC1DD418A86C4A004E96CC /* Common.h */,
-				C9AC1DD518A86C4A004E96CC /* Common.m */,
-				C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */,
-				C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -591,12 +605,18 @@
 				C9B2A58918934E54003A412E /* STDataMonitoringLineViewController.m */,
 				C9B2A58118934C97003A412E /* STDataMonitoringViewController.h */,
 				C9B2A58218934C97003A412E /* STDataMonitoringViewController.m */,
-				C922445818B5E03800D0B923 /* STMapViewController.h */,
-				C922445918B5E03800D0B923 /* STMapViewController.m */,
+				C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */,
+				C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */,
 				C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */,
 				C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */,
 				C9B2A59118934FCF003A412E /* STTaskAuditMapViewController.h */,
 				C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */,
+				C98F54A818B6515A0032AE8B /* STTaskAuditRecord1ViewController.h */,
+				C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */,
+				C98F54AB18B651660032AE8B /* STTaskAuditRecord2ViewController.h */,
+				C98F54AC18B651660032AE8B /* STTaskAuditRecord2ViewController.m */,
+				C98F54AE18B651710032AE8B /* STTaskAuditRecord3ViewController.h */,
+				C98F54AF18B651710032AE8B /* STTaskAuditRecord3ViewController.m */,
 				C9B2A59418935012003A412E /* STTaskAuditRecordViewController.h */,
 				C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */,
 				C9B2A58518934D9C003A412E /* STTaskAuditViewController.h */,
@@ -768,25 +788,29 @@
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
+				C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */,
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
 				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
 				C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */,
 				C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */,
-				C922445A18B5E03800D0B923 /* STMapViewController.m in Sources */,
 				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
 				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
+				C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */,
 				C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */,
 				C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */,
+				C98F54AD18B651660032AE8B /* STTaskAuditRecord2ViewController.m in Sources */,
 				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
+				C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */,
 				C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
+				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
 				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 			);

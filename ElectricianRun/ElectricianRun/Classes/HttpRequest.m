@@ -90,7 +90,10 @@
         HTTP_URL=[NSString stringWithFormat:@"%@",urlString];
     }
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:HTTP_URL]];
+    NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSString *url=[HTTP_URL stringByAddingPercentEscapesUsingEncoding:gbkEncoding];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     // 设置请求方法
     request.HTTPMethod = @"POST";
     // 60秒请求超时

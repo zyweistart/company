@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseRefreshTableViewController.h"
+#import "BaseMJRefreshViewController.h"
 
-@interface STAlarmManagerViewController : BaseRefreshTableViewController
+@interface STAlarmManagerViewController : BaseMJRefreshViewController
 
 @end

@@ -7,13 +7,28 @@
 //
 
 #import "STTaskAuditViewController.h"
-#import "STMapViewController.h"
+#import "STTaskAuditBuildViewController.h"
+#import "STTaskAuditRecordViewController.h"
+#import "STTaskAuditMapViewController.h"
 
 @interface STTaskAuditViewController ()
 
 @end
 
-@implementation STTaskAuditViewController
+@implementation STTaskAuditViewController {
+    UIButton *btnBuilder;
+    UIButton *btnRecording;
+    
+    UIControl *view1;
+    UIControl *view2;
+    UITextField *txtValueView11;
+    UITextField *txtValueView12;
+    
+    UITextField *txtValueView21;
+    UITextField *txtValueView22;
+    UITextField *txtValueView23;
+    UITextField *txtValueView24;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,22 +55,21 @@
     [super viewDidLoad];
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
-    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 40)];
-    btn1.titleLabel.font=[UIFont systemFontOfSize:12.0f];
-    [btn1 setTitle:@"巡检任务生成" forState:UIControlStateNormal];
-    [btn1 setBackgroundColor:[UIColor blueColor]];
-    [btn1 addTarget:self action:@selector(build:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btn1];
+    btnBuilder=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 40)];
+    btnBuilder.titleLabel.font=[UIFont systemFontOfSize:12.0f];
+    [btnBuilder setTitle:@"巡检任务生成" forState:UIControlStateNormal];
+    [btnBuilder setBackgroundColor:[UIColor redColor]];
+    [btnBuilder addTarget:self action:@selector(build:) forControlEvents:UIControlEventTouchUpInside];
+    [control addSubview:btnBuilder];
     
-    UIButton *btn2=[[UIButton alloc]initWithFrame:CGRectMake(110, 0, 100, 40)];
-    btn2.titleLabel.font=[UIFont systemFontOfSize:12.0f];
-    [btn2 setTitle:@"巡检记录" forState:UIControlStateNormal];
-    [btn2 setBackgroundColor:[UIColor blueColor]];
-    [btn2 addTarget:self action:@selector(recording:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btn2];
+    btnRecording=[[UIButton alloc]initWithFrame:CGRectMake(110, 0, 100, 40)];
+    btnRecording.titleLabel.font=[UIFont systemFontOfSize:12.0f];
+    [btnRecording setTitle:@"巡检记录" forState:UIControlStateNormal];
+    [btnRecording setBackgroundColor:[UIColor blueColor]];
+    [btnRecording addTarget:self action:@selector(recording:) forControlEvents:UIControlEventTouchUpInside];
+    [control addSubview:btnRecording];
     
     UIButton *btn3=[[UIButton alloc]initWithFrame:CGRectMake(210, 0, 110, 40)];
     btn3.titleLabel.font=[UIFont systemFontOfSize:12.0f];
@@ -64,23 +78,183 @@
     [btn3 addTarget:self action:@selector(maplocation:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btn3];
     
+    
+    view1=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 130)];
+    [view1 setHidden:NO];
+    [view1 addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+    [control addSubview:view1];
+    
+    UILabel *lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"客户名称"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view1 addSubview:lblName];
+    
+    txtValueView11=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    [txtValueView11 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView11 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView11 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView11 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView11 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView11 setKeyboardType:UIKeyboardTypePhonePad];
+    [view1 addSubview:txtValueView11];
+    
+    lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"站点名称"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view1 addSubview:lblName];
+    
+    txtValueView12=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    [txtValueView12 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView12 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView12 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView12 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView12 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView12 setKeyboardType:UIKeyboardTypePhonePad];
+    [view1 addSubview:txtValueView12];
+    
+    //查询
+    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(120, 90, 80, 30)];
+    [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
+    btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
+    [btnSearch setBackgroundColor:[UIColor blueColor]];
+//    [btnSearch setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
+    [btnSearch addTarget:self action:@selector(search1:) forControlEvents:UIControlEventTouchUpInside];
+    [view1 addSubview:btnSearch];
+    
+    ///////////////////////
+    
+    view2=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 210)];
+    [view2 setHidden:YES];
+    [view2 addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+    [control addSubview:view2];
+    
+    lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"客户名称"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view2 addSubview:lblName];
+    
+    txtValueView21=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    [txtValueView21 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView21 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView21 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView21 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView21 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView21 setKeyboardType:UIKeyboardTypePhonePad];
+    [view2 addSubview:txtValueView21];
+    
+    lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"站点名称"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view2 addSubview:lblName];
+    
+    txtValueView22=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    [txtValueView22 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView22 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView22 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView22 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView22 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView22 setKeyboardType:UIKeyboardTypePhonePad];
+    [view2 addSubview:txtValueView22];
+    
+    lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"任务开始时间"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view2 addSubview:lblName];
+    
+    txtValueView23=[[UITextField alloc]initWithFrame:CGRectMake(105, 90, 150, 30)];
+    [txtValueView23 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView23 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView23 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView23 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView23 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView23 setKeyboardType:UIKeyboardTypePhonePad];
+    [view2 addSubview:txtValueView23];
+    
+    lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 130, 90, 30)];
+    lblName.font=[UIFont systemFontOfSize:12.0];
+    [lblName setText:@"任务结束时间"];
+    [lblName setTextColor:[UIColor blackColor]];
+    [lblName setBackgroundColor:[UIColor clearColor]];
+    [lblName setTextAlignment:NSTextAlignmentRight];
+    [view2 addSubview:lblName];
+    
+    txtValueView24=[[UITextField alloc]initWithFrame:CGRectMake(105, 130, 150, 30)];
+    [txtValueView24 setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueView24 setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueView24 setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueView24 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueView24 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [txtValueView24 setKeyboardType:UIKeyboardTypePhonePad];
+    [view2 addSubview:txtValueView24];
+    
+    //查询
+    btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(120, 170, 80, 30)];
+    [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
+    btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
+    [btnSearch setBackgroundColor:[UIColor blueColor]];
+//    [btnSearch setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
+    [btnSearch addTarget:self action:@selector(search2:) forControlEvents:UIControlEventTouchUpInside];
+    [view2 addSubview:btnSearch];
 }
 
 - (void)build:(id)sender {
-    NSLog(@"巡检任务生成");
+    
+    [btnBuilder setBackgroundColor:[UIColor redColor]];
+    [btnRecording setBackgroundColor:[UIColor blueColor]];
+    
+    [view1 setHidden:NO];
+    [view2 setHidden:YES];
+    [self backgroundDoneEditing:nil];
 }
 
 - (void)recording:(id)sender {
-    NSLog(@"巡检记录");
+    
+    
+    [btnBuilder setBackgroundColor:[UIColor blueColor]];
+    [btnRecording setBackgroundColor:[UIColor redColor]];
+    
+    [view1 setHidden:YES];
+    [view2 setHidden:NO];
+    [self backgroundDoneEditing:nil];
+}
+
+- (void)search1:(id)sender {
+    STTaskAuditBuildViewController *taskAuditBuildViewController=[[STTaskAuditBuildViewController alloc]init];
+    [self.navigationController pushViewController:taskAuditBuildViewController animated:YES];
+}
+
+- (void)search2:(id)sender {
+    STTaskAuditRecordViewController *taskAuditRecordViewController=[[STTaskAuditRecordViewController alloc]init];
+    [self.navigationController pushViewController:taskAuditRecordViewController animated:YES];
 }
 
 - (void)maplocation:(id)sender {
-    STMapViewController *mapViewController=[[STMapViewController alloc]init];
-    [self.navigationController pushViewController:mapViewController animated:YES];
+    STTaskAuditMapViewController *taskAuditMapViewController=[[STTaskAuditMapViewController alloc]init];
+    [self.navigationController pushViewController:taskAuditMapViewController animated:YES];
 }
 
 - (void)backgroundDoneEditing:(id)sender {
-//    [txtValue1 resignFirstResponder];
+    [txtValueView11 resignFirstResponder];
+    [txtValueView12 resignFirstResponder];
+    [txtValueView21 resignFirstResponder];
+    [txtValueView22 resignFirstResponder];
+    [txtValueView23 resignFirstResponder];
+    [txtValueView24 resignFirstResponder];
 }
 
 @end

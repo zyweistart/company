@@ -81,7 +81,8 @@ static NSString *cellIdentifier2 = @"ExpandingCellIdentifier";
             cell = [[STTaskManagerExpandingCellIdentifierCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
         }
         NSIndexPath *theIndexPath = [self actualIndexPathForTappedIndexPath:indexPath];
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:[theIndexPath row]];
+        NSInteger row=[theIndexPath row];
+        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
 		[cell.lblName setText:[dictionary objectForKey:@"CP_NAME"]];
         return cell;
 	}

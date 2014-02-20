@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BaseTableViewController.h"
+#import "BaseMJRefreshViewController.h"
 
-@interface STTaskManagerViewController : BaseTableViewController
+@interface STTaskManagerViewController : BaseMJRefreshViewController
 
 @end

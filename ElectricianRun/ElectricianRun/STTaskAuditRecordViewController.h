@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseMJRefreshViewController.h"
 
-@interface STTaskAuditRecordViewController : UIViewController
+@interface STTaskAuditRecordViewController : BaseMJRefreshViewController
 
 @end

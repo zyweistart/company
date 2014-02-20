@@ -109,8 +109,6 @@
 
 - (void)reloadTableViewDataSource{
     
-	_reloading = YES;
-    
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];

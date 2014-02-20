@@ -1,5 +1,5 @@
 //
-//  STMapViewController.h
+//  STTaskAuditBuildDetailViewController.h
 //  ElectricianRun
 //
 //  Created by Start on 2/20/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STMapViewController : UIViewController
+@interface STTaskAuditBuildDetailViewController : UIViewController
 
 @end

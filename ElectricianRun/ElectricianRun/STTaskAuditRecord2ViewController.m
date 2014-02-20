@@ -1,27 +1,35 @@
 //
-//  STTaskAuditBuildViewController.m
+//  STTaskAuditRecord2ViewController.m
 //  ElectricianRun
-//  任务稽核-巡检任务生成
-//  Created by Start on 1/25/14.
+//
+//  Created by Start on 2/20/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
-#import "STTaskAuditBuildViewController.h"
-#import "STTaskAuditBuildDetailViewController.h"
+#import "STTaskAuditRecord2ViewController.h"
 #import "NSString+Utils.h"
 
-@interface STTaskAuditBuildViewController ()
+@interface STTaskAuditRecord2ViewController ()
 
 @end
 
-@implementation STTaskAuditBuildViewController
+@implementation STTaskAuditRecord2ViewController {
+    NSInteger _type;
+    NSDictionary *_data;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithData:(NSDictionary *)data type:(NSInteger)t
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        self.title=@"巡检任务生成";
+        
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        _type=t;
+        _data=data;
+        
+        [self reloadTableViewDataSource];
+        
     }
     return self;
 }
@@ -36,17 +44,13 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"NAME"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    STTaskAuditBuildDetailViewController *taskAuditBuildDetailViewController=[[STTaskAuditBuildDetailViewController alloc]init];
-    [self.navigationController pushViewController:taskAuditBuildDetailViewController animated:YES];
+    
 }
-
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
     
@@ -55,11 +59,9 @@
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
-    [p setObject:@"ZY22" forKey:@"GNID"];
-    [p setObject:@"" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY2"];
-    [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
-    [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
+    [p setObject:@"RW12" forKey:@"GNID"];
+    [p setObject:[_data objectForKey:@"TASK_ID"] forKey:@"QTTASK"];
+    [p setObject:[NSString stringWithFormat:@"%ld",_type] forKey:@"QTKEY"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
@@ -67,4 +69,22 @@
     
 }
 
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
+    
+    
+    NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
+    
+    self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
+    
+    // 刷新表格
+    [self.tableView reloadData];
+    
+}
+
+- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
+{
+    
+}
+
 @end
+
