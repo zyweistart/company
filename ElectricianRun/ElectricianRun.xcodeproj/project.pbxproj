@@ -11,6 +11,8 @@
 		C909822118B45E6500703D47 /* ARLineChartContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821D18B45E6500703D47 /* ARLineChartContentView.m */; };
 		C909822218B45E6500703D47 /* ARLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821F18B45E6500703D47 /* ARLineChartView.m */; };
 		C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C924B16C18B39E3D00B998F9 /* STChartViewController.m */; };
+		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
+		C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA718B512E000E4AE0A /* BaseTableViewController.m */; };
 		C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
 		C93C7483189235E400A7FAB8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7482189235E400A7FAB8 /* CoreGraphics.framework */; };
 		C93C7485189235E400A7FAB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7484189235E400A7FAB8 /* UIKit.framework */; };
@@ -102,6 +104,10 @@
 		C909821F18B45E6500703D47 /* ARLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartView.m; sourceTree = "<group>"; };
 		C924B16B18B39E3D00B998F9 /* STChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartViewController.h; sourceTree = "<group>"; };
 		C924B16C18B39E3D00B998F9 /* STChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartViewController.m; sourceTree = "<group>"; };
+		C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
+		C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRefreshTableViewController.m; sourceTree = "<group>"; };
+		C933FEA618B512E000E4AE0A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		C933FEA718B512E000E4AE0A /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		C93C747D189235E400A7FAB8 /* ElectricianRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElectricianRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93C7480189235E400A7FAB8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C93C7482189235E400A7FAB8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -443,6 +449,10 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */,
+				C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */,
+				C933FEA618B512E000E4AE0A /* BaseTableViewController.h */,
+				C933FEA718B512E000E4AE0A /* BaseTableViewController.m */,
 				C967A0DA18A89D8A00BD268D /* Animator.h */,
 				C967A0DB18A89D8A00BD268D /* Animator.m */,
 				C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */,
@@ -709,6 +719,8 @@
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
+				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
+				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

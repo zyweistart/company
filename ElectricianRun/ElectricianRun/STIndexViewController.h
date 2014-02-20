@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STIndexViewController : UIViewController<HttpRequestDelegate>
+@interface STIndexViewController : UIViewController
 
 @end

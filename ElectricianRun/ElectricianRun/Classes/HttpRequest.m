@@ -75,8 +75,8 @@
 
 - (void)handle {
     NSString *HTTP_URL=nil;
-    NSMutableString *urlString=[[NSMutableString alloc]initWithString:HTTPSERVERURL];
-    [urlString appendString:_http_url];
+    NSMutableString *urlString=[[NSMutableString alloc]initWithString:_http_url];
+//    [urlString appendString:_http_url];
     
     if(_params!=nil&&[_params count]>0){
         [urlString appendString:@"?"];
@@ -94,7 +94,7 @@
     // 设置请求方法
     request.HTTPMethod = @"POST";
     // 60秒请求超时
-    request.timeoutInterval = 60;
+    request.timeoutInterval = 10;
     // 初始化一个连接
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
     // 开始一个异步请求
@@ -152,12 +152,18 @@
 
 #pragma mark 服务器的数据已经接收完毕时调用
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
     NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSString*pageSource = [[NSString alloc] initWithData:_resultData encoding:gbkEncoding];
-    NSString *json=[pageSource stringByReplacingPercentEscapesUsingEncoding:gbkEncoding];
-    
     Response *response=[[Response alloc]init];
-    [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
+    if(pageSource!=nil) {
+        NSString *responseString=[pageSource stringByReplacingPercentEscapesUsingEncoding:gbkEncoding];
+        [response setResponseString:responseString];
+        [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
+    } else {
+        NSString *responseString =[[NSString alloc] initWithData:_resultData encoding:NSUTF8StringEncoding];
+        [response setResponseString:responseString];
+    }
     
     _resultData=nil;
     

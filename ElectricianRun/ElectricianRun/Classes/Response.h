@@ -10,6 +10,7 @@
 
 @interface Response : NSObject
 
+@property (strong,nonatomic) NSString *responseString;
 @property (strong,nonatomic) NSDictionary *resultJSON;
 
 @end

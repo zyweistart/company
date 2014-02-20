@@ -17,6 +17,7 @@
 
     #import "BaseUIViewController.h"
     #import "HttpRequest.h"
-#import "Common.h"
-    #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
+    #import "Common.h"
+    #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7]
+    #define PAGESIZE 10
 #endif

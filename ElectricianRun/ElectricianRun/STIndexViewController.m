@@ -109,6 +109,7 @@
 - (void)onClickJurisdiction:(id)sender {
     //数据监测
      UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
+//    dtaMonitoringViewControllerNav.navigationBarHidden=YES;
     dtaMonitoringViewControllerNav.tabBarItem.title=@"数据监测";
     //报警管理
     UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
@@ -155,29 +156,5 @@
     UINavigationController *calculateViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STCalculateViewController alloc]init]];
     [self presentViewController:calculateViewControllerNav animated:YES completion:nil];
 }
-
-//- (IBAction)onClick:(id)sender {
-//    
-//    NSString *URL=@"checkMobileValid.aspx";
-//    
-//    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-//    [p setObject:@"zhangyy" forKey:@"imei"];
-//    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
-//    [p setObject:@"2" forKey:@"Type"];
-//    [p setObject:@"2" forKey:@"IsEncode"];
-//    
-//    _hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
-//    [_hRequest setIsShowMessage:YES];
-//    [_hRequest start:URL params:p];
-//    
-//}
-//
-//- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-//    NSLog(@"json:%@",[response resultJSON]);
-//}
-//
-//- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error{
-//    NSLog(@"requestFailed");
-//}
 
 @end

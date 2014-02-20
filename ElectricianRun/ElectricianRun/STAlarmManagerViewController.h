@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseRefreshTableViewController.h"
 
-@interface STAlarmManagerViewController : UIViewController
+@interface STAlarmManagerViewController : BaseRefreshTableViewController
 
 @end

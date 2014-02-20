@@ -10,4 +10,8 @@
 
 @interface STDataMonitoringLineDetailViewController : UIViewController
 
+@property (strong,nonatomic) NSDictionary *data;
+
+- (id)initWithData:(NSDictionary *)data;
+
 @end
