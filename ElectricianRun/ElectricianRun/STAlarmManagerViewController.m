@@ -35,8 +35,19 @@
         @"选择",@"已处理",@"处理未妥",@"试验",
         @"误报",@"不需要处理",@"正在处理",@"原因不明",
         @"计划处理",@"人工分闸", nil];
+        
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(back:)];
+        
     }
     return self;
+}
+
+- (void)back:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)edit:(id)sender {
