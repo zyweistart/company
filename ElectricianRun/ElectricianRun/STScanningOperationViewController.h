@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STScanningOperationViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface STScanningOperationViewController : UIViewController
 
 @end

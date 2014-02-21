@@ -45,6 +45,10 @@
 		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
 		C967A0DE18A89D8A00BD268D /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DB18A89D8A00BD268D /* Animator.m */; };
 		C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */; };
+		C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */; };
+		C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */; };
+		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
+		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
 		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
 		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
 		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
@@ -179,6 +183,14 @@
 		C967A0DB18A89D8A00BD268D /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animator.m; sourceTree = "<group>"; };
 		C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerDelegate.h; sourceTree = "<group>"; };
 		C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerDelegate.m; sourceTree = "<group>"; };
+		C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorInfoViewController.h; sourceTree = "<group>"; };
+		C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAggregatorInfoViewController.m; sourceTree = "<group>"; };
+		C9726CD818B73CD7006FB209 /* STAggregatorEntInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorEntInfoViewController.h; sourceTree = "<group>"; };
+		C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAggregatorEntInfoViewController.m; sourceTree = "<group>"; };
+		C9726CDE18B73D76006FB209 /* STLineInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLineInfoViewController.h; sourceTree = "<group>"; };
+		C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLineInfoViewController.m; sourceTree = "<group>"; };
+		C9726CE118B7956D006FB209 /* STChangeMaterialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChangeMaterialViewController.h; sourceTree = "<group>"; };
+		C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeMaterialViewController.m; sourceTree = "<group>"; };
 		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
 		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
 		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
@@ -421,14 +433,22 @@
 			isa = PBXGroup;
 			children = (
 				C922445D18B5FFFA00D0B923 /* Cell */,
+				C9726CD818B73CD7006FB209 /* STAggregatorEntInfoViewController.h */,
+				C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */,
+				C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */,
+				C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */,
 				C93C74C518923EC700A7FAB8 /* STCalculateViewController.h */,
 				C93C74C618923EC700A7FAB8 /* STCalculateViewController.m */,
+				C9726CE118B7956D006FB209 /* STChangeMaterialViewController.h */,
+				C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */,
 				C924B16B18B39E3D00B998F9 /* STChartViewController.h */,
 				C924B16C18B39E3D00B998F9 /* STChartViewController.m */,
 				C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */,
 				C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
+				C9726CDE18B73D76006FB209 /* STLineInfoViewController.h */,
+				C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */,
 				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
 				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
 				C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */,
@@ -753,6 +773,7 @@
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
 				C909822218B45E6500703D47 /* ARLineChartView.m in Sources */,
+				C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */,
 				C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */,
 				C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
@@ -771,6 +792,7 @@
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
 				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
 				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
+				C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */,
@@ -779,11 +801,13 @@
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
 				C909822118B45E6500703D47 /* ARLineChartContentView.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
+				C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */,
 				C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C9DFDF2818B327DC00F7B368 /* GHWalkThroughView.m in Sources */,
 				C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */,
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
+				C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,

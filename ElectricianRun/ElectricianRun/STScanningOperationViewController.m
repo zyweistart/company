@@ -7,15 +7,21 @@
 //
 
 #import "STScanningOperationViewController.h"
+#import "STAggregatorInfoViewController.h"
+#import "STLineInfoViewController.h"
+#import "STChangeMaterialViewController.h"
 #import "STScanningViewController.h"
 
-@interface STScanningOperationViewController()<ScanningDelegate>
+@interface STScanningOperationViewController()<UIPickerViewDelegate,UIPickerViewDataSource,ScanningDelegate>
 
 @end
 
 @implementation STScanningOperationViewController {
     NSArray *selectData;
     UITextField *txtValue1;
+    NSString *channl;
+    NSString *twoDimensionalCode;
+    UIPickerView* pickerView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -78,7 +84,7 @@
     [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnSubmit];
     
-    UIPickerView* pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,352.0,320.0,216.0)];
+    pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,352.0,320.0,216.0)];
     pickerView.delegate = self;
     pickerView.dataSource =  self;
     [self.view addSubview:pickerView];
@@ -86,7 +92,31 @@
 }
 
 - (void)submit:(id)sender {
-    NSLog(@"SUBMIT");
+    //获取选中的列中的所在的行
+    NSInteger row=[pickerView selectedRowInComponent:0];
+    if([twoDimensionalCode length]==12){
+        if(row==0){
+            STAggregatorInfoViewController *aggregatorInfoViewController=[[STAggregatorInfoViewController alloc]initWithSerialNo:twoDimensionalCode];
+            [self.navigationController pushViewController:aggregatorInfoViewController animated:YES];
+        } else {
+            [Common alert:@"请扫描采集器！"];
+        }
+    } else if([twoDimensionalCode length]==14){
+        NSString *code=[twoDimensionalCode substringToIndex:12];
+        if(row==0){
+            [Common alert:@"请选择操作类型！"];
+        }else if(row==1) {
+            //线路实时信息
+            STLineInfoViewController *lineInfoViewController=[[STLineInfoViewController alloc]initWithSerialNo:code channelNo:channl];
+            [self.navigationController pushViewController:lineInfoViewController animated:YES];
+        } else if(row==2) {
+            //更换采集器
+            STChangeMaterialViewController *changeMaterialViewController=[[STChangeMaterialViewController alloc]initWithSerialNo:code];
+            [self.navigationController pushViewController:changeMaterialViewController animated:YES];
+        }
+    } else {
+        [Common alert:@"二维码不符合规则!"];
+    }
 }
 
 - (void)scanning:(id)sender {
@@ -139,6 +169,11 @@
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue1 setText:value];
+    twoDimensionalCode=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if([twoDimensionalCode length]==14){
+        channl=[twoDimensionalCode substringFromIndex:12];
+    }
     [self backgroundDoneEditing:nil];
 }
 

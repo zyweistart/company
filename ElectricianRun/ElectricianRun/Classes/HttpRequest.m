@@ -170,8 +170,10 @@
     
     _resultData=nil;
     
-    //调用代理对象
-    [_delegate requestFinishedByResponse:response responseCode:_responseCode];
+    if( [_delegate respondsToSelector: @selector(requestFinishedByResponse:responseCode:)]) {
+        //调用代理对象
+        [_delegate requestFinishedByResponse:response responseCode:_responseCode];
+    }
     
     //隐藏等待条
     if (_mbpHud) {
@@ -189,11 +191,12 @@
 #pragma mark 网络连接出错时调用
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
-    NSLog(@"网络连接出错:%@",[error localizedDescription]);
-    
     _resultData=nil;
-    
-    [_delegate requestFailed:_responseCode didFailWithError:error];
+    if( [_delegate respondsToSelector: @selector(requestFailed:didFailWithError:)]) {
+        [_delegate requestFailed:_responseCode didFailWithError:error];
+    } else {
+        [Common alert:[NSString stringWithFormat:@"网络连接出错:%@",[error localizedDescription]]];
+    }
     
     //隐藏等待条
     if (_mbpHud) {
