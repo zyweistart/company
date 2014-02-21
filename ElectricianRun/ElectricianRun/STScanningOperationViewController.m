@@ -92,6 +92,7 @@
 - (void)scanning:(id)sender {
     STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
     [scanningViewController setDelegate:self];
+    [scanningViewController setResponseCode:500];
     [self presentViewController:scanningViewController animated:YES completion:nil];
 }
 
@@ -136,7 +137,7 @@
     [txtValue1 resignFirstResponder];
 }
 
-- (void)success:(NSString*)value {
+- (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue1 setText:value];
     [self backgroundDoneEditing:nil];
 }

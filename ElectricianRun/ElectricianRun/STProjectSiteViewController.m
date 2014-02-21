@@ -8,6 +8,10 @@
 
 #import "STProjectSiteViewController.h"
 #import "STScanningViewController.h"
+#import "NSString+Utils.h"
+
+#define RESPONSECODESCAN 500
+#define RESPONSECODESCANADD 501
 
 @interface STProjectSiteViewController ()<ScanningDelegate>
 
@@ -47,7 +51,6 @@
     [super viewDidLoad];
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 164, 320, 300)];
-    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     //序列号
     UILabel *lblValue1=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 60, 30)];
@@ -65,6 +68,7 @@
     [txtValue1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue1 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValue1 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue1 setEnabled:NO];
     [control addSubview:txtValue1];
     
     UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(235, 10, 30, 30)];
@@ -89,6 +93,7 @@
     [txtValue2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue2 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValue2 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue2 setEnabled:NO];
     [control addSubview:txtValue2];
     //唯一标识
     UILabel *lblValue3=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 60, 30)];
@@ -106,6 +111,7 @@
     [txtValue3 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue3 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValue3 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue3 setEnabled:NO];
     [control addSubview:txtValue3];
     //配电房编号
     UILabel *lblValue4=[[UILabel alloc]initWithFrame:CGRectMake(10, 130, 60, 30)];
@@ -123,6 +129,7 @@
     [txtValue4 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue4 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValue4 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue4 setEnabled:NO];
     [control addSubview:txtValue4];
     
     //建站
@@ -144,14 +151,41 @@
     
 }
 
-- (void)success:(NSString*)value {
+
+- (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue1 setText:value];
-    [self backgroundDoneEditing:nil];
+    if(responseCode==RESPONSECODESCAN){
+        
+        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
+        
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:@"zhangyy" forKey:@"imei"];
+        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+        [p setObject:@"0" forKey:@"OpWap"];
+        [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
+        
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCAN];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest start:URL params:p];
+    }else if(responseCode==RESPONSECODESCANADD){
+        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
+        
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:@"zhangyy" forKey:@"imei"];
+        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+        [p setObject:@"0" forKey:@"OpWap"];
+        [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
+        
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCANADD];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest start:URL params:p];
+    }
 }
 
 - (void)scanning:(id)sender {
     STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
     [scanningViewController setDelegate:self];
+    [scanningViewController setResponseCode:RESPONSECODESCAN];
     [self presentViewController:scanningViewController animated:YES completion:nil];
 }
 
@@ -159,14 +193,28 @@
     
 }
 - (void)add:(id)sender {
-    
+    NSString *serial=[txtValue1 text];
+    if([@"" isEqualToString:serial]){
+        STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
+        [scanningViewController setDelegate:self];
+        [scanningViewController setResponseCode:RESPONSECODESCANADD];
+        [self presentViewController:scanningViewController animated:YES completion:nil];
+    }
 }
 
-- (void)backgroundDoneEditing:(id)sender {
-    [txtValue1 resignFirstResponder];
-    [txtValue2 resignFirstResponder];
-    [txtValue3 resignFirstResponder];
-    [txtValue4 resignFirstResponder];
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    if(repCode==RESPONSECODESCAN){
+        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
+        
+        for(NSDictionary *dic in dataArray) {
+//            [txtValue1 setText:[dic objectForKey:@"SERIAL_NO"]];
+            [txtValue2 setText:[dic objectForKey:@"CP_NAME"]];
+            [txtValue3 setText:[dic objectForKey:@"CONVERGEKEY"]];
+            [txtValue4 setText:[dic objectForKey:@"SUB_NAME"]];
+            break;
+        }
+    }
 }
 
 @end

@@ -36,8 +36,7 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    NSLog(@"%@",dictionary);
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@,%@",[dictionary objectForKey:@"NAME"],[dictionary objectForKey:@"SITE_NAME"]];
     return cell;
 }
 
@@ -61,7 +60,7 @@
     [p setObject:@"中" forKey:@"QTKEY"];
     [p setObject:@"" forKey:@"QTKEY2"];
     [p setObject:@"2014-01-21" forKey:@"QTD1"];
-    [p setObject:@"2014-02-20" forKey:@"QTD2"];
+    [p setObject:@"2014-02-21" forKey:@"QTD2"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     

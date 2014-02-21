@@ -7,6 +7,7 @@
 //
 
 #import "STTaskAuditRecord2ViewController.h"
+#import "STTaskAuditRecord3ViewController.h"
 #import "NSString+Utils.h"
 
 @interface STTaskAuditRecord2ViewController ()
@@ -27,6 +28,16 @@
         
         _type=t;
         _data=data;
+        
+        if(_type==1){
+            self.title=@"站点电耗量信息";
+        } else if(_type==2){
+            self.title=@"运行设备温度、外观检查";
+        } else if(_type==3){
+            self.title=@"受总柜运行情况";
+        } else if(_type==4){
+            self.title=@"TRMS系统巡视检查";
+        }
         
         [self reloadTableViewDataSource];
         
@@ -49,7 +60,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSUInteger row=[indexPath row];
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    STTaskAuditRecord3ViewController *taskAuditRecord3ViewController=[[STTaskAuditRecord3ViewController alloc]initWithData:_data dic:dictionary];
+    [self.navigationController pushViewController:taskAuditRecord3ViewController animated:YES];
 }
 
 - (void)reloadTableViewDataSource{

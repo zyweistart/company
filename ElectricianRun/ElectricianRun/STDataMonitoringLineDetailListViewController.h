@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseRefreshTableViewController.h"
 
-@interface STDataMonitoringLineDetailListViewController : UIViewController
+@interface STDataMonitoringLineDetailListViewController : BaseRefreshTableViewController
 
+@property (strong,nonatomic) NSDictionary *data;
+
+- (id)initWithData:(NSDictionary *)data;
 @end

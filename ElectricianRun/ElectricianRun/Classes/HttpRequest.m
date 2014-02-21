@@ -173,14 +173,14 @@
     //调用代理对象
     [_delegate requestFinishedByResponse:response responseCode:_responseCode];
     
-    //隐藏下载进度条
-    if(_atmHud) {
-        [_atmHud hide];
+    //隐藏等待条
+    if (_mbpHud) {
+        [_mbpHud hide:YES];
     }
     if(self.isFileDownload) {
-        //隐藏等待条
-        if (_mbpHud) {
-            [_mbpHud hide:YES];
+        //隐藏下载进度条
+        if(_atmHud) {
+            [_atmHud hide];
         }
     }
     
@@ -195,14 +195,14 @@
     
     [_delegate requestFailed:_responseCode didFailWithError:error];
     
-    //隐藏下载进度条
-    if(_atmHud) {
-        [_atmHud hide];
+    //隐藏等待条
+    if (_mbpHud) {
+        [_mbpHud hide:YES];
     }
     if(self.isFileDownload) {
-        //隐藏等待条
-        if (_mbpHud) {
-            [_mbpHud hide:YES];
+        //隐藏下载进度条
+        if(_atmHud) {
+            [_atmHud hide];
         }
     }
 }

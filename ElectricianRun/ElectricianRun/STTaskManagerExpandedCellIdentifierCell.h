@@ -10,6 +10,12 @@
 
 @interface STTaskManagerExpandedCellIdentifierCell : UITableViewCell
 
-@property (strong,nonatomic) UILabel *lblName;
+@property (strong,nonatomic) UIButton *btn1;
+
+@property (strong,nonatomic) UIButton *btn2;
+
+@property (strong,nonatomic) UIButton *btn3;
+
+@property (strong,nonatomic) UIButton *btn4;
 
 @end

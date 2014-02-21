@@ -12,7 +12,7 @@
 @protocol ScanningDelegate
 
 @optional
-- (void)success:(NSString*)value;
+- (void)success:(NSString*)value responseCode:(NSInteger)responseCode;
 
 @end
 
@@ -27,7 +27,8 @@
 @property (strong,nonatomic)AVCaptureMetadataOutput * output;
 @property (strong,nonatomic)AVCaptureSession * session;
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
-@property (nonatomic, retain) UIImageView * line;
+@property (strong,nonatomic) UIImageView * line;
+@property NSInteger responseCode;
 
 @property (strong,nonatomic) id<ScanningDelegate> delegate;
 
