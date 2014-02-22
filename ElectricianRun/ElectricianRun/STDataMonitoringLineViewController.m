@@ -8,13 +8,16 @@
 
 #import "STDataMonitoringLineViewController.h"
 #import "STDataMonitoringLineDetailViewController.h"
+#import "STDataMonitoringLineSearchViewController.h"
 #import "NSString+Utils.h"
 
 @interface STDataMonitoringLineViewController ()
 
 @end
 
-@implementation STDataMonitoringLineViewController
+@implementation STDataMonitoringLineViewController {
+    NSMutableDictionary *searchData;
+}
 
 - (id)initWithData:(NSDictionary *) data
 {
@@ -25,9 +28,27 @@
         
         self.data=data;
         
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithTitle:@"查询"
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(search:)];
+        
+        searchData=[[NSMutableDictionary alloc]init];
+        [searchData setObject:@"" forKey:@"QTKEY"];
+        [searchData setObject:@"" forKey:@"QTKEY1"];
+        
     }
     return self;
 }
+
+//查询
+- (void)search:(id)sender{
+    STDataMonitoringLineSearchViewController *dataMonitoringLineSearchViewController=[[STDataMonitoringLineSearchViewController alloc]init];
+    [dataMonitoringLineSearchViewController setDelegate:self];
+    [self.navigationController pushViewController:dataMonitoringLineSearchViewController animated:YES];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -38,33 +59,22 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"METER_NAME"]];
-    }else{
-        cell.textLabel.text=@"更多";
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"METER_NAME"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        STDataMonitoringLineDetailViewController *dataMonitoringLineDetailViewController=[[STDataMonitoringLineDetailViewController alloc]initWithData:dictionary];
-        [self.navigationController pushViewController:dataMonitoringLineDetailViewController animated:YES];
-    }else{
-        _currentPage++;
-        [self reloadTableViewDataSource];
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    STDataMonitoringLineDetailViewController *dataMonitoringLineDetailViewController=[[STDataMonitoringLineDetailViewController alloc]initWithData:dictionary];
+    [self.navigationController pushViewController:dataMonitoringLineDetailViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-    
-	_reloading = YES;
     
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     
@@ -82,6 +92,12 @@
     [self.hRequest setIsShowMessage:NO];
     [self.hRequest start:URL params:p];
     
+}
+
+- (void)startSearch:(NSMutableDictionary *)data {
+    
+    searchData=data;
+    [self autoRefresh];
 }
 
 @end

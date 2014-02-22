@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DatePickerView.h"
 
-@interface STTaskAuditViewController : UIViewController
+@interface STTaskAuditViewController : UIViewController<DatePickerViewDelegate,UITextFieldDelegate>
 
 @end

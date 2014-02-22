@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseMJRefreshViewController.h"
+#import "SearchDelegate.h"
 
-@interface STDataMonitoringViewController : BaseMJRefreshViewController
+@interface STDataMonitoringViewController : BaseMJRefreshViewController<SearchDelegate>
 
 @end

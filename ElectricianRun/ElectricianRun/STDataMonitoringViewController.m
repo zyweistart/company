@@ -8,13 +8,16 @@
 
 #import "STDataMonitoringViewController.h"
 #import "STDataMonitoringLineViewController.h"
+#import "STDataMonitoringSearchViewController.h"
 #import "NSString+Utils.h"
 
 @interface STDataMonitoringViewController ()
 
 @end
 
-@implementation STDataMonitoringViewController
+@implementation STDataMonitoringViewController {
+    NSMutableDictionary *searchData;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,12 +31,30 @@
                                                target:self
                                                action:@selector(back:)];
         
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"查询"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(search:)];
+        
+        
+        searchData=[[NSMutableDictionary alloc]init];
+        [searchData setObject:@"" forKey:@"name"];
+        
     }
     return self;
 }
 
 - (void)back:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//查询
+- (void)search:(id)sender{
+//    [self.header beginRefreshing];
+    STDataMonitoringSearchViewController *dataMonitoringSearchViewController=[[STDataMonitoringSearchViewController alloc]init];
+    [dataMonitoringSearchViewController setDelegate:self];
+    [self.navigationController pushViewController:dataMonitoringSearchViewController animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,19 +83,25 @@
 - (void)reloadTableViewDataSource{
     
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
+
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"SJ10" forKey:@"GNID"];
-    [p setObject:@"" forKey:@"QTKEY"];
+    [p setObject:[searchData objectForKey:@"name"] forKey:@"QTKEY"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
-    
+
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
     [self.hRequest start:URL params:p];
     
+}
+
+- (void)startSearch:(NSMutableDictionary *)data {
+    
+    searchData=data;
+    [self autoRefresh];
 }
 
 @end

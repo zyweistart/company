@@ -16,6 +16,7 @@
 @end
 
 @implementation STTaskAuditViewController {
+    DatePickerView *datePicker;
     UIButton *btnBuilder;
     UIButton *btnRecording;
     
@@ -56,6 +57,9 @@
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
     [self.view addSubview:control];
+    
+    datePicker = [[DatePickerView alloc] init];
+    [datePicker setDelegate:self];
     
     btnBuilder=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 40)];
     btnBuilder.titleLabel.font=[UIFont systemFontOfSize:12.0f];
@@ -183,6 +187,8 @@
     [txtValueView23 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView23 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueView23 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValueView23 setDelegate:self];
+    [txtValueView23 setInputView:datePicker];
     [view2 addSubview:txtValueView23];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 130, 90, 30)];
@@ -200,6 +206,8 @@
     [txtValueView24 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView24 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueView24 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValueView24 setDelegate:self];
+    [txtValueView24 setInputView:datePicker];
     [view2 addSubview:txtValueView24];
     
     //查询
@@ -207,9 +215,9 @@
     [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
     btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
     [btnSearch setBackgroundColor:[UIColor blueColor]];
-//    [btnSearch setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnSearch addTarget:self action:@selector(search2:) forControlEvents:UIControlEventTouchUpInside];
     [view2 addSubview:btnSearch];
+    
 }
 
 - (void)build:(id)sender {
@@ -255,6 +263,40 @@
     [txtValueView22 resignFirstResponder];
     [txtValueView23 resignFirstResponder];
     [txtValueView24 resignFirstResponder];
+}
+
+#pragma mark - Delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSString *d=[textField text];
+    if(![@"" isEqualToString:d]){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *date = [dateFormatter dateFromString:d];
+        [[datePicker datePicker]setDate:date];
+    }
+}
+
+- (void)pickerDidPressDoneWithDate:(NSDate*)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:date];
+    if([txtValueView23 isFirstResponder]){
+        [txtValueView23 setText:currentDateStr];
+        [txtValueView23 resignFirstResponder];
+    }
+    if([txtValueView24 isFirstResponder]){
+        [txtValueView24 setText:currentDateStr];
+        [txtValueView24 resignFirstResponder];
+    }
+}
+
+- (void)pickerDidPressCancel {
+    if([txtValueView23 isFirstResponder]){
+        [txtValueView23 resignFirstResponder];
+    }
+    if([txtValueView24 isFirstResponder]){
+        [txtValueView24 resignFirstResponder];
+    }
 }
 
 @end

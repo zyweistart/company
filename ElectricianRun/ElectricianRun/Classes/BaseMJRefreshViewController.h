@@ -26,4 +26,6 @@
 
 - (void)doneLoadingTableViewData;
 
+- (void)autoRefresh;
+
 @end

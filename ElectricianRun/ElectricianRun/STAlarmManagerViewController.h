@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseMJRefreshViewController.h"
+#import "SearchDelegate.h"
+#import "RMPickerViewController.h"
 
-@interface STAlarmManagerViewController : BaseMJRefreshViewController
+@interface STAlarmManagerViewController : BaseMJRefreshViewController<SearchDelegate,RMPickerViewControllerDelegate>
 
 @end

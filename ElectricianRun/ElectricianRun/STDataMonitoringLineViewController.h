@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseRefreshTableViewController.h"
+#import "BaseMJRefreshViewController.h"
+#import "SearchDelegate.h"
 
-@interface STDataMonitoringLineViewController : BaseRefreshTableViewController
+@interface STDataMonitoringLineViewController : BaseMJRefreshViewController<SearchDelegate>
 
 @property (strong,nonatomic) NSDictionary *data;
 

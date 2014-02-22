@@ -7,6 +7,7 @@
 //
 
 #import "STAlarmManagerViewController.h"
+#import "STAlarmManagerSearchViewController.h"
 #import "NSString+Utils.h"
 
 @interface STAlarmManagerViewController ()
@@ -16,6 +17,7 @@
 @implementation STAlarmManagerViewController {
     NSMutableArray *deleteDic;
     NSArray *handleData;
+    NSMutableDictionary *searchData;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,13 +26,8 @@
     if (self) {
         self.title=@"报警管理";
         
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
-                                               initWithTitle:@"批量处理"
-                                               style:UIBarButtonItemStyleBordered
-                                               target:self
-                                               action:@selector(edit:)];
-        
         deleteDic=[[NSMutableArray alloc]init];
+        
         handleData=[[NSArray alloc]initWithObjects:
         @"选择",@"已处理",@"处理未妥",@"试验",
         @"误报",@"不需要处理",@"正在处理",@"原因不明",
@@ -42,6 +39,26 @@
                                                target:self
                                                action:@selector(back:)];
         
+        self.navigationItem.rightBarButtonItems=[[NSArray alloc]initWithObjects:
+                                                 [[UIBarButtonItem alloc]
+                                                                                 initWithTitle:@"查询"
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                  action:@selector(search:)],
+                                                 [[UIBarButtonItem alloc]
+                                                                              initWithTitle:@"批量处理"
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(edit:)], nil];
+        
+        searchData=[[NSMutableDictionary alloc]init];
+        [searchData setObject:@"" forKey:@"QTKEY"];
+        [searchData setObject:@"" forKey:@"QTKEY1"];
+        [searchData setObject:@"" forKey:@"QTKEY2"];
+        
+        
+        
+        
     }
     return self;
 }
@@ -51,14 +68,26 @@
 }
 
 - (void)edit:(id)sender {
-    if ([self.navigationItem.rightBarButtonItem.title isEqualToString: @"批量处理"]) {
-		self.navigationItem.rightBarButtonItem.title = @"确定";
+    
+    UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    
+    if ([bi.title isEqualToString: @"批量处理"]) {
+		bi.title = @"确定";
 		[self.tableView setEditing:YES animated:YES];
         [deleteDic removeAllObjects];
 	} else {
-		self.navigationItem.rightBarButtonItem.title = @"批量处理";
-		[self.tableView setEditing:NO animated:YES];
+//		bi.title = @"批量处理";
+//		[self.tableView setEditing:NO animated:YES];
+        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+        pickerVC.delegate = self;
+        [pickerVC show];
 	}
+}
+
+- (void)search:(id)sender {
+    STAlarmManagerSearchViewController *alarmManagerSearchViewController=[[STAlarmManagerSearchViewController alloc]init];
+    [alarmManagerSearchViewController setDelegate:self];
+    [self.navigationController pushViewController:alarmManagerSearchViewController animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,22 +109,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] <= row){
-        _currentPage++;
-        [self reloadTableViewDataSource];
+    UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    
+    if ([bi.title isEqualToString: @"批量处理"]) {
+        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+        pickerVC.delegate = self;
+        [pickerVC show];
     } else {
         [deleteDic addObject:[self.dataItemArray objectAtIndex:[indexPath row]]];
     }
+    
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
-    }
-    return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -115,9 +143,9 @@
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"SJ30" forKey:@"GNID"];
-    [p setObject:@"" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY1"];
-    [p setObject:@"" forKey:@"QTKEY2"];
+    [p setObject:[searchData objectForKey:@"QTKEY"] forKey:@"QTKEY"];
+    [p setObject:[searchData objectForKey:@"QTKEY1"] forKey:@"QTKEY1"];
+    [p setObject:[searchData objectForKey:@"QTKEY2"] forKey:@"QTKEY2"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     
@@ -127,4 +155,42 @@
     
 }
 
+- (void)startSearch:(NSMutableDictionary *)data {
+    
+    searchData=data;
+    [self autoRefresh];
+    
+}
+
+#pragma mark - RMPickerViewController Delegates
+- (void)pickerViewController:(RMPickerViewController *)vc didSelectRows:(NSArray *)selectedRows {
+    NSLog(@"Successfully selected rows: %@", selectedRows);
+    UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    if ([bi.title isEqualToString: @"确定"]) {
+		bi.title = @"批量处理";
+		[self.tableView setEditing:NO animated:YES];
+	}
+}
+
+- (void)pickerViewControllerDidCancel:(RMPickerViewController *)vc {
+    NSLog(@"Selection was canceled");
+    UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    if ([bi.title isEqualToString: @"确定"]) {
+		bi.title = @"批量处理";
+		[self.tableView setEditing:NO animated:YES];
+	}
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [handleData count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    return [handleData objectAtIndex:row];
+}
 @end
