@@ -10,6 +10,8 @@
 #import "STAlarmManagerSearchViewController.h"
 #import "NSString+Utils.h"
 
+#define REQUESTHANDLECODE 1000
+
 @interface STAlarmManagerViewController ()
 
 @end
@@ -163,7 +165,8 @@
 
 #pragma mark - RMPickerViewController Delegates
 - (void)pickerViewController:(RMPickerViewController *)vc didSelectRows:(NSArray *)selectedRows {
-    if(selectedRows==0){
+    NSInteger row=[[selectedRows objectAtIndex:0] intValue];
+    if(row==0){
         [Common alert:@"请选择处理选项！"];
     } else {
         NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
@@ -191,19 +194,19 @@
             [p setObject:@"SJ31" forKey:@"GNID"];
             [p setObject:hs forKey:@"QTALARM"];
         }
-        [p setObject:selectedRows forKey:@"QTVAL"];
-        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+        [p setObject:[NSString stringWithFormat:@"%ld",row] forKey:@"QTVAL"];
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTHANDLECODE];
         [self.hRequest setIsShowMessage:YES];
         [self.hRequest start:URL params:p];
     }
 }
 
-- (void)handle:(NSString *)cid selectId:(NSString *)sid{
-    
-}
-
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
-    NSLog(@"%@",[response responseString]);
+    if(repCode==REQUESTHANDLECODE){
+        [self autoRefresh];
+    }else{
+        [super requestFinishedByResponse:response responseCode:repCode];
+    }
 }
 
 - (void)pickerViewControllerDidCancel:(RMPickerViewController *)vc {
