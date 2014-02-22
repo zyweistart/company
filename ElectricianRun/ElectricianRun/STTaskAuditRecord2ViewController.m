@@ -31,9 +31,9 @@
         
         if(_type==1){
             self.title=@"站点电耗量信息";
-        } else if(_type==2){
-            self.title=@"运行设备温度、外观检查";
         } else if(_type==3){
+            self.title=@"运行设备温度、外观检查";
+        } else if(_type==2){
             self.title=@"受总柜运行情况";
         } else if(_type==4){
             self.title=@"TRMS系统巡视检查";
@@ -62,7 +62,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    STTaskAuditRecord3ViewController *taskAuditRecord3ViewController=[[STTaskAuditRecord3ViewController alloc]initWithData:_data dic:dictionary];
+    STTaskAuditRecord3ViewController *taskAuditRecord3ViewController=[[STTaskAuditRecord3ViewController alloc]initWithData:_data dic:dictionary type:_type];
     [self.navigationController pushViewController:taskAuditRecord3ViewController animated:YES];
 }
 

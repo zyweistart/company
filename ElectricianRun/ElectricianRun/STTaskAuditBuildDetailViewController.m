@@ -1,14 +1,21 @@
 //
 //  STTaskAuditBuildDetailViewController.m
 //  ElectricianRun
-//
+//  巡检任务生成
 //  Created by Start on 2/20/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
 #import "STTaskAuditBuildDetailViewController.h"
+#import "DatePickerView.h"
+#import "DataPickerView.h"
+#import "NSString+Utils.h"
 
-@interface STTaskAuditBuildDetailViewController ()
+#define LOADUSERCODE 500
+#define LOADMODELCODE 501
+#define BUILDTASK 502
+
+@interface STTaskAuditBuildDetailViewController () <DatePickerViewDelegate,DataPickerViewDelegate,UITextFieldDelegate>
 
 @end
 
@@ -17,6 +24,18 @@
     UITextField *txtValue2;
     UITextField *txtValue3;
     UITextField *txtValue4;
+    
+    NSMutableArray *data1;
+    NSMutableArray *data2;
+    
+    DataPickerView *userdpv;
+    DataPickerView *modeldpv;
+    
+    DatePickerView *datePicker;
+    
+    NSString *userId;
+    NSString *modelId;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -25,21 +44,68 @@
     if (self) {
         self.title=@"巡检任务生成";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"生成"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(build:)];
+        
     }
     return self;
+}
+
+- (void)build:(id)sender {
+    
+    if([@"" isEqualToString:[txtValue1 text]]){
+        [Common alert:@"请选择任务时间"];
+        return;
+    }
+    if([@"" isEqualToString:[txtValue2 text]]){
+        [Common alert:@"请选择要求完成时间"];
+        return;
+    }
+    if([@"" isEqualToString:[txtValue3 text]]){
+        [Common alert:@"请选择工作人员"];
+        return;
+    }
+    if([@"" isEqualToString:[txtValue4 text]]){
+        [Common alert:@"请选择任务模板"];
+        return;
+    }
+    
+    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
+    
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:@"zhangyy" forKey:@"imei"];
+    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:@"RW19" forKey:@"GNID"];
+    [p setObject:self.cpId forKey:@"QTCP"];
+    [p setObject:self.contractId forKey:@"QTCT"];
+    [p setObject:self.siteId forKey:@"QTST"];
+    [p setObject:userId forKey:@"QTKEY1"];
+    [p setObject:modelId forKey:@"QTKEY2"];
+    [p setObject:[txtValue1 text] forKey:@"QTD1"];
+    [p setObject:[txtValue2 text] forKey:@"QTD2"];
+    
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:BUILDTASK];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest start:URL params:p];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    datePicker = [[DatePickerView alloc] init];
+    [datePicker setDelegate:self];
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 210)];
-    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
     UILabel *lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
     lblName.font=[UIFont systemFontOfSize:12.0];
-    [lblName setText:@"客户名称"];
+    [lblName setText:@"任务时间"];
     [lblName setTextColor:[UIColor blackColor]];
     [lblName setBackgroundColor:[UIColor clearColor]];
     [lblName setTextAlignment:NSTextAlignmentRight];
@@ -51,12 +117,13 @@
     [txtValue1 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue1 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue1 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue1 setInputView:datePicker];
+    [txtValue1 setDelegate:self];
     [control addSubview:txtValue1];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
     lblName.font=[UIFont systemFontOfSize:12.0];
-    [lblName setText:@"站点名称"];
+    [lblName setText:@"要求完成时间"];
     [lblName setTextColor:[UIColor blackColor]];
     [lblName setBackgroundColor:[UIColor clearColor]];
     [lblName setTextAlignment:NSTextAlignmentRight];
@@ -68,12 +135,13 @@
     [txtValue2 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue2 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue2 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue2 setInputView:datePicker];
+    [txtValue2 setDelegate:self];
     [control addSubview:txtValue2];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 90, 30)];
     lblName.font=[UIFont systemFontOfSize:12.0];
-    [lblName setText:@"任务开始时间"];
+    [lblName setText:@"工作人员"];
     [lblName setTextColor:[UIColor blackColor]];
     [lblName setBackgroundColor:[UIColor clearColor]];
     [lblName setTextAlignment:NSTextAlignmentRight];
@@ -85,12 +153,11 @@
     [txtValue3 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue3 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue3 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue3 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue3];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 130, 90, 30)];
     lblName.font=[UIFont systemFontOfSize:12.0];
-    [lblName setText:@"任务结束时间"];
+    [lblName setText:@"任务模板"];
     [lblName setTextColor:[UIColor blackColor]];
     [lblName setBackgroundColor:[UIColor clearColor]];
     [lblName setTextAlignment:NSTextAlignmentRight];
@@ -102,16 +169,126 @@
     [txtValue4 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue4 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue4 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue4 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue4];
     
 }
 
-- (void)backgroundDoneEditing:(id)sender {
-    [txtValue1 resignFirstResponder];
-    [txtValue2 resignFirstResponder];
-    [txtValue3 resignFirstResponder];
-    [txtValue4 resignFirstResponder];
+//加载工作人员
+- (void)reloadUser{
+    
+    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
+    
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:@"zhangyy" forKey:@"imei"];
+    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:@"ZY23" forKey:@"GNID"];
+    [p setObject:self.cpId forKey:@"QTCP"];
+    
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:LOADUSERCODE];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest start:URL params:p];
 }
+
+//加载任务模板
+- (void)reloadModel{
+    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
+    
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:@"zhangyy" forKey:@"imei"];
+    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:@"ZY24" forKey:@"GNID"];
+    [p setObject:@"1" forKey:@"QTKEY"];
+    
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:LOADMODELCODE];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest start:URL params:p];
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
+    if(repCode==LOADUSERCODE) {
+        NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
+        data1=[[NSMutableArray alloc]initWithArray:tmpData];
+
+        NSMutableArray *d=[[NSMutableArray alloc]init];
+        for(NSDictionary *dic in data1) {
+            [d addObject:[dic objectForKey:@"USER_NAME"]];
+        }
+        
+        userdpv=[[DataPickerView alloc]initWithData:d];
+        [userdpv setDelegate:self];
+        
+        [txtValue3 setInputView:userdpv];
+    } else if(repCode==LOADMODELCODE) {
+        NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
+        data2=[[NSMutableArray alloc]initWithArray:tmpData];
+
+        NSMutableArray *d=[[NSMutableArray alloc]init];
+        for(NSDictionary *dic in data2) {
+            [d addObject:[dic objectForKey:@"MODEL_NAME"]];
+        }
+        
+        modeldpv=[[DataPickerView alloc]initWithData:d];
+        [modeldpv setDelegate:self];
+        
+        [txtValue4 setInputView:modeldpv];
+    } else if(repCode==BUILDTASK) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)pickerDidPressDoneWithRow:(NSInteger)row {
+    if([txtValue3 isFirstResponder]){
+        NSDictionary *d= [data1 objectAtIndex:row];
+        userId=[d objectForKey:@"USER_ID"];
+        [txtValue3 setText:[d objectForKey:@"USER_NAME"]];
+        [txtValue3 resignFirstResponder];
+    }
+    if([txtValue4 isFirstResponder]){
+        NSDictionary *d= [data2 objectAtIndex:row];
+        modelId=[d objectForKey:@"MODEL_ID"];
+        [txtValue4 setText:[d objectForKey:@"MODEL_NAME"]];
+        [txtValue4 resignFirstResponder];
+    }
+}
+
+- (void)pickerDidPressCancel{
+    if([txtValue1 isFirstResponder]){
+        [txtValue1 resignFirstResponder];
+    }
+    if([txtValue2 isFirstResponder]){
+        [txtValue2 resignFirstResponder];
+    }
+    if([txtValue3 isFirstResponder]){
+        [txtValue3 resignFirstResponder];
+    }
+    if([txtValue4 isFirstResponder]){
+        [txtValue4 resignFirstResponder];
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSString *d=[textField text];
+    if(![@"" isEqualToString:d]){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *date = [dateFormatter dateFromString:d];
+        [[datePicker datePicker]setDate:date];
+    }
+}
+
+- (void)pickerDidPressDoneWithDate:(NSDate*)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:date];
+    if([txtValue1 isFirstResponder]){
+        [txtValue1 setText:currentDateStr];
+        [txtValue1 resignFirstResponder];
+    }
+    if([txtValue2 isFirstResponder]){
+        [txtValue2 setText:currentDateStr];
+        [txtValue2 resignFirstResponder];
+    }
+}
+
 
 @end

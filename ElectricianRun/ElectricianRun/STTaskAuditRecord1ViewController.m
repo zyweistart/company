@@ -24,16 +24,7 @@
         
         self.data=data;
         
-        
-        NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:@"站点电耗量信息",@"1", nil];
-        NSDictionary *dic2=[[NSDictionary alloc]initWithObjectsAndKeys:@"运行设备外观、温度检查",@"2", nil];
-        NSDictionary *dic3=[[NSDictionary alloc]initWithObjectsAndKeys:@"受总柜运行情况",@"3", nil];
-        NSDictionary *dic4=[[NSDictionary alloc]initWithObjectsAndKeys:@"TRMS系统巡视检查",@"4", nil];
-        self.dataItemArray=[[NSMutableArray alloc]init];
-        [self.dataItemArray addObject:dic1];
-        [self.dataItemArray addObject:dic2];
-        [self.dataItemArray addObject:dic3];
-        [self.dataItemArray addObject:dic4];
+        self.dataItemArray=[[NSMutableArray alloc]initWithObjects:@"1",@"3",@"2",@"4", nil];
         
     }
     return self;
@@ -48,15 +39,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row=[indexPath row];
-    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:[NSString stringWithFormat:@"%ld",row+1]]];
+    NSString *data=[self.dataItemArray objectAtIndex:row];
+    if([@"1" isEqualToString:data]){
+        cell.textLabel.text=@"站点电耗量信息";
+    } else if([@"3" isEqualToString:data]){
+        cell.textLabel.text=@"运行设备外观、温度检查";
+    } else if([@"2" isEqualToString:data]){
+        cell.textLabel.text=@"受总柜运行情况";
+    } else if([@"4" isEqualToString:data]){
+        cell.textLabel.text=@"TRMS系统巡视检查";
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSUInteger row=[indexPath row];
-    STTaskAuditRecord2ViewController *taskAuditRecord2ViewController=[[STTaskAuditRecord2ViewController alloc]initWithData:[self data] type:row+1];
+    NSString *v=[self.dataItemArray objectAtIndex:row];
+    STTaskAuditRecord2ViewController *taskAuditRecord2ViewController=[[STTaskAuditRecord2ViewController alloc]initWithData:[self data] type:[v intValue]];
     [self.navigationController pushViewController:taskAuditRecord2ViewController animated:YES];
     
 }

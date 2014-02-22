@@ -8,11 +8,21 @@
 
 #import "BaseMJRefreshViewController.h"
 
+#define CACHE_DATA [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:object_getClassName(self)]]
+
 @interface BaseMJRefreshViewController ()
 
 @end
 
 @implementation BaseMJRefreshViewController
+
+- (id)init {
+    self=[super init];
+    if(self){
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -25,6 +35,19 @@
     [self addHeader];
     // 上拉加载更多
     [self addFooter];
+    if(self.isLoadCache){
+        NSString *responseString=[Common getCache:CACHE_DATA];
+        if(responseString!=nil) {
+            NSDictionary *resultJSON=[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+            NSArray *tmpData=[resultJSON objectForKey:@"table1"];
+            if([tmpData count]>0){
+                self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
+                [self.tableView reloadData];
+                return;
+            }
+        }
+        [self autoRefresh];
+    }
 }
 
 - (void)addHeader
@@ -35,35 +58,35 @@
         // 进入刷新状态就会回调这个Block
         _currentPage=1;
         
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+//        NSLog(@"%@----开始进入刷新状态", refreshView.class);
         
         [self reloadTableViewDataSource];
         
     };
     header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
         // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
+//        NSLog(@"%@----刷新完毕", refreshView.class);
     };
     header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
         // 控件的刷新状态切换了就会调用这个block
         switch (state) {
             case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
+//                NSLog(@"%@----切换到：普通状态", refreshView.class);
                 break;
                 
             case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+//                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
                 break;
                 
             case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+//                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
                 break;
             default:
                 break;
         }
     };
 //    [header beginRefreshing];
-    [self autoRefresh];
+//    [self autoRefresh];
     _header = header;
 }
 
@@ -79,7 +102,7 @@
             _currentPage++;
         }
         
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+//        NSLog(@"%@----开始进入刷新状态", refreshView.class);
         
         [self reloadTableViewDataSource];
         
@@ -109,17 +132,26 @@
     
     _pageCount=[[pageinfo objectForKey:@"PageCount"] intValue];
     if(_pageCount<_currentPage) {
-        _currentPage=_pageCount;
+        if(_pageCount==0){
+            [self.dataItemArray removeAllObjects];
+            _currentPage=1;
+        }else{
+            _currentPage=_pageCount;
+        }
     } else {
         
         NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-        
         if(_currentPage==1){
             self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
         } else {
             [self.dataItemArray addObjectsFromArray:tmpData];
         }
         
+    }
+    if(self.isLoadCache){
+        if(_currentPage==1){
+            [Common setCache:CACHE_DATA data:[response responseString]];
+        }
     }
     
     // 刷新表格

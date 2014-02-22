@@ -57,10 +57,10 @@
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"RW18" forKey:@"GNID"];
-    [p setObject:@"中" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY2"];
-    [p setObject:@"2014-01-21" forKey:@"QTD1"];
-    [p setObject:@"2014-02-21" forKey:@"QTD2"];
+    [p setObject:self.cpName forKey:@"QTKEY"];
+    [p setObject:self.siteName forKey:@"QTKEY2"];
+    [p setObject:self.startDay forKey:@"QTD1"];
+    [p setObject:self.endDay forKey:@"QTD2"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     

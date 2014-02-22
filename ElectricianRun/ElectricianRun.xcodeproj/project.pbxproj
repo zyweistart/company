@@ -47,8 +47,6 @@
 		C963416018B79D720064AC56 /* STDataMonitoringSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963415F18B79D720064AC56 /* STDataMonitoringSearchViewController.m */; };
 		C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416218B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m */; };
 		C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416518B7A0B50064AC56 /* STAlarmManagerSearchViewController.m */; };
-		C967A0DE18A89D8A00BD268D /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DB18A89D8A00BD268D /* Animator.m */; };
-		C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */; };
 		C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */; };
 		C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */; };
 		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
@@ -99,6 +97,7 @@
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
 		C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D19EA518B7BC330038D131 /* DatePickerView.m */; };
+		C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D3218D18B84D4A0015B537 /* DataPickerView.m */; };
 		C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DFDF2418B327DC00F7B368 /* GHWalkThroughPageCell.m */; };
 		C9DFDF2818B327DC00F7B368 /* GHWalkThroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DFDF2618B327DC00F7B368 /* GHWalkThroughView.m */; };
 		C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */; };
@@ -193,10 +192,6 @@
 		C963416418B7A0B50064AC56 /* STAlarmManagerSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmManagerSearchViewController.h; sourceTree = "<group>"; };
 		C963416518B7A0B50064AC56 /* STAlarmManagerSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmManagerSearchViewController.m; sourceTree = "<group>"; };
 		C963416718B7A1510064AC56 /* SearchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDelegate.h; sourceTree = "<group>"; };
-		C967A0DA18A89D8A00BD268D /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
-		C967A0DB18A89D8A00BD268D /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animator.m; sourceTree = "<group>"; };
-		C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerDelegate.h; sourceTree = "<group>"; };
-		C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerDelegate.m; sourceTree = "<group>"; };
 		C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorInfoViewController.h; sourceTree = "<group>"; };
 		C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAggregatorInfoViewController.m; sourceTree = "<group>"; };
 		C9726CD818B73CD7006FB209 /* STAggregatorEntInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorEntInfoViewController.h; sourceTree = "<group>"; };
@@ -291,6 +286,8 @@
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C9D19EA418B7BC330038D131 /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
 		C9D19EA518B7BC330038D131 /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
+		C9D3218C18B84D4A0015B537 /* DataPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPickerView.h; sourceTree = "<group>"; };
+		C9D3218D18B84D4A0015B537 /* DataPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPickerView.m; sourceTree = "<group>"; };
 		C9DFDF2318B327DC00F7B368 /* GHWalkThroughPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughPageCell.h; sourceTree = "<group>"; };
 		C9DFDF2418B327DC00F7B368 /* GHWalkThroughPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWalkThroughPageCell.m; sourceTree = "<group>"; };
 		C9DFDF2518B327DC00F7B368 /* GHWalkThroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughView.h; sourceTree = "<group>"; };
@@ -563,8 +560,6 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C967A0DA18A89D8A00BD268D /* Animator.h */,
-				C967A0DB18A89D8A00BD268D /* Animator.m */,
 				C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */,
 				C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */,
 				C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */,
@@ -577,8 +572,6 @@
 				C9AC1DD518A86C4A004E96CC /* Common.m */,
 				C9488D0418A781A0006008C3 /* HttpRequest.h */,
 				C9488D0518A781A0006008C3 /* HttpRequest.m */,
-				C967A0DC18A89D8A00BD268D /* NavigationControllerDelegate.h */,
-				C967A0DD18A89D8A00BD268D /* NavigationControllerDelegate.m */,
 				C9488D0018A77D16006008C3 /* NSString+Utils.h */,
 				C9488D0118A77D16006008C3 /* NSString+Utils.m */,
 				C95EDEB518A7BC7C00CA80B4 /* Response.h */,
@@ -586,6 +579,8 @@
 				C963416718B7A1510064AC56 /* SearchDelegate.h */,
 				C9D19EA418B7BC330038D131 /* DatePickerView.h */,
 				C9D19EA518B7BC330038D131 /* DatePickerView.m */,
+				C9D3218C18B84D4A0015B537 /* DataPickerView.h */,
+				C9D3218D18B84D4A0015B537 /* DataPickerView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -804,14 +799,13 @@
 				C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */,
 				C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */,
 				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
-				C967A0DE18A89D8A00BD268D /* Animator.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
 				C909822218B45E6500703D47 /* ARLineChartView.m in Sources */,
 				C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */,
 				C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */,
-				C967A0DF18A89D8A00BD268D /* NavigationControllerDelegate.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
+				C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */,
 				C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
 				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,

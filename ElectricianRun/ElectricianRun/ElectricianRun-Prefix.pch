@@ -19,5 +19,5 @@
     #import "HttpRequest.h"
     #import "Common.h"
     #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7]
-    #define PAGESIZE 10
+    #define PAGESIZE 20
 #endif

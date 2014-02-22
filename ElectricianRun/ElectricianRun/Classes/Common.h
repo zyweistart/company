@@ -10,6 +10,14 @@
 
 @interface Common : NSObject
 
++ (id)getCache:(NSString *)key;
+
++ (void)setCache:(NSString *)key data:(id)data;
+
++ (BOOL)getCacheByBool:(NSString *)key;
+
++ (void)setCacheByBool:(NSString *)key data:(BOOL)data;
+
 + (void)alert:(NSString *)message;
 
 + (void)notificationMessage:(NSString *)message inView:(UIView *)aView;

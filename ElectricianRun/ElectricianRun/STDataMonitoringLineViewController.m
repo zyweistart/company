@@ -42,11 +42,18 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [self setIsLoadCache:YES];
+    [super viewDidLoad];
+}
+
 //查询
 - (void)search:(id)sender{
     STDataMonitoringLineSearchViewController *dataMonitoringLineSearchViewController=[[STDataMonitoringLineSearchViewController alloc]init];
     [dataMonitoringLineSearchViewController setDelegate:self];
+    [dataMonitoringLineSearchViewController setCpId:[_data objectForKey:@"CP_ID"]];
     [self.navigationController pushViewController:dataMonitoringLineSearchViewController animated:YES];
+    [dataMonitoringLineSearchViewController reload];
 }
 
 
@@ -83,8 +90,8 @@
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"SJ20" forKey:@"GNID"];
     [p setObject:[self.data objectForKey:@"CP_ID"] forKey:@"QTCP"];
-    [p setObject:@"" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY1"];
+    [p setObject:[searchData objectForKey:@"QTKEY"] forKey:@"QTKEY"];
+    [p setObject:[searchData objectForKey:@"QTKEY1"] forKey:@"QTKEY1"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     

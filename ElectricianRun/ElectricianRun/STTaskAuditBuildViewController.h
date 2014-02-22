@@ -11,4 +11,7 @@
 
 @interface STTaskAuditBuildViewController : BaseMJRefreshViewController
 
+@property (strong,nonatomic) NSString *cpName;
+@property (strong,nonatomic) NSString *siteName;
+
 @end

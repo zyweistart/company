@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "STDataMonitoringLineViewController.h"
 
-@interface STDataMonitoringLineSearchViewController : UIViewController
+@interface STDataMonitoringLineSearchViewController : UIViewController<HttpRequestDelegate>
+
+@property (strong,nonatomic) HttpRequest *hRequest;
 
 @property (strong,nonatomic) STDataMonitoringLineViewController<SearchDelegate> *delegate;
+
+@property (strong,nonatomic) NSString *cpId;
+
+- (void)reload;
 
 @end

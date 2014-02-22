@@ -102,7 +102,6 @@
     [txtValueView11 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView11 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView11 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView11 setKeyboardType:UIKeyboardTypePhonePad];
     [view1 addSubview:txtValueView11];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
@@ -119,7 +118,6 @@
     [txtValueView12 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView12 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView12 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView12 setKeyboardType:UIKeyboardTypePhonePad];
     [view1 addSubview:txtValueView12];
     
     //查询
@@ -152,7 +150,6 @@
     [txtValueView21 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView21 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView21 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView21 setKeyboardType:UIKeyboardTypePhonePad];
     [view2 addSubview:txtValueView21];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
@@ -169,7 +166,6 @@
     [txtValueView22 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView22 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView22 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView22 setKeyboardType:UIKeyboardTypePhonePad];
     [view2 addSubview:txtValueView22];
     
     lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 90, 30)];
@@ -186,7 +182,6 @@
     [txtValueView23 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView23 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView23 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView23 setKeyboardType:UIKeyboardTypePhonePad];
     [txtValueView23 setDelegate:self];
     [txtValueView23 setInputView:datePicker];
     [view2 addSubview:txtValueView23];
@@ -205,7 +200,6 @@
     [txtValueView24 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueView24 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView24 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueView24 setKeyboardType:UIKeyboardTypePhonePad];
     [txtValueView24 setDelegate:self];
     [txtValueView24 setInputView:datePicker];
     [view2 addSubview:txtValueView24];
@@ -243,12 +237,23 @@
 
 - (void)search1:(id)sender {
     STTaskAuditBuildViewController *taskAuditBuildViewController=[[STTaskAuditBuildViewController alloc]init];
+    [taskAuditBuildViewController setCpName:[txtValueView11 text]];
+    [taskAuditBuildViewController setSiteName:[txtValueView12 text]];
     [self.navigationController pushViewController:taskAuditBuildViewController animated:YES];
+    [taskAuditBuildViewController autoRefresh];
 }
 
 - (void)search2:(id)sender {
     STTaskAuditRecordViewController *taskAuditRecordViewController=[[STTaskAuditRecordViewController alloc]init];
+    
+    [taskAuditRecordViewController setCpName:[txtValueView21 text]];
+    [taskAuditRecordViewController setSiteName:[txtValueView22 text]];
+    [taskAuditRecordViewController setStartDay:[txtValueView23 text]];
+    [taskAuditRecordViewController setEndDay:[txtValueView24 text]];
+    
     [self.navigationController pushViewController:taskAuditRecordViewController animated:YES];
+    
+    [taskAuditRecordViewController autoRefresh];
 }
 
 - (void)maplocation:(id)sender {

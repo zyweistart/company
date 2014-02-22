@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STTaskAuditBuildDetailViewController : UIViewController
+@interface STTaskAuditBuildDetailViewController : UIViewController<HttpRequestDelegate>
+
+@property (strong,nonatomic) NSString *cpId;
+@property (strong,nonatomic) NSString *contractId;
+@property (strong,nonatomic) NSString *siteId;
+
+@property (strong,nonatomic) HttpRequest *hRequest;
+
+- (void)reloadUser;
+- (void)reloadModel;
 
 @end

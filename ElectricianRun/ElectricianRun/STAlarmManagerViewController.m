@@ -18,6 +18,7 @@
     NSMutableArray *deleteDic;
     NSArray *handleData;
     NSMutableDictionary *searchData;
+    NSDictionary *selectDic;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,11 +57,13 @@
         [searchData setObject:@"" forKey:@"QTKEY1"];
         [searchData setObject:@"" forKey:@"QTKEY2"];
         
-        
-        
-        
     }
     return self;
+}
+
+- (void)viewDidLoad {
+    [self setIsLoadCache:YES];
+    [super viewDidLoad];
 }
 
 - (void)back:(id)sender{
@@ -99,24 +102,20 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"SITE_NAME"]];
-    }else{
-        cell.textLabel.text=@"更多";
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"SITE_NAME"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    
+    selectDic=[self.dataItemArray objectAtIndex:[indexPath row]];
     if ([bi.title isEqualToString: @"批量处理"]) {
         RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
         pickerVC.delegate = self;
         [pickerVC show];
     } else {
-        [deleteDic addObject:[self.dataItemArray objectAtIndex:[indexPath row]]];
+        [deleteDic addObject:selectDic];
     }
     
 }
@@ -164,16 +163,50 @@
 
 #pragma mark - RMPickerViewController Delegates
 - (void)pickerViewController:(RMPickerViewController *)vc didSelectRows:(NSArray *)selectedRows {
-    NSLog(@"Successfully selected rows: %@", selectedRows);
-    UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    if ([bi.title isEqualToString: @"确定"]) {
-		bi.title = @"批量处理";
-		[self.tableView setEditing:NO animated:YES];
-	}
+    if(selectedRows==0){
+        [Common alert:@"请选择处理选项！"];
+    } else {
+        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
+        
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:@"zhangyy" forKey:@"imei"];
+        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+        
+        
+        UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        if ([bi.title isEqualToString: @"确定"]) {
+            bi.title = @"批量处理";
+            [self.tableView setEditing:NO animated:YES];
+//        NSLog(@"当前选择的为多行模式值为:%@",deleteDic);
+            NSMutableString *handleStr=[[NSMutableString alloc]init];
+            for(NSDictionary *d in deleteDic){
+                [handleStr appendFormat:@"%@,",[d objectForKey:@"ALERT_ID"]];
+            }
+            NSString *hs=[handleStr substringWithRange:NSMakeRange(0, [handleStr length]-1)];
+            [p setObject:@"SJ32" forKey:@"GNID"];
+            [p setObject:hs forKey:@"QTKEY"];
+        } else {
+//        NSLog(@"当前选择的为单行模式值为：%@",selectDic);
+            NSString *hs=[selectDic objectForKey:@"ALERT_ID"];
+            [p setObject:@"SJ31" forKey:@"GNID"];
+            [p setObject:hs forKey:@"QTALARM"];
+        }
+        [p setObject:selectedRows forKey:@"QTVAL"];
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest start:URL params:p];
+    }
+}
+
+- (void)handle:(NSString *)cid selectId:(NSString *)sid{
+    
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
+    NSLog(@"%@",[response responseString]);
 }
 
 - (void)pickerViewControllerDidCancel:(RMPickerViewController *)vc {
-    NSLog(@"Selection was canceled");
     UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
     if ([bi.title isEqualToString: @"确定"]) {
 		bi.title = @"批量处理";
@@ -190,7 +223,6 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
     return [handleData objectAtIndex:row];
 }
 @end

@@ -41,6 +41,8 @@
         searchData=[[NSMutableDictionary alloc]init];
         [searchData setObject:@"" forKey:@"name"];
         
+        [self setIsLoadCache:YES];
+        
     }
     return self;
 }

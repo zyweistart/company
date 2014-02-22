@@ -36,19 +36,29 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"CP_NAME"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+    
     STTaskAuditBuildDetailViewController *taskAuditBuildDetailViewController=[[STTaskAuditBuildDetailViewController alloc]init];
+    
+    [taskAuditBuildDetailViewController setCpId:[dictionary objectForKey:@"CP_ID"]];
+    [taskAuditBuildDetailViewController setContractId:[dictionary objectForKey:@"CONTRACT_ID"]];
+    [taskAuditBuildDetailViewController setSiteId:[dictionary objectForKey:@"SITE_ID"]];
+    
     [self.navigationController pushViewController:taskAuditBuildDetailViewController animated:YES];
+    [taskAuditBuildDetailViewController reloadUser];
+    [taskAuditBuildDetailViewController reloadModel];
 }
 
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
-- (void)reloadTableViewDataSource{
+- (void)reloadTableViewDataSource {
     
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     
@@ -56,8 +66,8 @@
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"ZY22" forKey:@"GNID"];
-    [p setObject:@"" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY2"];
+    [p setObject:self.cpName forKey:@"QTKEY"];
+    [p setObject:self.siteName forKey:@"QTKEY2"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     

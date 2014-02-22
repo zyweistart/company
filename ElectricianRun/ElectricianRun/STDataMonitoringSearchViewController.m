@@ -47,7 +47,6 @@
     [txtValueName setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueName setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValueName];
     
     UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 160, 100, 30)];

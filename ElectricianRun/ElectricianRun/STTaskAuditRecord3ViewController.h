@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
 
-@interface STTaskAuditRecord3ViewController : BaseTableViewController<HttpRequestDelegate>
+@interface STTaskAuditRecord3ViewController : UIViewController<HttpRequestDelegate>
 
-@property (strong,nonatomic) NSDictionary *data;
-@property (strong,nonatomic) NSDictionary *dic;
-
-- (id)initWithData:(NSDictionary *)data dic:(NSDictionary *)dic;
+- (id)initWithData:(NSDictionary *)data dic:(NSDictionary *)dic type:(NSInteger)t;
 
 @property (strong,nonatomic) HttpRequest *hRequest;
+@property (strong,nonatomic) NSDictionary *data;
+@property (strong,nonatomic) NSDictionary *dic;
+@property NSInteger type;
 
 @end

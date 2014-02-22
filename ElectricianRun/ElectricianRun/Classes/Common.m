@@ -11,6 +11,25 @@
 
 @implementation Common
 
++ (id)getCache:(NSString *)key{
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    return [settings objectForKey:key];
+}
++ (void)setCache:(NSString *)key data:(id)data{
+    NSUserDefaults *setting=[NSUserDefaults standardUserDefaults];
+    [setting setObject:data forKey:key];
+    [setting synchronize];
+}
++ (BOOL)getCacheByBool:(NSString *)key{
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    return [settings boolForKey:key];
+}
++ (void)setCacheByBool:(NSString *)key data:(BOOL)data{
+    NSUserDefaults *setting=[NSUserDefaults standardUserDefaults];
+    [setting setBool:data forKey:key];
+    [setting synchronize];
+}
+
 + (void)alert:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"信息"

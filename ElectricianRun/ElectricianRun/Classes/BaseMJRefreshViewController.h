@@ -20,6 +20,7 @@
 @property MJRefreshHeaderView *header;
 @property MJRefreshFooterView *footer;
 
+@property BOOL isLoadCache;
 @property (strong,nonatomic) HttpRequest *hRequest;
 
 - (void)reloadTableViewDataSource;

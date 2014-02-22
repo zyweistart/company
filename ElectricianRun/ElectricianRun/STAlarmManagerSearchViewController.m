@@ -7,8 +7,9 @@
 //
 
 #import "STAlarmManagerSearchViewController.h"
+#import "DataPickerView.h"
 
-@interface STAlarmManagerSearchViewController ()
+@interface STAlarmManagerSearchViewController () <DataPickerViewDelegate>
 
 @end
 
@@ -16,6 +17,10 @@
     UITextField *txtValueName;
     UITextField *txtValueLevel;
     UITextField *txtValueCategory;
+    DataPickerView *leveldpv;
+    DataPickerView *categorydpv;
+    NSArray *data1;
+    NSArray *data2;
     
 }
 
@@ -32,6 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    data1=[[NSArray alloc]initWithObjects:@"--选择--",@"一般报警",@"紧急报警",@"重要报警", nil];
+    leveldpv=[[DataPickerView alloc]initWithData:data1];
+    [leveldpv setDelegate:self];
+    data2=[[NSArray alloc]initWithObjects:@"--选择--",@"状态报警",@"超限报警",@"内部故障", nil];
+    categorydpv=[[DataPickerView alloc]initWithData:data2];
+    [categorydpv setDelegate:self];
+    
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
@@ -50,7 +64,6 @@
     [txtValueName setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValueName setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValueName];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 60, 30)];
@@ -68,6 +81,7 @@
     [txtValueLevel setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueLevel setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueLevel setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValueLevel setInputView:leveldpv];
     [control addSubview:txtValueLevel];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 60, 30)];
@@ -85,6 +99,7 @@
     [txtValueCategory setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueCategory setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueCategory setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValueCategory setInputView:categorydpv];
     [control addSubview:txtValueCategory];
     
     UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 130, 100, 30)];
@@ -111,6 +126,30 @@
     [data setObject:category forKey:@"QTKEY2"];
     [self.delegate startSearch:data];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)pickerDidPressDoneWithRow:(NSInteger)row {
+    if([txtValueLevel isFirstResponder]){
+        if(row!=0){
+            [txtValueLevel setText:[data1 objectAtIndex:row]];
+        }
+        [txtValueLevel resignFirstResponder];
+    }
+    if([txtValueCategory isFirstResponder]){
+        if(row!=0){
+            [txtValueCategory setText:[data2 objectAtIndex:row]];
+        }
+        [txtValueCategory resignFirstResponder];
+    }
+}
+
+- (void)pickerDidPressCancel{
+    if([txtValueLevel isFirstResponder]){
+        [txtValueLevel resignFirstResponder];
+    }
+    if([txtValueCategory isFirstResponder]){
+        [txtValueCategory resignFirstResponder];
+    }
 }
 
 @end
