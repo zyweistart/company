@@ -18,7 +18,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"登录";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }

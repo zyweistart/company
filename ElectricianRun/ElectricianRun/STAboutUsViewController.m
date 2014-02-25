@@ -1,24 +1,24 @@
 //
-//  STSetupViewController.m
+//  STAboutUsViewController.m
 //  ElectricianRun
-//  设置
-//  Created by Start on 1/24/14.
+//  关于我们
+//  Created by Start on 2/22/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
-#import "STSetupViewController.h"
+#import "STAboutUsViewController.h"
 
-@interface STSetupViewController ()
+@interface STAboutUsViewController ()
 
 @end
 
-@implementation STSetupViewController
+@implementation STAboutUsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title=@"设置";
+        self.title=@"关于我们";
         [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;

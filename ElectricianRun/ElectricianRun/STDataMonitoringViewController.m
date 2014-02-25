@@ -69,7 +69,7 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"CP_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"第:%@",[dictionary objectForKey:@"CP_NAME"]];
     return cell;
 }
 

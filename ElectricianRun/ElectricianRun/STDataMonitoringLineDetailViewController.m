@@ -7,6 +7,7 @@
 //
 
 #import "STDataMonitoringLineDetailViewController.h"
+#import "STDataMonitoringLineDetailSearchViewController.h"
 #import "STDataMonitoringLineDetailListViewController.h"
 
 @interface STDataMonitoringLineDetailViewController ()
@@ -217,8 +218,8 @@
 }
 
 - (void)history2:(id)sender {
-    STDataMonitoringLineDetailListViewController *dataMonitoringLineDetailListViewController=[[STDataMonitoringLineDetailListViewController alloc]init];
-    [self.navigationController pushViewController:dataMonitoringLineDetailListViewController animated:YES];
+    STDataMonitoringLineDetailSearchViewController *dataMonitoringLineDetailSearchViewController=[[STDataMonitoringLineDetailSearchViewController alloc]init];
+    [self.navigationController pushViewController:dataMonitoringLineDetailSearchViewController animated:YES];
 }
 
 @end

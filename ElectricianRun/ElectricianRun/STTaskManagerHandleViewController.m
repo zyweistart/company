@@ -1,33 +1,34 @@
 //
-//  STTaskAuditRecord2ViewController.m
+//  STTaskManagerHandleViewController.m
 //  ElectricianRun
 //
-//  Created by Start on 2/20/14.
+//  Created by Start on 2/25/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
-#import "STTaskAuditRecord2ViewController.h"
-#import "STTaskAuditRecord3ViewController.h"
+#import "STTaskManagerHandleViewController.h"
 #import "NSString+Utils.h"
+#import "STTaskManagerConsumptionViewController.h"
 
-@interface STTaskAuditRecord2ViewController ()
+@interface STTaskManagerHandleViewController ()
 
 @end
 
-@implementation STTaskAuditRecord2ViewController {
+@implementation STTaskManagerHandleViewController{
+    NSString *_taskId;
+    NSString *_gnid;
     NSInteger _type;
-    NSDictionary *_data;
 }
 
-- (id)initWithData:(NSDictionary *)data type:(NSInteger)t
+- (id)initWithTaskId:(NSString *)taskId gnid:(NSString *)g type:(NSInteger)t;
 {
     self = [super init];
     if (self) {
         
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        
+        _taskId=taskId;
+        _gnid=g;
         _type=t;
-        _data=data;
         
         if(_type==1){
             self.title=@"站点电耗量信息";
@@ -60,10 +61,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger row=[indexPath row];
-    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    STTaskAuditRecord3ViewController *taskAuditRecord3ViewController=[[STTaskAuditRecord3ViewController alloc]initWithData:_data dic:dictionary type:_type];
-    [self.navigationController pushViewController:taskAuditRecord3ViewController animated:YES];
+    NSDictionary *data=[self.dataItemArray objectAtIndex:[indexPath row]];
+    STTaskManagerConsumptionViewController *taskManagerConsumptionViewController=[[STTaskManagerConsumptionViewController alloc]initWithData:data taskId:_taskId gnid:_gnid type:_type];
+    [self.navigationController pushViewController:taskManagerConsumptionViewController animated:YES];
+    
 }
 
 - (void)reloadTableViewDataSource{
@@ -74,7 +75,7 @@
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
     [p setObject:@"RW12" forKey:@"GNID"];
-    [p setObject:[_data objectForKey:@"TASK_ID"] forKey:@"QTTASK"];
+    [p setObject:_taskId forKey:@"QTTASK"];
     [p setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"QTKEY"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
@@ -94,11 +95,6 @@
     [self.tableView reloadData];
     
     [self doneLoadingTableViewData];
-    
-}
-
-- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
-{
     
 }
 

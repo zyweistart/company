@@ -62,6 +62,9 @@
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
 		C98F54AD18B651660032AE8B /* STTaskAuditRecord2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54AC18B651660032AE8B /* STTaskAuditRecord2ViewController.m */; };
 		C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54AF18B651710032AE8B /* STTaskAuditRecord3ViewController.m */; };
+		C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FAC18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m */; };
+		C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */; };
+		C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */; };
 		C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */; };
 		C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CF18A7438700EA865D /* ETFoursquareImages.m */; };
 		C9AC1DD618A86C4A004E96CC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD518A86C4A004E96CC /* Common.m */; };
@@ -96,6 +99,9 @@
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
+		C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */; };
+		C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154B18BC619A00268BBE /* STTaskManagerConsumptionViewController.m */; };
+		C9D1154F18BC755B00268BBE /* STProjectSiteAddLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154E18BC755B00268BBE /* STProjectSiteAddLineViewController.m */; };
 		C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D19EA518B7BC330038D131 /* DatePickerView.m */; };
 		C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D3218D18B84D4A0015B537 /* DataPickerView.m */; };
 		C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DFDF2418B327DC00F7B368 /* GHWalkThroughPageCell.m */; };
@@ -104,6 +110,14 @@
 		C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */; };
 		C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */; };
 		C9EF51F218AA0CF500CFBE06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9488CF218A77002006008C3 /* AVFoundation.framework */; };
+		C9EFE22718B91E5E00308819 /* icon_session.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EFE21A18B91E5E00308819 /* icon_session.png */; };
+		C9EFE22818B91E5E00308819 /* icon_session@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EFE21B18B91E5E00308819 /* icon_session@2x.png */; };
+		C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EFE21C18B91E5E00308819 /* icon_timeline.png */; };
+		C9EFE22A18B91E5E00308819 /* icon_timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EFE21D18B91E5E00308819 /* icon_timeline@2x.png */; };
+		C9EFE22B18B91E5E00308819 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EFE21E18B91E5E00308819 /* libWeChatSDK.a */; };
+		C9EFE22C18B91E5E00308819 /* WeixinActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22218B91E5E00308819 /* WeixinActivity.m */; };
+		C9EFE22D18B91E5E00308819 /* WeixinSessionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22418B91E5E00308819 /* WeixinSessionActivity.m */; };
+		C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22618B91E5E00308819 /* WeixinTimelineActivity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +236,12 @@
 		C98F54AC18B651660032AE8B /* STTaskAuditRecord2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecord2ViewController.m; sourceTree = "<group>"; };
 		C98F54AE18B651710032AE8B /* STTaskAuditRecord3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditRecord3ViewController.h; sourceTree = "<group>"; };
 		C98F54AF18B651710032AE8B /* STTaskAuditRecord3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecord3ViewController.m; sourceTree = "<group>"; };
+		C9943FAB18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineDetailSearchViewController.h; sourceTree = "<group>"; };
+		C9943FAC18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringLineDetailSearchViewController.m; sourceTree = "<group>"; };
+		C9943FAE18B8E2F200A62C19 /* STAlarmCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmCell.h; sourceTree = "<group>"; };
+		C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmCell.m; sourceTree = "<group>"; };
+		C9943FB118B8EA1B00A62C19 /* STAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAboutUsViewController.h; sourceTree = "<group>"; };
+		C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAboutUsViewController.m; sourceTree = "<group>"; };
 		C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMainTabBarController.h; sourceTree = "<group>"; };
 		C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMainTabBarController.m; sourceTree = "<group>"; };
 		C9A809CE18A7438700EA865D /* ETFoursquareImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETFoursquareImages.h; sourceTree = "<group>"; };
@@ -284,6 +304,12 @@
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C9D1154718BC5E4B00268BBE /* STTaskManagerHandleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerHandleViewController.h; sourceTree = "<group>"; };
+		C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerHandleViewController.m; sourceTree = "<group>"; };
+		C9D1154A18BC619A00268BBE /* STTaskManagerConsumptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerConsumptionViewController.h; sourceTree = "<group>"; };
+		C9D1154B18BC619A00268BBE /* STTaskManagerConsumptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerConsumptionViewController.m; sourceTree = "<group>"; };
+		C9D1154D18BC755B00268BBE /* STProjectSiteAddLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STProjectSiteAddLineViewController.h; sourceTree = "<group>"; };
+		C9D1154E18BC755B00268BBE /* STProjectSiteAddLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STProjectSiteAddLineViewController.m; sourceTree = "<group>"; };
 		C9D19EA418B7BC330038D131 /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
 		C9D19EA518B7BC330038D131 /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		C9D3218C18B84D4A0015B537 /* DataPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPickerView.h; sourceTree = "<group>"; };
@@ -298,6 +324,19 @@
 		C9EF51AE18A9B95000CFBE06 /* BaseUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
 		C9EF51B018A9E00A00CFBE06 /* STUserExperienceAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserExperienceAlarmViewController.h; sourceTree = "<group>"; };
 		C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserExperienceAlarmViewController.m; sourceTree = "<group>"; };
+		C9EFE21A18B91E5E00308819 /* icon_session.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_session.png; sourceTree = "<group>"; };
+		C9EFE21B18B91E5E00308819 /* icon_session@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_session@2x.png"; sourceTree = "<group>"; };
+		C9EFE21C18B91E5E00308819 /* icon_timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_timeline.png; sourceTree = "<group>"; };
+		C9EFE21D18B91E5E00308819 /* icon_timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_timeline@2x.png"; sourceTree = "<group>"; };
+		C9EFE21E18B91E5E00308819 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		C9EFE21F18B91E5E00308819 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		C9EFE22018B91E5E00308819 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		C9EFE22118B91E5E00308819 /* WeixinActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinActivity.h; sourceTree = "<group>"; };
+		C9EFE22218B91E5E00308819 /* WeixinActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinActivity.m; sourceTree = "<group>"; };
+		C9EFE22318B91E5E00308819 /* WeixinSessionActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinSessionActivity.h; sourceTree = "<group>"; };
+		C9EFE22418B91E5E00308819 /* WeixinSessionActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinSessionActivity.m; sourceTree = "<group>"; };
+		C9EFE22518B91E5E00308819 /* WeixinTimelineActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinTimelineActivity.h; sourceTree = "<group>"; };
+		C9EFE22618B91E5E00308819 /* WeixinTimelineActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinTimelineActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +346,7 @@
 			files = (
 				C922445C18B5F7B900D0B923 /* MapKit.framework in Frameworks */,
 				C9EF51F218AA0CF500CFBE06 /* AVFoundation.framework in Frameworks */,
+				C9EFE22B18B91E5E00308819 /* libWeChatSDK.a in Frameworks */,
 				C93C7483189235E400A7FAB8 /* CoreGraphics.framework in Frameworks */,
 				C93C7485189235E400A7FAB8 /* UIKit.framework in Frameworks */,
 				C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */,
@@ -355,6 +395,8 @@
 				C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */,
 				C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */,
 				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
+				C9943FAE18B8E2F200A62C19 /* STAlarmCell.h */,
+				C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -455,6 +497,8 @@
 			isa = PBXGroup;
 			children = (
 				C922445D18B5FFFA00D0B923 /* Cell */,
+				C9943FB118B8EA1B00A62C19 /* STAboutUsViewController.h */,
+				C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */,
 				C9726CD818B73CD7006FB209 /* STAggregatorEntInfoViewController.h */,
 				C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */,
 				C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */,
@@ -481,6 +525,8 @@
 				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
 				C9B2A57B18934BBE003A412E /* STNewsListViewController.h */,
 				C9B2A57C18934BBE003A412E /* STNewsListViewController.m */,
+				C9D1154D18BC755B00268BBE /* STProjectSiteAddLineViewController.h */,
+				C9D1154E18BC755B00268BBE /* STProjectSiteAddLineViewController.m */,
 				C93C74CB18923F1100A7FAB8 /* STProjectSiteViewController.h */,
 				C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */,
 				C9B68ACF18B4FD6B009B57E2 /* STScanningOperationViewController.h */,
@@ -588,6 +634,7 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C9EFE21818B91E5E00308819 /* WeixinActivity */,
 				C909821918B45E6500703D47 /* ARLineChart */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
@@ -645,6 +692,8 @@
 				C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */,
 				C9B2A58E18934EE9003A412E /* STDataMonitoringLineDetailListViewController.h */,
 				C9B2A58F18934EE9003A412E /* STDataMonitoringLineDetailListViewController.m */,
+				C9943FAB18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.h */,
+				C9943FAC18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m */,
 				C9B2A58B18934EA0003A412E /* STDataMonitoringLineDetailViewController.h */,
 				C9B2A58C18934EA0003A412E /* STDataMonitoringLineDetailViewController.m */,
 				C963416118B79DC90064AC56 /* STDataMonitoringLineSearchViewController.h */,
@@ -673,6 +722,10 @@
 				C9B2A58618934D9C003A412E /* STTaskAuditViewController.m */,
 				C9B68AD518B50EB6009B57E2 /* STTaskManagerViewController.h */,
 				C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */,
+				C9D1154718BC5E4B00268BBE /* STTaskManagerHandleViewController.h */,
+				C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */,
+				C9D1154A18BC619A00268BBE /* STTaskManagerConsumptionViewController.h */,
+				C9D1154B18BC619A00268BBE /* STTaskManagerConsumptionViewController.m */,
 			);
 			name = TransformerSubstation;
 			sourceTree = "<group>";
@@ -686,6 +739,34 @@
 				C9DFDF2618B327DC00F7B368 /* GHWalkThroughView.m */,
 			);
 			path = GHWalkThrough;
+			sourceTree = "<group>";
+		};
+		C9EFE21818B91E5E00308819 /* WeixinActivity */ = {
+			isa = PBXGroup;
+			children = (
+				C9EFE21918B91E5E00308819 /* Resources */,
+				C9EFE22118B91E5E00308819 /* WeixinActivity.h */,
+				C9EFE22218B91E5E00308819 /* WeixinActivity.m */,
+				C9EFE22318B91E5E00308819 /* WeixinSessionActivity.h */,
+				C9EFE22418B91E5E00308819 /* WeixinSessionActivity.m */,
+				C9EFE22518B91E5E00308819 /* WeixinTimelineActivity.h */,
+				C9EFE22618B91E5E00308819 /* WeixinTimelineActivity.m */,
+			);
+			path = WeixinActivity;
+			sourceTree = "<group>";
+		};
+		C9EFE21918B91E5E00308819 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C9EFE21A18B91E5E00308819 /* icon_session.png */,
+				C9EFE21B18B91E5E00308819 /* icon_session@2x.png */,
+				C9EFE21C18B91E5E00308819 /* icon_timeline.png */,
+				C9EFE21D18B91E5E00308819 /* icon_timeline@2x.png */,
+				C9EFE21E18B91E5E00308819 /* libWeChatSDK.a */,
+				C9EFE21F18B91E5E00308819 /* WXApi.h */,
+				C9EFE22018B91E5E00308819 /* WXApiObject.h */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -766,6 +847,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9EFE22818B91E5E00308819 /* icon_session@2x.png in Resources */,
+				C9EFE22718B91E5E00308819 /* icon_session.png in Resources */,
+				C9EFE22A18B91E5E00308819 /* icon_timeline@2x.png in Resources */,
 				C93C7499189235E500A7FAB8 /* Images.xcassets in Resources */,
 				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
 				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
@@ -773,6 +857,7 @@
 				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */,
+				C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */,
 				C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */,
 				C922446F18B623E200D0B923 /* MJRefresh.bundle in Resources */,
 				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
@@ -797,6 +882,7 @@
 				C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */,
 				C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */,
 				C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */,
+				C9EFE22C18B91E5E00308819 /* WeixinActivity.m in Sources */,
 				C93C74BA18923C1400A7FAB8 /* STIndexViewController.m in Sources */,
 				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
@@ -810,8 +896,10 @@
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
 				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,
 				C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */,
+				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
+				C9D1154F18BC755B00268BBE /* STProjectSiteAddLineViewController.m in Sources */,
 				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
 				C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
@@ -823,6 +911,7 @@
 				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
 				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
 				C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */,
+				C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */,
@@ -844,11 +933,14 @@
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
 				C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */,
+				C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */,
+				C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */,
 				C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */,
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
 				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
 				C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */,
+				C9EFE22D18B91E5E00308819 /* WeixinSessionActivity.m in Sources */,
 				C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */,
 				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
 				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
@@ -869,8 +961,10 @@
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
 				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
+				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
 				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
+				C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,13 +1074,16 @@
 		C93C74B0189235E500A7FAB8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/WeixinActivity/Resources,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -995,13 +1092,16 @@
 		C93C74B1189235E500A7FAB8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/WeixinActivity/Resources,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

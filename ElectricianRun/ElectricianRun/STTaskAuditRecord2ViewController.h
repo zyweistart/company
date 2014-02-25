@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
+#import "BaseMJRefreshViewController.h"
 
-@interface STTaskAuditRecord2ViewController : BaseTableViewController<HttpRequestDelegate>
+@interface STTaskAuditRecord2ViewController : BaseMJRefreshViewController<HttpRequestDelegate>
 
 - (id)initWithData:(NSDictionary *)data type:(NSInteger)t;
 

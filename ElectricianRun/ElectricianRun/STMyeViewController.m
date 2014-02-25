@@ -7,142 +7,115 @@
 //
 
 #import "STMyeViewController.h"
+#import "STLoginViewController.h"
+#import "STSetupViewController.h"
+#import "STAboutUsViewController.h"
+#import "WeixinSessionActivity.h"
+#import "WeixinTimelineActivity.h"
 
-#import "MJRefresh.h"
-
-NSString *const MJTableViewCellIdentifier = @"Cell";
-
-@interface STMyeViewController ()
-{
-    NSMutableArray *_fakeData; // 假数据(只存放字符串)
-    
-    MJRefreshHeaderView *_header;
-    MJRefreshFooterView *_footer;
+@interface STMyeViewController () {
+    NSArray *activity;
 }
+
 @end
 
 @implementation STMyeViewController
 
-- (void)viewDidLoad
-{
+
+- (id)init {
+    self=[super init];
+    if(self) {
+        self.title=@"我的E电工";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.tableView setDelegate:self];
+        [self.tableView setDataSource:self];
+        [self.view addSubview:self.tableView];
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
+    activity = @[[[WeixinSessionActivity alloc] init], [[WeixinTimelineActivity alloc] init]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 45;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section==0){
+        return 3;
+    }else{
+        return 1;
+    }
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
+    static NSString *CellIdentifier=@"Cell";
     
-    // 1.注册
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MJTableViewCellIdentifier];
-    
-    // 2.初始化假数据
-    _fakeData = [NSMutableArray array];
-    for (int i = 0; i<12; i++) {
-        int random = arc4random_uniform(1000000);
-        [_fakeData addObject:[NSString stringWithFormat:@"随机数据---%d", random]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // 3.集成刷新控件
-    // 3.1.下拉刷新
-    [self addHeader];
-    
-    // 3.2.上拉加载更多
-    [self addFooter];
-}
-
-- (void)addFooter
-{
-    __unsafe_unretained STMyeViewController *vc = self;
-    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = self.tableView;
-    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 增加5条假数据
-        for (int i = 0; i<5; i++) {
-            int random = arc4random_uniform(1000000);
-            [vc->_fakeData addObject:[NSString stringWithFormat:@"随机数据---%d", random]];
+    NSInteger row=[indexPath row];
+    NSInteger section=[indexPath section];
+    if(section==0){
+        if(row==0){
+            cell.textLabel.text=@"我的账户";
+        }else if(row==1){
+            cell.textLabel.text=@"推荐给好友";
+        }else{
+            cell.textLabel.text=@"联系新能量";
         }
-        
-        // 模拟延迟加载数据，因此2秒后才调用）
-        // 这里的refreshView其实就是footer
-        [vc performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
-    _footer = footer;
-}
-
-- (void)addHeader
-{
-    __unsafe_unretained STMyeViewController *vc = self;
+    }else if(section==1){
+        cell.textLabel.text=@"设置";
+    }else{
+        cell.textLabel.text=@"关于e电工";
+    }
     
-    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = self.tableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        // 增加5条假数据
-        for (int i = 0; i<5; i++) {
-            int random = arc4random_uniform(1000000);
-            [vc->_fakeData insertObject:[NSString stringWithFormat:@"随机数据---%d", random] atIndex:0];
-        }
-        
-        // 模拟延迟加载数据，因此2秒后才调用）
-        // 这里的refreshView其实就是header
-        [vc performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    [header beginRefreshing];
-    _header = header;
-}
-
-- (void)doneWithView:(MJRefreshBaseView *)refreshView
-{
-    // 刷新表格
-    [self.tableView reloadData];
-    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [refreshView endRefreshing];
-}
-
-#pragma mark - Table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _fakeData.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MJTableViewCellIdentifier forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.textLabel.text = _fakeData[indexPath.row];
     return cell;
 }
 
-/**
- 为了保证内部不泄露，在dealloc中释放占用的内存
- */
-- (void)dealloc
-{
-    NSLog(@"MJTableViewController--dealloc---");
-    [_header free];
-    [_footer free];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row=[indexPath row];
+    NSInteger section=[indexPath section];
+    if(section==0){
+        if(row==0){
+            STLoginViewController *loginViewController=[[STLoginViewController alloc]init];
+            [self.navigationController pushViewController:loginViewController animated:YES];
+        }else if(row==1){
+            UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"推荐一个很强大的APP，新能量e电工，通过集中在线监测和异常报警，高效管理众多变电站，安全、省心、省力、省钱，快下载试试吧。客户端下载地址：", [NSURL URLWithString:@"http://www.fps365.net/web/index/FPS_EDG.aspx"]] applicationActivities:activity];
+            activityView.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint];
+            [self presentViewController:activityView animated:YES completion:nil];
+        }else{
+            [Common actionSheet:self message:@"是否拨打新能量客服电话？" tag:1];
+        }
+    }else if(section==1){
+        STSetupViewController *setupViewController=[[STSetupViewController alloc]init];
+        [self.navigationController pushViewController:setupViewController animated:YES];
+    }else{
+        STAboutUsViewController *aboutUsViewController=[[STAboutUsViewController alloc]init];
+        [self.navigationController pushViewController:aboutUsViewController animated:YES];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(actionSheet.tag==1) {
+        if(buttonIndex==0){
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",@"4008263365"]]];
+        }
+    }
 }
 
 @end

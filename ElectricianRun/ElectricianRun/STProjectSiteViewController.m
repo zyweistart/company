@@ -8,10 +8,12 @@
 
 #import "STProjectSiteViewController.h"
 #import "STScanningViewController.h"
+#import "STProjectSiteAddLineViewController.h"
 #import "NSString+Utils.h"
 
 #define RESPONSECODESCAN 500
 #define RESPONSECODESCANADD 501
+#define RESPONSECODECREATESITE 502
 
 @interface STProjectSiteViewController ()<ScanningDelegate>
 
@@ -22,6 +24,8 @@
     UITextField *txtValue2;
     UITextField *txtValue3;
     UITextField *txtValue4;
+    NSDictionary *data;
+    NSString *lineCode;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -153,9 +157,8 @@
 
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
-    [txtValue1 setText:value];
     if(responseCode==RESPONSECODESCAN){
-        
+        [txtValue1 setText:value];
         NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
         
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
@@ -168,21 +171,31 @@
         [self.hRequest setIsShowMessage:YES];
         [self.hRequest start:URL params:p];
     }else if(responseCode==RESPONSECODESCANADD){
-        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
-        
-        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-        [p setObject:@"zhangyy" forKey:@"imei"];
-        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
-        [p setObject:@"0" forKey:@"OpWap"];
-        [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
-        
-        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCANADD];
-        [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URL params:p];
+        NSString *v=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if([v length]==14){
+            
+            lineCode=v;
+            
+            NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
+            
+            NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+            [p setObject:@"zhangyy" forKey:@"imei"];
+            [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+            [p setObject:@"0" forKey:@"OpWap"];
+            [p setObject:[v substringToIndex:12] forKey:@"SerialNo"];
+            [p setObject:[v substringFromIndex:12] forKey:@"Channel"];
+            
+            self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCANADD];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest start:URL params:p];
+        }else{
+            [Common alert:@"请扫描正确的采集器！"];
+        }
     }
 }
 
 - (void)scanning:(id)sender {
+    data=nil;
     STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
     [scanningViewController setDelegate:self];
     [scanningViewController setResponseCode:RESPONSECODESCAN];
@@ -190,15 +203,48 @@
 }
 
 - (void)site:(id)sender {
-    
+    if(data){
+        int siteId=[[data objectForKey:@"MSITE_ID"]intValue];
+        if(siteId==0){
+            NSString *value=[txtValue1 text];
+            NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
+            
+            NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+            [p setObject:@"zhangyy" forKey:@"imei"];
+            [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+            [p setObject:@"2" forKey:@"OpWap"];
+            [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
+            
+            self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODECREATESITE];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest start:URL params:p];
+            
+        }else{
+            [Common alert:@"该站点已经存在，无需添加！"];
+        }
+    }else{
+        [Common alert:@"请先扫描汇集器二维码！"];
+    }
 }
+
 - (void)add:(id)sender {
-    NSString *serial=[txtValue1 text];
-    if([@"" isEqualToString:serial]){
-        STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
-        [scanningViewController setDelegate:self];
-        [scanningViewController setResponseCode:RESPONSECODESCANADD];
-        [self presentViewController:scanningViewController animated:YES completion:nil];
+    if(data){
+        int siteId=[[data objectForKey:@"MSITE_ID"]intValue];
+        if(siteId>0){
+            NSString *serial=[txtValue1 text];
+            if(![@"" isEqualToString:serial]){
+                STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
+                [scanningViewController setDelegate:self];
+                [scanningViewController setResponseCode:RESPONSECODESCANADD];
+                [self presentViewController:scanningViewController animated:YES completion:nil];
+            }else{
+                [Common alert:@"请先扫描汇集器二维码！"];
+            }
+        }else{
+            [Common alert:@"请先建站！"];
+        }
+    }else{
+        [Common alert:@"请先扫描汇集器二维码！"];
     }
 }
 
@@ -208,12 +254,54 @@
         NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
         
         for(NSDictionary *dic in dataArray) {
+            data=[[NSMutableDictionary alloc]initWithDictionary:dic];
 //            [txtValue1 setText:[dic objectForKey:@"SERIAL_NO"]];
             [txtValue2 setText:[dic objectForKey:@"CP_NAME"]];
             [txtValue3 setText:[dic objectForKey:@"CONVERGEKEY"]];
             [txtValue4 setText:[dic objectForKey:@"SUB_NAME"]];
             break;
         }
+    }else if(repCode==RESPONSECODESCANADD){
+        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
+        
+        for(NSDictionary *dic in dataArray) {
+            NSMutableDictionary *d=[[NSMutableDictionary alloc]initWithDictionary:dic];
+            
+            [d setObject:lineCode forKey:@"SERIAL_NO"];
+            [d setObject:[data objectForKey:@"MSITE_ID"] forKey:@"MSITE_ID"];
+            
+            STProjectSiteAddLineViewController *projectSiteAddLineViewController=[[STProjectSiteAddLineViewController alloc]initWithData:d];
+            [self.navigationController pushViewController:projectSiteAddLineViewController animated:YES];
+            break;
+        }
+    }else if(repCode==RESPONSECODECREATESITE){
+        
+        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
+        
+        for(NSDictionary *dic in dataArray) {
+            int result=[[dic objectForKey:@"result"]intValue];
+            [data setValue:@"0" forKey:@"MSITE_ID"];
+            if(result>0) {
+                [data setValue:[NSString stringWithFormat:@"%d",result] forKey:@"MSITE_ID"];
+                [Common alert:@"建站成功"];
+            } else if(result== -10) {
+                [Common alert:@"序列号不能为空！"];
+            } else if(result == -9) {
+                [Common alert:@"查询未找到该序列号，请联系管理员！"];
+            } else if(result == -8) {
+                [Common alert:@"该序列号不可使用状态，请联系管理员！"];
+            } else if(result == -5) {
+                [Common alert:@"选择正确的站点进入添加！"];
+            } else if(result  == -4) {
+                [Common alert:@"该站点已经存在，无需添加！"];
+            } else if(result == -2) {
+                [Common alert:@"该序列号不可操作！"];
+            } else if(result == 0) {
+                [Common alert:@"不合法操作（该用户不存在）！"];
+            }
+            break;
+        }
+        
     }
 }
 

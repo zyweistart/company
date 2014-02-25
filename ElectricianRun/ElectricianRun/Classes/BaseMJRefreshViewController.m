@@ -127,7 +127,6 @@
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-    
     NSMutableDictionary *pageinfo=[[response resultJSON] objectForKey:@"Rows"];
     
     _pageCount=[[pageinfo objectForKey:@"PageCount"] intValue];

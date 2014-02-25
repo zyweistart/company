@@ -10,6 +10,6 @@
 
 #import "BaseMJRefreshViewController.h"
 
-@interface STTaskManagerViewController : BaseMJRefreshViewController
+@interface STTaskManagerViewController : BaseMJRefreshViewController<UIActionSheetDelegate>
 
 @end
