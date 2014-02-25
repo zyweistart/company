@@ -7,8 +7,7 @@
 //
 
 #import "STUserExperienceAlarmViewController.h"
-
-#import "STChartViewController.h"
+#import "STUserExperienceLineDetailViewController.h"
 
 #define DISPLAYLINESTR @"ia=%.2f;\nib=%.2f;\nic=%.2f;"
 
@@ -18,6 +17,7 @@
 
 @implementation STUserExperienceAlarmViewController{
     NSTimer * timer;
+    double iaTempLastValue;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +34,8 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
+        
+        iaTempLastValue=0;
     }
     return self;
 }
@@ -89,19 +91,29 @@ bool finalB9=NO;// 中间开关，默认为跳闸状态
     double electricCurrentRightB=0.0;
     double electricCurrentRightC=0.0;
     
-    //保证rn的值在0.1-1之间
-    if(rn0<0.1){
-        rn0=0.1+rn0;
-    }
     
     //进线A
-    electricCurrentLeftA=1443.4*rn0;
+    if(iaTempLastValue>0){
+        if(rn0>0.5){
+            iaTempLastValue=iaTempLastValue*(1+0.5);
+        }else{
+            iaTempLastValue=iaTempLastValue*(1-0.5);
+        }
+    }else{
+        //第一次随机数保证rn的值在0.1-1之间
+        if(rn0<0.1){
+            rn0=0.1+rn0;
+        }
+        electricCurrentLeftA=1443.4*rn0;
+    }
     
     if(electricCurrentLeftA>1443.4){
         electricCurrentLeftA=1345;
     }else if(electricCurrentLeftA<144.34){
         electricCurrentLeftA=160;
     }
+    
+    iaTempLastValue=electricCurrentLeftA;
     
     if(rn1>0.5){
         electricCurrentLeftB=electricCurrentLeftA*1.05;
@@ -135,6 +147,12 @@ bool finalB9=NO;// 中间开关，默认为跳闸状态
     
     //母联开关是否合并
     for(int i=0;i<3;i++) {
+//        int sign=1;
+//        if (rn0 > 0.5) {
+//            sign = -1;
+//        }
+//        * (1 + 0.025 * i * sign
+        
         if (finalB9) {
             consolidated(i);
         } else {
@@ -434,8 +452,8 @@ void consolidated(int index) {
     }else if(tag==8){
         _currentSelectLineName=@"出线B-3";
     }
-    STChartViewController *chartViewController=[[STChartViewController alloc]init];
-    [self.navigationController pushViewController:chartViewController animated:YES];
+    STUserExperienceLineDetailViewController *userExperienceLineDetailViewController=[[STUserExperienceLineDetailViewController alloc]init];
+    [self.navigationController pushViewController:userExperienceLineDetailViewController animated:YES];
 }
 
 @end
