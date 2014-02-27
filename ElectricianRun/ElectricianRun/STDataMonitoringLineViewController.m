@@ -67,7 +67,7 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"METER_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"METER_NAME"]];
     return cell;
 }
 

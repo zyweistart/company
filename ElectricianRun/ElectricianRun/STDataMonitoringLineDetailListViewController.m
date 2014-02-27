@@ -39,7 +39,7 @@
     NSUInteger row=[indexPath row];
     if([self.dataItemArray count] > row){
         NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"METER_NAME"]];
+        cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"METER_NAME"]];
     }else{
         cell.textLabel.text=@"更多";
     }

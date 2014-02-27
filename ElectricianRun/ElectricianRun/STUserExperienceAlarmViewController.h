@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+//保存每条进出线开关的状态
+bool finalB[8];
+//保存母联开关的状态
+bool finalB9;
+//保存最近12个每条进出线的电流IA、IB、IC的值
+double allPhaseCurrentList[12][2][4][3];
+//保存最近12个每条进出线的负荷数
+double allTotalBurden[12][2][4];
+//保存最近12个每条进出线的电量
+double allTotalElectricity[12][2][4];
+//保存最近12个每条进出线的电费
+double allTotalElectricityVal[12][2][4];
+
 @interface STUserExperienceAlarmViewController : UIViewController
 
 //当前负荷

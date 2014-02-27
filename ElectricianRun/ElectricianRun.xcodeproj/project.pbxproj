@@ -19,7 +19,6 @@
 		C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446A18B623E200D0B923 /* MJRefreshConst.m */; };
 		C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446C18B623E200D0B923 /* MJRefreshFooterView.m */; };
 		C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */; };
-		C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C924B16C18B39E3D00B998F9 /* STChartViewController.m */; };
 		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
 		C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA718B512E000E4AE0A /* BaseTableViewController.m */; };
 		C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
@@ -44,6 +43,12 @@
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
+		C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F2E18BF3E4900403430 /* STChartElectricCurrentLineViewController.m */; };
+		C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3118BF3E6700403430 /* STChartBurdenLineViewController.m */; };
+		C95F7F3518BF3E8200403430 /* STChartElectricityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3418BF3E8200403430 /* STChartElectricityViewController.m */; };
+		C95F7F3818BF3EA900403430 /* STChartElectricityPieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3718BF3EA900403430 /* STChartElectricityPieViewController.m */; };
+		C95F7F3B18BF3EBD00403430 /* STChartElectricityValPieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3A18BF3EBD00403430 /* STChartElectricityValPieViewController.m */; };
+		C95F7F3E18BF3F9C00403430 /* STChartElectricityValViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3D18BF3F9C00403430 /* STChartElectricityValViewController.m */; };
 		C963416018B79D720064AC56 /* STDataMonitoringSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963415F18B79D720064AC56 /* STDataMonitoringSearchViewController.m */; };
 		C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416218B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m */; };
 		C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416518B7A0B50064AC56 /* STAlarmManagerSearchViewController.m */; };
@@ -51,12 +56,6 @@
 		C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */; };
 		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
 		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
-		C98568DD18A74FDD005CC2AC /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D218A74FDD005CC2AC /* EColor.m */; };
-		C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D418A74FDD005CC2AC /* EColumn.m */; };
-		C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D618A74FDD005CC2AC /* EColumnChart.m */; };
-		C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */; };
-		C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */; };
-		C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = C98568DC18A74FDD005CC2AC /* EFloatBox.m */; };
 		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
 		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
@@ -155,8 +154,6 @@
 		C922446C18B623E200D0B923 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
 		C922446D18B623E200D0B923 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
 		C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
-		C924B16B18B39E3D00B998F9 /* STChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartViewController.h; sourceTree = "<group>"; };
-		C924B16C18B39E3D00B998F9 /* STChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartViewController.m; sourceTree = "<group>"; };
 		C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
 		C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRefreshTableViewController.m; sourceTree = "<group>"; };
 		C933FEA618B512E000E4AE0A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
@@ -200,6 +197,18 @@
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C95EDEB518A7BC7C00CA80B4 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		C95EDEB618A7BC7C00CA80B4 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		C95F7F2D18BF3E4900403430 /* STChartElectricCurrentLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricCurrentLineViewController.h; sourceTree = "<group>"; };
+		C95F7F2E18BF3E4900403430 /* STChartElectricCurrentLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartElectricCurrentLineViewController.m; sourceTree = "<group>"; };
+		C95F7F3018BF3E6700403430 /* STChartBurdenLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartBurdenLineViewController.h; sourceTree = "<group>"; };
+		C95F7F3118BF3E6700403430 /* STChartBurdenLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartBurdenLineViewController.m; sourceTree = "<group>"; };
+		C95F7F3318BF3E8200403430 /* STChartElectricityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricityViewController.h; sourceTree = "<group>"; };
+		C95F7F3418BF3E8200403430 /* STChartElectricityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartElectricityViewController.m; sourceTree = "<group>"; };
+		C95F7F3618BF3EA900403430 /* STChartElectricityPieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricityPieViewController.h; sourceTree = "<group>"; };
+		C95F7F3718BF3EA900403430 /* STChartElectricityPieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartElectricityPieViewController.m; sourceTree = "<group>"; };
+		C95F7F3918BF3EBD00403430 /* STChartElectricityValPieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricityValPieViewController.h; sourceTree = "<group>"; };
+		C95F7F3A18BF3EBD00403430 /* STChartElectricityValPieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartElectricityValPieViewController.m; sourceTree = "<group>"; };
+		C95F7F3C18BF3F9C00403430 /* STChartElectricityValViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricityValViewController.h; sourceTree = "<group>"; };
+		C95F7F3D18BF3F9C00403430 /* STChartElectricityValViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChartElectricityValViewController.m; sourceTree = "<group>"; };
 		C963415E18B79D720064AC56 /* STDataMonitoringSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringSearchViewController.h; sourceTree = "<group>"; };
 		C963415F18B79D720064AC56 /* STDataMonitoringSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringSearchViewController.m; sourceTree = "<group>"; };
 		C963416118B79DC90064AC56 /* STDataMonitoringLineSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineSearchViewController.h; sourceTree = "<group>"; };
@@ -215,18 +224,6 @@
 		C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLineInfoViewController.m; sourceTree = "<group>"; };
 		C9726CE118B7956D006FB209 /* STChangeMaterialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChangeMaterialViewController.h; sourceTree = "<group>"; };
 		C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeMaterialViewController.m; sourceTree = "<group>"; };
-		C98568D118A74FDD005CC2AC /* EColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColor.h; sourceTree = "<group>"; };
-		C98568D218A74FDD005CC2AC /* EColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColor.m; sourceTree = "<group>"; };
-		C98568D318A74FDD005CC2AC /* EColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumn.h; sourceTree = "<group>"; };
-		C98568D418A74FDD005CC2AC /* EColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumn.m; sourceTree = "<group>"; };
-		C98568D518A74FDD005CC2AC /* EColumnChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnChart.h; sourceTree = "<group>"; };
-		C98568D618A74FDD005CC2AC /* EColumnChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnChart.m; sourceTree = "<group>"; };
-		C98568D718A74FDD005CC2AC /* EColumnChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnChartLabel.h; sourceTree = "<group>"; };
-		C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnChartLabel.m; sourceTree = "<group>"; };
-		C98568D918A74FDD005CC2AC /* EColumnDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EColumnDataModel.h; sourceTree = "<group>"; };
-		C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EColumnDataModel.m; sourceTree = "<group>"; };
-		C98568DB18A74FDD005CC2AC /* EFloatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFloatBox.h; sourceTree = "<group>"; };
-		C98568DC18A74FDD005CC2AC /* EFloatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFloatBox.m; sourceTree = "<group>"; };
 		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
 		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
 		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
@@ -510,8 +507,18 @@
 				C93C74C618923EC700A7FAB8 /* STCalculateViewController.m */,
 				C9726CE118B7956D006FB209 /* STChangeMaterialViewController.h */,
 				C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */,
-				C924B16B18B39E3D00B998F9 /* STChartViewController.h */,
-				C924B16C18B39E3D00B998F9 /* STChartViewController.m */,
+				C95F7F3018BF3E6700403430 /* STChartBurdenLineViewController.h */,
+				C95F7F3118BF3E6700403430 /* STChartBurdenLineViewController.m */,
+				C95F7F2D18BF3E4900403430 /* STChartElectricCurrentLineViewController.h */,
+				C95F7F2E18BF3E4900403430 /* STChartElectricCurrentLineViewController.m */,
+				C95F7F3618BF3EA900403430 /* STChartElectricityPieViewController.h */,
+				C95F7F3718BF3EA900403430 /* STChartElectricityPieViewController.m */,
+				C95F7F3918BF3EBD00403430 /* STChartElectricityValPieViewController.h */,
+				C95F7F3A18BF3EBD00403430 /* STChartElectricityValPieViewController.m */,
+				C95F7F3C18BF3F9C00403430 /* STChartElectricityValViewController.h */,
+				C95F7F3D18BF3F9C00403430 /* STChartElectricityValViewController.m */,
+				C95F7F3318BF3E8200403430 /* STChartElectricityViewController.h */,
+				C95F7F3418BF3E8200403430 /* STChartElectricityViewController.m */,
 				C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */,
 				C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
@@ -549,25 +556,6 @@
 				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		C98568D018A74FDD005CC2AC /* EChart */ = {
-			isa = PBXGroup;
-			children = (
-				C98568D118A74FDD005CC2AC /* EColor.h */,
-				C98568D218A74FDD005CC2AC /* EColor.m */,
-				C98568D318A74FDD005CC2AC /* EColumn.h */,
-				C98568D418A74FDD005CC2AC /* EColumn.m */,
-				C98568D518A74FDD005CC2AC /* EColumnChart.h */,
-				C98568D618A74FDD005CC2AC /* EColumnChart.m */,
-				C98568D718A74FDD005CC2AC /* EColumnChartLabel.h */,
-				C98568D818A74FDD005CC2AC /* EColumnChartLabel.m */,
-				C98568D918A74FDD005CC2AC /* EColumnDataModel.h */,
-				C98568DA18A74FDD005CC2AC /* EColumnDataModel.m */,
-				C98568DB18A74FDD005CC2AC /* EFloatBox.h */,
-				C98568DC18A74FDD005CC2AC /* EFloatBox.m */,
-			);
-			path = EChart;
 			sourceTree = "<group>";
 		};
 		C9A809CD18A7438700EA865D /* ETFoursquareImages */ = {
@@ -643,7 +631,6 @@
 				C909821918B45E6500703D47 /* ARLineChart */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
-				C98568D018A74FDD005CC2AC /* EChart */,
 				C9A809CD18A7438700EA865D /* ETFoursquareImages */,
 				C9AC1DD718A86CE9004E96CC /* GCDiscreetNotificationView */,
 				C9DFDF2218B327DC00F7B368 /* GHWalkThrough */,
@@ -898,13 +885,14 @@
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */,
 				C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */,
+				C95F7F3518BF3E8200403430 /* STChartElectricityViewController.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
-				C98568E218A74FDD005CC2AC /* EFloatBox.m in Sources */,
 				C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */,
 				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
 				C9D1154F18BC755B00268BBE /* STProjectSiteAddLineViewController.m in Sources */,
+				C95F7F3818BF3EA900403430 /* STChartElectricityPieViewController.m in Sources */,
 				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
 				C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
@@ -913,13 +901,14 @@
 				C909822018B45E6500703D47 /* ARLineChartCommon.m in Sources */,
 				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
+				C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */,
 				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
-				C98568E118A74FDD005CC2AC /* EColumnDataModel.m in Sources */,
 				C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */,
 				C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */,
+				C95F7F3B18BF3EBD00403430 /* STChartElectricityValPieViewController.m in Sources */,
+				C95F7F3E18BF3F9C00403430 /* STChartElectricityValViewController.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
-				C98568E018A74FDD005CC2AC /* EColumnChartLabel.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
@@ -934,6 +923,7 @@
 				C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */,
 				C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
+				C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
@@ -943,12 +933,9 @@
 				C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */,
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
-				C98568DD18A74FDD005CC2AC /* EColor.m in Sources */,
 				C9D1155218BC8B0F00268BBE /* STUserExperienceLineDetailViewController.m in Sources */,
 				C9EF51B218A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m in Sources */,
 				C9EFE22D18B91E5E00308819 /* WeixinSessionActivity.m in Sources */,
-				C924B16D18B39E3D00B998F9 /* STChartViewController.m in Sources */,
-				C98568DE18A74FDD005CC2AC /* EColumn.m in Sources */,
 				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
 				C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */,
 				C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */,
@@ -961,7 +948,6 @@
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
 				C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */,
-				C98568DF18A74FDD005CC2AC /* EColumnChart.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C963416018B79D720064AC56 /* STDataMonitoringSearchViewController.m in Sources */,
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,

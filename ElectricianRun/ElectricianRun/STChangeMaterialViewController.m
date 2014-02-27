@@ -120,7 +120,7 @@
     [p setObject:@"2" forKey:@"OpType"];
     [p setObject:oldSerialNo forKey:@"SerialNo"];
     [p setObject:newSerialNo forKey:@"NewserialNo"];
-    [p setObject:[NSString stringWithFormat:@"%ld",row] forKey:@"ChangeReason"];
+    [p setObject:[NSString stringWithFormat:@"%d",row] forKey:@"ChangeReason"];
     
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];

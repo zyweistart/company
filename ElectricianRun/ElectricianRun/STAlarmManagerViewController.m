@@ -105,7 +105,7 @@
     }
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%ld,%@",row+1,[dictionary objectForKey:@"SITE_NAME"]];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"SITE_NAME"]];
     return cell;
 }
 
@@ -194,7 +194,7 @@
             [p setObject:@"SJ31" forKey:@"GNID"];
             [p setObject:hs forKey:@"QTALARM"];
         }
-        [p setObject:[NSString stringWithFormat:@"%ld",row] forKey:@"QTVAL"];
+        [p setObject:[NSString stringWithFormat:@"%d",row] forKey:@"QTVAL"];
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTHANDLECODE];
         [self.hRequest setIsShowMessage:YES];
         [self.hRequest start:URL params:p];

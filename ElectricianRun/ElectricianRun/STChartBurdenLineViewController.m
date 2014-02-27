@@ -1,27 +1,25 @@
 //
-//  STChartViewController.m
+//  STChartBurdenLineViewController.m
 //  ElectricianRun
-//
-//  Created by Start on 2/18/14.
+//  进出线负荷曲线图
+//  Created by Start on 2/27/14.
 //  Copyright (c) 2014 Start. All rights reserved.
 //
 
-#import "STChartViewController.h"
+#import "STChartBurdenLineViewController.h"
 
-extern int count;
-
-@interface STChartViewController ()
+@interface STChartBurdenLineViewController ()
 
 @end
 
-@implementation STChartViewController
+@implementation STChartBurdenLineViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title=@"进出线负荷曲线图";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        
     }
     return self;
 }

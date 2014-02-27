@@ -10,4 +10,6 @@
 
 @interface STUserExperienceLineDetailViewController : UIViewController
 
+- (id)initWithIndex:(long)index;
+
 @end
