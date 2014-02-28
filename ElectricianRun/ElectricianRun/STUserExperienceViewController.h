@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "STBaseUserExperienceViewController.h"
 
+
 @interface STUserExperienceViewController : STBaseUserExperienceViewController
+
+@property NSTimer *countdown;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblCountdown;
 
 @end
