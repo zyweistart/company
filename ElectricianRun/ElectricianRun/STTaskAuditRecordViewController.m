@@ -8,6 +8,7 @@
 
 #import "STTaskAuditRecordViewController.h"
 #import "STTaskAuditRecord1ViewController.h"
+#import "STAuditRecordCell.h"
 #import "NSString+Utils.h"
 
 @interface STTaskAuditRecordViewController ()
@@ -26,17 +27,35 @@
     return self;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STAuditRecordCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STAuditRecordCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@,%@",[dictionary objectForKey:@"NAME"],[dictionary objectForKey:@"SITE_NAME"]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"NAME"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TASK_DATE"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"RECOMPLETE_DATE"]]];
+    NSString *IS_COMPLETE=[Common NSNullConvertEmptyString:[dictionary objectForKey:@"IS_COMPLETE"]];
+    if([@"1" isEqualToString:IS_COMPLETE]){
+        [cell.lbl5 setTextColor:[UIColor greenColor]];
+        [cell.lbl5 setText:@"是"];
+    }else{
+        [cell.lbl5 setTextColor:[UIColor redColor]];
+        [cell.lbl5 setText:@"否"];
+    }
+    [cell.lbl6 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"COMPLETE_DATE"]]];
     return cell;
 }
 

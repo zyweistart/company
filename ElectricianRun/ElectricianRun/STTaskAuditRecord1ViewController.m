@@ -49,6 +49,7 @@
     } else if([@"4" isEqualToString:data]){
         cell.textLabel.text=@"TRMS系统巡视检查";
     }
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }
 
