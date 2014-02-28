@@ -20,4 +20,7 @@
     #import "Common.h"
     #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7]
     #define PAGESIZE 20
+
+    #define CACHE_DATA [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:object_getClassName(self)]]
+    #define CACHE_DATABYUNIQUE(UNIQUE) [NSString stringWithFormat:@"%@-%@",CACHE_DATA,UNIQUE]
 #endif

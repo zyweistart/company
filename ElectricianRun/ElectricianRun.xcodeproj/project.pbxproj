@@ -96,6 +96,11 @@
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
+		C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827518C065C8002826C4 /* STSignupViewController.m */; };
+		C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827818C0689E002826C4 /* STUserExperienceSelectViewController.m */; };
+		C9CF827C18C06D01002826C4 /* STDataMonitoringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */; };
+		C9CF827F18C06D30002826C4 /* STDataMonitoringLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827E18C06D2F002826C4 /* STDataMonitoringLineCell.m */; };
+		C9CF828218C08413002826C4 /* STAuditBuildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF828118C08413002826C4 /* STAuditBuildCell.m */; };
 		C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */; };
 		C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154B18BC619A00268BBE /* STTaskManagerConsumptionViewController.m */; };
 		C9D1154F18BC755B00268BBE /* STProjectSiteAddLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D1154E18BC755B00268BBE /* STProjectSiteAddLineViewController.m */; };
@@ -296,6 +301,16 @@
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C9CF827418C065C8002826C4 /* STSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSignupViewController.h; sourceTree = "<group>"; };
+		C9CF827518C065C8002826C4 /* STSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSignupViewController.m; sourceTree = "<group>"; };
+		C9CF827718C0689E002826C4 /* STUserExperienceSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserExperienceSelectViewController.h; sourceTree = "<group>"; };
+		C9CF827818C0689E002826C4 /* STUserExperienceSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUserExperienceSelectViewController.m; sourceTree = "<group>"; };
+		C9CF827A18C06D01002826C4 /* STDataMonitoringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringCell.h; sourceTree = "<group>"; };
+		C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringCell.m; sourceTree = "<group>"; };
+		C9CF827D18C06D2F002826C4 /* STDataMonitoringLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataMonitoringLineCell.h; sourceTree = "<group>"; };
+		C9CF827E18C06D2F002826C4 /* STDataMonitoringLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataMonitoringLineCell.m; sourceTree = "<group>"; };
+		C9CF828018C08413002826C4 /* STAuditBuildCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAuditBuildCell.h; sourceTree = "<group>"; };
+		C9CF828118C08413002826C4 /* STAuditBuildCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAuditBuildCell.m; sourceTree = "<group>"; };
 		C9D1154718BC5E4B00268BBE /* STTaskManagerHandleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerHandleViewController.h; sourceTree = "<group>"; };
 		C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerHandleViewController.m; sourceTree = "<group>"; };
 		C9D1154A18BC619A00268BBE /* STTaskManagerConsumptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerConsumptionViewController.h; sourceTree = "<group>"; };
@@ -372,12 +387,18 @@
 		C922445D18B5FFFA00D0B923 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C9943FAE18B8E2F200A62C19 /* STAlarmCell.h */,
+				C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */,
 				C922445E18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.h */,
 				C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */,
 				C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */,
 				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
-				C9943FAE18B8E2F200A62C19 /* STAlarmCell.h */,
-				C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */,
+				C9CF827A18C06D01002826C4 /* STDataMonitoringCell.h */,
+				C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */,
+				C9CF827D18C06D2F002826C4 /* STDataMonitoringLineCell.h */,
+				C9CF827E18C06D2F002826C4 /* STDataMonitoringLineCell.m */,
+				C9CF828018C08413002826C4 /* STAuditBuildCell.h */,
+				C9CF828118C08413002826C4 /* STAuditBuildCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -528,12 +549,16 @@
 				C93C74C918923EE500A7FAB8 /* STScanningViewController.m */,
 				C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */,
 				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
+				C9CF827418C065C8002826C4 /* STSignupViewController.h */,
+				C9CF827518C065C8002826C4 /* STSignupViewController.m */,
 				C93C74BE18923E3200A7FAB8 /* STStudyViewController.h */,
 				C93C74BF18923E3200A7FAB8 /* STStudyViewController.m */,
 				C9EF51B018A9E00A00CFBE06 /* STUserExperienceAlarmViewController.h */,
 				C9EF51B118A9E00A00CFBE06 /* STUserExperienceAlarmViewController.m */,
 				C9D1155018BC8B0F00268BBE /* STUserExperienceLineDetailViewController.h */,
 				C9D1155118BC8B0F00268BBE /* STUserExperienceLineDetailViewController.m */,
+				C9CF827718C0689E002826C4 /* STUserExperienceSelectViewController.h */,
+				C9CF827818C0689E002826C4 /* STUserExperienceSelectViewController.m */,
 				C93C74C218923EA900A7FAB8 /* STUserExperienceViewController.h */,
 				C93C74C318923EA900A7FAB8 /* STUserExperienceViewController.m */,
 				C9B2A58418934C9D003A412E /* TransformerSubstation */,
@@ -871,6 +896,7 @@
 				C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */,
 				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
+				C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
 				C9D1154F18BC755B00268BBE /* STProjectSiteAddLineViewController.m in Sources */,
 				C95F7F3818BF3EA900403430 /* STChartElectricityPieViewController.m in Sources */,
@@ -892,9 +918,11 @@
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
+				C9CF827F18C06D30002826C4 /* STDataMonitoringLineCell.m in Sources */,
 				C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
 				C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */,
+				C9CF828218C08413002826C4 /* STAuditBuildCell.m in Sources */,
 				C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,
 				C9DFDF2818B327DC00F7B368 /* GHWalkThroughView.m in Sources */,
@@ -931,8 +959,10 @@
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C963416018B79D720064AC56 /* STDataMonitoringSearchViewController.m in Sources */,
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
+				C9CF827C18C06D01002826C4 /* STDataMonitoringCell.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
 				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
+				C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */,
 				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
 				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,

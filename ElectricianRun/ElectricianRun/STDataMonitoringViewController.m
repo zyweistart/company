@@ -9,6 +9,7 @@
 #import "STDataMonitoringViewController.h"
 #import "STDataMonitoringLineViewController.h"
 #import "STDataMonitoringSearchViewController.h"
+#import "STDataMonitoringCell.h"
 #import "NSString+Utils.h"
 
 @interface STDataMonitoringViewController ()
@@ -21,6 +22,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    [self setIsLoadCache:YES];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"数据监测";
@@ -40,9 +42,6 @@
         
         searchData=[[NSMutableDictionary alloc]init];
         [searchData setObject:@"" forKey:@"name"];
-        
-        [self setIsLoadCache:YES];
-        
     }
     return self;
 }
@@ -59,18 +58,29 @@
     [self.navigationController pushViewController:dataMonitoringSearchViewController animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STDataMonitoringCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STDataMonitoringCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"第:%@",[dictionary objectForKey:@"CP_NAME"]];
+    
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CP_NAME"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TRANS_COUNT"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"MAX_DATE"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"MAX_LOAD"]]];
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -89,12 +89,12 @@
     }
     
     //把最后一次生成的电流值重新进行赋值计算
-    threePhaseCurrentLeft[0][0]=electricCurrentLeftA;
-    threePhaseCurrentLeft[0][1]=electricCurrentLeftB;
-    threePhaseCurrentLeft[0][2]=electricCurrentLeftC;
-    threePhaseCurrentRight[0][0]=electricCurrentRightA;
-    threePhaseCurrentRight[0][1]=electricCurrentRightB;
-    threePhaseCurrentRight[0][2]=electricCurrentRightC;
+    threePhaseCurrentLeft[0][0]=self.electricCurrentLeftA;
+    threePhaseCurrentLeft[0][1]=self.electricCurrentLeftB;
+    threePhaseCurrentLeft[0][2]=self.electricCurrentLeftC;
+    threePhaseCurrentRight[0][0]=self.electricCurrentRightA;
+    threePhaseCurrentRight[0][1]=self.electricCurrentRightB;
+    threePhaseCurrentRight[0][2]=self.electricCurrentRightC;
     
     [self startCalculate];
     
@@ -133,8 +133,8 @@
         if(![@"" isEqualToString:content]){
             int value=[content intValue];
             if(value>0&&value<2500){
-                isTransLoad=YES;
-                electricCurrentLeftA=[self transCurrent:value];
+                self.isTransLoad=YES;
+                self.electricCurrentLeftA=[self transCurrent:value];
                 [self buildCal];
                 UIActionSheet *sheet = [[UIActionSheet alloc]
                                         initWithTitle:@"企业总负荷超过所设定的阀值，请注意！"
@@ -157,7 +157,7 @@
 {
     if(buttonIndex==0){
         //关闭报警声音
-        isTransLoad=NO;
+        self.isTransLoad=NO;
         [self startBusinessCal];
     }
 }

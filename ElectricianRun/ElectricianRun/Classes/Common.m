@@ -58,4 +58,13 @@
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
++ (NSString *)NSNullConvertEmptyString:(id)value
+{
+    if([value isEqual:[NSNull null]]){
+        return @"";
+    }
+    return [NSString stringWithFormat:@"%@",value];
+}
+
+
 @end

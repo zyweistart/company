@@ -9,6 +9,7 @@
 #import "STDataMonitoringLineViewController.h"
 #import "STDataMonitoringLineDetailViewController.h"
 #import "STDataMonitoringLineSearchViewController.h"
+#import "STDataMonitoringLineCell.h"
 #import "NSString+Utils.h"
 
 @interface STDataMonitoringLineViewController ()
@@ -21,6 +22,8 @@
 
 - (id)initWithData:(NSDictionary *) data
 {
+    [self setIsLoadCache:YES];
+    [self setCachetag:CACHE_DATABYUNIQUE([data objectForKey:@"CP_ID"])];
     self = [super init];
     if (self) {
         
@@ -38,13 +41,9 @@
         [searchData setObject:@"" forKey:@"QTKEY"];
         [searchData setObject:@"" forKey:@"QTKEY1"];
         
+        
     }
     return self;
-}
-
-- (void)viewDidLoad {
-    [self setIsLoadCache:YES];
-    [super viewDidLoad];
 }
 
 //查询
@@ -57,18 +56,35 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STDataMonitoringLineCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STDataMonitoringLineCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"METER_NAME"]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];
+    NSString *SWITCH_STATUS=[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SWITCH_STATUS"]];
+    if([@"1" isEqualToString:SWITCH_STATUS]){
+        [cell.lbl2 setTextColor:[UIColor redColor]];
+        [cell.lbl2 setText:@"合"];
+    }else{
+        [cell.lbl2 setTextColor:[UIColor greenColor]];
+        [cell.lbl2 setText:@"分"];
+    }
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"REPORT_DATE"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"DAY_POWER"]]];
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

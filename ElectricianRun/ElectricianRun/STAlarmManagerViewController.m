@@ -8,6 +8,7 @@
 
 #import "STAlarmManagerViewController.h"
 #import "STAlarmManagerSearchViewController.h"
+#import "STAlarmCell.h"
 #import "NSString+Utils.h"
 
 #define REQUESTHANDLECODE 1000
@@ -25,6 +26,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    [self setIsLoadCache:YES];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"报警管理";
@@ -62,12 +64,6 @@
     }
     return self;
 }
-
-- (void)viewDidLoad {
-    [self setIsLoadCache:YES];
-    [super viewDidLoad];
-}
-
 - (void)back:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -95,18 +91,30 @@
     [self.navigationController pushViewController:alarmManagerSearchViewController animated:YES];
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STAlarmCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STAlarmCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"SITE_NAME"]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"ALERT_DATE"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"ALERT_LEVEL"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];
+    [cell.lbl5 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CONTENT"]]];
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

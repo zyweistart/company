@@ -7,6 +7,7 @@
 //
 
 #import "STBaseUserExperienceViewController.h"
+#import "STSignupViewController.h"
 
 @interface STBaseUserExperienceViewController ()
 
@@ -42,10 +43,10 @@
             }
         }
     }
-    isTransLoad=NO;
-    iaTempLastValue=0;
+    self.isTransLoad=NO;
+    self.iaTempLastValue=0;
     //初始默认当前总电量为
-    currentTotalElectricity=5;
+    self.currentTotalElectricity=5;
     //初始调用一次
     [self startBusinessCal];
     [self displaySwitchStatus];
@@ -81,35 +82,35 @@
 {
     //进线A
     double rn0=[self random];
-    if(isTransLoad){
+    if(self.isTransLoad){
         int sign=1;
         if (rn0 > 0.5) {
             sign = -1;
         }
         //保证每次产生的值都在最后一次的基础之上上下浮动5%
-        electricCurrentLeftA=electricCurrentLeftA*sign*0.05+electricCurrentLeftA;
+        self.electricCurrentLeftA=self.electricCurrentLeftA*sign*0.05+self.electricCurrentLeftA;
     }else{
-        if(iaTempLastValue==0){
+        if(self.iaTempLastValue==0){
             //第一次随机数保证rn的值在0.1-1之间
             if(rn0<0.1){
                 rn0=0.1+rn0;
             }
-            electricCurrentLeftA=1443.4*rn0;
+            self.electricCurrentLeftA=1443.4*rn0;
         }else{
             int sign=1;
             if (rn0 > 0.5) {
                 sign = -1;
             }
             //保证每次产生的值都在最后一次的基础之上上下浮动5%
-            electricCurrentLeftA=iaTempLastValue*sign*0.05+iaTempLastValue;
+            self.electricCurrentLeftA=self.iaTempLastValue*sign*0.05+self.iaTempLastValue;
         }
         
-        if(electricCurrentLeftA>1443.4){
-            electricCurrentLeftA=1345;
-        }else if(electricCurrentLeftA<144.34){
-            electricCurrentLeftA=160;
+        if(self.electricCurrentLeftA>1443.4){
+            self.electricCurrentLeftA=1345;
+        }else if(self.electricCurrentLeftA<144.34){
+            self.electricCurrentLeftA=160;
         }
-        iaTempLastValue=electricCurrentLeftA;
+        self.iaTempLastValue=self.electricCurrentLeftA;
     }
     [self buildCal];
     
@@ -119,28 +120,28 @@
 {
     double rn1=[self random];
     if(rn1>0.5){
-        electricCurrentLeftB=electricCurrentLeftA*1.05;
-        electricCurrentLeftC=electricCurrentLeftA*0.95;
+        self.electricCurrentLeftB=self.electricCurrentLeftA*1.05;
+        self.electricCurrentLeftC=self.electricCurrentLeftA*0.95;
     }else{
-        electricCurrentLeftB=electricCurrentLeftA*0.95;
-        electricCurrentLeftC=electricCurrentLeftA*1.05;
+        self.electricCurrentLeftB=self.electricCurrentLeftA*0.95;
+        self.electricCurrentLeftC=self.electricCurrentLeftA*1.05;
     }
     
     //进线B
     double rn2=[self random];
     if(rn2>0.5){
-        electricCurrentRightA=electricCurrentLeftA*1.05;
+        self.electricCurrentRightA=self.electricCurrentLeftA*1.05;
     }else{
-        electricCurrentRightA=electricCurrentLeftA*0.95;
+        self.electricCurrentRightA=self.electricCurrentLeftA*0.95;
     }
     
     double rn3=[self random];
     if(rn3>0.5){
-        electricCurrentRightB=electricCurrentRightA*1.05;
-        electricCurrentRightC=electricCurrentRightA*0.95;
+        self.electricCurrentRightB=self.electricCurrentRightA*1.05;
+        self.electricCurrentRightC=self.electricCurrentRightA*0.95;
     }else{
-        electricCurrentRightB=electricCurrentRightA*0.95;
-        electricCurrentRightC=electricCurrentRightA*1.05;
+        self.electricCurrentRightB=self.electricCurrentRightA*0.95;
+        self.electricCurrentRightC=self.electricCurrentRightA*1.05;
     }
     
     for(int i=0;i<4;i++){
@@ -150,12 +151,12 @@
         }
     }
     
-    threePhaseCurrentLeft[0][0]=electricCurrentLeftA;
-    threePhaseCurrentLeft[0][1]=electricCurrentLeftB;
-    threePhaseCurrentLeft[0][2]=electricCurrentLeftC;
-    threePhaseCurrentRight[0][0]=electricCurrentRightA;
-    threePhaseCurrentRight[0][1]=electricCurrentRightB;
-    threePhaseCurrentRight[0][2]=electricCurrentRightC;
+    threePhaseCurrentLeft[0][0]=self.electricCurrentLeftA;
+    threePhaseCurrentLeft[0][1]=self.electricCurrentLeftB;
+    threePhaseCurrentLeft[0][2]=self.electricCurrentLeftC;
+    threePhaseCurrentRight[0][0]=self.electricCurrentRightA;
+    threePhaseCurrentRight[0][1]=self.electricCurrentRightB;
+    threePhaseCurrentRight[0][2]=self.electricCurrentRightC;
     
     //把数组中所有的值往前移一位把数组最后一位空出来保存新值
     int length=11;
@@ -330,10 +331,10 @@
     if(finalB[4]){
         tmpBurden = tmpBurden + allTotalBurden[length][1][0];
     }
-    if(currentTotalBurden>0){
-        lastTotalBurden=currentTotalBurden;
+    if(self.currentTotalBurden>0){
+        self.lastTotalBurden=self.currentTotalBurden;
     }
-    currentTotalBurden=tmpBurden;
+    self.currentTotalBurden=tmpBurden;
 }
 
 //总电量(更新调用频率一分钟)
@@ -355,7 +356,7 @@
             allTotalElectricityVal[length][i][j]=allTotalElectricity[length][i][j]*[self businessCalculationTime];
         }
     }
-    currentTotalElectricity=currentTotalElectricity+(lastTotalBurden+currentTotalBurden)/2/60/1000;
+    self.currentTotalElectricity=self.currentTotalElectricity+(self.lastTotalBurden+self.currentTotalBurden)/2/60/1000;
 }
 
 //显示当前的电流
@@ -372,9 +373,9 @@
     [self.btnOutLineB2Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[2][0],threePhaseCurrentRight[2][1],threePhaseCurrentRight[2][2]] forState:UIControlStateNormal];
     [self.btnOutLineB3Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[3][0],threePhaseCurrentRight[3][1],threePhaseCurrentRight[3][2]] forState:UIControlStateNormal];
     //当前负荷
-    [self.lblCurrentLoad setText:[NSString stringWithFormat:@"%.2fkW",currentTotalBurden/1000]];
+    [self.lblCurrentLoad setText:[NSString stringWithFormat:@"%.2fkW",self.currentTotalBurden/1000]];
     //当前总电量
-    [self.lblElectricity setText:[NSString stringWithFormat:@"%.2fkWh",currentTotalElectricity]];
+    [self.lblElectricity setText:[NSString stringWithFormat:@"%.2fkWh",self.currentTotalElectricity]];
 }
 
 //显示开关的状态
@@ -429,7 +430,8 @@
 
 //我要报名
 - (IBAction)onClickSignup:(id)sender {
-    NSLog(@"我要报名");
+    STSignupViewController *signupViewController=[[STSignupViewController alloc]init];
+    [self.navigationController pushViewController:signupViewController animated:YES];
 }
 
 - (IBAction)onClickSwitch:(id)sender

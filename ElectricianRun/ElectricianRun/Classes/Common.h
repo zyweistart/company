@@ -24,4 +24,6 @@
 
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag;
 
++ (NSString *)NSNullConvertEmptyString:(id)value;
+
 @end

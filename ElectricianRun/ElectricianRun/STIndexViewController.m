@@ -7,9 +7,7 @@
 //
 
 #import "STIndexViewController.h"
-#import "STUserExperienceAlarmViewController.h"
-#import "STUserExperienceViewController.h"
-#import "STUserExperienceViewController.h"
+#import "STUserExperienceSelectViewController.h"
 #import "STProjectSiteViewController.h"
 #import "STScanningOperationViewController.h"
 #import "STCalculateViewController.h"
@@ -101,15 +99,8 @@
 
 //用户体验
 - (void)onClickUserExperience:(id)sender {
-    
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
-//    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
-//    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
-    
-    STUserExperienceViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceViewController"];
-    UINavigationController *userExperienceViewController = [[UINavigationController alloc] initWithRootViewController:stuea];
-    [self presentViewController:userExperienceViewController animated:YES completion:nil];
+    UINavigationController *userExperienceSelectViewController = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
+    [self presentViewController:userExperienceSelectViewController animated:YES completion:nil];
 }
 
 //我管辖的变电站

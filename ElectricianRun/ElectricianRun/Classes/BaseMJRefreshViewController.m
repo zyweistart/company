@@ -8,8 +8,6 @@
 
 #import "BaseMJRefreshViewController.h"
 
-#define CACHE_DATA [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:object_getClassName(self)]]
-
 @interface BaseMJRefreshViewController ()
 
 @end
@@ -19,7 +17,6 @@
 - (id)init {
     self=[super init];
     if(self){
-        
     }
     return self;
 }
@@ -27,7 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     _currentPage=0;
     
     // 集成刷新控件
@@ -36,7 +32,7 @@
     // 上拉加载更多
     [self addFooter];
     if(self.isLoadCache){
-        NSString *responseString=[Common getCache:CACHE_DATA];
+        NSString *responseString=[Common getCache:self.cachetag!=nil?self.cachetag:CACHE_DATA];
         if(responseString!=nil) {
             NSDictionary *resultJSON=[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
             NSArray *tmpData=[resultJSON objectForKey:@"table1"];
@@ -149,7 +145,9 @@
     }
     if(self.isLoadCache){
         if(_currentPage==1){
-            [Common setCache:CACHE_DATA data:[response responseString]];
+            if(self.isLoadCache){
+                [Common setCache:self.cachetag!=nil?self.cachetag:CACHE_DATA data:[response responseString]];
+            }
         }
     }
     

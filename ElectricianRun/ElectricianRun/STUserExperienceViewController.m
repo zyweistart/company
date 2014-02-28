@@ -20,9 +20,9 @@
     
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithUserType:(int)userType
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         
         self.title=@"商业用户体验";
@@ -34,6 +34,8 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
+        
+        usertype=userType;
         
     }
     return self;
@@ -48,7 +50,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    usertype=2;
     if(usertype==1){
         level=arc4random() % 4+1;
         counttimer=120;
@@ -56,7 +57,7 @@
         level=arc4random() % 5+1;
         counttimer=180;
     }
-    iaTempLastValue=[self dataWithLevel:level];
+    self.iaTempLastValue=[self dataWithLevel:level];
     [self startBusinessCal];
     //以后则每根据设定的时间调用一次
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
@@ -192,8 +193,8 @@
                 basetariff=37500;
             }
             
-            double C1=currentTotalElectricity*[self industrialCalculationTime]+2*basetariff/(30*24*60);
-            double C2=currentTotalElectricity*[self businessCalculationTime];
+            double C1=self.currentTotalElectricity*[self industrialCalculationTime]+2*basetariff/(30*24*60);
+            double C2=self.currentTotalElectricity*[self businessCalculationTime];
             
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:@"商业用户体验"
@@ -248,12 +249,12 @@
             finalB[4]=NO;
             finalB9=YES;
             //把最后一次生成的电流值重新进行赋值计算
-            threePhaseCurrentLeft[0][0]=electricCurrentLeftA;
-            threePhaseCurrentLeft[0][1]=electricCurrentLeftB;
-            threePhaseCurrentLeft[0][2]=electricCurrentLeftC;
-            threePhaseCurrentRight[0][0]=electricCurrentRightA;
-            threePhaseCurrentRight[0][1]=electricCurrentRightB;
-            threePhaseCurrentRight[0][2]=electricCurrentRightC;
+            threePhaseCurrentLeft[0][0]=self.electricCurrentLeftA;
+            threePhaseCurrentLeft[0][1]=self.electricCurrentLeftB;
+            threePhaseCurrentLeft[0][2]=self.electricCurrentLeftC;
+            threePhaseCurrentRight[0][0]=self.electricCurrentRightA;
+            threePhaseCurrentRight[0][1]=self.electricCurrentRightB;
+            threePhaseCurrentRight[0][2]=self.electricCurrentRightC;
             
             [self startCalculate];
             

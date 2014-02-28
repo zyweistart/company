@@ -22,6 +22,7 @@
 
 @property BOOL isLoadCache;
 @property (strong,nonatomic) HttpRequest *hRequest;
+@property (strong,nonatomic) NSString *cachetag;
 
 - (void)reloadTableViewDataSource;
 

@@ -22,24 +22,8 @@ double allTotalBurden[12][2][4];
 double allTotalElectricity[12][2][4];
 //保存最近12个每条进出线的电费
 double allTotalElectricityVal[12][2][4];
-//是否为超负荷体验
-bool isTransLoad;
-double electricCurrentLeftA;
-double electricCurrentLeftB;
-double electricCurrentLeftC;
-double electricCurrentRightA;
-double electricCurrentRightB;
-double electricCurrentRightC;
 double threePhaseCurrentLeft[4][3];
 double threePhaseCurrentRight[4][3];
-//最后一次进线A的值
-double iaTempLastValue;
-//最后一次负荷
-double lastTotalBurden;
-//当前负荷
-double currentTotalBurden;
-//总电量
-double currentTotalElectricity;
 
 @interface STBaseUserExperienceViewController : UIViewController<UIAlertViewDelegate,UIActionSheetDelegate>
 
@@ -82,11 +66,23 @@ double currentTotalElectricity;
 //母联开关
 @property (weak, nonatomic) IBOutlet UIButton *btnMotherOf;
 
-//当前点击的线路名称
-@property (strong,nonatomic) NSString *currentSelectLineName;
-
 @property NSTimer * timer;
 @property NSTimer * timerElectricity;
+//最后一次进线A的值
+@property double iaTempLastValue;
+//最后一次负荷
+@property double lastTotalBurden;
+//当前负荷
+@property double currentTotalBurden;
+//总电量
+@property double currentTotalElectricity;//是否为超负荷体验
+@property bool isTransLoad;
+@property double electricCurrentLeftA;
+@property double electricCurrentLeftB;
+@property double electricCurrentLeftC;
+@property double electricCurrentRightA;
+@property double electricCurrentRightB;
+@property double electricCurrentRightC;
 
 //后退
 - (void)back:(id)sender;

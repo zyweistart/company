@@ -8,6 +8,7 @@
 
 #import "STTaskAuditBuildViewController.h"
 #import "STTaskAuditBuildDetailViewController.h"
+#import "STAuditBuildCell.h"
 #import "NSString+Utils.h"
 
 @interface STTaskAuditBuildViewController ()
@@ -26,18 +27,27 @@
     return self;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STAuditBuildCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STAuditBuildCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"CP_NAME"]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CONTRACT_NAME"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
