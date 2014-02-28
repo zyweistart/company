@@ -11,7 +11,7 @@
 
 #define DISPLAYLINESTR @"ia=%.2f;\nib=%.2f;\nic=%.2f;"
 
-@interface STUserExperienceAlarmViewController ()
+@interface STUserExperienceAlarmViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
 
 @end
 
@@ -37,6 +37,8 @@ double lastTotalBurden;
 double currentTotalBurden;
 //总电量
 double currentTotalElectricity;
+//是否为超负荷体验
+bool isTransLoad;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,13 +86,14 @@ double currentTotalElectricity;
             }
         }
     }
+    isTransLoad=NO;
     iaTempLastValue=0;
     //初始默认当前总电量为
     currentTotalElectricity=5;
-    
+    //初始调用一次
     [self startBusinessCal];
     [self displaySwitchStatus];
-    
+    //以后则每根据设定的时间调用一次
     timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
     timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
 }
@@ -119,40 +122,25 @@ double currentTotalElectricity;
     return money;
 }
 
-- (void)startBusinessCal {
-    
-    for(int i=0;i<4;i++){
-        for(int j=0;j<3;j++){
-            threePhaseCurrentLeft[i][j]=0.0;
-            threePhaseCurrentRight[i][j]=0.0;
-        }
+//计算负荷超限报警通过开关状态，确定负荷电流
+- (double)transCurrent:(double)load {
+    double current = 0;
+    //随机生成一个0.9~1的随机数
+    double d=((double)(arc4random() % 10)/100)+0.9;
+    if (!finalB[0] || !finalB[4]) {
+        load = load;
+    } else if ((!finalB[1] && !finalB[2] && !finalB[3])
+               || (!finalB[5] && !finalB[6] && !finalB[7])) {
+        load = load;
+    } else {
+        load = load / 2;
     }
-    
-    //进线A
-    double rn0=[self random];
-    if(iaTempLastValue==0){
-        //第一次随机数保证rn的值在0.1-1之间
-        if(rn0<0.1){
-            rn0=0.1+rn0;
-        }
-        electricCurrentLeftA=1443.4*rn0;
-    }else{
-        int sign=1;
-        if (rn0 > 0.5) {
-            sign = -1;
-        }
-        //保证每次产生的值都在最后一次的基础之上上下浮动5%
-        electricCurrentLeftA=iaTempLastValue*sign*0.05+iaTempLastValue;
-    }
-    
-    if(electricCurrentLeftA>1443.4){
-        electricCurrentLeftA=1345;
-    }else if(electricCurrentLeftA<144.34){
-        electricCurrentLeftA=160;
-    }
-    
-    iaTempLastValue=electricCurrentLeftA;
-    
+    current = load * 1000 / 220 / d / 3 * 1.15;
+    return current;
+}
+
+- (void)buildCal
+{
     double rn1=[self random];
     if(rn1>0.5){
         electricCurrentLeftB=electricCurrentLeftA*1.05;
@@ -177,6 +165,13 @@ double currentTotalElectricity;
     }else{
         electricCurrentRightB=electricCurrentRightA*0.95;
         electricCurrentRightC=electricCurrentRightA*1.05;
+    }
+    
+    for(int i=0;i<4;i++){
+        for(int j=0;j<3;j++){
+            threePhaseCurrentLeft[i][j]=0.0;
+            threePhaseCurrentRight[i][j]=0.0;
+        }
     }
     
     threePhaseCurrentLeft[0][0]=electricCurrentLeftA;
@@ -204,6 +199,42 @@ double currentTotalElectricity;
     [self startCalculate];
     
     [self displayElectricCurrent];
+}
+
+- (void)startBusinessCal {
+    //进线A
+    double rn0=[self random];
+    if(isTransLoad){
+        int sign=1;
+        if (rn0 > 0.5) {
+            sign = -1;
+        }
+        //保证每次产生的值都在最后一次的基础之上上下浮动5%
+        electricCurrentLeftA=electricCurrentLeftA*sign*0.05+electricCurrentLeftA;
+    }else{
+        if(iaTempLastValue==0){
+            //第一次随机数保证rn的值在0.1-1之间
+            if(rn0<0.1){
+                rn0=0.1+rn0;
+            }
+            electricCurrentLeftA=1443.4*rn0;
+        }else{
+            int sign=1;
+            if (rn0 > 0.5) {
+                sign = -1;
+            }
+            //保证每次产生的值都在最后一次的基础之上上下浮动5%
+            electricCurrentLeftA=iaTempLastValue*sign*0.05+iaTempLastValue;
+        }
+        
+        if(electricCurrentLeftA>1443.4){
+            electricCurrentLeftA=1345;
+        }else if(electricCurrentLeftA<144.34){
+            electricCurrentLeftA=160;
+        }
+        iaTempLastValue=electricCurrentLeftA;
+    }
+    [self buildCal];
     
 }
 
@@ -403,7 +434,6 @@ double currentTotalElectricity;
     [_lblCurrentLoad setText:[NSString stringWithFormat:@"%.2fkW",currentTotalBurden/1000]];
     //当前总电量
     [_lblElectricity setText:[NSString stringWithFormat:@"%.2fkWh",currentTotalElectricity]];
-    
 }
 
 //显示开关的状态
@@ -519,6 +549,62 @@ double currentTotalElectricity;
     long tag=((UIButton*)sender).tag;
     STUserExperienceLineDetailViewController *userExperienceLineDetailViewController=[[STUserExperienceLineDetailViewController alloc]initWithIndex:tag];
     [self.navigationController pushViewController:userExperienceLineDetailViewController animated:YES];
+}
+
+//我要报名
+- (IBAction)onClickSignup:(id)sender {
+    NSLog(@"我要报名");
+}
+
+//负荷超限报警体验
+- (IBAction)onClickAlarmExperience:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"企业总负荷超限报警体验阈值"
+                          message:@"提示：输入阈值范围在0～2500之间"
+                          delegate:self
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:@"取消",nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    //设置输入框的键盘类型
+    UITextField *tf = [alert textFieldAtIndex:0];
+    tf.keyboardType = UIKeyboardTypeNumberPad;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0){
+        NSString *content=[[alertView textFieldAtIndex:0]text];
+        if(![@"" isEqualToString:content]){
+            int value=[content intValue];
+            if(value>0&&value<2500){
+                isTransLoad=YES;
+                electricCurrentLeftA=[self transCurrent:value];
+                [self buildCal];
+                UIActionSheet *sheet = [[UIActionSheet alloc]
+                                        initWithTitle:@"企业总负荷超过所设定的阀值，请注意！"
+                                        delegate:self
+                                        cancelButtonTitle:nil
+                                        destructiveButtonTitle:@"确定"
+                                        otherButtonTitles:nil,nil];
+                [sheet showInView:[UIApplication sharedApplication].keyWindow];
+                //开启报警声音
+            }else{
+                [Common alert:@"输入阈值范围在0～2500之间"];
+            }
+        }else{
+            [Common alert:@"阈值不能为空"];
+        }
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0){
+        //关闭报警声音
+        isTransLoad=NO;
+        [self startBusinessCal];
+    }
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STUserExperienceViewController : UIViewController
+#import "STBaseUserExperienceViewController.h"
+
+@interface STUserExperienceViewController : STBaseUserExperienceViewController
 
 @end
