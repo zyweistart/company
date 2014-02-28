@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C909822018B45E6500703D47 /* ARLineChartCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821B18B45E6500703D47 /* ARLineChartCommon.m */; };
-		C909822118B45E6500703D47 /* ARLineChartContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821D18B45E6500703D47 /* ARLineChartContentView.m */; };
-		C909822218B45E6500703D47 /* ARLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C909821F18B45E6500703D47 /* ARLineChartView.m */; };
 		C91F9A6B18B7D8AF008AE135 /* RMPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91F9A6A18B7D8AF008AE135 /* RMPickerViewController.m */; };
 		C922445C18B5F7B900D0B923 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C922445B18B5F7B900D0B923 /* MapKit.framework */; };
 		C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */; };
@@ -131,12 +128,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C909821A18B45E6500703D47 /* ARLineChartCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineChartCommon.h; sourceTree = "<group>"; };
-		C909821B18B45E6500703D47 /* ARLineChartCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartCommon.m; sourceTree = "<group>"; };
-		C909821C18B45E6500703D47 /* ARLineChartContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineChartContentView.h; sourceTree = "<group>"; };
-		C909821D18B45E6500703D47 /* ARLineChartContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartContentView.m; sourceTree = "<group>"; };
-		C909821E18B45E6500703D47 /* ARLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineChartView.h; sourceTree = "<group>"; };
-		C909821F18B45E6500703D47 /* ARLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineChartView.m; sourceTree = "<group>"; };
 		C91F9A6918B7D8AF008AE135 /* RMPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPickerViewController.h; sourceTree = "<group>"; };
 		C91F9A6A18B7D8AF008AE135 /* RMPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPickerViewController.m; sourceTree = "<group>"; };
 		C922445B18B5F7B900D0B923 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -366,19 +357,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C909821918B45E6500703D47 /* ARLineChart */ = {
-			isa = PBXGroup;
-			children = (
-				C909821A18B45E6500703D47 /* ARLineChartCommon.h */,
-				C909821B18B45E6500703D47 /* ARLineChartCommon.m */,
-				C909821C18B45E6500703D47 /* ARLineChartContentView.h */,
-				C909821D18B45E6500703D47 /* ARLineChartContentView.m */,
-				C909821E18B45E6500703D47 /* ARLineChartView.h */,
-				C909821F18B45E6500703D47 /* ARLineChartView.m */,
-			);
-			path = ARLineChart;
-			sourceTree = "<group>";
-		};
 		C91F9A6818B7D8AF008AE135 /* RMPickerViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,7 +606,6 @@
 			isa = PBXGroup;
 			children = (
 				C9EFE21818B91E5E00308819 /* WeixinActivity */,
-				C909821918B45E6500703D47 /* ARLineChart */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
 				C9A809CD18A7438700EA865D /* ETFoursquareImages */,
@@ -879,7 +856,6 @@
 				C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */,
 				C93C748D189235E400A7FAB8 /* main.m in Sources */,
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
-				C909822218B45E6500703D47 /* ARLineChartView.m in Sources */,
 				C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */,
 				C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
@@ -898,7 +874,6 @@
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
 				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
 				C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */,
-				C909822018B45E6500703D47 /* ARLineChartCommon.m in Sources */,
 				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
 				C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */,
@@ -912,7 +887,6 @@
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
-				C909822118B45E6500703D47 /* ARLineChartContentView.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
 				C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */,
 				C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */,
