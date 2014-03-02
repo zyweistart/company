@@ -7,12 +7,16 @@
 //
 
 #import "STLoginViewController.h"
+#import "NSString+Utils.h"
 
 @interface STLoginViewController ()
 
 @end
 
-@implementation STLoginViewController
+@implementation STLoginViewController {
+    UITextField *txtValueUserName;
+    UITextField *txtValuePassword;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -20,6 +24,12 @@
     if (self) {
         self.title=@"登录";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"登录"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(login:)];
     }
     return self;
 }
@@ -27,13 +37,88 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 130)];
+    [control setHidden:NO];
+    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:control];
+    
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
+    lbl.font=[UIFont systemFontOfSize:12.0];
+    [lbl setText:@"账户"];
+    [lbl setTextColor:[UIColor blackColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setTextAlignment:NSTextAlignmentRight];
+    [control addSubview:lbl];
+    
+    txtValueUserName=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    [txtValueUserName setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValueUserName setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValueUserName setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValueUserName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValueUserName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [control addSubview:txtValueUserName];
+    
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
+    lbl.font=[UIFont systemFontOfSize:12.0];
+    [lbl setText:@"密码："];
+    [lbl setTextColor:[UIColor blackColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setTextAlignment:NSTextAlignmentRight];
+    [control addSubview:lbl];
+    
+    txtValuePassword=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    [txtValuePassword setFont:[UIFont systemFontOfSize: 12.0]];
+    [txtValuePassword setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [txtValuePassword setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValuePassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [control addSubview:txtValuePassword];
+    
+    [txtValueUserName setText:@"zhangyy"];
+    [txtValuePassword setText:@"8888aa"];
+    
 }
 
-- (void)didReceiveMemoryWarning
+- (void)backgroundDoneEditing:(id)sender {
+    [txtValueUserName resignFirstResponder];
+    [txtValuePassword resignFirstResponder];
+}
+
+- (void)login:(id)sender {
+    
+    NSString *username=[txtValueUserName text];
+    NSString *password=[txtValuePassword text];
+    if([@"" isEqualToString:username]){
+        [Common alert:@"账户输入有误"];
+    }else if([@"" isEqualToString:password]){
+        [Common alert:@"密码输入有误"];
+    }else{
+        [Account clear];
+        NSString *URL=@"http://122.224.247.221:7003/WEB/mobile/checkMobileValid.aspx";
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:username forKey:@"imei"];
+        [p setObject:[[password uppercaseString] md5] forKey:@"authentication"];
+        [p setObject:@"2" forKey:@"type"];
+        [p setObject:@"2" forKey:@"IsEncode"];
+        
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest start:URL params:p];
+    }
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSString *result=[Common NSNullConvertEmptyString:[[response resultJSON] objectForKey:@"result"]];
+    if([@"2" isEqualToString:result]){
+        NSString *username=[txtValueUserName text];
+        NSString *password=[txtValuePassword text];
+        [Account LoginSuccessWithUserName:username Password:password Data:[response resultJSON]];
+        [Common alert:@"登录成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [Common alert:@"登录出错"];
+    }
 }
 
 @end

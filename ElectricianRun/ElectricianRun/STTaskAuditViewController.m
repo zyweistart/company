@@ -130,6 +130,13 @@
     [view1 addSubview:btnSearch];
     
     ///////////////////////
+    NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate=[NSDate date];
+    NSString *startDateStr = [dateFormatter stringFromDate:startDate];
+    NSTimeInterval secondsPerDay = 86400*30;
+    NSDate *endDate = [startDate dateByAddingTimeInterval:-secondsPerDay];
+    NSString *endDateStr = [dateFormatter stringFromDate:endDate];
     
     view2=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 210)];
     [view2 setHidden:YES];
@@ -183,6 +190,7 @@
     [txtValueView23 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView23 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueView23 setDelegate:self];
+    [txtValueView23 setText:endDateStr];
     [txtValueView23 setInputView:datePicker];
     [view2 addSubview:txtValueView23];
     
@@ -201,6 +209,7 @@
     [txtValueView24 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueView24 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtValueView24 setDelegate:self];
+    [txtValueView24 setText:startDateStr];
     [txtValueView24 setInputView:datePicker];
     [view2 addSubview:txtValueView24];
     

@@ -27,12 +27,9 @@
     if(self) {
         self.title=@"我的E电工";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        
-        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
-        [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStyleGrouped];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-        [self.view addSubview:self.tableView];
     }
     return self;
 }
@@ -70,7 +67,11 @@
     NSInteger section=[indexPath section];
     if(section==0){
         if(row==0){
-            cell.textLabel.text=@"我的账户";
+            if([Account isLogin]){
+                cell.textLabel.text=@"切换账户";
+            }else{
+                cell.textLabel.text=@"我的账户";
+            }
         }else if(row==1){
             cell.textLabel.text=@"推荐给好友";
         }else{

@@ -62,7 +62,11 @@
 		C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FAC18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m */; };
 		C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */; };
 		C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */; };
-		C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */; };
+		C99F7E2318C2F04C002C97F0 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F7E2218C2F04C002C97F0 /* Account.m */; };
+		C99F7E2918C2F759002C97F0 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F7E2618C2F759002C97F0 /* EAIntroPage.m */; };
+		C99F7E2A18C2F759002C97F0 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F7E2818C2F759002C97F0 /* EAIntroView.m */; };
+		C99F7E2F18C30AA5002C97F0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C99F7E2E18C30AA5002C97F0 /* libsqlite3.dylib */; };
+		C99F7E3218C30C7E002C97F0 /* SQLiteOperate.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F7E3118C30C7E002C97F0 /* SQLiteOperate.m */; };
 		C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CF18A7438700EA865D /* ETFoursquareImages.m */; };
 		C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AB9C4B18C01BFB004B536E /* STBaseUserExperienceViewController.m */; };
 		C9AC1DD618A86C4A004E96CC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD518A86C4A004E96CC /* Common.m */; };
@@ -240,8 +244,15 @@
 		C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmCell.m; sourceTree = "<group>"; };
 		C9943FB118B8EA1B00A62C19 /* STAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAboutUsViewController.h; sourceTree = "<group>"; };
 		C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAboutUsViewController.m; sourceTree = "<group>"; };
-		C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMainTabBarController.h; sourceTree = "<group>"; };
-		C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMainTabBarController.m; sourceTree = "<group>"; };
+		C99F7E2118C2F04C002C97F0 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		C99F7E2218C2F04C002C97F0 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		C99F7E2518C2F759002C97F0 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
+		C99F7E2618C2F759002C97F0 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
+		C99F7E2718C2F759002C97F0 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
+		C99F7E2818C2F759002C97F0 /* EAIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroView.m; sourceTree = "<group>"; };
+		C99F7E2E18C30AA5002C97F0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		C99F7E3018C30C7E002C97F0 /* SQLiteOperate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteOperate.h; sourceTree = "<group>"; };
+		C99F7E3118C30C7E002C97F0 /* SQLiteOperate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteOperate.m; sourceTree = "<group>"; };
 		C9A809CE18A7438700EA865D /* ETFoursquareImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETFoursquareImages.h; sourceTree = "<group>"; };
 		C9A809CF18A7438700EA865D /* ETFoursquareImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETFoursquareImages.m; sourceTree = "<group>"; };
 		C9AB9C4A18C01BFB004B536E /* STBaseUserExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseUserExperienceViewController.h; sourceTree = "<group>"; };
@@ -356,6 +367,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C99F7E2F18C30AA5002C97F0 /* libsqlite3.dylib in Frameworks */,
 				C922445C18B5F7B900D0B923 /* MapKit.framework in Frameworks */,
 				C9EF51F218AA0CF500CFBE06 /* AVFoundation.framework in Frameworks */,
 				C9EFE22B18B91E5E00308819 /* libWeChatSDK.a in Frameworks */,
@@ -447,6 +459,7 @@
 		C93C747F189235E400A7FAB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C99F7E2E18C30AA5002C97F0 /* libsqlite3.dylib */,
 				C922445B18B5F7B900D0B923 /* MapKit.framework */,
 				C9488CF218A77002006008C3 /* AVFoundation.framework */,
 				C93C7480189235E400A7FAB8 /* Foundation.framework */,
@@ -536,8 +549,6 @@
 				C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */,
 				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
 				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
-				C9A809CA18A73B6C00EA865D /* STMainTabBarController.h */,
-				C9A809CB18A73B6C00EA865D /* STMainTabBarController.m */,
 				C93C74BB18923C2A00A7FAB8 /* STMyeViewController.h */,
 				C93C74BC18923C2A00A7FAB8 /* STMyeViewController.m */,
 				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
@@ -569,6 +580,17 @@
 				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		C99F7E2418C2F759002C97F0 /* EAIntroView */ = {
+			isa = PBXGroup;
+			children = (
+				C99F7E2518C2F759002C97F0 /* EAIntroPage.h */,
+				C99F7E2618C2F759002C97F0 /* EAIntroPage.m */,
+				C99F7E2718C2F759002C97F0 /* EAIntroView.h */,
+				C99F7E2818C2F759002C97F0 /* EAIntroView.m */,
+			);
+			path = EAIntroView;
 			sourceTree = "<group>";
 		};
 		C9A809CD18A7438700EA865D /* ETFoursquareImages */ = {
@@ -633,6 +655,10 @@
 				C9D19EA518B7BC330038D131 /* DatePickerView.m */,
 				C9D3218C18B84D4A0015B537 /* DataPickerView.h */,
 				C9D3218D18B84D4A0015B537 /* DataPickerView.m */,
+				C99F7E2118C2F04C002C97F0 /* Account.h */,
+				C99F7E2218C2F04C002C97F0 /* Account.m */,
+				C99F7E3018C30C7E002C97F0 /* SQLiteOperate.h */,
+				C99F7E3118C30C7E002C97F0 /* SQLiteOperate.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -640,6 +666,7 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C99F7E2418C2F759002C97F0 /* EAIntroView */,
 				C9EFE21818B91E5E00308819 /* WeixinActivity */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
@@ -899,7 +926,9 @@
 				C95F7F3518BF3E8200403430 /* STChartElectricityViewController.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
 				C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */,
+				C99F7E2318C2F04C002C97F0 /* Account.m in Sources */,
 				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
+				C99F7E2A18C2F759002C97F0 /* EAIntroView.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
 				C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
@@ -922,7 +951,6 @@
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
-				C9A809CC18A73B6C00EA865D /* STMainTabBarController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
 				C9CF827F18C06D30002826C4 /* STDataMonitoringLineCell.m in Sources */,
 				C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */,
@@ -957,6 +985,7 @@
 				C91F9A6B18B7D8AF008AE135 /* RMPickerViewController.m in Sources */,
 				C98F54AD18B651660032AE8B /* STTaskAuditRecord2ViewController.m in Sources */,
 				C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */,
+				C99F7E3218C30C7E002C97F0 /* SQLiteOperate.m in Sources */,
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
@@ -967,6 +996,7 @@
 				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C9CF827C18C06D01002826C4 /* STDataMonitoringCell.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
+				C99F7E2918C2F759002C97F0 /* EAIntroPage.m in Sources */,
 				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
 				C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */,
 				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
@@ -1085,6 +1115,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
@@ -1093,6 +1125,7 @@
 					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/WeixinActivity/Resources,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1103,6 +1136,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElectricianRun/ElectricianRun-Prefix.pch";
 				INFOPLIST_FILE = "ElectricianRun/ElectricianRun-Info.plist";
@@ -1111,6 +1146,7 @@
 					/Users/start/Documents/Developer/GitHub/company/ElectricianRun/ElectricianRun/Librarys/WeixinActivity/Resources,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STStudyViewController : UIViewController
+@interface STStudyViewController : UITableViewController
 
 @end

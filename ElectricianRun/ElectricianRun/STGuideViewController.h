@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EAIntroView.h"
 
-@interface STGuideViewController : UIViewController
+@interface STGuideViewController : UIViewController<EAIntroDelegate,HttpRequestDelegate>
+
+@property (strong,nonatomic) HttpRequest *hRequest;
+@property (strong,nonatomic) HttpRequest *hdRequest;
 
 @end

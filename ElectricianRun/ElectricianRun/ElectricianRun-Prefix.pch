@@ -18,9 +18,15 @@
     #import "BaseUIViewController.h"
     #import "HttpRequest.h"
     #import "Common.h"
+    #import "Account.h"
     #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7]
     #define PAGESIZE 20
 
     #define CACHE_DATA [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:object_getClassName(self)]]
     #define CACHE_DATABYUNIQUE(UNIQUE) [NSString stringWithFormat:@"%@-%@",CACHE_DATA,UNIQUE]
+#define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
+    #define ISACCOUNTLOGIN @"ISACCOUNTLOGIN"
+    #define ACCOUNTUSERNAME @"ACCOUNTUSERNAME"
+    #define ACCOUNTPASSWORD @"ACCOUNTPASSWORD"
+    #define ACCOUNTRESULTDATA @"ACCOUNTRESULTDATA"
 #endif

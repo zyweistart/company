@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STLoginViewController : UIViewController
+@interface STLoginViewController : UIViewController<HttpRequestDelegate>
+
+@property (strong,nonatomic) HttpRequest *hRequest;
 
 @end

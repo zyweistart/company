@@ -22,7 +22,6 @@
     ATMHud *_atmHud;
     MBProgressHUD *_mbpHud;
     long long downloadFileSize;
-    NSMutableData *_resultData;
     NSString *_http_url;
     NSMutableDictionary *_params;
     
@@ -31,6 +30,7 @@
 - (id)init:(UIViewController*)controler delegate:(NSObject<HttpRequestDelegate>*)delegate responseCode:(int)repCode{
     self = [super init];
     if (self) {
+        _isReachableViaWiFiMessage=YES;
         [self setController:controler];
         [self setDelegate:delegate];
         [self setResponseCode:repCode];
@@ -55,11 +55,15 @@
         _http_url=URL;
         _params=p;
         if(_isFileDownload) {
-            //如果为下载是否使用的是3G移动网络
-            Reachability *reach = [Reachability reachabilityForInternetConnection];
-            if([reach currentReachabilityStatus]!=ReachableViaWWAN) {
-                [Common actionSheet:self message:@"即将通过移动网络下载数据，为了节约流量，推荐您使用WIFI无线网络!" tag:ReachableViaWWANDOWNLOAD];
-            } else {
+            if(_isReachableViaWiFiMessage){
+                //如果为下载是否使用的是3G移动网络
+                Reachability *reach = [Reachability reachabilityForInternetConnection];
+                if([reach currentReachabilityStatus]==ReachableViaWWAN) {
+                    [Common actionSheet:self message:@"即将通过移动网络下载数据，为了节约流量，推荐您使用WIFI无线网络!" tag:ReachableViaWWANDOWNLOAD];
+                } else {
+                    [self handle];
+                }
+            }else{
                 [self handle];
             }
         } else {
@@ -104,11 +108,13 @@
     [conn start];
     
     if(_isFileDownload){
-        _atmHud=[[ATMHud alloc]init];
-        [self.controller.view addSubview:_atmHud.view];
-        [_atmHud setCaption:@"下载中..."];
-        [_atmHud setProgress:0.01];
-        [_atmHud show];
+        if(self.isShowMessage){
+            _atmHud=[[ATMHud alloc]init];
+            [self.controller.view addSubview:_atmHud.view];
+            [_atmHud setCaption:@"下载中..."];
+            [_atmHud setProgress:0.01];
+            [_atmHud show];
+        }
     } else {
         if(self.controller&&(self.message!=nil||self.isShowMessage)) {
             _mbpHud = [[MBProgressHUD alloc] initWithView:self.controller.view];
@@ -130,11 +136,13 @@
     }
     
     if(self.isFileDownload) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if(httpResponse && [httpResponse respondsToSelector:@selector(allHeaderFields)]){
-            NSDictionary *httpResponseHeaderFields = [httpResponse allHeaderFields];
-            //获取文件文件的大小
-            downloadFileSize = [[httpResponseHeaderFields objectForKey:@"Content-Length"] longLongValue];
+        if(self.isShowMessage){
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if(httpResponse && [httpResponse respondsToSelector:@selector(allHeaderFields)]){
+                NSDictionary *httpResponseHeaderFields = [httpResponse allHeaderFields];
+                //获取文件文件的大小
+                downloadFileSize = [[httpResponseHeaderFields objectForKey:@"Content-Length"] longLongValue];
+            }
         }
     }
 }
@@ -143,11 +151,13 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [_resultData appendData:data];
     if(self.isFileDownload) {
-        //显示下载进度条
-        if(_atmHud) {
-            float size=[_resultData length]/(float)downloadFileSize;
-            if(size>0) {
-                [_atmHud setProgress:size];
+        if(self.isShowMessage){
+            //显示下载进度条
+            if(_atmHud) {
+                float size=[_resultData length]/(float)downloadFileSize;
+                if(size>0) {
+                    [_atmHud setProgress:size];
+                }
             }
         }
     }
@@ -155,20 +165,20 @@
 
 #pragma mark 服务器的数据已经接收完毕时调用
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSString*pageSource = [[NSString alloc] initWithData:_resultData encoding:gbkEncoding];
     Response *response=[[Response alloc]init];
-    if(pageSource!=nil) {
-        NSString *responseString=[pageSource stringByReplacingPercentEscapesUsingEncoding:gbkEncoding];
-        [response setResponseString:responseString];
-        [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
-    } else {
-        NSString *responseString =[[NSString alloc] initWithData:_resultData encoding:NSUTF8StringEncoding];
-        [response setResponseString:responseString];
+    [response setResultData:_resultData];
+    if(!self.isFileDownload){
+        NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        NSString*pageSource = [[NSString alloc] initWithData:_resultData encoding:gbkEncoding];
+        if(pageSource!=nil) {
+            NSString *responseString=[pageSource stringByReplacingPercentEscapesUsingEncoding:gbkEncoding];
+            [response setResponseString:responseString];
+            [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
+        } else {
+            NSString *responseString =[[NSString alloc] initWithData:_resultData encoding:NSUTF8StringEncoding];
+            [response setResponseString:responseString];
+        }
     }
-    
-    _resultData=nil;
     
     if( [_delegate respondsToSelector: @selector(requestFinishedByResponse:responseCode:)]) {
         //调用代理对象
@@ -180,9 +190,11 @@
         [_mbpHud hide:YES];
     }
     if(self.isFileDownload) {
-        //隐藏下载进度条
-        if(_atmHud) {
-            [_atmHud hide];
+        if(self.isShowMessage){
+            //隐藏下载进度条
+            if(_atmHud) {
+                [_atmHud hide];
+            }
         }
     }
     
@@ -203,9 +215,11 @@
         [_mbpHud hide:YES];
     }
     if(self.isFileDownload) {
-        //隐藏下载进度条
-        if(_atmHud) {
-            [_atmHud hide];
+        if(self.isShowMessage){
+            //隐藏下载进度条
+            if(_atmHud) {
+                [_atmHud hide];
+            }
         }
     }
 }

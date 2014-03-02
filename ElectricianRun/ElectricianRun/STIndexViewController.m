@@ -63,29 +63,22 @@
     [btnF2 setBackgroundColor:[UIColor blueColor]];
     [btnF2 addTarget:self action:@selector(onClickJurisdiction:) forControlEvents:UIControlEventTouchUpInside];
     [foursquareImages.scrollView addSubview:btnF2];
-    //调试工具
-    UIButton *btnF3=[[UIButton alloc]initWithFrame:CGRectMake(5,95+IMAGEHEIGHT, 73.85, 80)];
-    btnF3.titleLabel.font=[UIFont systemFontOfSize: 10.0];
-    [btnF3 setTitle:@"调试工具" forState:UIControlStateNormal];
-    [btnF3 setBackgroundColor:[UIColor greenColor]];
-    [btnF3 addTarget:self action:@selector(onClickDebug:) forControlEvents:UIControlEventTouchUpInside];
-    [foursquareImages.scrollView addSubview:btnF3];
     //工程建站
-    UIButton *btnF4=[[UIButton alloc]initWithFrame:CGRectMake(83.85,95+IMAGEHEIGHT, 73.85, 80)];
+    UIButton *btnF4=[[UIButton alloc]initWithFrame:CGRectMake(5,95+IMAGEHEIGHT, 100, 80)];
     btnF4.titleLabel.font=[UIFont systemFontOfSize: 10.0];
     [btnF4 setTitle:@"工程建站" forState:UIControlStateNormal];
     [btnF4 setBackgroundColor:[UIColor orangeColor]];
     [btnF4 addTarget:self action:@selector(onClickSite:) forControlEvents:UIControlEventTouchUpInside];
     [foursquareImages.scrollView addSubview:btnF4];
     //扫描操作
-    UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(162.7,95+IMAGEHEIGHT, 73.85, 80)];
+    UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(110,95+IMAGEHEIGHT, 100, 80)];
     btnF5.titleLabel.font=[UIFont systemFontOfSize: 10.0];
     [btnF5 setTitle:@"扫描操作" forState:UIControlStateNormal];
     [btnF5 setBackgroundColor:[UIColor redColor]];
     [btnF5 addTarget:self action:@selector(onClickOperating:) forControlEvents:UIControlEventTouchUpInside];
     [foursquareImages.scrollView addSubview:btnF5];
     //在线计算
-    UIButton *btnF6=[[UIButton alloc]initWithFrame:CGRectMake(241.55,95+IMAGEHEIGHT, 73.85, 80)];
+    UIButton *btnF6=[[UIButton alloc]initWithFrame:CGRectMake(215,95+IMAGEHEIGHT, 100, 80)];
     btnF6.titleLabel.font=[UIFont systemFontOfSize: 10.0];
     [btnF6 setTitle:@"在线计算" forState:UIControlStateNormal];
     [btnF6 setBackgroundColor:[UIColor blueColor]];
@@ -130,12 +123,6 @@
                                              taskManagerViewControllerNav,
                                              taskAuditViewControllerNav,nil];
     [self presentViewController:_tabBarController animated:YES completion:nil];
-}
-
-//调试工具
-- (void)onClickDebug:(id)sender {
-    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
-    [self presentViewController:myeViewControllerNav animated:YES completion:nil];
 }
 
 //工程建站

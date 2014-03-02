@@ -26,12 +26,15 @@
 @property BOOL isShowMessage;
 //是否为文件下载
 @property BOOL isFileDownload;
+//是否使用移动网络提示
+@property BOOL isReachableViaWiFiMessage;
 //请求时的提示信息
 @property (strong,nonatomic) NSString *message;
 //当前请求的控制器
 @property (strong,nonatomic) UIViewController *controller;
 //代理对象
 @property (strong,nonatomic) NSObject<HttpRequestDelegate> *delegate;
+@property (strong,nonatomic) NSMutableData *resultData;
 
 //是否已连接网络
 + (BOOL)isNetworkConnection;

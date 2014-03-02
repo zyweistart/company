@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STMyeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
-
-@property (strong,nonatomic) UITableView *tableView;
+@interface STMyeViewController : UITableViewController<UIActionSheetDelegate>
 
 @end
