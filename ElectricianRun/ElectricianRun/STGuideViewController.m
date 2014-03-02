@@ -77,26 +77,30 @@
 - (void)gotoMainPage
 {
     
-//    //首页
-//    UINavigationController *indexViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STIndexViewController alloc]init]];
-//    indexViewControllerNav.navigationBarHidden=YES;
-//    indexViewControllerNav.tabBarItem.title=@"首页";
-//    //我要学习
-//    UINavigationController *studyViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STStudyViewController alloc]init]];
-//    studyViewControllerNav.tabBarItem.title=@"我要学习";
-//    //我的E电工
-//    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
-//    myeViewControllerNav.tabBarItem.title=@"我的E电工";
-//    
-//    [self setViewControllers:[NSArray arrayWithObjects:
-//                             indexViewControllerNav,
-//                             studyViewControllerNav,
-//                             myeViewControllerNav,
-//                              nil] animated:YES];
+    //首页
+    UINavigationController *indexViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STIndexViewController alloc]init]];
+    indexViewControllerNav.navigationBarHidden=YES;
+    indexViewControllerNav.tabBarItem.title=@"首页";
+    //我要学习
+    UINavigationController *studyViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STStudyViewController alloc]init]];
+    studyViewControllerNav.tabBarItem.title=@"我要学习";
+    //我的E电工
+    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
+    myeViewControllerNav.tabBarItem.title=@"我的E电工";
+    
+    [self setViewControllers:[NSArray arrayWithObjects:
+                             indexViewControllerNav,
+                             studyViewControllerNav,
+                             myeViewControllerNav,
+                              nil] animated:YES];
     
 //    [self downLoadPicture];
-    db=[[SQLiteOperate alloc]init];
-    [self downLoadHtml];
+//    db=[[SQLiteOperate alloc]init];
+//    [self downLoadHtml];
+
+    
+//    self.downloadIcon=[[DownloadIcon alloc]init];
+//    [self.downloadIcon startWithUrl:@"http://122.224.247.221:7003/html/AppNews/images/app_20140117095452.jpg"];
     
 }
 
@@ -153,13 +157,8 @@
                     NSMutableString *iconurl=[[NSMutableString alloc]initWithString:url];
                     [iconurl appendFormat:@"images/%@",outicon_name];
                     
-                    self.hdRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADICONFILE];
-                    [self.hdRequest setIsFileDownload:YES];
-                    [self.hdRequest setIsShowMessage:NO];
-                    [self.hdRequest setIsReachableViaWiFiMessage:NO];
-                    [self.hdRequest start:iconurl params:nil];
-                    
-                    
+                    self.downloadIcon=[[DownloadIcon alloc]init];
+                    [self.downloadIcon startWithUrl:iconurl];
                     
                     break;
                     
@@ -200,31 +199,7 @@
         
         
     }else if(repCode==DOWNLOADICONFILE){
-        //创建文件管理器
-        NSFileManager* fileManager = [NSFileManager defaultManager];
-        //获取临时目录
-        NSString* tmpDir=NSTemporaryDirectory();
-        //更改到待操作的临时目录
-        [fileManager changeCurrentDirectoryPath:[tmpDir stringByExpandingTildeInPath]];
-        NSString *tmpPath = [tmpDir stringByAppendingPathComponent:@"images.jpg"];
         
-        //创建数据缓冲区
-        NSMutableData* writer = [[NSMutableData alloc] init];
-        //将字符串添加到缓冲中
-        [writer appendData: [response resultData]];
-        //将其他数据添加到缓冲中
-        //将缓冲的数据写入到临时文件中
-        [writer writeToFile:tmpPath atomically:YES];
-        
-        //获取Documents主目录
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-        //得到相应的Documents的路径
-        NSString* docDir = [paths objectAtIndex:0];
-        //更改到待操作的目录下
-        [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
-        NSString *path = [docDir stringByAppendingPathComponent:@"images.jpg"];
-        //把临时下载好的文件移动到主文档目录下
-        [fileManager moveItemAtPath:tmpPath toPath:path error:nil];
         
         
     }

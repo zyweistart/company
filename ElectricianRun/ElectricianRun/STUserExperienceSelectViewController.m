@@ -65,10 +65,14 @@
 
 - (void)alarm:(id)sender
 {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
-    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
-    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
+//    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
+//    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
+//    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
+    
+    UINavigationController *userExperienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceAlarmViewController alloc]init]];
+    [self presentViewController:userExperienceAlarmViewControllerNav animated:YES completion:nil];
+    
 }
 
 - (void)business:(id)sender

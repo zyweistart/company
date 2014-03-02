@@ -54,6 +54,7 @@
 		C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */; };
 		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
 		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
+		C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */; };
 		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
 		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
@@ -228,6 +229,8 @@
 		C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLineInfoViewController.m; sourceTree = "<group>"; };
 		C9726CE118B7956D006FB209 /* STChangeMaterialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChangeMaterialViewController.h; sourceTree = "<group>"; };
 		C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeMaterialViewController.m; sourceTree = "<group>"; };
+		C97D54D818C35EAD003BC6C9 /* DownloadIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadIcon.h; sourceTree = "<group>"; };
+		C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadIcon.m; sourceTree = "<group>"; };
 		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
 		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
 		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
@@ -659,6 +662,8 @@
 				C99F7E2218C2F04C002C97F0 /* Account.m */,
 				C99F7E3018C30C7E002C97F0 /* SQLiteOperate.h */,
 				C99F7E3118C30C7E002C97F0 /* SQLiteOperate.m */,
+				C97D54D818C35EAD003BC6C9 /* DownloadIcon.h */,
+				C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -948,6 +953,7 @@
 				C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */,
 				C95F7F3B18BF3EBD00403430 /* STChartElectricityValPieViewController.m in Sources */,
 				C95F7F3E18BF3F9C00403430 /* STChartElectricityValViewController.m in Sources */,
+				C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,

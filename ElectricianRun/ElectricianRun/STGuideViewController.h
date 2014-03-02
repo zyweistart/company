@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "EAIntroView.h"
+#import "DownloadIcon.h"
 
-@interface STGuideViewController : UIViewController<EAIntroDelegate,HttpRequestDelegate>
+@interface STGuideViewController : UITabBarController<EAIntroDelegate,HttpRequestDelegate>
 
 @property (strong,nonatomic) HttpRequest *hRequest;
-@property (strong,nonatomic) HttpRequest *hdRequest;
+@property (strong,nonatomic) DownloadIcon *downloadIcon;
 
 @end

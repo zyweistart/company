@@ -40,9 +40,10 @@
     [foursquareImages setImagesHeight:IMAGEHEIGHT];
     
     NSArray *images  = [NSArray arrayWithObjects:
-                        [UIImage imageNamed:@"horses"],
-                        [UIImage imageNamed:@"surfer"],
-                        [UIImage imageNamed:@"bridge"], nil];
+                        [UIImage imageNamed:@"image1"],
+                        [UIImage imageNamed:@"image2"],
+                        [UIImage imageNamed:@"image3"],
+                        [UIImage imageNamed:@"image4"], nil];
     
     [foursquareImages setImages:images];
     [foursquareImages setBackgroundColor:[UIColor redColor]];

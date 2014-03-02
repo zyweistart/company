@@ -38,9 +38,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //以后则每根据设定的时间调用一次
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
-    self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
+//    //以后则每根据设定的时间调用一次
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
+//    self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
+    [self buildUI];
+}
+
+
+- (void)buildUI{
+    NSLog(@"buildUI");
 }
 
 - (IBAction)onClickSwitch:(id)sender
