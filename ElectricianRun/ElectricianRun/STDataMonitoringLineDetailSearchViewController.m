@@ -21,12 +21,15 @@
     UITextField *txtEndValue;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (id)initWithData:(NSDictionary *)data
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         
         self.title=@"历史数据查询";
+        
+        self.data=data;
         
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
@@ -42,8 +45,13 @@
 
 //查询
 - (void)search:(id)sender{
-    STDataMonitoringLineDetailListViewController *dataMonitoringLineDetailListViewController=[[STDataMonitoringLineDetailListViewController alloc]init];
+    NSString *startDay=[txtStartValue text];
+    NSString *endDay=[txtEndValue text];
+    STDataMonitoringLineDetailListViewController *dataMonitoringLineDetailListViewController=[[STDataMonitoringLineDetailListViewController alloc]initWithData:self.data lastMonthSearch:NO];
+    [dataMonitoringLineDetailListViewController setStartDay:startDay];
+    [dataMonitoringLineDetailListViewController setEndDay:endDay];
     [self.navigationController pushViewController:dataMonitoringLineDetailListViewController animated:YES];
+    [dataMonitoringLineDetailListViewController autoRefresh];
 }
 
 - (void)viewDidLoad

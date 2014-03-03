@@ -213,12 +213,13 @@
 }
 
 - (void)history1:(id)sender {
-    STDataMonitoringLineDetailListViewController *dataMonitoringLineDetailListViewController=[[STDataMonitoringLineDetailListViewController alloc]init];
+    STDataMonitoringLineDetailListViewController *dataMonitoringLineDetailListViewController=[[STDataMonitoringLineDetailListViewController alloc]initWithData:self.data lastMonthSearch:YES];
     [self.navigationController pushViewController:dataMonitoringLineDetailListViewController animated:YES];
+    [dataMonitoringLineDetailListViewController autoRefresh];
 }
 
 - (void)history2:(id)sender {
-    STDataMonitoringLineDetailSearchViewController *dataMonitoringLineDetailSearchViewController=[[STDataMonitoringLineDetailSearchViewController alloc]init];
+    STDataMonitoringLineDetailSearchViewController *dataMonitoringLineDetailSearchViewController=[[STDataMonitoringLineDetailSearchViewController alloc]initWithData:self.data];
     [self.navigationController pushViewController:dataMonitoringLineDetailSearchViewController animated:YES];
 }
 

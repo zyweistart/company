@@ -7,42 +7,72 @@
 //
 
 #import "STDataMonitoringLineDetailListViewController.h"
+#import "STMonitoringLineDetailCell.h"
 #import "NSString+Utils.h"
 
 @interface STDataMonitoringLineDetailListViewController ()
 
 @end
 
-@implementation STDataMonitoringLineDetailListViewController
+@implementation STDataMonitoringLineDetailListViewController {
+    NSDictionary *data;
+    BOOL lastMonthSearch;
+    NSString *year;
+    NSString *month;
+}
 
-- (id)initWithData:(NSDictionary *) data
+- (id)initWithData:(NSDictionary *)d lastMonthSearch:(BOOL)flag
 {
+    [self setIsLoadCache:NO];
     self = [super init];
     if (self) {
         
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        
-        self.data=data;
+        data=d;
+        lastMonthSearch=flag;
+        if(lastMonthSearch){
+            NSDate *date=[NSDate date];
+            NSDateFormatter *dayformatter =[[NSDateFormatter alloc] init];
+            [dayformatter setDateFormat:@"yyyy"];
+            year = [dayformatter stringFromDate:date];
+            NSDateFormatter *monthformatter =[[NSDateFormatter alloc] init];
+            [monthformatter setDateFormat:@"MM"];
+            month = [monthformatter stringFromDate:date];
+            self.title=[NSString stringWithFormat:@"%@月份历史耗量",month];
+        }
         
     }
     return self;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 210;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellReuseIdentifier=@"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    STMonitoringLineDetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    if(!cell) {
+        cell = [[STMonitoringLineDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
     }
+    
     NSUInteger row=[indexPath row];
-    if([self.dataItemArray count] > row){
-        NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"METER_NAME"]];
-    }else{
-        cell.textLabel.text=@"更多";
-    }
+    NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CHANNEL"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"REPORT_DATE"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"HZ"]]];
+    [cell.lbl5 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"V_A"]]];
+    [cell.lbl6 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"I_A"]]];
+    [cell.lbl7 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"V_B"]]];
+    [cell.lbl8 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"I_B"]]];
+    [cell.lbl9 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"V_C"]]];
+    [cell.lbl10 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"I_C"]]];
+    [cell.lbl11 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"P_POWER"]]];
+    [cell.lbl12 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"FACTOR"]]];
     return cell;
 }
 
@@ -51,24 +81,30 @@
 
 - (void)reloadTableViewDataSource{
     
-	_reloading = YES;
-    
     NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"zhangyy" forKey:@"imei"];
     [p setObject:[@"8888AA" md5] forKey:@"authentication"];
-    [p setObject:@"SJ20" forKey:@"GNID"];
-    [p setObject:[self.data objectForKey:@"CP_ID"] forKey:@"QTCP"];
-    [p setObject:@"" forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY1"];
+    [p setObject:[data objectForKey:@"CP_ID"] forKey:@"QTCP"];
+    [p setObject:[data objectForKey:@"METER_ID"] forKey:@"QTLN"];
+    if(lastMonthSearch){
+        //当月的耗量
+        [p setObject:@"SJ21" forKey:@"GNID"];
+        [p setObject:[NSString stringWithFormat:@"%@-%@-1",year,month] forKey:@"QTD1"];
+    }else{
+        //按日期查询耗量
+        [p setObject:@"SJ22" forKey:@"GNID"];
+        [p setObject:self.startDay forKey:@"QTD1"];
+        [p setObject:self.endDay forKey:@"QTD2"];
+    }
+    
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
     [self.hRequest start:URL params:p];
-    
 }
 
 @end

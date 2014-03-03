@@ -11,4 +11,8 @@
 
 @interface STDataMonitoringLineDetailSearchViewController : UIViewController<DatePickerViewDelegate,UITextFieldDelegate>
 
+- (id)initWithData:(NSDictionary *)data;
+
+@property (strong,nonatomic) NSDictionary *data;
+
 @end

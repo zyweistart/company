@@ -104,6 +104,7 @@
 		C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */; };
 		C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */; };
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
+		C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
 		C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827518C065C8002826C4 /* STSignupViewController.m */; };
@@ -327,6 +328,8 @@
 		C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmManagerViewController.m; sourceTree = "<group>"; };
 		C9B68AD518B50EB6009B57E2 /* STTaskManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerViewController.h; sourceTree = "<group>"; };
 		C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerViewController.m; sourceTree = "<group>"; };
+		C9C067C818C466CA006AB9C7 /* STMonitoringLineDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMonitoringLineDetailCell.h; sourceTree = "<group>"; };
+		C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMonitoringLineDetailCell.m; sourceTree = "<group>"; };
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 				C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */,
 				C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */,
 				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
+				C9C067C818C466CA006AB9C7 /* STMonitoringLineDetailCell.h */,
+				C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1009,6 +1014,7 @@
 				C9EFE22D18B91E5E00308819 /* WeixinSessionActivity.m in Sources */,
 				C9AC1DD618A86C4A004E96CC /* Common.m in Sources */,
 				C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */,
+				C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */,
 				C9EF51AC18A9B6C000CFBE06 /* STGuideViewController.m in Sources */,
 				C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */,
 				C91F9A6B18B7D8AF008AE135 /* RMPickerViewController.m in Sources */,

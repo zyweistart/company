@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseRefreshTableViewController.h"
+#import "BaseMJRefreshViewController.h"
 
-@interface STDataMonitoringLineDetailListViewController : BaseRefreshTableViewController
+@interface STDataMonitoringLineDetailListViewController : BaseMJRefreshViewController
 
-@property (strong,nonatomic) NSDictionary *data;
+- (id)initWithData:(NSDictionary *)d lastMonthSearch:(BOOL)flag;
 
-- (id)initWithData:(NSDictionary *)data;
+@property (strong,nonatomic) NSString *startDay;
+@property (strong,nonatomic) NSString *endDay;
+
 @end
