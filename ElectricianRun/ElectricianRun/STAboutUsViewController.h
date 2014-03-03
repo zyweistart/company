@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STAboutUsViewController : UIViewController
+@interface STAboutUsViewController : UITableViewController
 
 @end

@@ -70,6 +70,7 @@
     [txtValuePassword setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValuePassword setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValuePassword setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtValuePassword setSecureTextEntry:YES];
     [txtValuePassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValuePassword];

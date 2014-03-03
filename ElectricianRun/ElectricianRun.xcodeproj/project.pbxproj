@@ -16,6 +16,11 @@
 		C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446A18B623E200D0B923 /* MJRefreshConst.m */; };
 		C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446C18B623E200D0B923 /* MJRefreshFooterView.m */; };
 		C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */; };
+		C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */; };
+		C92EA0C418C41FCB003F1669 /* STAgreementContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */; };
+		C92EA0C718C41FF8003F1669 /* STIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */; };
+		C92EA0CD18C422E6003F1669 /* STAlarmSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */; };
+		C92EA0D018C42747003F1669 /* STAlarmSetupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */; };
 		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
 		C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA718B512E000E4AE0A /* BaseTableViewController.m */; };
 		C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
@@ -36,7 +41,6 @@
 		C93C74CA18923EE500A7FAB8 /* STScanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74C918923EE500A7FAB8 /* STScanningViewController.m */; };
 		C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */; };
 		C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D218923F8400A7FAB8 /* STLoginViewController.m */; };
-		C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */; };
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C949E7E618C087A00001B5FE /* STAuditRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C949E7E518C087A00001B5FE /* STAuditRecordCell.m */; };
@@ -157,6 +161,16 @@
 		C922446C18B623E200D0B923 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
 		C922446D18B623E200D0B923 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
 		C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		C92EA0BF18C41F82003F1669 /* STFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedbackViewController.h; sourceTree = "<group>"; };
+		C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedbackViewController.m; sourceTree = "<group>"; };
+		C92EA0C218C41FCB003F1669 /* STAgreementContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAgreementContentViewController.h; sourceTree = "<group>"; };
+		C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAgreementContentViewController.m; sourceTree = "<group>"; };
+		C92EA0C518C41FF8003F1669 /* STIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIntroductionViewController.h; sourceTree = "<group>"; };
+		C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIntroductionViewController.m; sourceTree = "<group>"; };
+		C92EA0CB18C422E6003F1669 /* STAlarmSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmSetupViewController.h; sourceTree = "<group>"; };
+		C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmSetupViewController.m; sourceTree = "<group>"; };
+		C92EA0CE18C42747003F1669 /* STAlarmSetupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmSetupCell.h; sourceTree = "<group>"; };
+		C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmSetupCell.m; sourceTree = "<group>"; };
 		C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
 		C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRefreshTableViewController.m; sourceTree = "<group>"; };
 		C933FEA618B512E000E4AE0A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
@@ -191,8 +205,6 @@
 		C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STProjectSiteViewController.m; sourceTree = "<group>"; };
 		C93C74D118923F8400A7FAB8 /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
 		C93C74D218923F8400A7FAB8 /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
-		C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSetupViewController.h; sourceTree = "<group>"; };
-		C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSetupViewController.m; sourceTree = "<group>"; };
 		C9488CF218A77002006008C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C9488D0018A77D16006008C3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		C9488D0118A77D16006008C3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -407,18 +419,20 @@
 			children = (
 				C9943FAE18B8E2F200A62C19 /* STAlarmCell.h */,
 				C9943FAF18B8E2F200A62C19 /* STAlarmCell.m */,
-				C922445E18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.h */,
-				C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */,
-				C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */,
-				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
-				C9CF827A18C06D01002826C4 /* STDataMonitoringCell.h */,
-				C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */,
-				C9CF827D18C06D2F002826C4 /* STDataMonitoringLineCell.h */,
-				C9CF827E18C06D2F002826C4 /* STDataMonitoringLineCell.m */,
+				C92EA0CE18C42747003F1669 /* STAlarmSetupCell.h */,
+				C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */,
 				C9CF828018C08413002826C4 /* STAuditBuildCell.h */,
 				C9CF828118C08413002826C4 /* STAuditBuildCell.m */,
 				C949E7E418C087A00001B5FE /* STAuditRecordCell.h */,
 				C949E7E518C087A00001B5FE /* STAuditRecordCell.m */,
+				C9CF827A18C06D01002826C4 /* STDataMonitoringCell.h */,
+				C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */,
+				C9CF827D18C06D2F002826C4 /* STDataMonitoringLineCell.h */,
+				C9CF827E18C06D2F002826C4 /* STDataMonitoringLineCell.m */,
+				C922445E18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.h */,
+				C922445F18B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m */,
+				C922446118B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.h */,
+				C922446218B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -526,6 +540,10 @@
 				C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */,
 				C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */,
 				C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */,
+				C92EA0C218C41FCB003F1669 /* STAgreementContentViewController.h */,
+				C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */,
+				C92EA0CB18C422E6003F1669 /* STAlarmSetupViewController.h */,
+				C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */,
 				C9AB9C4A18C01BFB004B536E /* STBaseUserExperienceViewController.h */,
 				C9AB9C4B18C01BFB004B536E /* STBaseUserExperienceViewController.m */,
 				C93C74C518923EC700A7FAB8 /* STCalculateViewController.h */,
@@ -544,10 +562,14 @@
 				C95F7F3D18BF3F9C00403430 /* STChartElectricityValViewController.m */,
 				C95F7F3318BF3E8200403430 /* STChartElectricityViewController.h */,
 				C95F7F3418BF3E8200403430 /* STChartElectricityViewController.m */,
+				C92EA0BF18C41F82003F1669 /* STFeedbackViewController.h */,
+				C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */,
 				C9EF51AA18A9B6C000CFBE06 /* STGuideViewController.h */,
 				C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
+				C92EA0C518C41FF8003F1669 /* STIntroductionViewController.h */,
+				C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */,
 				C9726CDE18B73D76006FB209 /* STLineInfoViewController.h */,
 				C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */,
 				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
@@ -566,8 +588,6 @@
 				C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */,
 				C93C74C818923EE500A7FAB8 /* STScanningViewController.h */,
 				C93C74C918923EE500A7FAB8 /* STScanningViewController.m */,
-				C93C74D418923FAB00A7FAB8 /* STSetupViewController.h */,
-				C93C74D518923FAB00A7FAB8 /* STSetupViewController.m */,
 				C9CF827418C065C8002826C4 /* STSignupViewController.h */,
 				C9CF827518C065C8002826C4 /* STSignupViewController.m */,
 				C93C74BE18923E3200A7FAB8 /* STStudyViewController.h */,
@@ -934,6 +954,7 @@
 				C99F7E2318C2F04C002C97F0 /* Account.m in Sources */,
 				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
 				C99F7E2A18C2F759002C97F0 /* EAIntroView.m in Sources */,
+				C92EA0CD18C422E6003F1669 /* STAlarmSetupViewController.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
 				C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */,
 				C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */,
@@ -943,7 +964,6 @@
 				C949E7E618C087A00001B5FE /* STAuditRecordCell.m in Sources */,
 				C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
-				C93C74D618923FAB00A7FAB8 /* STSetupViewController.m in Sources */,
 				C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */,
 				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
@@ -955,6 +975,7 @@
 				C95F7F3E18BF3F9C00403430 /* STChartElectricityValViewController.m in Sources */,
 				C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
+				C92EA0D018C42747003F1669 /* STAlarmSetupCell.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
@@ -972,12 +993,14 @@
 				C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */,
+				C92EA0C418C41FCB003F1669 /* STAgreementContentViewController.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
 				C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */,
 				C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */,
 				C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */,
+				C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */,
 				C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */,
 				C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */,
 				C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */,
@@ -995,6 +1018,7 @@
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
+				C92EA0C718C41FF8003F1669 /* STIntroductionViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
 				C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import "STMyeViewController.h"
 #import "STLoginViewController.h"
-#import "STSetupViewController.h"
+#import "STAlarmSetupViewController.h"
 #import "STAboutUsViewController.h"
 #import "WeixinSessionActivity.h"
 #import "WeixinTimelineActivity.h"
@@ -78,7 +78,7 @@
             cell.textLabel.text=@"联系新能量";
         }
     }else if(section==1){
-        cell.textLabel.text=@"设置";
+        cell.textLabel.text=@"报警阀值设置";
     }else{
         cell.textLabel.text=@"关于e电工";
     }
@@ -103,8 +103,8 @@
             [Common actionSheet:self message:@"是否拨打新能量客服电话？" tag:1];
         }
     }else if(section==1){
-        STSetupViewController *setupViewController=[[STSetupViewController alloc]init];
-        [self.navigationController pushViewController:setupViewController animated:YES];
+        STAlarmSetupViewController *alarmSetupViewController=[[STAlarmSetupViewController alloc]init];
+        [self.navigationController pushViewController:alarmSetupViewController animated:YES];
     }else{
         STAboutUsViewController *aboutUsViewController=[[STAboutUsViewController alloc]init];
         [self.navigationController pushViewController:aboutUsViewController animated:YES];
