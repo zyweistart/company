@@ -62,7 +62,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
     NSInteger row=[indexPath row];
     NSInteger section=[indexPath section];
     if(section==0){
