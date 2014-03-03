@@ -28,43 +28,45 @@ double threePhaseCurrentRight[4][3];
 @interface STBaseUserExperienceViewController : UIViewController<UIAlertViewDelegate,UIActionSheetDelegate>
 
 //当前负荷
-@property (weak, nonatomic) IBOutlet UILabel *lblCurrentLoad;
+@property (strong, nonatomic) UILabel *lblCurrentLoad;
 //当前总电量
-@property (weak, nonatomic) IBOutlet UILabel *lblElectricity;
+@property (strong, nonatomic) UILabel *lblElectricity;
 //进线A值
-@property (weak, nonatomic) IBOutlet UIButton *btnInLineAValue;
+@property (strong, nonatomic) UILabel *lblInLineAValue;
 //进线A
-@property (weak, nonatomic) IBOutlet UIButton *btnInLineA;
+@property (strong, nonatomic) UIButton *btnInLineA;
 //出线A-1值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA1Value;
+@property (strong, nonatomic) UILabel *lblOutLineA1Value;
 //进线A-1
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA1;
+@property (strong, nonatomic) UIButton *btnOutLineA1;
 //出线A-2值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA2Value;
+@property (strong, nonatomic) UILabel *lblOutLineA2Value;
 //进线A-2
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA2;
+@property (strong, nonatomic) UIButton *btnOutLineA2;
 //出线A-3值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA3Value;
+@property (strong, nonatomic) UILabel *lblOutLineA3Value;
 //进线A-3
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineA3;
+@property (strong, nonatomic) UIButton *btnOutLineA3;
 //出线B值
-@property (weak, nonatomic) IBOutlet UIButton *btnInLineBValue;
+@property (strong, nonatomic) UILabel *lblInLineBValue;
 //进线B
-@property (weak, nonatomic) IBOutlet UIButton *btnInLineB;
+@property (strong, nonatomic) UIButton *btnInLineB;
 //出线B-1值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB1Value;
+@property (strong, nonatomic) UILabel *lblOutLineB1Value;
 //进线B-1
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB1;
+@property (strong, nonatomic) UIButton *btnOutLineB1;
 //出线B-2值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB2Value;
+@property (strong, nonatomic) UILabel *lblOutLineB2Value;
 //进线B-2
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB2;
+@property (strong, nonatomic) UIButton *btnOutLineB2;
 //出线B-3值
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB3Value;
+@property (strong, nonatomic) UILabel *lblOutLineB3Value;
 //进线B-3
-@property (weak, nonatomic) IBOutlet UIButton *btnOutLineB3;
+@property (strong, nonatomic) UIButton *btnOutLineB3;
 //母联开关
-@property (weak, nonatomic) IBOutlet UIButton *btnMotherOf;
+@property (strong, nonatomic) UIButton *btnMotherOf;
+
+@property (strong, nonatomic) UIScrollView *control;
 
 @property NSTimer * timer;
 @property NSTimer * timerElectricity;

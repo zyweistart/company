@@ -18,10 +18,12 @@
 #import "STTaskManagerViewController.h"
 #import "STTaskAuditViewController.h"
 
+#import "STNewsDetailViewController.h"
+
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
 
-#define IMAGEHEIGHT 140
+#define IMAGEHEIGHT 180
 
 @interface STIndexViewController () <UITabBarControllerDelegate>
 
@@ -86,6 +88,12 @@
     [btnF6 addTarget:self action:@selector(onClickCalculation:) forControlEvents:UIControlEventTouchUpInside];
     [foursquareImages.scrollView addSubview:btnF6];
     
+    UIView *newView=[[UIView alloc]initWithFrame:CGRectMake(5, 180+IMAGEHEIGHT, 310, 135)];
+    [newView setBackgroundColor:[UIColor redColor]];
+    [newView setUserInteractionEnabled:YES];
+    [newView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickNewList:)]];
+    [foursquareImages.scrollView addSubview:newView];
+    
     foursquareImages.scrollView.contentSize = CGSizeMake(320, 95+80+IMAGEHEIGHT);
     
     [foursquareImages.pageControl setCurrentPageIndicatorTintColor:[UIColor colorWithRed:(28/255.f) green:(189/255.f) blue:(141/255.f) alpha:1.0]];
@@ -144,4 +152,9 @@
     [self presentViewController:calculateViewControllerNav animated:YES completion:nil];
 }
 
+//新闻详细
+- (void)onClickNewList:(id)sender {
+    UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsDetailViewController alloc]init]];
+    [self presentViewController:newsDetailViewControllerNav animated:YES completion:nil];
+}
 @end

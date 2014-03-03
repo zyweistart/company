@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STNewsListViewController : UIViewController
+@interface STNewsListViewController : UITableViewController
 
 @end

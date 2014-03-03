@@ -38,21 +38,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    //以后则每根据设定的时间调用一次
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
-//    self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
-    [self buildUI];
+    //以后则每根据设定的时间调用一次
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
+    self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
+    
 }
 
-
-- (void)buildUI{
-    NSLog(@"buildUI");
+- (void)onClickCurrentDetailInfo:(UITapGestureRecognizer*)sender
+{
+    UILabel *lblSender=((UILabel*)sender.view);
+    long tag=lblSender.tag;
+    STUserExperienceLineDetailViewController *userExperienceLineDetailViewController=[[STUserExperienceLineDetailViewController alloc]initWithIndex:tag];
+    [self.navigationController pushViewController:userExperienceLineDetailViewController animated:YES];
 }
 
 - (IBAction)onClickSwitch:(id)sender
 {
+ 
+    UIButton *send=(UIButton*)sender;
+    long tag=(send).tag;
     
-    long tag=((UIButton*)sender).tag;
     if(tag==0){
         //母联开关
         if(finalB9){

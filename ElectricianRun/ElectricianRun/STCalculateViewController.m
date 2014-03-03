@@ -60,8 +60,7 @@
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    ivImage=[[UIImageView alloc]initWithFrame:CGRectMake(35, 10, 250, 80)];
-    [ivImage setBackgroundColor:[UIColor redColor]];
+    ivImage=[[UIImageView alloc]init];
     [control addSubview:ivImage];
     
     //值1
@@ -150,6 +149,9 @@
 - (void)updateView:(NSInteger)row{
     currentRow=row;
     self.title=[selectData objectAtIndex:row];
+    
+    [ivImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[NSString stringWithFormat:@"f%d",currentRow+1]]]];
+    
     if (row==0) {
         //倍率
         [lblValue1 setText:@"CT变比"];
@@ -163,6 +165,7 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
+        [ivImage setFrame:CGRectMake(120, 40, 84.5, 8)];
     } else if (row==1) {
         //电量
         [lblValue1 setText:@"本次读入"];
@@ -179,6 +182,8 @@
         
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
+        
+        [ivImage setFrame:CGRectMake(95, 40, 129.5, 8.5)];
     } else if (row==2) {
         //功率因数
         [lblValue1 setText:@"有功功率"];
@@ -192,6 +197,8 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
+        
+        [ivImage setFrame:CGRectMake(80, 40, 149, 23)];
     } else if (row==3) {
         //有功功率
         [lblValue1 setText:@"线电压"];
@@ -208,6 +215,8 @@
         
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
+        
+        [ivImage setFrame:CGRectMake(70, 40, 180.5, 12.5)];
     } else if (row==4) {
         //无功功率
         [lblValue1 setText:@"线电压"];
@@ -224,6 +233,8 @@
         
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
+        
+        [ivImage setFrame:CGRectMake(60, 40, 203, 12.5)];
     } else if (row==5) {
         //负荷率
         [lblValue1 setText:@"平均负荷"];
@@ -237,6 +248,8 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
+        
+        [ivImage setFrame:CGRectMake(110, 40, 97.5, 8.5)];
     } else if (row==6) {
         //变压器负载率
         [lblValue1 setText:@"视在功率"];
@@ -250,6 +263,8 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
+        
+        [ivImage setFrame:CGRectMake(50, 40, 227.5, 9.5)];
     } else if (row==7) {
         //视在功率
         [lblValue1 setText:@"有功耗量"];
@@ -263,6 +278,8 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
+        
+        [ivImage setFrame:CGRectMake(85, 40, 150.5, 12.5)];
     }
 }
 

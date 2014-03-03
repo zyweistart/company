@@ -76,7 +76,6 @@
 
 - (void)gotoMainPage
 {
-    
     //首页
     UINavigationController *indexViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STIndexViewController alloc]init]];
     indexViewControllerNav.navigationBarHidden=YES;
@@ -93,11 +92,9 @@
                              studyViewControllerNav,
                              myeViewControllerNav,
                               nil] animated:YES];
-    
 //    [self downLoadPicture];
 //    db=[[SQLiteOperate alloc]init];
 //    [self downLoadHtml];
-
     
 //    self.downloadIcon=[[DownloadIcon alloc]init];
 //    [self.downloadIcon startWithUrl:@"http://122.224.247.221:7003/html/AppNews/images/app_20140117095452.jpg"];

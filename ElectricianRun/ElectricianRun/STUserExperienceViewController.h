@@ -14,7 +14,7 @@
 
 @property NSTimer *countdown;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblCountdown;
+@property (strong, nonatomic) UILabel *lblCountdown;
 
 - (id)initWithUserType:(int)userType;
 

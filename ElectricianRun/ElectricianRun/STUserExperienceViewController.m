@@ -24,9 +24,12 @@
 {
     self = [super init];
     if (self) {
-        
-        self.title=@"商业用户体验";
-        
+        usertype=userType;
+        if(usertype==1){
+            self.title=@"大工业用户体验";
+        }else{
+            self.title=@"商业用户体验";
+        }
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
@@ -34,8 +37,6 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
-        
-        usertype=userType;
         
     }
     return self;
@@ -50,7 +51,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(usertype==1){
+    self.lblCountdown=[[UILabel alloc]initWithFrame:CGRectMake(20, 5, 80, 29)];
+    self.lblCountdown.font=[UIFont systemFontOfSize:7];
+    [self.lblCountdown setTextColor:[UIColor orangeColor]];
+    [self.lblCountdown setBackgroundColor:[UIColor clearColor]];
+    [self.lblCountdown setNumberOfLines:0];
+    [self.control  addSubview:self.lblCountdown];    if(usertype==1){
         level=arc4random() % 4+1;
         counttimer=120;
     }else{

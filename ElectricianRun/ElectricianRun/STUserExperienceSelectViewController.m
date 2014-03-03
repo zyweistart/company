@@ -65,30 +65,20 @@
 
 - (void)alarm:(id)sender
 {
-//    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    STUserExperienceAlarmViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceAlarmViewController"];
-//    UINavigationController *experienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:stuea];
-//    [self presentViewController:experienceAlarmViewControllerNav animated:YES completion:nil];
-    
     UINavigationController *userExperienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceAlarmViewController alloc]init]];
     [self presentViewController:userExperienceAlarmViewControllerNav animated:YES completion:nil];
-    
 }
 
 - (void)business:(id)sender
 {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STUserExperienceViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceViewController"];
-    UINavigationController *userExperienceViewController = [[UINavigationController alloc] initWithRootViewController:stuea];
-    [self presentViewController:userExperienceViewController animated:YES completion:nil];
+    UINavigationController *userExperienceViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceViewController alloc]initWithUserType:2]];
+    [self presentViewController:userExperienceViewControllerNav animated:YES completion:nil];
 }
 
 - (void)industrial:(id)sender
 {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    STUserExperienceViewController *stuea=[storyboard instantiateViewControllerWithIdentifier:@"STUserExperienceViewController"];
-    UINavigationController *userExperienceViewController = [[UINavigationController alloc] initWithRootViewController:stuea];
-    [self presentViewController:userExperienceViewController animated:YES completion:nil];
+    UINavigationController *userExperienceViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceViewController alloc]initWithUserType:1]];
+    [self presentViewController:userExperienceViewControllerNav animated:YES completion:nil];
 }
 
 @end

@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self buildUI];
     //初始化数据
     finalB9 = NO;
     for (int i = 0; i < 8; i++) {
@@ -50,6 +51,178 @@
     //初始调用一次
     [self startBusinessCal];
     [self displaySwitchStatus];
+}
+
+- (void)buildUI{
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    self.control=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, 320, 500)];
+    [self.control setBackgroundColor:[UIColor blackColor]];
+    self.control.contentSize = CGSizeMake(330,157);
+    [self.control setScrollEnabled:YES];
+    
+    self.lblCurrentLoad=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 40, 29)];
+    self.lblCurrentLoad.font=[UIFont systemFontOfSize:7];
+    [self.lblCurrentLoad setTextColor:[UIColor orangeColor]];
+    [self.lblCurrentLoad setBackgroundColor:[UIColor clearColor]];
+    [self.lblCurrentLoad setNumberOfLines:0];
+    [self.control addSubview:self.lblCurrentLoad];
+    
+    self.lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(270, 20, 40, 29)];
+    self.lblElectricity.font=[UIFont systemFontOfSize:7];
+    [self.lblElectricity setTextColor:[UIColor orangeColor]];
+    [self.lblElectricity setBackgroundColor:[UIColor clearColor]];
+    [self.lblElectricity setNumberOfLines:0];
+    [self.control addSubview:self.lblElectricity];
+    
+    self.lblInLineAValue=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 40, 29)];
+    self.lblInLineAValue.font=[UIFont systemFontOfSize:7];
+//    [self.lblInLineAValue setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblInLineAValue setTextColor:[UIColor whiteColor]];
+    [self.lblInLineAValue setBackgroundColor:[UIColor clearColor]];
+    [self.lblInLineAValue setNumberOfLines:0];
+    self.lblInLineAValue.userInteractionEnabled=YES;
+    self.lblInLineAValue.tag=0;
+    [self.lblInLineAValue addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblInLineAValue];
+    
+    self.lblOutLineA1Value=[[UILabel alloc]initWithFrame:CGRectMake(80, 100, 40, 29)];
+    self.lblOutLineA1Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineA1Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineA1Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineA1Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineA1Value setNumberOfLines:0];
+    self.lblOutLineA1Value.userInteractionEnabled=YES;
+    self.lblOutLineA1Value.tag=1;
+    [self.lblOutLineA1Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineA1Value];
+    
+    self.lblOutLineA2Value=[[UILabel alloc]initWithFrame:CGRectMake(80, 145, 40, 29)];
+    self.lblOutLineA2Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineA2Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineA2Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineA2Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineA2Value setNumberOfLines:0];
+    self.lblOutLineA2Value.userInteractionEnabled=YES;
+    self.lblOutLineA2Value.tag=2;
+    [self.lblOutLineA2Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineA2Value];
+    
+    self.lblOutLineA3Value=[[UILabel alloc]initWithFrame:CGRectMake(80, 195, 40, 29)];
+    self.lblOutLineA3Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineA3Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineA3Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineA3Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineA3Value setNumberOfLines:0];
+    self.lblOutLineA3Value.userInteractionEnabled=YES;
+    self.lblOutLineA3Value.tag=3;
+    [self.lblOutLineA3Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineA3Value];
+    
+    self.lblInLineBValue=[[UILabel alloc]initWithFrame:CGRectMake(270, 60, 40, 29)];
+    self.lblInLineBValue.font=[UIFont systemFontOfSize:7];
+//    [self.lblInLineBValue setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblInLineBValue setTextColor:[UIColor whiteColor]];
+    [self.lblInLineBValue setBackgroundColor:[UIColor clearColor]];
+    [self.lblInLineBValue setNumberOfLines:0];
+    self.lblInLineBValue.userInteractionEnabled=YES;
+    self.lblInLineBValue.tag=4;
+    [self.lblInLineBValue addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblInLineBValue];
+    
+    self.lblOutLineB1Value=[[UILabel alloc]initWithFrame:CGRectMake(208, 100, 40, 29)];
+    self.lblOutLineB1Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineB1Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineB1Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineB1Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineB1Value setNumberOfLines:0];
+    self.lblOutLineB1Value.userInteractionEnabled=YES;
+    self.lblOutLineB1Value.tag=5;
+    [self.lblOutLineB1Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineB1Value];
+    
+    self.lblOutLineB2Value=[[UILabel alloc]initWithFrame:CGRectMake(208, 145, 40, 29)];
+    self.lblOutLineB2Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineB2Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineB2Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineB2Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineB2Value setNumberOfLines:0];
+    self.lblOutLineB2Value.userInteractionEnabled=YES;
+    self.lblOutLineB2Value.tag=6;
+    [self.lblOutLineB2Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineB2Value];
+    
+    self.lblOutLineB3Value=[[UILabel alloc]initWithFrame:CGRectMake(208, 195, 40, 29)];
+    self.lblOutLineB3Value.font=[UIFont systemFontOfSize:7];
+//    [self.lblOutLineB3Value setText:@"ia=1243.23;\nib=1243.23;\nic=1243.23;"];
+    [self.lblOutLineB3Value setTextColor:[UIColor whiteColor]];
+    [self.lblOutLineB3Value setBackgroundColor:[UIColor clearColor]];
+    [self.lblOutLineB3Value setNumberOfLines:0];
+    self.lblOutLineB3Value.userInteractionEnabled=YES;
+    self.lblOutLineB3Value.tag=7;
+    [self.lblOutLineB3Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
+    [self.control addSubview:self.lblOutLineB3Value];
+    
+    self.btnInLineA=[[UIButton alloc]initWithFrame:CGRectMake(30, 96, 24, 12)];
+//    [self.btnInLineA setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnInLineA.tag=0;
+    [self.btnInLineA addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnInLineA];
+    
+    self.btnOutLineA1=[[UIButton alloc]initWithFrame:CGRectMake(80, 135, 24, 12)];
+//    [self.btnOutLineA1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    self.btnOutLineA1.tag=1;
+    [self.btnOutLineA1 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineA1];
+    
+    self.btnOutLineA2=[[UIButton alloc]initWithFrame:CGRectMake(80, 184, 24, 12)];
+//    [self.btnOutLineA2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnOutLineA2.tag=2;
+    [self.btnOutLineA2 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineA2];
+    
+    self.btnOutLineA3=[[UIButton alloc]initWithFrame:CGRectMake(80, 236, 24, 12)];
+//    [self.btnOutLineA3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnOutLineA3.tag=3;
+    [self.btnOutLineA3 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineA3];
+    
+    self.btnInLineB=[[UIButton alloc]initWithFrame:CGRectMake(270, 96, 24, 12)];
+//    [self.btnInLineB setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnInLineB.tag=4;
+    [self.btnInLineB addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnInLineB];
+    
+    self.btnOutLineB1=[[UIButton alloc]initWithFrame:CGRectMake(215, 135, 24, 12)];
+//    [self.btnOutLineB1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    self.btnOutLineB1.tag=5;
+    [self.btnOutLineB1 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineB1];
+    
+    self.btnOutLineB2=[[UIButton alloc]initWithFrame:CGRectMake(215, 184, 24, 12)];
+//    [self.btnOutLineB2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnOutLineB2.tag=6;
+    [self.btnOutLineB2 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineB2];
+    
+    self.btnOutLineB3=[[UIButton alloc]initWithFrame:CGRectMake(215, 236, 24, 12)];
+//    [self.btnOutLineB3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnOutLineB3.tag=7;
+    [self.btnOutLineB3 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnOutLineB3];
+    
+    self.btnMotherOf=[[UIButton alloc]initWithFrame:CGRectMake(150, 223, 24, 12)];
+//    [self.btnMotherOf setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    self.btnMotherOf.tag=8;
+    [self.btnMotherOf addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.control addSubview:self.btnMotherOf];
+    
+    UIImageView *bgImg=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userexperiencelinebg"]];
+    [bgImg setFrame:CGRectMake(0, 90, 330, 157)];
+    [self.control addSubview:bgImg];
+    
+    [self.view addSubview:self.control];
+    
 }
 
 //生成一个0～1之间的随机数小数点后保留两位
@@ -363,15 +536,15 @@
 - (void)displayElectricCurrent
 {
     //页面显示电流信息
-    [self.btnInLineAValue setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[0][0],threePhaseCurrentLeft[0][1],threePhaseCurrentLeft[0][2]] forState:UIControlStateNormal];
-    [self.btnOutLineA1Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[1][0],threePhaseCurrentLeft[1][1],threePhaseCurrentLeft[1][2]] forState:UIControlStateNormal];
-    [self.btnOutLineA2Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[2][0],threePhaseCurrentLeft[2][1],threePhaseCurrentLeft[2][2]] forState:UIControlStateNormal];
-    [self.btnOutLineA3Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[3][0],threePhaseCurrentLeft[3][1],threePhaseCurrentLeft[3][2]] forState:UIControlStateNormal];
+    [self.lblInLineAValue setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[0][0],threePhaseCurrentLeft[0][1],threePhaseCurrentLeft[0][2]]];
+    [self.lblOutLineA1Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[1][0],threePhaseCurrentLeft[1][1],threePhaseCurrentLeft[1][2]]];
+    [self.lblOutLineA2Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[2][0],threePhaseCurrentLeft[2][1],threePhaseCurrentLeft[2][2]]];
+    [self.lblOutLineA3Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentLeft[3][0],threePhaseCurrentLeft[3][1],threePhaseCurrentLeft[3][2]]];
     
-    [self.btnInLineBValue setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[0][0],threePhaseCurrentRight[0][1],threePhaseCurrentRight[0][2]] forState:UIControlStateNormal];
-    [self.btnOutLineB1Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[1][0],threePhaseCurrentRight[1][1],threePhaseCurrentRight[1][2]] forState:UIControlStateNormal];
-    [self.btnOutLineB2Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[2][0],threePhaseCurrentRight[2][1],threePhaseCurrentRight[2][2]] forState:UIControlStateNormal];
-    [self.btnOutLineB3Value setTitle:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[3][0],threePhaseCurrentRight[3][1],threePhaseCurrentRight[3][2]] forState:UIControlStateNormal];
+    [self.lblInLineBValue setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[0][0],threePhaseCurrentRight[0][1],threePhaseCurrentRight[0][2]]];
+    [self.lblOutLineB1Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[1][0],threePhaseCurrentRight[1][1],threePhaseCurrentRight[1][2]]];
+    [self.lblOutLineB2Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[2][0],threePhaseCurrentRight[2][1],threePhaseCurrentRight[2][2]]];
+    [self.lblOutLineB3Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[3][0],threePhaseCurrentRight[3][1],threePhaseCurrentRight[3][2]]];
     //当前负荷
     [self.lblCurrentLoad setText:[NSString stringWithFormat:@"%.2fkW",self.currentTotalBurden/1000]];
     //当前总电量
@@ -382,49 +555,49 @@
 - (void)displaySwitchStatus
 {
     if(finalB[0]){
-        [self.btnInLineA setTitle:@"进线A-合" forState:UIControlStateNormal];
+        [self.btnInLineA setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnInLineA setTitle:@"进线A-分" forState:UIControlStateNormal];
+        [self.btnInLineA setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[1]){
-        [self.btnOutLineA1 setTitle:@"出线A-1-合" forState:UIControlStateNormal];
+        [self.btnOutLineA1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineA1 setTitle:@"出线A-1-分" forState:UIControlStateNormal];
+        [self.btnOutLineA1 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[2]){
-        [self.btnOutLineA2 setTitle:@"出线A-2-合" forState:UIControlStateNormal];
+        [self.btnOutLineA2 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineA2 setTitle:@"出线A-2-分" forState:UIControlStateNormal];
+        [self.btnOutLineA2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[3]){
-        [self.btnOutLineA3 setTitle:@"出线A-3-合" forState:UIControlStateNormal];
+        [self.btnOutLineA3 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineA3 setTitle:@"出线A-3-分" forState:UIControlStateNormal];
+        [self.btnOutLineA3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[4]){
-        [self.btnInLineB setTitle:@"进线B-合" forState:UIControlStateNormal];
+        [self.btnInLineB setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnInLineB setTitle:@"进线B-分" forState:UIControlStateNormal];
+        [self.btnInLineB setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[5]){
-        [self.btnOutLineB1 setTitle:@"出线B-1-合" forState:UIControlStateNormal];
+        [self.btnOutLineB1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineB1 setTitle:@"出线B-1-分" forState:UIControlStateNormal];
+        [self.btnOutLineB1 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[6]){
-        [self.btnOutLineB2 setTitle:@"出线B-2-合" forState:UIControlStateNormal];
+        [self.btnOutLineB2 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineB2 setTitle:@"出线B-2-分" forState:UIControlStateNormal];
+        [self.btnOutLineB2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB[7]){
-        [self.btnOutLineB3 setTitle:@"出线B-3-合" forState:UIControlStateNormal];
+        [self.btnOutLineB3 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnOutLineB3 setTitle:@"出线B-3-分" forState:UIControlStateNormal];
+        [self.btnOutLineB3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
     if(finalB9){
-        [self.btnMotherOf setTitle:@"母联开关-合" forState:UIControlStateNormal];
+        [self.btnMotherOf setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
-        [self.btnMotherOf setTitle:@"母联开关-分" forState:UIControlStateNormal];
+        [self.btnMotherOf setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     }
 }
 
@@ -440,6 +613,11 @@
 }
 
 - (IBAction)onClickLoadDetail:(id)sender
+{
+    
+}
+
+- (void)onClickCurrentDetailInfo:(UITapGestureRecognizer*)sender
 {
     
 }
