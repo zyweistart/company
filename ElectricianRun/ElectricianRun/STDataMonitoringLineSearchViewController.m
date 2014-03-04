@@ -29,6 +29,13 @@
     if (self) {
         self.title=@"搜索";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithTitle:@"查询"
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(search:)];
+        
     }
     return self;
 }
@@ -36,11 +43,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 100, 320, 300)];
 //    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 60, 30)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 10, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"变压器"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -48,7 +55,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueType=[[UITextField alloc]initWithFrame:CGRectMake(80, 10, 150, 30)];
+    txtValueType=[[UITextField alloc]initWithFrame:CGRectMake(100, 10, 150, 30)];
     [txtValueType setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueType setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueType setBorderStyle:UITextBorderStyleRoundedRect];
@@ -57,7 +64,7 @@
     [txtValueType setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValueType];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 60, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 50, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"线路名称"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -65,19 +72,13 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(80, 50, 150, 30)];
+    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(100, 50, 150, 30)];
     [txtValueName setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueName setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValueName];
-    
-    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 90, 100, 30)];
-    [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
-    [btnSearch setBackgroundColor:[UIColor blueColor]];
-    [btnSearch addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnSearch];
     
 }
 

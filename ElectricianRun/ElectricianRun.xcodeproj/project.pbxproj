@@ -104,6 +104,8 @@
 		C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */; };
 		C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */; };
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
+		C9B6CCB318C5FA3600E72CFB /* STViewUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B6CCB218C5FA3600E72CFB /* STViewUserListViewController.m */; };
+		C9B6CCB718C6062000E72CFB /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B6CCB618C6062000E72CFB /* CustomAnnotation.m */; };
 		C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
@@ -332,6 +334,10 @@
 		C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmManagerViewController.m; sourceTree = "<group>"; };
 		C9B68AD518B50EB6009B57E2 /* STTaskManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerViewController.h; sourceTree = "<group>"; };
 		C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerViewController.m; sourceTree = "<group>"; };
+		C9B6CCB118C5FA3600E72CFB /* STViewUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STViewUserListViewController.h; sourceTree = "<group>"; };
+		C9B6CCB218C5FA3600E72CFB /* STViewUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STViewUserListViewController.m; sourceTree = "<group>"; };
+		C9B6CCB518C6062000E72CFB /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
+		C9B6CCB618C6062000E72CFB /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
 		C9C067C818C466CA006AB9C7 /* STMonitoringLineDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMonitoringLineDetailCell.h; sourceTree = "<group>"; };
 		C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMonitoringLineDetailCell.m; sourceTree = "<group>"; };
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -678,6 +684,8 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C9B6CCB518C6062000E72CFB /* CustomAnnotation.h */,
+				C9B6CCB618C6062000E72CFB /* CustomAnnotation.m */,
 				C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */,
 				C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */,
 				C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */,
@@ -803,6 +811,8 @@
 				C9D1154818BC5E4B00268BBE /* STTaskManagerHandleViewController.m */,
 				C9D1154A18BC619A00268BBE /* STTaskManagerConsumptionViewController.h */,
 				C9D1154B18BC619A00268BBE /* STTaskManagerConsumptionViewController.m */,
+				C9B6CCB118C5FA3600E72CFB /* STViewUserListViewController.h */,
+				C9B6CCB218C5FA3600E72CFB /* STViewUserListViewController.m */,
 			);
 			name = TransformerSubstation;
 			sourceTree = "<group>";
@@ -970,6 +980,7 @@
 				C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */,
+				C9B6CCB318C5FA3600E72CFB /* STViewUserListViewController.m in Sources */,
 				C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */,
 				C95F7F3518BF3E8200403430 /* STChartElectricityViewController.m in Sources */,
 				C93C74C718923EC700A7FAB8 /* STCalculateViewController.m in Sources */,
@@ -1007,6 +1018,7 @@
 				C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
 				C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */,
+				C9B6CCB718C6062000E72CFB /* CustomAnnotation.m in Sources */,
 				C9CF828218C08413002826C4 /* STAuditBuildCell.m in Sources */,
 				C9EF51AF18A9B95000CFBE06 /* BaseUIViewController.m in Sources */,
 				C9B2A58A18934E54003A412E /* STDataMonitoringLineViewController.m in Sources */,

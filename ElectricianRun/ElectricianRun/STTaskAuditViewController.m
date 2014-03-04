@@ -64,24 +64,23 @@
     btnBuilder=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 40)];
     btnBuilder.titleLabel.font=[UIFont systemFontOfSize:12.0f];
     [btnBuilder setTitle:@"巡检任务生成" forState:UIControlStateNormal];
-    [btnBuilder setBackgroundColor:[UIColor redColor]];
+    [btnBuilder setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnBuilder addTarget:self action:@selector(build:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnBuilder];
     
     btnRecording=[[UIButton alloc]initWithFrame:CGRectMake(110, 0, 100, 40)];
     btnRecording.titleLabel.font=[UIFont systemFontOfSize:12.0f];
     [btnRecording setTitle:@"巡检记录" forState:UIControlStateNormal];
-    [btnRecording setBackgroundColor:[UIColor blueColor]];
+    [btnRecording setBackgroundColor:[UIColor colorWithRed:(210/255.0) green:(85/255.0) blue:(24/255.0) alpha:1]];
     [btnRecording addTarget:self action:@selector(recording:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnRecording];
     
     UIButton *btn3=[[UIButton alloc]initWithFrame:CGRectMake(210, 0, 110, 40)];
     btn3.titleLabel.font=[UIFont systemFontOfSize:12.0f];
     [btn3 setTitle:@"工作人员位置" forState:UIControlStateNormal];
-    [btn3 setBackgroundColor:[UIColor blueColor]];
+    [btn3 setBackgroundColor:[UIColor colorWithRed:(210/255.0) green:(85/255.0) blue:(24/255.0) alpha:1]];
     [btn3 addTarget:self action:@selector(maplocation:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btn3];
-    
     
     view1=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 130)];
     [view1 setHidden:NO];
@@ -121,10 +120,10 @@
     [view1 addSubview:txtValueView12];
     
     //查询
-    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(120, 90, 80, 30)];
+    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 90, 100, 30)];
     [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
     btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
-    [btnSearch setBackgroundColor:[UIColor blueColor]];
+    [btnSearch setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
 //    [btnSearch setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnSearch addTarget:self action:@selector(search1:) forControlEvents:UIControlEventTouchUpInside];
     [view1 addSubview:btnSearch];
@@ -214,10 +213,10 @@
     [view2 addSubview:txtValueView24];
     
     //查询
-    btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(120, 170, 80, 30)];
+    btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 170, 100, 30)];
     [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
     btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
-    [btnSearch setBackgroundColor:[UIColor blueColor]];
+    [btnSearch  setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnSearch addTarget:self action:@selector(search2:) forControlEvents:UIControlEventTouchUpInside];
     [view2 addSubview:btnSearch];
     
@@ -225,8 +224,8 @@
 
 - (void)build:(id)sender {
     
-    [btnBuilder setBackgroundColor:[UIColor redColor]];
-    [btnRecording setBackgroundColor:[UIColor blueColor]];
+    [btnBuilder setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+    [btnRecording setBackgroundColor:[UIColor colorWithRed:(210/255.0) green:(85/255.0) blue:(24/255.0) alpha:1]];
     
     [view1 setHidden:NO];
     [view2 setHidden:YES];
@@ -234,10 +233,8 @@
 }
 
 - (void)recording:(id)sender {
-    
-    
-    [btnBuilder setBackgroundColor:[UIColor blueColor]];
-    [btnRecording setBackgroundColor:[UIColor redColor]];
+    [btnBuilder setBackgroundColor:[UIColor colorWithRed:(210/255.0) green:(85/255.0) blue:(24/255.0) alpha:1]];
+    [btnRecording setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     
     [view1 setHidden:YES];
     [view2 setHidden:NO];

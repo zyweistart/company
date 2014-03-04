@@ -30,6 +30,8 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
+        switchFlag=NO;
+        
     }
     return self;
 }
@@ -125,8 +127,30 @@
         }
         finalB9=!finalB9;
     }
+    
     if(tag<8) {
         finalB[tag]=!finalB[tag];
+    }
+    
+    if(switchFlag){
+        if(tag==0||tag==4){
+            if(!finalB[0]||!finalB[4]){
+                //开启报警声音
+                NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
+                NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+                NSError *error;
+                player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+                if (error) {
+                    NSLog(@"error:%@",[error description]);
+                    return;
+                }
+                [player setVolume:1];   //设置音量大小
+                player.numberOfLoops = 1;//设置音乐播放次数  -1为一直循环
+                [player prepareToPlay];
+                [player play];
+                switchFlag=NO;
+            }
+        }
     }
     
     //把最后一次生成的电流值重新进行赋值计算

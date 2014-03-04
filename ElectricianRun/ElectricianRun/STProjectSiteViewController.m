@@ -77,8 +77,8 @@
     
     UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(235, 10, 30, 30)];
     [btnCalculate setTitle:@"..." forState:UIControlStateNormal];
-    [btnCalculate setBackgroundColor:[UIColor blueColor]];
-    //    [btnCalculate setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
+    [btnCalculate setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+//    [btnCalculate setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnCalculate addTarget:self action:@selector(scanning:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnCalculate];
     //客户名称
@@ -140,7 +140,7 @@
     UIButton *btnSite=[[UIButton alloc]initWithFrame:CGRectMake(80, 170, 80, 30)];
     [btnSite setTitle:@"建站" forState:UIControlStateNormal];
     btnSite.titleLabel.font=[UIFont systemFontOfSize: 12.0];
-    [btnSite setBackgroundColor:[UIColor blueColor]];
+    [btnSite setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
 //    [btnSubmit setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnSite addTarget:self action:@selector(site:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnSite];
@@ -148,13 +148,11 @@
     UIButton *btnAdd=[[UIButton alloc]initWithFrame:CGRectMake(160, 170, 80, 30)];
     [btnAdd setTitle:@"添加线路" forState:UIControlStateNormal];
     btnAdd.titleLabel.font=[UIFont systemFontOfSize: 12.0];
-    [btnAdd setBackgroundColor:[UIColor blueColor]];
+    [btnAdd setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
 //    [btnSubmit setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
     [btnAdd addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnAdd];
-    
 }
-
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     if(responseCode==RESPONSECODESCAN){

@@ -13,7 +13,11 @@
 #import "STChartElectricityValViewController.h"
 #import "STChartElectricityPieViewController.h"
 #import "STChartElectricityValPieViewController.h"
+#import <AVFoundation/AVAudioPlayer.h>
 
+#define ALARMCODE 10022
+#define CHARTCODE 128374
+extern bool switchFlag;
 //保存每条进出线开关的状态
 extern bool finalB[8];
 //保存最近12个每条进出线的电流IA、IB、IC的值
@@ -30,6 +34,7 @@ double allTotalElectricity[12][2][4];
 @implementation STUserExperienceLineDetailViewController {
     long _currentIndex;
     
+    NSString *lineName;
     UILabel *lblLineName;
     UILabel *lblIA;
     UILabel *lblIB;
@@ -40,6 +45,8 @@ double allTotalElectricity[12][2][4];
     UILabel *lblSwitchStatus;
     NSTimer *timer;
     NSTimer *timerElectricity;
+    
+    AVAudioPlayer *player;
 }
 
 - (id)initWithIndex:(long)index
@@ -56,180 +63,197 @@ double allTotalElectricity[12][2][4];
                                                action:@selector(chartSwitch:)];
         
         _currentIndex=index;
+        if(_currentIndex==0){
+            lineName=@"进线A";
+        }else if(_currentIndex==1){
+            lineName=@"出线A-1";
+        }else if(_currentIndex==2){
+            lineName=@"出线A-2";
+        }else if(_currentIndex==3){
+            lineName=@"出线A-3";
+        }else if(_currentIndex==4){
+            lineName=@"进线B";
+        }else if(_currentIndex==5){
+            lineName=@"出线B-1";
+        }else if(_currentIndex==6){
+            lineName=@"出线B-2";
+        }else if(_currentIndex==7){
+            lineName=@"出线B-3";
+        }
         
         UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 340)];
         
-        UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(20, 5, 80, 30)];
-        btnHistory1.titleLabel.font=[UIFont systemFontOfSize:12];
+        UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(12.5, 5, 90, 30)];
+        btnHistory1.titleLabel.font=[UIFont systemFontOfSize:10];
         [btnHistory1 setTitle:@"电压报警体验" forState:UIControlStateNormal];
-        [btnHistory1 setBackgroundColor:[UIColor blueColor]];
+        [btnHistory1 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
         [btnHistory1 addTarget:self action:@selector(alarme1:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory1];
         
-        UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(120, 5, 80, 30)];
-        btnHistory2.titleLabel.font=[UIFont systemFontOfSize:12];
+        UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(115, 5, 90, 30)];
+        btnHistory2.titleLabel.font=[UIFont systemFontOfSize:10];
         [btnHistory2 setTitle:@"电流报警体验" forState:UIControlStateNormal];
-        [btnHistory2 setBackgroundColor:[UIColor blueColor]];
+        [btnHistory2 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
         [btnHistory2 addTarget:self action:@selector(alarme2:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory2];
         
-        UIButton *btnHistory3=[[UIButton alloc]initWithFrame:CGRectMake(220, 5, 80, 30)];
-        btnHistory3.titleLabel.font=[UIFont systemFontOfSize:12];
+        UIButton *btnHistory3=[[UIButton alloc]initWithFrame:CGRectMake(217.5, 5, 90, 30)];
+        btnHistory3.titleLabel.font=[UIFont systemFontOfSize:10];
         [btnHistory3 setTitle:@"开关状态报警体验" forState:UIControlStateNormal];
-        [btnHistory3 setBackgroundColor:[UIColor blueColor]];
+        [btnHistory3 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
         [btnHistory3 addTarget:self action:@selector(alarme3:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory3];
         
-        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(75, 40, 80, 20)];
-        [lbl1 setTextAlignment:NSTextAlignmentRight];
-        [lbl1 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl1 setText:@"线路名称:"];
-        [lbl1 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl1];
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 40, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"线路名称:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblLineName=[[UILabel alloc]initWithFrame:CGRectMake(160, 40, 120, 20)];
+        lblLineName=[[UILabel alloc]initWithFrame:CGRectMake(150, 40, 120, 20)];
         [lblLineName setTextAlignment:NSTextAlignmentLeft];
         [lblLineName setFont:[UIFont systemFontOfSize:12.0]];
-        [lblLineName setText:@""];
+        [lblLineName setText:lineName];
         [lblLineName setTextColor:[UIColor blackColor]];
         [control addSubview:lblLineName];
         
-        UILabel *lbl2=[[UILabel alloc]initWithFrame:CGRectMake(75, 65, 80, 20)];
-        [lbl2 setTextAlignment:NSTextAlignmentRight];
-        [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl2 setText:@"A相电压:"];
-        [lbl2 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl2];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 65, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"A相电压:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lblV2=[[UILabel alloc]initWithFrame:CGRectMake(160, 65, 120, 20)];
-        [lblV2 setTextAlignment:NSTextAlignmentLeft];
-        [lblV2 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV2 setText:@"220V"];
-        [lblV2 setTextColor:[UIColor blackColor]];
-        [control addSubview:lblV2];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(150, 65, 120, 20)];
+        [lbl setTextAlignment:NSTextAlignmentLeft];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"220V"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lbl3=[[UILabel alloc]initWithFrame:CGRectMake(75, 90, 80, 20)];
-        [lbl3 setTextAlignment:NSTextAlignmentRight];
-        [lbl3 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl3 setText:@"B相电压:"];
-        [lbl3 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl3];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 90, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"B相电压:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lblV3=[[UILabel alloc]initWithFrame:CGRectMake(160, 90, 120, 20)];
-        [lblV3 setTextAlignment:NSTextAlignmentLeft];
-        [lblV3 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV3 setText:@"220V"];
-        [lblV3 setTextColor:[UIColor blackColor]];
-        [control addSubview:lblV3];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(150, 90, 120, 20)];
+        [lbl setTextAlignment:NSTextAlignmentLeft];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"220V"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lbl4=[[UILabel alloc]initWithFrame:CGRectMake(75, 115, 80, 20)];
-        [lbl4 setTextAlignment:NSTextAlignmentRight];
-        [lbl4 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl4 setText:@"C相电压:"];
-        [lbl4 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl4];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 115, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"C相电压:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lblV4=[[UILabel alloc]initWithFrame:CGRectMake(160, 115, 120, 20)];
-        [lblV4 setTextAlignment:NSTextAlignmentLeft];
-        [lblV4 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV4 setText:@"220V"];
-        [lblV4 setTextColor:[UIColor blackColor]];
-        [control addSubview:lblV4];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(150, 115, 120, 20)];
+        [lbl setTextAlignment:NSTextAlignmentLeft];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"220V"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        UILabel *lbl5=[[UILabel alloc]initWithFrame:CGRectMake(75, 140, 80, 20)];
-        [lbl5 setTextAlignment:NSTextAlignmentRight];
-        [lbl5 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl5 setText:@"A相电流:"];
-        [lbl5 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl5];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 140, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"A相电流:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblIA=[[UILabel alloc]initWithFrame:CGRectMake(160, 140, 120, 20)];
+        lblIA=[[UILabel alloc]initWithFrame:CGRectMake(150, 140, 120, 20)];
         [lblIA setTextAlignment:NSTextAlignmentLeft];
         [lblIA setFont:[UIFont systemFontOfSize:12.0]];
         [lblIA setText:@""];
         [lblIA setTextColor:[UIColor blackColor]];
         [control addSubview:lblIA];
         
-        UILabel *lbl6=[[UILabel alloc]initWithFrame:CGRectMake(75, 165, 80, 20)];
-        [lbl6 setTextAlignment:NSTextAlignmentRight];
-        [lbl6 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl6 setText:@"B相电流:"];
-        [lbl6 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl6];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 165, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"B相电流:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblIB=[[UILabel alloc]initWithFrame:CGRectMake(160, 165, 120, 20)];
+        lblIB=[[UILabel alloc]initWithFrame:CGRectMake(150, 165, 120, 20)];
         [lblIB setTextAlignment:NSTextAlignmentLeft];
         [lblIB setFont:[UIFont systemFontOfSize:12.0]];
         [lblIB setText:@""];
         [lblIB setTextColor:[UIColor blackColor]];
         [control addSubview:lblIB];
         
-        UILabel *lbl7=[[UILabel alloc]initWithFrame:CGRectMake(75, 190, 80, 20)];
-        [lbl7 setTextAlignment:NSTextAlignmentRight];
-        [lbl7 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl7 setText:@"C相电流:"];
-        [lbl7 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl7];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 190, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"C相电流:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblIC=[[UILabel alloc]initWithFrame:CGRectMake(160, 190, 120, 20)];
+        lblIC=[[UILabel alloc]initWithFrame:CGRectMake(150, 190, 120, 20)];
         [lblIC setTextAlignment:NSTextAlignmentLeft];
         [lblIC setFont:[UIFont systemFontOfSize:12.0]];
         [lblIC setText:@""];
         [lblIC setTextColor:[UIColor blackColor]];
         [control addSubview:lblIC];
         
-        UILabel *lbl8=[[UILabel alloc]initWithFrame:CGRectMake(75, 215, 80, 20)];
-        [lbl8 setTextAlignment:NSTextAlignmentRight];
-        [lbl8 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl8 setText:@"总有功功率:"];
-        [lbl8 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl8];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 215, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"总有功功率:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblTotalBurden=[[UILabel alloc]initWithFrame:CGRectMake(160, 215, 120, 20)];
+        lblTotalBurden=[[UILabel alloc]initWithFrame:CGRectMake(150, 215, 120, 20)];
         [lblTotalBurden setTextAlignment:NSTextAlignmentLeft];
         [lblTotalBurden setFont:[UIFont systemFontOfSize:12.0]];
         [lblTotalBurden setText:@""];
         [lblTotalBurden setTextColor:[UIColor blackColor]];
         [control addSubview:lblTotalBurden];
         
-        UILabel *lbl9=[[UILabel alloc]initWithFrame:CGRectMake(75, 240, 80, 20)];
-        [lbl9 setTextAlignment:NSTextAlignmentRight];
-        [lbl9 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl9 setText:@"功率因数:"];
-        [lbl9 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl9];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 240, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"功率因数:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
         double r1=(double)(arc4random() % 100)/100;
         
-        lblNum=[[UILabel alloc]initWithFrame:CGRectMake(160, 240, 120, 20)];
+        lblNum=[[UILabel alloc]initWithFrame:CGRectMake(150, 240, 120, 20)];
         [lblNum setTextAlignment:NSTextAlignmentLeft];
         [lblNum setFont:[UIFont systemFontOfSize:12.0]];
         [lblNum setText:[NSString stringWithFormat:@"%.2f",r1]];
         [lblNum setTextColor:[UIColor blackColor]];
         [control addSubview:lblNum];
         
-        UILabel *lbl10=[[UILabel alloc]initWithFrame:CGRectMake(75, 265, 80, 20)];
-        [lbl10 setTextAlignment:NSTextAlignmentRight];
-        [lbl10 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl10 setText:@"电量值:"];
-        [lbl10 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl10];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 265, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"电量值:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(160, 265, 120, 20)];
+        lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(150, 265, 120, 20)];
         [lblElectricity setTextAlignment:NSTextAlignmentLeft];
         [lblElectricity setFont:[UIFont systemFontOfSize:12.0]];
         [lblElectricity setText:@""];
         [lblElectricity setTextColor:[UIColor blackColor]];
         [control addSubview:lblElectricity];
         
-        UILabel *lbl11=[[UILabel alloc]initWithFrame:CGRectMake(75, 290, 80, 20)];
-        [lbl11 setTextAlignment:NSTextAlignmentRight];
-        [lbl11 setFont:[UIFont systemFontOfSize:12.0]];
-        [lbl11 setText:@"开关状态:"];
-        [lbl11 setTextColor:[UIColor blackColor]];
-        [control addSubview:lbl11];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(55, 290, 80, 20)];
+        [lbl setTextAlignment:NSTextAlignmentRight];
+        [lbl setFont:[UIFont systemFontOfSize:12.0]];
+        [lbl setText:@"开关状态:"];
+        [lbl setTextColor:[UIColor blackColor]];
+        [control addSubview:lbl];
         
-        lblSwitchStatus=[[UILabel alloc]initWithFrame:CGRectMake(160, 290, 120, 20)];
+        lblSwitchStatus=[[UILabel alloc]initWithFrame:CGRectMake(150, 290, 120, 20)];
         [lblSwitchStatus setTextAlignment:NSTextAlignmentLeft];
         [lblSwitchStatus setFont:[UIFont systemFontOfSize:12.0]];
         [lblSwitchStatus setText:@""];
@@ -252,8 +276,10 @@ double allTotalElectricity[12][2][4];
 {
     [super viewWillAppear:animated];
     if(finalB[_currentIndex]){
+        [lblSwitchStatus setTextColor:[UIColor redColor]];
         [lblSwitchStatus setText:@"合"];
     }else{
+        [lblSwitchStatus setTextColor:[UIColor greenColor]];
         [lblSwitchStatus setText:@"关"];
     }
 }
@@ -286,29 +312,35 @@ double allTotalElectricity[12][2][4];
                             @"进出线电费柱状图",
                             @"进出线尖峰谷进线电量饼图",
                             @"进出线尖峰谷进线电费饼图",nil];
+    sheet.tag=CHARTCODE;
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==0){
-        STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]init];
-        [self.navigationController pushViewController:chartElectricCurrentLineViewController animated:YES];
-    }else if(buttonIndex==1){
-        STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]init];
-        [self.navigationController pushViewController:chartBurdenLineViewController animated:YES];
-    }else if(buttonIndex==2){
-        STChartElectricityViewController *chartElectricityViewController=[[STChartElectricityViewController alloc]init];
-        [self.navigationController pushViewController:chartElectricityViewController animated:YES];
-    }else if(buttonIndex==3){
-        STChartElectricityValViewController *chartElectricityValViewController=[[STChartElectricityValViewController alloc]init];
-        [self.navigationController pushViewController:chartElectricityValViewController animated:YES];
-    }else if(buttonIndex==4){
-        STChartElectricityPieViewController *chartElectricityPieViewController=[[STChartElectricityPieViewController alloc]init];
-        [self.navigationController pushViewController:chartElectricityPieViewController animated:YES];
-    }else if(buttonIndex==5){
-        STChartElectricityValPieViewController *chartElectricityValPieViewController=[[STChartElectricityValPieViewController alloc]init];
-        [self.navigationController pushViewController:chartElectricityValPieViewController animated:YES];
+    NSInteger tag=actionSheet.tag;
+    if(tag==ALARMCODE){
+        NSLog(@"ALARAMCODE");
+    }else if(tag==CHARTCODE){
+        if(buttonIndex==0){
+            STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]init];
+            [self.navigationController pushViewController:chartElectricCurrentLineViewController animated:YES];
+        }else if(buttonIndex==1){
+            STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]init];
+            [self.navigationController pushViewController:chartBurdenLineViewController animated:YES];
+        }else if(buttonIndex==2){
+            STChartElectricityViewController *chartElectricityViewController=[[STChartElectricityViewController alloc]init];
+            [self.navigationController pushViewController:chartElectricityViewController animated:YES];
+        }else if(buttonIndex==3){
+            STChartElectricityValViewController *chartElectricityValViewController=[[STChartElectricityValViewController alloc]init];
+            [self.navigationController pushViewController:chartElectricityValViewController animated:YES];
+        }else if(buttonIndex==4){
+            STChartElectricityPieViewController *chartElectricityPieViewController=[[STChartElectricityPieViewController alloc]init];
+            [self.navigationController pushViewController:chartElectricityPieViewController animated:YES];
+        }else if(buttonIndex==5){
+            STChartElectricityValPieViewController *chartElectricityValPieViewController=[[STChartElectricityValPieViewController alloc]init];
+            [self.navigationController pushViewController:chartElectricityValPieViewController animated:YES];
+        }
     }
 }
 
@@ -347,6 +379,7 @@ double allTotalElectricity[12][2][4];
 - (void)alarme3:(id)sender
 {
     [Common alert:@"开关状态报警已开启，请回主接线上进行开着操作"];
+    switchFlag=YES;
 }
 
 
@@ -357,19 +390,44 @@ double allTotalElectricity[12][2][4];
         if(buttonIndex==1){
             NSString *content=[[alertView textFieldAtIndex:0]text];
             if(![@"" isEqualToString:content]){
-                NSLog(@"%@",content);
-                //报警
+                NSString *message=[NSString stringWithFormat:@"%@超出电压所设定的阀值，请注意!",lineName];
+                [self performSelector:@selector(alaram:) withObject:message afterDelay:20];
             }
         }
     }else if(tag==2){
         if(buttonIndex==1){
             NSString *content=[[alertView textFieldAtIndex:0]text];
             if(![@"" isEqualToString:content]){
-                NSLog(@"%@",content);
-                //报警
+                [self alaram:[NSString stringWithFormat:@"%@超出电流所设定的阀值，请注意！",lineName]];
+                
             }
         }
     }
+}
+
+- (void)alaram:(NSString*)message
+{
+    //开启报警声音
+    NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
+    NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+    NSError *error;
+    player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if (error) {
+        NSLog(@"error:%@",[error description]);
+        return;
+    }
+    [player setVolume:1];   //设置音量大小
+    player.numberOfLoops = 1;//设置音乐播放次数  -1为一直循环
+    [player prepareToPlay];
+    [player play];
+    UIActionSheet *sheet = [[UIActionSheet alloc]
+                            initWithTitle:message
+                            delegate:self
+                            cancelButtonTitle:nil
+                            destructiveButtonTitle:@"确定"
+                            otherButtonTitles:nil,nil];
+    sheet.tag=ALARMCODE;
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 @end

@@ -30,6 +30,13 @@
     if (self) {
         self.title=@"报警查询";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithTitle:@"查询"
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(search:)];
+        
     }
     return self;
 }
@@ -38,7 +45,6 @@
 {
     [super viewDidLoad];
     
-    
     data1=[[NSArray alloc]initWithObjects:@"--选择--",@"一般报警",@"紧急报警",@"重要报警", nil];
     leveldpv=[[DataPickerView alloc]initWithData:data1];
     [leveldpv setDelegate:self];
@@ -46,11 +52,11 @@
     categorydpv=[[DataPickerView alloc]initWithData:data2];
     [categorydpv setDelegate:self];
     
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 100, 320, 300)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 60, 30)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 10, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"客户名称"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -58,7 +64,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(80, 10, 150, 30)];
+    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(100, 10, 150, 30)];
     [txtValueName setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueName setBorderStyle:UITextBorderStyleRoundedRect];
@@ -66,7 +72,7 @@
     [txtValueName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValueName];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 60, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 50, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"报警级别"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -74,7 +80,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueLevel=[[UITextField alloc]initWithFrame:CGRectMake(80, 50, 150, 30)];
+    txtValueLevel=[[UITextField alloc]initWithFrame:CGRectMake(100, 50, 150, 30)];
     [txtValueLevel setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueLevel setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueLevel setBorderStyle:UITextBorderStyleRoundedRect];
@@ -84,7 +90,7 @@
     [txtValueLevel setInputView:leveldpv];
     [control addSubview:txtValueLevel];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 60, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 90, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"报警分类"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -92,7 +98,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueCategory=[[UITextField alloc]initWithFrame:CGRectMake(80, 90, 150, 30)];
+    txtValueCategory=[[UITextField alloc]initWithFrame:CGRectMake(100, 90, 150, 30)];
     [txtValueCategory setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueCategory setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueCategory setBorderStyle:UITextBorderStyleRoundedRect];
@@ -101,12 +107,6 @@
     [txtValueCategory setKeyboardType:UIKeyboardTypePhonePad];
     [txtValueCategory setInputView:categorydpv];
     [control addSubview:txtValueCategory];
-    
-    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 130, 100, 30)];
-    [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
-    [btnSearch setBackgroundColor:[UIColor blueColor]];
-    [btnSearch addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnSearch];
     
 }
 

@@ -129,10 +129,9 @@
     [txtValue4 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue4];
     
-    UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(60, 260, 200, 30)];
+    UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(80, 260, 160, 30)];
     [btnCalculate setTitle:@"计算" forState:UIControlStateNormal];
-    [btnCalculate setBackgroundColor:[UIColor blueColor]];
-//    [btnCalculate setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
+    [btnCalculate setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnCalculate addTarget:self action:@selector(calculate:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnCalculate];
     

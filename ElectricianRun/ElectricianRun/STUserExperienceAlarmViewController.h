@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "STBaseUserExperienceViewController.h"
 
+bool switchFlag;
+
 @interface STUserExperienceAlarmViewController:STBaseUserExperienceViewController
 
 @property (strong,nonatomic) UIButton *btnAlarmExperience;

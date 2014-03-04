@@ -22,6 +22,14 @@
     if (self) {
         self.title=@"查询";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithTitle:@"查询"
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(search:)];
+        
     }
     return self;
 }
@@ -33,7 +41,7 @@
 //    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 100, 60, 30)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(30, 100, 60, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"客户名称"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -41,19 +49,13 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(80, 100, 150, 30)];
+    txtValueName=[[UITextField alloc]initWithFrame:CGRectMake(100, 100, 150, 30)];
     [txtValueName setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueName setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValueName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValueName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValueName];
-    
-    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 160, 100, 30)];
-    [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
-    [btnSearch setBackgroundColor:[UIColor blueColor]];
-    [btnSearch addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnSearch];
     
 }
 

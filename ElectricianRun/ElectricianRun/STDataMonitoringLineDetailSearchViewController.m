@@ -61,7 +61,7 @@
     datePicker = [[DatePickerView alloc] init];
     [datePicker setDelegate:self];
     
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 90)];
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 100, 320, 90)];
     [self.view addSubview:control];
     
     UILabel *lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];

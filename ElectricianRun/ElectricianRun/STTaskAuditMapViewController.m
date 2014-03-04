@@ -7,17 +7,21 @@
 //
 
 #import "STTaskAuditMapViewController.h"
-
+#import "STViewUserListViewController.h"
+#import "NSString+Utils.h"
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "CustomAnnotation.h"
 
-@interface STTaskAuditMapViewController () <MKMapViewDelegate>
+@interface STTaskAuditMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate,HttpRequestDelegate>
 
 @end
 
 @implementation STTaskAuditMapViewController {
     
+    HttpRequest *hRequest;
     MKMapView *_mapView;
-    CLLocationCoordinate2D _coordinate;
+    CLLocationManager *_locationManager;
     
 }
 
@@ -28,15 +32,17 @@
         self.title=@"工作人员位置";
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
-        _mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        [_mapView setDelegate:self];
-        [self.view addSubview:_mapView];
-        
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
-                                                initWithTitle:@"定位"
-                                                style:UIBarButtonItemStyleBordered
-                                                target:self
-                                                action:@selector(goLocation:)];
+        self.navigationItem.rightBarButtonItems=[[NSArray alloc]initWithObjects:
+                                                 [[UIBarButtonItem alloc]
+                                                  initWithTitle:@"用户"
+                                                  style:UIBarButtonItemStyleBordered
+                                                  target:self
+                                                  action:@selector(viewuser:)],
+                                                 [[UIBarButtonItem alloc]
+                                                  initWithTitle:@"搜索"
+                                                  style:UIBarButtonItemStyleBordered
+                                                  target:self
+                                                  action:@selector(search:)], nil];
         
     }
     return self;
@@ -44,86 +50,122 @@
 
 - (void)viewDidLoad
 {
+    _mapView=[[MKMapView alloc]initWithFrame:[self.view bounds]];
+    [_mapView setDelegate:self];
+    [_mapView setMapType:MKMapTypeStandard];
+    [_mapView setScrollEnabled:YES];
+    [_mapView setZoomEnabled:YES];
+    [_mapView setShowsUserLocation:YES];
+    [self.view addSubview:_mapView];
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    [_locationManager startUpdatingLocation];
+    
     [super viewDidLoad];
-    _mapView.showsUserLocation = YES;
 }
 
-- (void)goLocation:(id)sender {
-    CLLocationCoordinate2D fromCoordinate = _coordinate;
-    
-    
-    CLLocationCoordinate2D toCoordinate   = CLLocationCoordinate2DMake(32.010241,
-                                                                       118.719635);
-    
-    MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:fromCoordinate
-                                                       addressDictionary:nil];
-    
-    MKPlacemark *toPlacemark   = [[MKPlacemark alloc] initWithCoordinate:toCoordinate
-                                                       addressDictionary:nil];
-    
-    MKMapItem *fromItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
-    
-    MKMapItem *toItem   = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
-    
-    [self findDirectionsFrom:fromItem
-                          to:toItem];
-    
-}
-
-#pragma mark - Private
-
-- (void)findDirectionsFrom:(MKMapItem *)source
-                        to:(MKMapItem *)destination
+- (void)search:(id)sender
 {
-    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
-    request.source = source;
-    request.destination = destination;
-    request.requestsAlternateRoutes = YES;
+//    int length=3;
+//    //声明一个数组  用来存放画线的点
+//    MKMapPoint coords[length];
+//    coords[0]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(31.484137685, 120.371875243));
+//    coords[1]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(31.784044745, 110.371879653));
+//    coords[2]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(32.484044745, 150.371879653));
+//    MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
+//    [_mapView addOverlay:line];
+    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx";
     
-    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:@"zhangyy" forKey:@"imei"];
+    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:@"13600000000" forKey:@"phoneNum"];
+    [p setObject:@"357071050721612" forKey:@"UUid"];
     
-    [directions calculateDirectionsWithCompletionHandler:
-     ^(MKDirectionsResponse *response, NSError *error) {
-         
-         if (error) {
-             
-             NSLog(@"error:%@", error);
-         }
-         else {
-             
-             MKRoute *route = response.routes[0];
-             
-             [_mapView addOverlay:route.polyline];
-         }
-     }];
+    [p setObject:@"2012-03-03 00:00" forKey:@"startDate"];
+    [p setObject:@"2014-03-03 23:59" forKey:@"endDate"];
+    [p setObject:@"10067" forKey:@"userId"];
+    [p setObject:@"" forKey:@"rtype"];
+//    [p setObject:@"" forKey:@"rvalue"];
+    
+    hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    [hRequest setIsShowMessage:YES];
+    [hRequest start:URL params:p];
 }
 
-#pragma mark - MKMapViewDelegate
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView
-            rendererForOverlay:(id<MKOverlay>)overlay
+
+- (void)viewuser:(id)sender
 {
-    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
-    renderer.lineWidth = 5.0;
-    renderer.strokeColor = [UIColor purpleColor];
-    return renderer;
+    STViewUserListViewController *viewUserListViewController=[[STViewUserListViewController alloc]init];
+    [self.navigationController pushViewController:viewUserListViewController animated:YES];
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    _coordinate.latitude = userLocation.location.coordinate.latitude;
-    _coordinate.longitude = userLocation.location.coordinate.longitude;
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    [_locationManager stopUpdatingLocation];
     
-    [self setMapRegionWithCoordinate:_coordinate];
-}
-
-- (void)setMapRegionWithCoordinate:(CLLocationCoordinate2D)coordinate
-{
-    MKCoordinateRegion region;
+//    NSString *strLat = [NSString stringWithFormat:@"%.4f",newLocation.coordinate.latitude];
+//    NSString *strLng = [NSString stringWithFormat:@"%.4f",newLocation.coordinate.longitude];
+//    NSLog(@"Lat: %@  Lng: %@", strLat, strLng);
     
-    region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(.1, .1));
-    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:region];
-    [_mapView setRegion:adjustedRegion animated:YES];
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+	float zoomLevel = 0.02;
+	MKCoordinateRegion region = MKCoordinateRegionMake(coords,MKCoordinateSpanMake(zoomLevel, zoomLevel));
+	[_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
 }
 
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[MKPolyline class]])
+    {
+        MKPolylineView *lineview=[[MKPolylineView alloc] initWithOverlay:overlay];
+        lineview.strokeColor=[[UIColor blueColor] colorWithAlphaComponent:0.5];
+        lineview.lineWidth=3.0;
+        return lineview;
+    }
+    return nil;
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
+    
+    if([@"1" isEqualToString:[[response resultJSON]objectForKey:@"result"]]){
+        NSMutableArray *data=[[response resultJSON]objectForKey:@"gpsDataInfoList"];
+        
+        int length=[data count];
+        //声明一个数组  用来存放画线的点
+        MKMapPoint coords[length];
+        for(int i=0;i<length;i++){
+            NSDictionary *d=[data objectAtIndex:i];
+            double latitude=[[d objectForKey:@"latitude"]doubleValue];
+            double longitude=[[d objectForKey:@"longitude"]doubleValue];
+            coords[i]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(latitude, longitude));
+        }
+        MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
+        
+        
+        NSDictionary *d=[data objectAtIndex:length-1];
+        double latitude=[[d objectForKey:@"latitude"]doubleValue];
+        double longitude=[[d objectForKey:@"longitude"]doubleValue];
+        
+        CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
+        float zoomLevel = 0.02;
+        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(zoomLevel, zoomLevel));
+        [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
+
+        CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
+        annotation.title = @"标题";
+        annotation.subtitle = @"子标题";
+        [_mapView addAnnotation:annotation];
+        
+        
+        [_mapView addOverlay:line];
+        
+        NSLog(@"%@",data);
+    }else{
+        [Common alert:@"查询失败"];
+    }
+    
+}
 @end

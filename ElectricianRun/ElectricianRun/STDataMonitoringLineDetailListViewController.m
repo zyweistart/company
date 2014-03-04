@@ -91,7 +91,7 @@
     if(lastMonthSearch){
         //当月的耗量
         [p setObject:@"SJ21" forKey:@"GNID"];
-        [p setObject:[NSString stringWithFormat:@"%@-%@-1",year,month] forKey:@"QTD1"];
+        [p setObject:[NSString stringWithFormat:@"%@-%@-01",year,month] forKey:@"QTD1"];
     }else{
         //按日期查询耗量
         [p setObject:@"SJ22" forKey:@"GNID"];
