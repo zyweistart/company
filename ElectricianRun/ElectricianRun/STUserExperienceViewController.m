@@ -30,7 +30,7 @@
         }else{
             self.title=@"商业用户体验";
         }
-        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [self.view setBackgroundColor:[UIColor blackColor]];
         
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
                                                initWithTitle:@"返回"
@@ -51,12 +51,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.btnSignup=[[UIButton alloc]initWithFrame:CGRectMake(110, self.view.frame.size.height-64, 100, 30)];
+    self.btnSignup.titleLabel.font=[UIFont systemFontOfSize:12];
+    [self.btnSignup setTitle:@"我要报名" forState:UIControlStateNormal];
+    [self.btnSignup addTarget:self action:@selector(onClickSignup:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btnSignup];
+    
     self.lblCountdown=[[UILabel alloc]initWithFrame:CGRectMake(20, 5, 80, 29)];
     self.lblCountdown.font=[UIFont systemFontOfSize:7];
     [self.lblCountdown setTextColor:[UIColor orangeColor]];
     [self.lblCountdown setBackgroundColor:[UIColor clearColor]];
     [self.lblCountdown setNumberOfLines:0];
-    [self.control  addSubview:self.lblCountdown];    if(usertype==1){
+    [self.control  addSubview:self.lblCountdown];
+    if(usertype==1){
         level=arc4random() % 4+1;
         counttimer=120;
     }else{
@@ -65,6 +73,7 @@
     }
     self.iaTempLastValue=[self dataWithLevel:level];
     [self startBusinessCal];
+    [self showtime];
     //以后则每根据设定的时间调用一次
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
     self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
@@ -215,6 +224,11 @@
             [self.countdown invalidate];
         }
     }
+    [self showtime];
+}
+
+- (void)showtime
+{
     int t1=counttimer/60;
     int t2=counttimer%60;
     if(t1>9&&t2>9){

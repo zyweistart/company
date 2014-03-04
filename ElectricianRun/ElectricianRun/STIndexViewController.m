@@ -24,7 +24,6 @@
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
 #import "SQLiteOperate.h"
-#import "DownloadIcon.h"
 #import "STSignupViewController.h"
 
 #import "STPurchaseShowViewController.h"
@@ -40,14 +39,16 @@
 @implementation STIndexViewController{
     HttpRequest *_hRequest;
     
-    DownloadIcon *downloadIcon;
+    NSDictionary *newData;
     
     SQLiteOperate *db;
-    
-    NSDictionary *newData;
+    UIImageView *img;
+    UILabel *lblTitle;
+    UILabel *lblContent;
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     ETFoursquareImages *foursquareImages = [[ETFoursquareImages alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-0)];
     [foursquareImages setImagesHeight:IMAGEHEIGHT];
@@ -62,7 +63,6 @@
     [foursquareImages setBackgroundColor:[UIColor redColor]];
     
     [self.view addSubview:foursquareImages];
-    
     
     // 设置按钮内部图片间距
     UIEdgeInsets insets;
@@ -123,16 +123,14 @@
     [newView setBackgroundColor:[UIColor colorWithRed:(208/255.0) green:(206/255.0) blue:(193/255.0) alpha:1]];
     [newView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickNewList:)]];
     
-    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(5, 15, 80, 60)];
+    img=[[UIImageView alloc]initWithFrame:CGRectMake(5, 15, 80, 60)];
     [newView addSubview:img];
-    
-    UILabel *lblTitle=[[UILabel alloc]initWithFrame:CGRectMake(90, 7, 215, 15)];
+    lblTitle=[[UILabel alloc]initWithFrame:CGRectMake(90, 7, 215, 15)];
     [lblTitle setFont:[UIFont systemFontOfSize:12]];
     [lblTitle setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
     [lblTitle setTextAlignment:NSTextAlignmentLeft];
     [newView addSubview:lblTitle];
-    
-    UILabel *lblContent=[[UILabel alloc]initWithFrame:CGRectMake(95, 25, 210, 55)];
+    lblContent=[[UILabel alloc]initWithFrame:CGRectMake(95, 25, 210, 55)];
     [lblContent setFont:[UIFont systemFontOfSize:10]];
     [lblContent setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
     [lblContent setTextAlignment:NSTextAlignmentLeft];
@@ -144,7 +142,11 @@
     foursquareImages.scrollView.contentSize = CGSizeMake(320, 95+80+IMAGEHEIGHT);
     
     [foursquareImages.pageControl setCurrentPageIndicatorTintColor:[UIColor colorWithRed:(28/255.f) green:(189/255.f) blue:(141/255.f) alpha:1.0]];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     db=[[SQLiteOperate alloc]init];
     if([db openDB]){
         NSString *sqlQuery = @"SELECT * FROM NEW";
@@ -154,11 +156,7 @@
             newData=[indata objectAtIndex:r];
             [lblTitle setText:[newData objectForKey:@"name"]];
             [lblContent setText:[newData objectForKey:@"content"]];
-            
-//            NSString *url=[data objectForKey:@"url"];
             NSString *icon_name=[newData objectForKey:@"icon_name"];
-//            NSString *file_name=[data objectForKey:@"file_name"];
-            
             //创建文件管理器
             NSFileManager* fileManager = [NSFileManager defaultManager];
             //获取Documents主目录
@@ -174,22 +172,12 @@
             }
         }
     }
-    
 }
 
 //用户体验
 - (void)onClickUserExperience:(id)sender {
-    UINavigationController *userExperienceSelectViewController = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
-    [self presentViewController:userExperienceSelectViewController animated:YES completion:nil];
-    
-    
-//    UINavigationController *userExperienceSelectViewController = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
-//    [self presentViewController:userExperienceSelectViewController animated:YES completion:nil];
-    
-    
-    
-
-    
+    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
+    [self presentViewController:userExperienceSelectViewControllerNav animated:YES completion:nil];
 }
 
 //我管辖的变电站
@@ -244,4 +232,5 @@
     UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsListViewController alloc]initWithData:newData]];
     [self presentViewController:newsDetailViewControllerNav animated:YES completion:nil];
 }
+
 @end

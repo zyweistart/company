@@ -23,7 +23,7 @@ double allTotalBurden[12][2][4];
 //保存最近12个每条进出线的电量
 double allTotalElectricity[12][2][4];
 
-@interface STUserExperienceLineDetailViewController () <UIActionSheetDelegate>
+@interface STUserExperienceLineDetailViewController () <UIAlertViewDelegate,UIActionSheetDelegate>
 
 @end
 
@@ -40,7 +40,6 @@ double allTotalElectricity[12][2][4];
     UILabel *lblSwitchStatus;
     NSTimer *timer;
     NSTimer *timerElectricity;
-    
 }
 
 - (id)initWithIndex:(long)index
@@ -318,10 +317,11 @@ double allTotalElectricity[12][2][4];
     UIAlertView *alert = [[UIAlertView alloc]
                        initWithTitle:@"电压设置报警体验阈值"
                        message:nil
-                       delegate:nil
-                       cancelButtonTitle:@"确定"
-                       otherButtonTitles:nil,nil];
+                       delegate:self
+                       cancelButtonTitle:@"取消"
+                       otherButtonTitles:@"确定",nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.tag=1;
     //设置输入框的键盘类型
     UITextField *tf = [alert textFieldAtIndex:0];
     tf.keyboardType = UIKeyboardTypeNumberPad;
@@ -333,10 +333,11 @@ double allTotalElectricity[12][2][4];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"电流设置报警体验阈值"
                           message:@"提示：输入阈值范围在0～1443.0之间"
-                          delegate:nil
-                          cancelButtonTitle:@"确定"
-                          otherButtonTitles:nil,nil];
+                          delegate:self
+                          cancelButtonTitle:@"取消"
+                          otherButtonTitles:@"确定",nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.tag=2;
     //设置输入框的键盘类型
     UITextField *tf = [alert textFieldAtIndex:0];
     tf.keyboardType = UIKeyboardTypeNumberPad;
@@ -346,6 +347,29 @@ double allTotalElectricity[12][2][4];
 - (void)alarme3:(id)sender
 {
     [Common alert:@"开关状态报警已开启，请回主接线上进行开着操作"];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSInteger tag=alertView.tag;
+    if(tag==1){
+        if(buttonIndex==1){
+            NSString *content=[[alertView textFieldAtIndex:0]text];
+            if(![@"" isEqualToString:content]){
+                NSLog(@"%@",content);
+                //报警
+            }
+        }
+    }else if(tag==2){
+        if(buttonIndex==1){
+            NSString *content=[[alertView textFieldAtIndex:0]text];
+            if(![@"" isEqualToString:content]){
+                NSLog(@"%@",content);
+                //报警
+            }
+        }
+    }
 }
 
 @end

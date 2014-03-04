@@ -54,7 +54,6 @@
                               myeViewControllerNav,
                               nil] animated:YES];
     
-    
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
@@ -62,6 +61,14 @@
     NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleShortVersionString"];
     if([currentVersionNo floatValue]>lastVersionNo){
         [self showIntroWithCrossDissolve];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if([Common getCacheByBool:@"enabled_preference_gps"]){
+        NSLog(@"已开启GPS服务,在此添加位置上传代码");
     }
 }
 

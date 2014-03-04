@@ -35,8 +35,6 @@
 {
     [super viewDidLoad];
     
-    NSString *D=@"['北京市':{'郊区':[{}],'市区':[{}]}]";
-    
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 290)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
