@@ -10,4 +10,6 @@
 
 @interface STNewsDetailViewController : UIViewController
 
+- (id)initWithData:(NSDictionary*)d;
+
 @end

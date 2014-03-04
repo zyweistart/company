@@ -8,12 +8,15 @@
 
 #import "STUserExperienceAlarmViewController.h"
 #import "STUserExperienceLineDetailViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface STUserExperienceAlarmViewController ()
 
 @end
 
-@implementation STUserExperienceAlarmViewController
+@implementation STUserExperienceAlarmViewController {
+    AVAudioPlayer *player;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -183,7 +186,20 @@
                                         destructiveButtonTitle:@"确定"
                                         otherButtonTitles:nil,nil];
                 [sheet showInView:[UIApplication sharedApplication].keyWindow];
+                
                 //开启报警声音
+                NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
+                NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+                NSError *error;
+                player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+                if (error) {
+                    NSLog(@"error:%@",[error description]);
+                    return;
+                }
+                [player setVolume:1];   //设置音量大小
+                player.numberOfLoops = -1;//设置音乐播放次数  -1为一直循环
+                [player prepareToPlay];
+                [player play];
             }else{
                 [Common alert:@"输入阈值范围在0～2500之间"];
             }
@@ -197,6 +213,10 @@
 {
     if(buttonIndex==0){
         //关闭报警声音
+        if([player isPlaying]){
+            [player stop];
+        }
+        player=nil;
         self.isTransLoad=NO;
         [self startBusinessCal];
     }

@@ -12,7 +12,8 @@
 
 @interface STGuideViewController : UITabBarController<EAIntroDelegate,HttpRequestDelegate>
 
-@property (strong,nonatomic) HttpRequest *hRequest;
+@property (strong,nonatomic) HttpRequest *hPicRequest;
+@property (strong,nonatomic) HttpRequest *hHtmlRequest;
 @property (strong,nonatomic) DownloadIcon *downloadIcon;
 
 @end

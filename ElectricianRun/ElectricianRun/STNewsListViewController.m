@@ -7,24 +7,55 @@
 //
 
 #import "STNewsListViewController.h"
+#import "STNewsDetailViewController.h"
+#import "SQLiteOperate.h"
 
 @interface STNewsListViewController () {
-    NSArray *titleArr;
+    SQLiteOperate *db;
+    NSMutableArray *titleArr;
 }
 
 @end
 
 @implementation STNewsListViewController
 
-
 - (id)init {
     self=[super init];
     if(self) {
-        self.title=@"我要学习";
+        self.title=@"新闻列表";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        titleArr=[[NSArray alloc]initWithObjects:@"新能量学习1",@"新能量学习2",@"新能量学习3",@"新能量学习4",nil];
+        db=[[SQLiteOperate alloc]init];
+        if([db openDB]){
+            NSString *sqlQuery = @"SELECT * FROM NEW";
+            NSMutableArray *indata=[db query:sqlQuery];
+            if(indata!=nil&&[indata count]>0){
+                titleArr=[[NSMutableArray alloc]initWithArray:indata];
+            }
+        }
+        
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(back:)];
     }
     return self;
+}
+
+- (id)initWithData:(NSDictionary*)d
+{
+    self=[self init];
+    if(self){
+        if(d!=nil){
+            [self performSelector:@selector(forward:) withObject:d afterDelay:0.5];
+        }
+    }
+    return self;
+}
+
+- (void)back:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -43,15 +74,38 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSInteger row=[indexPath row];
-    cell.textLabel.text=[titleArr objectAtIndex:row];
+    NSDictionary *data=[titleArr objectAtIndex:row];
+    
+    NSString *icon_name=[data objectForKey:@"icon_name"];
+    //创建文件管理器
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    //获取Documents主目录
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    //得到相应的Documents的路径
+    NSString* docDir = [paths objectAtIndex:0];
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+    NSString *path = [docDir stringByAppendingPathComponent:icon_name];
+    //如果图标文件已经存在则进行显示否则进行下载
+    if([fileManager fileExistsAtPath:path]){
+        [cell.imageView setImage:[UIImage imageWithContentsOfFile:path]];
+    }
+    cell.textLabel.font=[UIFont systemFontOfSize:12];
+    cell.textLabel.text=[data objectForKey:@"name"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger row=[indexPath row];
-    [Common alert:[NSString stringWithFormat:@"当前学习的是第%d条",row]];
+    NSDictionary *data=[titleArr objectAtIndex:row];
+    [self forward:data];
+}
+
+- (void)forward:(NSDictionary*)data
+{
+    STNewsDetailViewController *newsDetailViewController=[[STNewsDetailViewController alloc]initWithData:data];
+    [self.navigationController pushViewController:newsDetailViewController animated:YES];
 }
 
 @end
-

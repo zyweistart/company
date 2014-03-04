@@ -16,7 +16,6 @@
 
 #define DOWNLOADPIC 500
 #define DOWNLOADHTML 501
-#define DOWNLOADICONFILE 499
 
 @interface STGuideViewController ()
 
@@ -29,7 +28,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self downLoadPicture];
+    [self downLoadHtml];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    //首页
+    UINavigationController *indexViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STIndexViewController alloc]init]];
+    indexViewControllerNav.navigationBarHidden=YES;
+    indexViewControllerNav.tabBarItem.title=@"首页";
+    indexViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"shouye"];
+    //我要学习
+    UINavigationController *studyViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STStudyViewController alloc]init]];
+    studyViewControllerNav.tabBarItem.title=@"我要学习";
+    studyViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"xuexi"];
+    //我的E电工
+    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
+    myeViewControllerNav.tabBarItem.title=@"我的E电工";
+    myeViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"dgb"];
+    
+    [self setViewControllers:[NSArray arrayWithObjects:
+                              indexViewControllerNav,
+                              studyViewControllerNav,
+                              myeViewControllerNav,
+                              nil] animated:YES];
+    
+    
     //获取最后保存的版本号不存在则为0
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
@@ -37,9 +62,6 @@
     NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleShortVersionString"];
     if([currentVersionNo floatValue]>lastVersionNo){
         [self showIntroWithCrossDissolve];
-    }else{
-//        [self showIntroWithCrossDissolve];
-        [self gotoMainPage];
     }
 }
 
@@ -72,37 +94,6 @@
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
     NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleShortVersionString"];
     [Common setCache:DEFAULTDATA_LASTVERSIONNO data:currentVersionNo];
-    [self gotoMainPage];
-}
-
-- (void)gotoMainPage
-{
-    //首页
-    UINavigationController *indexViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STIndexViewController alloc]init]];
-    indexViewControllerNav.navigationBarHidden=YES;
-    indexViewControllerNav.tabBarItem.title=@"首页";
-    indexViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"shouye"];
-    //我要学习
-    UINavigationController *studyViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STStudyViewController alloc]init]];
-    studyViewControllerNav.tabBarItem.title=@"我要学习";
-    studyViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"xuexi"];
-    //我的E电工
-    UINavigationController *myeViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STMyeViewController alloc]init]];
-    myeViewControllerNav.tabBarItem.title=@"我的E电工";
-    myeViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"dgb"];
-    
-    [self setViewControllers:[NSArray arrayWithObjects:
-                             indexViewControllerNav,
-                             studyViewControllerNav,
-                             myeViewControllerNav,
-                              nil] animated:YES];
-//    [self downLoadPicture];
-    db=[[SQLiteOperate alloc]init];
-    [self downLoadHtml];
-    
-//    self.downloadIcon=[[DownloadIcon alloc]init];
-//    [self.downloadIcon startWithUrl:@"http://122.224.247.221:7003/html/AppNews/images/app_20140117095452.jpg"];
-    
 }
 
 //下载图片
@@ -113,9 +104,9 @@
     [p setObject:@"0" forKey:@"type"];
     [p setObject:@"3" forKey:@"num"];
     
-    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADPIC];
-    [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    self.hPicRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADPIC];
+    [self.hPicRequest setIsShowMessage:NO];
+    [self.hPicRequest start:URL params:p];
 }
 
 //下载新闻
@@ -126,9 +117,9 @@
     [p setObject:@"1" forKey:@"type"];
     [p setObject:@"7" forKey:@"num"];
     
-    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADHTML];
-    [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    self.hHtmlRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADHTML];
+    [self.hHtmlRequest setIsShowMessage:NO];
+    [self.hHtmlRequest start:URL params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
@@ -136,14 +127,16 @@
     if(repCode==DOWNLOADPIC){
         NSDictionary *dic=[[response resultJSON]objectForKey:@"Rows"];
         if(dic!=nil) {
-            if([@"0" isEqualToString:[dic objectForKey:@"result"]]){
-                [Common alert:[dic objectForKey:@"remark"]];
-            }
+//            NSLog(@"%@",dic);
+//            if([@"0" isEqualToString:[dic objectForKey:@"result"]]){
+//                [Common alert:[dic objectForKey:@"remark"]];
+//            }
         }
     }else if(repCode==DOWNLOADHTML){
         NSString *url=[[response resultJSON] objectForKey:@"URL"];
         NSMutableArray *outdata=[[response resultJSON] objectForKey:@"FILE_NAMES"];
         
+        db=[[SQLiteOperate alloc]init];
         if([db openDB]){
             if([db createTable]){
                 NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM NEW WHERE URL='%@'",url];
@@ -157,13 +150,6 @@
 
                     NSMutableString *iconurl=[[NSMutableString alloc]initWithString:url];
                     [iconurl appendFormat:@"images/%@",outicon_name];
-                    
-//                    self.downloadIcon=[[DownloadIcon alloc]init];
-//                    [self.downloadIcon startWithUrl:iconurl];
-//                    
-//                    break;
-                    
-                    
                     
                     BOOL flag=NO;
                     for(NSDictionary *ind in indata){
@@ -188,21 +174,56 @@
                         NSString *sql = [NSString stringWithFormat:
                                          @"INSERT INTO NEW (URL,NAME,ICO_NAME,FILE_NAME,CONTENT) VALUES ('%@', '%@', '%@' ,'%@' ,'%@')",url, outname, outicon_name, outfile_name, outcontent];
                         if([db execSql:sql]){
-                            
-                            
+                            NSString *ufile=[NSString stringWithFormat:@"%@%@",url,outfile_name];
+                            NSString *uicon=[NSString stringWithFormat:@"%@images/%@",url,outicon_name];
+                            [self AsynchronousDownloadWithUrl:ufile FileName:outfile_name];
+                            [self AsynchronousDownloadWithUrl:uicon FileName:outicon_name];
                         }
                     }
                 }
             }
         }
-        
-        
-    }else if(repCode==DOWNLOADICONFILE){
-        
-        
-        
     }
-    
+}
+
+- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
+{
+    NSLog(@"error:%@",[error description]);
+}
+
+- (void)AsynchronousDownloadWithUrl:(NSString *)u FileName:(NSString *)fName
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+    dispatch_async(queue, ^{
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:u]];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (data) {
+                //创建文件管理器
+                NSFileManager* fileManager = [NSFileManager defaultManager];
+                //获取临时目录
+                NSString* tmpDir=NSTemporaryDirectory();
+                //更改到待操作的临时目录
+                [fileManager changeCurrentDirectoryPath:[tmpDir stringByExpandingTildeInPath]];
+                NSString *tmpPath = [tmpDir stringByAppendingPathComponent:fName];
+                //创建数据缓冲区
+                NSMutableData* writer = [[NSMutableData alloc] init];
+                //将字符串添加到缓冲中
+                [writer appendData: data];
+                //将其他数据添加到缓冲中
+                //将缓冲的数据写入到临时文件中
+                [writer writeToFile:tmpPath atomically:YES];
+                //获取Documents主目录
+                NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+                //得到相应的Documents的路径
+                NSString* docDir = [paths objectAtIndex:0];
+                //更改到待操作的目录下
+                [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+                NSString *path = [docDir stringByAppendingPathComponent:fName];
+                //把临时下载好的文件移动到主文档目录下
+                [fileManager moveItemAtPath:tmpPath toPath:path error:nil];
+            }
+        });
+    });
 }
 
 @end

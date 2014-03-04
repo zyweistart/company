@@ -10,4 +10,7 @@
 
 @interface STNewsListViewController : UITableViewController
 
+
+- (id)initWithData:(NSDictionary*)d;
+
 @end

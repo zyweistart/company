@@ -19,10 +19,12 @@
 #import "STTaskAuditViewController.h"
 
 #import "STNewsDetailViewController.h"
+#import "STNewsListViewController.h"
 
 #import "ETFoursquareImages.h"
 #import "NSString+Utils.h"
 #import "SQLiteOperate.h"
+#import "DownloadIcon.h"
 
 //#define IMAGEHEIGHT 90
 #define IMAGEHEIGHT 180
@@ -34,7 +36,11 @@
 @implementation STIndexViewController{
     HttpRequest *_hRequest;
     
+    DownloadIcon *downloadIcon;
+    
     SQLiteOperate *db;
+    
+    NSDictionary *newData;
 }
 
 - (void)viewDidLoad {
@@ -114,7 +120,6 @@
     [newView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickNewList:)]];
     
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(5, 15, 80, 60)];
-    [img setImage:[UIImage imageNamed:@"newpic"]];
     [newView addSubview:img];
     
     UILabel *lblTitle=[[UILabel alloc]initWithFrame:CGRectMake(90, 7, 215, 15)];
@@ -142,9 +147,27 @@
         NSMutableArray *indata=[db query:sqlQuery];
         if(indata!=nil&&[indata count]>0){
             int r=arc4random()%[indata count];
-            NSDictionary *data=[indata objectAtIndex:r];
-            [lblTitle setText:[data objectForKey:@"name"]];
-            [lblContent setText:[data objectForKey:@"content"]];
+            newData=[indata objectAtIndex:r];
+            [lblTitle setText:[newData objectForKey:@"name"]];
+            [lblContent setText:[newData objectForKey:@"content"]];
+            
+//            NSString *url=[data objectForKey:@"url"];
+            NSString *icon_name=[newData objectForKey:@"icon_name"];
+//            NSString *file_name=[data objectForKey:@"file_name"];
+            
+            //创建文件管理器
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            //获取Documents主目录
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //得到相应的Documents的路径
+            NSString* docDir = [paths objectAtIndex:0];
+            //更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+            NSString *path = [docDir stringByAppendingPathComponent:icon_name];
+            //如果图标文件已经存在则进行显示否则进行下载
+            if([fileManager fileExistsAtPath:path]){
+                [img setImage:[UIImage imageWithContentsOfFile:path]];
+            }
         }
     }
     
@@ -205,7 +228,7 @@
 
 //新闻详细
 - (void)onClickNewList:(id)sender {
-    UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsDetailViewController alloc]init]];
+    UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsListViewController alloc]initWithData:newData]];
     [self presentViewController:newsDetailViewControllerNav animated:YES completion:nil];
 }
 @end

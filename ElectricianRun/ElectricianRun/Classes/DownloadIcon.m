@@ -7,6 +7,7 @@
 //
 
 #import "DownloadIcon.h"
+#import "NSString+Utils.h"
 
 #define DOWNLOADICONFILE 499
 
@@ -15,7 +16,6 @@
 - (void)startWithUrl:(NSString*)url
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSLog(@"%@",url);
     // 设置请求方法
 //    request.HTTPMethod = @"POST";
     // 60秒请求超时
@@ -48,7 +48,7 @@
     NSString* tmpDir=NSTemporaryDirectory();
     //更改到待操作的临时目录
     [fileManager changeCurrentDirectoryPath:[tmpDir stringByExpandingTildeInPath]];
-    NSString *tmpPath = [tmpDir stringByAppendingPathComponent:@"images.jpg"];
+    NSString *tmpPath = [tmpDir stringByAppendingPathComponent:[[self fileName] md5]];
     
     //创建数据缓冲区
     NSMutableData* writer = [[NSMutableData alloc] init];
@@ -64,7 +64,7 @@
     NSString* docDir = [paths objectAtIndex:0];
     //更改到待操作的目录下
     [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
-    NSString *path = [docDir stringByAppendingPathComponent:@"images.jpg"];
+    NSString *path = [docDir stringByAppendingPathComponent:[[self fileName]md5]];
     //把临时下载好的文件移动到主文档目录下
     [fileManager moveItemAtPath:tmpPath toPath:path error:nil];
 }

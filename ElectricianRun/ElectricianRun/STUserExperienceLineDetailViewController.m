@@ -50,6 +50,12 @@ double allTotalElectricity[12][2][4];
         self.title=@"线路详细信息";
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"图表"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(chartSwitch:)];
+        
         _currentIndex=index;
         
         UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 340)];
@@ -58,19 +64,21 @@ double allTotalElectricity[12][2][4];
         btnHistory1.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnHistory1 setTitle:@"电压报警体验" forState:UIControlStateNormal];
         [btnHistory1 setBackgroundColor:[UIColor blueColor]];
-        [btnHistory1 addTarget:self action:@selector(chartSwitch:) forControlEvents:UIControlEventTouchUpInside];
+        [btnHistory1 addTarget:self action:@selector(alarme1:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory1];
         
         UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(120, 5, 80, 30)];
         btnHistory2.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnHistory2 setTitle:@"电流报警体验" forState:UIControlStateNormal];
         [btnHistory2 setBackgroundColor:[UIColor blueColor]];
+        [btnHistory2 addTarget:self action:@selector(alarme2:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory2];
         
         UIButton *btnHistory3=[[UIButton alloc]initWithFrame:CGRectMake(220, 5, 80, 30)];
         btnHistory3.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnHistory3 setTitle:@"开关状态报警体验" forState:UIControlStateNormal];
         [btnHistory3 setBackgroundColor:[UIColor blueColor]];
+        [btnHistory3 addTarget:self action:@selector(alarme3:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory3];
         
         UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(75, 40, 80, 20)];
@@ -282,7 +290,8 @@ double allTotalElectricity[12][2][4];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     if(buttonIndex==0){
         STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]init];
         [self.navigationController pushViewController:chartElectricCurrentLineViewController animated:YES];
@@ -302,6 +311,41 @@ double allTotalElectricity[12][2][4];
         STChartElectricityValPieViewController *chartElectricityValPieViewController=[[STChartElectricityValPieViewController alloc]init];
         [self.navigationController pushViewController:chartElectricityValPieViewController animated:YES];
     }
+}
+
+- (void)alarme1:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                       initWithTitle:@"电压设置报警体验阈值"
+                       message:nil
+                       delegate:nil
+                       cancelButtonTitle:@"确定"
+                       otherButtonTitles:nil,nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    //设置输入框的键盘类型
+    UITextField *tf = [alert textFieldAtIndex:0];
+    tf.keyboardType = UIKeyboardTypeNumberPad;
+    [alert show];
+}
+
+- (void)alarme2:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"电流设置报警体验阈值"
+                          message:@"提示：输入阈值范围在0～1443.0之间"
+                          delegate:nil
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:nil,nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    //设置输入框的键盘类型
+    UITextField *tf = [alert textFieldAtIndex:0];
+    tf.keyboardType = UIKeyboardTypeNumberPad;
+    [alert show];
+}
+
+- (void)alarme3:(id)sender
+{
+    [Common alert:@"开关状态报警已开启，请回主接线上进行开着操作"];
 }
 
 @end

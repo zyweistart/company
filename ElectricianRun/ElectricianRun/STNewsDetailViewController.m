@@ -12,28 +12,53 @@
 
 @end
 
-@implementation STNewsDetailViewController
+@implementation STNewsDetailViewController {
+    NSDictionary *data;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithData:(NSDictionary*)d
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title=@"";
+    self=[super init];
+    if(self){
+        data=d;
+        self.title=@"新闻详细";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        NSString *url=[data objectForKey:@"url"];
+        NSString *file_name=[data objectForKey:@"file_name"];
+        
+        UIWebView *webView=[[UIWebView alloc]initWithFrame:self.view.frame];
+        [webView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        
+        if([HttpRequest isNetworkConnection]){
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",url,file_name]]];
+            [webView loadRequest:request];
+        }else{
+            //创建文件管理器
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            //获取Documents主目录
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //得到相应的Documents的路径
+            NSString* docDir = [paths objectAtIndex:0];
+            //更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+            NSString *path = [docDir stringByAppendingPathComponent:file_name];
+            //如果图标文件已经存在则进行显示否则进行下载
+            if([fileManager fileExistsAtPath:path]){
+                NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+                NSString *html= [NSString stringWithContentsOfFile:path encoding:gbkEncoding error:nil];
+                [webView loadHTMLString:html baseURL:nil];
+            }else{
+                [Common alert:@"当前新闻可能已经被删除"];
+                return self;
+            }
+        }
+        [self.view addSubview:webView];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

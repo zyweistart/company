@@ -12,6 +12,8 @@
 
 @property NSMutableData *resultData;
 
+@property NSString *fileName;
+
 - (void)startWithUrl:(NSString*)url;
 
 @end
