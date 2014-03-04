@@ -25,6 +25,10 @@
 #import "NSString+Utils.h"
 #import "SQLiteOperate.h"
 #import "DownloadIcon.h"
+#import "STSignupViewController.h"
+
+#import "STPurchaseShowViewController.h"
+#import "STPurchaseCalculateViewController.h"
 
 //#define IMAGEHEIGHT 90
 #define IMAGEHEIGHT 180
@@ -177,6 +181,15 @@
 - (void)onClickUserExperience:(id)sender {
     UINavigationController *userExperienceSelectViewController = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
     [self presentViewController:userExperienceSelectViewController animated:YES completion:nil];
+    
+    
+//    UINavigationController *userExperienceSelectViewController = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
+//    [self presentViewController:userExperienceSelectViewController animated:YES completion:nil];
+    
+    
+    
+
+    
 }
 
 //我管辖的变电站

@@ -7,7 +7,12 @@
 //
 
 #import "STBaseUserExperienceViewController.h"
+#import "STPurchaseShowViewController.h"
+#import "STPurchaseCalculateViewController.h"
+#import "STFeedbackViewController.h"
 #import "STSignupViewController.h"
+
+#define ACTIONSHEETTAGMORE 1111
 
 @interface STBaseUserExperienceViewController ()
 
@@ -15,11 +20,39 @@
 
 @implementation STBaseUserExperienceViewController
 
+- (id)init
+{
+    self=[super init];
+    if(self){
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithTitle:@"更多"
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(more:)];
+    }
+    return self;
+}
+
 - (void)back:(id)sender
 {
     [self.timer invalidate];
     [self.timerElectricity invalidate];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)more:(id)sender
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc]
+                            initWithTitle:nil
+                            delegate:self
+                            cancelButtonTitle:@"不做评价"
+                            destructiveButtonTitle:nil
+                            otherButtonTitles:
+                            @"评价",
+                            @"分享",
+                            @"购买产品",nil];
+    sheet.tag=ACTIONSHEETTAGMORE;
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)viewDidLoad
@@ -621,6 +654,31 @@
 - (void)onClickCurrentDetailInfo:(UITapGestureRecognizer*)sender
 {
     
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag==ACTIONSHEETTAGMORE){
+        if(buttonIndex==0){
+            STFeedbackViewController *feedbackViewController=[[STFeedbackViewController alloc]init];
+            [self.navigationController pushViewController:feedbackViewController animated:YES];
+        }else if(buttonIndex==1){
+            [Common alert:@"即将上线"];
+        }else if(buttonIndex==2){
+            UINavigationController *purchaseShowViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STPurchaseShowViewController alloc]init]];
+            purchaseShowViewControllerNav.tabBarItem.title=@"价格展示";
+            purchaseShowViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"shouye"];
+            UINavigationController *purchaseCalculateViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STPurchaseCalculateViewController alloc]init]];
+            purchaseCalculateViewControllerNav.tabBarItem.title=@"在线报价单";
+            purchaseCalculateViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"xuexi"];
+            UITabBarController *tabBarController=[[UITabBarController alloc]init];
+            [tabBarController setViewControllers:[NSArray arrayWithObjects:
+                              purchaseShowViewControllerNav,
+                              purchaseCalculateViewControllerNav,
+                              nil] animated:YES];
+            [self presentViewController:tabBarController animated:YES completion:nil];
+        }
+    }
 }
 
 @end

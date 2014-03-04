@@ -107,6 +107,8 @@
 		C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
+		C9C432D718C5A132005D0BC6 /* STPurchaseShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C432D618C5A132005D0BC6 /* STPurchaseShowViewController.m */; };
+		C9C432DA18C5A15A005D0BC6 /* STPurchaseCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C432D918C5A15A005D0BC6 /* STPurchaseCalculateViewController.m */; };
 		C9CCE5EF18C4D1CE00A94F98 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */; };
 		C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827518C065C8002826C4 /* STSignupViewController.m */; };
 		C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827818C0689E002826C4 /* STUserExperienceSelectViewController.m */; };
@@ -334,6 +336,10 @@
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C9C432D518C5A132005D0BC6 /* STPurchaseShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPurchaseShowViewController.h; sourceTree = "<group>"; };
+		C9C432D618C5A132005D0BC6 /* STPurchaseShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPurchaseShowViewController.m; sourceTree = "<group>"; };
+		C9C432D818C5A15A005D0BC6 /* STPurchaseCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPurchaseCalculateViewController.h; sourceTree = "<group>"; };
+		C9C432D918C5A15A005D0BC6 /* STPurchaseCalculateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPurchaseCalculateViewController.m; sourceTree = "<group>"; };
 		C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		C9CF827418C065C8002826C4 /* STSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSignupViewController.h; sourceTree = "<group>"; };
 		C9CF827518C065C8002826C4 /* STSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSignupViewController.m; sourceTree = "<group>"; };
@@ -592,6 +598,10 @@
 				C9D1154E18BC755B00268BBE /* STProjectSiteAddLineViewController.m */,
 				C93C74CB18923F1100A7FAB8 /* STProjectSiteViewController.h */,
 				C93C74CC18923F1100A7FAB8 /* STProjectSiteViewController.m */,
+				C9C432D818C5A15A005D0BC6 /* STPurchaseCalculateViewController.h */,
+				C9C432D918C5A15A005D0BC6 /* STPurchaseCalculateViewController.m */,
+				C9C432D518C5A132005D0BC6 /* STPurchaseShowViewController.h */,
+				C9C432D618C5A132005D0BC6 /* STPurchaseShowViewController.m */,
 				C9B68ACF18B4FD6B009B57E2 /* STScanningOperationViewController.h */,
 				C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */,
 				C93C74C818923EE500A7FAB8 /* STScanningViewController.h */,
@@ -988,6 +998,7 @@
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
 				C9B2A59018934EE9003A412E /* STDataMonitoringLineDetailListViewController.m in Sources */,
+				C9C432DA18C5A15A005D0BC6 /* STPurchaseCalculateViewController.m in Sources */,
 				C9CF827F18C06D30002826C4 /* STDataMonitoringLineCell.m in Sources */,
 				C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */,
 				C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */,
@@ -1000,6 +1011,7 @@
 				C93C7491189235E500A7FAB8 /* STAppDelegate.m in Sources */,
 				C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */,
 				C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */,
+				C9C432D718C5A132005D0BC6 /* STPurchaseShowViewController.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */,
 				C92EA0C418C41FCB003F1669 /* STAgreementContentViewController.m in Sources */,

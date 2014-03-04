@@ -50,7 +50,7 @@ double allTotalElectricity[12][2][4];
         self.title=@"线路详细信息";
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
-        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
                                                initWithTitle:@"图表"
                                                style:UIBarButtonItemStyleBordered
                                                target:self

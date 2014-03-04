@@ -30,8 +30,6 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
-        
-        
     }
     return self;
 }
@@ -185,6 +183,7 @@
                                         cancelButtonTitle:nil
                                         destructiveButtonTitle:@"确定"
                                         otherButtonTitles:nil,nil];
+                sheet.tag=100;
                 [sheet showInView:[UIApplication sharedApplication].keyWindow];
                 
                 //开启报警声音
@@ -211,14 +210,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==0){
-        //关闭报警声音
-        if([player isPlaying]){
-            [player stop];
+    if(actionSheet.tag==100){
+        if(buttonIndex==0){
+            //关闭报警声音
+            if([player isPlaying]){
+                [player stop];
+            }
+            player=nil;
+            self.isTransLoad=NO;
+            [self startBusinessCal];
         }
-        player=nil;
-        self.isTransLoad=NO;
-        [self startBusinessCal];
+    }else{
+        [super actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
     }
 }
 
