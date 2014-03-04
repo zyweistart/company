@@ -22,8 +22,6 @@
         
         self.title=@"体验站电气主接线图";
         
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
                                                initWithTitle:@"返回"
                                                style:UIBarButtonItemStyleBordered
@@ -38,6 +36,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    float height=self.view.frame.size.height;
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, height-160, 300, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setText:@"体验说明"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:lbl];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, height-140, 300, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setText:@"(1)点击线路开关体验开关分合闸。"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:lbl];lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, height-120, 300, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setText:@"(2)点击数据查看线路的运行曲线、体验报警功能。"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:lbl];
+    
+    self.btnSignup=[[UIButton alloc]initWithFrame:CGRectMake(40, self.view.frame.size.height-64, 100, 30)];
+    self.btnSignup.titleLabel.font=[UIFont systemFontOfSize:12];
+    [self.btnSignup setTitle:@"我要报名" forState:UIControlStateNormal];
+    [self.btnSignup addTarget:self action:@selector(onClickSignup:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btnSignup];
+    
+    self.btnAlarmExperience=[[UIButton alloc]initWithFrame:CGRectMake(180, self.view.frame.size.height-64, 100, 30)];
+    self.btnAlarmExperience.titleLabel.font=[UIFont systemFontOfSize:12];
+    [self.btnAlarmExperience setTitle:@"负荷超限报警体验" forState:UIControlStateNormal];
+    [self.btnAlarmExperience addTarget:self action:@selector(onClickAlarmExperience:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btnAlarmExperience];
+    
     //以后则每根据设定的时间调用一次
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
     self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];
@@ -52,7 +81,7 @@
     [self.navigationController pushViewController:userExperienceLineDetailViewController animated:YES];
 }
 
-- (IBAction)onClickSwitch:(id)sender
+- (void)onClickSwitch:(id)sender
 {
  
     UIButton *send=(UIButton*)sender;
@@ -116,14 +145,14 @@
 }
 
 
-- (IBAction)onClickLoadDetail:(id)sender {
+- (void)onClickLoadDetail:(id)sender {
     long tag=((UIButton*)sender).tag;
     STUserExperienceLineDetailViewController *userExperienceLineDetailViewController=[[STUserExperienceLineDetailViewController alloc]initWithIndex:tag];
     [self.navigationController pushViewController:userExperienceLineDetailViewController animated:YES];
 }
 
 //负荷超限报警体验
-- (IBAction)onClickAlarmExperience:(id)sender {
+- (void)onClickAlarmExperience:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"企业总负荷超限报警体验阈值"
                           message:@"提示：输入阈值范围在0～2500之间"

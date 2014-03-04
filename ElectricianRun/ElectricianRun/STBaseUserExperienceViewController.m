@@ -53,22 +53,23 @@
     [self displaySwitchStatus];
 }
 
-- (void)buildUI{
-    
+- (void)buildUI
+{
+    [self.view setBackgroundColor:[UIColor blackColor]];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    self.control=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, 320, 500)];
+    self.control=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, 320, 280)];
     [self.control setBackgroundColor:[UIColor blackColor]];
-    self.control.contentSize = CGSizeMake(330,157);
+    self.control.contentSize = CGSizeMake(330,280);
     [self.control setScrollEnabled:YES];
     
-    self.lblCurrentLoad=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 40, 29)];
+    self.lblCurrentLoad=[[UILabel alloc]initWithFrame:CGRectMake(20, 25, 40, 29)];
     self.lblCurrentLoad.font=[UIFont systemFontOfSize:7];
     [self.lblCurrentLoad setTextColor:[UIColor orangeColor]];
     [self.lblCurrentLoad setBackgroundColor:[UIColor clearColor]];
     [self.lblCurrentLoad setNumberOfLines:0];
     [self.control addSubview:self.lblCurrentLoad];
     
-    self.lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(270, 20, 40, 29)];
+    self.lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(270, 25, 40, 29)];
     self.lblElectricity.font=[UIFont systemFontOfSize:7];
     [self.lblElectricity setTextColor:[UIColor orangeColor]];
     [self.lblElectricity setBackgroundColor:[UIColor clearColor]];
@@ -222,7 +223,6 @@
     [self.control addSubview:bgImg];
     
     [self.view addSubview:self.control];
-    
 }
 
 //生成一个0～1之间的随机数小数点后保留两位
@@ -602,17 +602,18 @@
 }
 
 //我要报名
-- (IBAction)onClickSignup:(id)sender {
+- (void)onClickSignup:(id)sender
+{
     STSignupViewController *signupViewController=[[STSignupViewController alloc]init];
     [self.navigationController pushViewController:signupViewController animated:YES];
 }
 
-- (IBAction)onClickSwitch:(id)sender
+- (void)onClickSwitch:(id)sender
 {
     
 }
 
-- (IBAction)onClickLoadDetail:(id)sender
+- (void)onClickLoadDetail:(id)sender
 {
     
 }

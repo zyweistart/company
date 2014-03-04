@@ -11,4 +11,6 @@
 
 @interface STUserExperienceAlarmViewController:STBaseUserExperienceViewController
 
+@property (strong,nonatomic) UIButton *btnAlarmExperience;
+
 @end

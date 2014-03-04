@@ -107,6 +107,7 @@
 		C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
 		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
+		C9CCE5EF18C4D1CE00A94F98 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */; };
 		C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827518C065C8002826C4 /* STSignupViewController.m */; };
 		C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827818C0689E002826C4 /* STUserExperienceSelectViewController.m */; };
 		C9CF827C18C06D01002826C4 /* STDataMonitoringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF827B18C06D01002826C4 /* STDataMonitoringCell.m */; };
@@ -333,6 +334,7 @@
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		C9CF827418C065C8002826C4 /* STSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSignupViewController.h; sourceTree = "<group>"; };
 		C9CF827518C065C8002826C4 /* STSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSignupViewController.m; sourceTree = "<group>"; };
 		C9CF827718C0689E002826C4 /* STUserExperienceSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUserExperienceSelectViewController.h; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 		C93C7487189235E400A7FAB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */,
 				C93C7488189235E400A7FAB8 /* ElectricianRun-Info.plist */,
 				C93C748C189235E400A7FAB8 /* main.m */,
 				C93C748E189235E400A7FAB8 /* ElectricianRun-Prefix.pch */,
@@ -922,6 +925,7 @@
 				C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */,
 				C922446F18B623E200D0B923 /* MJRefresh.bundle in Resources */,
 				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
+				C9CCE5EF18C4D1CE00A94F98 /* alarm.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

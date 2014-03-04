@@ -3,19 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "guide2.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x",
       "filename" : "guide2@2x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "guide2-568h@2x.png",
-      "unassigned" : true,
-      "subtype" : "retina4",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "guide2-568h@2x.png"
     }
   ],
   "info" : {

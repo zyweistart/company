@@ -68,6 +68,8 @@ double threePhaseCurrentRight[4][3];
 
 @property (strong, nonatomic) UIScrollView *control;
 
+@property (strong,nonatomic) UIButton *btnSignup;
+
 @property NSTimer * timer;
 @property NSTimer * timerElectricity;
 //最后一次进线A的值
@@ -101,8 +103,9 @@ double threePhaseCurrentRight[4][3];
 //显示开关的状态
 - (void)displaySwitchStatus;
 //进出线电流开关
-- (IBAction)onClickSwitch:(id)sender;
+- (void)onClickSwitch:(id)sender;
 //电流详细信息
-- (IBAction)onClickLoadDetail:(id)sender;
+- (void)onClickLoadDetail:(id)sender;
+- (void)onClickSignup:(id)sender;
 
 @end

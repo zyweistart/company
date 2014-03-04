@@ -9,12 +9,15 @@
 #import "STUserExperienceSelectViewController.h"
 #import "STUserExperienceAlarmViewController.h"
 #import "STUserExperienceViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface STUserExperienceSelectViewController ()
+@interface STUserExperienceSelectViewController () <AVAudioPlayerDelegate>
 
 @end
 
-@implementation STUserExperienceSelectViewController
+@implementation STUserExperienceSelectViewController {
+    AVAudioPlayer *player;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,8 +75,33 @@
 
 - (void)alarm:(id)sender
 {
-    UINavigationController *userExperienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceAlarmViewController alloc]init]];
-    [self presentViewController:userExperienceAlarmViewControllerNav animated:YES completion:nil];
+//    UINavigationController *userExperienceAlarmViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceAlarmViewController alloc]init]];
+//    [self presentViewController:userExperienceAlarmViewControllerNav animated:YES completion:nil];
+    NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
+    NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+    NSError *error;
+    player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if (error) {
+        NSLog(@"error:%@",[error description]);
+        return;
+    }
+//    player.delegate=self;
+    //    [player setVolume:1.0];
+    [player setVolume:1];   //设置音量大小
+    player.numberOfLoops = -1;//设置音乐播放次数  -1为一直循环
+    [player prepareToPlay];
+    [player play];
+    NSLog(@"%@",path);
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"audioPlayerDidFinishPlaying");
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error
+{
+    NSLog(@"audioPlayerDecodeErrorDidOccur");
 }
 
 - (void)business:(id)sender
