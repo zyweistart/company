@@ -60,7 +60,7 @@
     UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 64, 320, 50)];
     [lbl setTextAlignment:NSTextAlignmentCenter];
     [lbl setFont:[UIFont systemFontOfSize:16.0]];
-    [lbl setText:@"0301 1601 0008 | 33"];
+    [lbl setText:@"0301 1601 0008 | 33---------"];
     [lbl setTextColor:[UIColor blackColor]];
     [self.view addSubview:lbl];
     
