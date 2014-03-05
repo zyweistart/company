@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STSignupViewController : UIViewController
+@interface STSignupViewController : UIViewController <HttpRequestDelegate>
+
+@property (strong,nonatomic) HttpRequest *hRequest;
 
 @end

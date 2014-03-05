@@ -73,18 +73,16 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
 
 - (void)reloadTableViewDataSource{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"E33" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"RW10" forKey:@"GNID"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

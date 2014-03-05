@@ -52,11 +52,9 @@
 
 - (void)reloadTableViewDataSource{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"3" forKey:@"rtype"];
     [p setObject:@"2012-03-02 00:00" forKey:@"startDate"];
     [p setObject:@"2014-03-02 23:59" forKey:@"endDate"];
@@ -65,7 +63,7 @@
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLgetLocationInfo params:p];
     
 }
 

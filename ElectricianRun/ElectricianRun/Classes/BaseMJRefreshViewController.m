@@ -17,6 +17,7 @@
 - (id)init {
     self=[super init];
     if(self){
+        
     }
     return self;
 }
@@ -123,35 +124,41 @@
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-    NSMutableDictionary *pageinfo=[[response resultJSON] objectForKey:@"Rows"];
-    _pageCount=[[pageinfo objectForKey:@"PageCount"] intValue];
-    if(_pageCount<_currentPage) {
-        if(_pageCount==0){
-            [self.dataItemArray removeAllObjects];
-            _currentPage=1;
-        }else{
-            _currentPage=_pageCount;
-        }
-    } else {
+    NSDictionary *data=[response resultJSON];
+    if(data!=nil){
+        NSDictionary *pageinfo=[data objectForKey:@"Rows"];
         
-        NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-        if(_currentPage==1){
-            self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
-        } else {
-            [self.dataItemArray addObjectsFromArray:tmpData];
-        }
-        
-    }
-    if(self.isLoadCache){
-        if(_currentPage==1){
-            if(self.isLoadCache){
-                [Common setCache:self.cachetag!=nil?self.cachetag:CACHE_DATA data:[response responseString]];
+        int result=[[pageinfo objectForKey:@"result"] intValue];
+        if(result>0){
+            _pageCount=[[pageinfo objectForKey:@"PageCount"] intValue];
+            if(_pageCount<_currentPage) {
+                if(_pageCount==0){
+                    [self.dataItemArray removeAllObjects];
+                    _currentPage=1;
+                }else{
+                    _currentPage=_pageCount;
+                }
+            } else {
+                NSArray *tmpData=[data objectForKey:@"table1"];
+                if(_currentPage==1){
+                    self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
+                } else {
+                    [self.dataItemArray addObjectsFromArray:tmpData];
+                }
             }
+            if(self.isLoadCache){
+                if(_currentPage==1){
+                    if(self.isLoadCache){
+                        [Common setCache:self.cachetag!=nil?self.cachetag:CACHE_DATA data:[response responseString]];
+                    }
+                }
+            }
+            // 刷新表格
+            [self.tableView reloadData];
+        } else {
+            [Common alert:[pageinfo objectForKey:@"remark"]];
         }
     }
-    
-    // 刷新表格
-    [self.tableView reloadData];
     
     [self doneLoadingTableViewData];
     
@@ -171,8 +178,7 @@
 }
 
 - (void)autoRefresh {
-    //1秒后刷新表格UI
-    [self performSelector:@selector(refresh) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(refresh) withObject:nil afterDelay:0.5];
 }
 
 - (void)refresh {

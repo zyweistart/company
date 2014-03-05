@@ -22,7 +22,6 @@
     [self setIsLoadCache:YES];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         self.title=@"报警阀值设置";
         [self.view setBackgroundColor:[UIColor whiteColor]];
     }
@@ -81,18 +80,16 @@
 
 - (void)reloadTableViewDataSource{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"CP10" forKey:@"GNID"];
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
     
 }
 
@@ -105,11 +102,9 @@
             NSString *content1=[[alertView textFieldAtIndex:0]text];
             NSString *content2=[[alertView textFieldAtIndex:1]text];
             
-            NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-            
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-            [p setObject:@"zhangyy" forKey:@"imei"];
-            [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+            [p setObject:[Account getUserName] forKey:@"imei"];
+            [p setObject:[Account getPassword] forKey:@"authentication"];
             [p setObject:@"CP11" forKey:@"GNID"];
             [p setObject:[dictionary objectForKey:@"CP_ID"] forKey:@"QTCP"];
             [p setObject:content1 forKey:@"QTVAL"];
@@ -117,7 +112,7 @@
             
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:ALARAMSETUPREQUESTCODE];
             [self.hRequest setIsShowMessage:NO];
-            [self.hRequest start:URL params:p];
+            [self.hRequest start:URLAppMonitoringAlarm params:p];
         }
     }
 }
@@ -132,6 +127,5 @@
         [super requestFinishedByResponse:response responseCode:repCode];
     }
 }
-
 
 @end

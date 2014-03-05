@@ -140,19 +140,17 @@
 - (void)done:(id)sender {
     
     NSString *serial=[_data objectForKey:@"SERIAL_NO"];
- 
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"1" forKey:@"OpWap"];
     [p setObject:[serial substringToIndex:12] forKey:@"SerialNo"];
     [p setObject:[serial substringFromIndex:12] forKey:@"Channel"];
     [p setObject:[_data objectForKey:@"MSITE_ID"] forKey:@"MsiteId"];
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODEDONE];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppProductInfoBySerial params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode

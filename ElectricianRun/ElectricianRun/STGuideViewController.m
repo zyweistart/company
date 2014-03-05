@@ -106,27 +106,25 @@
 //下载图片
 - (void)downLoadPicture
 {
-    NSString *URL=@"http://122.224.247.221:7003/WEB/mobile/news.aspx";
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"0" forKey:@"type"];
     [p setObject:@"3" forKey:@"num"];
     
     self.hPicRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADPIC];
     [self.hPicRequest setIsShowMessage:NO];
-    [self.hPicRequest start:URL params:p];
+    [self.hPicRequest start:URLnews params:p];
 }
 
 //下载新闻
 - (void)downLoadHtml
 {
-    NSString *URL=@"http://122.224.247.221:7003/WEB/mobile/news.aspx";
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"1" forKey:@"type"];
     [p setObject:@"7" forKey:@"num"];
     
     self.hHtmlRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADHTML];
     [self.hHtmlRequest setIsShowMessage:NO];
-    [self.hHtmlRequest start:URL params:p];
+    [self.hHtmlRequest start:URLnews params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode

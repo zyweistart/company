@@ -21,7 +21,6 @@
 
 @implementation STMyeViewController
 
-
 - (id)init {
     self=[super init];
     if(self) {
@@ -67,9 +66,9 @@
     if(section==0){
         if(row==0){
             if([Account isLogin]){
-                cell.textLabel.text=@"切换账户";
+                cell.textLabel.text=@"重新登录";
             }else{
-                cell.textLabel.text=@"我的账户";
+                cell.textLabel.text=@"登录账户";
             }
         }else if(row==1){
             cell.textLabel.text=@"推荐给好友";

@@ -146,11 +146,9 @@
 
 - (void)reloadTableViewDataSource{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"SJ30" forKey:@"GNID"];
     [p setObject:[searchData objectForKey:@"QTKEY"] forKey:@"QTKEY"];
     [p setObject:[searchData objectForKey:@"QTKEY1"] forKey:@"QTKEY1"];
@@ -160,7 +158,7 @@
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
     
 }
 
@@ -177,12 +175,10 @@
     if(row==0){
         [Common alert:@"请选择处理选项！"];
     } else {
-        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
         
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-        [p setObject:@"zhangyy" forKey:@"imei"];
-        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
-        
+        [p setObject:[Account getUserName] forKey:@"imei"];
+        [p setObject:[Account getPassword] forKey:@"authentication"];
         
         UIBarButtonItem *bi=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
         if ([bi.title isEqualToString: @"确定"]) {
@@ -205,7 +201,7 @@
         [p setObject:[NSString stringWithFormat:@"%d",row] forKey:@"QTVAL"];
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTHANDLECODE];
         [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URL params:p];
+        [self.hRequest start:URLAppMonitoringAlarm params:p];
     }
 }
 

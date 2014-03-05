@@ -157,35 +157,32 @@
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     if(responseCode==RESPONSECODESCAN){
         [txtValue1 setText:value];
-        NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
         
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-        [p setObject:@"zhangyy" forKey:@"imei"];
-        [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+        [p setObject:[Account getUserName] forKey:@"imei"];
+        [p setObject:[Account getPassword] forKey:@"authentication"];
         [p setObject:@"0" forKey:@"OpWap"];
         [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
         
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCAN];
         [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URL params:p];
+        [self.hRequest start:URLAppProductInfoBySerial params:p];
     }else if(responseCode==RESPONSECODESCANADD){
         NSString *v=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
         if([v length]==14){
             
             lineCode=v;
             
-            NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
-            
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-            [p setObject:@"zhangyy" forKey:@"imei"];
-            [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+            [p setObject:[Account getUserName] forKey:@"imei"];
+            [p setObject:[Account getPassword] forKey:@"authentication"];
             [p setObject:@"0" forKey:@"OpWap"];
             [p setObject:[v substringToIndex:12] forKey:@"SerialNo"];
             [p setObject:[v substringFromIndex:12] forKey:@"Channel"];
             
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCANADD];
             [self.hRequest setIsShowMessage:YES];
-            [self.hRequest start:URL params:p];
+            [self.hRequest start:URLAppProductInfoBySerial params:p];
         }else{
             [Common alert:@"请扫描正确的采集器！"];
         }
@@ -205,17 +202,16 @@
         int siteId=[[data objectForKey:@"MSITE_ID"]intValue];
         if(siteId==0){
             NSString *value=[txtValue1 text];
-            NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx";
             
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-            [p setObject:@"zhangyy" forKey:@"imei"];
-            [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+            [p setObject:[Account getUserName] forKey:@"imei"];
+            [p setObject:[Account getPassword] forKey:@"authentication"];
             [p setObject:@"2" forKey:@"OpWap"];
             [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
             
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODECREATESITE];
             [self.hRequest setIsShowMessage:YES];
-            [self.hRequest start:URL params:p];
+            [self.hRequest start:URLAppProductInfoBySerial params:p];
             
         }else{
             [Common alert:@"该站点已经存在，无需添加！"];

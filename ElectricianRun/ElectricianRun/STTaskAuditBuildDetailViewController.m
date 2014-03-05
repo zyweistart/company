@@ -191,17 +191,16 @@
 
 //加载任务模板
 - (void)reloadModel{
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"ZY24" forKey:@"GNID"];
     [p setObject:@"1" forKey:@"QTKEY"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:LOADMODELCODE];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {

@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 290)];
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 330)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
@@ -131,15 +131,46 @@
     [txtCounty setBorderStyle:UITextBorderStyleRoundedRect];
     [control addSubview:txtCounty];
     
+    UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(85, 290, 150, 30)];
+    [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
+    [btnSubmit setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+    [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+    [control addSubview:btnSubmit];
+    
 }
 
-- (void)backgroundDoneEditing:(id)sender {
+- (void)backgroundDoneEditing:(id)sender
+{
     [txtName resignFirstResponder];
     [txtPhone resignFirstResponder];
     [txtCard resignFirstResponder];
     [txtProvince resignFirstResponder];
     [txtCity resignFirstResponder];
     [txtCounty resignFirstResponder];
+}
+
+- (void)submit:(id)sender
+{
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:@"" forKey:@"name"];//姓名
+    [p setObject:@"13738873386" forKey:@"telNum"];//手机号码
+    [p setObject:@"330381198906240313" forKey:@"identityNo"];//身份证号码
+    [p setObject:@"" forKey:@"intentArea"];//意向工作地区
+    [p setObject:@"" forKey:@"identityImg"];
+    [p setObject:@"" forKey:@"elecImg"];
+    [p setObject:@"2" forKey:@"operateType"];
+    [p setObject:@"" forKey:@"province"];//省
+    [p setObject:@"" forKey:@"city"];//市
+    [p setObject:@"" forKey:@"area"];//区
+    
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest start:URLelecRegister params:p];
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    NSLog(@"%@",[response responseString]);
 }
 
 @end

@@ -95,7 +95,6 @@
         [Common alert:@"密码输入有误"];
     }else{
         [Account clear];
-        NSString *URL=@"http://122.224.247.221:7003/WEB/mobile/checkMobileValid.aspx";
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
         [p setObject:username forKey:@"imei"];
         [p setObject:[[password uppercaseString] md5] forKey:@"authentication"];
@@ -104,7 +103,7 @@
         
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
         [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URL params:p];
+        [self.hRequest start:URLcheckMobileValid params:p];
     }
 }
 

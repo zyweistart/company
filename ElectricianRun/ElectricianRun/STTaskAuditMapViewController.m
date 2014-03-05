@@ -75,11 +75,10 @@
 //    coords[2]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(32.484044745, 150.371879653));
 //    MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
 //    [_mapView addOverlay:line];
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx";
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"13600000000" forKey:@"phoneNum"];
     [p setObject:@"357071050721612" forKey:@"UUid"];
     
@@ -91,7 +90,7 @@
     
     hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [hRequest setIsShowMessage:YES];
-    [hRequest start:URL params:p];
+    [hRequest start:URLgetLocationInfo params:p];
 }
 
 

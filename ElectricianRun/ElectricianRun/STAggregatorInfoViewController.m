@@ -193,18 +193,16 @@
 
 - (void)reloadDataSource{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppScanNumber.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"1" forKey:@"OpWap"];
     [p setObject:@"2" forKey:@"OpType"];
     [p setObject:self.serialNo forKey:@"SerialNo"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppScanNumber params:p];
     
 }
 

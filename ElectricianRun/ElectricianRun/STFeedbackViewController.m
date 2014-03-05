@@ -100,7 +100,6 @@
         NSString *email=[txtEmail text];
         NSString *phone=[txtPhone text];
         
-        NSString *URL=@"http://122.224.247.221:7003/WEB/mobile/addSuggest.aspx";
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
         [p setObject:content forKey:@"content"];
         [p setObject:phone forKey:@"phone"];
@@ -109,7 +108,7 @@
         
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITFEEDBACKREQUESTCODE];
         [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URL params:p];
+        [self.hRequest start:URLaddSuggest params:p];
     }else{
         [Common alert:@"请输入反馈内容"];
     }
@@ -127,8 +126,13 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==SUBMITFEEDBACKREQUESTCODE){
-        [Common alert:@"反馈成功!"];
-        [self.navigationController popViewControllerAnimated:YES];
+        NSString *rs=[[response resultJSON] objectForKey:@"rs"];
+        if([@"1" isEqualToString:rs]){
+            [Common alert:@"反馈成功!"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [Common alert:@"反馈失败，请重试!"];
+        }
     }
 }
 

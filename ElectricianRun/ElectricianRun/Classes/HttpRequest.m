@@ -173,10 +173,9 @@
         if(pageSource!=nil) {
             NSString *responseString=[pageSource stringByReplacingPercentEscapesUsingEncoding:gbkEncoding];
             [response setResponseString:responseString];
-            [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
-        } else {
-            NSString *responseString =[[NSString alloc] initWithData:_resultData encoding:NSUTF8StringEncoding];
-            [response setResponseString:responseString];
+            if(responseString!=nil){
+                [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil]];
+            }
         }
     }
     
