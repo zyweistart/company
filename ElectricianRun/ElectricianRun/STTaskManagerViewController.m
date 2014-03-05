@@ -16,7 +16,9 @@
 @end
 
 
-@implementation STTaskManagerViewController
+@implementation STTaskManagerViewController {
+    BOOL refreshFLAG;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,9 +31,18 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
-        
+        refreshFLAG=YES;
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if(refreshFLAG){
+        [self autoRefresh];
+        refreshFLAG=NO;
+    }
 }
 
 - (void)back:(id)sender{
@@ -95,13 +106,13 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
         //站点电耗量信息
         STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW16" type:1];
         [self.navigationController pushViewController:taskManagerHandleViewController animated:YES];
-    } else if(buttonIndex==2){
-        //受总柜运行情况
-        STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW17" type:3];
-        [self.navigationController pushViewController:taskManagerHandleViewController animated:YES];
     } else if(buttonIndex==3){
         //运行设备外观、温度检查
         STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW15" type:2];
+        [self.navigationController pushViewController:taskManagerHandleViewController animated:YES];
+    } else if(buttonIndex==2){
+        //受总柜运行情况
+        STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW17" type:3];
         [self.navigationController pushViewController:taskManagerHandleViewController animated:YES];
     } else if(buttonIndex==4){
         //TRMS系统巡视检查

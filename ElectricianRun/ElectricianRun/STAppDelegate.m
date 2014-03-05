@@ -14,6 +14,7 @@
 {
     // Override point for customization after application launch.
     [WXApi registerApp:@"wxcefa411f34485347"];
+    
     return YES;
 }
 							

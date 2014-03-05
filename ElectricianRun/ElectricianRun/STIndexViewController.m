@@ -29,8 +29,6 @@
 #import "STPurchaseShowViewController.h"
 #import "STPurchaseCalculateViewController.h"
 
-//#define IMAGEHEIGHT 90
-#define IMAGEHEIGHT 180
 
 @interface STIndexViewController () <UITabBarControllerDelegate>
 
@@ -48,6 +46,11 @@
 }
 
 - (void)viewDidLoad {
+    
+    int IMAGEHEIGHT=180;
+    if(!inch4){
+        IMAGEHEIGHT=90;
+    }
     
     [super viewDidLoad];
     ETFoursquareImages *foursquareImages = [[ETFoursquareImages alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-0)];

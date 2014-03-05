@@ -44,7 +44,7 @@
     
     UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
-    [lbl setText:@"账户"];
+    [lbl setText:@"账户:"];
     [lbl setTextColor:[UIColor blackColor]];
     [lbl setBackgroundColor:[UIColor clearColor]];
     [lbl setTextAlignment:NSTextAlignmentRight];
@@ -60,7 +60,7 @@
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
-    [lbl setText:@"密码："];
+    [lbl setText:@"密码:"];
     [lbl setTextColor:[UIColor blackColor]];
     [lbl setBackgroundColor:[UIColor clearColor]];
     [lbl setTextAlignment:NSTextAlignmentRight];
@@ -75,7 +75,7 @@
     [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValuePassword];
     
-    [txtValueUserName setText:@"zhangyy"];
+    [txtValueUserName setText:@"zhangyy-gzry"];
     [txtValuePassword setText:@"8888aa"];
     
 }

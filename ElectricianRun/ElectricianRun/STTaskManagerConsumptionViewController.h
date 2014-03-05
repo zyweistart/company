@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface STTaskManagerConsumptionViewController : UIViewController
+@interface STTaskManagerConsumptionViewController : BaseTableViewController<HttpRequestDelegate>
 
 @property (strong,nonatomic) HttpRequest *hRequest;
 
 - (id)initWithData:(NSDictionary *)data taskId:(NSString *)taskId gnid:(NSString *)g type:(NSInteger)t;
+
+
+- (void)reloadTableViewDataSource;
 
 @end

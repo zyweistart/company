@@ -56,7 +56,7 @@
                 @"有功功率", @"无功功率", @"负荷率",
                 @"变压器负载率",@"视在功率", nil];
     
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 300)];
+    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 280)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
@@ -64,14 +64,14 @@
     [control addSubview:ivImage];
     
     //值1
-    lblValue1=[[UILabel alloc]initWithFrame:CGRectMake(10, 100, 80, 30)];
+    lblValue1=[[UILabel alloc]initWithFrame:CGRectMake(10, 80, 80, 30)];
     lblValue1.font=[UIFont systemFontOfSize:12.0];
     [lblValue1 setTextColor:[UIColor blackColor]];
     [lblValue1 setBackgroundColor:[UIColor clearColor]];
     [lblValue1 setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblValue1];
     
-    txtValue1=[[UITextField alloc]initWithFrame:CGRectMake(100, 100, 150, 30)];
+    txtValue1=[[UITextField alloc]initWithFrame:CGRectMake(100, 80, 150, 30)];
     [txtValue1 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue1 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue1 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -80,14 +80,14 @@
     [txtValue1 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue1];
     //值2
-    lblValue2=[[UILabel alloc]initWithFrame:CGRectMake(10, 140, 80, 30)];
+    lblValue2=[[UILabel alloc]initWithFrame:CGRectMake(10, 120, 80, 30)];
     lblValue2.font=[UIFont systemFontOfSize:12.0];
     [lblValue2 setTextColor:[UIColor blackColor]];
     [lblValue2 setBackgroundColor:[UIColor clearColor]];
     [lblValue2 setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblValue2];
     
-    txtValue2=[[UITextField alloc]initWithFrame:CGRectMake(100, 140, 150, 30)];
+    txtValue2=[[UITextField alloc]initWithFrame:CGRectMake(100, 120, 150, 30)];
     [txtValue2 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue2 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue2 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -96,14 +96,14 @@
     [txtValue2 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue2];
     //值3
-    lblValue3=[[UILabel alloc]initWithFrame:CGRectMake(10, 180, 80, 30)];
+    lblValue3=[[UILabel alloc]initWithFrame:CGRectMake(10, 160, 80, 30)];
     lblValue3.font=[UIFont systemFontOfSize:12.0];
     [lblValue3 setTextColor:[UIColor blackColor]];
     [lblValue3 setBackgroundColor:[UIColor clearColor]];
     [lblValue3 setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblValue3];
     
-    txtValue3=[[UITextField alloc]initWithFrame:CGRectMake(100, 180, 150, 30)];
+    txtValue3=[[UITextField alloc]initWithFrame:CGRectMake(100, 160, 150, 30)];
     [txtValue3 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue3 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue3 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -112,14 +112,14 @@
     [txtValue3 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue3];
     //值4
-    lblValue4=[[UILabel alloc]initWithFrame:CGRectMake(10, 220, 80, 30)];
+    lblValue4=[[UILabel alloc]initWithFrame:CGRectMake(10, 200, 80, 30)];
     lblValue4.font=[UIFont systemFontOfSize:12.0];
     [lblValue4 setTextColor:[UIColor blackColor]];
     [lblValue4 setBackgroundColor:[UIColor clearColor]];
     [lblValue4 setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblValue4];
     
-    txtValue4=[[UITextField alloc]initWithFrame:CGRectMake(100, 220, 150, 30)];
+    txtValue4=[[UITextField alloc]initWithFrame:CGRectMake(100, 200, 150, 30)];
     [txtValue4 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue4 setEnabled:NO];
     [txtValue4 setClearButtonMode:UITextFieldViewModeWhileEditing];
@@ -129,14 +129,18 @@
     [txtValue4 setKeyboardType:UIKeyboardTypePhonePad];
     [control addSubview:txtValue4];
     
-    UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(80, 260, 160, 30)];
+    UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(80, 240, 160, 30)];
     [btnCalculate setTitle:@"计算" forState:UIControlStateNormal];
     [btnCalculate setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnCalculate addTarget:self action:@selector(calculate:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnCalculate];
     
+    int IMAGEHEIGHT=468.0;
+    if(!inch4){
+        IMAGEHEIGHT=380.0;
+    }
     
-    UIPickerView* pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,352.0,320.0,216.0)];
+    UIPickerView* pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,IMAGEHEIGHT,320.0,100.0)];
     pickerView.delegate = self;
     pickerView.dataSource =  self;
     [self.view addSubview:pickerView];

@@ -61,9 +61,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NSDictionary *data=[self.dataItemArray objectAtIndex:[indexPath row]];
     STTaskManagerConsumptionViewController *taskManagerConsumptionViewController=[[STTaskManagerConsumptionViewController alloc]initWithData:data taskId:_taskId gnid:_gnid type:_type];
     [self.navigationController pushViewController:taskManagerConsumptionViewController animated:YES];
+    [taskManagerConsumptionViewController reloadTableViewDataSource];
     
 }
 
@@ -82,18 +84,25 @@
     
 }
 
-- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-    
-    
-    NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-    
-    self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
-    
-    // 刷新表格
-    [self.tableView reloadData];
-    
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    NSDictionary *json=[response resultJSON];
+    if(json!=nil) {
+        NSDictionary *pageinfo=[json objectForKey:@"Rows"];
+        
+        int result=[[pageinfo objectForKey:@"result"] intValue];
+        if(result>0){
+            NSArray *tmpData=[json objectForKey:@"table1"];
+            
+            self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
+            
+            // 刷新表格
+            [self.tableView reloadData];
+        } else {
+            [Common alert:[pageinfo objectForKey:@"remark"]];
+        }
+    }
     [self doneLoadingTableViewData];
-    
 }
 
 @end

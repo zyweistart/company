@@ -167,7 +167,7 @@
 
 - (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
 {
-    NSLog(@"error:%@",[error description]);
+    [Common notificationMessage:[error description] inView:self.view];
     [self doneLoadingTableViewData];
 }
 
