@@ -21,7 +21,7 @@
     [self setIsLoadCache:YES];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title=@"数据监测";
+        self.title=@"工作人员";
     }
     return self;
 }

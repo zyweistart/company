@@ -143,7 +143,6 @@
         }
         MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
         
-        
         NSDictionary *d=[data objectAtIndex:length-1];
         double latitude=[[d objectForKey:@"latitude"]doubleValue];
         double longitude=[[d objectForKey:@"longitude"]doubleValue];
