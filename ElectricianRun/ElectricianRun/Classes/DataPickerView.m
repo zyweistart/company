@@ -10,15 +10,11 @@
 
 #define kWinSize [UIScreen mainScreen].bounds.size
 
-@implementation DataPickerView {
-    NSArray *_data;
-}
+@implementation DataPickerView
 
-- (id)initWithData:(NSArray *)data {
+- (id)init{
     self = [super init];
     if (self) {
-        
-        _data=data;
         
         CGRect datePickerFrame = CGRectMake((kWinSize.width - kWinSize.width) / 2, 42, 320.0, 216.0);
         UIToolbar *toolbar = [[UIToolbar alloc]
@@ -48,6 +44,21 @@
         [self addSubview: self.dataPicker];
     }
     return self;
+}
+
+- (id)initWithData:(NSArray *)data {
+    self = [self init];
+    if (self) {
+        
+        _data=data;
+        
+    }
+    return self;
+}
+
+- (void)setData:(NSArray*)d{
+    _data=d;
+    [self.dataPicker reloadAllComponents];
 }
 
 #pragma mark - Actions

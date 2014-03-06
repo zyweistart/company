@@ -7,8 +7,11 @@
 //
 
 #import "STSignupViewController.h"
+#import "CityParser.h"
+#import "DataPickerView.h"
+#import "ChineseToPinyin.h"
 
-@interface STSignupViewController ()
+@interface STSignupViewController () <DataPickerViewDelegate>
 
 @end
 
@@ -19,13 +22,23 @@
     UITextField *txtProvince;
     UITextField *txtCity;
     UITextField *txtCounty;
+    CityParser *citys;
+    DataPickerView *dpvProvince;
+    DataPickerView *dpvCity;
+    DataPickerView *dpvCounty;
+    
+    NSMutableArray *dataProvinces;
+    NSMutableArray *dataCitys;
+    NSMutableArray *dataCountys;
+    
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title=@"用户注册";
+        self.title=@"电工注册";
         [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
@@ -34,6 +47,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    citys=[[CityParser alloc]init];
+    [citys startParser];
+    
+    dataProvinces=[[citys citys] objectForKey:@"province_item"];
+    dataCitys=[[citys citys] objectForKey:@"province_item"];
+    dataCountys=[[citys citys] objectForKey:@"province_item"];
+    
+    dpvCity=[[DataPickerView alloc]initWithData:dataProvinces];
+    [dpvCity setDelegate:self];
+    
+    dpvProvince=[[DataPickerView alloc]initWithData:dataCitys];
+    [dpvProvince setDelegate:self];
+    
+    dpvCounty=[[DataPickerView alloc]initWithData:dataCountys];
+    [dpvCounty setDelegate:self];
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 64, 320, 330)];
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
@@ -101,6 +129,8 @@
     [txtProvince setFont:[UIFont systemFontOfSize: 12.0]];
     [txtProvince setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtProvince setBorderStyle:UITextBorderStyleRoundedRect];
+//    [txtProvince setInputView:dpvProvince];
+    [txtProvince setText:@"北京市"];
     [control addSubview:txtProvince];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 210, 90, 30)];
@@ -115,6 +145,8 @@
     [txtCity setFont:[UIFont systemFontOfSize: 12.0]];
     [txtCity setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtCity setBorderStyle:UITextBorderStyleRoundedRect];
+//    [txtCity setInputView:dpvCity];
+    [txtCity setText:@"市辖区"];
     [control addSubview:txtCity];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 250, 90, 30)];
@@ -129,6 +161,8 @@
     [txtCounty setFont:[UIFont systemFontOfSize: 12.0]];
     [txtCounty setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtCounty setBorderStyle:UITextBorderStyleRoundedRect];
+//    [txtCounty setInputView:dpvCounty];
+    [txtCounty setText:@"东城区"];
     [control addSubview:txtCounty];
     
     UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(85, 290, 150, 30)];
@@ -171,6 +205,44 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     NSLog(@"%@",[response responseString]);
+}
+
+- (void)pickerDidPressDoneWithRow:(NSInteger)row {
+    if([txtProvince isFirstResponder]){
+        NSString *name=[dataProvinces objectAtIndex:row];
+        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
+        dataCitys=[[citys citys]objectForKey:[NSString stringWithFormat:@"%@_province_item",pinyin]];
+        [dpvCity setData:dataCitys];
+        [txtProvince setText:name];
+        [txtProvince resignFirstResponder];
+    }
+    if([txtCity isFirstResponder]){
+        NSString *firstpinyin=[[ChineseToPinyin pinyinFromChiniseString:[txtProvince text]] lowercaseString];
+        NSString *name=[dataCitys objectAtIndex:row];
+        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
+        dataCountys=[[citys citys]objectForKey:[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]];
+        NSLog(@"%@",dataCountys);
+        NSLog(@"%@-----beijingshixiaqu_city_item",[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]);
+        [dpvCounty setData:dataCountys];
+        [txtCity setText:name];
+        [txtCity resignFirstResponder];
+    }
+    if([txtCounty isFirstResponder]){
+        [txtCity setText:[dataCitys objectAtIndex:row]];
+        [txtCounty resignFirstResponder];
+    }
+}
+
+- (void)pickerDidPressCancel{
+    if([txtProvince isFirstResponder]){
+        [txtProvince resignFirstResponder];
+    }
+    if([txtCity isFirstResponder]){
+        [txtCity resignFirstResponder];
+    }
+    if([txtCounty isFirstResponder]){
+        [txtCounty resignFirstResponder];
+    }
 }
 
 @end

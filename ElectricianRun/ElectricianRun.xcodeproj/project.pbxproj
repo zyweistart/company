@@ -44,6 +44,9 @@
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C949E7E618C087A00001B5FE /* STAuditRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C949E7E518C087A00001B5FE /* STAuditRecordCell.m */; };
+		C95ACDB818C81680006A3F32 /* city.xml in Resources */ = {isa = PBXBuildFile; fileRef = C95ACDB718C81680006A3F32 /* city.xml */; };
+		C95ACDBB18C821E9006A3F32 /* CityParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ACDBA18C821E9006A3F32 /* CityParser.m */; };
+		C95ACDBE18C84FC1006A3F32 /* STSignupPhotographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ACDBD18C84FC1006A3F32 /* STSignupPhotographViewController.m */; };
 		C95EDEB718A7BC7C00CA80B4 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C95EDEB618A7BC7C00CA80B4 /* Response.m */; };
 		C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F2E18BF3E4900403430 /* STChartElectricCurrentLineViewController.m */; };
 		C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95F7F3118BF3E6700403430 /* STChartBurdenLineViewController.m */; };
@@ -59,6 +62,7 @@
 		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
 		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
 		C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */; };
+		C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */; };
 		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
 		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
@@ -101,6 +105,7 @@
 		C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59218934FCF003A412E /* STTaskAuditMapViewController.m */; };
 		C9B2A59618935012003A412E /* STTaskAuditRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */; };
 		C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */; };
+		C9B5F54518C8541900621E1C /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B5F54418C8541900621E1C /* VPImageCropperViewController.m */; };
 		C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */; };
 		C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */; };
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
@@ -219,6 +224,11 @@
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C949E7E418C087A00001B5FE /* STAuditRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAuditRecordCell.h; sourceTree = "<group>"; };
 		C949E7E518C087A00001B5FE /* STAuditRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAuditRecordCell.m; sourceTree = "<group>"; };
+		C95ACDB718C81680006A3F32 /* city.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = city.xml; sourceTree = "<group>"; };
+		C95ACDB918C821E9006A3F32 /* CityParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityParser.h; sourceTree = "<group>"; };
+		C95ACDBA18C821E9006A3F32 /* CityParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityParser.m; sourceTree = "<group>"; };
+		C95ACDBC18C84FC1006A3F32 /* STSignupPhotographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSignupPhotographViewController.h; sourceTree = "<group>"; };
+		C95ACDBD18C84FC1006A3F32 /* STSignupPhotographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSignupPhotographViewController.m; sourceTree = "<group>"; };
 		C95EDEB518A7BC7C00CA80B4 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		C95EDEB618A7BC7C00CA80B4 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
 		C95F7F2D18BF3E4900403430 /* STChartElectricCurrentLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STChartElectricCurrentLineViewController.h; sourceTree = "<group>"; };
@@ -250,6 +260,8 @@
 		C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STChangeMaterialViewController.m; sourceTree = "<group>"; };
 		C97D54D818C35EAD003BC6C9 /* DownloadIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadIcon.h; sourceTree = "<group>"; };
 		C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadIcon.m; sourceTree = "<group>"; };
+		C97DEBA218C841C20045EBBE /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
+		C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
 		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
 		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
@@ -328,6 +340,8 @@
 		C9B2A59518935012003A412E /* STTaskAuditRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditRecordViewController.m; sourceTree = "<group>"; };
 		C9B2A5971893503E003A412E /* STTaskAuditBuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildViewController.h; sourceTree = "<group>"; };
 		C9B2A5981893503E003A412E /* STTaskAuditBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskAuditBuildViewController.m; sourceTree = "<group>"; };
+		C9B5F54318C8541900621E1C /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		C9B5F54418C8541900621E1C /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		C9B68ACF18B4FD6B009B57E2 /* STScanningOperationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STScanningOperationViewController.h; sourceTree = "<group>"; };
 		C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STScanningOperationViewController.m; sourceTree = "<group>"; };
 		C9B68AD218B50E98009B57E2 /* STAlarmManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmManagerViewController.h; sourceTree = "<group>"; };
@@ -526,6 +540,7 @@
 		C93C7487189235E400A7FAB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C95ACDB718C81680006A3F32 /* city.xml */,
 				C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */,
 				C93C7488189235E400A7FAB8 /* ElectricianRun-Info.plist */,
 				C93C748E189235E400A7FAB8 /* ElectricianRun-Prefix.pch */,
@@ -615,6 +630,8 @@
 				C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */,
 				C93C74C818923EE500A7FAB8 /* STScanningViewController.h */,
 				C93C74C918923EE500A7FAB8 /* STScanningViewController.m */,
+				C95ACDBC18C84FC1006A3F32 /* STSignupPhotographViewController.h */,
+				C95ACDBD18C84FC1006A3F32 /* STSignupPhotographViewController.m */,
 				C9CF827418C065C8002826C4 /* STSignupViewController.h */,
 				C9CF827518C065C8002826C4 /* STSignupViewController.m */,
 				C93C74BE18923E3200A7FAB8 /* STStudyViewController.h */,
@@ -630,6 +647,15 @@
 				C9B2A58418934C9D003A412E /* TransformerSubstation */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		C97DEBA118C841C20045EBBE /* ChineseToPinyin */ = {
+			isa = PBXGroup;
+			children = (
+				C97DEBA218C841C20045EBBE /* ChineseToPinyin.h */,
+				C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */,
+			);
+			path = ChineseToPinyin;
 			sourceTree = "<group>";
 		};
 		C99F7E2418C2F759002C97F0 /* EAIntroView */ = {
@@ -713,6 +739,8 @@
 				C99F7E3118C30C7E002C97F0 /* SQLiteOperate.m */,
 				C97D54D818C35EAD003BC6C9 /* DownloadIcon.h */,
 				C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */,
+				C95ACDB918C821E9006A3F32 /* CityParser.h */,
+				C95ACDBA18C821E9006A3F32 /* CityParser.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -720,6 +748,8 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C9B5F54218C8541900621E1C /* VPImageCropper */,
+				C97DEBA118C841C20045EBBE /* ChineseToPinyin */,
 				C99F7E2418C2F759002C97F0 /* EAIntroView */,
 				C9EFE21818B91E5E00308819 /* WeixinActivity */,
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
@@ -815,6 +845,15 @@
 				C9B6CCB218C5FA3600E72CFB /* STViewUserListViewController.m */,
 			);
 			name = TransformerSubstation;
+			sourceTree = "<group>";
+		};
+		C9B5F54218C8541900621E1C /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				C9B5F54318C8541900621E1C /* VPImageCropperViewController.h */,
+				C9B5F54418C8541900621E1C /* VPImageCropperViewController.m */,
+			);
+			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
 		C9DFDF2218B327DC00F7B368 /* GHWalkThrough */ = {
@@ -943,6 +982,7 @@
 				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
 				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
 				C9E215D018C5B3F900A3CFAC /* Settings.bundle in Resources */,
+				C95ACDB818C81680006A3F32 /* city.xml in Resources */,
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */,
 				C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */,
@@ -988,6 +1028,7 @@
 				C99F7E2318C2F04C002C97F0 /* Account.m in Sources */,
 				C9D1154C18BC619A00268BBE /* STTaskManagerConsumptionViewController.m in Sources */,
 				C99F7E2A18C2F759002C97F0 /* EAIntroView.m in Sources */,
+				C95ACDBB18C821E9006A3F32 /* CityParser.m in Sources */,
 				C92EA0CD18C422E6003F1669 /* STAlarmSetupViewController.m in Sources */,
 				C9D19EA618B7BC330038D131 /* DatePickerView.m in Sources */,
 				C9CF827918C0689E002826C4 /* STUserExperienceSelectViewController.m in Sources */,
@@ -1002,6 +1043,7 @@
 				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
 				C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */,
+				C95ACDBE18C84FC1006A3F32 /* STSignupPhotographViewController.m in Sources */,
 				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
 				C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */,
 				C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */,
@@ -1009,6 +1051,7 @@
 				C95F7F3E18BF3F9C00403430 /* STChartElectricityValViewController.m in Sources */,
 				C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */,
 				C9B2A59318934FCF003A412E /* STTaskAuditMapViewController.m in Sources */,
+				C9B5F54518C8541900621E1C /* VPImageCropperViewController.m in Sources */,
 				C92EA0D018C42747003F1669 /* STAlarmSetupCell.m in Sources */,
 				C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */,
 				C9B2A5991893503E003A412E /* STTaskAuditBuildViewController.m in Sources */,
@@ -1071,6 +1114,7 @@
 				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 				C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */,
+				C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1139,8 +1183,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s armv6";
 			};
 			name = Debug;
 		};
@@ -1172,8 +1217,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s armv6";
 			};
 			name = Release;
 		};
@@ -1194,6 +1241,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1215,6 +1263,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

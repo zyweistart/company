@@ -22,7 +22,11 @@
     if(self) {
         self.title=@"我要学习";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        titleArr=[[NSArray alloc]initWithObjects:@"新能量学习1",@"新能量学习2",@"新能量学习3",@"新能量学习4",nil];
+        titleArr=[[NSArray alloc]initWithObjects:
+                  @"TRMS系统变电站远程监测服务安装高度教程",
+                  @"TRMS系统变电站失电报警装置安装调试教程",
+                  @"TRMS系统巡检工作服务规范",
+                  @"TRMS系统安装调试问题处理指南",nil];
     }
     return self;
 }
@@ -43,6 +47,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSInteger row=[indexPath row];
+    cell.textLabel.font=[UIFont systemFontOfSize:13];
     cell.textLabel.text=[titleArr objectAtIndex:row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

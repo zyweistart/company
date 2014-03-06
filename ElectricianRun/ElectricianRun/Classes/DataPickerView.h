@@ -24,6 +24,7 @@
 @property (nonatomic, strong) id<DataPickerViewDelegate> delegate;
 
 @property (nonatomic, strong) UIPickerView *dataPicker;
+@property (nonatomic, strong) NSArray *data;
 
 - (id)initWithData:(NSArray *)data;
 
