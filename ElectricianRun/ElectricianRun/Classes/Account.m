@@ -39,12 +39,20 @@
 
 + (NSString*)getUserName
 {
-    return [Common getCache:ACCOUNTUSERNAME];
+    NSString *userName=[Common getCache:ACCOUNTUSERNAME];
+    if(userName){
+        return userName;
+    }
+    return @"";
 }
 
 + (NSString*)getPassword
 {
-    return [Common getCache:ACCOUNTPASSWORD];
+    NSString *passWord=[Common getCache:ACCOUNTPASSWORD];
+    if(passWord){
+        return passWord;
+    }
+    return @"";
 }
 
 @end

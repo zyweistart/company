@@ -50,8 +50,6 @@
         [self.lbl3 setNumberOfLines:0];
         [self addSubview:self.lbl3];
         
-        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        
     }
     return self;
 }

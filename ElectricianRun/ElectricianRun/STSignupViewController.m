@@ -7,6 +7,7 @@
 //
 
 #import "STSignupViewController.h"
+#import "STSignupPhotographViewController.h"
 #import "CityParser.h"
 #import "DataPickerView.h"
 #import "ChineseToPinyin.h"
@@ -186,25 +187,29 @@
 - (void)submit:(id)sender
 {
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"" forKey:@"name"];//姓名
+    [p setObject:@"魏振耀" forKey:@"name"];//姓名
     [p setObject:@"13738873386" forKey:@"telNum"];//手机号码
     [p setObject:@"330381198906240313" forKey:@"identityNo"];//身份证号码
-    [p setObject:@"" forKey:@"intentArea"];//意向工作地区
-    [p setObject:@"" forKey:@"identityImg"];
-    [p setObject:@"" forKey:@"elecImg"];
-    [p setObject:@"2" forKey:@"operateType"];
-    [p setObject:@"" forKey:@"province"];//省
-    [p setObject:@"" forKey:@"city"];//市
-    [p setObject:@"" forKey:@"area"];//区
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URLelecRegister params:p];
+    [self.hRequest start:URLcheckElecIdent params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
-    NSLog(@"%@",[response responseString]);
+    NSDictionary *json=[response resultJSON];
+    if(json){
+        int result=[[[response resultJSON] objectForKey:@"result"]intValue];
+        if(result==0){
+            STSignupPhotographViewController *signupPhotographViewController=[[STSignupPhotographViewController alloc]init];
+            [self.navigationController pushViewController:signupPhotographViewController animated:YES];
+        }else{
+            [Common alert:@"信息已经存在"];
+            //已经存在则返回上一页
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
 }
 
 - (void)pickerDidPressDoneWithRow:(NSInteger)row {

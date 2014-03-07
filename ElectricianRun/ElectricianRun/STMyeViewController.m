@@ -38,6 +38,12 @@
     activity = @[[[WeixinSessionActivity alloc] init], [[WeixinTimelineActivity alloc] init]];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 45;
 }
@@ -59,14 +65,16 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     NSInteger row=[indexPath row];
     NSInteger section=[indexPath section];
     if(section==0){
         if(row==0){
             if([Account isLogin]){
-                cell.textLabel.text=@"重新登录";
+                cell.textLabel.text=@"切换账户";
+                cell.detailTextLabel.textColor=[UIColor redColor];
+                cell.detailTextLabel.text=[Account getUserName];
             }else{
                 cell.textLabel.text=@"登录账户";
             }

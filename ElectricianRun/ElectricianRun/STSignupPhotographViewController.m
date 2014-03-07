@@ -100,31 +100,16 @@
 
 - (void)submit:(id)sender
 {
-    //创建文件管理器
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    //获取Documents主目录
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    //得到相应的Documents的路径
-    NSString* docDir = [paths objectAtIndex:0];
-    //更改到待操作的目录下
-    [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
-    
-    UIImage *idPic=[photographIDImageView image];
-    NSString *idPicPath = [docDir stringByAppendingPathComponent:@"idPic.png"];
-    [UIImagePNGRepresentation(idPic) writeToFile:idPicPath atomically:YES];
-    
-    UIImage *elPic=[photographELImageView image];
-    NSString *elPicPath = [docDir stringByAppendingPathComponent:@"elPic.png"];
-    [UIImagePNGRepresentation(elPic) writeToFile:elPicPath atomically:YES];
-    
+    NSData *idPicDataPath=UIImagePNGRepresentation([photographIDImageView image]);
+    NSData *elPicDataPath=UIImagePNGRepresentation([photographELImageView image]);
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:@"" forKey:@"name"];//姓名
-    [p setObject:@"13738873386" forKey:@"telNum"];//手机号码
-    [p setObject:@"330381198906240313" forKey:@"identityNo"];//身份证号码
+    [p setObject:@"1373887333386" forKey:@"telNum"];//手机号码
+    [p setObject:@"330381198222906240313" forKey:@"identityNo"];//身份证号码
     [p setObject:@"" forKey:@"intentArea"];//意向工作地区
-    [p setObject:@"" forKey:@"identityImg"];
-    [p setObject:@"" forKey:@"elecImg"];
+    [p setObject:idPicDataPath forKey:@"identityImg"];
+    [p setObject:elPicDataPath forKey:@"elecImg"];
     [p setObject:@"1" forKey:@"operateType"];
     [p setObject:@"北京市" forKey:@"province"];//省
     [p setObject:@"市辖区" forKey:@"city"];//市

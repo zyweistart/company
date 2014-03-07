@@ -7,7 +7,6 @@
 //
 
 #import "STAlarmSetupViewController.h"
-#import "NSString+Utils.h"
 #import "STAlarmSetupCell.h"
 #define ALARAMSETUPREQUESTCODE 501
 

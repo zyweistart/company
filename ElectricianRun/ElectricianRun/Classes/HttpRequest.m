@@ -1,3 +1,6 @@
+
+
+
 //
 //  HttpRequest.m
 //  ElectricianRun
@@ -16,6 +19,7 @@
 
 #define ReachableViaWWANDOWNLOAD 500
 #define HTTPSERVERURL @"http://122.224.247.221:7003/WEB/mobile/"
+#define boundary @"_YJAYgDL082HLBJkC1laRbpjU5PlLgeJh_"
 
 @implementation HttpRequest{
     
@@ -82,13 +86,22 @@
     NSMutableString *urlString=[[NSMutableString alloc]initWithString:_http_url];
 //    [urlString appendString:_http_url];
     
+    NSMutableData *body = [NSMutableData data];
+    
     if(_params!=nil&&[_params count]>0){
         [urlString appendString:@"?"];
-        
         for(NSString *key in _params){
-            [urlString appendFormat:@"%@=%@&",key,[_params objectForKey:key]];
+            id value=[_params objectForKey:key];
+            if([value isKindOfClass:[NSData class]]){
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.jpg\"\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:value];
+                [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            }else{
+               [urlString appendFormat:@"%@=%@&",key,[_params objectForKey:key]];
+            }
         }
-        
         HTTP_URL=[urlString substringWithRange:NSMakeRange(0, [urlString length]-1)];
     }else{
         HTTP_URL=[NSString stringWithFormat:@"%@",urlString];
@@ -102,6 +115,10 @@
     request.HTTPMethod = @"POST";
     // 60秒请求超时
     request.timeoutInterval = 10;
+    if([body length]>0){
+        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        request.HTTPBody=body;
+    }
     // 初始化一个连接
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
     // 开始一个异步请求
