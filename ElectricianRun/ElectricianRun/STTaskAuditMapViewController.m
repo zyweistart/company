@@ -8,7 +8,6 @@
 
 #import "STTaskAuditMapViewController.h"
 #import "STViewUserListViewController.h"
-#import "NSString+Utils.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "CustomAnnotation.h"

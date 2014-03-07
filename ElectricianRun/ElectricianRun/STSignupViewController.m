@@ -40,6 +40,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"电工注册";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }

@@ -7,29 +7,19 @@
 //
 
 #import "STIndexViewController.h"
+
 #import "STUserExperienceSelectViewController.h"
 #import "STProjectSiteViewController.h"
 #import "STScanningOperationViewController.h"
 #import "STCalculateViewController.h"
-#import "STMyeViewController.h"
-
 #import "STDataMonitoringViewController.h"
 #import "STAlarmManagerViewController.h"
 #import "STTaskManagerViewController.h"
 #import "STTaskAuditViewController.h"
-
-#import "STNewsDetailViewController.h"
 #import "STNewsListViewController.h"
 
 #import "ETFoursquareImages.h"
-#import "NSString+Utils.h"
 #import "SQLiteOperate.h"
-#import "STSignupViewController.h"
-
-#import "STPurchaseShowViewController.h"
-#import "STPurchaseCalculateViewController.h"
-#import "STSignupPhotographViewController.h"
-
 
 @interface STIndexViewController () <UITabBarControllerDelegate>
 
@@ -180,12 +170,8 @@
 
 //用户体验
 - (void)onClickUserExperience:(id)sender {
-    
-    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
+    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
     [self presentViewController:userExperienceSelectViewControllerNav animated:YES completion:nil];
-    
-//    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
-//    [self presentViewController:userExperienceSelectViewControllerNav animated:YES completion:nil];
 }
 
 //我管辖的变电站

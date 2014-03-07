@@ -35,16 +35,18 @@
     
     static NSString *cellReuseIdentifier=@"Cell";
     
-    STDataMonitoringCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
     if(!cell) {
-        cell = [[STDataMonitoringCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellReuseIdentifier];
     }
     
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     NSLog(@"%@",dictionary);
-    return cell;
+    [cell.textLabel setText:[dictionary objectForKey:@"userName"]];
+    [cell.detailTextLabel setText:[dictionary objectForKey:@"userName"]];
     
+    return cell;
 }
 
 #pragma mark -
