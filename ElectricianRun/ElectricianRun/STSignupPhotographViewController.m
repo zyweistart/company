@@ -111,14 +111,11 @@
     [p setObject:idPicDataPath forKey:@"identityImg"];
     [p setObject:elPicDataPath forKey:@"elecImg"];
     [p setObject:@"1" forKey:@"operateType"];
-    [p setObject:self.province forKey:@"province"];//省
-    [p setObject:self.city forKey:@"city"];//市
-    [p setObject:self.county forKey:@"area"];//区
 
-    NSLog(@"%@",p);
-//    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITREQUESTCODE];
-//    [self.hRequest setIsShowMessage:YES];
-//    [self.hRequest start:URLelecRegister params:p];
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITREQUESTCODE];
+    [self.hRequest setIsBodySubmit:YES];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest start:URLelecRegister params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode

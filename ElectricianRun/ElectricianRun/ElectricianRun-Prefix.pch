@@ -40,7 +40,7 @@
 #define URLaddSuggest @"http://122.224.247.221:7003/WEB/mobile/addSuggest.aspx"
 #define URLnews @"http://122.224.247.221:7003/WEB/mobile/news.aspx"
 #define URLcheckMobileValid @"http://122.224.247.221:7003/WEB/mobile/checkMobileValid.aspx"
-#define URLelecRegister @"http://122.224.247.221:7007/WEB/mobile/elecRegister.aspx"
+#define URLelecRegister @"http://122.224.247.221:7003/WEB/mobile/elecRegister.aspx"
 #define URLgetLocationInfo @"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx"
 #define URLcheckElecIdent @"http://122.224.247.219:8083/Administrator/checkElecIdent.aspx"
 
