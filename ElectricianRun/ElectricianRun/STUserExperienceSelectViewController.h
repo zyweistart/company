@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STUserExperienceSelectViewController : UIViewController
+@interface STUserExperienceSelectViewController : BaseUIViewController
 
 @end

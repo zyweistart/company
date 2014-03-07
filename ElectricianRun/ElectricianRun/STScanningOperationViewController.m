@@ -34,14 +34,6 @@
         
         self.title=@"扫描操作";
         
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        
-        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
-                                               initWithTitle:@"返回"
-                                               style:UIBarButtonItemStyleBordered
-                                               target:self
-                                               action:@selector(back:)];
-        
     }
     return self;
 }
@@ -140,11 +132,6 @@
     [scanningViewController setDelegate:self];
     [scanningViewController setResponseCode:500];
     [self presentViewController:scanningViewController animated:YES completion:nil];
-}
-
-
-- (void)back:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)backgroundDoneEditing:(id)sender {

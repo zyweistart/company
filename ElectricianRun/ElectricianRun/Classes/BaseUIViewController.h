@@ -10,4 +10,6 @@
 
 @interface BaseUIViewController : UIViewController
 
+- (void)back:(id)sender;
+
 @end

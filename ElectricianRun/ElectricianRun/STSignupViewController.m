@@ -12,6 +12,8 @@
 #import "DataPickerView.h"
 #import "ChineseToPinyin.h"
 
+#define  REQUESTCODESUBMITSIGNUP 500
+
 @interface STSignupViewController () <DataPickerViewDelegate>
 
 @end
@@ -23,7 +25,7 @@
     UITextField *txtProvince;
     UITextField *txtCity;
     UITextField *txtCounty;
-    CityParser *citys;
+    CityParser *cityParser;
     DataPickerView *dpvProvince;
     DataPickerView *dpvCity;
     DataPickerView *dpvCounty;
@@ -31,8 +33,6 @@
     NSMutableArray *dataProvinces;
     NSMutableArray *dataCitys;
     NSMutableArray *dataCountys;
-    
-    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,7 +40,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"电工注册";
-        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -48,18 +47,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    citys=[[CityParser alloc]init];
-    [citys startParser];
+    cityParser=[[CityParser alloc]init];
+    [cityParser startParser];
     
-    dataProvinces=[[citys citys] objectForKey:@"province_item"];
-    dataCitys=[[citys citys] objectForKey:@"province_item"];
-    dataCountys=[[citys citys] objectForKey:@"province_item"];
+    dataProvinces=[[cityParser citys] objectForKey:@"province_item"];
+    dataCitys=[[cityParser citys] objectForKey:@"beijingshi_province_item"];
+    dataCountys=[[cityParser citys] objectForKey:@"beijingshixiaqu_city_item"];
     
-    dpvCity=[[DataPickerView alloc]initWithData:dataProvinces];
-    [dpvCity setDelegate:self];
-    
-    dpvProvince=[[DataPickerView alloc]initWithData:dataCitys];
+    dpvProvince=[[DataPickerView alloc]initWithData:dataProvinces];
     [dpvProvince setDelegate:self];
+    
+    dpvCity=[[DataPickerView alloc]initWithData:dataCitys];
+    [dpvCity setDelegate:self];
     
     dpvCounty=[[DataPickerView alloc]initWithData:dataCountys];
     [dpvCounty setDelegate:self];
@@ -130,8 +129,8 @@
     [txtProvince setFont:[UIFont systemFontOfSize: 12.0]];
     [txtProvince setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtProvince setBorderStyle:UITextBorderStyleRoundedRect];
-//    [txtProvince setInputView:dpvProvince];
-    [txtProvince setText:@"北京市"];
+    [txtProvince setInputView:dpvProvince];
+    [txtProvince setText:[dataProvinces objectAtIndex:0]];
     [control addSubview:txtProvince];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 210, 90, 30)];
@@ -146,8 +145,8 @@
     [txtCity setFont:[UIFont systemFontOfSize: 12.0]];
     [txtCity setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtCity setBorderStyle:UITextBorderStyleRoundedRect];
-//    [txtCity setInputView:dpvCity];
-    [txtCity setText:@"市辖区"];
+    [txtCity setInputView:dpvCity];
+    [txtCity setText:[dataCitys objectAtIndex:0]];
     [control addSubview:txtCity];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 250, 90, 30)];
@@ -162,8 +161,8 @@
     [txtCounty setFont:[UIFont systemFontOfSize: 12.0]];
     [txtCounty setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtCounty setBorderStyle:UITextBorderStyleRoundedRect];
-//    [txtCounty setInputView:dpvCounty];
-    [txtCounty setText:@"东城区"];
+    [txtCounty setInputView:dpvCounty];
+    [txtCounty setText:[dataCountys objectAtIndex:0]];
     [control addSubview:txtCounty];
     
     UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(85, 290, 150, 30)];
@@ -171,6 +170,10 @@
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnSubmit];
+    
+    [txtName setText:@"魏振耀"];
+    [txtPhone setText:@"13738873386"];
+    [txtCard setText:@"330381198906240313"];
     
 }
 
@@ -186,28 +189,60 @@
 
 - (void)submit:(id)sender
 {
+    NSString *name=[txtName text];
+    if([@"" isEqualToString:name]){
+        [Common alert:@"姓名不能为空,请填写"];
+        return;
+    }
+    NSString *phone=[txtPhone text];
+    if([@"" isEqualToString:phone]){
+        [Common alert:@"手机号码不能为空,请填写"];
+        return;
+    }
+    NSString *card=[txtCard text];
+    if([@"" isEqualToString:card]){
+        [Common alert:@"身份证号不能为空,请填写"];
+        return;
+    }
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"魏振耀" forKey:@"name"];//姓名
-    [p setObject:@"13738873386" forKey:@"telNum"];//手机号码
-    [p setObject:@"330381198906240313" forKey:@"identityNo"];//身份证号码
+    [p setObject:name forKey:@"name"];//姓名
+    [p setObject:phone forKey:@"telNum"];//手机号码
+    [p setObject:card forKey:@"identityNo"];//身份证号码
     
-    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODESUBMITSIGNUP];
     [self.hRequest setIsShowMessage:YES];
     [self.hRequest start:URLcheckElecIdent params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
-    NSDictionary *json=[response resultJSON];
-    if(json){
-        int result=[[[response resultJSON] objectForKey:@"result"]intValue];
-        if(result==0){
-            STSignupPhotographViewController *signupPhotographViewController=[[STSignupPhotographViewController alloc]init];
-            [self.navigationController pushViewController:signupPhotographViewController animated:YES];
-        }else{
-            [Common alert:@"信息已经存在"];
-            //已经存在则返回上一页
-            [self dismissViewControllerAnimated:YES completion:nil];
+    if(repCode==REQUESTCODESUBMITSIGNUP){
+        NSDictionary *json=[response resultJSON];
+        if(json){
+            int result=[[[response resultJSON] objectForKey:@"result"]intValue];
+            if(result==0){
+                NSString *name=[txtName text];
+                NSString *phone=[txtPhone text];
+                NSString *card=[txtCard text];
+                NSString *province=[txtProvince text];
+                NSString *city=[txtCity text];
+                NSString *county=[txtCounty text];
+                STSignupPhotographViewController *signupPhotographViewController=[[STSignupPhotographViewController alloc]init];
+                [signupPhotographViewController setName:name];
+                [signupPhotographViewController setPhone:phone];
+                [signupPhotographViewController setCard:card];
+                [signupPhotographViewController setAddress:[NSString stringWithFormat:@"%@%@%@",province,city,county]];
+                [signupPhotographViewController setProvince:province];
+                [signupPhotographViewController setCity:city];
+                [signupPhotographViewController setCounty:county];
+                [self.navigationController pushViewController:signupPhotographViewController animated:YES];
+            }else if(result==1){
+                [Common alert:@"电工注册信息已经存在"];
+                //已经存在则返回上一页
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                [Common alert:[NSString stringWithFormat:@"服务异常，错误代码：%d",result]];
+            }
         }
     }
 }
@@ -215,25 +250,26 @@
 - (void)pickerDidPressDoneWithRow:(NSInteger)row {
     if([txtProvince isFirstResponder]){
         NSString *name=[dataProvinces objectAtIndex:row];
-        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
-        dataCitys=[[citys citys]objectForKey:[NSString stringWithFormat:@"%@_province_item",pinyin]];
-        [dpvCity setData:dataCitys];
+//        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
+//        dataCitys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@_province_item",pinyin]];
+//        [dpvCity setData:dataCitys];
         [txtProvince setText:name];
         [txtProvince resignFirstResponder];
     }
     if([txtCity isFirstResponder]){
-        NSString *firstpinyin=[[ChineseToPinyin pinyinFromChiniseString:[txtProvince text]] lowercaseString];
+//        NSString *firstpinyin=[[ChineseToPinyin pinyinFromChiniseString:[txtProvince text]] lowercaseString];
         NSString *name=[dataCitys objectAtIndex:row];
-        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
-        dataCountys=[[citys citys]objectForKey:[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]];
-        NSLog(@"%@",dataCountys);
-        NSLog(@"%@-----beijingshixiaqu_city_item",[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]);
-        [dpvCounty setData:dataCountys];
+//        NSString *pinyin=[[ChineseToPinyin pinyinFromChiniseString:name] lowercaseString];
+//        dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]];
+//        NSLog(@"%@",dataCountys);
+//        NSLog(@"%@-----beijingshixiaqu_city_item",[NSString stringWithFormat:@"%@%@_city_item",firstpinyin,pinyin]);
+//        [dpvCounty setData:dataCountys];
         [txtCity setText:name];
         [txtCity resignFirstResponder];
     }
     if([txtCounty isFirstResponder]){
-        [txtCity setText:[dataCitys objectAtIndex:row]];
+        NSString *name=[dataCountys objectAtIndex:row];
+        [txtCounty setText:name];
         [txtCounty resignFirstResponder];
     }
 }

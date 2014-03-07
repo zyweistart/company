@@ -15,10 +15,12 @@
     #import <Foundation/Foundation.h>
 
 
+#import "BaseUIViewController.h"
     #import "BaseUIViewController.h"
     #import "HttpRequest.h"
     #import "Common.h"
     #import "Account.h"
+
     #define inch4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO) 
 
     #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7]

@@ -21,19 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"用户体验";
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
-                                               initWithTitle:@"返回"
-                                               style:UIBarButtonItemStyleBordered
-                                               target:self
-                                               action:@selector(back:)];
-        
     }
     return self;
-}
-
-- (void)back:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad

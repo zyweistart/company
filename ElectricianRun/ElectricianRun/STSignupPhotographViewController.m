@@ -104,20 +104,21 @@
     NSData *elPicDataPath=UIImagePNGRepresentation([photographELImageView image]);
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"" forKey:@"name"];//姓名
-    [p setObject:@"1373887333386" forKey:@"telNum"];//手机号码
-    [p setObject:@"330381198222906240313" forKey:@"identityNo"];//身份证号码
-    [p setObject:@"" forKey:@"intentArea"];//意向工作地区
+    [p setObject:self.name forKey:@"name"];//姓名
+    [p setObject:self.phone forKey:@"telNum"];//手机号码
+    [p setObject:self.card forKey:@"identityNo"];//身份证号码
+    [p setObject:self.address forKey:@"intentArea"];//意向工作地区
     [p setObject:idPicDataPath forKey:@"identityImg"];
     [p setObject:elPicDataPath forKey:@"elecImg"];
     [p setObject:@"1" forKey:@"operateType"];
-    [p setObject:@"北京市" forKey:@"province"];//省
-    [p setObject:@"市辖区" forKey:@"city"];//市
-    [p setObject:@"东城区" forKey:@"area"];//区
-    
-    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITREQUESTCODE];
-    [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URLelecRegister params:p];
+    [p setObject:self.province forKey:@"province"];//省
+    [p setObject:self.city forKey:@"city"];//市
+    [p setObject:self.county forKey:@"area"];//区
+
+    NSLog(@"%@",p);
+//    self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITREQUESTCODE];
+//    [self.hRequest setIsShowMessage:YES];
+//    [self.hRequest start:URLelecRegister params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode

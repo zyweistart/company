@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STScanningOperationViewController : UIViewController
+@interface STScanningOperationViewController : BaseUIViewController
 
 @end

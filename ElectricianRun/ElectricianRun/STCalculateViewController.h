@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STCalculateViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface STCalculateViewController : BaseUIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @end

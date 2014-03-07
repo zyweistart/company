@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STProjectSiteViewController : UIViewController<HttpRequestDelegate>
+@interface STProjectSiteViewController : BaseUIViewController<HttpRequestDelegate>
 
 @property (strong,nonatomic) HttpRequest *hRequest;
 

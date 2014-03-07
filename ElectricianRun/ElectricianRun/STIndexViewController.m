@@ -181,7 +181,7 @@
 //用户体验
 - (void)onClickUserExperience:(id)sender {
     
-    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupPhotographViewController alloc]init]];
+    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
     [self presentViewController:userExperienceSelectViewControllerNav animated:YES completion:nil];
     
 //    UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];

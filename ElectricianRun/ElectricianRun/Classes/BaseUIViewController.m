@@ -14,25 +14,24 @@
 
 @implementation BaseUIViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(back:)];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)back:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
