@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface ACNavigationWebPageViewController : UIViewController
+@interface STNavigationWebPageViewController : UIViewController
 
 - (id)initWithNavigationTitle:(NSString *)navigationTitle resourcePath:(NSString *)resourcePath;
 

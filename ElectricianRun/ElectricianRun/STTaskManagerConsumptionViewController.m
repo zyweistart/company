@@ -35,6 +35,7 @@
         _type=t;
         
         NSString *name=[_data objectForKey:@"NAME"];
+        self.title=name;
         
         if([name rangeOfString:@"受总" options:NSCaseInsensitiveSearch].length>0){
             self.navigationItem.rightBarButtonItems=[[NSArray alloc]initWithObjects:
@@ -168,7 +169,7 @@
 - (void)buildUI:(NSArray *)array
 {
     self.automaticallyAdjustsScrollViewInsets=NO;
-    scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 70, 320, 280)];
+    scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 70, 320, 400)];
     [scroll setBackgroundColor:[UIColor whiteColor]];
     scroll.contentSize = CGSizeMake(320,[array count]*60);
     [scroll setScrollEnabled:YES];

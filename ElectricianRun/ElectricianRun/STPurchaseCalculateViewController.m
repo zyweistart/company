@@ -137,7 +137,7 @@
 
 - (void)buy:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http:/www.baidu.com"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"]];
 }
 
 - (void)backgroundDoneEditing:(id)sender

@@ -8,7 +8,7 @@
 
 #import "STAboutUsViewController.h"
 #import "STFeedbackViewController.h"
-#import "ACNavigationWebPageViewController.h"
+#import "STNavigationWebPageViewController.h"
 
 @interface STAboutUsViewController () {
     NSArray *titleArr;
@@ -58,11 +58,11 @@
         STFeedbackViewController *feedbackViewController=[[STFeedbackViewController alloc]init];
         [self.navigationController pushViewController:feedbackViewController animated:YES];
     }else if(row==2){
-        ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"新能量介绍" resourcePath:@"aboutCompany"];
+        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"新能量介绍" resourcePath:@"aboutCompany"];
         [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
         
     }else if(row==3){
-        ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"e电工协议内容" resourcePath:@"aboutAgreements"];
+        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"e电工协议内容" resourcePath:@"aboutAgreements"];
         [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
     }else if(row==0){
         [Common alert:@"当前版本已经为最新版本"];

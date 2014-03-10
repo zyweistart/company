@@ -1,10 +1,10 @@
-#import "ACNavigationWebPageViewController.h"
+#import "STNavigationWebPageViewController.h"
 
-@interface ACNavigationWebPageViewController ()
+@interface STNavigationWebPageViewController ()
 
 @end
 
-@implementation ACNavigationWebPageViewController
+@implementation STNavigationWebPageViewController
 
 - (id)initWithNavigationTitle:(NSString *)navigationTitle resourcePath:(NSString *)resourcePath {
     self = [super init];

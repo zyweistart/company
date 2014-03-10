@@ -63,7 +63,7 @@
 		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
 		C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */; };
 		C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */; };
-		C986E4E518CD524700FBEA1F /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */; };
+		C986E4E518CD524700FBEA1F /* STNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C986E4E418CD524700FBEA1F /* STNavigationWebPageViewController.m */; };
 		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
 		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
@@ -348,8 +348,8 @@
 		C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadIcon.m; sourceTree = "<group>"; };
 		C97DEBA218C841C20045EBBE /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
 		C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
-		C986E4E318CD524700FBEA1F /* ACNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavigationWebPageViewController.h; sourceTree = "<group>"; };
-		C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
+		C986E4E318CD524700FBEA1F /* STNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNavigationWebPageViewController.h; sourceTree = "<group>"; };
+		C986E4E418CD524700FBEA1F /* STNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNavigationWebPageViewController.m; sourceTree = "<group>"; };
 		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
 		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
 		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
@@ -747,8 +747,6 @@
 		C93C74C118923E4000A7FAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C986E4E318CD524700FBEA1F /* ACNavigationWebPageViewController.h */,
-				C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */,
 				C922445D18B5FFFA00D0B923 /* Cell */,
 				C9943FB118B8EA1B00A62C19 /* STAboutUsViewController.h */,
 				C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */,
@@ -788,6 +786,8 @@
 				C93C74D218923F8400A7FAB8 /* STLoginViewController.m */,
 				C93C74BB18923C2A00A7FAB8 /* STMyeViewController.h */,
 				C93C74BC18923C2A00A7FAB8 /* STMyeViewController.m */,
+				C986E4E318CD524700FBEA1F /* STNavigationWebPageViewController.h */,
+				C986E4E418CD524700FBEA1F /* STNavigationWebPageViewController.m */,
 				C9B2A57E18934BDA003A412E /* STNewsDetailViewController.h */,
 				C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */,
 				C9B2A57B18934BBE003A412E /* STNewsListViewController.h */,
@@ -1447,7 +1447,7 @@
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
 				C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */,
-				C986E4E518CD524700FBEA1F /* ACNavigationWebPageViewController.m in Sources */,
+				C986E4E518CD524700FBEA1F /* STNavigationWebPageViewController.m in Sources */,
 				C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */,
 				C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */,
 				C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */,

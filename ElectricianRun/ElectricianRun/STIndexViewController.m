@@ -38,10 +38,7 @@
 
 - (void)viewDidLoad {
     
-    int IMAGEHEIGHT=180;
-    if(!inch4){
-        IMAGEHEIGHT=90;
-    }
+    int IMAGEHEIGHT=200;
     
     [super viewDidLoad];
     ETFoursquareImages *foursquareImages = [[ETFoursquareImages alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-0)];
@@ -58,11 +55,18 @@
     
     [self.view addSubview:foursquareImages];
     
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    UIScrollView *scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, IMAGEHEIGHT, 320, inch4?320:250)];
+    [scroll setBackgroundColor:[UIColor whiteColor]];
+    scroll.contentSize = CGSizeMake(320,320);
+    [scroll setScrollEnabled:YES];
+    [foursquareImages.scrollView addSubview:scroll];
+    
     // 设置按钮内部图片间距
     UIEdgeInsets insets;
     insets.top = insets.bottom = insets.right = insets.left = 3;
     //用户体验
-    UIButton *btnF1=[[UIButton alloc]initWithFrame:CGRectMake(5,5+IMAGEHEIGHT, 152.5, 100)];
+    UIButton *btnF1=[[UIButton alloc]initWithFrame:CGRectMake(5,5, 152.5, 100)];
     btnF1.titleLabel.font=[UIFont systemFontOfSize: 15.0];
     [btnF1 setTitle:@"用户体验" forState:UIControlStateNormal];
     [btnF1 setBackgroundColor:[UIColor colorWithRed:(72/255.0) green:(74/255.0) blue:(174/255.0) alpha:1]];
@@ -70,9 +74,9 @@
     [btnF1 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [btnF1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     btnF1.contentEdgeInsets = insets;
-    [foursquareImages.scrollView addSubview:btnF1];
+    [scroll addSubview:btnF1];
     //我管辖的变电站
-    UIButton *btnF2=[[UIButton alloc]initWithFrame:CGRectMake(162.5,5+IMAGEHEIGHT, 152.5, 100)];
+    UIButton *btnF2=[[UIButton alloc]initWithFrame:CGRectMake(162.5,5, 152.5, 100)];
     btnF2.titleLabel.font=[UIFont systemFontOfSize: 15.0];
     [btnF2 setTitle:@"我管辖的变电站" forState:UIControlStateNormal];
     [btnF2 setBackgroundColor:[UIColor colorWithRed:(9/255.0) green:(104/255.0) blue:(220/255.0) alpha:1]];
@@ -80,9 +84,9 @@
     [btnF2 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [btnF2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     btnF2.contentEdgeInsets = insets;
-    [foursquareImages.scrollView addSubview:btnF2];
+    [scroll addSubview:btnF2];
     //工程建站
-    UIButton *btnF4=[[UIButton alloc]initWithFrame:CGRectMake(5,110+IMAGEHEIGHT, 100, 100)];
+    UIButton *btnF4=[[UIButton alloc]initWithFrame:CGRectMake(5,110, 100, 100)];
     btnF4.titleLabel.font=[UIFont systemFontOfSize: 15.0];
     [btnF4 setTitle:@"工程建站" forState:UIControlStateNormal];
     [btnF4 setBackgroundColor:[UIColor colorWithRed:(215/255.0) green:(131/255.0) blue:(7/255.0) alpha:1]];
@@ -90,9 +94,9 @@
     [btnF4 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [btnF4 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     btnF4.contentEdgeInsets = insets;
-    [foursquareImages.scrollView addSubview:btnF4];
+    [scroll addSubview:btnF4];
     //扫描操作
-    UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(110,110+IMAGEHEIGHT, 100, 100)];
+    UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(110,110, 100, 100)];
     btnF5.titleLabel.font=[UIFont systemFontOfSize: 15.0];
     [btnF5 setTitle:@"扫描操作" forState:UIControlStateNormal];
     [btnF5 setBackgroundColor:[UIColor colorWithRed:(170/255.0) green:(44/255.0) blue:(1/255.0) alpha:1]];
@@ -100,9 +104,9 @@
     [btnF5 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [btnF5 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     btnF5.contentEdgeInsets = insets;
-    [foursquareImages.scrollView addSubview:btnF5];
+    [scroll addSubview:btnF5];
     //在线计算
-    UIButton *btnF6=[[UIButton alloc]initWithFrame:CGRectMake(215,110+IMAGEHEIGHT, 100, 100)];
+    UIButton *btnF6=[[UIButton alloc]initWithFrame:CGRectMake(215,110, 100, 100)];
     btnF6.titleLabel.font=[UIFont systemFontOfSize: 15.0];
     [btnF6 setTitle:@"在线计算" forState:UIControlStateNormal];
     [btnF6 setBackgroundColor:[UIColor colorWithRed:(1/255.0) green:(75/255.0) blue:(164/255.0) alpha:1]];
@@ -110,9 +114,9 @@
     [btnF6 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [btnF6 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     btnF6.contentEdgeInsets = insets;
-    [foursquareImages.scrollView addSubview:btnF6];
+    [scroll addSubview:btnF6];
     
-    UIView *newView=[[UIView alloc]initWithFrame:CGRectMake(5, 215+IMAGEHEIGHT, 310, 100)];
+    UIView *newView=[[UIView alloc]initWithFrame:CGRectMake(5, 215, 310, 100)];
     [newView setUserInteractionEnabled:YES];
     [newView setBackgroundColor:[UIColor colorWithRed:(208/255.0) green:(206/255.0) blue:(193/255.0) alpha:1]];
     [newView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickNewList:)]];
@@ -131,9 +135,9 @@
     [lblContent setNumberOfLines:0];
     [newView addSubview:lblContent];
     
-    [foursquareImages.scrollView addSubview:newView];
+    [scroll addSubview:newView];
     
-    foursquareImages.scrollView.contentSize = CGSizeMake(320, 95+80+IMAGEHEIGHT);
+    foursquareImages.scrollView.contentSize = CGSizeMake(320, 320+IMAGEHEIGHT);
     
     [foursquareImages.pageControl setCurrentPageIndicatorTintColor:[UIColor colorWithRed:(28/255.f) green:(189/255.f) blue:(141/255.f) alpha:1.0]];
 }

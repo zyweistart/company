@@ -7,7 +7,7 @@
 //
 
 #import "STStudyViewController.h"
-#import "ACNavigationWebPageViewController.h"
+#import "STNavigationWebPageViewController.h"
 
 @interface STStudyViewController () {
     NSArray *titleArr;
@@ -77,7 +77,7 @@
     NSMutableDictionary *d=[titleArr objectAtIndex:row];
     NSString *title=[d objectForKey:@"title"];
     NSString *url=[d objectForKey:@"url"];
-    ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:title resourcePath:url];
+    STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:title resourcePath:url];
     [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
 }
 

@@ -11,6 +11,8 @@
 #import "NSString+Utils.h"
 #import "STTaskManagerHandleViewController.h"
 
+#define REQUESTCODESUBMIT 5372897
+
 @interface STTaskManagerViewController ()
 
 @end
@@ -102,6 +104,15 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
     NSString *taskId=[data objectForKey:@"TASK_ID"];
     if(buttonIndex==0){
         //提交
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:[Account getUserName] forKey:@"imei"];
+        [p setObject:[Account getPassword] forKey:@"authentication"];
+        [p setObject:@"RW14" forKey:@"GNID"];
+        [p setObject:taskId forKey:@"QTTASK"];
+        
+        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODESUBMIT];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest start:URLAppMonitoringAlarm params:p];
     } else if(buttonIndex==1){
         //站点电耗量信息
         STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW16" type:1];
@@ -118,6 +129,18 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
         //TRMS系统巡视检查
         STTaskManagerHandleViewController *taskManagerHandleViewController=[[STTaskManagerHandleViewController alloc]initWithTaskId:taskId gnid:@"RW17" type:4];
         [self.navigationController pushViewController:taskManagerHandleViewController animated:YES];
+    }
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    if(repCode==REQUESTCODESUBMIT){
+        
+        NSDictionary *Rows=[[response resultJSON] objectForKey:@"Rows"];
+        [Common alert:[Rows objectForKey:@"remark"]];
+        
+    }else{
+        [super requestFinishedByResponse:response responseCode:repCode];
     }
 }
 
