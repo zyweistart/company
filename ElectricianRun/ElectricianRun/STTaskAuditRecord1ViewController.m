@@ -59,6 +59,7 @@
     NSString *v=[self.dataItemArray objectAtIndex:row];
     STTaskAuditRecord2ViewController *taskAuditRecord2ViewController=[[STTaskAuditRecord2ViewController alloc]initWithData:[self data] type:[v intValue]];
     [self.navigationController pushViewController:taskAuditRecord2ViewController animated:YES];
+//    [taskAuditRecord2ViewController autoRefresh];
     
 }
 

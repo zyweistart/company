@@ -12,11 +12,8 @@
 
 - (id)initWithData:(NSDictionary *)data dic:(NSDictionary *)dic type:(NSInteger)t;
 
-- (void)reloadDataSource;
-
 @property (strong,nonatomic) HttpRequest *hRequest;
-@property (strong,nonatomic) NSDictionary *data;
-@property (strong,nonatomic) NSDictionary *dic;
-@property NSInteger type;
+
+- (void)reloadDataSource;
 
 @end
