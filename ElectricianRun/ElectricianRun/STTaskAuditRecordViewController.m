@@ -44,7 +44,7 @@
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"NAME"]]];
-    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TASK_DATE"]]];
+    [cell.lbl2 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"TASK_DATE"]]];
     [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"RECOMPLETE_DATE"]]];
     NSString *IS_COMPLETE=[Common NSNullConvertEmptyString:[dictionary objectForKey:@"IS_COMPLETE"]];

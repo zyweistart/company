@@ -58,11 +58,11 @@
         STFeedbackViewController *feedbackViewController=[[STFeedbackViewController alloc]init];
         [self.navigationController pushViewController:feedbackViewController animated:YES];
     }else if(row==2){
-        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"新能量介绍" resourcePath:@"aboutCompany"];
+        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"新能量介绍" resourcePath:@"公司介绍"];
         [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
         
     }else if(row==3){
-        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"e电工协议内容" resourcePath:@"aboutAgreements"];
+        STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:@"e电工协议内容" resourcePath:@"变电站（配电房）运行合作协议"];
         [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
     }else if(row==0){
         [Common alert:@"当前版本已经为最新版本"];

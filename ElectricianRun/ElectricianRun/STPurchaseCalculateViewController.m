@@ -137,7 +137,7 @@
 
 - (void)buy:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PAYURL]];
 }
 
 - (void)backgroundDoneEditing:(id)sender

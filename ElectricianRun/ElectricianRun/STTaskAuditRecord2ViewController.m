@@ -87,15 +87,26 @@
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
     
-    
-    NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-    
-    self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
-    
-    // 刷新表格
-    [self.tableView reloadData];
-    
+    NSDictionary *json=[response resultJSON];
+    if(json!=nil) {
+        NSDictionary *pageinfo=[json objectForKey:@"Rows"];
+        
+        int result=[[pageinfo objectForKey:@"result"] intValue];
+        if(result>0){
+            NSArray *tmpData=[json objectForKey:@"table1"];
+            
+            self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
+            
+            // 刷新表格
+            [self.tableView reloadData];
+        } else {
+            [Common alert:[pageinfo objectForKey:@"remark"]];
+        }
+    }
     [self doneLoadingTableViewData];
+    
+    
+    
     
 }
 

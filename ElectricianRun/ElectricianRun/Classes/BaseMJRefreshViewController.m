@@ -167,7 +167,8 @@
 
 - (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
 {
-    [Common notificationMessage:[error description] inView:self.view];
+//    [Common notificationMessage:[error description] inView:self.view];
+    [Common alert:[error description]];
     [self doneLoadingTableViewData];
 }
 

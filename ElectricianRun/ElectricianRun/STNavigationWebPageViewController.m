@@ -15,9 +15,12 @@
                                        self.view.frame.size.width,
                                        self.view.frame.size.height)];
         [webView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        NSString *html= [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:resourcePath ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-        [webView loadHTMLString:html baseURL:nil];
         [self.view addSubview:webView];
+        NSString* path = [[NSBundle mainBundle] pathForResource:resourcePath ofType:@"html"];
+        NSURL* url = [NSURL fileURLWithPath:path];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url] ;
+        [webView loadRequest:request];
+        
     }
     return self;
 }

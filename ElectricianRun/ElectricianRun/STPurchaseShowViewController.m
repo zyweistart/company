@@ -35,6 +35,18 @@
                                                 target:self
                                                 action:@selector(buy:)];
         
+        UIWebView *webView=[[UIWebView alloc]initWithFrame:
+                            CGRectMake(0, 0,
+                                       self.view.frame.size.width,
+                                       self.view.frame.size.height)];
+        [webView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.view addSubview:webView];
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"价格介绍" ofType:@"html"];
+        NSURL* url = [NSURL fileURLWithPath:path];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url] ;
+        [webView loadRequest:request];
+        
+        
     }
     return self;
 }
@@ -42,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
 }
 
 - (void)back:(id)sender{
@@ -51,6 +63,6 @@
 
 - (void)buy:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PAYURL]];
 }
 @end

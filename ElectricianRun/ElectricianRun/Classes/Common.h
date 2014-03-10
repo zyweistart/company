@@ -26,4 +26,7 @@
 
 + (NSString *)NSNullConvertEmptyString:(id)value;
 
++ (NSString *)ConvertByNSDate:(NSString*)value;
++ (NSString *)ConvertByNSDate:(NSString*)value format:(NSString*)format;
+
 @end

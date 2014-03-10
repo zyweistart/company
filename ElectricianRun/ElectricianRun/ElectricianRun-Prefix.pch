@@ -59,4 +59,6 @@
     #define URLcheckElecIdent @"http://122.224.247.219:8083/Administrator/checkElecIdent.aspx"
 #endif
 
+#define PAYURL @"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"
+
 #endif
