@@ -9,10 +9,21 @@
 #import "STTaskAuditMapViewController.h"
 #import "STViewUserListViewController.h"
 #import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "CustomAnnotation.h"
+#import "STGPSSearchViewController.h"
 
-@interface STTaskAuditMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate,HttpRequestDelegate>
+#define ZOOMLEVEL 0.02
+
+//按日
+#define REUQESTCODEDAY 1
+//按月
+#define REQUESTCODEMONTH 2
+//按轨迹
+#define REQUESTCODELOCUS 3
+//按位置
+#define REQUESTCODELOCATION 4
+
+@interface STTaskAuditMapViewController () <MKMapViewDelegate,HttpRequestDelegate>
 
 @end
 
@@ -21,6 +32,7 @@
     HttpRequest *hRequest;
     MKMapView *_mapView;
     CLLocationManager *_locationManager;
+    NSMutableArray *overlays;
     
 }
 
@@ -42,7 +54,7 @@
                                                   style:UIBarButtonItemStyleBordered
                                                   target:self
                                                   action:@selector(search:)], nil];
-        
+        overlays=[[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -54,65 +66,32 @@
     [_mapView setMapType:MKMapTypeStandard];
     [_mapView setScrollEnabled:YES];
     [_mapView setZoomEnabled:YES];
-    [_mapView setShowsUserLocation:YES];
     [self.view addSubview:_mapView];
-    
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    [_locationManager startUpdatingLocation];
+  
+    //显示默认的位置
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(30.287786360161632,
+                                                               120.15082687139511);
+	MKCoordinateRegion region = MKCoordinateRegionMake(coords,MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
+	[_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
     
     [super viewDidLoad];
 }
 
 - (void)search:(id)sender
 {
-//    int length=3;
-//    //声明一个数组  用来存放画线的点
-//    MKMapPoint coords[length];
-//    coords[0]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(31.484137685, 120.371875243));
-//    coords[1]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(31.784044745, 110.371879653));
-//    coords[2]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(32.484044745, 150.371879653));
-//    MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
-//    [_mapView addOverlay:line];
-    
-    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:[Account getUserName] forKey:@"imei"];
-    [p setObject:[Account getPassword] forKey:@"authentication"];
-    [p setObject:@"13600000000" forKey:@"phoneNum"];
-    [p setObject:@"357071050721612" forKey:@"UUid"];
-    
-    [p setObject:@"2012-03-03 00:00" forKey:@"startDate"];
-    [p setObject:@"2014-03-03 23:59" forKey:@"endDate"];
-    [p setObject:@"10067" forKey:@"userId"];
-    [p setObject:@"" forKey:@"rtype"];
-//    [p setObject:@"" forKey:@"rvalue"];
-    
-    hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
-    [hRequest setIsShowMessage:YES];
-    [hRequest start:URLgetLocationInfo params:p];
+    STGPSSearchViewController *gpsSearchViewController=[[STGPSSearchViewController alloc]init];
+    [gpsSearchViewController setDelegate:self];
+    [gpsSearchViewController setSearchData:nil];
+    [self.navigationController pushViewController:gpsSearchViewController animated:YES];
 }
-
-
 
 - (void)viewuser:(id)sender
 {
     STViewUserListViewController *viewUserListViewController=[[STViewUserListViewController alloc]init];
+    [viewUserListViewController setDelegate:self];
     [self.navigationController pushViewController:viewUserListViewController animated:YES];
+    [viewUserListViewController autoRefresh];
 }
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    [_locationManager stopUpdatingLocation];
-    
-//    NSString *strLat = [NSString stringWithFormat:@"%.4f",newLocation.coordinate.latitude];
-//    NSString *strLng = [NSString stringWithFormat:@"%.4f",newLocation.coordinate.longitude];
-//    NSLog(@"Lat: %@  Lng: %@", strLat, strLng);
-    
-    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(newLocation.coordinate.latitude,newLocation.coordinate.longitude);
-	float zoomLevel = 0.02;
-	MKCoordinateRegion region = MKCoordinateRegionMake(coords,MKCoordinateSpanMake(zoomLevel, zoomLevel));
-	[_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
-}
-
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
 {
@@ -126,43 +105,88 @@
     return nil;
 }
 
-- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
+- (void)startSearch:(NSMutableDictionary *)data {
+    //清除地图上的标记
+    [_mapView removeAnnotations:[_mapView annotations]];
+    //清除地点上的线路
+    [_mapView removeOverlays:overlays];
+    [overlays removeAllObjects];
     
-    if([@"1" isEqualToString:[[response resultJSON]objectForKey:@"result"]]){
-        NSMutableArray *data=[[response resultJSON]objectForKey:@"gpsDataInfoList"];
+    NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
+    [p setObject:[data objectForKey:@"phoneNum"] forKey:@"phoneNum"];
+    [p setObject:[data objectForKey:@"UUID"] forKey:@"UUid"];
+    [p setObject:[data objectForKey:@"userId"] forKey:@"userId"];
+    
+    [p setObject:@"2012-03-03 00:00" forKey:@"startDate"];
+    [p setObject:@"2014-03-03 23:59" forKey:@"endDate"];
+    [p setObject:@"2" forKey:@"rtype"];
+    [p setObject:@"2" forKey:@"rvalue"];
+    
+    hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    [hRequest setIsShowMessage:YES];
+    [hRequest start:URLgetLocationInfo params:p];
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
+    NSLog(@"%@",[response responseString]);
+    
+    if(repCode==REUQESTCODEDAY){
+        //按日
+    }else if(repCode==REQUESTCODEMONTH){
+        //按月
+    }else if(repCode==REQUESTCODELOCATION){
+        //按位置
+    }else if(repCode==REQUESTCODELOCUS){
+        //按轨迹
+    }
+    
+    NSMutableArray *data=[[response resultJSON]objectForKey:@"gpsUserList"];
+    int length=[data count];
+    //声明一个数组  用来存放画线的点
+    MKMapPoint coords[length];
+    for(int i=0;i<length;i++){
+        NSDictionary *d=[data objectAtIndex:i];
+        double latitude=[[d objectForKey:@"latitude"]doubleValue];
+        double longitude=[[d objectForKey:@"longitude"]doubleValue];
+        coords[i]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(latitude, longitude));
+    }
+    MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
+    [overlays addObject:line];
+    [_mapView addOverlay:line];
+    //开始的位置点
+    if(length>=0){
+        NSDictionary *d=[data objectAtIndex:0];
+        double latitude=[[d objectForKey:@"latitude"]doubleValue];
+        double longitude=[[d objectForKey:@"longitude"]doubleValue];
         
-        int length=[data count];
-        //声明一个数组  用来存放画线的点
-        MKMapPoint coords[length];
-        for(int i=0;i<length;i++){
-            NSDictionary *d=[data objectAtIndex:i];
-            double latitude=[[d objectForKey:@"latitude"]doubleValue];
-            double longitude=[[d objectForKey:@"longitude"]doubleValue];
-            coords[i]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(latitude, longitude));
-        }
-        MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
+        CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
+        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
+        [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
         
+        CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
+        annotation.title = [d objectForKey:@"userName"];
+        annotation.subtitle = [d objectForKey:@"gpsTime"];
+        
+        [_mapView addAnnotation:annotation];
+    }
+    //结束的位置点
+    if(length>1){
         NSDictionary *d=[data objectAtIndex:length-1];
         double latitude=[[d objectForKey:@"latitude"]doubleValue];
         double longitude=[[d objectForKey:@"longitude"]doubleValue];
         
         CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
-        float zoomLevel = 0.02;
-        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(zoomLevel, zoomLevel));
+        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
         [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
-
+        
         CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
-        annotation.title = @"标题";
-        annotation.subtitle = @"子标题";
+        annotation.title = [d objectForKey:@"userName"];
+        annotation.subtitle = [d objectForKey:@"gpsTime"];
+        
         [_mapView addAnnotation:annotation];
-        
-        
-        [_mapView addOverlay:line];
-        
-        NSLog(@"%@",data);
-    }else{
-        [Common alert:@"查询失败"];
     }
-    
 }
+
 @end

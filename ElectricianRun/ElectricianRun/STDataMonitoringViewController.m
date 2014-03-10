@@ -109,7 +109,6 @@
 }
 
 - (void)startSearch:(NSMutableDictionary *)data {
-    
     searchData=data;
     [self autoRefresh];
 }

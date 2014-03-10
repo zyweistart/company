@@ -386,8 +386,8 @@
     } else if(self.type==3 || self.type==4){
         [p setObject:@"RW17" forKey:@"gnid"];
     }
-    [p setObject:@"" forKey:@"QTTASK"];
-    [p setObject:@"" forKey:@"QTKEY"];
+    [p setObject:[self.data objectForKey:@"TASK_ID"] forKey:@"QTTASK"];
+    [p setObject:[self.dic objectForKey:@"EQUIPMENT_ID"] forKey:@"QTKEY"];
     [p setObject:@"" forKey:@"QTKEY1"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
@@ -398,6 +398,7 @@
 
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
+    NSLog(@"%@",[response responseString]);
     NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
     for(NSDictionary *dic in dataArray) {
         [lblV1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NAME"]]];

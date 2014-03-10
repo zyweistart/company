@@ -11,7 +11,7 @@
 #import "STTaskAuditRecordViewController.h"
 #import "STTaskAuditMapViewController.h"
 
-@interface STTaskAuditViewController ()
+@interface STTaskAuditViewController () <DatePickerViewDelegate>
 
 @end
 

@@ -67,6 +67,7 @@
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     STTaskAuditRecord3ViewController *taskAuditRecord3ViewController=[[STTaskAuditRecord3ViewController alloc]initWithData:_data dic:dictionary type:_type];
     [self.navigationController pushViewController:taskAuditRecord3ViewController animated:YES];
+    [taskAuditRecord3ViewController reloadDataSource];
 }
 
 - (void)reloadTableViewDataSource{

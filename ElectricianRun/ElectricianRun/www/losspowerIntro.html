@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TRMS系统</title>  
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head> 
+<body> 
+<div class="descBox">
+	<div class="title">
+		<div class="lf"><img src="images/leafl.jpg"/></div>
+		<div class="rt"><img src="images/leafr.jpg"/></div>
+
+		<div class="crumb"><img src="images/word.jpg" title="省心、省力、安全、省钱！"/></div>
+		<div class="right"><img src="images/right.gif"/></div>
+	</div>
+	<div class="content">
+		<h2>失电报警介绍</h2>
+
+		<h3>失电报警系统介绍</h3>
+		<div class="subCnt">
+			<p> 面向广大工商企业、公共机构等电力专变客户，通过对电力运行监测，变电站发生失电故障时，及时提供手机信息报警，保障变电站运行安全，帮助客户提高变电站运行管理效率。</p>
+
+			<h4>功能介绍</h4>
+			<ul>
+				<li>监测变配电系统出线回路和关键设备运行状态，消除人工运维盲区</li>
+				<li>发生失电故障，第一时间向手机发出报警信息</li>
+			</ul>
+		</div>
+
+		<h3>失电报警设备介绍</h3>
+		<div class="subCnt">
+			<h4>1、失电报警采集器介绍</h4>
+			<h5>产品外观</h5>
+			<p><img src="images/pic23.jpg" class="fullwidth"/></p>
+			<h5>功能介绍</h5>
+			<p>ZFP- eTP -Ⅰ型采集器主要包括失电缺相监测和与汇集器配合报警两项功能，具体如下：</p>
+			<p>
+				1)	失电缺相监测<br/>
+				每只ZFP-eTP-Ⅰ型采集器可同时监测8回路的电压状态，每回路可由投切开关控制。回路电压正常时，采集器输出端为开路状态，多只采集器以并联方式连接至告警输出端，形成与门状态。一旦出现某回路通道一相或多相失电时，采集器输出端将输出闭合信号。
+			</p>
+			<p>
+				2)	与汇集器配合报警<br/>
+				采集器输出端与ZFP-DC-Ⅰ型汇集器输入端相连，汇集器监测到采集器输出的闭合信号时，蜂鸣器就地报警，同时通过语音拨号向新能量服务器报警，主站再以短信方式向用户手机报警。
+			</p>
+
+			<h5>适用范围</h5>
+			<p>适用于解决用户电力信息采集装置不同厂家、不同接口、不同规约的产品之间相互通讯，可以实现变电站运行监测系统和电能管理系统内的各种现场智能设备和远方监控后台之间以串口、以太网、无线等多种方式的通信互联。</p>
+
+			<h5>价值</h5>
+			<p>具有强大的通信处理能力和现场监控能力，还具有实时性强、可靠性高、安装简易方便的特点。</p>
+
+
+			<h4>2、ZFP-DC-Ⅰ型汇集器介绍</h4>
+			<h5>产品外观：</h5>
+			<p><img src="images/pic23.jpg"  class="fullwidth"/></p>
+			<h5>ZFP-DC-Ⅰ型汇集器主要与ZFP-eTP-Ⅰ型采集器配合，提供失电缺相报警功能，具体如下：</h5>
+			<p>1)	失电缺相监测<br/>ZFP-DC-Ⅰ型汇集器通过485总线与多个ZFP-eTP-Ⅰ型采集器相连，当总线上的任一采集器检测到其中一路出现失电或缺相时，即输出信号触发 ZFP-DC-Ⅰ汇集器的报警模块。</p>
+		
+			<p>2)	就地蜂鸣报警<br/>ZFP-DC-Ⅰ型汇集器器内置蜂鸣器，一旦出现某回路通道一相或多相失电时，蜂鸣器发出报警信号。/p>
+			<p>3)	GSM网络远程报警<br/>ZFP-DC-Ⅰ型汇集器内置手机报警模块可实现远程报警，报警模块被触发后，通过GSM网络以语音拨号方式向新能量主站报警，新能量主站接收报警信息后，即向用户接收报警的手机终端发送短消息报警。以上功能只需在汇集器手机报警模块上插入SIM即可。</p>
+			<p>4)	远程修改主站报警号码<br/>ZFP-DC-Ⅰ型汇集器支持主站报警接收号码的远程修改（该号码在产品出厂时已配置），通过指定号码发送短信来修改，方便系统升级维护。</p>
+			<p>
+
+			<h5>适用范围</h5>
+			<p>适用于解决用户电力信息采集装置不同厂家、不同接口、不同规约的产品之间相互通讯。</p>
+
+			<h5>价值</h5>
+			<p>具有强大的通信处理能力和现场监控能力，还具有实时性强、可靠性高、安装简易方便的特点。</p>
+		</div>
+	</div>
+</div>
+<script>
+function init(){
+	var w = document.body.clientWidth;
+	var pic = document.getElementsByTagName("img");
+	for(var i=0;i<pic.length;i++){
+		if(pic[i].className == "fullScrean"){
+			var width1 = pic[i].width; 
+			var height1 = pic[i].height; 
+			pic[i].width= w *0.9;
+			pic[i].height=height1*w/width1*0.9; 
+		}
+	}
+}
+init();
+</script>
+</body> 
+</html> 

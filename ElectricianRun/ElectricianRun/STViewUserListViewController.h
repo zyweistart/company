@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseMJRefreshViewController.h"
+#import "STTaskAuditMapViewController.h"
 
 @interface STViewUserListViewController : BaseMJRefreshViewController
+
+@property (strong,nonatomic) STTaskAuditMapViewController<SearchDelegate> *delegate;
 
 @end

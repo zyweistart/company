@@ -82,7 +82,7 @@
 {
     if (!view) {
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 30)];
-        label.text = [_data objectAtIndex:row];
+        label.text = [Common NSNullConvertEmptyString:[_data objectAtIndex:row]];
         label.textColor = [UIColor blueColor];
         label.font=[UIFont systemFontOfSize:14];
         view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];

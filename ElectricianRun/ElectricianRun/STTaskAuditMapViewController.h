@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchDelegate.h"
 
-@interface STTaskAuditMapViewController : UIViewController
+@interface STTaskAuditMapViewController : UIViewController<SearchDelegate>
 
 @end

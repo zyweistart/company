@@ -35,25 +35,41 @@
     control.contentSize = CGSizeMake(640,height);
     [control setScrollEnabled:YES];
     UIView *firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
-    UIButton *btnAlarm=[[UIButton alloc]initWithFrame:CGRectMake(100, 100, 150, 30)];
+    
+    UIView *firstViewGB=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 347)];
+    [firstViewGB setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ty"]]];
+    [firstView addSubview:firstViewGB];
+    
+    UIButton *btnAlarm=[[UIButton alloc]initWithFrame:CGRectMake(70, 360, 180, 30)];
     [btnAlarm setTitle:@"报警体验" forState:UIControlStateNormal];
-    [btnAlarm setBackgroundColor:[UIColor blueColor]];
+    [btnAlarm setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnAlarm addTarget:self action:@selector(alarm:) forControlEvents:UIControlEventTouchUpInside];
     [firstView addSubview:btnAlarm];
+    
+    UIImageView *ftop=[[UIImageView alloc]initWithFrame:CGRectMake(150, 400, 19, 7)];
+    [ftop setImage:[UIImage imageNamed:@"d1"]];
+    [firstView addSubview:ftop];
     [control addSubview:firstView];
     
     UIView *secondView=[[UIView alloc]initWithFrame:CGRectMake(320, 0, 320, height)];
-    UIButton *btnBusiness=[[UIButton alloc]initWithFrame:CGRectMake(100, 150, 150, 30)];
-    [btnBusiness setTitle:@"商业用户" forState:UIControlStateNormal];
-    [btnBusiness setBackgroundColor:[UIColor blueColor]];
+    
+    UIView *secondViewGB=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 276)];
+    [secondViewGB setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ty1"]]];
+    [secondView addSubview:secondViewGB];
+    
+    UIButton *btnBusiness=[[UIButton alloc]initWithFrame:CGRectMake(22, 290, 128, 91.5)];
+    [btnBusiness setBackgroundImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
     [btnBusiness addTarget:self action:@selector(business:) forControlEvents:UIControlEventTouchUpInside];
     [secondView addSubview:btnBusiness];
 
-    UIButton *btnIndustrial=[[UIButton alloc]initWithFrame:CGRectMake(100, 200, 150, 30)];
-    [btnIndustrial setTitle:@"大工业用户" forState:UIControlStateNormal];
-    [btnIndustrial setBackgroundColor:[UIColor blueColor]];
+    UIButton *btnIndustrial=[[UIButton alloc]initWithFrame:CGRectMake(172, 290, 128, 91.5)];
+    [btnIndustrial setBackgroundImage:[UIImage imageNamed:@"dsy"] forState:UIControlStateNormal];
     [btnIndustrial addTarget:self action:@selector(industrial:) forControlEvents:UIControlEventTouchUpInside];
     [secondView addSubview:btnIndustrial];
+    
+    UIImageView *stop=[[UIImageView alloc]initWithFrame:CGRectMake(150, 400, 19, 7)];
+    [stop setImage:[UIImage imageNamed:@"d2"]];
+    [secondView addSubview:stop];
     [control addSubview:secondView];
     
     [self.view addSubview:control];

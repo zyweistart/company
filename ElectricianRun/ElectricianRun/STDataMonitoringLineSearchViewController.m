@@ -113,14 +113,17 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
     
     NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-    dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
-    
-    NSMutableArray *d=[[NSMutableArray alloc]init];
-    for(NSDictionary *dic in dataItemArray) {
-        [d addObject:[dic objectForKey:@"TRANS_NAME"]];
+    dataItemArray=[[NSMutableArray alloc]init];
+    NSMutableArray *names=[[NSMutableArray alloc]init];
+    for(NSDictionary *dic in tmpData) {
+        NSString *TRANS_NAME=[Common NSNullConvertEmptyString:[dic objectForKey:@"TRANS_NAME"]];
+        if(![@"" isEqualToString:TRANS_NAME]){
+            [dataItemArray addObject:dic];
+            [names addObject:TRANS_NAME];
+        }
     }
     
-    transformerdpv=[[DataPickerView alloc]initWithData:d];
+    transformerdpv=[[DataPickerView alloc]initWithData:names];
     [transformerdpv setDelegate:self];
     
     [txtValueType setInputView:transformerdpv];

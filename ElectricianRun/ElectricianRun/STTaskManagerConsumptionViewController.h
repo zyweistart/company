@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
 
-@interface STTaskManagerConsumptionViewController : BaseTableViewController<HttpRequestDelegate>
+@interface STTaskManagerConsumptionViewController : UIViewController<HttpRequestDelegate>
 
 @property (strong,nonatomic) HttpRequest *hRequest;
 
