@@ -19,8 +19,6 @@
 		C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446C18B623E200D0B923 /* MJRefreshFooterView.m */; };
 		C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */; };
 		C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */; };
-		C92EA0C418C41FCB003F1669 /* STAgreementContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */; };
-		C92EA0C718C41FF8003F1669 /* STIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */; };
 		C92EA0CD18C422E6003F1669 /* STAlarmSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */; };
 		C92EA0D018C42747003F1669 /* STAlarmSetupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */; };
 		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
@@ -65,6 +63,7 @@
 		C9726CE318B7956D006FB209 /* STChangeMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CE218B7956D006FB209 /* STChangeMaterialViewController.m */; };
 		C97D54DA18C35EAD003BC6C9 /* DownloadIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */; };
 		C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */; };
+		C986E4E518CD524700FBEA1F /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */; };
 		C98F54A418B637B70032AE8B /* BaseMJRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */; };
 		C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A618B64B500032AE8B /* STTaskAuditBuildDetailViewController.m */; };
 		C98F54AA18B6515A0032AE8B /* STTaskAuditRecord1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F54A918B6515A0032AE8B /* STTaskAuditRecord1ViewController.m */; };
@@ -266,10 +265,6 @@
 		C922446E18B623E200D0B923 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		C92EA0BF18C41F82003F1669 /* STFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedbackViewController.h; sourceTree = "<group>"; };
 		C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedbackViewController.m; sourceTree = "<group>"; };
-		C92EA0C218C41FCB003F1669 /* STAgreementContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAgreementContentViewController.h; sourceTree = "<group>"; };
-		C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAgreementContentViewController.m; sourceTree = "<group>"; };
-		C92EA0C518C41FF8003F1669 /* STIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIntroductionViewController.h; sourceTree = "<group>"; };
-		C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIntroductionViewController.m; sourceTree = "<group>"; };
 		C92EA0CB18C422E6003F1669 /* STAlarmSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmSetupViewController.h; sourceTree = "<group>"; };
 		C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmSetupViewController.m; sourceTree = "<group>"; };
 		C92EA0CE18C42747003F1669 /* STAlarmSetupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmSetupCell.h; sourceTree = "<group>"; };
@@ -353,6 +348,8 @@
 		C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadIcon.m; sourceTree = "<group>"; };
 		C97DEBA218C841C20045EBBE /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
 		C97DEBA318C841C20045EBBE /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
+		C986E4E318CD524700FBEA1F /* ACNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavigationWebPageViewController.h; sourceTree = "<group>"; };
+		C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
 		C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMJRefreshViewController.h; sourceTree = "<group>"; };
 		C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMJRefreshViewController.m; sourceTree = "<group>"; };
 		C98F54A518B64B500032AE8B /* STTaskAuditBuildDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskAuditBuildDetailViewController.h; sourceTree = "<group>"; };
@@ -750,6 +747,8 @@
 		C93C74C118923E4000A7FAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C986E4E318CD524700FBEA1F /* ACNavigationWebPageViewController.h */,
+				C986E4E418CD524700FBEA1F /* ACNavigationWebPageViewController.m */,
 				C922445D18B5FFFA00D0B923 /* Cell */,
 				C9943FB118B8EA1B00A62C19 /* STAboutUsViewController.h */,
 				C9943FB218B8EA1B00A62C19 /* STAboutUsViewController.m */,
@@ -757,8 +756,6 @@
 				C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */,
 				C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */,
 				C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */,
-				C92EA0C218C41FCB003F1669 /* STAgreementContentViewController.h */,
-				C92EA0C318C41FCB003F1669 /* STAgreementContentViewController.m */,
 				C92EA0CB18C422E6003F1669 /* STAlarmSetupViewController.h */,
 				C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */,
 				C9AB9C4A18C01BFB004B536E /* STBaseUserExperienceViewController.h */,
@@ -785,8 +782,6 @@
 				C9EF51AB18A9B6C000CFBE06 /* STGuideViewController.m */,
 				C93C74B818923C1400A7FAB8 /* STIndexViewController.h */,
 				C93C74B918923C1400A7FAB8 /* STIndexViewController.m */,
-				C92EA0C518C41FF8003F1669 /* STIntroductionViewController.h */,
-				C92EA0C618C41FF8003F1669 /* STIntroductionViewController.m */,
 				C9726CDE18B73D76006FB209 /* STLineInfoViewController.h */,
 				C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */,
 				C93C74D118923F8400A7FAB8 /* STLoginViewController.h */,
@@ -1448,11 +1443,11 @@
 				C9C432D718C5A132005D0BC6 /* STPurchaseShowViewController.m in Sources */,
 				C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */,
 				C95F7F2F18BF3E4900403430 /* STChartElectricCurrentLineViewController.m in Sources */,
-				C92EA0C418C41FCB003F1669 /* STAgreementContentViewController.m in Sources */,
 				C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */,
 				C922447218B623E200D0B923 /* MJRefreshFooterView.m in Sources */,
 				C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */,
 				C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */,
+				C986E4E518CD524700FBEA1F /* ACNavigationWebPageViewController.m in Sources */,
 				C9943FB318B8EA1B00A62C19 /* STAboutUsViewController.m in Sources */,
 				C9D1154918BC5E4B00268BBE /* STTaskManagerHandleViewController.m in Sources */,
 				C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */,
@@ -1474,7 +1469,6 @@
 				C9B2A58718934D9C003A412E /* STTaskAuditViewController.m in Sources */,
 				C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */,
 				C93C74C418923EA900A7FAB8 /* STUserExperienceViewController.m in Sources */,
-				C92EA0C718C41FF8003F1669 /* STIntroductionViewController.m in Sources */,
 				C9B2A58318934C97003A412E /* STDataMonitoringViewController.m in Sources */,
 				C9160D0C18CC0FA500DD6575 /* STTaskConsumptionCell.m in Sources */,
 				C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */,
