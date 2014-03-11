@@ -205,7 +205,6 @@
 		C9B6CCB718C6062000E72CFB /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B6CCB618C6062000E72CFB /* CustomAnnotation.m */; };
 		C9C067CA18C466CA006AB9C7 /* STMonitoringLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */; };
 		C9C22DED18AA651B00ACF787 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DEF18AA651B00ACF787 /* InfoPlist.strings */; };
-		C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C22DF118AA66F000ACF787 /* Main.storyboard */; };
 		C9C432D718C5A132005D0BC6 /* STPurchaseShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C432D618C5A132005D0BC6 /* STPurchaseShowViewController.m */; };
 		C9C432DA18C5A15A005D0BC6 /* STPurchaseCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C432D918C5A15A005D0BC6 /* STPurchaseCalculateViewController.m */; };
 		C9C4FC2718CDF88400333685 /* NSMutableArray+pieEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C4FC2218CDF88400333685 /* NSMutableArray+pieEx.m */; };
@@ -549,7 +548,6 @@
 		C9C067C918C466CA006AB9C7 /* STMonitoringLineDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMonitoringLineDetailCell.m; sourceTree = "<group>"; };
 		C9C22DEE18AA651B00ACF787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9C22DF018AA651F00ACF787 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		C9C22DF118AA66F000ACF787 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C9C432D518C5A132005D0BC6 /* STPurchaseShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPurchaseShowViewController.h; sourceTree = "<group>"; };
 		C9C432D618C5A132005D0BC6 /* STPurchaseShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPurchaseShowViewController.m; sourceTree = "<group>"; };
 		C9C432D818C5A15A005D0BC6 /* STPurchaseCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPurchaseCalculateViewController.h; sourceTree = "<group>"; };
@@ -735,7 +733,6 @@
 			children = (
 				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
 				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
-				C9C22DF118AA66F000ACF787 /* Main.storyboard */,
 				C93C7498189235E500A7FAB8 /* Images.xcassets */,
 				C9B2A56018934AC8003A412E /* Classes */,
 				C9B2A56118934AC8003A412E /* Librarys */,
@@ -1373,7 +1370,6 @@
 				C95ACDB818C81680006A3F32 /* city.xml in Resources */,
 				C9A36FA518CDA8FA0090B246 /* news2.png in Resources */,
 				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
-				C9C22DF218AA66F000ACF787 /* Main.storyboard in Resources */,
 				C9A36FE318CDA8FA0090B246 /* ttbg.png in Resources */,
 				C9A36FD618CDA8FA0090B246 /* pic48.png in Resources */,
 				C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */,

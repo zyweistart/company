@@ -8,7 +8,6 @@
 
 #import "STChartElectricityValPieViewController.h"
 
-
 #import "Example2PieView.h"
 #import "MyPieElement.h"
 #import "PieLayer.h"
