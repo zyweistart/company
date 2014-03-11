@@ -24,13 +24,6 @@
     if(self) {
         self.title=@"我要学习";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        
-        titleArr=[[NSArray alloc]initWithObjects:
-                  @"TRMS系统变电站失电报警装置安装调试教程",
-                  @"TRMS系统变电站远程监测服务安装调试教程",
-                  @"TRMS系统巡检工作服务规范(e电工版)",
-                  @"TRMS系统现场安装调试问题处理指南",nil];
-        
     }
     return self;
 }
@@ -105,7 +98,18 @@
 {
     if(repCode==REQUESTCODESUBMIT){
         NSLog(@"%@",[response responseString]);
+        [self loadData];
     }
+}
+
+- (void)loadData
+{
+    titleArr=[[NSArray alloc]initWithObjects:
+              @"TRMS系统变电站失电报警装置安装调试教程",
+              @"TRMS系统变电站远程监测服务安装调试教程",
+              @"TRMS系统巡检工作服务规范(e电工版)",
+              @"TRMS系统现场安装调试问题处理指南",nil];
+    [self.tableView reloadData];
 }
 
 @end

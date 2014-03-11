@@ -22,7 +22,6 @@
 		C92EA0C118C41F82003F1669 /* STFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0C018C41F82003F1669 /* STFeedbackViewController.m */; };
 		C92EA0CD18C422E6003F1669 /* STAlarmSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */; };
 		C92EA0D018C42747003F1669 /* STAlarmSetupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */; };
-		C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */; };
 		C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C933FEA718B512E000E4AE0A /* BaseTableViewController.m */; };
 		C93C7481189235E400A7FAB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7480189235E400A7FAB8 /* Foundation.framework */; };
 		C93C7483189235E400A7FAB8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93C7482189235E400A7FAB8 /* CoreGraphics.framework */; };
@@ -169,7 +168,6 @@
 		C9A809D018A7438700EA865D /* ETFoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A809CF18A7438700EA865D /* ETFoursquareImages.m */; };
 		C9AB9C4C18C01BFB004B536E /* STBaseUserExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AB9C4B18C01BFB004B536E /* STBaseUserExperienceViewController.m */; };
 		C9AC1DD618A86C4A004E96CC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD518A86C4A004E96CC /* Common.m */; };
-		C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DE918A86DF7004E96CC /* ATMHud.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DDD18A86DF7004E96CC /* ATMHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DEA18A86DF7004E96CC /* ATMHudQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE018A86DF7004E96CC /* ATMHudQueueItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DEB18A86DF7004E96CC /* ATMHudView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE218A86DF7004E96CC /* ATMHudView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -177,13 +175,6 @@
 		C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56418934AC8003A412E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9B2A57018934AC8003A412E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56618934AC8003A412E /* blackArrow.png */; };
-		C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56718934AC8003A412E /* blackArrow@2x.png */; };
-		C9B2A57218934AC8003A412E /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56818934AC8003A412E /* blueArrow.png */; };
-		C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56918934AC8003A412E /* blueArrow@2x.png */; };
-		C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9B2A57518934AC8003A412E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56C18934AC8003A412E /* grayArrow.png */; };
-		C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B2A56D18934AC8003A412E /* grayArrow@2x.png */; };
 		C9B2A57A18934B2B003A412E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57918934B2B003A412E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57C18934BBE003A412E /* STNewsListViewController.m */; };
 		C9B2A58018934BDA003A412E /* STNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57F18934BDA003A412E /* STNewsDetailViewController.m */; };
@@ -281,8 +272,6 @@
 		C92EA0CC18C422E6003F1669 /* STAlarmSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmSetupViewController.m; sourceTree = "<group>"; };
 		C92EA0CE18C42747003F1669 /* STAlarmSetupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmSetupCell.h; sourceTree = "<group>"; };
 		C92EA0CF18C42747003F1669 /* STAlarmSetupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlarmSetupCell.m; sourceTree = "<group>"; };
-		C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
-		C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRefreshTableViewController.m; sourceTree = "<group>"; };
 		C933FEA618B512E000E4AE0A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		C933FEA718B512E000E4AE0A /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		C93C747D189235E400A7FAB8 /* ElectricianRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElectricianRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -482,8 +471,6 @@
 		C9AB9C4B18C01BFB004B536E /* STBaseUserExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBaseUserExperienceViewController.m; sourceTree = "<group>"; };
 		C9AC1DD418A86C4A004E96CC /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		C9AC1DD518A86C4A004E96CC /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
-		C9AC1DD818A86CE9004E96CC /* GCDiscreetNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDiscreetNotificationView.h; sourceTree = "<group>"; };
-		C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDiscreetNotificationView.m; sourceTree = "<group>"; };
 		C9AC1DDC18A86DF7004E96CC /* ATMHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHud.h; sourceTree = "<group>"; };
 		C9AC1DDD18A86DF7004E96CC /* ATMHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHud.m; sourceTree = "<group>"; };
 		C9AC1DDE18A86DF7004E96CC /* ATMHudDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudDelegate.h; sourceTree = "<group>"; };
@@ -499,14 +486,6 @@
 		C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMTextLayer.m; sourceTree = "<group>"; };
 		C9B2A56318934AC8003A412E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C9B2A56418934AC8003A412E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		C9B2A56618934AC8003A412E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
-		C9B2A56718934AC8003A412E /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
-		C9B2A56818934AC8003A412E /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		C9B2A56918934AC8003A412E /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
-		C9B2A56A18934AC8003A412E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		C9B2A56C18934AC8003A412E /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
-		C9B2A56D18934AC8003A412E /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		C9B2A57818934B2B003A412E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		C9B2A57918934B2B003A412E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		C9B2A57B18934BBE003A412E /* STNewsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNewsListViewController.h; sourceTree = "<group>"; };
@@ -979,15 +958,6 @@
 			path = ETFoursquareImages;
 			sourceTree = "<group>";
 		};
-		C9AC1DD718A86CE9004E96CC /* GCDiscreetNotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				C9AC1DD818A86CE9004E96CC /* GCDiscreetNotificationView.h */,
-				C9AC1DD918A86CE9004E96CC /* GCDiscreetNotificationView.m */,
-			);
-			path = GCDiscreetNotificationView;
-			sourceTree = "<group>";
-		};
 		C9AC1DDB18A86DF7004E96CC /* ATMHud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,8 +991,6 @@
 				C9B6CCB618C6062000E72CFB /* CustomAnnotation.m */,
 				C98F54A218B637B70032AE8B /* BaseMJRefreshViewController.h */,
 				C98F54A318B637B70032AE8B /* BaseMJRefreshViewController.m */,
-				C933FEA418B512E000E4AE0A /* BaseRefreshTableViewController.h */,
-				C933FEA518B512E000E4AE0A /* BaseRefreshTableViewController.m */,
 				C933FEA618B512E000E4AE0A /* BaseTableViewController.h */,
 				C933FEA718B512E000E4AE0A /* BaseTableViewController.m */,
 				C9EF51AD18A9B95000CFBE06 /* BaseUIViewController.h */,
@@ -1065,11 +1033,9 @@
 				C9B2A57718934B2B003A412E /* ASIHTTP */,
 				C9AC1DDB18A86DF7004E96CC /* ATMHud */,
 				C9A809CD18A7438700EA865D /* ETFoursquareImages */,
-				C9AC1DD718A86CE9004E96CC /* GCDiscreetNotificationView */,
 				C9DFDF2218B327DC00F7B368 /* GHWalkThrough */,
 				C9B2A56218934AC8003A412E /* MBProgressHUD */,
 				C922446418B623E200D0B923 /* MJRefresh */,
-				C9B2A56518934AC8003A412E /* RefreshTableHeaderView */,
 				C91F9A6818B7D8AF008AE135 /* RMPickerViewController */,
 			);
 			path = Librarys;
@@ -1082,21 +1048,6 @@
 				C9B2A56418934AC8003A412E /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		C9B2A56518934AC8003A412E /* RefreshTableHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				C9B2A56618934AC8003A412E /* blackArrow.png */,
-				C9B2A56718934AC8003A412E /* blackArrow@2x.png */,
-				C9B2A56818934AC8003A412E /* blueArrow.png */,
-				C9B2A56918934AC8003A412E /* blueArrow@2x.png */,
-				C9B2A56A18934AC8003A412E /* EGORefreshTableHeaderView.h */,
-				C9B2A56B18934AC8003A412E /* EGORefreshTableHeaderView.m */,
-				C9B2A56C18934AC8003A412E /* grayArrow.png */,
-				C9B2A56D18934AC8003A412E /* grayArrow@2x.png */,
-			);
-			path = RefreshTableHeaderView;
 			sourceTree = "<group>";
 		};
 		C9B2A57718934B2B003A412E /* ASIHTTP */ = {
@@ -1335,19 +1286,15 @@
 				C9A36FC618CDA8FA0090B246 /* pic32.png in Resources */,
 				C9A36FD718CDA8FA0090B246 /* pic49.png in Resources */,
 				C9A36FE118CDA8FA0090B246 /* pic59.png in Resources */,
-				C9B2A57018934AC8003A412E /* blackArrow.png in Resources */,
 				C9A36FCE18CDA8FA0090B246 /* pic40.png in Resources */,
-				C9B2A57618934AC8003A412E /* grayArrow@2x.png in Resources */,
 				C9A36FD518CDA8FA0090B246 /* pic47.png in Resources */,
 				C9A36FB018CDA8FA0090B246 /* pic9.png in Resources */,
 				C9A36F4A18CDA7310090B246 /* 《浙江日报》：“新能量”谢国强 - 副本.html in Resources */,
 				C9A36FAC18CDA8FA0090B246 /* pic5.png in Resources */,
-				C9B2A57318934AC8003A412E /* blueArrow@2x.png in Resources */,
 				C9A36FCC18CDA8FA0090B246 /* pic38.png in Resources */,
 				C9A36FE018CDA8FA0090B246 /* pic58.png in Resources */,
 				C9A36FC318CDA8FA0090B246 /* pic29.png in Resources */,
 				C9A36FD418CDA8FA0090B246 /* pic46.png in Resources */,
-				C9B2A57218934AC8003A412E /* blueArrow.png in Resources */,
 				C9A36FBB18CDA8FA0090B246 /* pic20.png in Resources */,
 				C9A36FB418CDA8FA0090B246 /* pic13.png in Resources */,
 				C9A36FCF18CDA8FA0090B246 /* pic41.png in Resources */,
@@ -1373,7 +1320,6 @@
 				C9A36FA918CDA8FA0090B246 /* pic2.png in Resources */,
 				C95ACDB818C81680006A3F32 /* city.xml in Resources */,
 				C9A36FA518CDA8FA0090B246 /* news2.png in Resources */,
-				C9B2A57118934AC8003A412E /* blackArrow@2x.png in Resources */,
 				C9A36FE318CDA8FA0090B246 /* ttbg.png in Resources */,
 				C9A36FD618CDA8FA0090B246 /* pic48.png in Resources */,
 				C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */,
@@ -1402,7 +1348,6 @@
 				C9A36F4C18CDA7310090B246 /* 《青年时报》：“电管家”新能量专开“节电处方”.html in Resources */,
 				C9A36FDF18CDA8FA0090B246 /* pic57.png in Resources */,
 				C9A36FD018CDA8FA0090B246 /* pic42.png in Resources */,
-				C9B2A57518934AC8003A412E /* grayArrow.png in Resources */,
 				C9A36FDE18CDA8FA0090B246 /* pic56.png in Resources */,
 				C9A36FB918CDA8FA0090B246 /* pic18.png in Resources */,
 				C9A36F4D18CDA7310090B246 /* 价格介绍.html in Resources */,
@@ -1464,7 +1409,6 @@
 				C95F7F3818BF3EA900403430 /* STChartElectricityPieViewController.m in Sources */,
 				C9B2A57A18934B2B003A412E /* Reachability.m in Sources */,
 				C949E7E618C087A00001B5FE /* STAuditRecordCell.m in Sources */,
-				C9AC1DDA18A86CE9004E96CC /* GCDiscreetNotificationView.m in Sources */,
 				C93C74CD18923F1100A7FAB8 /* STProjectSiteViewController.m in Sources */,
 				C9DFDF2718B327DC00F7B368 /* GHWalkThroughPageCell.m in Sources */,
 				C922447318B623E200D0B923 /* MJRefreshHeaderView.m in Sources */,
@@ -1533,7 +1477,6 @@
 				C98F54A718B64B500032AE8B /* STTaskAuditBuildDetailViewController.m in Sources */,
 				C93C74D318923F8400A7FAB8 /* STLoginViewController.m in Sources */,
 				C963416018B79D720064AC56 /* STDataMonitoringSearchViewController.m in Sources */,
-				C9B2A57418934AC8003A412E /* EGORefreshTableHeaderView.m in Sources */,
 				C9CF827C18C06D01002826C4 /* STDataMonitoringCell.m in Sources */,
 				C93C74BD18923C2A00A7FAB8 /* STMyeViewController.m in Sources */,
 				C99F7E2918C2F759002C97F0 /* EAIntroPage.m in Sources */,
@@ -1541,7 +1484,6 @@
 				C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */,
 				C9B6159018CE011F000A446E /* NSMutableArray+TTMutableArray.m in Sources */,
 				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
-				C933FEA818B512E000E4AE0A /* BaseRefreshTableViewController.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 				C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */,
 				C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */,

@@ -191,11 +191,6 @@
     }
 }
 
-- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
-{
-    NSLog(@"error:%@",[error description]);
-}
-
 - (void)AsynchronousDownloadWithUrl:(NSString *)u FileName:(NSString *)fName
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);

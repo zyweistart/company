@@ -20,8 +20,6 @@
 
 + (void)alert:(NSString *)message;
 
-+ (void)notificationMessage:(NSString *)message inView:(UIView *)aView;
-
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag;
 
 + (NSString *)NSNullConvertEmptyString:(id)value;

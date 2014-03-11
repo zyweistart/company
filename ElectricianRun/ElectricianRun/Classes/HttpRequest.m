@@ -18,8 +18,6 @@
 #import "Common.h"
 
 #define ReachableViaWWANDOWNLOAD 500
-#define HTTPSERVERURL @"http://122.224.247.221:7003/WEB/mobile/"
-#define boundary @"_YJAYgDL082HLBJkC1laRbpjU5PlLgeJh_"
 
 @implementation HttpRequest{
     
@@ -76,7 +74,10 @@
         }
     } else {
         if(self.controller) {
-            [Common notificationMessage:@"网络连接出错，请检测网络设置" inView:self.controller.view];
+            [Common alert:@"网络连接出错，请检测网络设置"];
+            if( [_delegate respondsToSelector: @selector(requestFailed:didFailWithError:)]) {
+                [_delegate requestFailed:_responseCode didFailWithError:nil];
+            }
         }
     }
     
@@ -103,94 +104,10 @@
     // 60秒请求超时
     request.timeoutInterval = 30;
     if(_isBodySubmit){
-        NSString *TWITTERFON_FORM_BOUNDARY = @"AaB03x";
-        //根据url初始化request
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                                           timeoutInterval:10];
-        //分界线 --AaB03x
-        NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
-        //结束符 AaB03x--
-        NSString *endMPboundary=[[NSString alloc]initWithFormat:@"%@--",MPboundary];
-        //要上传的图片
-//        UIImage *image=[_params objectForKey:@"pic"];
-        //得到图片的data
-//        NSData* data = UIImagePNGRepresentation(image);
-        //http body的字符串
-        NSMutableString *body=[[NSMutableString alloc]init];
-        for(NSString *key in _params){
-            id value=[_params objectForKey:key];
-            if([value isKindOfClass:[NSString class]]){
-                //添加分界线，换行
-                [body appendFormat:@"%@\r\n",MPboundary];
-                //添加字段名称，换2行
-                [body appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
-                //添加字段的值
-                [body appendFormat:@"%@\r\n",[_params objectForKey:key]];
-            }
-        }
+        //主体数据POST提交
+        NSMutableData *httpBody = [NSMutableData data];
         
-        NSMutableString *uplodaBody=[[NSMutableString alloc]init];
-        ////添加分界线，换行
-        [uplodaBody appendFormat:@"%@\r\n",MPboundary];
-        //声明pic字段，文件名为boris.png
-        [uplodaBody appendFormat:@"Content-Disposition: form-data; name=\"identityImg\"; filename=\"identityImg.png\"\r\n"];
-        //声明上传文件的格式
-        [uplodaBody appendFormat:@"Content-Type: image/png\r\n\r\n"];
-        //声明结束符：--AaB03x--
-        NSString *end=[[NSString alloc]initWithFormat:@"\r\n%@",endMPboundary];
-        //声明myRequestData，用来放入http body
-        NSMutableData *myRequestData=[NSMutableData data];
-        //将body字符串转化为UTF8格式的二进制
-        [myRequestData appendData:[[NSString stringWithFormat:@"%@%@",body,uplodaBody] dataUsingEncoding:gbkEncoding]];
-        //将image的data加入
-        [myRequestData appendData:[_params objectForKey:@"identityImg"]];
-        //加入结束符--AaB03x--
-        [myRequestData appendData:[end dataUsingEncoding:gbkEncoding]];
-        
-        uplodaBody=[[NSMutableString alloc]init];
-        ////添加分界线，换行
-        [uplodaBody appendFormat:@"%@\r\n",MPboundary];
-        //声明pic字段，文件名为boris.png
-        [uplodaBody appendFormat:@"Content-Disposition: form-data; name=\"elecImg\"; filename=\"elecImg.png\"\r\n"];
-        //声明上传文件的格式
-        [uplodaBody appendFormat:@"Content-Type: image/png\r\n\r\n"];
-        //将body字符串转化为UTF8格式的二进制
-        [myRequestData appendData:[[NSString stringWithFormat:@"%@%@",body,uplodaBody] dataUsingEncoding:gbkEncoding]];
-        //将image的data加入
-        [myRequestData appendData:[_params objectForKey:@"elecImg"]];
-        //加入结束符--AaB03x--
-        [myRequestData appendData:[end dataUsingEncoding:gbkEncoding]];
-
-        //设置HTTPHeader中Content-Type的值
-        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data; boundary=%@",TWITTERFON_FORM_BOUNDARY];
-        //设置HTTPHeader
-        [request setValue:content forHTTPHeaderField:@"Content-Type"];
-        //设置Content-Length
-        [request setValue:[NSString stringWithFormat:@"%d", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
-        
-        
-//        [request setValue:@"multipart/form-data" forHTTPHeaderField: @"Content-Type"];
-//        NSMutableData *body = [NSMutableData data];
-//        for(NSString *key in _params){
-//            id value=[_params objectForKey:key];
-//            if([value isKindOfClass:[NSData class]]){
-//                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"data\"\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-//                [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-//                [body appendData:value];
-//                [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            }else{
-//                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-//                [body appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
-//            }
-//        }
-//        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//        NSLog(@"%@",body);
-//        request.HTTPBody=body;
-//        NSString *postLength = [NSString stringWithFormat:@"%d",[body length]];
-//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        request.HTTPBody=httpBody;
     }
     // 初始化一个连接
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
