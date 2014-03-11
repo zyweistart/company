@@ -42,15 +42,15 @@
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 70, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
-    [lbl setText:@"账户:"];
+    [lbl setText:@"账户"];
     [lbl setTextColor:[UIColor blackColor]];
     [lbl setBackgroundColor:[UIColor clearColor]];
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueUserName=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    txtValueUserName=[[UITextField alloc]initWithFrame:CGRectMake(85, 10, 200, 30)];
     [txtValueUserName setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueUserName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueUserName setBorderStyle:UITextBorderStyleRoundedRect];
@@ -58,15 +58,15 @@
     [txtValueUserName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValueUserName];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 70, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
-    [lbl setText:@"密码:"];
+    [lbl setText:@"密码"];
     [lbl setTextColor:[UIColor blackColor]];
     [lbl setBackgroundColor:[UIColor clearColor]];
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValuePassword=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    txtValuePassword=[[UITextField alloc]initWithFrame:CGRectMake(85, 50, 200, 30)];
     [txtValuePassword setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValuePassword setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValuePassword setBorderStyle:UITextBorderStyleRoundedRect];
@@ -74,9 +74,6 @@
     [txtValuePassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValuePassword];
-    
-    [txtValueUserName setText:@"zhangyy-gzry"];
-    [txtValuePassword setText:@"8888aa"];
     
 }
 

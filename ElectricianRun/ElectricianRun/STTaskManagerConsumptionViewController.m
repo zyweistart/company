@@ -8,10 +8,12 @@
 
 #import "STTaskManagerConsumptionViewController.h"
 #import "DatePickerView.h"
+#import "STScanningViewController.h"
 #define REQUESTCODERSUBMIT 50000
 #define REQUESTCODEBUILDDATA 374283
+#define RESPONSECODESCANADD 2473821
 
-@interface STTaskManagerConsumptionViewController () <DatePickerViewDelegate>
+@interface STTaskManagerConsumptionViewController () <DatePickerViewDelegate,ScanningDelegate>
 
 @end
 
@@ -20,6 +22,7 @@
     NSString *_taskId;
     NSString *_gnid;
     NSInteger _type;
+    NSString *scanncode;
     UIScrollView *scroll;
     NSArray *dataItemArray;
     DatePickerView *datePicker;
@@ -61,14 +64,18 @@
             datePicker = [[DatePickerView alloc] init];
             [datePicker setDelegate:self];
         }
-        
+        scanncode=@"";
+        self.automaticallyAdjustsScrollViewInsets=NO;
     }
     return self;
 }
 
 - (void)scann:(id)sender
 {
-    NSLog(@"扫描");
+    STScanningViewController *scanningViewController=[[STScanningViewController alloc]init];
+    [scanningViewController setDelegate:self];
+    [scanningViewController setResponseCode:RESPONSECODESCANADD];
+    [self presentViewController:scanningViewController animated:YES completion:nil];
 }
 
 - (void)submit:(id)sender
@@ -138,8 +145,8 @@
     [p setObject:_gnid forKey:@"GNID"];
     [p setObject:_taskId forKey:@"QTTASK"];
     [p setObject:[_data objectForKey:@"EQUIPMENT_ID"] forKey:@"QTKEY"];
-    [p setObject:@"" forKey:@"QTKEY1"];
-
+    [p setObject:scanncode forKey:@"QTKEY1"];
+    scanncode=@"";
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODEBUILDDATA];
     [self.hRequest setIsShowMessage:YES];
     [self.hRequest start:URLAppMonitoringAlarm params:p];
@@ -166,7 +173,6 @@
 
 - (void)buildUI:(NSArray *)array
 {
-    self.automaticallyAdjustsScrollViewInsets=NO;
     scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 70, 320, 400)];
     [scroll setBackgroundColor:[UIColor whiteColor]];
     scroll.contentSize = CGSizeMake(320,[array count]*60);
@@ -251,6 +257,13 @@
                 break;
             }
         }
+    }
+}
+
+- (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
+    if(responseCode==RESPONSECODESCANADD){
+        scanncode=value;
+        [self reloadTableViewDataSource];
     }
 }
 

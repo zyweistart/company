@@ -40,7 +40,7 @@
     [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:control];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 90, 30)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 70, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"内容"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -48,7 +48,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtContent=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    txtContent=[[UITextField alloc]initWithFrame:CGRectMake(85, 10, 200, 30)];
     [txtContent setFont:[UIFont systemFontOfSize: 12.0]];
     [txtContent setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtContent setBorderStyle:UITextBorderStyleRoundedRect];
@@ -57,7 +57,7 @@
     [txtContent setPlaceholder:@"请输入您的反馈意见"];
     [control addSubview:txtContent];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 90, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 50, 70, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"邮箱"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -65,7 +65,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtEmail=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    txtEmail=[[UITextField alloc]initWithFrame:CGRectMake(85, 50, 200, 30)];
     [txtEmail setFont:[UIFont systemFontOfSize: 12.0]];
     [txtEmail setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtEmail setBorderStyle:UITextBorderStyleRoundedRect];
@@ -74,7 +74,7 @@
     [txtEmail setPlaceholder:@"以便将反馈意见告知您"];
     [control addSubview:txtEmail];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 90, 30)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 70, 30)];
     lbl.font=[UIFont systemFontOfSize:12.0];
     [lbl setText:@"手机"];
     [lbl setTextColor:[UIColor blackColor]];
@@ -82,7 +82,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtPhone=[[UITextField alloc]initWithFrame:CGRectMake(105, 90, 150, 30)];
+    txtPhone=[[UITextField alloc]initWithFrame:CGRectMake(85, 90, 200, 30)];
     [txtPhone setFont:[UIFont systemFontOfSize: 12.0]];
     [txtPhone setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtPhone setBorderStyle:UITextBorderStyleRoundedRect];

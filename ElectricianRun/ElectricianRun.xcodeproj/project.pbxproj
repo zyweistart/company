@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C90720C318CEDF9700C4787C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C90720C218CEDF9700C4787C /* Main.storyboard */; };
 		C9160D0C18CC0FA500DD6575 /* STTaskConsumptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9160D0B18CC0FA500DD6575 /* STTaskConsumptionCell.m */; };
 		C9160D0F18CC5C7200DD6575 /* STGPSSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9160D0E18CC5C7200DD6575 /* STGPSSearchViewController.m */; };
 		C91F9A6B18B7D8AF008AE135 /* RMPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91F9A6A18B7D8AF008AE135 /* RMPickerViewController.m */; };
@@ -252,6 +253,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C90720C218CEDF9700C4787C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C9160D0A18CC0FA500DD6575 /* STTaskConsumptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskConsumptionCell.h; sourceTree = "<group>"; };
 		C9160D0B18CC0FA500DD6575 /* STTaskConsumptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskConsumptionCell.m; sourceTree = "<group>"; };
 		C9160D0D18CC5C7200DD6575 /* STGPSSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGPSSearchViewController.h; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 			children = (
 				C93C748F189235E500A7FAB8 /* STAppDelegate.h */,
 				C93C7490189235E500A7FAB8 /* STAppDelegate.m */,
+				C90720C218CEDF9700C4787C /* Main.storyboard */,
 				C93C7498189235E500A7FAB8 /* Images.xcassets */,
 				C9B2A56018934AC8003A412E /* Classes */,
 				C9B2A56118934AC8003A412E /* Librarys */,
@@ -1326,6 +1329,7 @@
 				C9A36FDC18CDA8FA0090B246 /* pic54.png in Resources */,
 				C9A36FD818CDA8FA0090B246 /* pic50.png in Resources */,
 				C9A36FDA18CDA8FA0090B246 /* pic52.png in Resources */,
+				C90720C318CEDF9700C4787C /* Main.storyboard in Resources */,
 				C9A36FAA18CDA8FA0090B246 /* pic3.png in Resources */,
 				C9A36FBA18CDA8FA0090B246 /* pic19.png in Resources */,
 				C9A36FC618CDA8FA0090B246 /* pic32.png in Resources */,
