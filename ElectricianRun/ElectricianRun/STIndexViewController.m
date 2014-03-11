@@ -62,58 +62,30 @@
     [scroll setScrollEnabled:YES];
     [foursquareImages.scrollView addSubview:scroll];
     
-    // 设置按钮内部图片间距
-    UIEdgeInsets insets;
-    insets.top = insets.bottom = insets.right = insets.left = 3;
     //用户体验
     UIButton *btnF1=[[UIButton alloc]initWithFrame:CGRectMake(5,5, 152.5, 100)];
-    btnF1.titleLabel.font=[UIFont systemFontOfSize: 15.0];
-    [btnF1 setTitle:@"用户体验" forState:UIControlStateNormal];
-    [btnF1 setBackgroundColor:[UIColor colorWithRed:(72/255.0) green:(74/255.0) blue:(174/255.0) alpha:1]];
+    [btnF1 setBackgroundImage:[UIImage imageNamed:@"yh1"] forState:UIControlStateNormal];
     [btnF1 addTarget:self action:@selector(onClickUserExperience:) forControlEvents:UIControlEventTouchUpInside];
-    [btnF1 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
-    [btnF1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    btnF1.contentEdgeInsets = insets;
     [scroll addSubview:btnF1];
     //我管辖的变电站
     UIButton *btnF2=[[UIButton alloc]initWithFrame:CGRectMake(162.5,5, 152.5, 100)];
-    btnF2.titleLabel.font=[UIFont systemFontOfSize: 15.0];
-    [btnF2 setTitle:@"我管辖的变电站" forState:UIControlStateNormal];
-    [btnF2 setBackgroundColor:[UIColor colorWithRed:(9/255.0) green:(104/255.0) blue:(220/255.0) alpha:1]];
+    [btnF2 setBackgroundImage:[UIImage imageNamed:@"bdz1"] forState:UIControlStateNormal];
     [btnF2 addTarget:self action:@selector(onClickJurisdiction:) forControlEvents:UIControlEventTouchUpInside];
-    [btnF2 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
-    [btnF2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    btnF2.contentEdgeInsets = insets;
     [scroll addSubview:btnF2];
     //工程建站
     UIButton *btnF4=[[UIButton alloc]initWithFrame:CGRectMake(5,110, 100, 100)];
-    btnF4.titleLabel.font=[UIFont systemFontOfSize: 15.0];
-    [btnF4 setTitle:@"工程建站" forState:UIControlStateNormal];
-    [btnF4 setBackgroundColor:[UIColor colorWithRed:(215/255.0) green:(131/255.0) blue:(7/255.0) alpha:1]];
+    [btnF4 setBackgroundImage:[UIImage imageNamed:@"gcjz"] forState:UIControlStateNormal];
     [btnF4 addTarget:self action:@selector(onClickSite:) forControlEvents:UIControlEventTouchUpInside];
-    [btnF4 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
-    [btnF4 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    btnF4.contentEdgeInsets = insets;
     [scroll addSubview:btnF4];
     //扫描操作
     UIButton *btnF5=[[UIButton alloc]initWithFrame:CGRectMake(110,110, 100, 100)];
-    btnF5.titleLabel.font=[UIFont systemFontOfSize: 15.0];
-    [btnF5 setTitle:@"扫描操作" forState:UIControlStateNormal];
-    [btnF5 setBackgroundColor:[UIColor colorWithRed:(170/255.0) green:(44/255.0) blue:(1/255.0) alpha:1]];
+    [btnF5 setBackgroundImage:[UIImage imageNamed:@"sm"] forState:UIControlStateNormal];
     [btnF5 addTarget:self action:@selector(onClickOperating:) forControlEvents:UIControlEventTouchUpInside];
-    [btnF5 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
-    [btnF5 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    btnF5.contentEdgeInsets = insets;
     [scroll addSubview:btnF5];
     //在线计算
     UIButton *btnF6=[[UIButton alloc]initWithFrame:CGRectMake(215,110, 100, 100)];
-    btnF6.titleLabel.font=[UIFont systemFontOfSize: 15.0];
-    [btnF6 setTitle:@"在线计算" forState:UIControlStateNormal];
-    [btnF6 setBackgroundColor:[UIColor colorWithRed:(1/255.0) green:(75/255.0) blue:(164/255.0) alpha:1]];
+    [btnF6 setBackgroundImage:[UIImage imageNamed:@"zxjs"] forState:UIControlStateNormal];
     [btnF6 addTarget:self action:@selector(onClickCalculation:) forControlEvents:UIControlEventTouchUpInside];
-    [btnF6 setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
-    [btnF6 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    btnF6.contentEdgeInsets = insets;
     [scroll addSubview:btnF6];
     
     UIView *newView=[[UIView alloc]initWithFrame:CGRectMake(5, 215, 310, 100)];
@@ -140,11 +112,6 @@
     foursquareImages.scrollView.contentSize = CGSizeMake(320, 320+IMAGEHEIGHT);
     
     [foursquareImages.pageControl setCurrentPageIndicatorTintColor:[UIColor colorWithRed:(28/255.f) green:(189/255.f) blue:(141/255.f) alpha:1.0]];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     db=[[SQLiteOperate alloc]init];
     if([db openDB]){
         NSString *sqlQuery = @"SELECT * FROM NEW";
@@ -172,6 +139,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 //用户体验
 - (void)onClickUserExperience:(id)sender {
     UINavigationController *userExperienceSelectViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STUserExperienceSelectViewController alloc]init]];
@@ -184,17 +156,21 @@
      UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
 //    dtaMonitoringViewControllerNav.navigationBarHidden=YES;
     dtaMonitoringViewControllerNav.tabBarItem.title=@"数据监测";
+    dtaMonitoringViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"sj"];
     //报警管理
     UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
     alarmManagerViewControllerNav.tabBarItem.title=@"报警管理";
+    alarmManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"bj"];
     //任务管理
     UINavigationController *taskManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskManagerViewController alloc]init]];
     taskManagerViewControllerNav.title=@"任务管理";
     taskManagerViewControllerNav.tabBarItem.title=@"任务管理";
+    taskManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"gl"];
     //任务稽核
     UINavigationController *taskAuditViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskAuditViewController alloc]init]];
     taskAuditViewControllerNav.title=@"任务稽核";
     taskAuditViewControllerNav.tabBarItem.title=@"任务稽核";
+    taskAuditViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"rw"];
     
     UITabBarController *_tabBarController = [[UITabBarController alloc] init];
     [_tabBarController.view setBackgroundColor:[UIColor whiteColor]];

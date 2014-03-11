@@ -49,7 +49,6 @@
                             destructiveButtonTitle:nil
                             otherButtonTitles:
                             @"评价",
-                            @"分享",
                             @"购买产品",nil];
     sheet.tag=ACTIONSHEETTAGMORE;
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
@@ -663,8 +662,6 @@
             STFeedbackViewController *feedbackViewController=[[STFeedbackViewController alloc]init];
             [self.navigationController pushViewController:feedbackViewController animated:YES];
         }else if(buttonIndex==1){
-            [Common alert:@"即将上线"];
-        }else if(buttonIndex==2){
             UINavigationController *purchaseShowViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STPurchaseShowViewController alloc]init]];
             purchaseShowViewControllerNav.tabBarItem.title=@"价格展示";
             purchaseShowViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"shouye"];

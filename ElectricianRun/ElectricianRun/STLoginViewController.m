@@ -75,6 +75,9 @@
     [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValuePassword];
     
+    [txtValueUserName setText:@"zhangyy-gzry"];
+    [txtValuePassword setText:@"8888AA"];
+    
 }
 
 - (void)backgroundDoneEditing:(id)sender {
@@ -116,6 +119,7 @@
     }else{
         [Common alert:@"登录出错"];
     }
+    NSLog(@"%@",[Account getResultData]);
 }
 
 @end

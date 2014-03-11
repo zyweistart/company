@@ -84,23 +84,17 @@ double allTotalElectricity[12][2][4];
         UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 340)];
         
         UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(12.5, 5, 90, 30)];
-        btnHistory1.titleLabel.font=[UIFont systemFontOfSize:10];
-        [btnHistory1 setTitle:@"电压报警体验" forState:UIControlStateNormal];
-        [btnHistory1 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+        [btnHistory1 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
         [btnHistory1 addTarget:self action:@selector(alarme1:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory1];
         
         UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(115, 5, 90, 30)];
-        btnHistory2.titleLabel.font=[UIFont systemFontOfSize:10];
-        [btnHistory2 setTitle:@"电流报警体验" forState:UIControlStateNormal];
-        [btnHistory2 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+        [btnHistory2 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
         [btnHistory2 addTarget:self action:@selector(alarme2:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory2];
         
         UIButton *btnHistory3=[[UIButton alloc]initWithFrame:CGRectMake(217.5, 5, 90, 30)];
-        btnHistory3.titleLabel.font=[UIFont systemFontOfSize:10];
-        [btnHistory3 setTitle:@"开关状态报警体验" forState:UIControlStateNormal];
-        [btnHistory3 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+        [btnHistory3 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
         [btnHistory3 addTarget:self action:@selector(alarme3:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory3];
         

@@ -21,4 +21,6 @@
 
 + (NSString*)getPassword;
 
++ (NSDictionary*)getResultData;
+
 @end

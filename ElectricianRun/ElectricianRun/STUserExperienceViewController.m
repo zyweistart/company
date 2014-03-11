@@ -53,8 +53,7 @@
     [super viewDidLoad];
     
     self.btnSignup=[[UIButton alloc]initWithFrame:CGRectMake(110, self.view.frame.size.height-64, 100, 30)];
-    self.btnSignup.titleLabel.font=[UIFont systemFontOfSize:12];
-    [self.btnSignup setTitle:@"我要报名" forState:UIControlStateNormal];
+    [self.btnSignup setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
     [self.btnSignup addTarget:self action:@selector(onClickSignup:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnSignup];
     

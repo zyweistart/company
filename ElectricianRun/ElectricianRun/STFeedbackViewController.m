@@ -90,6 +90,15 @@
     [txtPhone setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [txtPhone setPlaceholder:@"请输入手机号码"];
     [control addSubview:txtPhone];
+    
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(40, 130, 240, 60)];
+    lbl.font=[UIFont systemFontOfSize:12.0];
+    [lbl setText:@"如您需要了解反馈结果，请留下邮箱或手机号码，紧急问题可拨打4008-263-365获得及时帮助"];
+    [lbl setTextColor:[UIColor blackColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setNumberOfLines:0];
+    [lbl setTextAlignment:NSTextAlignmentLeft];
+    [control addSubview:lbl];
 }
 
 - (void)submit:(id)sender

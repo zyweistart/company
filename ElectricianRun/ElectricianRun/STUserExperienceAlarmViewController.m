@@ -59,14 +59,12 @@
     [self.view addSubview:lbl];
     
     self.btnSignup=[[UIButton alloc]initWithFrame:CGRectMake(40, self.view.frame.size.height-64, 100, 30)];
-    self.btnSignup.titleLabel.font=[UIFont systemFontOfSize:12];
-    [self.btnSignup setTitle:@"我要报名" forState:UIControlStateNormal];
+    [self.btnSignup setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
     [self.btnSignup addTarget:self action:@selector(onClickSignup:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnSignup];
     
     self.btnAlarmExperience=[[UIButton alloc]initWithFrame:CGRectMake(180, self.view.frame.size.height-64, 100, 30)];
-    self.btnAlarmExperience.titleLabel.font=[UIFont systemFontOfSize:12];
-    [self.btnAlarmExperience setTitle:@"负荷超限报警体验" forState:UIControlStateNormal];
+    [self.btnAlarmExperience setBackgroundImage:[UIImage imageNamed:@"cj"] forState:UIControlStateNormal];
     [self.btnAlarmExperience addTarget:self action:@selector(onClickAlarmExperience:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnAlarmExperience];
     [self totalElectricity];

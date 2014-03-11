@@ -55,4 +55,12 @@
     return @"";
 }
 
++ (NSDictionary*)getResultData
+{
+    NSDictionary *data=[Common getCache:ACCOUNTRESULTDATA];
+    if(data){
+        return data;
+    }
+    return nil;
+}
 @end
