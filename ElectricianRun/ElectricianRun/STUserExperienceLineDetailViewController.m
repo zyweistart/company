@@ -84,17 +84,17 @@ double allTotalElectricity[12][2][4];
         UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 340)];
         
         UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(12.5, 5, 90, 30)];
-        [btnHistory1 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
+        [btnHistory1 setBackgroundImage:[UIImage imageNamed:@"dy"] forState:UIControlStateNormal];
         [btnHistory1 addTarget:self action:@selector(alarme1:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory1];
         
         UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(115, 5, 90, 30)];
-        [btnHistory2 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
+        [btnHistory2 setBackgroundImage:[UIImage imageNamed:@"dl"] forState:UIControlStateNormal];
         [btnHistory2 addTarget:self action:@selector(alarme2:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory2];
         
         UIButton *btnHistory3=[[UIButton alloc]initWithFrame:CGRectMake(217.5, 5, 90, 30)];
-        [btnHistory3 setBackgroundImage:[UIImage imageNamed:@"bm"] forState:UIControlStateNormal];
+        [btnHistory3 setBackgroundImage:[UIImage imageNamed:@"bj1"] forState:UIControlStateNormal];
         [btnHistory3 addTarget:self action:@selector(alarme3:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory3];
         

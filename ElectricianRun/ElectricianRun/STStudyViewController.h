@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STStudyViewController : UITableViewController
+@interface STStudyViewController : UITableViewController <HttpRequestDelegate>
 
+@property (strong,nonatomic) HttpRequest *hRequest;
 @end

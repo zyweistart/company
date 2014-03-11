@@ -120,7 +120,7 @@
     [view1 addSubview:txtValueView12];
     
     //查询
-    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 90, 100, 30)];
+    UIButton *btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(80, 90, 160, 30)];
     [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
     btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
     [btnSearch setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
@@ -213,7 +213,7 @@
     [view2 addSubview:txtValueView24];
     
     //查询
-    btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(110, 170, 100, 30)];
+    btnSearch=[[UIButton alloc]initWithFrame:CGRectMake(80, 170, 160, 30)];
     [btnSearch setTitle:@"查询" forState:UIControlStateNormal];
     btnSearch.titleLabel.font=[UIFont systemFontOfSize: 12.0];
     [btnSearch  setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];

@@ -114,6 +114,7 @@
     [control addSubview:txtValue4];
     
     UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(80, 240, 160, 30)];
+    [btnCalculate.titleLabel setFont:[UIFont systemFontOfSize: 12.0]];
     [btnCalculate setTitle:@"计算" forState:UIControlStateNormal];
     [btnCalculate setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnCalculate addTarget:self action:@selector(calculate:) forControlEvents:UIControlEventTouchUpInside];

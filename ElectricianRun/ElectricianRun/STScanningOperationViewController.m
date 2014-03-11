@@ -87,12 +87,12 @@
     [control addSubview:txtValue1];
     
     UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(235, 50, 30, 30)];
-    [btnCalculate setTitle:@"..." forState:UIControlStateNormal];
-    [btnCalculate setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+    [btnCalculate setBackgroundImage:[UIImage imageNamed:@"sj222"] forState:UIControlStateNormal];
     [btnCalculate addTarget:self action:@selector(scanning:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnCalculate];
     
-    UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(110, 100, 100, 30)];
+    UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(80, 100, 160, 30)];
+    [btnSubmit.titleLabel setFont:[UIFont systemFontOfSize: 12.0]];
     [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];

@@ -9,6 +9,8 @@
 #import "STStudyViewController.h"
 #import "STNavigationWebPageViewController.h"
 
+#define REQUESTCODESUBMIT 43281794
+
 @interface STStudyViewController () {
     NSArray *titleArr;
 }
@@ -16,7 +18,6 @@
 @end
 
 @implementation STStudyViewController
-
 
 - (id)init {
     self=[super init];
@@ -33,6 +34,23 @@
     }
     return self;
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"我要学习"
+                          message:@"手机号码"
+                          delegate:self
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:@"取消",nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    //设置输入框的键盘类型
+    UITextField *tf = [alert textFieldAtIndex:0];
+    tf.keyboardType = UIKeyboardTypeNumberPad;
+    [alert show];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 45;
@@ -61,6 +79,33 @@
     NSInteger row=[indexPath row];
     STNavigationWebPageViewController *navigationWebPageViewController=[[STNavigationWebPageViewController alloc]initWithNavigationTitle:[titleArr objectAtIndex:row] resourcePath:[titleArr objectAtIndex:row]];
     [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0){
+        NSString *phone=[[alertView textFieldAtIndex:0]text];
+        if(![@"" isEqualToString:phone]){
+            NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+            [p setObject:phone forKey:@"telNum"];
+            [p setObject:@"" forKey:@"identityNo"];
+            [p setObject:@"2" forKey:@"operateType"];
+            self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODESUBMIT];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest start:URLelecRegister params:p];
+        }else{
+            self.tabBarController.selectedIndex=0;
+        }
+    }else{
+        self.tabBarController.selectedIndex=0;
+    }
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    if(repCode==REQUESTCODESUBMIT){
+        NSLog(@"%@",[response responseString]);
+    }
 }
 
 @end
