@@ -158,6 +158,8 @@
         } else {
             [Common alert:[pageinfo objectForKey:@"remark"]];
         }
+    }else{
+        [Common alert:@"数据解析异常"];
     }
     
     [self doneLoadingTableViewData];

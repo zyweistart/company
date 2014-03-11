@@ -29,7 +29,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 55;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,8 +43,10 @@
     
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CONTRACT_NAME"]]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CP_NAME"]]];
     [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
     
 }

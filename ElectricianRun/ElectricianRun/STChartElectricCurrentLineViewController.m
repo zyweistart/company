@@ -7,6 +7,8 @@
 //
 
 #import "STChartElectricCurrentLineViewController.h"
+//保存最近12个每条进出线的负荷数
+extern double allTotalBurden[12][2][4];
 
 @interface STChartElectricCurrentLineViewController ()
 

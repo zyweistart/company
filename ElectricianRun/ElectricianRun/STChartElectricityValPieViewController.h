@@ -10,4 +10,8 @@
 
 @interface STChartElectricityValPieViewController : UIViewController
 
+@property NSUInteger index;
+
+- (void)buildUI;
+
 @end

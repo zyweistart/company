@@ -116,7 +116,6 @@
 }
 
 - (void)startSearch:(NSMutableDictionary *)data {
-    NSLog(@"%@",data);
     searchData=data;
     [self autoRefresh];
 }

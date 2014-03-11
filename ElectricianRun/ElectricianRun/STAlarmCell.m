@@ -76,7 +76,7 @@
         [lbl setText:@"报警内容:"];
         [self addSubview:lbl];
         
-        self.lbl5=[[UILabel alloc]initWithFrame:CGRectMake(60, 87, 200, 29)];
+        self.lbl5=[[UILabel alloc]initWithFrame:CGRectMake(60, 87, 250, 29)];
         [self.lbl5 setFont:[UIFont systemFontOfSize:12]];
         [self.lbl5 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [self.lbl5 setTextAlignment:NSTextAlignmentLeft];

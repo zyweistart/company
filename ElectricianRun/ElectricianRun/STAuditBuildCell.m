@@ -14,28 +14,28 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 65, 30)];
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(5, 5, 65, 20)];
         [lbl setFont:[UIFont systemFontOfSize:12]];
         [lbl setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [lbl setTextAlignment:NSTextAlignmentRight];
         [lbl setText:@"线路名称:"];
         [self addSubview:lbl];
         
-        self.lbl1=[[UILabel alloc]initWithFrame:CGRectMake(70, 5, 90, 30)];
+        self.lbl1=[[UILabel alloc]initWithFrame:CGRectMake(75, 5, 200, 20)];
         [self.lbl1 setFont:[UIFont systemFontOfSize:12]];
         [self.lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [self.lbl1 setTextAlignment:NSTextAlignmentLeft];
         [self.lbl1 setNumberOfLines:0];
         [self addSubview:self.lbl1];
         
-        lbl=[[UILabel alloc]initWithFrame:CGRectMake(160, 5, 65, 30)];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(5, 30, 65, 20)];
         [lbl setFont:[UIFont systemFontOfSize:12]];
         [lbl setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [lbl setTextAlignment:NSTextAlignmentRight];
         [lbl setText:@"站点名称:"];
         [self addSubview:lbl];
         
-        self.lbl2=[[UILabel alloc]initWithFrame:CGRectMake(230, 5, 90, 30)];
+        self.lbl2=[[UILabel alloc]initWithFrame:CGRectMake(75, 30, 200, 20)];
         [self.lbl2 setFont:[UIFont systemFontOfSize:12]];
         [self.lbl2 setTextAlignment:NSTextAlignmentLeft];
         [self.lbl2 setNumberOfLines:0];

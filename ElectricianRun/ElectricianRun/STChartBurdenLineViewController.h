@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STChartBurdenLineViewController : UIViewController
+@interface STChartBurdenLineViewController : UIViewController<UIWebViewDelegate,UITextFieldDelegate>
+
+@property(strong,nonatomic)UIWebView* webViewForSelectDate;
+@property(strong,nonatomic)NSTimer* timer;
+
+@property NSUInteger currentIndex;
 
 @end
+

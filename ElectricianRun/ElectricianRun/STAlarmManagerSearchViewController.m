@@ -21,6 +21,8 @@
     DataPickerView *categorydpv;
     NSArray *data1;
     NSArray *data2;
+    NSInteger levelIndex;
+    NSInteger categoryIndex;
     
 }
 
@@ -36,6 +38,8 @@
                                                 style:UIBarButtonItemStyleBordered
                                                 target:self
                                                 action:@selector(search:)];
+        levelIndex=0;
+        categoryIndex=0;
         
     }
     return self;
@@ -118,27 +122,30 @@
 
 - (void)search:(id)sender {
     NSString *name=[txtValueName text];
-    NSString *level=[txtValueLevel text];
-    NSString *category=[txtValueCategory text];
+//    NSString *level=[txtValueLevel text];
+//    NSString *category=[txtValueCategory text];
+    
     NSMutableDictionary *data=[[NSMutableDictionary alloc]init];
-    [data setObject:name forKey:@"QTKEY"];
-    [data setObject:level forKey:@"QTKEY1"];
-    [data setObject:category forKey:@"QTKEY2"];
+    [data setObject:name forKey:@"QTKEY1"];
+    [data setObject:[NSString stringWithFormat:@"%d",levelIndex] forKey:@"QTKEY"];
+    [data setObject:[NSString stringWithFormat:@"%d",categoryIndex] forKey:@"QTKEY2"];
     [self.delegate startSearch:data];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)pickerDidPressDoneWithRow:(NSInteger)row {
     if([txtValueLevel isFirstResponder]){
-        if(row!=0){
+//        if(row!=0){
             [txtValueLevel setText:[data1 objectAtIndex:row]];
-        }
+//        }
+        levelIndex=row;
         [txtValueLevel resignFirstResponder];
     }
     if([txtValueCategory isFirstResponder]){
-        if(row!=0){
+//        if(row!=0){
             [txtValueCategory setText:[data2 objectAtIndex:row]];
-        }
+//        }
+        categoryIndex=row;
         [txtValueCategory resignFirstResponder];
     }
 }

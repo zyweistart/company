@@ -49,7 +49,7 @@
         UILabel *lblV1=[[UILabel alloc]initWithFrame:CGRectMake(150, 40, 120, 20)];
         [lblV1 setTextAlignment:NSTextAlignmentLeft];
         [lblV1 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV1 setText:[self.data objectForKey:@"METER_NAME"]];
+        [lblV1 setText:[Common NSNullConvertEmptyString:[self.data objectForKey:@"METER_NAME"]]];
         [lblV1 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV1];
         
@@ -77,8 +77,14 @@
         UILabel *lblV3=[[UILabel alloc]initWithFrame:CGRectMake(150, 90, 120, 20)];
         [lblV3 setTextAlignment:NSTextAlignmentLeft];
         [lblV3 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV3 setText:[self.data objectForKey:@"I_A"]];
-        [lblV3 setTextColor:[UIColor blackColor]];
+        NSString *SWITCH_STATUS=[Common NSNullConvertEmptyString:[self.data objectForKey:@"SWITCH_STATUS"]];
+        if([@"1" isEqualToString:SWITCH_STATUS]){
+            [lblV3 setTextColor:[UIColor redColor]];
+            [lblV3 setText:@"合"];
+        }else{
+            [lblV3 setTextColor:[UIColor greenColor]];
+            [lblV3 setText:@"分"];
+        }
         [control addSubview:lblV3];
         
         UILabel *lbl4=[[UILabel alloc]initWithFrame:CGRectMake(55, 115, 80, 20)];
@@ -91,7 +97,7 @@
         UILabel *lblV4=[[UILabel alloc]initWithFrame:CGRectMake(150, 115, 120, 20)];
         [lblV4 setTextAlignment:NSTextAlignmentLeft];
         [lblV4 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV4 setText:[self.data objectForKey:@"I_A"]];
+        [lblV4 setText:[Common NSNullConvertEmptyString:[self.data objectForKey:@"DAY_POWER"]]];
         [lblV4 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV4];
         
@@ -105,7 +111,7 @@
         UILabel *lblV5=[[UILabel alloc]initWithFrame:CGRectMake(150, 140, 120, 20)];
         [lblV5 setTextAlignment:NSTextAlignmentLeft];
         [lblV5 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV5 setText:[self.data objectForKey:@"V_A"]];
+        [lblV5 setText:[NSString stringWithFormat:@"%@V",[Common NSNullConvertEmptyString:[self.data objectForKey:@"V_A"]]]];
         [lblV5 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV5];
         
@@ -119,7 +125,7 @@
         UILabel *lblV6=[[UILabel alloc]initWithFrame:CGRectMake(150, 165, 120, 20)];
         [lblV6 setTextAlignment:NSTextAlignmentLeft];
         [lblV6 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV6 setText:[self.data objectForKey:@"V_B"]];
+        [lblV6 setText:[NSString stringWithFormat:@"%@V",[Common NSNullConvertEmptyString:[self.data objectForKey:@"V_B"]]]];
         [lblV6 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV6];
         
@@ -133,7 +139,7 @@
         UILabel *lblV7=[[UILabel alloc]initWithFrame:CGRectMake(150, 190, 120, 20)];
         [lblV7 setTextAlignment:NSTextAlignmentLeft];
         [lblV7 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV7 setText:[self.data objectForKey:@"V_C"]];
+        [lblV7 setText:[NSString stringWithFormat:@"%@V",[Common NSNullConvertEmptyString:[self.data objectForKey:@"V_C"]]]];
         [lblV7 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV7];
         
@@ -147,7 +153,7 @@
         UILabel *lblV8=[[UILabel alloc]initWithFrame:CGRectMake(150, 215, 120, 20)];
         [lblV8 setTextAlignment:NSTextAlignmentLeft];
         [lblV8 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV8 setText:[self.data objectForKey:@"I_A"]];
+        [lblV8 setText:[NSString stringWithFormat:@"%@A",[Common NSNullConvertEmptyString:[self.data objectForKey:@"I_A"]]]];
         [lblV8 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV8];
         
@@ -161,7 +167,7 @@
         UILabel *lblV9=[[UILabel alloc]initWithFrame:CGRectMake(150, 240, 120, 20)];
         [lblV9 setTextAlignment:NSTextAlignmentLeft];
         [lblV9 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV9 setText:[self.data objectForKey:@"I_B"]];
+        [lblV9 setText:[NSString stringWithFormat:@"%@A",[Common NSNullConvertEmptyString:[self.data objectForKey:@"I_B"]]]];
         [lblV9 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV9];
         
@@ -175,7 +181,7 @@
         UILabel *lblV10=[[UILabel alloc]initWithFrame:CGRectMake(150, 265, 120, 20)];
         [lblV10 setTextAlignment:NSTextAlignmentLeft];
         [lblV10 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV10 setText:[self.data objectForKey:@"I_C"]];
+        [lblV10 setText:[NSString stringWithFormat:@"%@A",[Common NSNullConvertEmptyString:[self.data objectForKey:@"I_C"]]]];
         [lblV10 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV10];
         
@@ -189,7 +195,7 @@
         UILabel *lblV11=[[UILabel alloc]initWithFrame:CGRectMake(150, 290, 120, 20)];
         [lblV11 setTextAlignment:NSTextAlignmentLeft];
         [lblV11 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV11 setText:[self.data objectForKey:@"P_POWER"]];
+        [lblV11 setText:[Common NSNullConvertEmptyString:[self.data objectForKey:@"P_POWER"]]];
         [lblV11 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV11];
         
@@ -203,7 +209,7 @@
         UILabel *lblV12=[[UILabel alloc]initWithFrame:CGRectMake(150, 315, 120, 20)];
         [lblV12 setTextAlignment:NSTextAlignmentLeft];
         [lblV12 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV12 setText:[self.data objectForKey:@"FACTOR"]];
+        [lblV12 setText:[Common NSNullConvertEmptyString:[self.data objectForKey:@"FACTOR"]]];
         [lblV12 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV12];
         

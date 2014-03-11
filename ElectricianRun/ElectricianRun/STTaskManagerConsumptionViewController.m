@@ -159,12 +159,10 @@
                 [Common alert:[pageinfo objectForKey:@"remark"]];
             }
         }else if(REQUESTCODERSUBMIT==repCode){
-            NSLog(@"%@",[response responseString]);
             [Common alert:[pageinfo objectForKey:@"remark"]];
         }
     }
 }
-
 
 - (void)buildUI:(NSArray *)array
 {

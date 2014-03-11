@@ -57,9 +57,9 @@
                                                                               action:@selector(edit:)], nil];
         
         searchData=[[NSMutableDictionary alloc]init];
-        [searchData setObject:@"" forKey:@"QTKEY"];
+        [searchData setObject:@"0" forKey:@"QTKEY"];
         [searchData setObject:@"" forKey:@"QTKEY1"];
-        [searchData setObject:@"" forKey:@"QTKEY2"];
+        [searchData setObject:@"0" forKey:@"QTKEY2"];
         
     }
     return self;
@@ -110,7 +110,7 @@
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     [cell.lbl1 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"ALERT_DATE"]]];
     [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
-    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"ALERT_LEVEL"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CATA_LOG"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];
     [cell.lbl5 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CONTENT"]]];
     return cell;
@@ -150,9 +150,19 @@
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"SJ30" forKey:@"GNID"];
-    [p setObject:[searchData objectForKey:@"QTKEY"] forKey:@"QTKEY"];
-    [p setObject:[searchData objectForKey:@"QTKEY1"] forKey:@"QTKEY1"];
-    [p setObject:[searchData objectForKey:@"QTKEY2"] forKey:@"QTKEY2"];
+    
+    NSString *QTKEY=[searchData objectForKey:@"QTKEY"];
+    if(![@"0" isEqualToString:QTKEY]){
+        [p setObject:QTKEY forKey:@"QTKEY"];
+    }
+    NSString *QTKEY1=[searchData objectForKey:@"QTKEY1"];
+    if(![@"" isEqualToString:QTKEY1]){
+        [p setObject:QTKEY1 forKey:@"QTKEY1"];
+    }
+    NSString *QTKEY2=[searchData objectForKey:@"QTKEY2"];
+    if(![@"0" isEqualToString:QTKEY2]){
+        [p setObject:QTKEY2 forKey:@"QTKEY2"];
+    }
     [p setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"QTPINDEX"];
     [p setObject:[NSString stringWithFormat: @"%d",PAGESIZE] forKey:@"QTPSIZE"];
     
@@ -163,10 +173,9 @@
 }
 
 - (void)startSearch:(NSMutableDictionary *)data {
-    
+    NSLog(@"%@",data);
     searchData=data;
     [self autoRefresh];
-    
 }
 
 #pragma mark - RMPickerViewController Delegates

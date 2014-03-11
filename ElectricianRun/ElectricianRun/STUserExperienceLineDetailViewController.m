@@ -329,17 +329,19 @@ double allTotalElectricity[12][2][4];
             STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]init];
             [self.navigationController pushViewController:chartBurdenLineViewController animated:YES];
         }else if(buttonIndex==2){
-            STChartElectricityViewController *chartElectricityViewController=[[STChartElectricityViewController alloc]init];
+            STChartElectricityViewController *chartElectricityViewController=[[STChartElectricityViewController alloc]initWithIndex:_currentIndex];
             [self.navigationController pushViewController:chartElectricityViewController animated:YES];
         }else if(buttonIndex==3){
-            STChartElectricityValViewController *chartElectricityValViewController=[[STChartElectricityValViewController alloc]init];
+            STChartElectricityValViewController *chartElectricityValViewController=[[STChartElectricityValViewController alloc]initWithIndex:_currentIndex];
             [self.navigationController pushViewController:chartElectricityValViewController animated:YES];
         }else if(buttonIndex==4){
             STChartElectricityPieViewController *chartElectricityPieViewController=[[STChartElectricityPieViewController alloc]init];
             [self.navigationController pushViewController:chartElectricityPieViewController animated:YES];
         }else if(buttonIndex==5){
             STChartElectricityValPieViewController *chartElectricityValPieViewController=[[STChartElectricityValPieViewController alloc]init];
+            [chartElectricityValPieViewController setIndex:_currentIndex];
             [self.navigationController pushViewController:chartElectricityValPieViewController animated:YES];
+            [chartElectricityValPieViewController buildUI];
         }
     }
 }

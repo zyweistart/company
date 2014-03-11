@@ -61,7 +61,8 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
     }
     NSInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    [cell.lblName setText:[dictionary objectForKey:@"CP_NAME"]];
+    NSString *content=[dictionary objectForKey:@"SITE_NAME"];
+    [cell.lblName setText:content];
     return cell;
 }
 

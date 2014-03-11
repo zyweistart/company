@@ -63,7 +63,7 @@
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];
     [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CHANNEL"]]];
-    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"REPORT_DATE"]]];
+    [cell.lbl3 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"REPORT_DATE"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"HZ"]]];
     [cell.lbl5 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"V_A"]]];
     [cell.lbl6 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"I_A"]]];

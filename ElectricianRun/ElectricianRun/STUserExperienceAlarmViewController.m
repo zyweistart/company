@@ -69,7 +69,7 @@
     [self.btnAlarmExperience setTitle:@"负荷超限报警体验" forState:UIControlStateNormal];
     [self.btnAlarmExperience addTarget:self action:@selector(onClickAlarmExperience:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnAlarmExperience];
-    
+    [self totalElectricity];
     //以后则每根据设定的时间调用一次
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startBusinessCal) userInfo:nil repeats:YES];
     self.timerElectricity = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(totalElectricity) userInfo:nil repeats:YES];

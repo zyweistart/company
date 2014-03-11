@@ -111,7 +111,7 @@
     [lblName setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblName];
     
-    txtValue1=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 150, 30)];
+    txtValue1=[[UITextField alloc]initWithFrame:CGRectMake(105, 10, 180, 30)];
     [txtValue1 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue1 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue1 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -129,7 +129,7 @@
     [lblName setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblName];
     
-    txtValue2=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 150, 30)];
+    txtValue2=[[UITextField alloc]initWithFrame:CGRectMake(105, 50, 180, 30)];
     [txtValue2 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue2 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue2 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -147,7 +147,7 @@
     [lblName setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblName];
     
-    txtValue3=[[UITextField alloc]initWithFrame:CGRectMake(105, 90, 150, 30)];
+    txtValue3=[[UITextField alloc]initWithFrame:CGRectMake(105, 90, 180, 30)];
     [txtValue3 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue3 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue3 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -163,7 +163,7 @@
     [lblName setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lblName];
     
-    txtValue4=[[UITextField alloc]initWithFrame:CGRectMake(105, 130, 150, 30)];
+    txtValue4=[[UITextField alloc]initWithFrame:CGRectMake(105, 130, 180, 30)];
     [txtValue4 setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValue4 setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValue4 setBorderStyle:UITextBorderStyleRoundedRect];
@@ -176,17 +176,15 @@
 //加载工作人员
 - (void)reloadUser{
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"ZY23" forKey:@"GNID"];
     [p setObject:self.cpId forKey:@"QTCP"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:LOADUSERCODE];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
 }
 
 //加载任务模板

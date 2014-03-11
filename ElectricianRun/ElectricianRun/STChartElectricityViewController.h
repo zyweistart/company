@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SimpleBarChart.h"
 
-@interface STChartElectricityViewController : UIViewController
+@interface STChartElectricityViewController : UIViewController<SimpleBarChartDataSource, SimpleBarChartDelegate>
+{
+	NSArray *_values;
+    
+	SimpleBarChart *_chart;
+}
+
+@property NSUInteger currentIndex;
+
+- (id)initWithIndex:(NSUInteger)index;
 
 @end

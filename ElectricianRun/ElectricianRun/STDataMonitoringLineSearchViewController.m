@@ -86,11 +86,11 @@
     
     NSMutableDictionary *data=[[NSMutableDictionary alloc]init];
     
-    [data setObject:[txtValueName text] forKey:@"QTKEY"];
+    [data setObject:[txtValueName text] forKey:@"QTKEY1"];
     if([@"" isEqualToString:[txtValueType text]]){
-        [data setObject:@"" forKey:@"QTKEY1"];
+        [data setObject:@"" forKey:@"QTKEY"];
     }else{
-        [data setObject:[tmpDic objectForKey:@"TRANS_NO"] forKey:@"QTKEY1"];
+        [data setObject:[tmpDic objectForKey:@"TRANS_NO"] forKey:@"QTKEY"];
     }
     
     [self.delegate startSearch:data];
@@ -132,8 +132,10 @@
 
 - (void)pickerDidPressDoneWithRow:(NSInteger)row {
     if([txtValueType isFirstResponder]){
-        tmpDic= [dataItemArray objectAtIndex:row];
-        [txtValueType setText:[tmpDic objectForKey:@"TRANS_NAME"]];
+        if([dataItemArray count]>0){
+            tmpDic= [dataItemArray objectAtIndex:row];
+            [txtValueType setText:[tmpDic objectForKey:@"TRANS_NAME"]];
+        }
         [txtValueType resignFirstResponder];
     }
 }

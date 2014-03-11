@@ -57,6 +57,7 @@
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     cell.textLabel.text=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"NAME"]];
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
