@@ -32,24 +32,24 @@ extern double allTotalBurden[12][2][4];
 - (void)viewDidLoad
 {
     
-    CGRect webFrame = self.view.frame;
-    webFrame.origin.x = 0;
-    webFrame.origin.y =  0;
-    
-    _webViewForSelectDate = [[UIWebView alloc] initWithFrame:webFrame];
-    _webViewForSelectDate.delegate = self;
-    _webViewForSelectDate.scalesPageToFit = YES;
-    _webViewForSelectDate.opaque = NO;
-    _webViewForSelectDate.backgroundColor = [UIColor clearColor];
-    _webViewForSelectDate.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    [self.view addSubview:_webViewForSelectDate];
-    
-    //所有的资源都在source.bundle这个文件夹里
-    NSString* htmlPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"source.bundle/index.html"];
-    
-    NSURL* url = [NSURL fileURLWithPath:htmlPath];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    [_webViewForSelectDate loadRequest:request];
+//    CGRect webFrame = self.view.frame;
+//    webFrame.origin.x = 0;
+//    webFrame.origin.y =  0;
+//    
+//    _webViewForSelectDate = [[UIWebView alloc] initWithFrame:webFrame];
+//    _webViewForSelectDate.delegate = self;
+//    _webViewForSelectDate.scalesPageToFit = YES;
+//    _webViewForSelectDate.opaque = NO;
+//    _webViewForSelectDate.backgroundColor = [UIColor clearColor];
+//    _webViewForSelectDate.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+//    [self.view addSubview:_webViewForSelectDate];
+//    
+//    //所有的资源都在source.bundle这个文件夹里
+//    NSString* htmlPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"source.bundle/index.html"];
+//    
+//    NSURL* url = [NSURL fileURLWithPath:htmlPath];
+//    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+//    [_webViewForSelectDate loadRequest:request];
     
     [super viewDidLoad];
 }

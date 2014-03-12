@@ -11,11 +11,8 @@
 
 @interface STGPSSearchViewController : UIViewController
 
-
-- (id)initWitData:(NSDictionary*)data;
-
-@property (strong,nonatomic) NSMutableDictionary *searchData;
-
 @property (strong,nonatomic) STTaskAuditMapViewController<SearchDelegate> *delegate;
+
+- (void)buildUIQuantum:(NSMutableArray*)quantum;
 
 @end

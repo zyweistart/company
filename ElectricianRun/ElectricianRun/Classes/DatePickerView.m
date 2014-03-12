@@ -13,6 +13,10 @@
 @implementation DatePickerView
 
 - (id)init {
+    return [self initWithPickerMode:UIDatePickerModeDate];
+}
+
+- (id)initWithPickerMode:(UIDatePickerMode)mode {
     self = [super init];
     if (self) {
         CGRect datePickerFrame = CGRectMake((kWinSize.width - kWinSize.width) / 2, 42, 320.0, 216.0);
@@ -38,7 +42,7 @@
         
         self.frame = CGRectMake(0.0, 312.0, kWinSize.width, 256.0);
         _datePicker = [[UIDatePicker alloc] initWithFrame: datePickerFrame];
-        [_datePicker setDatePickerMode:UIDatePickerModeDate];
+        [_datePicker setDatePickerMode:mode];
         [self addSubview: _datePicker];
     }
     return self;

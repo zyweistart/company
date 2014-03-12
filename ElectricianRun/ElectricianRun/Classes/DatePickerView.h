@@ -21,6 +21,8 @@
 
 @interface DatePickerView : UIView
 
+- (id)initWithPickerMode:(UIDatePickerMode)mode;
+
 @property (nonatomic, strong) id<DatePickerViewDelegate> delegate;
 
 @property (nonatomic, strong) UIDatePicker *datePicker;

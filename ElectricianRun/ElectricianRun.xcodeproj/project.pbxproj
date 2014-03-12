@@ -44,6 +44,7 @@
 		C9488D0218A77D16006008C3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0118A77D16006008C3 /* NSString+Utils.m */; };
 		C9488D0618A781A0006008C3 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9488D0518A781A0006008C3 /* HttpRequest.m */; };
 		C949E7E618C087A00001B5FE /* STAuditRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C949E7E518C087A00001B5FE /* STAuditRecordCell.m */; };
+		C953008918CF5AB7009E0E6B /* LocationGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C953008818CF5AB7009E0E6B /* LocationGetter.m */; };
 		C95ACDB818C81680006A3F32 /* city.xml in Resources */ = {isa = PBXBuildFile; fileRef = C95ACDB718C81680006A3F32 /* city.xml */; };
 		C95ACDBB18C821E9006A3F32 /* CityParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ACDBA18C821E9006A3F32 /* CityParser.m */; };
 		C95ACDBE18C84FC1006A3F32 /* STSignupPhotographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ACDBD18C84FC1006A3F32 /* STSignupPhotographViewController.m */; };
@@ -189,7 +190,6 @@
 		C9B2C44118CE14C30024C905 /* source.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C9B2C44018CE14C30024C905 /* source.bundle */; };
 		C9B5F54518C8541900621E1C /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B5F54418C8541900621E1C /* VPImageCropperViewController.m */; };
 		C9B6158D18CE010C000A446E /* SimpleBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B6158C18CE010C000A446E /* SimpleBarChart.m */; };
-		C9B6159018CE011F000A446E /* NSMutableArray+TTMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B6158F18CE011F000A446E /* NSMutableArray+TTMutableArray.m */; };
 		C9B68AD118B4FD6B009B57E2 /* STScanningOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */; };
 		C9B68AD418B50E98009B57E2 /* STAlarmManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD318B50E98009B57E2 /* STAlarmManagerViewController.m */; };
 		C9B68AD718B50EB6009B57E2 /* STTaskManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B68AD618B50EB6009B57E2 /* STTaskManagerViewController.m */; };
@@ -311,6 +311,8 @@
 		C9488D0518A781A0006008C3 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		C949E7E418C087A00001B5FE /* STAuditRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAuditRecordCell.h; sourceTree = "<group>"; };
 		C949E7E518C087A00001B5FE /* STAuditRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAuditRecordCell.m; sourceTree = "<group>"; };
+		C953008718CF5AB7009E0E6B /* LocationGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationGetter.h; sourceTree = "<group>"; };
+		C953008818CF5AB7009E0E6B /* LocationGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationGetter.m; sourceTree = "<group>"; };
 		C95ACDB718C81680006A3F32 /* city.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = city.xml; sourceTree = "<group>"; };
 		C95ACDB918C821E9006A3F32 /* CityParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityParser.h; sourceTree = "<group>"; };
 		C95ACDBA18C821E9006A3F32 /* CityParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityParser.m; sourceTree = "<group>"; };
@@ -513,8 +515,6 @@
 		C9B5F54418C8541900621E1C /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		C9B6158B18CE010C000A446E /* SimpleBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBarChart.h; sourceTree = "<group>"; };
 		C9B6158C18CE010C000A446E /* SimpleBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBarChart.m; sourceTree = "<group>"; };
-		C9B6158E18CE011F000A446E /* NSMutableArray+TTMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+TTMutableArray.h"; sourceTree = "<group>"; };
-		C9B6158F18CE011F000A446E /* NSMutableArray+TTMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+TTMutableArray.m"; sourceTree = "<group>"; };
 		C9B68ACF18B4FD6B009B57E2 /* STScanningOperationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STScanningOperationViewController.h; sourceTree = "<group>"; };
 		C9B68AD018B4FD6B009B57E2 /* STScanningOperationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STScanningOperationViewController.m; sourceTree = "<group>"; };
 		C9B68AD218B50E98009B57E2 /* STAlarmManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlarmManagerViewController.h; sourceTree = "<group>"; };
@@ -981,8 +981,6 @@
 		C9B2A56018934AC8003A412E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C9B6158E18CE011F000A446E /* NSMutableArray+TTMutableArray.h */,
-				C9B6158F18CE011F000A446E /* NSMutableArray+TTMutableArray.m */,
 				C9C4FC2D18CDFD9800333685 /* Example2PieView.h */,
 				C9C4FC2E18CDFD9800333685 /* Example2PieView.m */,
 				C9C4FC2F18CDFD9800333685 /* MyPieElement.h */,
@@ -1016,6 +1014,8 @@
 				C97D54D918C35EAD003BC6C9 /* DownloadIcon.m */,
 				C95ACDB918C821E9006A3F32 /* CityParser.h */,
 				C95ACDBA18C821E9006A3F32 /* CityParser.m */,
+				C953008718CF5AB7009E0E6B /* LocationGetter.h */,
+				C953008818CF5AB7009E0E6B /* LocationGetter.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1482,13 +1482,13 @@
 				C99F7E2918C2F759002C97F0 /* EAIntroPage.m in Sources */,
 				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
 				C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */,
-				C9B6159018CE011F000A446E /* NSMutableArray+TTMutableArray.m in Sources */,
 				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 				C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */,
 				C97DEBA418C841C20045EBBE /* ChineseToPinyin.m in Sources */,
 				C9C4FC2818CDF88400333685 /* PieElement.m in Sources */,
 				C9C4FC3118CDFD9800333685 /* Example2PieView.m in Sources */,
+				C953008918CF5AB7009E0E6B /* LocationGetter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

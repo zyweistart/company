@@ -14,4 +14,6 @@
 
 @property (strong,nonatomic) STTaskAuditMapViewController<SearchDelegate> *delegate;
 
+- (id)initWithTimeType:(int)type;
+
 @end

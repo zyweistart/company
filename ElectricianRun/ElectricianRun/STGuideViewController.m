@@ -64,14 +64,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if([Common getCacheByBool:@"enabled_preference_gps"]){
-        NSLog(@"已开启GPS服务,在此添加位置上传代码");
-    }
-}
-
 - (void)showIntroWithCrossDissolve {
     EAIntroPage *page1 = [EAIntroPage page];
 //    page1.title = @"Hello world";

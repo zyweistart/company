@@ -13,9 +13,6 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-
-
-    #import "BaseUIViewController.h"
     #import "BaseUIViewController.h"
     #import "HttpRequest.h"
     #import "Common.h"
@@ -28,14 +25,25 @@
 
     #define CACHE_DATA [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:object_getClassName(self)]]
     #define CACHE_DATABYUNIQUE(UNIQUE) [NSString stringWithFormat:@"%@-%@",CACHE_DATA,UNIQUE]
-#define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
+    #define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
     #define ISACCOUNTLOGIN @"ISACCOUNTLOGIN"
     #define ACCOUNTUSERNAME @"ACCOUNTUSERNAME"
     #define ACCOUNTPASSWORD @"ACCOUNTPASSWORD"
     #define ACCOUNTRESULTDATA @"ACCOUNTRESULTDATA"
+    #define ISMYSTUDYAUDIT @"ISMYSTUDYAUDIT"
 
+    //按钮背景色
+    #define BTNCOLORGB [UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]
+
+//产品购买URL
+#define PAYURL @"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"
+
+//正式环境中注释该行
 #define DEVELOPER_STATUS
 #ifdef DEVELOPER_STATUS
+    #define URL1 @"http://122.224.247.221:7007/WEB/mobile/"
+    #define URL2 @"http://122.224.247.221:7003/WEB/mobile/"
+    #define URL3 @"http://122.224.247.219:8083/Administrator/"
     //测试环境
     #define URLAppScanNumber @"http://122.224.247.221:7007/WEB/mobile/AppScanNumber.aspx"
     #define URLAppProductInfoBySerial @"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx"
@@ -47,18 +55,21 @@
     #define URLgetLocationInfo @"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx"
     #define URLcheckElecIdent @"http://122.224.247.219:8083/Administrator/checkElecIdent.aspx"
 #else
+    #define URL1 @"http://60.191.92.132:7006/WEB/mobile/"
+    #define URL2 @"http://www.fps365.net/WEB/mobile/"
+    #define URL3 @"http://122.224.247.219:8083/Administrator/"
     //正式环境
-    #define URLAppScanNumber @"http://122.224.247.221:7007/WEB/mobile/AppScanNumber.aspx"
-    #define URLAppProductInfoBySerial @"http://122.224.247.221:7007/WEB/mobile/AppProductInfoBySerial.aspx"
-    #define URLAppMonitoringAlarm @"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx"
-    #define URLaddSuggest @"http://122.224.247.221:7003/WEB/mobile/addSuggest.aspx"
-    #define URLnews @"http://122.224.247.221:7003/WEB/mobile/news.aspx"
-    #define URLcheckMobileValid @"http://122.224.247.221:7003/WEB/mobile/checkMobileValid.aspx"
-    #define URLelecRegister @"http://122.224.247.221:7003/WEB/mobile/elecRegister.aspx"
-    #define URLgetLocationInfo @"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx"
+    #define URLAppScanNumber @"http://60.191.92.132:7006/WEB/mobile/AppScanNumber.aspx"
+    #define URLAppProductInfoBySerial @"http://60.191.92.132:7006/WEB/mobile/AppProductInfoBySerial.aspx"
+    #define URLAppMonitoringAlarm @"http://60.191.92.132:7006/WEB/mobile/AppMonitoringAlarm.aspx"
+    #define URLgetLocationInfo @"http://60.191.92.132:7006/WEB/mobile/getLocationInfo.aspx"
+
+    #define URLaddSuggest @"http://www.fps365.net/WEB/mobile/addSuggest.aspx"
+    #define URLnews @"http://www.fps365.net/WEB/mobile/news.aspx"
+    #define URLcheckMobileValid @"http://www.fps365.net/WEB/mobile/checkMobileValid.aspx"
+    #define URLelecRegister @"http://www.fps365.net/WEB/mobile/elecRegister.aspx"
+
     #define URLcheckElecIdent @"http://122.224.247.219:8083/Administrator/checkElecIdent.aspx"
 #endif
-
-#define PAYURL @"http://www.fps365.net/WEB/Index/lineOrder/LostElery.aspx"
 
 #endif

@@ -50,7 +50,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValueUserName=[[UITextField alloc]initWithFrame:CGRectMake(85, 10, 200, 30)];
+    txtValueUserName=[[UITextField alloc]initWithFrame:CGRectMake(90, 10, 200, 30)];
     [txtValueUserName setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValueUserName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValueUserName setBorderStyle:UITextBorderStyleRoundedRect];
@@ -66,7 +66,7 @@
     [lbl setTextAlignment:NSTextAlignmentRight];
     [control addSubview:lbl];
     
-    txtValuePassword=[[UITextField alloc]initWithFrame:CGRectMake(85, 50, 200, 30)];
+    txtValuePassword=[[UITextField alloc]initWithFrame:CGRectMake(90, 50, 200, 30)];
     [txtValuePassword setFont:[UIFont systemFontOfSize: 12.0]];
     [txtValuePassword setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtValuePassword setBorderStyle:UITextBorderStyleRoundedRect];

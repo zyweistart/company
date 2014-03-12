@@ -13,4 +13,6 @@
 @optional
 - (void)startSearch:(NSMutableDictionary *)data;
 
+- (void)startSearch:(NSMutableDictionary *)data responseCode:(int)repCode;
+
 @end

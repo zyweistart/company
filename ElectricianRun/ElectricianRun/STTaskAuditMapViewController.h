@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SearchDelegate.h"
 
-@interface STTaskAuditMapViewController : UIViewController<SearchDelegate>
+@interface STTaskAuditMapViewController : UIViewController<UIActionSheetDelegate,SearchDelegate>
+
+@property (strong,nonatomic) NSMutableDictionary *searchData;
 
 @end

@@ -8,8 +8,11 @@
 
 #import "STAppDelegate.h"
 #import "STGuideViewController.h"
+#define REQUESTCODEUPDATELOCATION 58374
 
-@implementation STAppDelegate
+@implementation STAppDelegate {
+    BOOL isUpdateLocationIng;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -54,8 +57,25 @@
     }
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    if([Common getCacheByBool:@"enabled_preference_gps"]){
+        if(self.locationGetter==nil){
+            isUpdateLocationIng=NO;
+            self.locationGetter=[[LocationGetter alloc]init];
+            [self.locationGetter startUpdates];
+            self.updateLocationTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateLocation) userInfo:nil repeats:YES];
+        }
+    }else{
+        if(self.updateLocationTimer){
+            [self.updateLocationTimer invalidate];
+        }
+    }
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    //获取deviceToken
+    //获取deviceToken需上传至服务端
+//    NSLog(@"%@",deviceToken);
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -69,6 +89,38 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (void)updateLocation
+{
+    if(self.locationGetter!=nil&&!isUpdateLocationIng){
+        isUpdateLocationIng=YES;
+        
+        NSString *latitude=[NSString stringWithFormat:@"%.6f",self.locationGetter.currentLocation.coordinate.latitude ];
+        NSString *longitude=[NSString stringWithFormat:@"%.6f",self.locationGetter.currentLocation.coordinate.longitude ];
+        
+        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+        [p setObject:latitude forKey:@"latitude"];
+        [p setObject:longitude forKey:@"longitude"];
+        self.hRequest=[[HttpRequest alloc]init:nil delegate:self responseCode:REQUESTCODEUPDATELOCATION];
+        [self.hRequest start:URLnews params:p];
+    }
+}
+
+- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
+{
+    if(repCode==REQUESTCODEUPDATELOCATION){
+        
+        isUpdateLocationIng=NO;
+    }
+}
+
+- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
+{
+    if(repCode==REQUESTCODEUPDATELOCATION){
+        
+        isUpdateLocationIng=NO;
+    }
 }
 
 @end

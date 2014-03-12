@@ -105,14 +105,6 @@
     }
     [self doneLoadingTableViewData];
     
-    
-    
-    
-}
-
-- (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
-{
-    
 }
 
 @end

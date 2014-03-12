@@ -161,9 +161,9 @@
     [txtCounty setInputView:dpvCounty];
     [control addSubview:txtCounty];
     
-    UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(85, 290, 150, 30)];
+    UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(80, 290, 160, 30)];
     [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
-    [btnSubmit setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+    [btnSubmit setBackgroundColor:BTNCOLORGB];
     [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnSubmit];
     
@@ -277,7 +277,7 @@
             [txtCity setText:[dataCitys objectAtIndex:0]];
             NSString *nameC=[txtCity text];
             NSString *pinyinC=[[ChineseToPinyin pinyinFromChiniseString:nameC] lowercaseString];
-            dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@%@_city_item",pinyinP,pinyinC]];
+            dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@_city_item",pinyinC]];
             [dpvCounty setData:dataCountys];
             if([dataCountys count]>0){
                 [txtCounty setText:[dataCountys objectAtIndex:0]];
@@ -291,7 +291,7 @@
     }else if(v==2){
         NSString *nameC=[txtCity text];
         NSString *pinyinC=[[ChineseToPinyin pinyinFromChiniseString:nameC] lowercaseString];
-        dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@%@_city_item",pinyinP,pinyinC]];
+        dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@_city_item",pinyinC]];
         [dpvCounty setData:dataCountys];
         if([dataCountys count]>0){
             [txtCounty setText:[dataCountys objectAtIndex:0]];

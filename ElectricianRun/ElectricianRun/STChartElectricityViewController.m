@@ -7,7 +7,6 @@
 //
 
 #import "STChartElectricityViewController.h"
-#import "NSMutableArray+TTMutableArray.h"
 //保存最近12个每条进出线的负荷数
 extern double allTotalElectricity[12][2][4];
 

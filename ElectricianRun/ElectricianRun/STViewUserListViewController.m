@@ -7,20 +7,42 @@
 //
 
 #import "STViewUserListViewController.h"
-#import "STDataMonitoringCell.h"
-#import "NSString+Utils.h"
 
 @interface STViewUserListViewController ()
 
 @end
 
-@implementation STViewUserListViewController
+@implementation STViewUserListViewController {
+    int _type;
+    NSString *startDateStr;
+    NSString *endDateStr;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithTimeType:(int)type
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self setIsLoadCache:YES];
+    NSString *d=[NSString stringWithFormat:@"%d",_type];
+    [self setCachetag:CACHE_DATABYUNIQUE(d)];
+    self = [super init];
     if (self) {
         self.title=@"用户列表";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        _type=type;
+        
+        NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *endDate=[NSDate date];
+        endDateStr = [dateFormatter stringFromDate:endDate];
+        if(_type==2){
+            NSTimeInterval secondsPerDay = 86400*30;
+            NSDate *startDate = [endDate dateByAddingTimeInterval:-secondsPerDay];
+            startDateStr = [dateFormatter stringFromDate:startDate];
+            startDateStr=[NSString stringWithFormat:@"%@ 00:00",startDateStr];
+            endDateStr=[NSString stringWithFormat:@"%@ 23:59",endDateStr];
+        }else{
+            startDateStr=[NSString stringWithFormat:@"%@ 00:00",endDateStr];
+            endDateStr=[NSString stringWithFormat:@"%@ 23:59",endDateStr];
+        }
     }
     return self;
 }
@@ -39,13 +61,16 @@
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     [cell.textLabel setText:[dictionary objectForKey:@"userName"]];
-    [cell.detailTextLabel setText:[dictionary objectForKey:@"userName"]];
+    [cell.detailTextLabel setText:[dictionary objectForKey:@"phoneNum"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-    [_delegate startSearch:dictionary];
+    NSMutableDictionary *dictionary=[[NSMutableDictionary alloc]initWithDictionary:[self.dataItemArray objectAtIndex:[indexPath row]]];
+    [dictionary setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"rtype"];
+    [dictionary setObject:startDateStr forKey:@"startDate"];
+    [dictionary setObject:endDateStr forKey:@"endDate"];
+    [self.delegate startSearch:dictionary responseCode:200];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -53,13 +78,12 @@
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"3" forKey:@"rtype"];
-    [p setObject:@"2012-03-02 00:00" forKey:@"startDate"];
-    [p setObject:@"2014-03-02 23:59" forKey:@"endDate"];
+    [p setObject:startDateStr forKey:@"startDate"];
+    [p setObject:endDateStr forKey:@"endDate"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];

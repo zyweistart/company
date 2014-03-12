@@ -39,7 +39,7 @@
         <item>市辖区</item>
         <item>市辖县</item>
     </string-array>
-    <string-array name="tianjingshi_province_item">
+    <string-array name="tianjinshi_province_item">
         <item>市辖区</item>
         <item>市辖县</item>
     </string-array>
@@ -451,7 +451,7 @@
         <item>台湾省</item>
     </string-array>
     
-    <string-array name="beijingshishixiaqu_city_item">
+    <string-array name="beijingshixiaqu_city_item">
         <item>东城区</item>
         <item>西城区</item>
         <item>崇文区</item>
@@ -469,11 +469,11 @@
         <item>怀柔区</item>
         <item>平谷区</item>
     </string-array>
-    <string-array name="beijingshishixiaxian_city_item">
+    <string-array name="beijingxian_city_item">
         <item>密云县</item>
         <item>延庆县</item>
     </string-array>
-    <string-array name="tianjingshishixiaqu_city_item">
+    <string-array name="tianjingshixiaqu_city_item">
         <item>和平区</item>
         <item>河东区</item>
         <item>河西区</item>
@@ -490,7 +490,7 @@
         <item>武清区</item>
         <item>宝坻区</item>
     </string-array>
-    <string-array name="tianjingshishixiaxian_city_item">
+    <string-array name="tianjingxian_city_item">
         <item>宁河县</item>
         <item>静海县</item>
         <item>蓟县</item>
@@ -1319,7 +1319,7 @@
         <item>塔河县</item>
         <item>漠河县</item>
     </string-array>
-    <string-array name="shanghaishishixiaqu_city_item">
+    <string-array name="shanghaishixiaqu_city_item">
         <item>黄浦区</item>
         <item>卢湾区</item>
         <item>徐汇区</item>
@@ -1339,7 +1339,7 @@
         <item>南汇区</item>
         <item>奉贤区</item>
     </string-array>
-    <string-array name="shanghaishishixiaxian_city_item">
+    <string-array name="shanghaixian_city_item">
         <item>崇明县</item>
     </string-array>
     <string-array name="nanjingshi_city_item">
@@ -2928,7 +2928,7 @@
         <item>南沙群岛</item>
         <item>中沙群岛的岛礁及其海域</item>
     </string-array>
-    <string-array name="chongqingshishixiaqu_city_item">
+    <string-array name="chongqingshixiaqu_city_item">
         <item>万州区</item>
         <item>涪陵区</item>
         <item>渝中区</item>
@@ -2949,7 +2949,7 @@
         <item>永川区</item>
         <item>南川区</item>
     </string-array>
-    <string-array name="chongqingshishixiaxian_city_item">
+    <string-array name="chongqingxian_city_item">
         <item>綦江县</item>
         <item>潼南县</item>
         <item>铜梁县</item>

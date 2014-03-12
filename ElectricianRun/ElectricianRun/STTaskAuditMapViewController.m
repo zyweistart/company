@@ -14,14 +14,12 @@
 
 #define ZOOMLEVEL 0.02
 
-//按日
-#define REUQESTCODEDAY 1
-//按月
-#define REQUESTCODEMONTH 2
 //按轨迹
 #define REQUESTCODELOCUS 3
 //按位置
 #define REQUESTCODELOCATION 4
+
+#define REQUESTCODEMONTHDAY 47382197
 
 @interface STTaskAuditMapViewController () <MKMapViewDelegate,HttpRequestDelegate>
 
@@ -33,6 +31,7 @@
     MKMapView *_mapView;
     CLLocationManager *_locationManager;
     NSMutableArray *overlays;
+    NSMutableArray *timeQuantum;
     
 }
 
@@ -64,6 +63,7 @@
     _mapView=[[MKMapView alloc]initWithFrame:[self.view bounds]];
     [_mapView setDelegate:self];
     [_mapView setMapType:MKMapTypeStandard];
+//    [_mapView setShowsUserLocation:YES];
     [_mapView setScrollEnabled:YES];
     [_mapView setZoomEnabled:YES];
     [self.view addSubview:_mapView];
@@ -81,16 +81,20 @@
 {
     STGPSSearchViewController *gpsSearchViewController=[[STGPSSearchViewController alloc]init];
     [gpsSearchViewController setDelegate:self];
-    [gpsSearchViewController setSearchData:nil];
+    [gpsSearchViewController buildUIQuantum:timeQuantum];
     [self.navigationController pushViewController:gpsSearchViewController animated:YES];
 }
 
 - (void)viewuser:(id)sender
 {
-    STViewUserListViewController *viewUserListViewController=[[STViewUserListViewController alloc]init];
-    [viewUserListViewController setDelegate:self];
-    [self.navigationController pushViewController:viewUserListViewController animated:YES];
-    [viewUserListViewController autoRefresh];
+    UIActionSheet *sheet = [[UIActionSheet alloc]
+                            initWithTitle:@""
+                            delegate:self
+                            cancelButtonTitle:@"取消"
+                            destructiveButtonTitle:nil
+                            otherButtonTitles:@"按日",@"按月",nil];
+    sheet.tag=1;
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
@@ -105,7 +109,8 @@
     return nil;
 }
 
-- (void)startSearch:(NSMutableDictionary *)data {
+- (void)startSearch:(NSMutableDictionary *)data responseCode:(int)repCode
+{
     //清除地图上的标记
     [_mapView removeAnnotations:[_mapView annotations]];
     //清除地点上的线路
@@ -115,77 +120,118 @@
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
-    [p setObject:[data objectForKey:@"phoneNum"] forKey:@"phoneNum"];
-    [p setObject:[data objectForKey:@"UUID"] forKey:@"UUid"];
-    [p setObject:[data objectForKey:@"userId"] forKey:@"userId"];
-    
-    [p setObject:@"2012-03-03 00:00" forKey:@"startDate"];
-    [p setObject:@"2014-03-03 23:59" forKey:@"endDate"];
-    [p setObject:@"2" forKey:@"rtype"];
-    [p setObject:@"2" forKey:@"rvalue"];
-    
-    hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
+    if(repCode==120){
+        //位置
+        [p setObject:[data objectForKey:@"phoneNum"] forKey:@"phoneNum"];
+        hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODELOCATION];
+    }else if(repCode==150){
+        //轨迹
+        [p setObject:[data objectForKey:@"phoneNum"] forKey:@"phoneNum"];
+        [p setObject:[data objectForKey:@"startDate"] forKey:@"startDate"];
+        [p setObject:[data objectForKey:@"endDate"] forKey:@"endDate"];
+        hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODELOCUS];
+    }else if(repCode==180){
+        [p setObject:[data objectForKey:@"userId"] forKey:@"userId"];
+        [p setObject:[data objectForKey:@"UUID"] forKey:@"UUID"];
+        [p setObject:[data objectForKey:@"rtype"] forKey:@"rtype"];
+        NSString *rvalue=[data objectForKey:@"rvalue"];
+        if(rvalue){
+            //有记录的轨迹查询
+            [p setObject:rvalue forKey:@"rvalue"];
+        }else{
+            [p setObject:[data objectForKey:@"startDate"] forKey:@"startDate"];
+            [p setObject:[data objectForKey:@"endDate"] forKey:@"endDate"];
+        }
+        hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODELOCUS];
+    }else if(repCode==200){
+        self.searchData=data;
+        //通过按月日搜索返回的结果
+        [p setObject:[data objectForKey:@"phoneNum"] forKey:@"phoneNum"];
+        [p setObject:[data objectForKey:@"UUID"] forKey:@"UUid"];
+        [p setObject:[data objectForKey:@"userId"] forKey:@"userId"];
+        [p setObject:[data objectForKey:@"startDate"] forKey:@"startDate"];
+        [p setObject:[data objectForKey:@"endDate"] forKey:@"endDate"];
+        [p setObject:[data objectForKey:@"rtype"] forKey:@"rtype"];
+        hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODEMONTHDAY];
+    }
     [hRequest setIsShowMessage:YES];
     [hRequest start:URLgetLocationInfo params:p];
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-    NSLog(@"%@",[response responseString]);
-    
-    if(repCode==REUQESTCODEDAY){
-        //按日
-    }else if(repCode==REQUESTCODEMONTH){
-        //按月
-    }else if(repCode==REQUESTCODELOCATION){
-        //按位置
-    }else if(repCode==REQUESTCODELOCUS){
-        //按轨迹
+    NSDictionary *json=[response resultJSON];
+    if([@"1" isEqualToString:[json objectForKey:@"result"]]){
+        //按日按月或按轨迹
+        NSMutableArray *data=[json objectForKey:@"gpsDataInfoList"];
+        NSString *name=[json objectForKey:@"userName"];
+        int length=[data count];
+        if(repCode==REQUESTCODEMONTHDAY){
+            timeQuantum=[json objectForKey:@"timeQuantum"];
+        }
+        //声明一个数组  用来存放画线的点
+        MKMapPoint coords[length];
+        for(int i=0;i<length;i++){
+            NSDictionary *d=[data objectAtIndex:i];
+            double latitude=[[d objectForKey:@"latitude"]doubleValue];
+            double longitude=[[d objectForKey:@"longitude"]doubleValue];
+            coords[i]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(latitude, longitude));
+        }
+        MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
+        [overlays addObject:line];
+        [_mapView addOverlay:line];
+        //开始的位置点
+        if(length>0){
+            NSDictionary *d=[data objectAtIndex:0];
+            double latitude=[[d objectForKey:@"latitude"]doubleValue];
+            double longitude=[[d objectForKey:@"longitude"]doubleValue];
+            
+            CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
+            MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
+            [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
+            
+            CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
+            annotation.title = name;
+            annotation.subtitle = [NSString stringWithFormat:@"开始:%@",[d objectForKey:@"gpsTime"]];
+            
+            [_mapView addAnnotation:annotation];
+        }
+        //结束的位置点
+        if(length>1){
+            NSDictionary *d=[data objectAtIndex:length-1];
+            double latitude=[[d objectForKey:@"latitude"]doubleValue];
+            double longitude=[[d objectForKey:@"longitude"]doubleValue];
+            
+            CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
+            MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
+            [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
+            
+            CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
+            annotation.title = name;
+            annotation.subtitle = [NSString stringWithFormat:@"结束:%@",[d objectForKey:@"gpsTime"]];
+            
+            [_mapView addAnnotation:annotation];
+        }
+    }else{
+        [Common alert:@"查询失败"];
     }
-    
-    NSMutableArray *data=[[response resultJSON]objectForKey:@"gpsUserList"];
-    int length=[data count];
-    //声明一个数组  用来存放画线的点
-    MKMapPoint coords[length];
-    for(int i=0;i<length;i++){
-        NSDictionary *d=[data objectAtIndex:i];
-        double latitude=[[d objectForKey:@"latitude"]doubleValue];
-        double longitude=[[d objectForKey:@"longitude"]doubleValue];
-        coords[i]=MKMapPointForCoordinate(CLLocationCoordinate2DMake(latitude, longitude));
-    }
-    MKPolyline *line = [MKPolyline polylineWithPoints:coords count:length];
-    [overlays addObject:line];
-    [_mapView addOverlay:line];
-    //开始的位置点
-    if(length>=0){
-        NSDictionary *d=[data objectAtIndex:0];
-        double latitude=[[d objectForKey:@"latitude"]doubleValue];
-        double longitude=[[d objectForKey:@"longitude"]doubleValue];
-        
-        CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
-        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
-        [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
-        
-        CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
-        annotation.title = [d objectForKey:@"userName"];
-        annotation.subtitle = [d objectForKey:@"gpsTime"];
-        
-        [_mapView addAnnotation:annotation];
-    }
-    //结束的位置点
-    if(length>1){
-        NSDictionary *d=[data objectAtIndex:length-1];
-        double latitude=[[d objectForKey:@"latitude"]doubleValue];
-        double longitude=[[d objectForKey:@"longitude"]doubleValue];
-        
-        CLLocationCoordinate2D cll = CLLocationCoordinate2DMake(latitude,longitude);
-        MKCoordinateRegion region = MKCoordinateRegionMake(cll, MKCoordinateSpanMake(ZOOMLEVEL, ZOOMLEVEL));
-        [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
-        
-        CustomAnnotation *annotation = [[CustomAnnotation alloc] initWithCoordinate:cll];
-        annotation.title = [d objectForKey:@"userName"];
-        annotation.subtitle = [d objectForKey:@"gpsTime"];
-        
-        [_mapView addAnnotation:annotation];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag==1){
+        if(buttonIndex==0){
+            //按日
+            STViewUserListViewController *viewUserListViewController=[[STViewUserListViewController alloc]initWithTimeType:1];
+            [viewUserListViewController setDelegate:self];
+            [self.navigationController pushViewController:viewUserListViewController animated:YES];
+            [viewUserListViewController autoRefresh];
+        }else if(buttonIndex==1){
+            //按月
+            STViewUserListViewController *viewUserListViewController=[[STViewUserListViewController alloc]initWithTimeType:2];
+            [viewUserListViewController setDelegate:self];
+            [self.navigationController pushViewController:viewUserListViewController animated:YES];
+            [viewUserListViewController autoRefresh];
+        }
     }
 }
 

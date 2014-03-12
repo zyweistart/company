@@ -31,17 +31,22 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"我要学习"
-                          message:@"手机号码"
-                          delegate:self
-                          cancelButtonTitle:@"确定"
-                          otherButtonTitles:@"取消",nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    //设置输入框的键盘类型
-    UITextField *tf = [alert textFieldAtIndex:0];
-    tf.keyboardType = UIKeyboardTypeNumberPad;
-    [alert show];
+    if([Common getCacheByBool:ISMYSTUDYAUDIT]){
+        //如果审核通过则直接进入
+        [self loadData];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"我要学习"
+                              message:@"手机号码"
+                              delegate:self
+                              cancelButtonTitle:@"确定"
+                              otherButtonTitles:@"取消",nil];
+        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        //设置输入框的键盘类型
+        UITextField *tf = [alert textFieldAtIndex:0];
+        tf.keyboardType = UIKeyboardTypeNumberPad;
+        [alert show];
+    }
 }
 
 
@@ -80,13 +85,19 @@
         NSString *phone=[[alertView textFieldAtIndex:0]text];
         if(![@"" isEqualToString:phone]){
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-            [p setObject:phone forKey:@"telNum"];
-            [p setObject:@"" forKey:@"identityNo"];
-            [p setObject:@"2" forKey:@"operateType"];
+//            [p setObject:phone forKey:@"telNum"];
+//            [p setObject:@"" forKey:@"identityNo"];
+//            [p setObject:@"2" forKey:@"operateType"];
+            
+            [p setObject:phone forKey:@"telNum"];//手机号码
+            [p setObject:@"" forKey:@"name"];//姓名
+            [p setObject:@"" forKey:@"identityNo"];//身份证号码
+            
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODESUBMIT];
             [self.hRequest setIsShowMessage:YES];
-            [self.hRequest start:URLelecRegister params:p];
+            [self.hRequest start:URLcheckElecIdent params:p];
         }else{
+            [Common alert:@"请输入手机号码"];
             self.tabBarController.selectedIndex=0;
         }
     }else{
@@ -97,8 +108,25 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==REQUESTCODESUBMIT){
-        NSLog(@"%@",[response responseString]);
-        [self loadData];
+        NSString *result=[[response resultJSON]objectForKey:@"result"];
+        [Common setCacheByBool:ISMYSTUDYAUDIT data:NO];
+        if([@"0" isEqualToString:result]){
+            [Common alert:@"审核不通过"];
+            self.tabBarController.selectedIndex=0;
+        }else if([@"1" isEqualToString:result]){
+            //审核通过
+            [self loadData];
+            [Common setCacheByBool:ISMYSTUDYAUDIT data:YES];
+        }else if([@"2" isEqualToString:result]){
+            [Common alert:@"审核中"];
+            self.tabBarController.selectedIndex=0;
+        }else if([@"3" isEqualToString:result]){
+            [Common alert:@"未提交申请"];
+            self.tabBarController.selectedIndex=0;
+        }else{
+            [Common alert:@"未知错误"];
+            self.tabBarController.selectedIndex=0;
+        }
     }
 }
 
