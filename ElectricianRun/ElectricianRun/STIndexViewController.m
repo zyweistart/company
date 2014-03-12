@@ -158,7 +158,7 @@
     }
     NSMutableArray *views=[[NSMutableArray alloc]init];
     
-    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+    if([Account isAuth:@"ELEC_DATE_MONITOR"]){
         //数据监测
         UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
         //    dtaMonitoringViewControllerNav.navigationBarHidden=YES;
@@ -166,14 +166,14 @@
         dtaMonitoringViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"sj"];
         [views addObject:dtaMonitoringViewControllerNav];
     }
-    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+    if([Account isAuth:@"ELEC_ALARM"]){
         //报警管理
         UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
         alarmManagerViewControllerNav.tabBarItem.title=@"报警管理";
         alarmManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"bj"];
         [views addObject:alarmManagerViewControllerNav];
     }
-    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+    if([Account isAuth:@"ELEC_TASK"]){
         //任务管理
         UINavigationController *taskManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskManagerViewController alloc]init]];
         taskManagerViewControllerNav.title=@"任务管理";
@@ -181,7 +181,7 @@
         taskManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"gl"];
         [views addObject:taskManagerViewControllerNav];
     }
-    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+    if([Account isAuth:@"ELEC_TASK_CHECK"]){
         //任务稽核
         UINavigationController *taskAuditViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskAuditViewController alloc]init]];
         taskAuditViewControllerNav.title=@"任务稽核";
@@ -190,9 +190,13 @@
         [views addObject:taskAuditViewControllerNav];
     }
     
+    if([views count]==0){
+        [Common alert:@"没有该权限"];
+        return;
+    }
+    
     UITabBarController *_tabBarController = [[UITabBarController alloc] init];
     [_tabBarController.view setBackgroundColor:[UIColor whiteColor]];
-    _tabBarController.delegate = self;
     _tabBarController.viewControllers = views;
     [_tabBarController setDelegate:self];
     [self presentViewController:_tabBarController animated:YES completion:nil];
@@ -224,9 +228,6 @@
 - (void)onClickNewList:(id)sender {
     UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsListViewController alloc]initWithData:newData]];
     [self presentViewController:newsDetailViewControllerNav animated:YES completion:nil];
-}
-
-- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController {
 }
 
 @end

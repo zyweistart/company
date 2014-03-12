@@ -175,6 +175,7 @@
 		C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE418A86DF7004E96CC /* ATMProgressLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DED18A86DF7004E96CC /* ATMSoundFX.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9AC1DEE18A86DF7004E96CC /* ATMTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9AEF10218D0537F0087570B /* RequestPostUploadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF10118D0537F0087570B /* RequestPostUploadHelper.m */; };
 		C9B2A56F18934AC8003A412E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A56418934AC8003A412E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A57A18934B2B003A412E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57918934B2B003A412E /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9B2A57D18934BBE003A412E /* STNewsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B2A57C18934BBE003A412E /* STNewsListViewController.m */; };
@@ -486,6 +487,8 @@
 		C9AC1DE618A86DF7004E96CC /* ATMSoundFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMSoundFX.m; sourceTree = "<group>"; };
 		C9AC1DE718A86DF7004E96CC /* ATMTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMTextLayer.h; sourceTree = "<group>"; };
 		C9AC1DE818A86DF7004E96CC /* ATMTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMTextLayer.m; sourceTree = "<group>"; };
+		C9AEF10018D0537F0087570B /* RequestPostUploadHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPostUploadHelper.h; sourceTree = "<group>"; };
+		C9AEF10118D0537F0087570B /* RequestPostUploadHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPostUploadHelper.m; sourceTree = "<group>"; };
 		C9B2A56318934AC8003A412E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C9B2A56418934AC8003A412E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C9B2A57818934B2B003A412E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -1016,6 +1019,8 @@
 				C95ACDBA18C821E9006A3F32 /* CityParser.m */,
 				C953008718CF5AB7009E0E6B /* LocationGetter.h */,
 				C953008818CF5AB7009E0E6B /* LocationGetter.m */,
+				C9AEF10018D0537F0087570B /* RequestPostUploadHelper.h */,
+				C9AEF10118D0537F0087570B /* RequestPostUploadHelper.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1391,6 +1396,7 @@
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */,
 				C9B6CCB318C5FA3600E72CFB /* STViewUserListViewController.m in Sources */,
+				C9AEF10218D0537F0087570B /* RequestPostUploadHelper.m in Sources */,
 				C9B6158D18CE010C000A446E /* SimpleBarChart.m in Sources */,
 				C922446318B6003B00D0B923 /* STTaskManagerExpandingCellIdentifierCell.m in Sources */,
 				C95F7F3518BF3E8200403430 /* STChartElectricityViewController.m in Sources */,

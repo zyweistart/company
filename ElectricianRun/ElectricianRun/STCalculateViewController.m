@@ -153,7 +153,7 @@
         
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
-        [ivImage setFrame:CGRectMake(120, 40, 84.5, 8)];
+        [ivImage setFrame:CGRectMake(96, 40, 128, 11.5)];
     } else if (row==1) {
         //电量
         [lblValue1 setText:@"本次读入"];
@@ -171,7 +171,7 @@
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
         
-        [ivImage setFrame:CGRectMake(95, 40, 129.5, 8.5)];
+        [ivImage setFrame:CGRectMake(70, 40, 180, 11.5)];
     } else if (row==2) {
         //功率因数
         [lblValue1 setText:@"有功功率"];
@@ -186,7 +186,7 @@
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
         
-        [ivImage setFrame:CGRectMake(80, 40, 149, 23)];
+        [ivImage setFrame:CGRectMake(56.25, 40, 207.5, 31.5)];
     } else if (row==3) {
         //有功功率
         [lblValue1 setText:@"线电压"];
@@ -204,7 +204,7 @@
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
         
-        [ivImage setFrame:CGRectMake(70, 40, 180.5, 12.5)];
+        [ivImage setFrame:CGRectMake(34.75, 40, 250.5, 15.5)];
     } else if (row==4) {
         //无功功率
         [lblValue1 setText:@"线电压"];
@@ -222,7 +222,7 @@
         [lblValue4 setHidden:NO];
         [txtValue4 setHidden:NO];
         
-        [ivImage setFrame:CGRectMake(60, 40, 203, 12.5)];
+        [ivImage setFrame:CGRectMake(19.25, 40, 281.5, 16)];
     } else if (row==5) {
         //负荷率
         [lblValue1 setText:@"平均负荷"];
@@ -237,7 +237,7 @@
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
         
-        [ivImage setFrame:CGRectMake(110, 40, 97.5, 8.5)];
+        [ivImage setFrame:CGRectMake(88.5, 40, 143, 11)];
     } else if (row==6) {
         //变压器负载率
         [lblValue1 setText:@"视在功率"];
@@ -252,7 +252,7 @@
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
         
-        [ivImage setFrame:CGRectMake(50, 40, 227.5, 9.5)];
+        [ivImage setFrame:CGRectMake(52, 40, 216, 13)];
     } else if (row==7) {
         //视在功率
         [lblValue1 setText:@"有功耗量"];
@@ -267,7 +267,7 @@
         [lblValue4 setHidden:YES];
         [txtValue4 setHidden:YES];
         
-        [ivImage setFrame:CGRectMake(85, 40, 150.5, 12.5)];
+        [ivImage setFrame:CGRectMake(53.5, 40, 213, 15.5)];
     }
 }
 
