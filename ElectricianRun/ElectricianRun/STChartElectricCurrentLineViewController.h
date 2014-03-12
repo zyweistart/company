@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PCLineChartView.h"
 @interface STChartElectricCurrentLineViewController : UIViewController
 
+@property (nonatomic, strong) PCLineChartView *lineChartView;
+
+- (id)initWithIndex:(NSUInteger)index;
 @end

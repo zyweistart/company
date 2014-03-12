@@ -183,6 +183,11 @@
     }
 }
 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+  
+}
+
 - (void)AsynchronousDownloadWithUrl:(NSString *)u FileName:(NSString *)fName
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);

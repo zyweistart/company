@@ -317,7 +317,7 @@ double allTotalElectricity[12][2][4];
         NSLog(@"ALARAMCODE");
     }else if(tag==CHARTCODE){
         if(buttonIndex==0){
-            STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]init];
+            STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]initWithIndex:_currentIndex];
             [self.navigationController pushViewController:chartElectricCurrentLineViewController animated:YES];
         }else if(buttonIndex==1){
             STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]initWithIndex:_currentIndex];

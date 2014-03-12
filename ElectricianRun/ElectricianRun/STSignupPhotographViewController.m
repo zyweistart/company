@@ -23,6 +23,8 @@
     NSInteger selectIndex;
     UIImageView *photographIDImageView;
     UIImageView *photographELImageView;
+    BOOL identityImg;
+    BOOL elecImg;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,7 +39,8 @@
                                                 style:UIBarButtonItemStyleBordered
                                                 target:self
                                                 action:@selector(submit:)];
-        
+        identityImg=NO;
+        elecImg=NO;
     }
     return self;
 }
@@ -100,6 +103,15 @@
 
 - (void)submit:(id)sender
 {
+    if(!identityImg){
+        [Common alert:@"请拍摄身份证件"];
+        return;
+    }
+    if(!elecImg){
+        [Common alert:@"请拍摄电工证件"];
+        return;
+    }
+    
     NSData *idPicDataPath=UIImagePNGRepresentation([photographIDImageView image]);
     NSData *elPicDataPath=UIImagePNGRepresentation([photographELImageView image]);
     
@@ -176,8 +188,10 @@
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     if(selectIndex==1){
         photographIDImageView.image = editedImage;
+        identityImg=YES;
     }else if(selectIndex==2){
         photographELImageView.image = editedImage;
+        elecImg=YES;
     }
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
     }];

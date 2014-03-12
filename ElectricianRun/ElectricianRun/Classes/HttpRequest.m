@@ -105,9 +105,43 @@
     request.timeoutInterval = 10;
     if(_isBodySubmit){
         //主体数据POST提交
-        NSMutableData *httpBody = [NSMutableData data];
         
-        request.HTTPBody=httpBody;
+        NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        
+        NSString *boundary=@"AaB03x";
+        
+        [request setValue:[NSString stringWithFormat:@"multipart/form-data, boundary=%@",boundary] forHTTPHeaderField: @"Content-Type"];
+        
+        // post body
+        NSMutableData *body = [NSMutableData data];
+        
+        // add params (all params are strings)
+        for (NSString *param in _params) {
+            id value=[_params objectForKey:param];
+            if(![value isKindOfClass:[NSData class]]){
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:gbkEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:gbkEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:gbkEncoding]];
+            }
+        }
+        // add image data
+        for (NSString *param in _params) {
+            id value=[_params objectForKey:param];
+            if([value isKindOfClass:[NSData class]]){
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:gbkEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.png\"\r\n",param,param] dataUsingEncoding:gbkEncoding]];
+                [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:gbkEncoding]];
+                [body appendData:value];
+                [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:gbkEncoding]];
+            }
+        }
+        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:gbkEncoding]];
+        
+        [request setHTTPBody:body];
+        
+        // set the content-length
+        [request setValue:[NSString stringWithFormat:@"%d",[body length]] forHTTPHeaderField:@"Content-Length"];
+        
     }
     // 初始化一个连接
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
@@ -239,6 +273,5 @@
         }
     }
 }
-
 
 @end
