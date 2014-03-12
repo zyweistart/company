@@ -636,8 +636,8 @@
 //我要报名
 - (void)onClickSignup:(id)sender
 {
-    STSignupViewController *signupViewController=[[STSignupViewController alloc]init];
-    [self.navigationController pushViewController:signupViewController animated:YES];
+    UINavigationController *signupViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
+    [self presentViewController:signupViewControllerNav animated:YES completion:nil];
 }
 
 - (void)onClickSwitch:(id)sender

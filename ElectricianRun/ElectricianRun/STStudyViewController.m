@@ -8,6 +8,7 @@
 
 #import "STStudyViewController.h"
 #import "STNavigationWebPageViewController.h"
+#import "STSignupViewController.h"
 
 #define REQUESTCODESUBMIT 43281794
 
@@ -85,17 +86,12 @@
         NSString *phone=[[alertView textFieldAtIndex:0]text];
         if(![@"" isEqualToString:phone]){
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-//            [p setObject:phone forKey:@"telNum"];
-//            [p setObject:@"" forKey:@"identityNo"];
-//            [p setObject:@"2" forKey:@"operateType"];
-            
-            [p setObject:phone forKey:@"telNum"];//手机号码
-            [p setObject:@"" forKey:@"name"];//姓名
-            [p setObject:@"" forKey:@"identityNo"];//身份证号码
-            
+            [p setObject:phone forKey:@"telNum"];
+            [p setObject:@"" forKey:@"identityNo"];
+            [p setObject:@"2" forKey:@"operateType"];
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:REQUESTCODESUBMIT];
             [self.hRequest setIsShowMessage:YES];
-            [self.hRequest start:URLcheckElecIdent params:p];
+            [self.hRequest start:URLelecRegister params:p];
         }else{
             [Common alert:@"请输入手机号码"];
             self.tabBarController.selectedIndex=0;
@@ -108,6 +104,7 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==REQUESTCODESUBMIT){
+        NSLog(@"%@",[response responseString]);
         NSString *result=[[response resultJSON]objectForKey:@"result"];
         [Common setCacheByBool:ISMYSTUDYAUDIT data:NO];
         if([@"0" isEqualToString:result]){
@@ -122,6 +119,8 @@
             self.tabBarController.selectedIndex=0;
         }else if([@"3" isEqualToString:result]){
             [Common alert:@"未提交申请"];
+            UINavigationController *signupViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
+            [self presentViewController:signupViewControllerNav animated:YES completion:nil];
             self.tabBarController.selectedIndex=0;
         }else{
             [Common alert:@"未知错误"];
