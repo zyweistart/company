@@ -63,4 +63,23 @@
     }
     return nil;
 }
+
++ (BOOL)isAuth:(NSString*)name
+{
+    if([Account isLogin]){
+        NSDictionary *data=[Account getResultData];
+        if(data!=nil){
+            NSMutableArray *ARR=[data objectForKey:@"Perm"];
+            if(ARR!=nil){
+                for(NSDictionary *d in ARR){
+                    if([name isEqualToString:[d objectForKey:@"BP_CODE"]]){
+                        return YES;
+                    }
+                }
+            }
+        }
+    }
+    return NO;
+}
+
 @end

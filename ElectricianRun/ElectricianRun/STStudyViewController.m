@@ -104,8 +104,7 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==REQUESTCODESUBMIT){
-        NSLog(@"%@",[response responseString]);
-        NSString *result=[[response resultJSON]objectForKey:@"result"];
+        NSString *result=[[response resultJSON]objectForKey:@"rs"];
         [Common setCacheByBool:ISMYSTUDYAUDIT data:NO];
         if([@"0" isEqualToString:result]){
             [Common alert:@"审核不通过"];

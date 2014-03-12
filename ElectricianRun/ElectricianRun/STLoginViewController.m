@@ -109,6 +109,7 @@
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
+    NSLog(@"%@",[response responseString]);
     NSString *result=[Common NSNullConvertEmptyString:[[response resultJSON] objectForKey:@"result"]];
     if([@"2" isEqualToString:result]){
         NSString *username=[txtValueUserName text];
@@ -119,7 +120,6 @@
     }else{
         [Common alert:@"登录出错"];
     }
-    NSLog(@"%@",[Account getResultData]);
 }
 
 @end

@@ -152,39 +152,58 @@
 
 //我管辖的变电站
 - (void)onClickJurisdiction:(id)sender {
-    //数据监测
-     UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
-//    dtaMonitoringViewControllerNav.navigationBarHidden=YES;
-    dtaMonitoringViewControllerNav.tabBarItem.title=@"数据监测";
-    dtaMonitoringViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"sj"];
-    //报警管理
-    UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
-    alarmManagerViewControllerNav.tabBarItem.title=@"报警管理";
-    alarmManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"bj"];
-    //任务管理
-    UINavigationController *taskManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskManagerViewController alloc]init]];
-    taskManagerViewControllerNav.title=@"任务管理";
-    taskManagerViewControllerNav.tabBarItem.title=@"任务管理";
-    taskManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"gl"];
-    //任务稽核
-    UINavigationController *taskAuditViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskAuditViewController alloc]init]];
-    taskAuditViewControllerNav.title=@"任务稽核";
-    taskAuditViewControllerNav.tabBarItem.title=@"任务稽核";
-    taskAuditViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"rw"];
+    if(![Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+        [Common alert:@"没有该权限"];
+        return;
+    }
+    NSMutableArray *views=[[NSMutableArray alloc]init];
+    
+    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+        //数据监测
+        UINavigationController *dtaMonitoringViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STDataMonitoringViewController alloc]init]];
+        //    dtaMonitoringViewControllerNav.navigationBarHidden=YES;
+        dtaMonitoringViewControllerNav.tabBarItem.title=@"数据监测";
+        dtaMonitoringViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"sj"];
+        [views addObject:dtaMonitoringViewControllerNav];
+    }
+    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+        //报警管理
+        UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STAlarmManagerViewController alloc]init]];
+        alarmManagerViewControllerNav.tabBarItem.title=@"报警管理";
+        alarmManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"bj"];
+        [views addObject:alarmManagerViewControllerNav];
+    }
+    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+        //任务管理
+        UINavigationController *taskManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskManagerViewController alloc]init]];
+        taskManagerViewControllerNav.title=@"任务管理";
+        taskManagerViewControllerNav.tabBarItem.title=@"任务管理";
+        taskManagerViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"gl"];
+        [views addObject:taskManagerViewControllerNav];
+    }
+    if([Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
+        //任务稽核
+        UINavigationController *taskAuditViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STTaskAuditViewController alloc]init]];
+        taskAuditViewControllerNav.title=@"任务稽核";
+        taskAuditViewControllerNav.tabBarItem.title=@"任务稽核";
+        taskAuditViewControllerNav.tabBarItem.image=[UIImage imageNamed:@"rw"];
+        [views addObject:taskAuditViewControllerNav];
+    }
     
     UITabBarController *_tabBarController = [[UITabBarController alloc] init];
     [_tabBarController.view setBackgroundColor:[UIColor whiteColor]];
     _tabBarController.delegate = self;
-    _tabBarController.viewControllers = [NSArray arrayWithObjects:
-                                             dtaMonitoringViewControllerNav,
-                                             alarmManagerViewControllerNav,
-                                             taskManagerViewControllerNav,
-                                             taskAuditViewControllerNav,nil];
+    _tabBarController.viewControllers = views;
+    [_tabBarController setDelegate:self];
     [self presentViewController:_tabBarController animated:YES completion:nil];
 }
 
 //工程建站
 - (void)onClickSite:(id)sender {
+    if(![Account isAuth:@"ELEC_SUBSTATION_CREATE"]){
+        [Common alert:@"没有该权限"];
+        return;
+    }
     UINavigationController *projectSiteViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STProjectSiteViewController alloc]init]];
     [self presentViewController:projectSiteViewControllerNav animated:YES completion:nil];
 }
@@ -205,6 +224,9 @@
 - (void)onClickNewList:(id)sender {
     UINavigationController *newsDetailViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STNewsListViewController alloc]initWithData:newData]];
     [self presentViewController:newsDetailViewControllerNav animated:YES completion:nil];
+}
+
+- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController {
 }
 
 @end

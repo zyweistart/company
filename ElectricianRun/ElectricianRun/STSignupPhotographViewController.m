@@ -121,7 +121,15 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==SUBMITREQUESTCODE){
-        NSLog(@"%@",[response responseString]);
+        NSString *result=[[response resultJSON]objectForKey:@"rs"];
+        if([@"1" isEqualToString:result]){
+            [Common alert:@"注册成功，信息已提交！"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else if([@"-1" isEqualToString:result]){
+            [Common alert:@"注册失败，请稍候再试！"];
+        }else{
+            [Common alert:@"未知异常"];
+        }
     }
 }
 

@@ -23,4 +23,6 @@
 
 + (NSDictionary*)getResultData;
 
++ (BOOL)isAuth:(NSString*)name;
+
 @end
