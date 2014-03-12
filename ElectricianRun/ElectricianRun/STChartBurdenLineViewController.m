@@ -15,84 +15,86 @@ extern double allTotalBurden[12][2][4];
 @end
 
 @implementation STChartBurdenLineViewController {
-    int count;
+    NSTimer *timer;
+    int currentIndex;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - View Lifecycle
+- (id)initWithIndex:(int)index
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    self=[super init];
+    if(self){
         self.title=@"进出线负荷曲线图";
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        count=12;
+        currentIndex=index;
+        
+        self.ArrayOfValues=[[NSMutableArray alloc]init];
+        self.ArrayOfDates=[[NSMutableArray alloc]init];
+        
+        self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(10, 60, 300, 300)];
+        self.myGraph.delegate = self;
+        [self.view addSubview:self.myGraph];
+        
+        self.myGraph.enableTouchReport=YES;
+        self.myGraph.colorTop = [UIColor whiteColor];
+        self.myGraph.colorBottom = [UIColor whiteColor];
+        self.myGraph.colorLine = [UIColor blueColor];
+        self.myGraph.colorXaxisLabel = [UIColor blueColor];
+        self.myGraph.widthLine = 3.0;
+        
+        self.lblCurrentValue=[[UILabel alloc]initWithFrame:CGRectMake(10, 370, 300, 30)];
+        self.lblCurrentValue.font=[UIFont systemFontOfSize:15.0];
+        [self.lblCurrentValue setTextColor:[UIColor blackColor]];
+        [self.lblCurrentValue setBackgroundColor:[UIColor clearColor]];
+        [self.lblCurrentValue setTextAlignment:NSTextAlignmentLeft];
+        [self.view addSubview:self.lblCurrentValue];
+        
+        [self refreshValue];
+        
+        [self.lblCurrentValue setText:[NSString stringWithFormat:@"当前负荷值:%.2f",[[self.ArrayOfValues objectAtIndex:0] floatValue]]];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshValue) userInfo:nil repeats:YES];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    
-//    CGRect webFrame = self.view.frame;
-//    webFrame.origin.x = 0;
-//    webFrame.origin.y =  0;
-//    
-//    _webViewForSelectDate = [[UIWebView alloc] initWithFrame:webFrame];
-//    _webViewForSelectDate.delegate = self;
-//    _webViewForSelectDate.scalesPageToFit = YES;
-//    _webViewForSelectDate.opaque = NO;
-//    _webViewForSelectDate.backgroundColor = [UIColor clearColor];
-//    _webViewForSelectDate.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-//    [self.view addSubview:_webViewForSelectDate];
-//    
-//    //所有的资源都在source.bundle这个文件夹里
-//    NSString* htmlPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"source.bundle/index.html"];
-//    
-//    NSURL* url = [NSURL fileURLWithPath:htmlPath];
-//    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-//    [_webViewForSelectDate loadRequest:request];
-    
-    [super viewDidLoad];
-}
+#pragma mark - Graph Actions
 
--(void)updateData
-{
-    //取得当前时间，x轴
-    NSDate* nowDate = [[NSDate alloc]init];
-    NSTimeInterval nowTimeInterval = [nowDate timeIntervalSince1970] * 1000;
+- (void)refreshValue {
+    [self.ArrayOfValues removeAllObjects];
+    [self.ArrayOfDates removeAllObjects];
     
-    count--;
-    
-    float temperature=allTotalBurden[count%12][_currentIndex/4][_currentIndex%4]/1000;
-    
-    if(count==0){
-        count=12;
+    for(int i=11;i>=0;i--){
+        float f=allTotalBurden[i][currentIndex/4][currentIndex%4]/1000;
+        [self.ArrayOfValues addObject:[NSString stringWithFormat:@"%.2f",f]];
+        [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%d",i]];
     }
     
-    
-    NSMutableString* jsStr = [[NSMutableString alloc] initWithCapacity:0];
-    [jsStr appendFormat:@"updateData(%f,%f)",nowTimeInterval,temperature];
-    
-    [_webViewForSelectDate stringByEvaluatingJavaScriptFromString:jsStr];
+    [self.myGraph reloadGraph];
 }
 
-#pragma mark - delegate of webview
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return YES;
+#pragma mark - SimpleLineGraph Data Source
+
+- (int)numberOfPointsInGraph {
+    return (int)[self.ArrayOfValues count];
 }
 
--(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    
+- (float)valueForIndex:(NSInteger)index {
+    return [[self.ArrayOfValues objectAtIndex:index] floatValue];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    //等webview加载完毕再更新数据
-    _timer = [NSTimer scheduledTimerWithTimeInterval: 5
-                                             target: self
-                                           selector: @selector(updateData)
-                                           userInfo: nil
-                                            repeats: YES];
+#pragma mark - SimpleLineGraph Delegate
+
+- (int)numberOfGapsBetweenLabels {
+    return 0;
 }
+
+- (NSString *)labelOnXAxisForIndex:(NSInteger)index {
+    return [NSString stringWithFormat:@"%d",index+1];
+}
+
+- (void)didTouchGraphWithClosestIndex:(int)index {
+    [self.lblCurrentValue setText:[NSString stringWithFormat:@"当前负荷值:%.2f",[[self.ArrayOfValues objectAtIndex:index] floatValue]]];
+}
+
 @end

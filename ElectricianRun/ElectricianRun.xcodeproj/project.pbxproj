@@ -232,6 +232,10 @@
 		C9EFE22C18B91E5E00308819 /* WeixinActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22218B91E5E00308819 /* WeixinActivity.m */; };
 		C9EFE22D18B91E5E00308819 /* WeixinSessionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22418B91E5E00308819 /* WeixinSessionActivity.m */; };
 		C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE22618B91E5E00308819 /* WeixinTimelineActivity.m */; };
+		C9F682F218D0735E009CF911 /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F682EB18D0735E009CF911 /* BEMAnimations.m */; };
+		C9F682F318D0735E009CF911 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F682ED18D0735E009CF911 /* BEMCircle.m */; };
+		C9F682F418D0735E009CF911 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F682EF18D0735E009CF911 /* BEMLine.m */; };
+		C9F682F518D0735E009CF911 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F682F118D0735E009CF911 /* BEMSimpleLineGraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -594,6 +598,14 @@
 		C9EFE22418B91E5E00308819 /* WeixinSessionActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinSessionActivity.m; sourceTree = "<group>"; };
 		C9EFE22518B91E5E00308819 /* WeixinTimelineActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinTimelineActivity.h; sourceTree = "<group>"; };
 		C9EFE22618B91E5E00308819 /* WeixinTimelineActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinTimelineActivity.m; sourceTree = "<group>"; };
+		C9F682EA18D0735E009CF911 /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
+		C9F682EB18D0735E009CF911 /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
+		C9F682EC18D0735E009CF911 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		C9F682ED18D0735E009CF911 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		C9F682EE18D0735E009CF911 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		C9F682EF18D0735E009CF911 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		C9F682F018D0735E009CF911 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		C9F682F118D0735E009CF911 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1028,6 +1040,7 @@
 		C9B2A56118934AC8003A412E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C9F682E918D0735E009CF911 /* BEMSimpleLineGraph */,
 				C9B2C44018CE14C30024C905 /* source.bundle */,
 				C9B6158A18CE010C000A446E /* SimpleBarChart */,
 				C9C4FC1F18CDF88400333685 /* MagicPieLayer */,
@@ -1184,6 +1197,21 @@
 				C9EFE22018B91E5E00308819 /* WXApiObject.h */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C9F682E918D0735E009CF911 /* BEMSimpleLineGraph */ = {
+			isa = PBXGroup;
+			children = (
+				C9F682EA18D0735E009CF911 /* BEMAnimations.h */,
+				C9F682EB18D0735E009CF911 /* BEMAnimations.m */,
+				C9F682EC18D0735E009CF911 /* BEMCircle.h */,
+				C9F682ED18D0735E009CF911 /* BEMCircle.m */,
+				C9F682EE18D0735E009CF911 /* BEMLine.h */,
+				C9F682EF18D0735E009CF911 /* BEMLine.m */,
+				C9F682F018D0735E009CF911 /* BEMSimpleLineGraphView.h */,
+				C9F682F118D0735E009CF911 /* BEMSimpleLineGraphView.m */,
+			);
+			path = BEMSimpleLineGraph;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1393,6 +1421,7 @@
 				C93C74C018923E3200A7FAB8 /* STStudyViewController.m in Sources */,
 				C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */,
 				C922446018B6002E00D0B923 /* STTaskManagerExpandedCellIdentifierCell.m in Sources */,
+				C9F682F218D0735E009CF911 /* BEMAnimations.m in Sources */,
 				C9AC1DEC18A86DF7004E96CC /* ATMProgressLayer.m in Sources */,
 				C9D3218E18B84D4A0015B537 /* DataPickerView.m in Sources */,
 				C9B6CCB318C5FA3600E72CFB /* STViewUserListViewController.m in Sources */,
@@ -1421,8 +1450,10 @@
 				C922447118B623E200D0B923 /* MJRefreshConst.m in Sources */,
 				C95F7F3218BF3E6700403430 /* STChartBurdenLineViewController.m in Sources */,
 				C95ACDBE18C84FC1006A3F32 /* STSignupPhotographViewController.m in Sources */,
+				C9F682F518D0735E009CF911 /* BEMSimpleLineGraphView.m in Sources */,
 				C922447018B623E200D0B923 /* MJRefreshBaseView.m in Sources */,
 				C9C4FC3218CDFD9800333685 /* MyPieElement.m in Sources */,
+				C9F682F318D0735E009CF911 /* BEMCircle.m in Sources */,
 				C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */,
 				C9EFE22E18B91E5E00308819 /* WeixinTimelineActivity.m in Sources */,
 				C95F7F3B18BF3EBD00403430 /* STChartElectricityValPieViewController.m in Sources */,
@@ -1488,6 +1519,7 @@
 				C99F7E2918C2F759002C97F0 /* EAIntroPage.m in Sources */,
 				C98F54B018B651710032AE8B /* STTaskAuditRecord3ViewController.m in Sources */,
 				C9CF827618C065C8002826C4 /* STSignupViewController.m in Sources */,
+				C9F682F418D0735E009CF911 /* BEMLine.m in Sources */,
 				C9943FB018B8E2F200A62C19 /* STAlarmCell.m in Sources */,
 				C933FEA918B512E000E4AE0A /* BaseTableViewController.m in Sources */,
 				C9943FAD18B8DDA500A62C19 /* STDataMonitoringLineDetailSearchViewController.m in Sources */,

@@ -152,6 +152,11 @@
 
 //我管辖的变电站
 - (void)onClickJurisdiction:(id)sender {
+    if(![Account isLogin]){
+        [Common alert:@"你还未登录，请先登录!"];
+        return;
+    }
+    
     if(![Account isAuth:@"ELEC_MANAGER_SUBSTATION"]){
         [Common alert:@"没有该权限"];
         return;
@@ -204,6 +209,10 @@
 
 //工程建站
 - (void)onClickSite:(id)sender {
+    if(![Account isLogin]){
+        [Common alert:@"你还未登录，请先登录!"];
+        return;
+    }
     if(![Account isAuth:@"ELEC_SUBSTATION_CREATE"]){
         [Common alert:@"没有该权限"];
         return;

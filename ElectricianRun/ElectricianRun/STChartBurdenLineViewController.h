@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BEMSimpleLineGraphView.h"
 
-@interface STChartBurdenLineViewController : UIViewController<UIWebViewDelegate,UITextFieldDelegate>
+@interface STChartBurdenLineViewController : UIViewController<BEMSimpleLineGraphDelegate>
+@property (strong,nonatomic) UILabel *lblCurrentValue;
+@property (strong, nonatomic) BEMSimpleLineGraphView *myGraph;
 
-@property(strong,nonatomic)UIWebView* webViewForSelectDate;
-@property(strong,nonatomic)NSTimer* timer;
+@property (strong, nonatomic) NSMutableArray *ArrayOfValues;
+@property (strong, nonatomic) NSMutableArray *ArrayOfDates;
 
-@property NSUInteger currentIndex;
+
+- (id)initWithIndex:(int)index;
 
 @end
 

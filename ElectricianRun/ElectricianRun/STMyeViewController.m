@@ -109,6 +109,10 @@
             [Common actionSheet:self message:@"是否拨打新能量客服电话？" tag:1];
         }
     }else if(section==1){
+        if(![Account isLogin]){
+            [Common alert:@"你还未登录，请先登录!"];
+            return;
+        }
         STAlarmSetupViewController *alarmSetupViewController=[[STAlarmSetupViewController alloc]init];
         [self.navigationController pushViewController:alarmSetupViewController animated:YES];
     }else{

@@ -320,7 +320,7 @@ double allTotalElectricity[12][2][4];
             STChartElectricCurrentLineViewController *chartElectricCurrentLineViewController=[[STChartElectricCurrentLineViewController alloc]init];
             [self.navigationController pushViewController:chartElectricCurrentLineViewController animated:YES];
         }else if(buttonIndex==1){
-            STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]init];
+            STChartBurdenLineViewController *chartBurdenLineViewController=[[STChartBurdenLineViewController alloc]initWithIndex:_currentIndex];
             [self.navigationController pushViewController:chartBurdenLineViewController animated:YES];
         }else if(buttonIndex==2){
             STChartElectricityViewController *chartElectricityViewController=[[STChartElectricityViewController alloc]initWithIndex:_currentIndex];
