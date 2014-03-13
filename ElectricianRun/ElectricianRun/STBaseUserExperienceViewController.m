@@ -370,7 +370,7 @@
             for(int j=0;j<4;j++){
                 for(int k=0;k<3;k++){
                     //电流数组
-                    allPhaseCurrentList[i][r][i][j]=allPhaseCurrentList[i+1][r][j][k];
+                    allPhaseCurrentList[i][r][j][k]=allPhaseCurrentList[i+1][r][j][k];
                 }
                 //每条进出线的负荷数组
                 allTotalBurden[i][r][j]=allTotalBurden[i+1][r][j];
@@ -540,6 +540,7 @@
         self.lastTotalBurden=self.currentTotalBurden;
     }
     self.currentTotalBurden=tmpBurden;
+    
 }
 
 //总电量(更新调用频率一分钟)

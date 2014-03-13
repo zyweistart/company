@@ -90,7 +90,10 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //获取deviceToken需上传至服务端
-//    NSLog(@"%@",deviceToken);
+    NSString *dt=[[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if([dt length]>2){
+        [Common setCache:DEVICETOKEN data:[dt substringWithRange:NSMakeRange(1,[dt length]-2)]];
+    }
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -108,6 +111,11 @@
 
 - (void)updateLocation
 {
+    
+    if(![HttpRequest isNetworkConnection]){
+        return;
+    }
+    
     if(self.locationGetter!=nil){
         
         CLLocation *location=self.locationGetter.currentLocation;
@@ -127,11 +135,11 @@
                 [p setObject:latitude forKey:@"latitude"];
                 [p setObject:longitude forKey:@"longitude"];
                 [p setObject:[NSString stringWithFormat:@"%f",location.speed] forKey:@"speed"];//为速度
-                [p setObject:@"" forKey:@"direction"];//为速度方向
+                [p setObject:[NSString stringWithFormat:@"%f",location.course] forKey:@"direction"];//为速度方向
                 [p setObject:@"E" forKey:@"longitudeEW"];//为东西经,值为”E”或“W”,其中”E”代表东经，”W”代表西经
                 [p setObject:@"N" forKey:@"latitudeNS"];//为南北纬，值为“N”或“S”,其中”N”代表北纬，”S”代表南纬
                 [p setObject:date forKey:@"gpsTime"];//为GPS时间，URL编码处理后的数据
-                [p setObject:@"4324324" forKey:@"key"];//为国际移动设备身份码
+                [p setObject:[Common getCache:DEVICETOKEN] forKey:@"key"];//为国际移动设备身份码
                 [p setObject:@"0" forKey:@"iscorrect"];//为是否已纠偏
                 
                 self.hRequest=[[HttpRequest alloc]init:nil delegate:self responseCode:REQUESTCODEUPDATELOCATION];

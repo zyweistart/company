@@ -31,6 +31,7 @@
     #define ACCOUNTPASSWORD @"ACCOUNTPASSWORD"
     #define ACCOUNTRESULTDATA @"ACCOUNTRESULTDATA"
     #define ISMYSTUDYAUDIT @"ISMYSTUDYAUDIT"
+    #define DEVICETOKEN @"DEVICETOKEN"
 
     //按钮背景色
     #define BTNCOLORGB [UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]

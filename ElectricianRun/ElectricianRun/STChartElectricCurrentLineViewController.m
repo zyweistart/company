@@ -26,7 +26,12 @@ double allPhaseCurrentList[12][2][4][3];
 		_lineChartView = [[PCLineChartView alloc] initWithFrame:CGRectMake(10,64,300,300)];
 		[_lineChartView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 		_lineChartView.minValue = 0;
-		_lineChartView.maxValue = 100;
+        _lineChartView.interval=500;
+		_lineChartView.maxValue = 3000;
+        _lineChartView.xLabelFont=[UIFont systemFontOfSize:10];
+        _lineChartView.yLabelFont=[UIFont systemFontOfSize:10];
+        _lineChartView.valueLabelFont=[UIFont systemFontOfSize:10];
+        _lineChartView.legendFont=[UIFont systemFontOfSize:10];
 		[self.view addSubview:_lineChartView];
         
         NSMutableArray *components = [NSMutableArray array];
@@ -86,6 +91,10 @@ double allPhaseCurrentList[12][2][4][3];
         [componentic setShouldLabelValues:NO];
         [componentic setColour:PCColorBlue];
         [components addObject:componentic];
+        
+//        for(int i=0;i<12;i++){
+//            NSLog(@"%f",allPhaseCurrentList[i][index/4][index%4][0]);
+//        }
         
 		[_lineChartView setComponents:components];
 		[_lineChartView setXLabels:[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12", nil]];
