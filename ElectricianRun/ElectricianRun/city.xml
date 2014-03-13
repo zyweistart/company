@@ -451,7 +451,7 @@
         <item>台湾省</item>
     </string-array>
     
-    <string-array name="beijingshixiaqu_city_item">
+    <string-array name="beijingshishixiaqu_city_item">
         <item>东城区</item>
         <item>西城区</item>
         <item>崇文区</item>
@@ -469,11 +469,11 @@
         <item>怀柔区</item>
         <item>平谷区</item>
     </string-array>
-    <string-array name="beijingxian_city_item">
+    <string-array name="beijingshishixiaxian_city_item">
         <item>密云县</item>
         <item>延庆县</item>
     </string-array>
-    <string-array name="tianjingshixiaqu_city_item">
+    <string-array name="tianjinshishixiaqu_city_item">
         <item>和平区</item>
         <item>河东区</item>
         <item>河西区</item>
@@ -490,7 +490,7 @@
         <item>武清区</item>
         <item>宝坻区</item>
     </string-array>
-    <string-array name="tianjingxian_city_item">
+    <string-array name="tianjinshishixiaxian_city_item">
         <item>宁河县</item>
         <item>静海县</item>
         <item>蓟县</item>

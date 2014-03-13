@@ -14,6 +14,10 @@
 @property (strong,nonatomic) NSString *phone;
 @property (strong,nonatomic) NSString *card;
 @property (strong,nonatomic) NSString *address;
+@property (strong,nonatomic) NSString *province;
+@property (strong,nonatomic) NSString *city;
+@property (strong,nonatomic) NSString *area;
+
 
 @property (strong,nonatomic) HttpRequest *hRequest;
 

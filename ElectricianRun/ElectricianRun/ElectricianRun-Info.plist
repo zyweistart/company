@@ -28,11 +28,17 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>voip</string>
+		<string>location</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 		<string>sms</string>
 		<string>telephony</string>
+		<string>location-services</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>

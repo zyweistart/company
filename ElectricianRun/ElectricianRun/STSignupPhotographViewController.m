@@ -123,6 +123,9 @@
     [p setObject:idPicDataPath forKey:@"identityImg"];
     [p setObject:elPicDataPath forKey:@"elecImg"];
     [p setObject:@"1" forKey:@"operateType"];
+    [p setObject:self.province forKey:@"province"];
+    [p setObject:self.city forKey:@"city"];
+    [p setObject:self.area forKey:@"area"];
 
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:SUBMITREQUESTCODE];
     [self.hRequest setIsBodySubmit:YES];

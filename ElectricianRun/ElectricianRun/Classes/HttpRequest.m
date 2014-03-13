@@ -110,8 +110,6 @@
         
         NSString *boundary=@"AaB03x";
         
-        [request setValue:[NSString stringWithFormat:@"multipart/form-data, boundary=%@",boundary] forHTTPHeaderField: @"Content-Type"];
-        
         // post body
         NSMutableData *body = [NSMutableData data];
         
@@ -120,7 +118,7 @@
             id value=[_params objectForKey:param];
             if(![value isKindOfClass:[NSData class]]){
                 [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:gbkEncoding]];
-                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:gbkEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", [param stringByAddingPercentEscapesUsingEncoding:gbkEncoding]] dataUsingEncoding:gbkEncoding]];
                 [body appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:gbkEncoding]];
             }
         }
@@ -137,10 +135,14 @@
         }
         [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:gbkEncoding]];
         
-        [request setHTTPBody:body];
+//        NSLog(@"%@",[[NSString alloc] initWithData:body  encoding:gbkEncoding]);
+        
+        [request setValue:[NSString stringWithFormat:@"multipart/form-data, boundary=%@",boundary] forHTTPHeaderField: @"Content-Type"];
         
         // set the content-length
         [request setValue:[NSString stringWithFormat:@"%d",[body length]] forHTTPHeaderField:@"Content-Length"];
+        
+        [request setHTTPBody:body];
         
     }
     // 初始化一个连接

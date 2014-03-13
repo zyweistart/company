@@ -17,16 +17,10 @@
         [self.locationManager setDelegate:self];
         //设置精确度
         [self.locationManager setDesiredAccuracy: kCLLocationAccuracyBest];
-        self.locationManager.distanceFilter = 1000.0f;
-    }
-    //开启位置更新
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)stopUpdates
-{
-    if (self.locationManager!=nil){
-        [self.locationManager stopUpdatingLocation];
+        self.locationManager.distanceFilter = 0.1;
+        
+        [self.locationManager startMonitoringSignificantLocationChanges];
+        
     }
 }
 
@@ -34,9 +28,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     self.currentLocation=newLocation;
-    NSLog(@"latitude: %.6f, longitude: %.6f\n",
-           newLocation.coordinate.latitude,
-           newLocation.coordinate.longitude);
+//    NSLog(@"latitude: %.6f, longitude: %.6f\n",
+//           newLocation.coordinate.latitude,
+//           newLocation.coordinate.longitude);
 }
 
 //定位出错时被调

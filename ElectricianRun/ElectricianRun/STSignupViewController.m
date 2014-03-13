@@ -167,10 +167,6 @@
     [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnSubmit];
     
-    [txtName setText:@"安安"];
-    [txtPhone setText:@"13329873286"];
-    [txtCard setText:@"330381198906240313"];
-    
     [txtProvince setText:[dataProvinces objectAtIndex:0]];
     [self change:1];
     
@@ -231,6 +227,9 @@
                 [signupPhotographViewController setPhone:phone];
                 [signupPhotographViewController setCard:card];
                 [signupPhotographViewController setAddress:[NSString stringWithFormat:@"%@%@%@",province,city,county]];
+                [signupPhotographViewController setProvince:province];
+                [signupPhotographViewController setCity:city];
+                [signupPhotographViewController setArea:county];
                 [self.navigationController pushViewController:signupPhotographViewController animated:YES];
             }else if(result==1){
                 [Common alert:@"电工注册信息已经存在"];
@@ -277,6 +276,9 @@
             [txtCity setText:[dataCitys objectAtIndex:0]];
             NSString *nameC=[txtCity text];
             NSString *pinyinC=[[ChineseToPinyin pinyinFromChiniseString:nameC] lowercaseString];
+            if([@"市辖区" isEqualToString:nameC]||[@"市辖县" isEqualToString:nameC]){
+                pinyinC=[NSString stringWithFormat:@"%@%@",pinyinP,pinyinC];
+            }
             dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@_city_item",pinyinC]];
             [dpvCounty setData:dataCountys];
             if([dataCountys count]>0){
@@ -291,6 +293,9 @@
     }else if(v==2){
         NSString *nameC=[txtCity text];
         NSString *pinyinC=[[ChineseToPinyin pinyinFromChiniseString:nameC] lowercaseString];
+        if([@"市辖区" isEqualToString:nameC]||[@"市辖县" isEqualToString:nameC]){
+            pinyinC=[NSString stringWithFormat:@"%@%@",pinyinP,pinyinC];
+        }
         dataCountys=[[cityParser citys]objectForKey:[NSString stringWithFormat:@"%@_city_item",pinyinC]];
         [dpvCounty setData:dataCountys];
         if([dataCountys count]>0){

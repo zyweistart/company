@@ -10,9 +10,7 @@
 #import "STGuideViewController.h"
 #define REQUESTCODEUPDATELOCATION 58374
 
-@implementation STAppDelegate {
-    BOOL isUpdateLocationIng;
-}
+@implementation STAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -61,16 +59,33 @@
 {
     if([Common getCacheByBool:@"enabled_preference_gps"]){
         if(self.locationGetter==nil){
-            isUpdateLocationIng=NO;
             self.locationGetter=[[LocationGetter alloc]init];
             [self.locationGetter startUpdates];
-            self.updateLocationTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateLocation) userInfo:nil repeats:YES];
+        }
+        if(self.updateLocationTimer==nil){
+            self.updateLocationTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(updateLocation) userInfo:nil repeats:YES];
         }
     }else{
-        if(self.updateLocationTimer){
+        if(self.locationGetter!=nil){
+            [[self.locationGetter locationManager]stopMonitoringSignificantLocationChanges];
+            self.locationGetter=nil;
+        }
+        if(self.updateLocationTimer!=nil){
             [self.updateLocationTimer invalidate];
+            self.updateLocationTimer=nil;
         }
     }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        [self backgroundHandler];
+    }];
+    if (backgroundAccepted){
+//        NSLog(@"backgrounding accepted");
+    }
+    [self backgroundHandler];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -93,34 +108,71 @@
 
 - (void)updateLocation
 {
-    if(self.locationGetter!=nil&&!isUpdateLocationIng){
-        isUpdateLocationIng=YES;
+    if(self.locationGetter!=nil){
         
-        NSString *latitude=[NSString stringWithFormat:@"%.6f",self.locationGetter.currentLocation.coordinate.latitude ];
-        NSString *longitude=[NSString stringWithFormat:@"%.6f",self.locationGetter.currentLocation.coordinate.longitude ];
+        CLLocation *location=self.locationGetter.currentLocation;
         
-        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-        [p setObject:latitude forKey:@"latitude"];
-        [p setObject:longitude forKey:@"longitude"];
-        self.hRequest=[[HttpRequest alloc]init:nil delegate:self responseCode:REQUESTCODEUPDATELOCATION];
-        [self.hRequest start:URLnews params:p];
+        if(location){
+            NSString *latitude=[NSString stringWithFormat:@"%f",self.locationGetter.currentLocation.coordinate.latitude ];
+            NSString *longitude=[NSString stringWithFormat:@"%f",self.locationGetter.currentLocation.coordinate.longitude ];
+            
+            if([Account isLogin]){
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+                NSString *date=[formatter stringFromDate:[NSDate date]];
+                
+                NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+                [p setObject:[Account getUserName] forKey:@"imei"];
+                [p setObject:[Account getPassword] forKey:@"authentication"];
+                [p setObject:latitude forKey:@"latitude"];
+                [p setObject:longitude forKey:@"longitude"];
+                [p setObject:[NSString stringWithFormat:@"%f",location.speed] forKey:@"speed"];//为速度
+                [p setObject:@"" forKey:@"direction"];//为速度方向
+                [p setObject:@"E" forKey:@"longitudeEW"];//为东西经,值为”E”或“W”,其中”E”代表东经，”W”代表西经
+                [p setObject:@"N" forKey:@"latitudeNS"];//为南北纬，值为“N”或“S”,其中”N”代表北纬，”S”代表南纬
+                [p setObject:date forKey:@"gpsTime"];//为GPS时间，URL编码处理后的数据
+                [p setObject:@"4324324" forKey:@"key"];//为国际移动设备身份码
+                [p setObject:@"0" forKey:@"iscorrect"];//为是否已纠偏
+                
+                self.hRequest=[[HttpRequest alloc]init:nil delegate:self responseCode:REQUESTCODEUPDATELOCATION];
+                [self.hRequest start:URLsendLocationInfo params:p];
+            }
+        }
     }
 }
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==REQUESTCODEUPDATELOCATION){
-        
-        isUpdateLocationIng=NO;
     }
 }
 
 - (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
 {
     if(repCode==REQUESTCODEUPDATELOCATION){
-        
-        isUpdateLocationIng=NO;
     }
+}
+
+- (void)backgroundHandler {
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    __block UIBackgroundTaskIdentifier bgTask;
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTask != UIBackgroundTaskInvalid) {
+                
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTask != UIBackgroundTaskInvalid) {
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    });
+    
 }
 
 @end

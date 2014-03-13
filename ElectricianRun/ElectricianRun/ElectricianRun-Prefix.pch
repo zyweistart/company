@@ -53,6 +53,7 @@
     #define URLcheckMobileValid @"http://122.224.247.221:7003/WEB/mobile/checkMobileValid.aspx"
     #define URLelecRegister @"http://122.224.247.221:7003/WEB/mobile/elecRegister.aspx"
     #define URLgetLocationInfo @"http://122.224.247.221:7007/WEB/mobile/getLocationInfo.aspx"
+   #define URLsendLocationInfo @"http://122.224.247.221:7007/WEB/mobile/sendLocationInfo.aspx"
     #define URLcheckElecIdent @"http://122.224.247.219:8083/Administrator/checkElecIdent.aspx"
 #else
     #define URL1 @"http://60.191.92.132:7006/WEB/mobile/"
