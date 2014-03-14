@@ -29,35 +29,18 @@
     self.window.rootViewController=[[STGuideViewController alloc]init];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    //应用关闭的情况下接收到消息推送
+    NSDictionary *aps = [[launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"] objectForKey:@"aps"];
+    [self notication:aps];
+    
     return YES;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    NSDictionary *aps=[userInfo objectForKey:@"aps"];
-    NSString *type=[aps objectForKey:@"type"];
-    if([@"1" isEqualToString:type]||[@"2" isEqualToString:type]){
-        NSString *title=@"功率因数报警消息";
-        if([@"2" isEqualToString:type]){
-            title=@"需量报警消息";
-        }
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:title
-                              message:[aps objectForKey:@"alert"]
-                              delegate:nil
-                              cancelButtonTitle:@"确定"
-                              otherButtonTitles:nil, nil];
-        [alert show];
-    }else if([@"0" isEqualToString:type]){
-        //报警消息推送
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"报警消息"
-                              message:[aps objectForKey:@"alert"]
-                              delegate:self
-                              cancelButtonTitle:@"确定"
-                              otherButtonTitles:nil, nil];
-        [alert show];
-    }
+    //应用在后台或前台开启的状态下接收到消息推送
+    [self notication:[userInfo objectForKey:@"aps"]];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -186,6 +169,35 @@
         });
     });
     
+}
+
+- (void)notication:(NSDictionary*)aps
+{
+    if(aps!=nil){
+        NSString *type=[aps objectForKey:@"type"];
+        if([@"1" isEqualToString:type]||[@"2" isEqualToString:type]){
+            NSString *title=@"功率因数报警消息";
+            if([@"2" isEqualToString:type]){
+                title=@"需量报警消息";
+            }
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:title
+                                  message:[aps objectForKey:@"alert"]
+                                  delegate:nil
+                                  cancelButtonTitle:@"确定"
+                                  otherButtonTitles:nil, nil];
+            [alert show];
+        }else if([@"0" isEqualToString:type]){
+            //报警消息推送
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"报警消息"
+                                  message:[aps objectForKey:@"alert"]
+                                  delegate:self
+                                  cancelButtonTitle:@"确定"
+                                  otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
