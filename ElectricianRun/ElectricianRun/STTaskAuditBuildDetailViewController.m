@@ -214,6 +214,11 @@
             [userdpv setDelegate:self];
             
             [txtValue3 setInputView:userdpv];
+            
+            //设置默认值
+            NSDictionary *tmp= [data1 objectAtIndex:0];
+            userId=[tmp objectForKey:@"USER_ID"];
+            [txtValue3 setText:[tmp objectForKey:@"USER_NAME"]];
         }else{
             [Common alert:@"工作人员数据为空"];
 //            [self.navigationController popViewControllerAnimated:YES];
@@ -232,6 +237,10 @@
             [modeldpv setDelegate:self];
             
             [txtValue4 setInputView:modeldpv];
+            //设置默认值
+            NSDictionary *tmp= [data2 objectAtIndex:0];
+            modelId=[tmp objectForKey:@"MODEL_ID"];
+            [txtValue4 setText:[tmp objectForKey:@"MODEL_NAME"]];
         }else{
             [Common alert:@"任务模数据为空"];
 //            [self.navigationController popViewControllerAnimated:YES];

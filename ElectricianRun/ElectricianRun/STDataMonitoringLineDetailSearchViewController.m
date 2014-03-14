@@ -58,7 +58,7 @@
 {
     [super viewDidLoad];
     
-    datePicker = [[DatePickerView alloc] init];
+    datePicker = [[DatePickerView alloc] initWithPickerMode:UIDatePickerModeDateAndTime];
     [datePicker setDelegate:self];
     
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 100, 320, 90)];
@@ -107,7 +107,7 @@
     NSString *d=[textField text];
     if(![@"" isEqualToString:d]){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
         NSDate *date = [dateFormatter dateFromString:d];
         [[datePicker datePicker]setDate:date];
     }
@@ -115,7 +115,7 @@
 
 - (void)pickerDidPressDoneWithDate:(NSDate*)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
     NSString *currentDateStr = [dateFormatter stringFromDate:date];
     if([txtStartValue isFirstResponder]){
         [txtStartValue setText:currentDateStr];
