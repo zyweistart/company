@@ -18,12 +18,11 @@
 @end
 
 
-@implementation STTaskManagerViewController {
-    BOOL refreshFLAG;
-}
-
+@implementation STTaskManagerViewController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    
+    [self setIsLoadCache:YES];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"任务管理";
@@ -33,18 +32,8 @@
                                                style:UIBarButtonItemStyleBordered
                                                target:self
                                                action:@selector(back:)];
-        refreshFLAG=YES;
     }
     return self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if(refreshFLAG){
-        [self autoRefresh];
-        refreshFLAG=NO;
-    }
 }
 
 - (void)back:(id)sender{
@@ -52,6 +41,12 @@
 }
 
 #pragma mark - UITableView delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55;
+}
+
 static NSString *cellIdentifier = @"ExpandingCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -61,8 +56,9 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
     }
     NSInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    NSString *content=[dictionary objectForKey:@"SITE_NAME"];
-    [cell.lblName setText:content];
+    [cell.lblName setText:[dictionary objectForKey:@"NAME"]];
+    [cell.lblSiteName setText:[dictionary objectForKey:@"SITE_NAME"]];
+    [cell.lblTaskDate setText:[Common ConvertByNSDate:[dictionary objectForKey:@"TASK_DATE"]]];
     return cell;
 }
 
@@ -136,10 +132,12 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
     if(repCode==REQUESTCODESUBMIT){
-        
         NSDictionary *Rows=[[response resultJSON] objectForKey:@"Rows"];
         [Common alert:[Rows objectForKey:@"remark"]];
-        
+        int result=[[Rows objectForKey:@"result"] intValue];
+        if(result>0){
+            [self autoRefresh];
+        }
     }else{
         [super requestFinishedByResponse:response responseCode:repCode];
     }

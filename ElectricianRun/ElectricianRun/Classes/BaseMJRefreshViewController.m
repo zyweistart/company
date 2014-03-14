@@ -17,7 +17,6 @@
 - (id)init {
     self=[super init];
     if(self){
-        
     }
     return self;
 }
@@ -25,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _isPage=YES;
     _currentPage=0;
     // 集成刷新控件
     // 下拉刷新
@@ -132,7 +132,7 @@
         int result=[[pageinfo objectForKey:@"result"] intValue];
         if(result>0){
             _pageCount=[[pageinfo objectForKey:@"PageCount"] intValue];
-            if(_pageCount<_currentPage) {
+            if(_pageCount<_currentPage&&self.isPage) {
                 if(_pageCount==0){
                     [self.dataItemArray removeAllObjects];
                     _currentPage=1;
@@ -144,6 +144,9 @@
                 if(_currentPage==1){
                     self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
                 } else {
+                    if(self.dataItemArray==nil){
+                        self.dataItemArray=[[NSMutableArray alloc]init];
+                    }
                     [self.dataItemArray addObjectsFromArray:tmpData];
                 }
             }

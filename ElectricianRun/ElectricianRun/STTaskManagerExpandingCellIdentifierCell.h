@@ -11,5 +11,7 @@
 @interface STTaskManagerExpandingCellIdentifierCell : UITableViewCell
 
 @property (strong,nonatomic) UILabel *lblName;
+@property (strong,nonatomic) UILabel *lblSiteName;
+@property (strong,nonatomic) UILabel *lblTaskDate;
 
 @end

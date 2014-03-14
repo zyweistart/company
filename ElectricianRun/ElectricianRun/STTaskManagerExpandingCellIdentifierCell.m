@@ -14,19 +14,22 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 160, 30)];
-        [_lblName setFont:[UIFont systemFontOfSize:15]];
+        _lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 200, 20)];
+        [_lblName setFont:[UIFont systemFontOfSize:12]];
         [_lblName setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [self addSubview:_lblName];
+        
+        _lblSiteName=[[UILabel alloc]initWithFrame:CGRectMake(10, 30, 150, 20)];
+        [_lblSiteName setFont:[UIFont systemFontOfSize:12]];
+        [_lblSiteName setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+        [self addSubview:_lblSiteName];
+        
+        _lblTaskDate=[[UILabel alloc]initWithFrame:CGRectMake(160, 30, 150, 20)];
+        [_lblTaskDate setFont:[UIFont systemFontOfSize:12]];
+        [_lblTaskDate setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+        [self addSubview:_lblTaskDate];
     }
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

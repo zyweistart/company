@@ -10,7 +10,6 @@
 #import "STDataMonitoringLineDetailViewController.h"
 #import "STDataMonitoringLineSearchViewController.h"
 #import "STDataMonitoringLineCell.h"
-#import "NSString+Utils.h"
 
 @interface STDataMonitoringLineViewController ()
 

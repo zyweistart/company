@@ -8,7 +8,6 @@
 
 #import "STTaskAuditRecord2ViewController.h"
 #import "STTaskAuditRecord3ViewController.h"
-#import "NSString+Utils.h"
 
 @interface STTaskAuditRecord2ViewController ()
 
@@ -21,6 +20,9 @@
 
 - (id)initWithData:(NSDictionary *)data type:(NSInteger)t
 {
+    [self setIsLoadCache:YES];
+    NSString *tag=[NSString stringWithFormat:@"%@,%d",[data objectForKey:@"TASK_ID"],t];
+    [self setCachetag:CACHE_DATABYUNIQUE(tag)];
     self = [super init];
     if (self) {
         
@@ -38,8 +40,6 @@
         } else if(_type==4){
             self.title=@"TRMS系统巡视检查";
         }
-        
-        [self reloadTableViewDataSource];
         
     }
     return self;
@@ -72,6 +72,8 @@
 
 - (void)reloadTableViewDataSource{
     
+    [self setIsPage:NO];
+    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
@@ -82,28 +84,6 @@
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:NO];
     [self.hRequest start:URLAppMonitoringAlarm params:p];
-    
-}
-
-- (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode{
-    
-    NSDictionary *json=[response resultJSON];
-    if(json!=nil) {
-        NSDictionary *pageinfo=[json objectForKey:@"Rows"];
-        
-        int result=[[pageinfo objectForKey:@"result"] intValue];
-        if(result>0){
-            NSArray *tmpData=[json objectForKey:@"table1"];
-            
-            self.dataItemArray=[[NSMutableArray alloc]initWithArray:tmpData];
-            
-            // 刷新表格
-            [self.tableView reloadData];
-        } else {
-            [Common alert:[pageinfo objectForKey:@"remark"]];
-        }
-    }
-    [self doneLoadingTableViewData];
     
 }
 

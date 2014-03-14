@@ -20,6 +20,8 @@
 @property MJRefreshHeaderView *header;
 @property MJRefreshFooterView *footer;
 
+@property BOOL isPage;
+
 @property BOOL isLoadCache;
 @property (strong,nonatomic) HttpRequest *hRequest;
 @property (strong,nonatomic) NSString *cachetag;
