@@ -10,6 +10,11 @@
 #import "STGuideViewController.h"
 #define REQUESTCODEUPDATELOCATION 58374
 
+#import "STDataMonitoringViewController.h"
+#import "STAlarmManagerViewController.h"
+#import "STTaskManagerViewController.h"
+#import "STTaskAuditViewController.h"
+
 @implementation STAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -32,9 +37,9 @@
     NSDictionary *aps=[userInfo objectForKey:@"aps"];
     NSString *type=[aps objectForKey:@"type"];
     if([@"1" isEqualToString:type]||[@"2" isEqualToString:type]){
-        NSString *title=@"功率因数报警推送";
+        NSString *title=@"功率因数报警消息";
         if([@"2" isEqualToString:type]){
-            title=@"需量报警推送";
+            title=@"需量报警消息";
         }
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:title
@@ -46,9 +51,9 @@
     }else if([@"0" isEqualToString:type]){
         //报警消息推送
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"报警消息推送"
+                              initWithTitle:@"报警消息"
                               message:[aps objectForKey:@"alert"]
-                              delegate:nil
+                              delegate:self
                               cancelButtonTitle:@"确定"
                               otherButtonTitles:nil, nil];
         [alert show];
@@ -181,6 +186,19 @@
         });
     });
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0){
+        if([Account isAuth:@"ELEC_ALARM"]){
+            //报警管理
+            STAlarmManagerViewController *alarmManagerViewController=[[STAlarmManagerViewController alloc]init];
+            UINavigationController *alarmManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:alarmManagerViewController];
+            [self.window.rootViewController presentViewController:alarmManagerViewControllerNav animated:YES completion:nil];
+            [alarmManagerViewController autoRefresh];
+        }
+    }
 }
 
 @end
