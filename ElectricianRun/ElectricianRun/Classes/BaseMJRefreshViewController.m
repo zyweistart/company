@@ -26,7 +26,6 @@
 {
     [super viewDidLoad];
     _currentPage=0;
-    
     // 集成刷新控件
     // 下拉刷新
     [self addHeader];
@@ -99,15 +98,17 @@
             _currentPage++;
         }
         
-//        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-        [self reloadTableViewDataSource];
+        //如果数据页数不大于1则没有下拉刷新
+        if(_currentPage==1){
+            [Common alert:@"亲，没有最新数据，请下拉刷新试试!"];
+            [self doneLoadingTableViewData];
+        }else{
+           [self reloadTableViewDataSource];
+        }
         
     };
     _footer = footer;
 }
-
-
 
 /**
  为了保证内部不泄露，在dealloc中释放占用的内存
@@ -156,7 +157,9 @@
             // 刷新表格
             [self.tableView reloadData];
         } else {
-            [Common alert:[pageinfo objectForKey:@"remark"]];
+//            NSString *remark=[pageinfo objectForKey:@"remark"];
+//            [Common alert:remark];
+            [Common alert:@"暂无任何数据"];
         }
     }else{
         [Common alert:@"数据解析异常"];
@@ -170,7 +173,8 @@
 - (void)requestFailed:(int)repCode didFailWithError:(NSError *)error
 {
     if(error!=nil){
-        [Common alert:[error description]];
+//        [Common alert:[error description]];
+        [Common alert:@"网络连接异常"];
     }
     [self doneLoadingTableViewData];
 }

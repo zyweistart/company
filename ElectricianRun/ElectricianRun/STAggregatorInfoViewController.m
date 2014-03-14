@@ -8,7 +8,6 @@
 
 #import "STAggregatorInfoViewController.h"
 #import "STAggregatorEntInfoViewController.h"
-#import "NSString+Utils.h"
 
 @interface STAggregatorInfoViewController ()
 
@@ -175,10 +174,10 @@
     [lblV10 setTextColor:[UIColor redColor]];
     [control addSubview:lblV10];
     
-    btnEnt=[[UIButton alloc]initWithFrame:CGRectMake(110, 280, 100, 30)];
+    btnEnt=[[UIButton alloc]initWithFrame:CGRectMake(80, 280, 160, 30)];
     btnEnt.titleLabel.font=[UIFont systemFontOfSize:12.0];
     [btnEnt setTitle:@"企业基本信息" forState:UIControlStateNormal];
-    [btnEnt setBackgroundColor:[UIColor blueColor]];
+    [btnEnt setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
     [btnEnt addTarget:self action:@selector(entinfo:) forControlEvents:UIControlEventTouchUpInside];
     [btnEnt setHidden:YES];
     [control addSubview:btnEnt];
@@ -206,25 +205,24 @@
     
 }
 
-
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
     NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
     for(NSDictionary *dic in dataArray) {
         [lblV1 setText:[self serialNo]];
-        [lblV2 setText:[dic objectForKey:@"PRODUCT_NO"]];
-        [lblV3 setText:[dic objectForKey:@"COMMU_TYPE"]];
-        NSString *statusStr=[NSString stringWithFormat:@"%@",[dic objectForKey:@"STATUS"]];
+        [lblV2 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"PRODUCT_NO"]]];
+        [lblV3 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"COMMU_TYPE"]]];
+        NSString *statusStr=[NSString stringWithFormat:@"%@",[Common NSNullConvertEmptyString:[dic objectForKey:@"STATUS"]]];
         if([@"1" isEqualToString:statusStr]){
             [lblV4 setText:@"关闭"];
         }else if([@"2" isEqualToString:statusStr]){
            [lblV4 setText:@"在线"];
         }
-        [lblV5 setText:[dic objectForKey:@"CP_NAME"]];
-        [lblV6 setText:[dic objectForKey:@"CONVERGE_KEY"]];
-        [lblV7 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LINES_COUNT"]]];
-        [lblV8 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METERS_COUNT"]]];
-        [lblV9 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ALARM_COUNT"]]];
-        [lblV10 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ERR_COUNT"]]];
+        [lblV5 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CP_NAME"]]];
+        [lblV6 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CONVERGE_KEY"]]];
+        [lblV7 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LINES_COUNT"]]]];
+        [lblV8 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METERS_COUNT"]]]];
+        [lblV9 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ALARM_COUNT"]]]];
+        [lblV10 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ERR_COUNT"]]]];
         
         SITE_ID=[NSString stringWithFormat:@"%@",[dic objectForKey:@"SITE_ID"]];
         [btnEnt setHidden:NO];

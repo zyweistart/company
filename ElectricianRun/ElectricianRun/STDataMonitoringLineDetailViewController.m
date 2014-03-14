@@ -27,15 +27,17 @@
         
         UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 80, 320, 340)];
         
-        UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(80, 5, 80, 30)];
+        UIButton *btnHistory1=[[UIButton alloc]initWithFrame:CGRectMake(10, 5, 145, 30)];
+        btnHistory1.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnHistory1 setTitle:@"历史耗量" forState:UIControlStateNormal];
-        [btnHistory1 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+        [btnHistory1 setBackgroundColor:BTNCOLORGB];
         [btnHistory1 addTarget:self action:@selector(history1:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory1];
         
-        UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(160, 5, 80, 30)];
+        UIButton *btnHistory2=[[UIButton alloc]initWithFrame:CGRectMake(165, 5, 145, 30)];
+        btnHistory2.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnHistory2 setTitle:@"历史数据" forState:UIControlStateNormal];
-        [btnHistory2 setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
+        [btnHistory2 setBackgroundColor:BTNCOLORGB];
         [btnHistory2 addTarget:self action:@selector(history2:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnHistory2];
         

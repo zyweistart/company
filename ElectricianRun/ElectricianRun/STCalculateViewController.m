@@ -61,7 +61,7 @@
     [txtValue1 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue1 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue1 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue1 setKeyboardType:UIKeyboardTypeDecimalPad];
     [control addSubview:txtValue1];
     //值2
     lblValue2=[[UILabel alloc]initWithFrame:CGRectMake(10, 120, 80, 30)];
@@ -77,7 +77,7 @@
     [txtValue2 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue2 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue2 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue2 setKeyboardType:UIKeyboardTypeDecimalPad];
     [control addSubview:txtValue2];
     //值3
     lblValue3=[[UILabel alloc]initWithFrame:CGRectMake(10, 160, 80, 30)];
@@ -93,7 +93,7 @@
     [txtValue3 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue3 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue3 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue3 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue3 setKeyboardType:UIKeyboardTypeDecimalPad];
     [control addSubview:txtValue3];
     //值4
     lblValue4=[[UILabel alloc]initWithFrame:CGRectMake(10, 200, 80, 30)];
@@ -110,7 +110,7 @@
     [txtValue4 setBorderStyle:UITextBorderStyleRoundedRect];
     [txtValue4 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [txtValue4 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [txtValue4 setKeyboardType:UIKeyboardTypePhonePad];
+    [txtValue4 setKeyboardType:UIKeyboardTypeDecimalPad];
     [control addSubview:txtValue4];
     
     UIButton *btnCalculate=[[UIButton alloc]initWithFrame:CGRectMake(80, 240, 160, 30)];

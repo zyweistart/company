@@ -73,15 +73,15 @@
         [control addSubview:txtValue2];
         
         UIButton *btnScan=[[UIButton alloc]initWithFrame:CGRectMake(235, 50, 30, 30)];
-        [btnScan setTitle:@"..." forState:UIControlStateNormal];
+        [btnScan setBackgroundImage:[UIImage imageNamed:@"sj222"] forState:UIControlStateNormal];
         [btnScan setBackgroundColor:[UIColor blueColor]];
         [btnScan addTarget:self action:@selector(scanning:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnScan];
         
-        UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(110, 120, 100, 30)];
+        UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(80, 120, 160, 30)];
         btnSubmit.titleLabel.font=[UIFont systemFontOfSize:12];
         [btnSubmit setTitle:@"开始变更" forState:UIControlStateNormal];
-        [btnSubmit setBackgroundColor:[UIColor blueColor]];
+        [btnSubmit setBackgroundColor:[UIColor colorWithRed:(55/255.0) green:(55/255.0) blue:(139/255.0) alpha:1]];
         [btnSubmit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnSubmit];
         
@@ -96,30 +96,78 @@
 
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
-//    NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-//    for(NSDictionary *dic in dataArray) {
-//        
-//        break;
-//    }
+    NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
+    if([dataArray count]>0){
+        for(NSDictionary *dic in dataArray) {
+            NSString *result=[NSString stringWithFormat:@"%@",[dic objectForKey:@"result"]];
+            if([@"-15" isEqualToString:result]){
+                [Common alert:@"暂未配置远程汇集器信息，请配置再下发!"];
+            }else if([@"-14" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不是12位，请修改后再操作。"];
+            }else if([@"-13" isEqualToString:result]){
+                [Common alert:@"连接中断，已重新连接!"];
+            }else if([@"-12" isEqualToString:result]){
+                [Common alert:@"连接失败，请检查网络及汇集器是否正常!"];
+            }else if([@"-11" isEqualToString:result]){
+                [Common alert:@"站点下发类型尚未设置，不可操作！"];
+            }else if([@"-10" isEqualToString:result]){
+                [Common alert:@"找不到唯一标识或序列号，请核实后再操作！"];
+            }else if([@"-9" isEqualToString:result]){
+                [Common alert:@"查询未找到采集器序列号，请联系管理员！"];
+            }else if([@"-8" isEqualToString:result]){
+                [Common alert:@"操作失败，当前用户无管理权限！;"];
+            }else if([@"-7" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下未找到线路，不可操作！"];
+            }else if([@"-6" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号不可操作，"];
+            }else if([@"-5" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号注册类型错误，"];
+            }else if([@"-4" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下存在多条线路，不能使用CK型采集器序列号！"];
+            }else if([@"-2" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不可操作！"];
+            }else if([@"-1" isEqualToString:result]){
+                [Common alert:@"序列号变更失败！"];
+            }else if([@"0" isEqualToString:result]){
+                [Common alert:@"不合法操作（该用户不存在）！"];
+            }else{
+                [Common alert:@"更换成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    }else{
+        [Common alert:@"查询未找到采集器序列号，请联系管理员"];
+    }
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)submit:(id)sender {
     
     NSString *oldSerialNo=self.serialNo;
     NSString *newSerialNo=[txtValue2 text];
+    
+    oldSerialNo=[oldSerialNo stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if([@"" isEqualToString:oldSerialNo]){
+        [Common alert:@"请扫描旧序列号"];
+        return;
+    }
+    newSerialNo=[newSerialNo stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if([@"" isEqualToString:newSerialNo]){
+        [Common alert:@"请扫描新序列号"];
+        return;
+    }
+    
+    
     NSInteger row=[pickerView selectedRowInComponent:0];
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
-    [p setObject:@"1" forKey:@"OpWap"];
-    [p setObject:@"2" forKey:@"OpType"];
+    [p setObject:@"0" forKey:@"OpWap"];
+    [p setObject:@"1" forKey:@"OpType"];
     [p setObject:oldSerialNo forKey:@"SerialNo"];
     [p setObject:newSerialNo forKey:@"NewserialNo"];
     [p setObject:[NSString stringWithFormat:@"%d",row] forKey:@"ChangeReason"];
-    
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
     [self.hRequest setIsShowMessage:YES];

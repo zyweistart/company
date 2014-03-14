@@ -102,7 +102,7 @@
     // 设置请求方法
     request.HTTPMethod = @"POST";
     // 60秒请求超时
-    request.timeoutInterval = 10;
+    request.timeoutInterval = 30;
     if(_isBodySubmit){
         //主体数据POST提交
         

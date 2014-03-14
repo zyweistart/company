@@ -90,7 +90,7 @@
         [lbl setText:@"实际完成时间:"];
         [self addSubview:lbl];
         
-        self.lbl6=[[UILabel alloc]initWithFrame:CGRectMake(225, 75, 80, 30)];
+        self.lbl6=[[UILabel alloc]initWithFrame:CGRectMake(235, 75, 80, 30)];
         [self.lbl6 setFont:[UIFont systemFontOfSize:12]];
         [self.lbl6 setTextAlignment:NSTextAlignmentLeft];
         [self.lbl6 setNumberOfLines:0];

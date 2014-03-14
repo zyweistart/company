@@ -15,6 +15,7 @@
 @end
 
 @implementation STLineInfoViewController{
+    UILabel *lblTitleInfo;
     UILabel *lblV1;
     UILabel *lblV2;
     UILabel *lblV3;
@@ -57,12 +58,11 @@
 {
     [super viewDidLoad];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 64, 320, 50)];
-    [lbl setTextAlignment:NSTextAlignmentCenter];
-    [lbl setFont:[UIFont systemFontOfSize:16.0]];
-    [lbl setText:@"0301 1601 0008 | 33"];
-    [lbl setTextColor:[UIColor blackColor]];
-    [self.view addSubview:lbl];
+    lblTitleInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 64, 320, 50)];
+    [lblTitleInfo setTextAlignment:NSTextAlignmentCenter];
+    [lblTitleInfo setFont:[UIFont systemFontOfSize:16.0]];
+    [lblTitleInfo setTextColor:[UIColor blackColor]];
+    [self.view addSubview:lblTitleInfo];
     
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 114, 320, 400)];
     [self.view addSubview:view];
@@ -72,7 +72,7 @@
     [control setScrollEnabled:YES];
     [view addSubview:control];
     
-    lbl=[[UILabel alloc]initWithFrame:CGRectMake(50, 5, 100, 20)];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(50, 5, 100, 20)];
     [lbl setTextAlignment:NSTextAlignmentRight];
     [lbl setFont:[UIFont systemFontOfSize:12.0]];
     [lbl setText:@"线路名称:"];
@@ -376,6 +376,8 @@
 
 - (void)reloadDataSource{
     
+    [lblTitleInfo setText:[NSString stringWithFormat:@"%@ | %@",self.serialNo,self.channelNo]];
+    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
@@ -393,33 +395,69 @@
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
     NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-    for(NSDictionary *dic in dataArray) {
-        [lblV1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NAME"]]];
-        [lblV2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NO"]]];
-        [lblV3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"SWITCH_NO"]]];
-        [lblV4 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LOAD_GRADE"]]];
-        [lblV5 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"FIX_VALUE"]]];
-        [lblV6 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"RATIO"]]];
-        [lblV7 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"STATUS2"]]];
-        [lblV8 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"REPORT_DATE"]]];
-        [lblV9 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TOTAL_POWER"]]];
-        [lblV10 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"all_hour"]]];
-        [lblV11 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_A"]]];
-        [lblV12 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_B"]]];
-        [lblV13 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_C"]]];
-        [lblV14 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_A"]]];
-        [lblV15 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_B"]]];
-        [lblV16 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_C"]]];
-        [lblV17 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_A"]]];
-        [lblV18 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_B"]]];
-        [lblV19 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_C"]]];
-        [lblV20 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_A"]]];
-        [lblV21 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_B"]]];
-        [lblV22 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_C"]]];
-        [lblV23 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"HZ"]]];
-        break;
+    if([dataArray count]>0){
+        for(NSDictionary *dic in dataArray) {
+            NSString *result=[NSString stringWithFormat:@"%@",[dic objectForKey:@"result"]];
+            if([@"-15" isEqualToString:result]){
+                [Common alert:@"暂未配置远程汇集器信息，请配置再下发!"];
+            }else if([@"-14" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不是12位，请修改后再操作。"];
+            }else if([@"-13" isEqualToString:result]){
+                [Common alert:@"连接中断，已重新连接!"];
+            }else if([@"-12" isEqualToString:result]){
+                [Common alert:@"连接失败，请检查网络及汇集器是否正常!"];
+            }else if([@"-11" isEqualToString:result]){
+                [Common alert:@"站点下发类型尚未设置，不可操作！"];
+            }else if([@"-10" isEqualToString:result]){
+                [Common alert:@"找不到唯一标识或序列号，请核实后再操作！"];
+            }else if([@"-9" isEqualToString:result]){
+                [Common alert:@"查询未找到采集器序列号，请联系管理员！"];
+            }else if([@"-8" isEqualToString:result]){
+                [Common alert:@"操作失败，当前用户无管理权限！;"];
+            }else if([@"-7" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下未找到线路，不可操作！"];
+            }else if([@"-6" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号不可操作，"];
+            }else if([@"-5" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号注册类型错误，"];
+            }else if([@"-4" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下存在多条线路，不能使用CK型采集器序列号！"];
+            }else if([@"-2" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不可操作！"];
+            }else if([@"-1" isEqualToString:result]){
+                [Common alert:@"序列号变更失败！"];
+            }else if([@"0" isEqualToString:result]){
+                [Common alert:@"不合法操作（该用户不存在）！"];
+            }else{
+                [lblV1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NAME"]]];
+                [lblV2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NO"]]];
+                [lblV3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"SWITCH_NO"]]];
+                [lblV4 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LOAD_GRADE"]]];
+                [lblV5 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"FIX_VALUE"]]];
+                [lblV6 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"RATIO"]]];
+                [lblV7 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"STATUS2"]]];
+                [lblV8 setText:[Common ConvertByNSDate:[NSString stringWithFormat:@"%@",[dic objectForKey:@"REPORT_DATE"]]]];
+                [lblV9 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TOTAL_POWER"]]];
+                [lblV10 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"all_hour"]]];
+                [lblV11 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_A"]]];
+                [lblV12 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_B"]]];
+                [lblV13 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_C"]]];
+                [lblV14 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_A"]]];
+                [lblV15 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_B"]]];
+                [lblV16 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_C"]]];
+                [lblV17 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_A"]]];
+                [lblV18 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_B"]]];
+                [lblV19 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_C"]]];
+                [lblV20 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_A"]]];
+                [lblV21 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_B"]]];
+                [lblV22 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_C"]]];
+                [lblV23 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"HZ"]]];
+            }
+            break;
+        }
+    }else{
+        [Common alert:@"查询未找到采集器序列号，请联系管理员"];
     }
-    
 }
 
 @end

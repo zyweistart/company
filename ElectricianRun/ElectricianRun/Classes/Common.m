@@ -61,28 +61,33 @@
 
 + (NSString *)ConvertByNSDate:(NSString*)value
 {
-    return [Common ConvertByNSDate:value format:@"yyyy/MM/dd+hh:mm:ss"];
+    NSString *d=[Common NSNullConvertEmptyString:value];
+    if(d){
+        return [d stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    }
+    return d;
+//    return [Common ConvertByNSDate:value format:@"yyyy/MM/dd+hh:mm:ss"];
 }
 
-+ (NSString *)ConvertByNSDate:(NSString*)value format:(NSString*)format
-{
-    NSString *d=[Common NSNullConvertEmptyString:value];
-    if(![@"" isEqualToString:d]){
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat: format];
-        NSDate *destDate= [dateFormatter dateFromString:d];
-        if(destDate!=nil){
-            NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-            [dateFormatter1 setDateFormat: @"yyyy-MM-dd hh:mm:ss"];
-            NSString *v=[dateFormatter1 stringFromDate:destDate];
-            if(v!=nil){
-                return v;
-            }
-        }
-        return d;
-    }
-    return @"";
-}
+//+ (NSString *)ConvertByNSDate:(NSString*)value format:(NSString*)format
+//{
+//    NSString *d=[Common NSNullConvertEmptyString:value];
+//    if(![@"" isEqualToString:d]){
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat: format];
+//        NSDate *destDate= [dateFormatter dateFromString:d];
+//        if(destDate!=nil){
+//            NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+//            [dateFormatter1 setDateFormat: @"yyyy-MM-dd hh:mm:ss"];
+//            NSString *v=[dateFormatter1 stringFromDate:destDate];
+//            if(v!=nil){
+//                return v;
+//            }
+//        }
+//        return d;
+//    }
+//    return @"";
+//}
 
 + (void)AsynchronousDownloadWithUrl:(NSString *)u FileName:(NSString *)fName image:(UIImageView*)img
 {

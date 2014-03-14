@@ -101,6 +101,18 @@
 }
 
 - (void)submit:(id)sender {
+    
+    NSString *code=[txtValue1 text];
+    if([@"" isEqualToString:code]){
+        [Common alert:@"请扫描二维码"];
+        return;
+    }
+    twoDimensionalCode=[code stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if([twoDimensionalCode length]==14){
+        channl=[twoDimensionalCode substringFromIndex:12];
+    }
+    
     //获取选中的列中的所在的行
     if([twoDimensionalCode length]==12){
         if(selectrow==0){
@@ -141,11 +153,11 @@
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue1 setText:value];
-    twoDimensionalCode=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    if([twoDimensionalCode length]==14){
-        channl=[twoDimensionalCode substringFromIndex:12];
-    }
+//    twoDimensionalCode=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    
+//    if([twoDimensionalCode length]==14){
+//        channl=[twoDimensionalCode substringFromIndex:12];
+//    }
     [self backgroundDoneEditing:nil];
 }
 

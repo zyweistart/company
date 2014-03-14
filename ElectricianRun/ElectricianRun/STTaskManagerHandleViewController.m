@@ -7,7 +7,6 @@
 //
 
 #import "STTaskManagerHandleViewController.h"
-#import "NSString+Utils.h"
 #import "STTaskManagerConsumptionViewController.h"
 
 @interface STTaskManagerHandleViewController ()
@@ -100,7 +99,8 @@
             // 刷新表格
             [self.tableView reloadData];
         } else {
-            [Common alert:[pageinfo objectForKey:@"remark"]];
+//            [Common alert:[pageinfo objectForKey:@"remark"]];
+            [Common alert:@"暂无任何数据"];
         }
     }
     [self doneLoadingTableViewData];
