@@ -180,8 +180,8 @@
                           initWithTitle:@"企业总负荷超限报警体验阈值"
                           message:@"提示：输入阈值范围在0～2500之间"
                           delegate:self
-                          cancelButtonTitle:@"确定"
-                          otherButtonTitles:@"取消",nil];
+                          cancelButtonTitle:@"取消"
+                          otherButtonTitles:@"确定",nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     //设置输入框的键盘类型
     UITextField *tf = [alert textFieldAtIndex:0];
@@ -191,7 +191,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==0){
+    if(buttonIndex==1){
         NSString *content=[[alertView textFieldAtIndex:0]text];
         if(![@"" isEqualToString:content]){
             int value=[content intValue];

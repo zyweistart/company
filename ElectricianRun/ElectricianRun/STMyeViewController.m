@@ -12,14 +12,16 @@
 #import "STAboutUsViewController.h"
 #import "WeixinSessionActivity.h"
 #import "WeixinTimelineActivity.h"
+#import "FileUtils.h"
 
-@interface STMyeViewController () {
-    NSArray *activity;
-}
+@interface STMyeViewController ()
 
 @end
 
-@implementation STMyeViewController
+@implementation STMyeViewController {
+    NSArray *activity;
+    NSString *cacheName;
+}
 
 - (id)init {
     self=[super init];
@@ -29,6 +31,7 @@
         self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStyleGrouped];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
+        cacheName=nil;
     }
     return self;
 }
@@ -89,7 +92,27 @@
     }else if(section==2){
         cell.textLabel.text=@"关于e电工";
     }else if(section==3){
-        cell.textLabel.text=@"清除缓存数据";
+        if(cacheName!=nil){
+            cell.textLabel.text=[NSString stringWithFormat:@"缓存大小:%@",cacheName];
+        }else{
+            cell.textLabel.text=@"正在计算...";
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+            dispatch_async(queue, ^{
+                long long cachesize=[FileUtils getCacheSize];
+                if(cachesize/1024/1024>1024){//GB
+                    float totla=(float)cachesize/1024/1024;
+                    cacheName=[NSString stringWithFormat:@"%.2fGB",totla/1024];
+                }else if(cachesize/1024>1024){//MB
+                    float totla=(float)cachesize/1024;
+                    cacheName=[NSString stringWithFormat:@"%.2fMB",totla/1024];
+                }else{//KB
+                    cacheName=[NSString stringWithFormat:@"%lldKB",cachesize/1024];
+                }
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    cell.textLabel.text=[NSString stringWithFormat:@"缓存大小:%@",cacheName];
+                });
+            });
+        }
     }
     if(section!=3){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -153,9 +176,12 @@
                     [fileManager removeItemAtPath:path error:nil];
                 }
             }
-            [Common alert:@"已清除成功"];
+            [Common alert:@"缓存清除成功"];
+            cacheName=nil;
+            [self.tableView reloadData];
         }
     }
 }
+
 
 @end
