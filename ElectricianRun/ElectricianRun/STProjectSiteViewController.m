@@ -9,7 +9,6 @@
 #import "STProjectSiteViewController.h"
 #import "STScanningViewController.h"
 #import "STProjectSiteAddLineViewController.h"
-#import "NSString+Utils.h"
 
 #define RESPONSECODESCAN 500
 #define RESPONSECODESCANADD 501
@@ -33,9 +32,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title=@"工程建站";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -222,58 +223,71 @@
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode
 {
-    if(repCode==RESPONSECODESCAN){
-        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-        
+    NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
+    if([dataArray count]>0){
         for(NSDictionary *dic in dataArray) {
-            data=[[NSMutableDictionary alloc]initWithDictionary:dic];
-//            [txtValue1 setText:[dic objectForKey:@"SERIAL_NO"]];
-            [txtValue2 setText:[dic objectForKey:@"CP_NAME"]];
-            [txtValue3 setText:[dic objectForKey:@"CONVERGEKEY"]];
-            [txtValue4 setText:[dic objectForKey:@"SUB_NAME"]];
-            break;
-        }
-    }else if(repCode==RESPONSECODESCANADD){
-        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-        
-        for(NSDictionary *dic in dataArray) {
-            NSMutableDictionary *d=[[NSMutableDictionary alloc]initWithDictionary:dic];
-            
-            [d setObject:lineCode forKey:@"SERIAL_NO"];
-            [d setObject:[data objectForKey:@"MSITE_ID"] forKey:@"MSITE_ID"];
-            
-            STProjectSiteAddLineViewController *projectSiteAddLineViewController=[[STProjectSiteAddLineViewController alloc]initWithData:d];
-            [self.navigationController pushViewController:projectSiteAddLineViewController animated:YES];
-            break;
-        }
-    }else if(repCode==RESPONSECODECREATESITE){
-        
-        NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-        
-        for(NSDictionary *dic in dataArray) {
-            int result=[[dic objectForKey:@"result"]intValue];
-            [data setValue:@"0" forKey:@"MSITE_ID"];
-            if(result>0) {
-                [data setValue:[NSString stringWithFormat:@"%d",result] forKey:@"MSITE_ID"];
-                [Common alert:@"建站成功"];
-            } else if(result== -10) {
-                [Common alert:@"序列号不能为空！"];
-            } else if(result == -9) {
-                [Common alert:@"查询未找到该序列号，请联系管理员！"];
-            } else if(result == -8) {
-                [Common alert:@"该序列号不可使用状态，请联系管理员！"];
-            } else if(result == -5) {
-                [Common alert:@"选择正确的站点进入添加！"];
-            } else if(result  == -4) {
-                [Common alert:@"该站点已经存在，无需添加！"];
-            } else if(result == -2) {
-                [Common alert:@"该序列号不可操作！"];
-            } else if(result == 0) {
+            NSString *result=[NSString stringWithFormat:@"%@",[dic objectForKey:@"result"]];
+            if([@"-15" isEqualToString:result]){
+                [Common alert:@"暂未配置远程汇集器信息，请配置再下发!"];
+            }else if([@"-14" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不是12位，请修改后再操作。"];
+            }else if([@"-13" isEqualToString:result]){
+                [Common alert:@"连接中断，已重新连接!"];
+            }else if([@"-12" isEqualToString:result]){
+                [Common alert:@"连接失败，请检查网络及汇集器是否正常!"];
+            }else if([@"-11" isEqualToString:result]){
+                [Common alert:@"站点下发类型尚未设置，不可操作！"];
+            }else if([@"-10" isEqualToString:result]){
+                [Common alert:@"找不到唯一标识或序列号，请核实后再操作！"];
+            }else if([@"-9" isEqualToString:result]){
+                [Common alert:@"查询未找到采集器序列号，请联系管理员！"];
+            }else if([@"-8" isEqualToString:result]){
+                [Common alert:@"操作失败，当前用户无管理权限！;"];
+            }else if([@"-7" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下未找到线路，不可操作！"];
+            }else if([@"-6" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号不可操作，"];
+            }else if([@"-5" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号注册类型错误，"];
+            }else if([@"-4" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下存在多条线路，不能使用CK型采集器序列号！"];
+            }else if([@"-2" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不可操作！"];
+            }else if([@"-1" isEqualToString:result]){
+                [Common alert:@"序列号变更失败！"];
+            }else if([@"0" isEqualToString:result]){
                 [Common alert:@"不合法操作（该用户不存在）！"];
+            }else{
+                if(repCode==RESPONSECODESCAN){
+                    data=[[NSMutableDictionary alloc]initWithDictionary:dic];
+//                    [txtValue1 setText:[dic objectForKey:@"SERIAL_NO"]];
+                    [txtValue2 setText:[dic objectForKey:@"CP_NAME"]];
+                    [txtValue3 setText:[dic objectForKey:@"CONVERGEKEY"]];
+                    [txtValue4 setText:[dic objectForKey:@"SUB_NAME"]];
+                }else if(repCode==RESPONSECODESCANADD){
+                    NSMutableDictionary *d=[[NSMutableDictionary alloc]initWithDictionary:dic];
+                    
+                    [d setObject:lineCode forKey:@"SERIAL_NO"];
+                    [d setObject:[data objectForKey:@"MSITE_ID"] forKey:@"MSITE_ID"];
+                    
+                    STProjectSiteAddLineViewController *projectSiteAddLineViewController=[[STProjectSiteAddLineViewController alloc]initWithData:d];
+                    [self.navigationController pushViewController:projectSiteAddLineViewController animated:YES];
+                }else if(repCode==RESPONSECODECREATESITE){
+                    [data setValue:@"0" forKey:@"MSITE_ID"];
+                    [data setValue:result forKey:@"MSITE_ID"];
+                    [Common alert:@"建站成功"];
+                }
             }
             break;
         }
-        
+    }else{
+        if(repCode==RESPONSECODESCAN){
+            [Common alert:@"查询未找到汇集器序列号，请联系管理员"];
+        }else if(repCode==RESPONSECODESCANADD){
+            [Common alert:@"查询未找到采集器序列号，请联系管理员"];
+        }else{
+            [Common alert:@"暂无记录"];
+        }
     }
 }
 
