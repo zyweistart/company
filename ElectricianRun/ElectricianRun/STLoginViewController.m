@@ -100,6 +100,7 @@
         [p setObject:[[password uppercaseString] md5] forKey:@"authentication"];
         [p setObject:@"2" forKey:@"type"];
         [p setObject:@"2" forKey:@"IsEncode"];
+        [p setObject:[Common getCache:DEVICETOKEN] forKey:@"equipmentId"];
         
         self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
         [self.hRequest setIsShowMessage:YES];

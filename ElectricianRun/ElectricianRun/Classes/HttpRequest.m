@@ -100,7 +100,7 @@
     }
     NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSString *url=[HTTP_URL stringByAddingPercentEscapesUsingEncoding:gbkEncoding];
-//    NSLog(@"%@",url);
+//    NSLog(@"%@,%d",url,[url length]);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     // 设置请求方法
     request.HTTPMethod = @"POST";
