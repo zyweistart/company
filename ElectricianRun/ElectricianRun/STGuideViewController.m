@@ -104,6 +104,7 @@
     
     self.hPicRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADPIC];
     [self.hPicRequest setIsShowMessage:NO];
+    [self.hPicRequest setIsShowNetConnectionMessage:NO];
     [self.hPicRequest start:URLnews params:p];
 }
 
@@ -116,6 +117,7 @@
     
     self.hHtmlRequest=[[HttpRequest alloc]init:self delegate:self responseCode:DOWNLOADHTML];
     [self.hHtmlRequest setIsShowMessage:NO];
+    [self.hHtmlRequest setIsShowNetConnectionMessage:NO];
     [self.hHtmlRequest start:URLnews params:p];
 }
 

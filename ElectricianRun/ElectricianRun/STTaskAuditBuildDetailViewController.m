@@ -74,11 +74,9 @@
         return;
     }
     
-    NSString *URL=@"http://122.224.247.221:7007/WEB/mobile/AppMonitoringAlarm.aspx";
-    
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-    [p setObject:@"zhangyy" forKey:@"imei"];
-    [p setObject:[@"8888AA" md5] forKey:@"authentication"];
+    [p setObject:[Account getUserName] forKey:@"imei"];
+    [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"RW19" forKey:@"GNID"];
     [p setObject:self.cpId forKey:@"QTCP"];
     [p setObject:self.contractId forKey:@"QTCT"];
@@ -90,7 +88,7 @@
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:BUILDTASK];
     [self.hRequest setIsShowMessage:YES];
-    [self.hRequest start:URL params:p];
+    [self.hRequest start:URLAppMonitoringAlarm params:p];
     
 }
 
@@ -204,30 +202,40 @@
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
     if(repCode==LOADUSERCODE) {
         NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-        data1=[[NSMutableArray alloc]initWithArray:tmpData];
-
-        NSMutableArray *d=[[NSMutableArray alloc]init];
-        for(NSDictionary *dic in data1) {
-            [d addObject:[dic objectForKey:@"USER_NAME"]];
+        if([tmpData count]>0){
+            data1=[[NSMutableArray alloc]initWithArray:tmpData];
+            
+            NSMutableArray *d=[[NSMutableArray alloc]init];
+            for(NSDictionary *dic in data1) {
+                [d addObject:[dic objectForKey:@"USER_NAME"]];
+            }
+            
+            userdpv=[[DataPickerView alloc]initWithData:d];
+            [userdpv setDelegate:self];
+            
+            [txtValue3 setInputView:userdpv];
+        }else{
+            [Common alert:@"工作人员数据为空"];
+//            [self.navigationController popViewControllerAnimated:YES];
         }
-        
-        userdpv=[[DataPickerView alloc]initWithData:d];
-        [userdpv setDelegate:self];
-        
-        [txtValue3 setInputView:userdpv];
     } else if(repCode==LOADMODELCODE) {
         NSArray *tmpData=[[response resultJSON] objectForKey:@"table1"];
-        data2=[[NSMutableArray alloc]initWithArray:tmpData];
-
-        NSMutableArray *d=[[NSMutableArray alloc]init];
-        for(NSDictionary *dic in data2) {
-            [d addObject:[dic objectForKey:@"MODEL_NAME"]];
+        if([tmpData count]>0){
+            data2=[[NSMutableArray alloc]initWithArray:tmpData];
+            
+            NSMutableArray *d=[[NSMutableArray alloc]init];
+            for(NSDictionary *dic in data2) {
+                [d addObject:[dic objectForKey:@"MODEL_NAME"]];
+            }
+            
+            modeldpv=[[DataPickerView alloc]initWithData:d];
+            [modeldpv setDelegate:self];
+            
+            [txtValue4 setInputView:modeldpv];
+        }else{
+            [Common alert:@"任务模数据为空"];
+//            [self.navigationController popViewControllerAnimated:YES];
         }
-        
-        modeldpv=[[DataPickerView alloc]initWithData:d];
-        [modeldpv setDelegate:self];
-        
-        [txtValue4 setInputView:modeldpv];
     } else if(repCode==BUILDTASK) {
         [self.navigationController popViewControllerAnimated:YES];
     }

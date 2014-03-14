@@ -29,6 +29,7 @@
 //是否使用移动网络提示
 @property BOOL isReachableViaWiFiMessage;
 @property BOOL isBodySubmit;
+@property BOOL isShowNetConnectionMessage;
 //请求时的提示信息
 @property (strong,nonatomic) NSString *message;
 //当前请求的控制器

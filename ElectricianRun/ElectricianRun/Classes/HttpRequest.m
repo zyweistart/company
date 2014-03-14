@@ -34,6 +34,7 @@
     if (self) {
         _isBodySubmit=NO;
         _isReachableViaWiFiMessage=YES;
+        _isShowNetConnectionMessage=YES;
         [self setController:controler];
         [self setDelegate:delegate];
         [self setResponseCode:repCode];
@@ -74,7 +75,9 @@
         }
     } else {
         if(self.controller) {
-            [Common alert:@"网络连接出错，请检测网络设置"];
+            if(self.isShowNetConnectionMessage){
+                [Common alert:@"网络连接出错，请检测网络设置"];
+            }
             if( [_delegate respondsToSelector: @selector(requestFailed:didFailWithError:)]) {
                 [_delegate requestFailed:_responseCode didFailWithError:nil];
             }
