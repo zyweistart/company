@@ -69,14 +69,14 @@
         [self.lbl4 setNumberOfLines:0];
         [self addSubview:self.lbl4];
         
-        lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 87, 55, 29)];
+        lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 87, 55, 49)];
         [lbl setFont:[UIFont systemFontOfSize:12]];
         [lbl setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [lbl setTextAlignment:NSTextAlignmentRight];
         [lbl setText:@"报警内容:"];
         [self addSubview:lbl];
         
-        self.lbl5=[[UILabel alloc]initWithFrame:CGRectMake(60, 87, 250, 29)];
+        self.lbl5=[[UILabel alloc]initWithFrame:CGRectMake(60, 87, 250, 49)];
         [self.lbl5 setFont:[UIFont systemFontOfSize:12]];
         [self.lbl5 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [self.lbl5 setTextAlignment:NSTextAlignmentLeft];
