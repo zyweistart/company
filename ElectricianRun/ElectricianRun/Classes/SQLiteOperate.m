@@ -36,6 +36,13 @@
     return YES;
 }
 
+- (BOOL)createTable1
+{
+    //新闻表
+    NSString *ctNEWSql = @"CREATE TABLE IF NOT EXISTS PIC (ID INTEGER PRIMARY KEY AUTOINCREMENT,URL TEXT, NAME TEXT)";
+    return [self execSql:ctNEWSql];
+}
+
 - (BOOL)createTable
 {
     //新闻表
@@ -52,6 +59,28 @@
         return NO;
     }
     return YES;
+}
+
+- (NSMutableArray*)query1:(NSString*)sqlQuery
+{
+    NSMutableArray *data=[[NSMutableArray alloc]init];
+    sqlite3_stmt * statement;
+    if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            NSMutableDictionary *d=[[NSMutableDictionary alloc]init];
+            char *url = (char*)sqlite3_column_text(statement, 1);
+            NSString *urlStr = [[NSString alloc]initWithUTF8String:url];
+            [d setObject:urlStr forKey:@"url"];
+            
+            char *name = (char*)sqlite3_column_text(statement, 2);
+            NSString *nameStr = [[NSString alloc]initWithUTF8String:name];
+            [d setObject:nameStr forKey:@"name"];
+            
+            [data addObject:d];
+        }
+    }
+    sqlite3_close(db);
+    return data;
 }
 
 - (NSMutableArray*)query:(NSString*)sqlQuery

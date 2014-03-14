@@ -45,12 +45,39 @@
     ETFoursquareImages *foursquareImages = [[ETFoursquareImages alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-0)];
     [foursquareImages setImagesHeight:IMAGEHEIGHT];
     
-    NSArray *images  = [NSArray arrayWithObjects:
-                        [UIImage imageNamed:@"image1"],
-                        [UIImage imageNamed:@"image2"],
-                        [UIImage imageNamed:@"image3"],
-                        [UIImage imageNamed:@"image4"], nil];
+    NSMutableArray *images=[[NSMutableArray alloc]init];
     
+    db=[[SQLiteOperate alloc]init];
+    if([db openDB]){
+        //创建文件管理器
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        //获取Documents主目录
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+        //得到相应的Documents的路径
+        NSString* docDir = [paths objectAtIndex:0];
+        //更改到待操作的目录下
+        [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+        NSString *sqlQuery = @"SELECT * FROM PIC";
+        NSMutableArray *indata=[db query1:sqlQuery];
+        if(indata!=nil&&[indata count]>0){
+            for(int i=0;i<[indata count];i++){
+                NSString *name=[[indata objectAtIndex:i] objectForKey:@"name"];
+                NSString *path = [docDir stringByAppendingPathComponent:name];
+                //如果图标文件已经存在则进行显示否则进行下载
+                if([fileManager fileExistsAtPath:path]){
+                    [images addObject:[UIImage imageWithContentsOfFile:path]];
+                }
+                if([images count]==4){
+                    break;
+                }
+            }
+        }
+    }
+    //每次显示4幅如果不够4幅则加载默认的图片
+    int num=4-[images count];
+    for(int i=0;i<num;i++){
+        [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"image%d",i+1]]];
+    }
     [foursquareImages setImages:images];
     [foursquareImages setBackgroundColor:[UIColor redColor]];
     

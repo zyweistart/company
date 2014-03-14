@@ -14,9 +14,13 @@
 //打开数据库
 - (BOOL)openDB;
 //创建表
+- (BOOL)createTable1;
+//创建表
 - (BOOL)createTable;
 //执行SQL语句
 - (BOOL)execSql:(NSString *)sql;
+//查询语句
+- (NSMutableArray*)query1:(NSString*)sqlQuery;
 //查询语句
 - (NSMutableArray*)query:(NSString*)sqlQuery;
 

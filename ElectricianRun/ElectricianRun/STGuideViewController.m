@@ -126,15 +126,53 @@
     if(repCode==DOWNLOADPIC){
         NSDictionary *dic=[[response resultJSON]objectForKey:@"Rows"];
         if(dic!=nil) {
-//            NSLog(@"%@",dic);
-//            if([@"0" isEqualToString:[dic objectForKey:@"result"]]){
-//                [Common alert:[dic objectForKey:@"remark"]];
-//            }
+            if([@"0" isEqualToString:[dic objectForKey:@"result"]]){
+                return;
+            }
         }
-    }else if(repCode==DOWNLOADHTML){
         NSString *url=[[response resultJSON] objectForKey:@"URL"];
         NSMutableArray *outdata=[[response resultJSON] objectForKey:@"FILE_NAMES"];
-        
+        db=[[SQLiteOperate alloc]init];
+        if([db openDB]){
+            if([db createTable1]){
+                NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM PIC WHERE URL='%@'",url];
+                NSMutableArray *indata=[db query1:sqlQuery];
+                for(NSDictionary *outd in outdata){
+                    NSString *out_filename=[outd objectForKey:@"FILE_NAME"];
+                    BOOL flag=NO;
+                    for(NSDictionary *ind in indata){
+                        flag=NO;
+                        NSString *inname=[ind objectForKey:@"name"];
+                        
+                        if([out_filename isEqualToString:inname]){
+                            
+                            flag=YES;
+                            
+                            break;
+                        }
+                        
+                    }
+                    if(!flag){
+                        NSString *sql = [NSString stringWithFormat:
+                                         @"INSERT INTO PIC (URL,NAME) VALUES ('%@', '%@')",url, out_filename];
+                        if([db execSql:sql]){
+                            NSString *ufile=[NSString stringWithFormat:@"%@%@",url,out_filename];
+                            [self AsynchronousDownloadWithUrl:ufile FileName:out_filename];
+                        }
+                    }
+                }
+                
+            }
+        }
+    }else if(repCode==DOWNLOADHTML){
+        NSDictionary *dic=[[response resultJSON]objectForKey:@"Rows"];
+        if(dic!=nil) {
+            if([@"0" isEqualToString:[dic objectForKey:@"result"]]){
+                return;
+            }
+        }
+        NSString *url=[[response resultJSON] objectForKey:@"URL"];
+        NSMutableArray *outdata=[[response resultJSON] objectForKey:@"FILE_NAMES"];
         db=[[SQLiteOperate alloc]init];
         if([db openDB]){
             if([db createTable]){

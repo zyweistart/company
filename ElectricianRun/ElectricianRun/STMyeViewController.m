@@ -49,7 +49,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -86,12 +86,14 @@
         }
     }else if(section==1){
         cell.textLabel.text=@"报警阀值设置";
-    }else{
+    }else if(section==2){
         cell.textLabel.text=@"关于e电工";
+    }else if(section==3){
+        cell.textLabel.text=@"清除缓存数据";
     }
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+    if(section!=3){
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
 }
 
@@ -118,9 +120,11 @@
         }
         STAlarmSetupViewController *alarmSetupViewController=[[STAlarmSetupViewController alloc]init];
         [self.navigationController pushViewController:alarmSetupViewController animated:YES];
-    }else{
+    }else if(section==2){
         STAboutUsViewController *aboutUsViewController=[[STAboutUsViewController alloc]init];
         [self.navigationController pushViewController:aboutUsViewController animated:YES];
+    }else{
+       [Common actionSheet:self message:@"确认要删除所有缓存数据吗？" tag:2];
     }
 }
 
@@ -128,6 +132,27 @@
     if(actionSheet.tag==1) {
         if(buttonIndex==0){
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",@"4008263365"]]];
+        }
+    }else if(actionSheet.tag==2){
+        if(buttonIndex==0){
+            //创建文件管理器
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            //获取Documents主目录
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+            //得到相应的Documents的路径
+            NSString* docDir = [paths objectAtIndex:0];
+            //更改到待操作的目录下
+            [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+            
+            //fileList便是包含有该文件夹下所有文件的文件名及文件夹名的数组
+            NSArray *fileList = [fileManager contentsOfDirectoryAtPath:docDir error:nil];
+            for(NSString *file in fileList){
+                NSString *path = [docDir stringByAppendingPathComponent:file];
+                //如果图标文件已经存在则进行显示否则进行下载
+                if([fileManager fileExistsAtPath:path]){
+                    [fileManager removeItemAtPath:path error:nil];
+                }
+            }
         }
     }
 }

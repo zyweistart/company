@@ -34,6 +34,9 @@
     NSDictionary *aps = [[launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"] objectForKey:@"aps"];
     [self notication:aps];
     
+//    self.locationGetter=[[LocationGetter alloc]init];
+//    [self.locationGetter startUpdates];
+    
     return YES;
 }
 
