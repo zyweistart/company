@@ -31,9 +31,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         self.title=@"扫描操作";
-        
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -131,7 +130,7 @@
             [self.navigationController pushViewController:lineInfoViewController animated:YES];
         } else if(selectrow==2) {
             //更换采集器
-            STChangeMaterialViewController *changeMaterialViewController=[[STChangeMaterialViewController alloc]initWithSerialNo:code];
+            STChangeMaterialViewController *changeMaterialViewController=[[STChangeMaterialViewController alloc]initWithSerialNo:twoDimensionalCode];
             [self.navigationController pushViewController:changeMaterialViewController animated:YES];
         }
     } else {
@@ -153,11 +152,6 @@
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue1 setText:value];
-//    twoDimensionalCode=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    
-//    if([twoDimensionalCode length]==14){
-//        channl=[twoDimensionalCode substringFromIndex:12];
-//    }
     [self backgroundDoneEditing:nil];
 }
 

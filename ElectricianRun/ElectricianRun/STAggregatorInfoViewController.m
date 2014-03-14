@@ -207,28 +207,66 @@
 
 - (void)requestFinishedByResponse:(Response*)response responseCode:(int)repCode {
     NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
-    for(NSDictionary *dic in dataArray) {
-        [lblV1 setText:[self serialNo]];
-        [lblV2 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"PRODUCT_NO"]]];
-        [lblV3 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"COMMU_TYPE"]]];
-        NSString *statusStr=[NSString stringWithFormat:@"%@",[Common NSNullConvertEmptyString:[dic objectForKey:@"STATUS"]]];
-        if([@"1" isEqualToString:statusStr]){
-            [lblV4 setText:@"关闭"];
-        }else if([@"2" isEqualToString:statusStr]){
-           [lblV4 setText:@"在线"];
+    if([dataArray count]>0){
+        for(NSDictionary *dic in dataArray) {
+            NSString *result=[NSString stringWithFormat:@"%@",[dic objectForKey:@"result"]];
+            if([@"-15" isEqualToString:result]){
+                [Common alert:@"暂未配置远程汇集器信息，请配置再下发!"];
+            }else if([@"-14" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不是12位，请修改后再操作。"];
+            }else if([@"-13" isEqualToString:result]){
+                [Common alert:@"连接中断，已重新连接!"];
+            }else if([@"-12" isEqualToString:result]){
+                [Common alert:@"连接失败，请检查网络及汇集器是否正常!"];
+            }else if([@"-11" isEqualToString:result]){
+                [Common alert:@"站点下发类型尚未设置，不可操作！"];
+            }else if([@"-10" isEqualToString:result]){
+                [Common alert:@"找不到唯一标识或序列号，请核实后再操作！"];
+            }else if([@"-9" isEqualToString:result]){
+                [Common alert:@"查询未找到采集器序列号，请联系管理员！"];
+            }else if([@"-8" isEqualToString:result]){
+                [Common alert:@"操作失败，当前用户无管理权限！;"];
+            }else if([@"-7" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下未找到线路，不可操作！"];
+            }else if([@"-6" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号不可操作，"];
+            }else if([@"-5" isEqualToString:result]){
+                [Common alert:@"变更采集器序列号注册类型错误，"];
+            }else if([@"-4" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号下存在多条线路，不能使用CK型采集器序列号！"];
+            }else if([@"-2" isEqualToString:result]){
+                [Common alert:@"原始采集器序列号不可操作！"];
+            }else if([@"-1" isEqualToString:result]){
+                [Common alert:@"序列号变更失败！"];
+            }else if([@"0" isEqualToString:result]){
+                [Common alert:@"不合法操作（该用户不存在）！"];
+            }else{
+                [lblV1 setText:[self serialNo]];
+                [lblV2 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"PRODUCT_NO"]]];
+                [lblV3 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"COMMU_TYPE"]]];
+                NSString *statusStr=[NSString stringWithFormat:@"%@",[Common NSNullConvertEmptyString:[dic objectForKey:@"STATUS"]]];
+                if([@"1" isEqualToString:statusStr]){
+                    [lblV4 setText:@"关闭"];
+                }else if([@"2" isEqualToString:statusStr]){
+                    [lblV4 setText:@"在线"];
+                }
+                [lblV5 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CP_NAME"]]];
+                [lblV6 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CONVERGE_KEY"]]];
+                [lblV7 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"LINES_COUNT"]]];
+                [lblV8 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"METERS_COUNT"]]];
+                [lblV9 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"ALARM_COUNT"]]];
+                [lblV10 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"ERR_COUNT"]]];
+                
+                SITE_ID=[Common NSNullConvertEmptyString:[dic objectForKey:@"SITE_ID"]];
+                if(![@"" isEqualToString:SITE_ID]){
+                    [btnEnt setHidden:NO];
+                }
+            }
+            break;
         }
-        [lblV5 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CP_NAME"]]];
-        [lblV6 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"CONVERGE_KEY"]]];
-        [lblV7 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LINES_COUNT"]]]];
-        [lblV8 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METERS_COUNT"]]]];
-        [lblV9 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ALARM_COUNT"]]]];
-        [lblV10 setText:[Common NSNullConvertEmptyString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ERR_COUNT"]]]];
-        
-        SITE_ID=[NSString stringWithFormat:@"%@",[dic objectForKey:@"SITE_ID"]];
-        [btnEnt setHidden:NO];
-        break;
+    }else{
+        [Common alert:@"查询未找到汇集器序列号，请联系管理员"];
     }
-    
 }
 
 @end

@@ -51,7 +51,7 @@
         [txtValue1 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [txtValue1 setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [txtValue1 setKeyboardType:UIKeyboardTypePhonePad];
-        [txtValue1 setEnabled:YES];
+        [txtValue1 setEnabled:NO];
         [txtValue1 setText:self.serialNo];
         [control addSubview:txtValue1];
         
@@ -143,30 +143,32 @@
 
 - (void)submit:(id)sender {
     
-    NSString *oldSerialNo=self.serialNo;
     NSString *newSerialNo=[txtValue2 text];
     
-    oldSerialNo=[oldSerialNo stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if([@"" isEqualToString:oldSerialNo]){
-        [Common alert:@"请扫描旧序列号"];
-        return;
-    }
-    newSerialNo=[newSerialNo stringByReplacingOccurrencesOfString:@" " withString:@""];
     if([@"" isEqualToString:newSerialNo]){
         [Common alert:@"请扫描新序列号"];
         return;
     }
     
+    twoDimensionalCode=[newSerialNo stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if([twoDimensionalCode length]!=14){
+        [Common alert:@"请扫描采集器"];
+        return;
+    }
     
     NSInteger row=[pickerView selectedRowInComponent:0];
+    if(row==0){
+        [Common alert:@"请选择更换类型!"];
+        return;
+    }
     
     NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
     [p setObject:[Account getUserName] forKey:@"imei"];
     [p setObject:[Account getPassword] forKey:@"authentication"];
     [p setObject:@"0" forKey:@"OpWap"];
     [p setObject:@"1" forKey:@"OpType"];
-    [p setObject:oldSerialNo forKey:@"SerialNo"];
-    [p setObject:newSerialNo forKey:@"NewserialNo"];
+    [p setObject:self.serialNo forKey:@"SerialNo"];
+    [p setObject:twoDimensionalCode forKey:@"NewserialNo"];
     [p setObject:[NSString stringWithFormat:@"%d",row] forKey:@"ChangeReason"];
     
     self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:500];
@@ -220,7 +222,6 @@
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     [txtValue2 setText:value];
-    twoDimensionalCode=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
     [self backgroundDoneEditing:nil];
 }
 

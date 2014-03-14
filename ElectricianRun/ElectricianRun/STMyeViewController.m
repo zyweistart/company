@@ -77,6 +77,7 @@
                 cell.detailTextLabel.text=[Account getUserName];
             }else{
                 cell.textLabel.text=@"登录账户";
+                cell.detailTextLabel.text=@"";
             }
         }else if(row==1){
             cell.textLabel.text=@"推荐给好友";
@@ -111,6 +112,8 @@
     }else if(section==1){
         if(![Account isLogin]){
             [Common alert:@"你还未登录，请先登录!"];
+            STLoginViewController *loginViewController=[[STLoginViewController alloc]init];
+            [self.navigationController pushViewController:loginViewController animated:YES];
             return;
         }
         STAlarmSetupViewController *alarmSetupViewController=[[STAlarmSetupViewController alloc]init];

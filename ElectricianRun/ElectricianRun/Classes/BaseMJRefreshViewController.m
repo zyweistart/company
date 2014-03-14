@@ -163,6 +163,11 @@
 //            NSString *remark=[pageinfo objectForKey:@"remark"];
 //            [Common alert:remark];
             [Common alert:@"暂无任何数据"];
+            [[self dataItemArray]removeAllObjects];
+            [self.tableView reloadData];
+            if(self.isLoadCache){
+                [Common setCache:self.cachetag!=nil?self.cachetag:CACHE_DATA data:@""];
+            }
         }
     }else{
         [Common alert:@"数据解析异常"];

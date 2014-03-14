@@ -17,6 +17,7 @@
 #import "STTaskManagerViewController.h"
 #import "STTaskAuditViewController.h"
 #import "STNewsListViewController.h"
+#import "STLoginViewController.h"
 
 #import "ETFoursquareImages.h"
 #import "SQLiteOperate.h"
@@ -142,6 +143,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.navigationController.navigationBarHidden=YES;
 }
 
 //用户体验
@@ -154,6 +156,9 @@
 - (void)onClickJurisdiction:(id)sender {
     if(![Account isLogin]){
         [Common alert:@"你还未登录，请先登录!"];
+        STLoginViewController *loginViewController=[[STLoginViewController alloc]init];
+        self.navigationController.navigationBarHidden=NO;
+        [self.navigationController pushViewController:loginViewController animated:YES];
         return;
     }
     
@@ -211,6 +216,9 @@
 - (void)onClickSite:(id)sender {
     if(![Account isLogin]){
         [Common alert:@"你还未登录，请先登录!"];
+        STLoginViewController *loginViewController=[[STLoginViewController alloc]init];
+        self.navigationController.navigationBarHidden=NO;
+        [self.navigationController pushViewController:loginViewController animated:YES];
         return;
     }
     if(![Account isAuth:@"ELEC_SUBSTATION_CREATE"]){

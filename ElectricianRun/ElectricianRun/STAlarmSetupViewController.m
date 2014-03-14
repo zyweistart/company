@@ -110,7 +110,7 @@
             [p setObject:content2 forKey:@"QTVAL1"];
             
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:ALARAMSETUPREQUESTCODE];
-            [self.hRequest setIsShowMessage:NO];
+            [self.hRequest setIsShowMessage:YES];
             [self.hRequest start:URLAppMonitoringAlarm params:p];
         }
     }
@@ -121,7 +121,9 @@
     if(repCode==ALARAMSETUPREQUESTCODE){
         NSDictionary *data=[[response resultJSON] objectForKey:@"Rows"];
         [Common alert:[data objectForKey:@"remark"]];
-        [self autoRefresh];
+        if([@"1" isEqualToString:[data objectForKey:@"result"]]){
+            [self autoRefresh];
+        }
     }else{
         [super requestFinishedByResponse:response responseCode:repCode];
     }

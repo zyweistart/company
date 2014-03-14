@@ -117,7 +117,7 @@
         [Common alert:@"登录成功"];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        [Common alert:@"登录出错"];
+        [Common alert:@"用户名或密码有误，请重试!"];
     }
 }
 
