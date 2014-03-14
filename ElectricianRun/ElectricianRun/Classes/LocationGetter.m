@@ -27,9 +27,9 @@
 //定位时候调用
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"latitude: %.6f, longitude: %.6f\n",
-           newLocation.coordinate.latitude,
-           newLocation.coordinate.longitude);
+//    NSLog(@"latitude: %.6f, longitude: %.6f\n",
+//           newLocation.coordinate.latitude,
+//           newLocation.coordinate.longitude);
     self.currentLocation=newLocation;
 }
 

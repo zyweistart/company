@@ -153,6 +153,7 @@
                     [fileManager removeItemAtPath:path error:nil];
                 }
             }
+            [Common alert:@"已清除成功"];
         }
     }
 }
