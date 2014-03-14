@@ -196,55 +196,55 @@
     [self.lblOutLineB3Value addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickCurrentDetailInfo:)]];
     [self.control addSubview:self.lblOutLineB3Value];
     
-    self.btnInLineA=[[UIButton alloc]initWithFrame:CGRectMake(30, 96, 24, 12)];
+    self.btnInLineA=[[UIButton alloc]initWithFrame:CGRectMake(32, 96, 24, 12)];
 //    [self.btnInLineA setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnInLineA.tag=0;
     [self.btnInLineA addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnInLineA];
     
-    self.btnOutLineA1=[[UIButton alloc]initWithFrame:CGRectMake(80, 135, 24, 12)];
+    self.btnOutLineA1=[[UIButton alloc]initWithFrame:CGRectMake(79.5, 134.5, 24, 12)];
 //    [self.btnOutLineA1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     self.btnOutLineA1.tag=1;
     [self.btnOutLineA1 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineA1];
     
-    self.btnOutLineA2=[[UIButton alloc]initWithFrame:CGRectMake(80, 184, 24, 12)];
+    self.btnOutLineA2=[[UIButton alloc]initWithFrame:CGRectMake(79.5, 183.5, 24, 12)];
 //    [self.btnOutLineA2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnOutLineA2.tag=2;
     [self.btnOutLineA2 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineA2];
     
-    self.btnOutLineA3=[[UIButton alloc]initWithFrame:CGRectMake(80, 236, 24, 12)];
+    self.btnOutLineA3=[[UIButton alloc]initWithFrame:CGRectMake(79.5, 235.5, 24, 12)];
 //    [self.btnOutLineA3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnOutLineA3.tag=3;
     [self.btnOutLineA3 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineA3];
     
-    self.btnInLineB=[[UIButton alloc]initWithFrame:CGRectMake(270, 96, 24, 12)];
+    self.btnInLineB=[[UIButton alloc]initWithFrame:CGRectMake(277, 96, 24, 12)];
 //    [self.btnInLineB setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnInLineB.tag=4;
     [self.btnInLineB addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnInLineB];
     
-    self.btnOutLineB1=[[UIButton alloc]initWithFrame:CGRectMake(215, 135, 24, 12)];
+    self.btnOutLineB1=[[UIButton alloc]initWithFrame:CGRectMake(219.5, 134.5, 24, 12)];
 //    [self.btnOutLineB1 setBackgroundImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     self.btnOutLineB1.tag=5;
     [self.btnOutLineB1 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineB1];
     
-    self.btnOutLineB2=[[UIButton alloc]initWithFrame:CGRectMake(215, 184, 24, 12)];
+    self.btnOutLineB2=[[UIButton alloc]initWithFrame:CGRectMake(219.5, 183.5, 24, 12)];
 //    [self.btnOutLineB2 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnOutLineB2.tag=6;
     [self.btnOutLineB2 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineB2];
     
-    self.btnOutLineB3=[[UIButton alloc]initWithFrame:CGRectMake(215, 236, 24, 12)];
+    self.btnOutLineB3=[[UIButton alloc]initWithFrame:CGRectMake(219.5, 235.5, 24, 12)];
 //    [self.btnOutLineB3 setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnOutLineB3.tag=7;
     [self.btnOutLineB3 addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
     [self.control addSubview:self.btnOutLineB3];
     
-    self.btnMotherOf=[[UIButton alloc]initWithFrame:CGRectMake(150, 223, 24, 12)];
+    self.btnMotherOf=[[UIButton alloc]initWithFrame:CGRectMake(150, 223.5, 24, 12)];
 //    [self.btnMotherOf setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     self.btnMotherOf.tag=8;
     [self.btnMotherOf addTarget:self action:@selector(onClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
