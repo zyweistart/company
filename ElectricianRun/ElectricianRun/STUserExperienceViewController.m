@@ -131,7 +131,7 @@
                                   initWithTitle:@"大工业用户体验"
                                   message:[NSString stringWithFormat:@"大工业用户，您当前总负荷低于%dKW，整体负载率低于%d％。体验继续…",percent,bruden]
                                   delegate:self
-                                  cancelButtonTitle:@"继续体验"
+                                  cancelButtonTitle:@"接受建议"
                                   otherButtonTitles:@"取消体验",nil];
             alert.tag=1;
             [alert show];
@@ -212,7 +212,7 @@
             
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:@"商业用户体验"
-                                  message:[NSString stringWithFormat:@"更改运行方式后，您已节省电费C2-C1元%.2f",C2-C1]
+                                  message:[NSString stringWithFormat:@"更改运行方式后，您已节省电费%.2f元",C2-C1]
                                   delegate:self
                                   cancelButtonTitle:@"确定"
                                   otherButtonTitles:nil,nil];
