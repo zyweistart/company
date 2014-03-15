@@ -120,12 +120,12 @@
     [btnCalculate addTarget:self action:@selector(calculate:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnCalculate];
     
-    int IMAGEHEIGHT=468.0;
+    int IMAGEHEIGHT=428.0;
     if(!inch4){
-        IMAGEHEIGHT=380.0;
+        IMAGEHEIGHT=340.0;
     }
     
-    UIPickerView* pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,IMAGEHEIGHT,320.0,100.0)];
+    UIPickerView* pickerView = [ [ UIPickerView alloc] initWithFrame:CGRectMake(0.0,IMAGEHEIGHT,320.0,50.0)];
     pickerView.delegate = self;
     pickerView.dataSource =  self;
     [self.view addSubview:pickerView];

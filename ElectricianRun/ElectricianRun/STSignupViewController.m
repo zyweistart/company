@@ -35,12 +35,20 @@
     NSMutableArray *dataCountys;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)init{
+    self = [super init];
     if (self) {
         self.title=@"电工注册";
         [self.view setBackgroundColor:[UIColor whiteColor]];
+    }
+    return self;
+}
+
+- (id)initWithPhone:(NSString*)phone{
+    self.phone=phone;
+    self = [self init];
+    if (self) {
+        
     }
     return self;
 }
@@ -92,6 +100,7 @@
     [txtPhone setFont:[UIFont systemFontOfSize: 12.0]];
     [txtPhone setClearButtonMode:UITextFieldViewModeWhileEditing];
     [txtPhone setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtPhone setText:self.phone];
     [control addSubview:txtPhone];
  
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 90, 90, 30)];

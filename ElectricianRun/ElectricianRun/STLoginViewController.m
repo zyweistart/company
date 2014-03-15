@@ -75,8 +75,8 @@
     [txtValuePassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [control addSubview:txtValuePassword];
     
-    [txtValueUserName setText:@"zhangyy-gzry"];
-    [txtValuePassword setText:@"8888AA"];
+//    [txtValueUserName setText:@"zhangyy-gzry"];
+//    [txtValuePassword setText:@"8888AA"];
     
 }
 

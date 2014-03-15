@@ -131,8 +131,8 @@
     }
     
     if(switchFlag){
-        if(tag==0||tag==4){
-            if(!finalB[0]||!finalB[4]){
+        if(tag<8){
+            if(!finalB[tag]){
                 //开启报警声音
                 NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
                 NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
@@ -146,6 +146,23 @@
                 player.numberOfLoops = 1;//设置音乐播放次数  -1为一直循环
                 [player prepareToPlay];
                 [player play];
+                if(tag==0){
+                    [Common alert:@"进线1开关跳闸，请注意！"];
+                }else if(tag==1){
+                    [Common alert:@"出线A-1开关跳闸，请注意！"];
+                }else if(tag==2){
+                    [Common alert:@"出线A-2开关跳闸，请注意！"];
+                }else if(tag==3){
+                    [Common alert:@"出线A-3开关跳闸，请注意！"];
+                }else if(tag==4){
+                    [Common alert:@"进线2开关跳闸，请注意！"];
+                }else if(tag==5){
+                    [Common alert:@"出线B-1开关跳闸，请注意！"];
+                }else if(tag==6){
+                    [Common alert:@"出线B-2开关跳闸，请注意！"];
+                }else if(tag==7){
+                    [Common alert:@"出线B-3开关跳闸，请注意！"];
+                }
                 switchFlag=NO;
             }
         }

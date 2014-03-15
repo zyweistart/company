@@ -374,8 +374,14 @@ double allTotalElectricity[12][2][4];
 
 - (void)alarme3:(id)sender
 {
-    [Common alert:@"开关状态报警已开启，请回主接线上进行开着操作"];
-    switchFlag=YES;
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"信息"
+                          message:@"开关状态报警已开启，请回主接线上进行开着操作"
+                          delegate:self
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:nil, nil];
+    alert.tag=234;
+    [alert show];
 }
 
 
@@ -397,6 +403,47 @@ double allTotalElectricity[12][2][4];
                 [self alaram:[NSString stringWithFormat:@"%@超出电流所设定的阀值，请注意！",lineName]];
                 
             }
+        }
+    }else if(tag==234){
+        NSMutableString *switchStr=[[NSMutableString alloc]init];
+        for(int i=0;i<8;i++){
+            if(!finalB[i]){
+                if(i==0){
+                    [switchStr appendString:@"进线A "];
+                }else if(i==1){
+                    [switchStr appendString:@"出线A-1 "];
+                }else if(i==2){
+                    [switchStr appendString:@"出线A-2 "];
+                }else if(i==3){
+                    [switchStr appendString:@"出线A-3 "];
+                }else if(i==4){
+                    [switchStr appendString:@"进线B "];
+                }else if(i==5){
+                    [switchStr appendString:@"出线B-1 "];
+                }else if(i==6){
+                    [switchStr appendString:@"出线B-2 "];
+                }else if(i==7){
+                    [switchStr appendString:@"出线B-3 "];
+                }
+            }
+        }
+        if(![@"" isEqualToString:switchStr]){
+            //开启报警声音
+            NSString *path=[[NSBundle mainBundle] pathForResource: @"alarm" ofType: @"mp3"];
+            NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+            NSError *error;
+            player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            if (error) {
+                NSLog(@"error:%@",[error description]);
+                return;
+            }
+            [player setVolume:1];   //设置音量大小
+            player.numberOfLoops = 1;//设置音乐播放次数  -1为一直循环
+            [player prepareToPlay];
+            [player play];
+            [Common alert:[NSString stringWithFormat:@"%@开关跳闸，请注意",switchStr]];
+        }else{
+            switchFlag=YES;
         }
     }
 }

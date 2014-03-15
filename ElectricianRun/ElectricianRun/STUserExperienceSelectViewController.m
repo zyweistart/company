@@ -41,7 +41,7 @@
     [firstView addSubview:firstViewGB];
     
     UIButton *btnAlarm=[[UIButton alloc]initWithFrame:CGRectMake(70, 360, 180, 30)];
-    [btnAlarm setTitle:@"报警体验" forState:UIControlStateNormal];
+    [btnAlarm setTitle:@"立即体验" forState:UIControlStateNormal];
     [btnAlarm setBackgroundColor:BTNCOLORGB];
     [btnAlarm addTarget:self action:@selector(alarm:) forControlEvents:UIControlEventTouchUpInside];
     [firstView addSubview:btnAlarm];

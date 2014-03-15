@@ -12,4 +12,9 @@
 
 @property (strong,nonatomic) HttpRequest *hRequest;
 
+
+@property (strong,nonatomic) NSString *phone;
+
+- (id)initWithPhone:(NSString*)phone;
+
 @end

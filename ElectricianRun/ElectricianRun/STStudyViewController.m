@@ -18,7 +18,9 @@
 
 @end
 
-@implementation STStudyViewController
+@implementation STStudyViewController {
+    NSString *phone;
+}
 
 - (id)init {
     self=[super init];
@@ -40,8 +42,8 @@
                               initWithTitle:@"我要学习"
                               message:@"手机号码"
                               delegate:self
-                              cancelButtonTitle:@"确定"
-                              otherButtonTitles:@"取消",nil];
+                              cancelButtonTitle:@"取消"
+                              otherButtonTitles:@"确定",nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         //设置输入框的键盘类型
         UITextField *tf = [alert textFieldAtIndex:0];
@@ -82,8 +84,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==0){
-        NSString *phone=[[alertView textFieldAtIndex:0]text];
+    if(buttonIndex==1){
+        phone=[[alertView textFieldAtIndex:0]text];
         if(![@"" isEqualToString:phone]){
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
             [p setObject:phone forKey:@"telNum"];
@@ -118,7 +120,7 @@
             self.tabBarController.selectedIndex=0;
         }else if([@"3" isEqualToString:result]){
             [Common alert:@"未提交申请"];
-            UINavigationController *signupViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]init]];
+            UINavigationController *signupViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STSignupViewController alloc]initWithPhone:phone]];
             [self presentViewController:signupViewControllerNav animated:YES completion:nil];
             self.tabBarController.selectedIndex=0;
         }else{

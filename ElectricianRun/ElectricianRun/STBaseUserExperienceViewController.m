@@ -94,14 +94,14 @@
     self.control.contentSize = CGSizeMake(330,280);
     [self.control setScrollEnabled:YES];
     
-    self.lblCurrentLoad=[[UILabel alloc]initWithFrame:CGRectMake(20, 25, 40, 29)];
+    self.lblCurrentLoad=[[UILabel alloc]initWithFrame:CGRectMake(20, 25, 100, 29)];
     self.lblCurrentLoad.font=[UIFont systemFontOfSize:7];
     [self.lblCurrentLoad setTextColor:[UIColor orangeColor]];
     [self.lblCurrentLoad setBackgroundColor:[UIColor clearColor]];
     [self.lblCurrentLoad setNumberOfLines:0];
     [self.control addSubview:self.lblCurrentLoad];
     
-    self.lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(270, 25, 40, 29)];
+    self.lblElectricity=[[UILabel alloc]initWithFrame:CGRectMake(220, 25, 100, 29)];
     self.lblElectricity.font=[UIFont systemFontOfSize:7];
     [self.lblElectricity setTextColor:[UIColor orangeColor]];
     [self.lblElectricity setBackgroundColor:[UIColor clearColor]];
@@ -579,9 +579,9 @@
     [self.lblOutLineB2Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[2][0],threePhaseCurrentRight[2][1],threePhaseCurrentRight[2][2]]];
     [self.lblOutLineB3Value setText:[NSString stringWithFormat:DISPLAYLINESTR,threePhaseCurrentRight[3][0],threePhaseCurrentRight[3][1],threePhaseCurrentRight[3][2]]];
     //当前负荷
-    [self.lblCurrentLoad setText:[NSString stringWithFormat:@"%.2fkW",self.currentTotalBurden/1000]];
+    [self.lblCurrentLoad setText:[NSString stringWithFormat:@"当前负荷：%.2fkW",self.currentTotalBurden/1000]];
     //当前总电量
-    [self.lblElectricity setText:[NSString stringWithFormat:@"%.2fkWh",self.currentTotalElectricity]];
+    [self.lblElectricity setText:[NSString stringWithFormat:@"当前总电量：%.2fkWh",self.currentTotalElectricity]];
 }
 
 //显示开关的状态
