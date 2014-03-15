@@ -186,7 +186,7 @@
                                   initWithTitle:@"商业用户体验"
                                   message:[NSString stringWithFormat:@"商业用户，您可以更改为大工业用户，并申请暂停一台变压器，每月节省电费约计%d元！",money]
                                   delegate:self
-                                  cancelButtonTitle:@"继续体验"
+                                  cancelButtonTitle:@"接受建议"
                                   otherButtonTitles:@"取消体验",nil];
             alert.tag=3;
             [alert show];

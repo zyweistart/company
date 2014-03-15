@@ -92,7 +92,12 @@
             [subs appendString:[Common NSNullConvertEmptyString:[d objectForKey:@"MODEL_SUB_ID"]]];
             if([@"32" isEqualToString:CODE_ID]){
                 UITextField *txt1=(UITextField*)view;
-                [values appendString:[txt1 text]];
+                NSString *v=[txt1 text];
+                if([@"" isEqualToString:v]){
+                    [Common alert:[NSString stringWithFormat:@"%@不能为空",[d objectForKey:@"SCOUTCHECK_CONTENT"]]];
+                    return;
+                }
+                [values appendString:v];
             }else{
                 UISwitch *sw=(UISwitch*)view;
                 if(sw.on){

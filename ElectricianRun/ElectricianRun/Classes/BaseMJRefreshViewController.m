@@ -161,9 +161,8 @@
             // 刷新表格
             [self.tableView reloadData];
         } else {
-//            NSString *remark=[pageinfo objectForKey:@"remark"];
-//            [Common alert:remark];
-            [Common alert:@"暂无任何数据"];
+            NSString *remark=[pageinfo objectForKey:@"remark"];
+            [Common alert:remark];
             [[self dataItemArray]removeAllObjects];
             [self.tableView reloadData];
             if(self.isLoadCache){
