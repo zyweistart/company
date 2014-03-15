@@ -8,12 +8,9 @@
 
 #import "STAppDelegate.h"
 #import "STGuideViewController.h"
-#define REQUESTCODEUPDATELOCATION 58374
-
-#import "STDataMonitoringViewController.h"
 #import "STAlarmManagerViewController.h"
-#import "STTaskManagerViewController.h"
-#import "STTaskAuditViewController.h"
+
+#define REQUESTCODEUPDATELOCATION 58374
 
 @implementation STAppDelegate
 

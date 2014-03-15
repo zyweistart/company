@@ -135,17 +135,25 @@
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
     if(responseCode==RESPONSECODESCAN){
+        NSString *v=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
         [txtValue1 setText:value];
-        
-        NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
-        [p setObject:[Account getUserName] forKey:@"imei"];
-        [p setObject:[Account getPassword] forKey:@"authentication"];
-        [p setObject:@"0" forKey:@"OpWap"];
-        [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
-        
-        self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCAN];
-        [self.hRequest setIsShowMessage:YES];
-        [self.hRequest start:URLAppProductInfoBySerial params:p];
+        if([v length]==12){
+            NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
+            [p setObject:[Account getUserName] forKey:@"imei"];
+            [p setObject:[Account getPassword] forKey:@"authentication"];
+            [p setObject:@"0" forKey:@"OpWap"];
+            [p setObject:v forKey:@"SerialNo"];
+            
+            self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODESCAN];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest start:URLAppProductInfoBySerial params:p];
+        }else{
+            [txtValue1 setText:@""];
+            [txtValue2 setText:@""];
+            [txtValue3 setText:@""];
+            [txtValue4 setText:@""];
+            [Common alert:@"请扫描正确的汇集器!"];
+        }
     }else if(responseCode==RESPONSECODESCANADD){
         NSString *v=[value stringByReplacingOccurrencesOfString:@" " withString:@""];
         if([v length]==14){
@@ -180,13 +188,13 @@
     if(data){
         int siteId=[[data objectForKey:@"MSITE_ID"]intValue];
         if(siteId==0){
-            NSString *value=[txtValue1 text];
+            NSString *value=[[txtValue1 text] stringByReplacingOccurrencesOfString:@" " withString:@""];
             
             NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
             [p setObject:[Account getUserName] forKey:@"imei"];
             [p setObject:[Account getPassword] forKey:@"authentication"];
             [p setObject:@"2" forKey:@"OpWap"];
-            [p setObject:[value stringByReplacingOccurrencesOfString:@" " withString:@""] forKey:@"SerialNo"];
+            [p setObject:value forKey:@"SerialNo"];
             
             self.hRequest=[[HttpRequest alloc]init:self delegate:self responseCode:RESPONSECODECREATESITE];
             [self.hRequest setIsShowMessage:YES];
@@ -273,7 +281,6 @@
                     STProjectSiteAddLineViewController *projectSiteAddLineViewController=[[STProjectSiteAddLineViewController alloc]initWithData:d];
                     [self.navigationController pushViewController:projectSiteAddLineViewController animated:YES];
                 }else if(repCode==RESPONSECODECREATESITE){
-                    [data setValue:@"0" forKey:@"MSITE_ID"];
                     [data setValue:result forKey:@"MSITE_ID"];
                     [Common alert:@"建站成功"];
                 }
