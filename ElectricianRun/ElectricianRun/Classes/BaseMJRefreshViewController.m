@@ -97,14 +97,15 @@
         if(count%PAGESIZE>=0){
             _currentPage++;
         }
-        
-        //如果数据页数不大于1则没有下拉刷新
-        if(_currentPage==1){
-            [Common alert:@"亲，没有最新数据，请下拉刷新试试!"];
-            [self doneLoadingTableViewData];
-        }else{
-           [self reloadTableViewDataSource];
+        if(_pageCount>0){
+            if(_currentPage>=_pageCount){
+                [Common alert:@"亲，没有最新数据，请下拉刷新试试!"];
+                [self doneLoadingTableViewData];
+                return;
+            }
         }
+        
+        [self reloadTableViewDataSource];
         
     };
     _footer = footer;
