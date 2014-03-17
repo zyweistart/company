@@ -9,139 +9,160 @@
 #import "STScanningViewController.h"
 
 @interface STScanningViewController ()
+@property (nonatomic, strong) AVCaptureSession *captureSession;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) NSString *code;
+
+-(BOOL)startReading;
+-(void)stopReading;
+-(void)loadBeepSound;
 
 @end
 
 @implementation STScanningViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor grayColor];
-	UIButton * scanButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [scanButton setTitle:@"取消" forState:UIControlStateNormal];
-    scanButton.frame = CGRectMake(100, 420, 120, 40);
-    [scanButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:scanButton];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+	// Do any additional setup after loading the view, typically from a nib.
     
-//    UILabel * labIntroudction= [[UILabel alloc] initWithFrame:CGRectMake(15, 40, 290, 50)];
-//    labIntroudction.backgroundColor = [UIColor clearColor];
-//    labIntroudction.numberOfLines=2;
-//    labIntroudction.textColor=[UIColor whiteColor];
-//    labIntroudction.text=@"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别。";
-//    [self.view addSubview:labIntroudction];
+    // Initially make the captureSession object nil.
+    _captureSession = nil;
+    
+    self.viewPreview=[[UIView alloc]initWithFrame:CGRectMake(0, 100, 320, 250)];
+    [self.view addSubview:self.viewPreview];
     
     
-//    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 100, 300, 300)];
-//    imageView.image = [UIImage imageNamed:@"pick_bg"];
-//    [self.view addSubview:imageView];
+    self.lblStatus=[[UILabel alloc]initWithFrame:CGRectMake(80,360,160,30)];
+    [self.view addSubview:self.lblStatus];
     
-    upOrdown = NO;
-    num =0;
-    _line = [[UIImageView alloc] initWithFrame:CGRectMake(50, 110, 220, 2)];
-    _line.image = [UIImage imageNamed:@"line.png"];
-    [self.view addSubview:_line];
+    self.btnOK=[[UIButton alloc]initWithFrame:CGRectMake(80,400, 160, 30)];
+    [self.btnOK setTitle:@"确认" forState:UIControlStateNormal];
+    [self.btnOK setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.btnOK addTarget:self action:@selector(startStopReading:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btnOK];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
+    // Begin loading the sound effect so to have it ready for playback when it's needed.
+    [self loadBeepSound];
     
-    
-    
-    
+    [self startReading];
 }
--(void)animation1
-{
-    if (upOrdown == NO) {
-        num ++;
-        _line.frame = CGRectMake(50, 110+2*num, 220, 2);
-        if (2*num == 280) {
-            upOrdown = YES;
-        }
-    }
-    else {
-        num --;
-        _line.frame = CGRectMake(50, 110+2*num, 220, 2);
-        if (num == 0) {
-            upOrdown = NO;
-        }
-    }
-    
-}
--(void)backAction
-{
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        [timer invalidate];
+
+
+
+#pragma mark - IBAction method implementation
+
+- (void)startStopReading:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        [self.delegate success:self.code responseCode:self.responseCode];
     }];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [self setupCamera];
+
+
+#pragma mark - Private method implementation
+
+- (BOOL)startReading {
+    NSError *error;
+    
+    // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
+    // as the media type parameter.
+    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    // Get an instance of the AVCaptureDeviceInput class using the previous device object.
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
+    
+    if (!input) {
+        // If any error occurs, simply log the description of it and don't continue any more.
+        NSLog(@"%@", [error localizedDescription]);
+        return NO;
+    }
+    
+    // Initialize the captureSession object.
+    _captureSession = [[AVCaptureSession alloc] init];
+    // Set the input device on the capture session.
+    [_captureSession addInput:input];
+    
+    
+    // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
+    AVCaptureMetadataOutput *captureMetadataOutput = [[AVCaptureMetadataOutput alloc] init];
+    [_captureSession addOutput:captureMetadataOutput];
+    
+    // Create a new serial dispatch queue.
+    dispatch_queue_t dispatchQueue;
+    dispatchQueue = dispatch_queue_create("myQueue", NULL);
+    [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatchQueue];
+    [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
+    
+    // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
+    _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+    [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
+    [_viewPreview.layer addSublayer:_videoPreviewLayer];
+    
+    
+    // Start video capture.
+    [_captureSession startRunning];
+    
+    return YES;
 }
-- (void)setupCamera
-{
-    // Device
-    _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+
+
+-(void)stopReading{
+    // Stop video capture and make the capture session object nil.
+    [_captureSession stopRunning];
+    _captureSession = nil;
     
-    // Input
-    _input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
-    
-    // Output
-    _output = [[AVCaptureMetadataOutput alloc]init];
-    [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    
-    // Session
-    _session = [[AVCaptureSession alloc]init];
-    [_session setSessionPreset:AVCaptureSessionPresetHigh];
-    if ([_session canAddInput:self.input])
-    {
-        [_session addInput:self.input];
-    }
-    
-    if ([_session canAddOutput:self.output])
-    {
-        [_session addOutput:self.output];
-    }
-    
-    // 条码类型 AVMetadataObjectTypeQRCode
-    _output.metadataObjectTypes =@[AVMetadataObjectTypeQRCode];
-    
-    // Preview
-    _preview =[AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _preview.frame =CGRectMake(20,110,280,280);
-    [self.view.layer insertSublayer:self.preview atIndex:0];
-    
-    // Start
-    [_session startRunning];
+    // Remove the video preview layer from the viewPreview view's layer.
+//    [_videoPreviewLayer removeFromSuperlayer];
 }
-#pragma mark AVCaptureMetadataOutputObjectsDelegate
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
-{
+
+
+-(void)loadBeepSound{
+    // Get the path to the beep.mp3 file and convert it to a NSURL object.
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     
-    NSString *stringValue;
+    NSError *error;
     
-    if ([metadataObjects count] >0)
-    {
-        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
-        stringValue = metadataObject.stringValue;
+    // Initialize the audio player object using the NSURL object previously set.
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    if (error) {
+        // If the audio player cannot be initialized then log a message.
+        NSLog(@"Could not play beep file.");
+        NSLog(@"%@", [error localizedDescription]);
     }
+    else{
+        // If the audio player was successfully initialized then load it in memory.
+        [_audioPlayer prepareToPlay];
+    }
+}
+
+
+#pragma mark - AVCaptureMetadataOutputObjectsDelegate method implementation
+
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
     
-    [_session stopRunning];
-    [self dismissViewControllerAnimated:YES completion:^
-     {
-         [timer invalidate];
-         [_delegate success:stringValue responseCode:self.responseCode];
-         
-     }];
+    // Check if the metadataObjects array is not nil and it contains at least one object.
+    if (metadataObjects != nil && [metadataObjects count] > 0) {
+        // Get the metadata object.
+        AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
+        if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
+            // If the found metadata is equal to the QR code metadata then update the status label's text,
+            // stop reading and change the bar button item's title and the flag's value.
+            self.code=[metadataObj stringValue];
+            // Everything is done on the main thread.
+            [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
+            
+            [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
+            
+            // If the audio player is not nil, then play the sound effect.
+            if (_audioPlayer) {
+                [_audioPlayer play];
+            }
+        }
+    }
 }
 
 @end

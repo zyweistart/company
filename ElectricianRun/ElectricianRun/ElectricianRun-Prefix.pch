@@ -40,11 +40,15 @@
 //正式环境中注释该行
 #define DEVELOPER_STATUS
 #ifdef DEVELOPER_STATUS
+    //微信注册APP
+    #define WEIXINREGISTERAPP @"wxa7c779d9b962af17"
     //测试环境
     #define URL1 @"http://122.224.247.221:7007/WEB/mobile/"
     #define URL2 @"http://122.224.247.221:7003/WEB/mobile/"
     #define URL3 @"http://122.224.247.219:8083/Administrator/"
 #else
+    //微信注册APP
+    #define WEIXINREGISTERAPP @"wxa7c779d9b962af17"
     //生产环境
     #define URL1 @"http://60.191.92.132:7006/WEB/mobile/"
     #define URL2 @"http://www.fps365.net/WEB/mobile/"

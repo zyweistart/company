@@ -65,7 +65,7 @@
         UILabel *lblV2=[[UILabel alloc]initWithFrame:CGRectMake(150, 65, 120, 20)];
         [lblV2 setTextAlignment:NSTextAlignmentLeft];
         [lblV2 setFont:[UIFont systemFontOfSize:12.0]];
-        [lblV2 setText:[Common ConvertByNSDate:[self.data objectForKey:@"REPORT_DATE"]]];
+        [lblV2 setText:[Common NSNullConvertEmptyString:[self.data objectForKey:@"REPORT_DATE"]]];
         [lblV2 setTextColor:[UIColor blackColor]];
         [control addSubview:lblV2];
         

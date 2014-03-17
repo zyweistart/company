@@ -16,18 +16,11 @@
 
 @end
 
-@interface STScanningViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate>
-{
-    int num;
-    BOOL upOrdown;
-    NSTimer * timer;
-}
-@property (strong,nonatomic)AVCaptureDevice * device;
-@property (strong,nonatomic)AVCaptureDeviceInput * input;
-@property (strong,nonatomic)AVCaptureMetadataOutput * output;
-@property (strong,nonatomic)AVCaptureSession * session;
-@property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
-@property (strong,nonatomic) UIImageView * line;
+@interface STScanningViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate>
+
+@property (strong, nonatomic) UIView *viewPreview;
+@property (strong, nonatomic) UILabel *lblStatus;
+@property (strong, nonatomic) UIButton *btnOK;
 @property NSInteger responseCode;
 
 @property (strong,nonatomic) id<ScanningDelegate> delegate;

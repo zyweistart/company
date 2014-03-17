@@ -16,7 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [WXApi registerApp:@"wxcefa411f34485347"];
+    [WXApi registerApp:WEIXINREGISTERAPP];
     
     //让设备知道我们想要收到推送通知
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];

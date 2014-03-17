@@ -80,7 +80,7 @@
         [cell.lbl2 setTextColor:[UIColor greenColor]];
         [cell.lbl2 setText:@"分"];
     }
-    [cell.lbl3 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"REPORT_DATE"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"REPORT_DATE"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"DAY_POWER"]]];
     return cell;
     

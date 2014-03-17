@@ -43,9 +43,9 @@
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
     [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"NAME"]]];
-    [cell.lbl2 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"TASK_DATE"]]];
+    [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TASK_DATE"]]];
     [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
-    [cell.lbl4 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"RECOMPLETE_DATE"]]];
+    [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"RECOMPLETE_DATE"]]];
     NSString *IS_COMPLETE=[Common NSNullConvertEmptyString:[dictionary objectForKey:@"IS_COMPLETE"]];
     if([@"1" isEqualToString:IS_COMPLETE]){
         [cell.lbl5 setTextColor:[UIColor greenColor]];
@@ -54,7 +54,7 @@
         [cell.lbl5 setTextColor:[UIColor redColor]];
         [cell.lbl5 setText:@"否"];
     }
-    [cell.lbl6 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"COMPLETE_DATE"]]];
+    [cell.lbl6 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"COMPLETE_DATE"]]];
     return cell;
 }
 

@@ -117,11 +117,11 @@
     NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[[response resultJSON] objectForKey:@"Rows"]];
     NSLog(@"%@",[response responseString]);
     for(NSDictionary *dic in dataArray) {
-        [lblV1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ADDRESS"]]];
-        [lblV2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"SUB_COUNT"]]];
-        [lblV3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TRANS_COUNT"]]];
-        [lblV4 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TRANS_NAME"]]];
-        [lblV5 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TRANSFORM_NO"]]];
+        [lblV1 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"ADDRESS"]]];
+        [lblV2 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"SUB_COUNT"]]];
+        [lblV3 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"TRANS_COUNT"]]];
+        [lblV4 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"TRANS_NAME"]]];
+        [lblV5 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"TRANSFORM_NO"]]];
         break;
     }
     

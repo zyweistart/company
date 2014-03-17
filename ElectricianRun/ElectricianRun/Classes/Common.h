@@ -24,8 +24,5 @@
 
 + (NSString *)NSNullConvertEmptyString:(id)value;
 
-+ (NSString *)ConvertByNSDate:(NSString*)value;
-//+ (NSString *)ConvertByNSDate:(NSString*)value format:(NSString*)format;
-
 + (void)AsynchronousDownloadWithUrl:(NSString *)u FileName:(NSString *)fName image:(UIImageView*)img;
 @end

@@ -258,6 +258,13 @@
 
 //扫描操作
 - (void)onClickOperating:(id)sender {
+    if(![Account isLogin]){
+        [Common alert:@"你还未登录，请先登录!"];
+        STLoginViewController *loginViewController=[[STLoginViewController alloc]init];
+        self.navigationController.navigationBarHidden=NO;
+        [self.navigationController pushViewController:loginViewController animated:YES];
+        return;
+    }
     UINavigationController *scanningOperationViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[STScanningOperationViewController alloc]init]];
     [self presentViewController:scanningOperationViewControllerNav animated:YES completion:nil];
 }

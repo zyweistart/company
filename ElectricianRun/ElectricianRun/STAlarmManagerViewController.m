@@ -108,7 +108,7 @@
     
     NSUInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    [cell.lbl1 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"ALERT_DATE"]]];
+    [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"ALERT_DATE"]]];
     [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
     [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CATA_LOG"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"METER_NAME"]]];

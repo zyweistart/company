@@ -10,7 +10,6 @@
 #import "STDataMonitoringLineViewController.h"
 #import "STDataMonitoringSearchViewController.h"
 #import "STDataMonitoringCell.h"
-#import "NSString+Utils.h"
 
 @interface STDataMonitoringViewController ()
 
@@ -77,7 +76,7 @@
     
     [cell.lbl1 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"CP_NAME"]]];
     [cell.lbl2 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TRANS_COUNT"]]];
-    [cell.lbl3 setText:[Common ConvertByNSDate:[dictionary objectForKey:@"MAX_DATE"]]];
+    [cell.lbl3 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"MAX_DATE"]]];
     [cell.lbl4 setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"MAX_LOAD"]]];
     return cell;
     

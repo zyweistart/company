@@ -56,9 +56,9 @@ static NSString *cellIdentifier = @"ExpandingCellIdentifier";
     }
     NSInteger row=[indexPath row];
     NSDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-    [cell.lblName setText:[dictionary objectForKey:@"NAME"]];
-    [cell.lblSiteName setText:[dictionary objectForKey:@"SITE_NAME"]];
-    [cell.lblTaskDate setText:[Common ConvertByNSDate:[dictionary objectForKey:@"TASK_DATE"]]];
+    [cell.lblName setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"NAME"]]];
+    [cell.lblSiteName setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"SITE_NAME"]]];
+    [cell.lblTaskDate setText:[Common NSNullConvertEmptyString:[dictionary objectForKey:@"TASK_DATE"]]];
     return cell;
 }
 

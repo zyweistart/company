@@ -429,29 +429,29 @@
             }else if([@"0" isEqualToString:result]){
                 [Common alert:@"不合法操作（该用户不存在）！"];
             }else{
-                [lblV1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NAME"]]];
-                [lblV2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"METER_NO"]]];
-                [lblV3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"SWITCH_NO"]]];
-                [lblV4 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"LOAD_GRADE"]]];
-                [lblV5 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"FIX_VALUE"]]];
-                [lblV6 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"RATIO"]]];
-                [lblV7 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"STATUS2"]]];
-                [lblV8 setText:[Common ConvertByNSDate:[NSString stringWithFormat:@"%@",[dic objectForKey:@"REPORT_DATE"]]]];
-                [lblV9 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"TOTAL_POWER"]]];
-                [lblV10 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"all_hour"]]];
-                [lblV11 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_A"]]];
-                [lblV12 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_B"]]];
-                [lblV13 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_C"]]];
-                [lblV14 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_A"]]];
-                [lblV15 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_B"]]];
-                [lblV16 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"I_C"]]];
-                [lblV17 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_A"]]];
-                [lblV18 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_B"]]];
-                [lblV19 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"P_C"]]];
-                [lblV20 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_A"]]];
-                [lblV21 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_B"]]];
-                [lblV22 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"F_C"]]];
-                [lblV23 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"HZ"]]];
+                [lblV1 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"METER_NAME"]]];
+                [lblV2 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"METER_NO"]]];
+                [lblV3 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"SWITCH_NO"]]];
+                [lblV4 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"LOAD_GRADE"]]];
+                [lblV5 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"FIX_VALUE"]]];
+                [lblV6 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"RATIO"]]];
+                [lblV7 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"STATUS2"]]];
+                [lblV8 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"REPORT_DATE"]]];
+                [lblV9 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"TOTAL_POWER"]]];
+                [lblV10 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"all_hour"]]];
+                [lblV11 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"V_A"]]];
+                [lblV12 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"V_B"]]];
+                [lblV13 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"V_C"]]];
+                [lblV14 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"I_A"]]];
+                [lblV15 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"I_B"]]];
+                [lblV16 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"I_C"]]];
+                [lblV17 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"P_A"]]];
+                [lblV18 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"P_B"]]];
+                [lblV19 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"P_C"]]];
+                [lblV20 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"F_A"]]];
+                [lblV21 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"F_B"]]];
+                [lblV22 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"F_C"]]];
+                [lblV23 setText:[Common NSNullConvertEmptyString:[dic objectForKey:@"HZ"]]];
             }
             break;
         }
