@@ -78,6 +78,7 @@
 //    [txtValueUserName setText:@"zhangyy-gzry"];
 //    [txtValuePassword setText:@"8888AA"];
     
+    [Account clear];
 }
 
 - (void)backgroundDoneEditing:(id)sender {
@@ -94,7 +95,6 @@
     }else if([@"" isEqualToString:password]){
         [Common alert:@"密码输入有误"];
     }else{
-        [Account clear];
         NSMutableDictionary *p=[[NSMutableDictionary alloc]init];
         [p setObject:username forKey:@"imei"];
         [p setObject:[[password uppercaseString] md5] forKey:@"authentication"];

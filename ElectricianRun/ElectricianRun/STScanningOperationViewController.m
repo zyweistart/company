@@ -151,7 +151,10 @@
 }
 
 - (void)success:(NSString*)value responseCode:(NSInteger)responseCode{
-    [txtValue1 setText:value];
+//    [txtValue1 setText:value];
+    
+    [txtValue1 performSelectorOnMainThread:@selector(setText:) withObject:value waitUntilDone:NO];
+    
     [self backgroundDoneEditing:nil];
 }
 

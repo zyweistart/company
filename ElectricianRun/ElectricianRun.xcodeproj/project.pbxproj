@@ -60,6 +60,7 @@
 		C963416318B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416218B79DC90064AC56 /* STDataMonitoringLineSearchViewController.m */; };
 		C963416618B7A0B50064AC56 /* STAlarmManagerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C963416518B7A0B50064AC56 /* STAlarmManagerSearchViewController.m */; };
 		C964915E18CDBBEE00D45298 /* STTaskManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C964915D18CDBBEE00D45298 /* STTaskManagerCell.m */; };
+		C96887E718D5E6B3001A0B85 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C96887E618D5E6B3001A0B85 /* beep.mp3 */; };
 		C9726CD718B73CB8006FB209 /* STAggregatorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */; };
 		C9726CDA18B73CD7006FB209 /* STAggregatorEntInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CD918B73CD7006FB209 /* STAggregatorEntInfoViewController.m */; };
 		C9726CE018B73D76006FB209 /* STLineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9726CDF18B73D76006FB209 /* STLineInfoViewController.m */; };
@@ -350,6 +351,7 @@
 		C963416718B7A1510064AC56 /* SearchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDelegate.h; sourceTree = "<group>"; };
 		C964915C18CDBBEE00D45298 /* STTaskManagerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTaskManagerCell.h; sourceTree = "<group>"; };
 		C964915D18CDBBEE00D45298 /* STTaskManagerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTaskManagerCell.m; sourceTree = "<group>"; };
+		C96887E618D5E6B3001A0B85 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		C9726CD518B73CB8006FB209 /* STAggregatorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorInfoViewController.h; sourceTree = "<group>"; };
 		C9726CD618B73CB8006FB209 /* STAggregatorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAggregatorInfoViewController.m; sourceTree = "<group>"; };
 		C9726CD818B73CD7006FB209 /* STAggregatorEntInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAggregatorEntInfoViewController.h; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 		C93C7487189235E400A7FAB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C96887E618D5E6B3001A0B85 /* beep.mp3 */,
 				C9A36EA018CDA7300090B246 /* page */,
 				C95ACDB718C81680006A3F32 /* city.xml */,
 				C9CCE5EE18C4D1CE00A94F98 /* alarm.mp3 */,
@@ -1376,6 +1379,7 @@
 				C9EFE22918B91E5E00308819 /* icon_timeline.png in Resources */,
 				C9A36FBC18CDA8FA0090B246 /* pic21.png in Resources */,
 				C9A36FD918CDA8FA0090B246 /* pic51.png in Resources */,
+				C96887E718D5E6B3001A0B85 /* beep.mp3 in Resources */,
 				C9A36FAF18CDA8FA0090B246 /* pic8.png in Resources */,
 				C9A36FA718CDA8FA0090B246 /* open.png in Resources */,
 				C9A36FD218CDA8FA0090B246 /* pic44.png in Resources */,
