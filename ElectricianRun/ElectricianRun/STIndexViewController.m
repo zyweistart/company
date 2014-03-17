@@ -67,14 +67,14 @@
                 if([fileManager fileExistsAtPath:path]){
                     [images addObject:[UIImage imageWithContentsOfFile:path]];
                 }
-                if([images count]==4){
+                if([images count]==3){
                     break;
                 }
             }
         }
     }
-    //每次显示4幅如果不够4幅则加载默认的图片
-    int num=4-[images count];
+    //每次显示3幅如果不够3幅则加载默认的图片
+    int num=3-[images count];
     for(int i=0;i<num;i++){
         [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"image%d",i+1]]];
     }
