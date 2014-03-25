@@ -74,7 +74,7 @@
     if(dictioanry){
         id content=[dictioanry objectForKey:[NSString stringWithFormat:@"%d%@-%@",_year,_month,CACHE_OLDACCOUNT_DAY]];
         if(content){
-            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            self.dataItemArray=[[Common toResponseData:content] dataItemArray];
             if([self.dataItemArray count]>0) {
                 [self.tableView reloadData];
             }

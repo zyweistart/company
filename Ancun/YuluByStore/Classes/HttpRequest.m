@@ -79,7 +79,22 @@
 }
 
 - (void)handle {
-    NSString *requestBodyContent=[XML generate:_action requestParams:_request];
+    
+    NSMutableDictionary *common=[[NSMutableDictionary alloc]init];
+    [common setObject:_action forKey:@"action"];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    [common setObject:[dateFormatter stringFromDate:[NSDate date]] forKey:@"reqtime"];
+    
+    NSMutableDictionary *mainjson=[[NSMutableDictionary alloc]init];
+    [mainjson setObject:common forKey:@"common"];
+    [mainjson setObject:_request forKey:@"content"];
+    
+    NSMutableDictionary *requestJSON=[[NSMutableDictionary alloc]init];
+    [requestJSON setObject:mainjson forKey:@"request"];
+    NSString *requestBodyContent=[[NSString alloc] initWithData:[Common toJSONData:requestJSON] encoding:NSUTF8StringEncoding];
+    
+//    NSString *requestBodyContent=[XML generate:_action requestParams:_request];
     
     if(_head==nil) {
         _head=[[NSMutableDictionary alloc]init];
@@ -93,6 +108,8 @@
             [_head setObject:[requestBodyContent md5] forKey:@"sign"];
         }
     }
+    
+    [_head setObject:@"JSON" forKey:@"format"];
     
     //请求长度
     [_head setObject:[NSString stringWithFormat:@"%d",[[requestBodyContent dataUsingEncoding:NSUTF8StringEncoding] length]] forKey:@"reqlength"];
@@ -176,15 +193,15 @@
     if( [_delegate respondsToSelector: @selector(connectionDidFinishLoading:)]) {
         [_delegate connectionDidFinishLoading:connection];
     } else if( [_delegate respondsToSelector: @selector(requestFinishedByResponse:requestCode:)]) {
-        Response *response=[[Response alloc]init];
-        [response setData:_data];
+        Response *response=nil;
         if(!_isFileDownload) {
             NSString *responseString =[[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-            response=[XML analysis:responseString];
+            response=[Common toResponseData:responseString];
+//            response=[XML analysis:responseString];
             [response setPropertys:_propertys];
-            [response setResponseString:responseString];
+//            [response setResponseString:responseString];
             if(!_isVerify) {
-                //                NSLog(@"%@---%@",[response code],[response msg]);
+//                NSLog(@"%@---%@",[response code],[response msg]);
                 [response setSuccessFlag:NO];
                 if([[response code] isEqualToString:@"100000"]) {
                     [response setSuccessFlag:YES];
@@ -217,7 +234,9 @@
                 }
             }
         } else {
+            response=[[Response alloc]init];
             [response setPropertys:_propertys];
+            [response setData:_data];
         }
         [_delegate requestFinishedByResponse:response requestCode:self.requestCode];
     }

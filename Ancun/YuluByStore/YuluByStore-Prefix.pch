@@ -33,6 +33,9 @@
 #import "HttpRequest.h"
 #import "BaseViewController.h"
 #endif
+
+#define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
+#define inch4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //iPhone检测是否当前环境为iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //缓存常量唯一方法
@@ -73,7 +76,7 @@
 #define RESULTCODE_ACExtractionDetailViewController_back 2
 #define RESULTCODE_ACRechargeConfirmViewController_back 21111
 #ifdef TEST
-//测试环境定义的常量
+    //测试环境定义的常量
     #define PHONENUMBER @"057156559570"
 //    #define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
 //    #define ANCUN_HTTP_URL @"http://115.236.89.210:8888/accore/http/HttpService"
@@ -81,7 +84,7 @@
     #define ACCESSID @"b99810e661d546f14763f15a9270c28d"
     #define ACCESSKEY @"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ="
 #else
-//正式环境定义的常量
+    //正式环境定义的常量
     #define PHONENUMBER @"95105856"
     #define ANCUN_HTTP_URL @"http://server.ancun.com:3391/rest/RestService"
     #define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"

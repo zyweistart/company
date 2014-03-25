@@ -11,8 +11,6 @@
 
 @interface ACLoginViewController ()
 
-- (void)autoLogin;
-
 @end
 
 @implementation ACLoginViewController {
@@ -22,7 +20,7 @@
     
     SSCheckBoxView *_checkbox;
     
-    int m_lastTabIndex;
+    unsigned long m_lastTabIndex;
     
     HttpRequest *_loginHttp;
     
@@ -37,9 +35,19 @@
     return self;
 }
 
+- (void)buildUI56
+{
+//    NSLog(@"buildUI56");
+}
+
+- (void)buildUI7
+{
+//    NSLog(@"buildUI7");
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     float width=self.view.frame.size.width;
     float height=self.view.frame.size.height;
     UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 0, width, height)];
@@ -149,11 +157,15 @@
             [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         }
         //拔号盘
-        UINavigationController *dialViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACDialViewController alloc]init]];
-        //是否隐藏导航条
-        dialViewControllerNav.navigationBarHidden = YES;
+        ACDialViewController *dialViewController = [[ACDialViewController alloc]init];
+        dialViewController.tabBarItem.title = @"拨号盘";
+        dialViewController.tabBarItem.image = [UIImage imageNamed:@"nav_icon_dial"];
+        
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactsViewController alloc]init]];
+        contactViewControllerNav.navigationItem.title=@"通讯录";
+        contactViewControllerNav.tabBarItem.title = @"通讯录";
+        contactViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_contact"];
         contactViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //我的账户
         UINavigationController *accountViewControllerNav;
@@ -162,10 +174,17 @@
         } else {
             accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
         }
+        accountViewControllerNav.navigationItem.title=@"我的账户";
+        accountViewControllerNav.tabBarItem.title = @"我的账户";
+        accountViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
         accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
         //录音管理
         UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
+        recordingManagerViewControllerNav.navigationItem.title=@"我的录音";
+        recordingManagerViewControllerNav.tabBarItem.title = @"我的录音";
+        recordingManagerViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_recording"];
         recordingManagerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
         moreViewControllerNav.navigationBar.tintColor=NAVCOLOR;
@@ -174,7 +193,7 @@
         UITabBarController *_tabBarController = [[UITabBarController alloc] init];
         _tabBarController.delegate = self;
         _tabBarController.viewControllers = [NSArray arrayWithObjects:
-                                             dialViewControllerNav,
+                                             dialViewController,
                                              contactViewControllerNav,
                                              accountViewControllerNav,
                                              recordingManagerViewControllerNav,
@@ -220,7 +239,7 @@
 }
 
 - (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController {
-    int newTabIndex = tabBarController.selectedIndex;
+    unsigned long newTabIndex = tabBarController.selectedIndex;
     if (newTabIndex == m_lastTabIndex) {
         [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TabClick_ACRecordingManagerViewController object:@"load"];
     } else {

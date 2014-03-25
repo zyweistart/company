@@ -17,11 +17,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        self.navigationItem.title=@"我的录音";
-        
-        self.tabBarItem.title = @"我的录音";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_recording"];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick_ACRecordingManagerViewController object:nil];
         
     }

@@ -1,4 +1,5 @@
 #import "ResultDelegate.h"
+#import "Response.h"
 #import <AddressBookUI/AddressBookUI.h>
 
 @interface Common : NSObject
@@ -24,5 +25,9 @@
 
 + (void)setCacheXmlByList:(NSString *)xml tag:(NSString *)tag;
 + (NSMutableArray *)getCacheXmlByList:(NSString *)tag;
+
++ (NSData *)toJSONData:(id)theData;
+
++ (Response*)toResponseData:(NSString*)repsonseString;
 
 @end

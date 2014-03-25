@@ -42,10 +42,6 @@
 
     if (self) {
         
-        self.navigationItem.title=@"我的账户";
-        self.tabBarItem.title = @"我的账户";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
-        
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 93,
                                    self.view.frame.size.width,
@@ -138,7 +134,7 @@
     if(dictioanry){
         id content=[dictioanry objectForKey:CACHE_DATA];
         if(content){
-            _rightDataItemArray=[[XML analysis:content] dataItemArray];
+            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
         }
     }
     

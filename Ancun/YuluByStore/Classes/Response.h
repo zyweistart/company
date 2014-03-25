@@ -9,13 +9,14 @@
 @interface Response : NSObject
 
 @property Boolean successFlag;
+@property (strong,nonatomic) NSDictionary *resultJSON;
 @property (strong,nonatomic) NSData *data;
-@property (strong,nonatomic) NSMutableDictionary *propertys;
+@property (strong,nonatomic) NSDictionary *propertys;
 @property (strong,nonatomic) NSString *responseString;
 @property (strong,nonatomic) NSString *code;
 @property (strong,nonatomic) NSString *msg;
-@property (strong,nonatomic) NSMutableDictionary *pageInfo;
+@property (strong,nonatomic) NSDictionary *pageInfo;
 @property (strong,nonatomic) NSMutableArray *dataItemArray;
-@property (strong,nonatomic) NSMutableDictionary *mainData;
+@property (strong,nonatomic) NSDictionary *mainData;
 
 @end

@@ -114,7 +114,7 @@
     if(dictioanry){
         id content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY1];
         if(content){
-            _leftDataItemArray=[[XML analysis:content] dataItemArray];
+            _leftDataItemArray=[[Common toResponseData:content] dataItemArray];
             if([_leftDataItemArray count]>0){
                 self.dataItemArray=_leftDataItemArray;
                 [self.tableView reloadData];
@@ -122,11 +122,11 @@
         }
         content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY2];
         if(content){
-            _centerDataItemArray=[[XML analysis:content] dataItemArray];
+            _centerDataItemArray=[[Common toResponseData:content] dataItemArray];
         }
         content=[dictioanry objectForKey:CACHE_ACCOUNT_PAY3];
         if(content){
-            _rightDataItemArray=[[XML analysis:content] dataItemArray];
+            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
         }
     }
 }

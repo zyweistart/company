@@ -27,8 +27,6 @@
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_dial"];
-        self.tabBarItem.title = @"拨号盘";
         
         _dialString=[[NSMutableString alloc]init];
         

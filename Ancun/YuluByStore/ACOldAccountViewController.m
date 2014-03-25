@@ -24,10 +24,6 @@
     
     if (self) {
         
-        self.navigationItem.title=@"我的账户";
-        self.tabBarItem.title = @"我的账户";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
-        
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];
         [view setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
         
@@ -79,7 +75,7 @@
     if(dictioanry){
         id content=[dictioanry objectForKey:CACHE_OLDACCOUNT_MONTH];
         if(content){
-            self.dataItemArray=[[XML analysis:content] dataItemArray];
+            self.dataItemArray=[[Common toResponseData:content] dataItemArray];
             if([self.dataItemArray count]>0){
                 [self.tableView reloadData];
                 [[Config Instance] setIsRefreshOldAccountMonthList:NO];

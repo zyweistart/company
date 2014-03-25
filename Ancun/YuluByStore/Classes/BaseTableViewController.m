@@ -17,6 +17,10 @@
     return 62;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
+
 #pragma mark -
 #pragma mark CustomMethod
 
