@@ -152,7 +152,7 @@
             if(self.message) {
                 _mbpHud.labelText = _message;
             }
-            _mbpHud.dimBackground = YES;
+            _mbpHud.dimBackground = NO;
             _mbpHud.square = YES;
             [_mbpHud show:YES];
         }

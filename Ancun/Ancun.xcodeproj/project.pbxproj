@@ -929,13 +929,13 @@
 			children = (
 				C9D97A11179FA64F0076ACF3 /* ACAppDelegate.h */,
 				C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */,
+				C978899618E16AC300157577 /* Images.xcassets */,
 				C9D97AAC179FA6640076ACF3 /* Classes */,
 				C9D97AC9179FA6640076ACF3 /* Librarys */,
 				C9D97D7E179FB1C40076ACF3 /* Model */,
 				C9D97BF1179FA6640076ACF3 /* Resources */,
 				C9D97991179FA3500076ACF3 /* Supporting Files */,
 				C9D97D79179FA72C0076ACF3 /* UI */,
-				C978899618E16AC300157577 /* Images.xcassets */,
 			);
 			path = YuluByStore;
 			sourceTree = "<group>";
