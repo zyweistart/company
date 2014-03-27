@@ -29,7 +29,6 @@
 #import "NSString+Utils.h"
 #import "Common.h"
 #import "Response.h"
-#import "XML.h"
 #import "HttpRequest.h"
 #import "BaseViewController.h"
 #endif

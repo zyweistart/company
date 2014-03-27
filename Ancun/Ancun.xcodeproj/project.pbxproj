@@ -129,7 +129,6 @@
 		C9D97C84179FA6640076ACF3 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AC0179FA6640076ACF3 /* LoadingCell.m */; };
 		C9D97C86179FA6640076ACF3 /* LongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AC3179FA6640076ACF3 /* LongPressButton.m */; };
 		C9D97C87179FA6640076ACF3 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AC5179FA6640076ACF3 /* Response.m */; };
-		C9D97C88179FA6640076ACF3 /* XML.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AC8179FA6640076ACF3 /* XML.m */; };
 		C9D97C89179FA6640076ACF3 /* libalixpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D97ACF179FA6640076ACF3 /* libalixpay.a */; };
 		C9D97C8A179FA6650076ACF3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D97AD0179FA6640076ACF3 /* libcrypto.a */; };
 		C9D97C8B179FA6650076ACF3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D97AD1179FA6640076ACF3 /* libssl.a */; };
@@ -174,9 +173,6 @@
 		C9D97CDC179FA6650076ACF3 /* cb_mono_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BBE179FA6640076ACF3 /* cb_mono_on@2x.png */; };
 		C9D97CDD179FA6650076ACF3 /* UIHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BC1179FA6640076ACF3 /* UIHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CDE179FA6650076ACF3 /* SSCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BC3179FA6640076ACF3 /* SSCheckBoxView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9D97CDF179FA6650076ACF3 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BC6179FA6640076ACF3 /* TBXML+Compression.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9D97CE0179FA6650076ACF3 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BC7179FA6640076ACF3 /* TBXML+HTTP.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C9D97CE1179FA6650076ACF3 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BC8179FA6640076ACF3 /* TBXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CF2179FA6650076ACF3 /* button_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF4179FA6640076ACF3 /* button_gb.png */; };
 		C9D97CF3179FA6650076ACF3 /* button_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */; };
 		C9D97CF7179FA6650076ACF3 /* extraction_button_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF9179FA6640076ACF3 /* extraction_button_1.png */; };
@@ -505,8 +501,6 @@
 		C9D97AC4179FA6640076ACF3 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Response.h; path = Classes/Response.h; sourceTree = "<group>"; };
 		C9D97AC5179FA6640076ACF3 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Response.m; path = Classes/Response.m; sourceTree = "<group>"; };
 		C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDelegate.h; path = Classes/ResultDelegate.h; sourceTree = "<group>"; };
-		C9D97AC7179FA6640076ACF3 /* XML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XML.h; sourceTree = "<group>"; };
-		C9D97AC8179FA6640076ACF3 /* XML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XML.m; sourceTree = "<group>"; };
 		C9D97ACC179FA6640076ACF3 /* AlixPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPay.h; sourceTree = "<group>"; };
 		C9D97ACD179FA6640076ACF3 /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
 		C9D97ACE179FA6640076ACF3 /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
@@ -645,14 +639,6 @@
 		C9D97BC1179FA6640076ACF3 /* UIHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelpers.m; sourceTree = "<group>"; };
 		C9D97BC2179FA6640076ACF3 /* SSCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCheckBoxView.h; sourceTree = "<group>"; };
 		C9D97BC3179FA6640076ACF3 /* SSCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCheckBoxView.m; sourceTree = "<group>"; };
-		C9D97BC6179FA6640076ACF3 /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Compression.m"; sourceTree = "<group>"; };
-		C9D97BC7179FA6640076ACF3 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
-		C9D97BC8179FA6640076ACF3 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
-		C9D97BCA179FA6640076ACF3 /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Compression.h"; sourceTree = "<group>"; };
-		C9D97BCB179FA6640076ACF3 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
-		C9D97BCC179FA6640076ACF3 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
-		C9D97BCE179FA6640076ACF3 /* TBXML-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML-iOS-Prefix.pch"; sourceTree = "<group>"; };
-		C9D97BCF179FA6640076ACF3 /* TBXML-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML-Prefix.pch"; sourceTree = "<group>"; };
 		C9D97BF4179FA6640076ACF3 /* button_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gb.png; sourceTree = "<group>"; };
 		C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gb@2x.png"; sourceTree = "<group>"; };
 		C9D97BF9179FA6640076ACF3 /* extraction_button_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_button_1.png; sourceTree = "<group>"; };
@@ -979,8 +965,6 @@
 				C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */,
 				C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */,
 				C9D97D80179FB3730076ACF3 /* NSString+Utils.m */,
-				C9D97AC7179FA6640076ACF3 /* XML.h */,
-				C9D97AC8179FA6640076ACF3 /* XML.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -997,7 +981,6 @@
 				C9D97B9D179FA6640076ACF3 /* MBProgressHUD */,
 				C9D97BA0179FA6640076ACF3 /* RefreshTableHeaderView */,
 				C9D97BA9179FA6640076ACF3 /* SSCheckBoxView */,
-				C9D97BC4179FA6640076ACF3 /* TBXML */,
 				C9D4D17017E2B8EE0013D03E /* TouchJSON */,
 			);
 			path = Librarys;
@@ -1229,45 +1212,6 @@
 				C9D97BC1179FA6640076ACF3 /* UIHelpers.m */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C9D97BC4179FA6640076ACF3 /* TBXML */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97BC5179FA6640076ACF3 /* TBXML-Code */,
-				C9D97BC9179FA6640076ACF3 /* TBXML-Headers */,
-				C9D97BCD179FA6640076ACF3 /* TBXML-Support */,
-			);
-			path = TBXML;
-			sourceTree = "<group>";
-		};
-		C9D97BC5179FA6640076ACF3 /* TBXML-Code */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97BC6179FA6640076ACF3 /* TBXML+Compression.m */,
-				C9D97BC7179FA6640076ACF3 /* TBXML+HTTP.m */,
-				C9D97BC8179FA6640076ACF3 /* TBXML.m */,
-			);
-			path = "TBXML-Code";
-			sourceTree = "<group>";
-		};
-		C9D97BC9179FA6640076ACF3 /* TBXML-Headers */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97BCA179FA6640076ACF3 /* TBXML+Compression.h */,
-				C9D97BCB179FA6640076ACF3 /* TBXML+HTTP.h */,
-				C9D97BCC179FA6640076ACF3 /* TBXML.h */,
-			);
-			path = "TBXML-Headers";
-			sourceTree = "<group>";
-		};
-		C9D97BCD179FA6640076ACF3 /* TBXML-Support */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97BCE179FA6640076ACF3 /* TBXML-iOS-Prefix.pch */,
-				C9D97BCF179FA6640076ACF3 /* TBXML-Prefix.pch */,
-			);
-			path = "TBXML-Support";
 			sourceTree = "<group>";
 		};
 		C9D97BF1179FA6640076ACF3 /* Resources */ = {
@@ -1865,7 +1809,6 @@
 				C9D97C84179FA6640076ACF3 /* LoadingCell.m in Sources */,
 				C9D97C86179FA6640076ACF3 /* LongPressButton.m in Sources */,
 				C9D97C87179FA6640076ACF3 /* Response.m in Sources */,
-				C9D97C88179FA6640076ACF3 /* XML.m in Sources */,
 				C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */,
 				C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */,
 				C9D97C94179FA6650076ACF3 /* Reachability.m in Sources */,
@@ -1883,9 +1826,6 @@
 				C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */,
 				C9D97CDD179FA6650076ACF3 /* UIHelpers.m in Sources */,
 				C9D97CDE179FA6650076ACF3 /* SSCheckBoxView.m in Sources */,
-				C9D97CDF179FA6650076ACF3 /* TBXML+Compression.m in Sources */,
-				C9D97CE0179FA6650076ACF3 /* TBXML+HTTP.m in Sources */,
-				C9D97CE1179FA6650076ACF3 /* TBXML.m in Sources */,
 				C900D50C17AF892B00D027D4 /* NSString+Date.m in Sources */,
 				C900D50F17AF98E200D027D4 /* ACOldAccountViewController.m in Sources */,
 				C99FCA5117B086300003B2FF /* ACAccountPayCell.m in Sources */,
