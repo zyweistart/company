@@ -117,7 +117,7 @@
         [self.tableView reloadData];
     }else if(reqCode==REQUESTCODE_REMOVE){
         if([response successFlag]){
-            [Common notificationMessage:@"删除成功" inView:self.view];
+            [Common alert:@"删除成功"];
             [self autoRefresh];
             [[Config Instance] setIsRefreshRecordingList:YES];
 //            [_dataItemArray removeObjectAtIndex:indexPath.row];
@@ -184,7 +184,7 @@
         if(buttonIndex==0){
             NSString *password=[[alertView textFieldAtIndex:0]text];
             if([password isEqualToString:@""]){
-                [Common notificationMessage:@"密码不能为空" inView:self.view];
+                [Common alert:@"密码不能为空"];
             }else{
                 NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
                 [requestParams setObject:[_currentDictionary objectForKey:@"fileno"] forKey:@"fileno"];

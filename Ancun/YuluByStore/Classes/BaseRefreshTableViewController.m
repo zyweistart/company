@@ -80,7 +80,8 @@
 }
 
 - (void)requestFailed:(int)reqCode {
-    [Common notificationMessage:@"网络请求出错，请重试" inView:self.view];
+    
+    [Common alert:@"网络请求出错，请重试"];
     [self doneLoadingTableViewData];
 }
 

@@ -22,7 +22,7 @@
         [_lblDescription setFont:[UIFont systemFontOfSize:13]];
         [_lblDescription setTextAlignment:NSTextAlignmentLeft];
         [_lblDescription setNumberOfLines:0];
-        [_lblDescription setLineBreakMode:UILineBreakModeCharacterWrap];
+        [_lblDescription setLineBreakMode:NSLineBreakByCharWrapping];
         [_lblDescription setTextColor:[UIColor colorWithRed:(163/255.0) green:(163/255.0) blue:(163/255.0) alpha:1]];
         [_lblDescription setText:@"有效期31天209分钟 309MB"];
         [self addSubview:_lblDescription];

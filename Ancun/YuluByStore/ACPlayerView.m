@@ -84,7 +84,7 @@
                 }
             }
             
-            [Common notificationMessage:@"取消成功" inView:self.controller.view];
+            [Common alert:@"取消成功"];
         }else if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply||
                  reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];

@@ -686,7 +686,7 @@
     lbl1=[[UILabel alloc]initWithFrame:CGRectMake(30, 70, 240, 40)];
     [lbl1 setFont:[UIFont systemFontOfSize:16]];
     [lbl1 setTextAlignment:NSTextAlignmentLeft];
-    [lbl1 setLineBreakMode:UILineBreakModeCharacterWrap];
+    [lbl1 setLineBreakMode:NSLineBreakByCharWrapping];
     [lbl1 setNumberOfLines:0];
     [lbl1 setText:[NSString stringWithFormat:@"您已经为账户(%@)\n购买：%@",[[[Config Instance]userInfo]objectForKey:@"phone"],[_data objectForKey:@"name"]]];
     [mainView addSubview:lbl1];

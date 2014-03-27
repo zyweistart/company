@@ -212,7 +212,7 @@
 }
 
 - (void)requestFailed:(int)reqCode {
-    [Common notificationMessage:@"网络请求出错，请重试" inView:self.view];
+    [Common alert:@"网络请求出错，请重试"];
     //执行失败则清空密码
     [Common setCache:DEFAULTDATA_PASSWORD data:@""];
 }
@@ -285,9 +285,9 @@
     [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:[_checkbox checked]];
     
     if(phone==nil||[phone isEqualToString:@""]){
-        [Common notificationMessage:@"账号不能为空" inView:self.view];
+        [Common alert:@"账号不能为空"];
     }else if(password==nil||[password isEqualToString:@""]){
-        [Common notificationMessage:@"密码不能为空" inView:self.view];
+        [Common alert:@"密码不能为空"];
     }else{
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:phone forKey:@"username"];

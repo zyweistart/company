@@ -31,7 +31,7 @@
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
     if([response successFlag]){
-        [Common notificationMessage:@"反馈成功" inView:self.view];
+        [Common alert:@"反馈成功"];
 //        [self.navigationController popViewControllerAnimated:YES];
     }
 }

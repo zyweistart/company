@@ -141,7 +141,6 @@
 		C9D97C99179FA6650076ACF3 /* ATMSoundFX.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B40179FA6640076ACF3 /* ATMSoundFX.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97C9A179FA6650076ACF3 /* ATMTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B42179FA6640076ACF3 /* ATMTextLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97C9C179FA6650076ACF3 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B48179FA6640076ACF3 /* ChineseToPinyin.m */; };
-		C9D97C9D179FA6650076ACF3 /* GCDiscreetNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B4B179FA6640076ACF3 /* GCDiscreetNotificationView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CA1179FA6650076ACF3 /* GHNSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B58179FA6640076ACF3 /* GHNSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CB0179FA6650076ACF3 /* GHNSString+HMAC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B76179FA6640076ACF3 /* GHNSString+HMAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CC0179FA6650076ACF3 /* ybase64.c in Sources */ = {isa = PBXBuildFile; fileRef = C9D97B9A179FA6640076ACF3 /* ybase64.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -606,8 +605,6 @@
 		C9D97B42179FA6640076ACF3 /* ATMTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMTextLayer.m; sourceTree = "<group>"; };
 		C9D97B47179FA6640076ACF3 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
 		C9D97B48179FA6640076ACF3 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
-		C9D97B4A179FA6640076ACF3 /* GCDiscreetNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDiscreetNotificationView.h; sourceTree = "<group>"; };
-		C9D97B4B179FA6640076ACF3 /* GCDiscreetNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDiscreetNotificationView.m; sourceTree = "<group>"; };
 		C9D97B57179FA6640076ACF3 /* GHNSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHNSData+Base64.h"; sourceTree = "<group>"; };
 		C9D97B58179FA6640076ACF3 /* GHNSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHNSData+Base64.m"; sourceTree = "<group>"; };
 		C9D97B75179FA6640076ACF3 /* GHNSString+HMAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHNSString+HMAC.h"; sourceTree = "<group>"; };
@@ -996,7 +993,6 @@
 				C9D97B35179FA6640076ACF3 /* ATMHud */,
 				C9D97B43179FA6640076ACF3 /* baidu-mtj */,
 				C9D97B46179FA6640076ACF3 /* ChineseToPinyin */,
-				C9D97B49179FA6640076ACF3 /* GCDiscreetNotificationView */,
 				C9D97B4C179FA6640076ACF3 /* GHKit */,
 				C9D97B9D179FA6640076ACF3 /* MBProgressHUD */,
 				C9D97BA0179FA6640076ACF3 /* RefreshTableHeaderView */,
@@ -1148,15 +1144,6 @@
 				C9D97B48179FA6640076ACF3 /* ChineseToPinyin.m */,
 			);
 			path = ChineseToPinyin;
-			sourceTree = "<group>";
-		};
-		C9D97B49179FA6640076ACF3 /* GCDiscreetNotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97B4A179FA6640076ACF3 /* GCDiscreetNotificationView.h */,
-				C9D97B4B179FA6640076ACF3 /* GCDiscreetNotificationView.m */,
-			);
-			path = GCDiscreetNotificationView;
 			sourceTree = "<group>";
 		};
 		C9D97B4C179FA6640076ACF3 /* GHKit */ = {
@@ -1889,7 +1876,6 @@
 				C9D97C99179FA6650076ACF3 /* ATMSoundFX.m in Sources */,
 				C9D97C9A179FA6650076ACF3 /* ATMTextLayer.m in Sources */,
 				C9D97C9C179FA6650076ACF3 /* ChineseToPinyin.m in Sources */,
-				C9D97C9D179FA6650076ACF3 /* GCDiscreetNotificationView.m in Sources */,
 				C9D97CA1179FA6650076ACF3 /* GHNSData+Base64.m in Sources */,
 				C9D97CB0179FA6650076ACF3 /* GHNSString+HMAC.m in Sources */,
 				C9D97CC0179FA6650076ACF3 /* ybase64.c in Sources */,

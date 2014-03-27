@@ -11,7 +11,6 @@
 #import "MBProgressHUD.h"
 #import "Reachability.h"
 #import "GHNSString+HMAC.h"
-#import "GCDiscreetNotificationView.h"
 #import "NSString+OAURLEncodingAdditions.h"
 #import "BaseRefreshTableViewController.h"
 
@@ -73,7 +72,7 @@
         }
     } else {
         if(self.controller) {
-            [Common notificationMessage:@"网络连接出错，请检测网络设置" inView:self.controller.view];
+            [Common alert:@"网络连接出错，请检测网络设置"];
         }
     }
 }
@@ -213,7 +212,7 @@
                     }
                     [response setSuccessFlag:YES];
                     if(self.controller){
-                        [Common notificationMessage:[response msg] inView:self.controller.view];
+                        [Common alert:[response msg]];
                     }
                 } else if([[response code] isEqualToString:@"110026"]) {
                     //通行证编号错误或未登录

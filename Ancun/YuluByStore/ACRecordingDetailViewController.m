@@ -74,7 +74,7 @@
             if(_mainData){
                 [_mainData setObject:_tv_remark.text forKey:@"remark"];
             }
-            [Common notificationMessage:@"备注修改成功" inView:self.view];
+            [Common alert:@"备注修改成功"];
         }else if(reqCode==REQUESTCODE_APPLYNOTARY){
             [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
             [_mainData setObject:@"2" forKey:@"cerflag"];
@@ -86,7 +86,7 @@
             [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
             [_mainData setObject:@"1" forKey:@"cerflag"];
             
-            [Common notificationMessage:@"取消成功" inView:self.view];
+            [Common alert:@"取消成功"];
         }else if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply||
                  reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];

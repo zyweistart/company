@@ -1,5 +1,4 @@
 #import "Common.h"
-#import "GCDiscreetNotificationView.h"
 
 @implementation Common
 
@@ -30,12 +29,6 @@
                           cancelButtonTitle:@"确定"
                           otherButtonTitles:nil, nil];
     [alert show];
-}
-
-+ (void)notificationMessage:(NSString *)message inView:(UIView *)aView{
-    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:message showActivity:NO inPresentationMode:GCDiscreetNotificationViewPresentationModeTop inView:aView];
-    [notificationView show:YES];
-    [notificationView hideAnimatedAfter:2.6];
 }
 
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag{

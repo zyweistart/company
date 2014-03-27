@@ -93,7 +93,7 @@
 - (IBAction)pasteBoard:(id)sender{
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string =[NSString stringWithFormat:@"%@",_lbl_accendcode.text];
-    [Common notificationMessage:@"复制成功" inView:self.view];
+    [Common alert:@"复制成功"];
 }
 
 - (IBAction)sendMessage:(id)sender{

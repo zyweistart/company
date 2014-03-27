@@ -111,7 +111,7 @@
                 if(cachesize>0){
                     [Common actionSheet:self message:@"确定要清除所有缓存文件吗？" tag:2];
                 }else{
-                    [Common notificationMessage:@"当前的缓存文件为0KB，无须清除" inView:self.view];
+                    [Common alert:@"当前的缓存文件为0KB，无须清除"];
                 }
             }
             break;
@@ -143,7 +143,7 @@
             //            [Common setCache:[Config Instance].cacheKey data:nil];
             [[Config Instance]setIsCalculateTotal:YES];
             cachesize=0;
-            [Common notificationMessage:@"清除完成" inView:self.view];
+            [Common alert:@"清除完成"];
             [self reloadTableViewDataSource];
         }
     }
