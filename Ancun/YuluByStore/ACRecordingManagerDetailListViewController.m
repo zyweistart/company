@@ -27,26 +27,33 @@
             navTitle=_oppno;
         }
         self.navigationItem.title=navTitle;
-        
+        UIView *container=nil;
+        if(IOS7){
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)];
+        }else{
+           container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-44)];
+        }
+        [self.view addSubview:container];
         _playerView=[ACPlayerView instance:self];
         //self.view.frame.size.height:主视图高度
         //[playerView frame].size.height:播放视图的高度
         //44:为导航栏的高度
         [_playerView setFrame:CGRectMake(0,
-                                        self.view.frame.size.height-[_playerView frame].size.height-44,
-                                        self.view.frame.size.width,
-                                        [_playerView frame].size.height)];
-        [self.view addSubview:_playerView];
+                                         container.frame.size.height-[_playerView frame].size.height,
+                                         container.frame.size.width,
+                                         [_playerView frame].size.height)];
+        [container addSubview:_playerView];
+        
         self.tableView=[[UITableView alloc]initWithFrame:
                     CGRectMake(0, 0,
-                               self.view.frame.size.width,
-                               self.view.frame.size.height-_playerView.frame.size.height)];
+                               container.frame.size.width,
+                               container.frame.size.height-_playerView.frame.size.height)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-        [self.view addSubview:self.tableView];
+        [container addSubview:self.tableView];
         if (_refreshHeaderView == nil) {
-            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
             view.delegate = self;
             [self.tableView addSubview:view];
             _refreshHeaderView = view;

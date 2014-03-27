@@ -1,11 +1,13 @@
 #import "BaseTableViewController.h"
 #import "EGORefreshTableHeaderView.h"
 
+#define PAGESIZE 8
+
 @interface BaseRefreshTableViewController:BaseTableViewController<EGORefreshTableHeaderDelegate,ResultDelegate,HttpViewDelegate>{
     //页大小
-    NSInteger _pageSize;
+    int _pageSize;
     //当前页数
-    NSInteger _currentPage;
+    int _currentPage;
     //是否处于加载中
 	BOOL _reloading;
     //是否加载完毕

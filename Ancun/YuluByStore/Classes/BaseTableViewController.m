@@ -26,10 +26,7 @@
 
 - (UITableView *)buildTableView{
     if(self.tableView==nil){
-        self.tableView=[[UITableView alloc]initWithFrame:
-                    CGRectMake(0, 0,
-                               self.view.frame.size.width,
-                               self.view.frame.size.height)];
+        self.tableView=[[UITableView alloc]initWithFrame:self.view.bounds];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];

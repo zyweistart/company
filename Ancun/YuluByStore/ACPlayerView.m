@@ -152,7 +152,7 @@
 }
 
 //开始播放
-- (void)player:(NSString *)playerPath dictionary:(NSMutableDictionary *)dic{
+- (void)player:(NSString *)playerPath dictionary:(NSDictionary *)dic{
     [self setPath:playerPath];
     
     [self setDictionary:[[NSMutableDictionary alloc] initWithDictionary:dic]];

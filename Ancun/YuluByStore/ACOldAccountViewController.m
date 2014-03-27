@@ -24,36 +24,44 @@
     
     if (self) {
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];
-        [view setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
+        self.title=@"我的账户";
+        
+        UIView *container=nil;
+        if(IOS7){
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-40-64)];
+        }else{
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40-44)];
+        }
+        
+        [container setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
         
         UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 10, 120, 30)];
         [lbl1 setFont:[UIFont systemFontOfSize:17]];
         [lbl1 setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
         [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [lbl1 setText:@"可用录音时长:"];
-        [view addSubview:lbl1];
+        [container addSubview:lbl1];
         
         _lblTimeLong=[[UILabel alloc]initWithFrame:CGRectMake(130, 10, 150, 30)];
         [_lblTimeLong setFont:[UIFont systemFontOfSize:17]];
         [_lblTimeLong setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
         [_lblTimeLong setTextColor:[UIColor colorWithRed:(239/255.0) green:(126/255.0) blue:(7/255.0) alpha:1]];
         [_lblTimeLong setText:[NSString stringWithFormat:@"%d分钟",[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60]];
-        [view addSubview:_lblTimeLong];
+        [container addSubview:_lblTimeLong];
         #ifdef JAILBREAK
             self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(onPay:)];
         #endif
         
-        [self.view addSubview:view];
+        [self.view addSubview:container];
         
         self.tableView=[[UITableView alloc]initWithFrame:
                         CGRectMake(0, 50,
                                    self.view.frame.size.width,
-                                   self.view.frame.size.height-50)];
+                                   container.frame.size.height-50)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-        [self.view addSubview:self.tableView];
+        [container addSubview:self.tableView];
         if(_refreshHeaderView==nil){
             EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
             view.delegate = self;

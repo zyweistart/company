@@ -13,18 +13,26 @@
 - (id)init{
     self=[super init];
     if(self){
-        if(IOS7){
-            [self buildUI7];
-        }else{
-            [self buildUI56];
-        }
+        
     }
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    if(IOS7){
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+        [self buildUI7];
+    }else{
+        [self buildUI56];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 #ifndef TEST
     //百度统计
     [[BaiduMobStat defaultStat] pageviewStartWithName:[NSString stringWithUTF8String:object_getClassName(self)]];

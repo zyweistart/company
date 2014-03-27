@@ -18,7 +18,11 @@
         [_lblRemark setTextColor:[UIColor colorWithRed:(50/255.0) green:(50/255.0) blue:(50/255.0) alpha:1]];
         [self addSubview:_lblRemark];
         [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        if(IOS7){
+            [self setAccessoryType:UITableViewCellAccessoryDetailButton];
+        }else{
+            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        }
     }
     return self;
 }

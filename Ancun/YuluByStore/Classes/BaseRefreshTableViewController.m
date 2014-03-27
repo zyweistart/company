@@ -6,21 +6,22 @@
 
 @implementation BaseRefreshTableViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id) init
+{
+    self = [super init];
     if (self) {
         //每页大小
-        _pageSize=8;
+        _pageSize=PAGESIZE;
         //初始化页为第一页
         _currentPage=1;
         [super buildTableView];
         if(_refreshHeaderView==nil){
-            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
             view.delegate = self;
             [self.tableView addSubview:view];
             _refreshHeaderView = view;
+            [_refreshHeaderView refreshLastUpdatedDate];
         }
-        [_refreshHeaderView refreshLastUpdatedDate];
     }
     return self;
 }

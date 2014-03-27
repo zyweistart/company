@@ -42,67 +42,75 @@
 
     if (self) {
         
+        self.title=@"我的账户";
+        UIView *container=nil;
+        if(IOS7){
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-40-64)];
+        }else{
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-40-44)];
+        }
+        
+        [self.view addSubview:container];
+        
+        int topHeight=91;
         self.tableView=[[UITableView alloc]initWithFrame:
-                        CGRectMake(0, 93,
-                                   self.view.frame.size.width,
-                                   self.view.frame.size.height-93)];
+                        CGRectMake(0, topHeight,
+                                   container.frame.size.width,
+                                   container.frame.size.height-topHeight)];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-        [self.view addSubview:self.tableView];
-        if(_refreshHeaderView==nil){
-            EGORefreshTableHeaderView *view=[[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+        [container addSubview:self.tableView];
+        if (_refreshHeaderView == nil) {
+            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                                               CGRectMake(0.0f,
+                                                          0.0f - self.tableView.bounds.size.height,
+                                                          self.tableView.bounds.size.width,
+                                                          self.tableView.bounds.size.height)];
             view.delegate = self;
             [self.tableView addSubview:view];
             _refreshHeaderView = view;
         }
-        [_refreshHeaderView refreshLastUpdatedDate];
         
         UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
         [lbl1 setFont:[UIFont systemFontOfSize:15]];
         [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [lbl1 setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
-        [self.view addSubview:lbl1];
-        
-//        UILabel *lbl2=[[UILabel alloc]initWithFrame:CGRectMake(8, 38, 300, 21)];
-//        [lbl2 setFont:[UIFont systemFontOfSize:15]];
-//        [lbl2 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
-//        [lbl2 setText:[NSString stringWithFormat:@"到期时间：%@",[[[Config Instance]userInfo]objectForKey:@"comboendtime"]]];
-//        [self.view addSubview:lbl2];
+        [container addSubview:lbl1];
         
 //        _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
         _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
         [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
         [_lblTip1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip1 setText:@"基础服务套餐: 正在计算..."];
-//        [self.view addSubview:_lblTip1];
+//        [container addSubview:_lblTip1];
         
         _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
         [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
         [_lblTip2 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
-//        [self.view addSubview:_lblTip2];
+//        [container addSubview:_lblTip2];
         
 //        _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
         _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 38, 300, 21)];
         [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
         [_lblTip3 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
         [_lblTip3 setText:@"当前可用容量: 正在计算..."];
-//        [self.view addSubview:_lblTip3];
+//        [container addSubview:_lblTip3];
         
         _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 51, 159, 40)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
         [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
-        [self.view addSubview:_leftTopTab];
+        [container addSubview:_leftTopTab];
         
         _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 160, 40)];
         [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
         [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
-        [self.view addSubview:_rightTopTab];
+        [container addSubview:_rightTopTab];
         
         _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 87, 159, 4)];
         [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
-        [self.view addSubview:_lblSlid];
+        [container addSubview:_lblSlid];
         
         _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
         [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
@@ -389,6 +397,8 @@
                 }
                 int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
                 [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟 %dMB",rectimelimit/60,auciquotalimit/1024/1024]];
+            }else if(ctype==9){
+                [cell.lblName setText:@"免费套餐 60分钟/31天"];
             }
             [cell.lblStartTime setText:[[dictionary objectForKey:@"starttime"] substringWithRange:NSMakeRange(0, 10)]];
             [cell.lblEndTime setText:[[dictionary objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
@@ -417,6 +427,8 @@
                     [strContent appendString:@"时长套餐"];
                 } else if(cgsubtype==3){
                     [strContent appendString:@"个人基础套餐"];
+                }else if(cgsubtype==9){
+                    [strContent appendString:@"免费套餐"];
                 } else {
                     [strContent appendString:@"未知"];
                 }
@@ -426,6 +438,8 @@
                     [strContent appendString:@"存储套餐"];
                 }else if(cgsubtype==3){
                     [strContent appendString:@"个人基础套餐"];
+                }else if(cgsubtype==9){
+                    [strContent appendString:@"免费套餐"];
                 } else {
                     [strContent appendString:@"未知"];
                 }
@@ -437,6 +451,8 @@
                     [strContent appendString:@"个人基础套餐"];
                 } else if(cgsubtype==0){
                     [strContent appendString:@"试用套餐"];
+                }else if(cgsubtype==9){
+                    [strContent appendString:@"免费套餐"];
                 }
             } else if(cgtype==5) {
                 [strContent appendString:@"套餐转换-"];

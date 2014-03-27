@@ -20,7 +20,7 @@
 
 + (ACPlayerView *)instance:(UIViewController *)viewController;
 
-- (void)player:(NSString *)playerPath dictionary:(NSMutableDictionary*)dic;
+- (void)player:(NSString *)playerPath dictionary:(NSDictionary*)dic;
 - (void)stop;
 
 - (IBAction)btnPlayer:(id)sender;

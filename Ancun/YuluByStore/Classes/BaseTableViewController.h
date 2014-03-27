@@ -1,8 +1,8 @@
 
 @interface BaseTableViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-@property (retain,nonatomic) UITableView *tableView;
-@property (retain,nonatomic) NSMutableArray *dataItemArray;
+@property (strong,nonatomic) UITableView *tableView;
+@property (strong,nonatomic) NSMutableArray *dataItemArray;
 
 - (UITableView *)buildTableView;
 

@@ -36,7 +36,7 @@
     [UIApplication sharedApplication].keyWindow.rootViewController=[[ACLoginViewController alloc]init];
     //进入应用之后才进行存储
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
-    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:[infoDict objectForKey:@"CFBundleVersion"]];
+    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:[infoDict objectForKey:@"CFBundleShortVersionString"]];
 }
 
 @end
