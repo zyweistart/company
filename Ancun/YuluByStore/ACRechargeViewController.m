@@ -264,7 +264,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if([self.dataItemArray count]>0){
-        if(_pageSize>[self.dataItemArray count]){
+        if(PAGESIZE>[self.dataItemArray count]){
             return [self.dataItemArray count];
         }else{
             return [self.dataItemArray count]+1;
@@ -349,7 +349,7 @@
         }
         [requestParams setObject:PRODUCTRECORDNO_STRING  forKey:@"productrecordno"];
         [requestParams setObject:@"1"  forKey:@"status"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
         _loadHttp=[[HttpRequest alloc]init];
         [_loadHttp setDelegate:self];

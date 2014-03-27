@@ -4,8 +4,6 @@
 #define PAGESIZE 8
 
 @interface BaseRefreshTableViewController:BaseTableViewController<EGORefreshTableHeaderDelegate,ResultDelegate,HttpViewDelegate>{
-    //页大小
-    int _pageSize;
     //当前页数
     int _currentPage;
     //是否处于加载中

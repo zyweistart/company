@@ -204,7 +204,7 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"6"  forKey:@"cgtype"];
         [requestParams setObject:@"1"  forKey:@"cgsubtype"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
         _loadDataHttp=[[HttpRequest alloc]init];
         [_loadDataHttp setDelegate:self];

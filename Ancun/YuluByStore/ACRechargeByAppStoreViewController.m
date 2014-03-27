@@ -149,7 +149,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     int count=[[[IAPHelper sharedHelper]products]count];
     if(count>0){
-        if(_pageSize>count){
+        if(PAGESIZE>count){
             return count;
         }else{
             return count+1;
@@ -238,7 +238,7 @@
         //只支持基础服务套餐版
         [requestParams setObject:@"3"  forKey:@"type"];
         [requestParams setObject:@"1"  forKey:@"status"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
         _loadHttp=[[HttpRequest alloc]init];
         [_loadHttp setDelegate:self];

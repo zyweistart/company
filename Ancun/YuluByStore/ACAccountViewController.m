@@ -338,7 +338,7 @@
         return [self.dataItemArray count];
     } else {
         if([self.dataItemArray count]>0){
-            if(_pageSize>[self.dataItemArray count]){
+            if(PAGESIZE>[self.dataItemArray count]){
                 return [self.dataItemArray count];
             }else{
                 return [self.dataItemArray count]+1;
@@ -554,7 +554,7 @@
         } else if (currentTab == 2){
             self.dataItemArray=_rightDataItemArray;
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-            [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+            [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
             [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
             _loadHttp=[[HttpRequest alloc]init];
             [_loadHttp setDelegate:self];

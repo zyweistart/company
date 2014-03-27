@@ -1543,6 +1543,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
+				TargetAttributes = {
+					C9D97986179FA3500076ACF3 = {
+						DevelopmentTeam = XLA7UCY3KD;
+					};
+				};
 			};
 			buildConfigurationList = C9D97980179FA3430076ACF3 /* Build configuration list for PBXProject "Ancun" */;
 			compatibilityVersion = "Xcode 3.2";

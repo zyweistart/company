@@ -10,8 +10,6 @@
 {
     self = [super init];
     if (self) {
-        //每页大小
-        _pageSize=PAGESIZE;
         //初始化页为第一页
         _currentPage=1;
         [super buildTableView];
@@ -89,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if([self.dataItemArray count]>0){
-        if(_pageSize>[self.dataItemArray count]){
+        if(PAGESIZE>[self.dataItemArray count]){
             return [self.dataItemArray count];
         }else{
             return [self.dataItemArray count]+1;
@@ -102,7 +100,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     int row=[indexPath row];
     if([self.dataItemArray count]==row){
-        if(row>=_pageSize) {
+        if(row>=PAGESIZE) {
             if(!_loadOver&&!_reloading) {
                 _currentPage++;
                 //0.1秒后自动开始刷新

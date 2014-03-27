@@ -373,7 +373,7 @@
         [requestParams setObject:@"" forKey:@"grouprecordno"];
         [requestParams setObject:@"" forKey:@"groupflag"];
         [requestParams setObject:@"desc" forKey:@"ordersort"];
-        [requestParams setObject:[NSString stringWithFormat: @"%d",_pageSize]  forKey:@"pagesize"];
+        [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
         _managerHttp=[[HttpRequest alloc]init];
         [_managerHttp setDelegate:self];

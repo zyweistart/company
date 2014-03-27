@@ -117,7 +117,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if([self.dataItemArray count]>0){
-        if(_pageSize>[self.dataItemArray count]){
+        if(PAGESIZE>[self.dataItemArray count]){
             return [self.dataItemArray count];
         }else{
             return [self.dataItemArray count]+1;
