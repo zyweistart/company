@@ -26,7 +26,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     //显示系统托盘
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    
 #ifndef TEST
     NSBundle *bundle=[NSBundle mainBundle];
     //测试环境下不进行百度统计

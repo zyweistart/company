@@ -6,10 +6,11 @@
 
 @implementation ACAboutUsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)init{
+    self = [super init];
     if (self) {
-        self.navigationItem.title=@"关于我们";
+        self.title=@"关于我们";
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }

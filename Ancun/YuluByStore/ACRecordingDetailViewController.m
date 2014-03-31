@@ -32,8 +32,8 @@
     return self;
 }
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
+- (void)loadData
+{
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
     [requestParams setObject:@"1" forKey:@"status"];
     [requestParams setObject:_fileno forKey:@"fileno"];
@@ -43,6 +43,7 @@
     [_recordingDetailHttp setController:self];
     [_recordingDetailHttp loginhandle:@"v4recGet" requestParams:requestParams];
 }
+
 #pragma mark -
 #pragma mark Delegate Methods
 

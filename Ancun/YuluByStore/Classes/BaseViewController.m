@@ -9,15 +9,15 @@
 
 @implementation BaseViewController
 
-
 - (id)init{
     self=[super init];
     if(self){
+        
     }
     return self;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 

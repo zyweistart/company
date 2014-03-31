@@ -1,5 +1,5 @@
 #import "ACLoginViewController.h"
-#import "ACDialViewController.h"
+#import "ACDialsViewController.h"
 #import "ACContactsViewController.h"
 #import "ACAccountViewController.h"
 #import "ACOldAccountViewController.h"
@@ -8,6 +8,8 @@
 #import "ACRegisterViewController.h"
 #import "ACForgetPwdViewController.h"
 #import "SSCheckBoxView.h"
+
+#define TABNORMALBGCOLOR [UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]
 
 @interface ACLoginViewController ()
 
@@ -139,7 +141,7 @@
         NSString *phone=_txtUserName.text;
         [[Config Instance] setIsLogin:YES];
         [[Config Instance] setIsCalculateTotal:YES];
-        [[Config Instance] setUserInfo:[[response mainData] objectForKey:@"v4info"]];
+        [[Config Instance] setUserInfo:[[NSMutableDictionary alloc]initWithDictionary:[[response mainData] objectForKey:@"v4info"]]];
         //企业版用户无法登录
         if([@"2" isEqualToString:[[[Config Instance]userInfo]objectForKey:@"usertype"]]) {
             [Common alert:@"您的号码属于政企用户，目前尚不能使用APP登录，如需通话录音可直接拨打95105856"];
@@ -157,44 +159,78 @@
             [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         }
         //拔号盘
-        ACDialViewController *dialViewController = [[ACDialViewController alloc]init];
+        ACDialsViewController *dialViewController = [[ACDialsViewController alloc]init];
         dialViewController.tabBarItem.title = @"拨号盘";
         [[dialViewController tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_dial_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_dial"]];
-        
+        [[dialViewController tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: [UIColor whiteColor],
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[dialViewController tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: TABNORMALBGCOLOR,
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactsViewController alloc]init]];
         contactViewControllerNav.tabBarItem.title = @"通讯录";
         [[contactViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_contact_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_contact"]];
+        [[contactViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: [UIColor whiteColor],
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[contactViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: TABNORMALBGCOLOR,
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         if(IOS7){
             [[contactViewControllerNav navigationBar]setBarTintColor:MAINBG];
+            [[contactViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }
         
         //我的账户
-        UINavigationController *accountViewControllerNav;
-        if([[Config Instance]isOldUser]) {
-            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACOldAccountViewController alloc]init]];
-        } else {
-            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
-        }
+        UINavigationController *accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+//        if([[Config Instance]isOldUser]) {
+//            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACOldAccountViewController alloc]init]];
+//        } else {
+//            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
+//        }
         accountViewControllerNav.tabBarItem.title = @"我的账户";
         [[accountViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_account_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_account"]];
+        [[accountViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                 dictionaryWithObjectsAndKeys: [UIColor whiteColor],
+                                                                 UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[accountViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                 dictionaryWithObjectsAndKeys: TABNORMALBGCOLOR,
+                                                                 UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         if(IOS7){
             [[accountViewControllerNav navigationBar]setBarTintColor:MAINBG];
+            [[accountViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }
+        
         //录音管理
         UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
         recordingManagerViewControllerNav.tabBarItem.title = @"我的录音";
         [[recordingManagerViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_recording_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_recording"]];
+        [[recordingManagerViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: [UIColor whiteColor],
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[recordingManagerViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                       dictionaryWithObjectsAndKeys: TABNORMALBGCOLOR,
+                                                                       UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         if(IOS7){
             [[recordingManagerViewControllerNav navigationBar]setBarTintColor:MAINBG];
+            [[recordingManagerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }
         
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
         moreViewControllerNav.tabBarItem.title = @"更多";
         [[moreViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_more_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_more"]];
+        [[moreViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                                dictionaryWithObjectsAndKeys: [UIColor whiteColor],
+                                                                                UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[moreViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
+                                                                                dictionaryWithObjectsAndKeys: TABNORMALBGCOLOR,
+                                                                                UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         if(IOS7){
             [[moreViewControllerNav navigationBar]setBarTintColor:MAINBG];
+            [[moreViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }
         
         //添加标签控制器
@@ -203,8 +239,6 @@
         if(IOS7){
             [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];
             [[_tabBarController tabBar] setBackgroundImage:[[UIImage alloc] init]];
-            [[_tabBarController tabBar] setTintColor:[UIColor whiteColor]];
-            [[_tabBarController tabBar] setSelectedImageTintColor:[UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]];
         }
         _tabBarController.delegate = self;
         _tabBarController.viewControllers = [NSArray arrayWithObjects:

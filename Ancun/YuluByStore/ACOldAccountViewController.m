@@ -18,9 +18,11 @@
 
 @end
 
-@implementation ACOldAccountViewController
+@implementation ACOldAccountViewController{
+    UILabel *_lblTimeLong;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)init {
     
     if (self) {
         
@@ -28,9 +30,9 @@
         
         UIView *container=nil;
         if(IOS7){
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-40-64)];
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, STATUSHEIGHT+TOPNAVIGATIONHEIGHT, self.view.frame.size.width, self.view.frame.size.height-STATUSHEIGHT-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
         }else{
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40-44)];
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
         }
         
         [container setBackgroundColor:[UIColor colorWithRed:(231/255.0) green:(231/255.0) blue:(231/255.0) alpha:1]];
@@ -71,7 +73,7 @@
         [_refreshHeaderView refreshLastUpdatedDate];
         
     }
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     return self;
 }
 
@@ -231,7 +233,6 @@
 - (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]) {
         _reloading = YES;
-        [self.tableView reloadData];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"" forKey:@"changetimeb"];
         [requestParams setObject:@"" forKey:@"changetimee"];

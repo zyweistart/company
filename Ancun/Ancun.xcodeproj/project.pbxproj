@@ -28,6 +28,7 @@
 		C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351917B9D81C00BECE31 /* ACRechargeNav.m */; };
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
+		C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */; };
 		C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9155D7918E90BC70075A693 /* ACContactsViewController.xib */; };
 		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
 		C978899718E16AC300157577 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C978899618E16AC300157577 /* Images.xcassets */; };
@@ -323,6 +324,8 @@
 		C90A351C17BA054F00BECE31 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavigationWebPageViewController.h; sourceTree = "<group>"; };
 		C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
+		C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDialsViewController.h; sourceTree = "<group>"; };
+		C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDialsViewController.m; sourceTree = "<group>"; };
 		C9155D7918E90BC70075A693 /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
 		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
 		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
@@ -1399,6 +1402,8 @@
 				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
 				C99B80DE17A0CAC0004D0BFB /* MyViewController.h */,
 				C99B80DF17A0CAC0004D0BFB /* MyViewController.m */,
+				C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */,
+				C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1805,6 +1810,7 @@
 				C9D4D18C17E2B8EE0013D03E /* CJSONSerialization.m in Sources */,
 				C9D4D18D17E2B8EE0013D03E /* CJSONSerializedData.m in Sources */,
 				C9D4D18E17E2B8EE0013D03E /* CDataScanner_Extensions.m in Sources */,
+				C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */,
 				C9D4D18F17E2B8EE0013D03E /* NSDictionary_JSONExtensions.m in Sources */,
 				C9D4D19017E2B8EE0013D03E /* CJSONDeserializer.m in Sources */,
 				C9D4D19117E2B8EE0013D03E /* CJSONScanner.m in Sources */,

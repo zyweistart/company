@@ -16,11 +16,6 @@
 - (id)initWithOppno:(NSString *)oppno{
     _oppno=oppno;
     if(self){
-        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
-                                                initWithTitle:@"返回"
-                                                style:UIBarButtonItemStyleBordered
-                                                target:self
-                                                action:@selector(back:)];
 
         NSString* navTitle=[[[Config Instance]contact] objectForKey:_oppno];
         if(navTitle==nil){
@@ -77,6 +72,14 @@
     if(!self.dataItemArray||[self.dataItemArray count]==0){
         [self autoRefresh];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if(_playerView){
+        [_playerView stop];
+    }
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark -
@@ -239,7 +242,7 @@
             cell.lblRemark.textColor=[UIColor lightGrayColor];
             cell.lblRemark.text=@"添加备注";
         }else{
-            cell.lblRemark.textColor=[UIColor blackColor];
+            cell.lblRemark.textColor=FONTCOLOR2;
             cell.lblRemark.text=remark;
         }
         return cell;
@@ -333,31 +336,29 @@
         [detailViewController setResultDelegate:self];
         detailViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detailViewController animated:YES];
-        
+        [detailViewController loadData];
     }
 }
-
-
 
 #pragma mark -
 #pragma mark Custom Methods
 
-- (void)back:(id)sencder{
-    if(_playerView){
-        [_playerView stop];
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
         _reloading = YES;
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"status"];
         [requestParams setObject:@"" forKey:@"calltype"];
         [requestParams setObject:_oppno forKey:@"oppno"];
-        [requestParams setObject:@"1" forKey:@"rectype"];
+        //如果是从老用户转过来则查询新接口
+        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
+            //查询新老录音
+            [requestParams setObject:@"3" forKey:@"rectype"];
+        }else{
+            //查询当前用户套餐下的录音
+            [requestParams setObject:@"1" forKey:@"rectype"];
+        }
         [requestParams setObject:@"" forKey:@"callerno"];
         [requestParams setObject:@"" forKey:@"calledno"];
         [requestParams setObject:@"" forKey:@"begintime"];

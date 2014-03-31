@@ -9,6 +9,8 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
+#define REFRESHUSERINFOREQUESTCODE 473281947
+
 @interface ACAccountViewController ()
 
 @end
@@ -19,8 +21,6 @@
     
     int currentTab;
     
-    UILabel *_lblSlid;
-    
     UIButton *_leftTopTab;
     UIButton *_rightTopTab;
     
@@ -30,73 +30,78 @@
 }
 
 - (id)init {
+    
+    UIView *container=nil;
+    if(IOS7){
+        container=[[UIView alloc]initWithFrame:CGRectMake(0, STATUSHEIGHT+TOPNAVIGATIONHEIGHT, self.view.bounds.size.width, self.view.bounds.size.height-BOTTOMTABBARHEIGHT-STATUSHEIGHT-TOPNAVIGATIONHEIGHT)];
+    }else{
+        container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-BOTTOMTABBARHEIGHT-TOPNAVIGATIONHEIGHT)];
+    }
+    [container setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:container];
+    
+    int topHeight=91;
+    
+    self.tableView=[[UITableView alloc]initWithFrame:
+                    CGRectMake(0, topHeight,
+                               container.frame.size.width,
+                               container.frame.size.height-topHeight)];
+    [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    [container addSubview:self.tableView];
+    if (_refreshHeaderView == nil) {
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                                           CGRectMake(0.0f,
+                                                      0.0f - self.tableView.bounds.size.height,
+                                                      self.tableView.bounds.size.width,
+                                                      self.tableView.bounds.size.height)];
+        view.delegate = self;
+        [self.tableView addSubview:view];
+        _refreshHeaderView = view;
+    }
+    
+    self = [super init];
 
     if (self) {
         
         self.title=@"我的账户";
-        UIView *container=nil;
-        if(IOS7){
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-49-64)];
-        }else{
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49-44)];
-        }
-        [container setBackgroundColor:[UIColor whiteColor]];
-        [self.view addSubview:container];
         
-        int topHeight=91;
-        self.tableView=[[UITableView alloc]initWithFrame:
-                        CGRectMake(0, topHeight,
-                                   container.frame.size.width,
-                                   container.frame.size.height-topHeight)];
-        [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        [self.tableView setDelegate:self];
-        [self.tableView setDataSource:self];
-        [container addSubview:self.tableView];
-        if (_refreshHeaderView == nil) {
-            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:
-                                               CGRectMake(0.0f,
-                                                          0.0f - self.tableView.bounds.size.height,
-                                                          self.tableView.bounds.size.width,
-                                                          self.tableView.bounds.size.height)];
-            view.delegate = self;
-            [self.tableView addSubview:view];
-            _refreshHeaderView = view;
-        }
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10, 15, 300, 21)];
+        [lbl setFont:[UIFont systemFontOfSize:15]];
+        [lbl setTextColor:FONTCOLOR2];
+        [lbl setBackgroundColor:[UIColor whiteColor]];
+        [lbl setTextAlignment:NSTextAlignmentCenter];
+        [lbl setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
+        [container addSubview:lbl];
         
-        UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
-        [lbl1 setFont:[UIFont systemFontOfSize:15]];
-        [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
-        [lbl1 setBackgroundColor:[UIColor whiteColor]];
-        [lbl1 setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
-        [container addSubview:lbl1];
-        
-        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 51, 159, 40)];
+        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(4.5, 51, 155.5, 34.5)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
-        [_leftTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
+        [_leftTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountleftact"] forState:UIControlStateNormal];
+        _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+        [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:_leftTopTab];
         
-        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 160, 40)];
+        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 155.5, 34.5)];
         [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
-        [_rightTopTab setBackgroundColor:[UIColor colorWithRed:(44/255.0) green:(140/255.0) blue:(207/255.0) alpha:1]];
+        [_rightTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountright"] forState:UIControlStateNormal];
+        _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
+        [_rightTopTab setTitleColor:FONTCOLOR2 forState:UIControlStateNormal];
+        [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:_rightTopTab];
         
-        _lblSlid=[[UILabel alloc]initWithFrame:CGRectMake(0, 87, 159, 4)];
-        [_lblSlid setBackgroundColor:[UIColor colorWithRed:(76/255.0) green:(86/255.0) blue:(108/255.0) alpha:1]];
-        [container addSubview:_lblSlid];
-        
-        _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-        [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-        [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
-        [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-        [_rightTopTab addTarget:self action:@selector(rightTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        
         //增加充值按钮
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
-
+        UIImage* image= [UIImage imageNamed:@"rechargebg"];
+        CGRect frame_1= CGRectMake(0, 0, image.size.width, image.size.height);
+        UIButton* goRecharge= [[UIButton alloc] initWithFrame:frame_1];
+        [goRecharge setBackgroundImage:image forState:UIControlStateNormal];
+        [goRecharge setTitle:@"充值" forState:UIControlStateNormal];
+        [goRecharge setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[goRecharge titleLabel]setFont:[UIFont systemFontOfSize:16]];
+        [goRecharge addTarget:self action:@selector(accountPay:) forControlEvents:UIControlEventTouchUpInside];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:goRecharge]];
     }
-    self = [super init];
     return self;
 }
 
@@ -109,29 +114,29 @@
     [[Config Instance]setIsRefreshAccountPayList:YES];
     [[Config Instance]setIsRefreshAccountUseRecordList:NO];
     
-//    //读取使用记录缓存信息
-//    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
-//    if(dictioanry){
-//        id content=[dictioanry objectForKey:CACHE_DATA];
-//        if(content){
-//            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
-//        }
-//    }
+    //读取使用记录缓存信息
+    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+    if(dictioanry){
+        id content=[dictioanry objectForKey:CACHE_DATA];
+        if(content){
+            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
+        }
+    }
     
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if([[Config Instance]isRefreshUserInfo]) {
-//        //更新账户信息
-//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//        [requestParams setObject:@"1" forKey:@"raflag"];
-//        _loadHttp=[[HttpRequest alloc]init];
-//        [_loadHttp setDelegate:self];
-//        [_loadHttp setController:self];
-//        [_loadHttp setIsShowMessage:YES];
-//        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-//        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+        //更新账户信息
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:@"1" forKey:@"raflag"];
+        _loadHttp=[[HttpRequest alloc]init];
+        [_loadHttp setDelegate:self];
+        [_loadHttp setController:self];
+        [_loadHttp setIsShowMessage:YES];
+        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
     } else {
         if(currentTab==1) {
             if([[Config Instance]isRefreshAccountPayList]) {
@@ -150,15 +155,15 @@
 
 - (void)accountPay:(id)sender{
     if([[Config Instance]isRefreshUserInfo]) {
-//        //更新账户信息
-//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//        [requestParams setObject:@"1" forKey:@"raflag"];
-//        _loadHttp=[[HttpRequest alloc]init];
-//        [_loadHttp setDelegate:self];
-//        [_loadHttp setController:self];
-//        [_loadHttp setIsShowMessage:YES];
-//        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-//        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+        //更新账户信息
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:@"1" forKey:@"raflag"];
+        _loadHttp=[[HttpRequest alloc]init];
+        [_loadHttp setDelegate:self];
+        [_loadHttp setController:self];
+        [_loadHttp setIsShowMessage:YES];
+        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
     } else if([[Config Instance]isRefreshAccountPayList]) {
         [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
@@ -189,15 +194,10 @@
         }
     }
     
-    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_rightTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    _lblSlid.frame = CGRectMake(0, 87, 159, 4);
-    
-    [UIView commitAnimations];
+    [_leftTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_rightTopTab setTitleColor:FONTCOLOR2 forState:UIControlStateNormal];
+    [_leftTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountleftact"] forState:UIControlStateNormal];
+    [_rightTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountright"] forState:UIControlStateNormal];
 }
 
 - (void)rightTopButtonAction {
@@ -210,15 +210,10 @@
         [self autoRefresh];
     }
     
-    [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时选中
-    [_leftTopTab setTitleColor:[UIColor colorWithRed:(220/255.0) green:(220/255.0) blue:(220/255.0) alpha:1] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    _lblSlid.frame = CGRectMake(160, 87, 160, 4);
-    
-    [UIView commitAnimations];
+    [_leftTopTab setTitleColor:FONTCOLOR2 forState:UIControlStateNormal];
+    [_rightTopTab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_leftTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountleft"] forState:UIControlStateNormal];
+    [_rightTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountrightact"] forState:UIControlStateNormal];
 }
 
 #pragma mark -
@@ -231,19 +226,19 @@
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-//    if (reqCode==REFRESHUSERINFOREQUESTCODE) {
-//        if([response successFlag]) {
-//            //更新用户信息
-//            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
-//            for(NSString *key in dics){
-//                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
-//            }
-//            [[Config Instance]setIsRefreshUserInfo:NO];
-//            //重新刷新信息
-//            [[Config Instance] setIsRefreshAccountPayList:YES];
-//            [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
-//        }
-//    } else {
+    if (reqCode==REFRESHUSERINFOREQUESTCODE) {
+        if([response successFlag]) {
+            //更新用户信息
+            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
+            for(NSString *key in dics){
+                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
+            }
+            [[Config Instance]setIsRefreshUserInfo:NO];
+            //重新刷新信息
+            [[Config Instance] setIsRefreshAccountPayList:YES];
+            [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+    } else {
         [super requestFinishedByResponse:response requestCode:reqCode];
         if([response successFlag]) {
             if(currentTab == 1) {
@@ -293,7 +288,7 @@
                 [Common setCache:[Config Instance].cacheKey data:dictionary];
             }
         }
-//    }
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -374,7 +369,7 @@
             int cgtype=[[dictionary objectForKey:@"cgtype"]intValue];
             int cgsubtype=[[dictionary objectForKey:@"cgsubtype"]intValue];
             if(cgtype==1){
-                [strContent appendString:@"活动-"];
+                [strContent appendString:@"活动\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"新手注册礼"];
                 } else if(cgsubtype==2){
@@ -383,7 +378,7 @@
                     [strContent appendString:@"未知"];
                 }
             } else if(cgtype==2) {
-                [strContent appendString:@"套餐充值购买-"];
+                [strContent appendString:@"套餐充值购买\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"存储套餐"];
                 } else if(cgsubtype==2){
@@ -396,7 +391,7 @@
                     [strContent appendString:@"未知"];
                 }
             } else if(cgtype==3) {
-                [strContent appendString:@"套餐生效-"];
+                [strContent appendString:@"套餐生效\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"存储套餐"];
                 }else if(cgsubtype==3){
@@ -407,7 +402,7 @@
                     [strContent appendString:@"未知"];
                 }
             } else if(cgtype==4) {
-                [strContent appendString:@"套餐失效-"];
+                [strContent appendString:@"套餐失效\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"存储套餐"];
                 } else if(cgsubtype==3){
@@ -418,14 +413,14 @@
                     [strContent appendString:@"免费套餐"];
                 }
             } else if(cgtype==5) {
-                [strContent appendString:@"套餐转换-"];
+                [strContent appendString:@"套餐转换\n"];
                 if(cgsubtype==2){
                     [strContent appendString:@"时长套餐"];
                 } else {
                     [strContent appendString:@"未知"];
                 }
             } else if(cgtype==6) {
-                [strContent appendString:@"通话录音-"];
+                [strContent appendString:@"通话录音\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"主叫录音"];
                 } else if(cgsubtype==2){
@@ -436,7 +431,7 @@
                     [strContent appendString:@"未知"];
                 }
             } else if(cgtype==7) {
-                [strContent appendString:@"录音删除-"];
+                [strContent appendString:@"录音删除\n"];
                 if(cgsubtype==1){
                     [strContent appendString:@"主叫录音删除"];
                 } else if(cgsubtype==2){
@@ -504,7 +499,6 @@
 - (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]){
         _reloading = YES;
-        [self.tableView reloadData];
         if(currentTab == 1){
             self.navigationItem.rightBarButtonItem.enabled=NO;
             [[Config Instance] setIsRefreshAccountPayList:YES];

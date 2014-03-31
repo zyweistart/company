@@ -25,4 +25,6 @@
 
 - (IBAction)backgroundDoneEditing:(id)sender;
 
+- (void)loadData;
+
 @end

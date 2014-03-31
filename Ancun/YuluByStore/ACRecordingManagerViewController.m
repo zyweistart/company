@@ -12,6 +12,7 @@
 @implementation ACRecordingManagerViewController {
     HttpRequest *_loadDataHttp;
 }
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -34,11 +35,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if(self.navigationItem.rightBarButtonItem==nil) {
-        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
-            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"时长版录音" style:UIBarButtonItemStyleDone target:self action:@selector(oldRecordingManagerList:)];
-        }
-    }
     //如果为nil或者集合长度为零则自动刷新
     if([[Config Instance]isRefreshRecordingList]) {
         [self autoRefresh];
@@ -71,6 +67,12 @@ static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
     NSInteger row=[indexPath row];
     if([self.dataItemArray count]>row) {
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        
+        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
+            [dictionary setObject:[dictionary objectForKey:@"nrttime"] forKey:@"onrttime"];
+            [dictionary setObject:[dictionary objectForKey:@"nrtcount"] forKey:@"onrtcount"];
+        }
+        
         NSString *oppno=[dictionary objectForKey:@"oppno"];
         NSString* name=[[[Config Instance]contact] objectForKey:oppno];
         if(name==nil||[oppno isEqualToString:name]) {
@@ -145,13 +147,6 @@ static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
     }
 }
 
-//导航至原时长版录音数据
-- (void)oldRecordingManagerList:(id)sender {
-    ACRecordingManagerDetailListOldViewController* recordingManagerDetailListOldViewController=[[ACRecordingManagerDetailListOldViewController alloc] init];
-    recordingManagerDetailListOldViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:recordingManagerDetailListOldViewController animated:YES];
-}
-
 - (void)reloadTableViewDataSource {
 	if([[Config Instance]isLogin]) {
         _reloading = YES;
@@ -166,7 +161,12 @@ static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
         _loadDataHttp=[[HttpRequest alloc]init];
         [_loadDataHttp setDelegate:self];
         [_loadDataHttp setController:self];
-        [_loadDataHttp loginhandle:@"v4recStat" requestParams:requestParams];
+        //如果是从老用户转过来则查询新接口
+        if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
+            [_loadDataHttp loginhandle:@"v4recStatn" requestParams:requestParams];
+        }else{
+            [_loadDataHttp loginhandle:@"v4recStat" requestParams:requestParams];
+        }
     } else {
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];
