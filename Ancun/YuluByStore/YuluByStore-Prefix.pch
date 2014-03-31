@@ -42,6 +42,9 @@
 #define CACHE_DATA [NSString stringWithFormat:@"%@-%@",[NSString stringWithUTF8String:object_getClassName(self)],ACCESSID]
 //导航背景
 #define NAVCOLOR [UIColor colorWithRed:(68/255.0) green:(141/255.0) blue:(208/255.0) alpha:1]
+#define MAINBG [UIColor colorWithRed:(41/255.0) green:(144/255.0) blue:(229/255.0) alpha:1]
+
+
 //常量
 #define APPNAME @"安存语录"
 #define Notification_TabClick_ACRecordingManagerViewController @"Notification_TabClick_ACRecordingManagerViewController"

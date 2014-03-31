@@ -28,6 +28,7 @@
 		C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351917B9D81C00BECE31 /* ACRechargeNav.m */; };
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
+		C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9155D7918E90BC70075A693 /* ACContactsViewController.xib */; };
 		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
 		C978899718E16AC300157577 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C978899618E16AC300157577 /* Images.xcassets */; };
 		C97889AA18E16B4400157577 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C978899818E16B4400157577 /* AddressBook.framework */; };
@@ -62,7 +63,6 @@
 		C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */; };
 		C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */; };
 		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
-		C9A67EAB17CD882900E9A81E /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */; };
 		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
 		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
 		C9D4D18917E2B8EE0013D03E /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4D17217E2B8EE0013D03E /* CDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -82,8 +82,6 @@
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A16179FA64F0076ACF3 /* ACContactCell.m */; };
 		C9D97A78179FA6520076ACF3 /* ACDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */; };
-		C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */; };
-		C9D97A7A179FA6520076ACF3 /* ACDialViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */; };
 		C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */; };
 		C9D97A7C179FA6520076ACF3 /* ACExtractionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */; };
 		C9D97A7D179FA6520076ACF3 /* ACExtractionDetailViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A22179FA6500076ACF3 /* ACExtractionDetailViewController@iPhone5.xib */; };
@@ -254,16 +252,6 @@
 		C9D97D4D179FA6650076ACF3 /* more_icon_relogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C4F179FA6640076ACF3 /* more_icon_relogin@2x.png */; };
 		C9D97D4E179FA6650076ACF3 /* more_icon_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C50179FA6640076ACF3 /* more_icon_tip.png */; };
 		C9D97D4F179FA6650076ACF3 /* more_icon_tip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C51179FA6640076ACF3 /* more_icon_tip@2x.png */; };
-		C9D97D52179FA6650076ACF3 /* nav_icon_account.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C54179FA6640076ACF3 /* nav_icon_account.png */; };
-		C9D97D53179FA6650076ACF3 /* nav_icon_account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C55179FA6640076ACF3 /* nav_icon_account@2x.png */; };
-		C9D97D54179FA6650076ACF3 /* nav_icon_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C56179FA6640076ACF3 /* nav_icon_contact.png */; };
-		C9D97D55179FA6650076ACF3 /* nav_icon_contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C57179FA6640076ACF3 /* nav_icon_contact@2x.png */; };
-		C9D97D56179FA6650076ACF3 /* nav_icon_dial.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C58179FA6640076ACF3 /* nav_icon_dial.png */; };
-		C9D97D57179FA6650076ACF3 /* nav_icon_dial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C59179FA6640076ACF3 /* nav_icon_dial@2x.png */; };
-		C9D97D58179FA6650076ACF3 /* nav_icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5A179FA6640076ACF3 /* nav_icon_more.png */; };
-		C9D97D59179FA6650076ACF3 /* nav_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5B179FA6640076ACF3 /* nav_icon_more@2x.png */; };
-		C9D97D5A179FA6650076ACF3 /* nav_icon_recording.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5C179FA6640076ACF3 /* nav_icon_recording.png */; };
-		C9D97D5B179FA6650076ACF3 /* nav_icon_recording@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5D179FA6640076ACF3 /* nav_icon_recording@2x.png */; };
 		C9D97D5C179FA6650076ACF3 /* notary_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5E179FA6640076ACF3 /* notary_gb.png */; };
 		C9D97D5D179FA6650076ACF3 /* notary_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */; };
 		C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C60179FA6640076ACF3 /* notary_result_gb.png */; };
@@ -335,6 +323,7 @@
 		C90A351C17BA054F00BECE31 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavigationWebPageViewController.h; sourceTree = "<group>"; };
 		C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
+		C9155D7918E90BC70075A693 /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
 		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
 		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
 		C978899618E16AC300157577 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -381,7 +370,6 @@
 		C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayCell.m; sourceTree = "<group>"; };
 		C9A67EA717CD882900E9A81E /* ACContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactsViewController.h; sourceTree = "<group>"; };
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
-		C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
 		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C9D4D17117E2B8EE0013D03E /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
@@ -421,8 +409,6 @@
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
 		C9D97A1B179FA64F0076ACF3 /* ACDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDialViewController.h; sourceTree = "<group>"; };
 		C9D97A1C179FA64F0076ACF3 /* ACDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDialViewController.m; sourceTree = "<group>"; };
-		C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACDialViewController.xib; sourceTree = "<group>"; };
-		C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACDialViewController@iPhone5.xib"; sourceTree = "<group>"; };
 		C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionDetailViewController.h; sourceTree = "<group>"; };
 		C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionDetailViewController.m; sourceTree = "<group>"; };
 		C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACExtractionDetailViewController.xib; sourceTree = "<group>"; };
@@ -720,16 +706,6 @@
 		C9D97C4F179FA6640076ACF3 /* more_icon_relogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_icon_relogin@2x.png"; sourceTree = "<group>"; };
 		C9D97C50179FA6640076ACF3 /* more_icon_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_icon_tip.png; sourceTree = "<group>"; };
 		C9D97C51179FA6640076ACF3 /* more_icon_tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_icon_tip@2x.png"; sourceTree = "<group>"; };
-		C9D97C54179FA6640076ACF3 /* nav_icon_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_icon_account.png; sourceTree = "<group>"; };
-		C9D97C55179FA6640076ACF3 /* nav_icon_account@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_account@2x.png"; sourceTree = "<group>"; };
-		C9D97C56179FA6640076ACF3 /* nav_icon_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_icon_contact.png; sourceTree = "<group>"; };
-		C9D97C57179FA6640076ACF3 /* nav_icon_contact@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_contact@2x.png"; sourceTree = "<group>"; };
-		C9D97C58179FA6640076ACF3 /* nav_icon_dial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_icon_dial.png; sourceTree = "<group>"; };
-		C9D97C59179FA6640076ACF3 /* nav_icon_dial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_dial@2x.png"; sourceTree = "<group>"; };
-		C9D97C5A179FA6640076ACF3 /* nav_icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_icon_more.png; sourceTree = "<group>"; };
-		C9D97C5B179FA6640076ACF3 /* nav_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_more@2x.png"; sourceTree = "<group>"; };
-		C9D97C5C179FA6640076ACF3 /* nav_icon_recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_icon_recording.png; sourceTree = "<group>"; };
-		C9D97C5D179FA6640076ACF3 /* nav_icon_recording@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_recording@2x.png"; sourceTree = "<group>"; };
 		C9D97C5E179FA6640076ACF3 /* notary_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_gb.png; sourceTree = "<group>"; };
 		C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notary_gb@2x.png"; sourceTree = "<group>"; };
 		C9D97C60179FA6640076ACF3 /* notary_result_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_result_gb.png; sourceTree = "<group>"; };
@@ -1326,16 +1302,6 @@
 				C9D97C51179FA6640076ACF3 /* more_icon_tip@2x.png */,
 				C9A8A93517BB7FF100652B90 /* nav.png */,
 				C9A8A93617BB7FF100652B90 /* nav@2x.png */,
-				C9D97C54179FA6640076ACF3 /* nav_icon_account.png */,
-				C9D97C55179FA6640076ACF3 /* nav_icon_account@2x.png */,
-				C9D97C56179FA6640076ACF3 /* nav_icon_contact.png */,
-				C9D97C57179FA6640076ACF3 /* nav_icon_contact@2x.png */,
-				C9D97C58179FA6640076ACF3 /* nav_icon_dial.png */,
-				C9D97C59179FA6640076ACF3 /* nav_icon_dial@2x.png */,
-				C9D97C5A179FA6640076ACF3 /* nav_icon_more.png */,
-				C9D97C5B179FA6640076ACF3 /* nav_icon_more@2x.png */,
-				C9D97C5C179FA6640076ACF3 /* nav_icon_recording.png */,
-				C9D97C5D179FA6640076ACF3 /* nav_icon_recording@2x.png */,
 				C9D97C5E179FA6640076ACF3 /* notary_gb.png */,
 				C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */,
 				C9D97C60179FA6640076ACF3 /* notary_result_gb.png */,
@@ -1452,9 +1418,7 @@
 		C9E8EE77179FD2EC00E47BD9 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				C9A67EA917CD882900E9A81E /* ACContactsViewController.xib */,
-				C9D97A1D179FA64F0076ACF3 /* ACDialViewController.xib */,
-				C9D97A1E179FA64F0076ACF3 /* ACDialViewController@iPhone5.xib */,
+				C9155D7918E90BC70075A693 /* ACContactsViewController.xib */,
 				C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */,
 				C9D97A22179FA6500076ACF3 /* ACExtractionDetailViewController@iPhone5.xib */,
 				C9D97A27179FA6500076ACF3 /* ACFeedBackViewController.xib */,
@@ -1573,8 +1537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */,
-				C9D97A79179FA6520076ACF3 /* ACDialViewController.xib in Resources */,
-				C9D97A7A179FA6520076ACF3 /* ACDialViewController@iPhone5.xib in Resources */,
 				C9D97A7C179FA6520076ACF3 /* ACExtractionDetailViewController.xib in Resources */,
 				C9D97A7D179FA6520076ACF3 /* ACExtractionDetailViewController@iPhone5.xib in Resources */,
 				C9D97A80179FA6520076ACF3 /* ACFeedBackViewController.xib in Resources */,
@@ -1667,6 +1629,7 @@
 				C9D97D24179FA6650076ACF3 /* i5del@2x.png in Resources */,
 				C9D97D25179FA6650076ACF3 /* i5dialgb.png in Resources */,
 				C9D97D26179FA6650076ACF3 /* i5dialgb@2x.png in Resources */,
+				C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */,
 				C9D97D27179FA6650076ACF3 /* i5gb.png in Resources */,
 				C9D97D28179FA6650076ACF3 /* i5gb@2x.png in Resources */,
 				C9D97D29179FA6650076ACF3 /* i5press.png in Resources */,
@@ -1698,16 +1661,6 @@
 				C9D97D4D179FA6650076ACF3 /* more_icon_relogin@2x.png in Resources */,
 				C9D97D4E179FA6650076ACF3 /* more_icon_tip.png in Resources */,
 				C9D97D4F179FA6650076ACF3 /* more_icon_tip@2x.png in Resources */,
-				C9D97D52179FA6650076ACF3 /* nav_icon_account.png in Resources */,
-				C9D97D53179FA6650076ACF3 /* nav_icon_account@2x.png in Resources */,
-				C9D97D54179FA6650076ACF3 /* nav_icon_contact.png in Resources */,
-				C9D97D55179FA6650076ACF3 /* nav_icon_contact@2x.png in Resources */,
-				C9D97D56179FA6650076ACF3 /* nav_icon_dial.png in Resources */,
-				C9D97D57179FA6650076ACF3 /* nav_icon_dial@2x.png in Resources */,
-				C9D97D58179FA6650076ACF3 /* nav_icon_more.png in Resources */,
-				C9D97D59179FA6650076ACF3 /* nav_icon_more@2x.png in Resources */,
-				C9D97D5A179FA6650076ACF3 /* nav_icon_recording.png in Resources */,
-				C9D97D5B179FA6650076ACF3 /* nav_icon_recording@2x.png in Resources */,
 				C9D97D5C179FA6650076ACF3 /* notary_gb.png in Resources */,
 				C9D97D5D179FA6650076ACF3 /* notary_gb@2x.png in Resources */,
 				C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */,
@@ -1765,7 +1718,6 @@
 				C909409417C2032900183921 /* guide_button_b_gb@2x.png in Resources */,
 				C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */,
 				C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */,
-				C9A67EAB17CD882900E9A81E /* ACContactsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

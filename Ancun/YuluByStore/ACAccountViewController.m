@@ -9,13 +9,7 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 
-#define REFRESHUSERINFOREQUESTCODE 10000001
-
 @interface ACAccountViewController ()
-
-//界面按钮事件
-- (void)leftTopButtonAction;
-- (void)rightTopButtonAction;
 
 @end
 
@@ -25,9 +19,6 @@
     
     int currentTab;
     
-    UILabel *_lblTip1;
-    UILabel *_lblTip2;
-    UILabel *_lblTip3;
     UILabel *_lblSlid;
     
     UIButton *_leftTopTab;
@@ -38,18 +29,18 @@
     
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)init {
 
     if (self) {
         
         self.title=@"我的账户";
         UIView *container=nil;
         if(IOS7){
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-40-64)];
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-49-64)];
         }else{
-            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-40-44)];
+            container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49-44)];
         }
-        
+        [container setBackgroundColor:[UIColor whiteColor]];
         [self.view addSubview:container];
         
         int topHeight=91;
@@ -75,28 +66,9 @@
         UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
         [lbl1 setFont:[UIFont systemFontOfSize:15]];
         [lbl1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
+        [lbl1 setBackgroundColor:[UIColor whiteColor]];
         [lbl1 setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
         [container addSubview:lbl1];
-        
-//        _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 7, 300, 21)];
-        _lblTip1=[[UILabel alloc]initWithFrame:CGRectMake(8, 15, 300, 21)];
-        [_lblTip1 setFont:[UIFont systemFontOfSize:15]];
-        [_lblTip1 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
-        [_lblTip1 setText:@"基础服务套餐: 正在计算..."];
-//        [container addSubview:_lblTip1];
-        
-        _lblTip2=[[UILabel alloc]initWithFrame:CGRectMake(8, 28, 300, 21)];
-        [_lblTip2 setFont:[UIFont systemFontOfSize:15]];
-        [_lblTip2 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
-        [_lblTip2 setText:@"增值时长剩余: 正在计算..."];
-//        [container addSubview:_lblTip2];
-        
-//        _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 51, 300, 21)];
-        _lblTip3=[[UILabel alloc]initWithFrame:CGRectMake(8, 38, 300, 21)];
-        [_lblTip3 setFont:[UIFont systemFontOfSize:15]];
-        [_lblTip3 setTextColor:[UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]];
-        [_lblTip3 setText:@"当前可用容量: 正在计算..."];
-//        [container addSubview:_lblTip3];
         
         _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(0, 51, 159, 40)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
@@ -124,7 +96,7 @@
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(accountPay:)];
 
     }
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     return self;
 }
 
@@ -137,29 +109,29 @@
     [[Config Instance]setIsRefreshAccountPayList:YES];
     [[Config Instance]setIsRefreshAccountUseRecordList:NO];
     
-    //读取使用记录缓存信息
-    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
-    if(dictioanry){
-        id content=[dictioanry objectForKey:CACHE_DATA];
-        if(content){
-            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
-        }
-    }
+//    //读取使用记录缓存信息
+//    NSMutableDictionary *dictioanry=[Common getCache:[Config Instance].cacheKey];
+//    if(dictioanry){
+//        id content=[dictioanry objectForKey:CACHE_DATA];
+//        if(content){
+//            _rightDataItemArray=[[Common toResponseData:content] dataItemArray];
+//        }
+//    }
     
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if([[Config Instance]isRefreshUserInfo]) {
-        //更新账户信息
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"1" forKey:@"raflag"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp setIsShowMessage:YES];
-        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+//        //更新账户信息
+//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//        [requestParams setObject:@"1" forKey:@"raflag"];
+//        _loadHttp=[[HttpRequest alloc]init];
+//        [_loadHttp setDelegate:self];
+//        [_loadHttp setController:self];
+//        [_loadHttp setIsShowMessage:YES];
+//        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+//        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
     } else {
         if(currentTab==1) {
             if([[Config Instance]isRefreshAccountPayList]) {
@@ -178,15 +150,15 @@
 
 - (void)accountPay:(id)sender{
     if([[Config Instance]isRefreshUserInfo]) {
-        //更新账户信息
-        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:@"1" forKey:@"raflag"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp setIsShowMessage:YES];
-        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+//        //更新账户信息
+//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//        [requestParams setObject:@"1" forKey:@"raflag"];
+//        _loadHttp=[[HttpRequest alloc]init];
+//        [_loadHttp setDelegate:self];
+//        [_loadHttp setController:self];
+//        [_loadHttp setIsShowMessage:YES];
+//        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
+//        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
     } else if([[Config Instance]isRefreshAccountPayList]) {
         [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
@@ -259,19 +231,19 @@
 }
 
 - (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode {
-    if (reqCode==REFRESHUSERINFOREQUESTCODE) {
-        if([response successFlag]) {
-            //更新用户信息
-            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
-            for(NSString *key in dics){
-                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
-            }
-            [[Config Instance]setIsRefreshUserInfo:NO];
-            //重新刷新信息
-            [[Config Instance] setIsRefreshAccountPayList:YES];
-            [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
-        }
-    } else {
+//    if (reqCode==REFRESHUSERINFOREQUESTCODE) {
+//        if([response successFlag]) {
+//            //更新用户信息
+//            NSMutableDictionary *dics=[[response mainData] objectForKey:@"v4info"];
+//            for(NSString *key in dics){
+//                [[[Config Instance] userInfo]setValue:[dics objectForKey:key] forKey:key];
+//            }
+//            [[Config Instance]setIsRefreshUserInfo:NO];
+//            //重新刷新信息
+//            [[Config Instance] setIsRefreshAccountPayList:YES];
+//            [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
+//        }
+//    } else {
         [super requestFinishedByResponse:response requestCode:reqCode];
         if([response successFlag]) {
             if(currentTab == 1) {
@@ -306,16 +278,7 @@
                             int timeuse=[[data objectForKey:@"useurectime"]intValue];
                             timecan+=timesum-timeuse;
                         }
-                        float storcan=storsum-[[[[Config Instance]userInfo]objectForKey:@"rtsize"]floatValue];
-                        [_lblTip1 setText:[NSString stringWithFormat:@"基础服务套餐: 剩余%d分钟，已用%d分钟",((basesum-baseuse)/60),baseuse/60]];
-                        [_lblTip2 setText:[NSString stringWithFormat:@"增值时长剩余: %d分钟",timecan/60]];
-                        [_lblTip3 setText:[NSString stringWithFormat:@"当前可用容量: %0.2fMB",storcan/1024/1024]];
                     }
-                } else {
-                    //当没有任何套餐时
-                    [_lblTip1 setText:@"基础服务套餐: 剩余0分钟，已用0分钟"];
-                    [_lblTip2 setText:@"增值时长剩余: 0分钟"];
-                    [_lblTip3 setText:@"当前可用容量: 0MB"];
                 }
                 self.navigationItem.rightBarButtonItem.enabled=YES;
             }
@@ -330,7 +293,7 @@
                 [Common setCache:[Config Instance].cacheKey data:dictionary];
             }
         }
-    }
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

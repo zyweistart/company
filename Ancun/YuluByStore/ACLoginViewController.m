@@ -159,14 +159,16 @@
         //拔号盘
         ACDialViewController *dialViewController = [[ACDialViewController alloc]init];
         dialViewController.tabBarItem.title = @"拨号盘";
-        dialViewController.tabBarItem.image = [UIImage imageNamed:@"nav_icon_dial"];
+        [[dialViewController tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_dial_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_dial"]];
         
         //联系人
         UINavigationController *contactViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACContactsViewController alloc]init]];
-        contactViewControllerNav.navigationItem.title=@"通讯录";
         contactViewControllerNav.tabBarItem.title = @"通讯录";
-        contactViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_contact"];
-        contactViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        [[contactViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_contact_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_contact"]];
+        if(IOS7){
+            [[contactViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        }
+        
         //我的账户
         UINavigationController *accountViewControllerNav;
         if([[Config Instance]isOldUser]) {
@@ -174,23 +176,36 @@
         } else {
             accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
         }
-        accountViewControllerNav.navigationItem.title=@"我的账户";
         accountViewControllerNav.tabBarItem.title = @"我的账户";
-        accountViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_account"];
-        accountViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        [[accountViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_account_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_account"]];
+        if(IOS7){
+            [[accountViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        }
         //录音管理
         UINavigationController *recordingManagerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACRecordingManagerViewController alloc]init]];
-        recordingManagerViewControllerNav.navigationItem.title=@"我的录音";
         recordingManagerViewControllerNav.tabBarItem.title = @"我的录音";
-        recordingManagerViewControllerNav.tabBarItem.image = [UIImage imageNamed:@"nav_icon_recording"];
-        recordingManagerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        [[recordingManagerViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_recording_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_recording"]];
+        if(IOS7){
+            [[recordingManagerViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        }
         
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
-        moreViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+        moreViewControllerNav.tabBarItem.title = @"更多";
+        [[moreViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_more_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_more"]];
+        if(IOS7){
+            [[moreViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        }
         
         //添加标签控制器
         UITabBarController *_tabBarController = [[UITabBarController alloc] init];
+        [_tabBarController.view setBackgroundColor:MAINBG];
+        if(IOS7){
+            [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];
+            [[_tabBarController tabBar] setBackgroundImage:[[UIImage alloc] init]];
+            [[_tabBarController tabBar] setTintColor:[UIColor whiteColor]];
+            [[_tabBarController tabBar] setSelectedImageTintColor:[UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]];
+        }
         _tabBarController.delegate = self;
         _tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              dialViewController,
@@ -199,7 +214,9 @@
                                              recordingManagerViewControllerNav,
                                              moreViewControllerNav,
                                              nil];
+        
         [self presentViewController:_tabBarController animated:YES completion:nil];
+        
     }else if([[response code] isEqualToString:@"120020"]){
         //用户不存在
         [Common alert:@"用户名或密码不正确"];

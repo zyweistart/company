@@ -13,9 +13,12 @@
 - (id)init{
     self=[super init];
     if(self){
-        
     }
     return self;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLoad

@@ -15,12 +15,10 @@
 
 @implementation ACMoreViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)init{
+    self = [super init];
     if(self){
-        self.navigationItem.title=@"更多";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_icon_more"];
-        self.tabBarItem.title = @"更多";
+        self.title=@"更多";
         self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
         [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.tableView setDelegate:self];
