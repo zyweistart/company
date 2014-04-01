@@ -78,10 +78,10 @@
         [headDisplay addSubview:rightBtn];
         [headDisplay setHidden:YES];
         
-        int howLeft=35;
+        int howLeft=27.5;
         int wspacing=20;
         int hspacing=20;
-        int width=70;
+        int width=75;
         int height=70;
         if(!inch4){
             howLeft=15;

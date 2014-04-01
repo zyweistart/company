@@ -158,6 +158,7 @@
         }else{
             [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         }
+        
         //拔号盘
         ACDialsViewController *dialViewController = [[ACDialsViewController alloc]init];
         dialViewController.tabBarItem.title = @"拨号盘";
@@ -181,6 +182,8 @@
         if(IOS7){
             [[contactViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[contactViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+        }else{
+            contactViewControllerNav.navigationBar.tintColor=MAINBG;
         }
         
         //我的账户
@@ -201,6 +204,8 @@
         if(IOS7){
             [[accountViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[accountViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+        }else{
+            accountViewControllerNav.navigationBar.tintColor=MAINBG;
         }
         
         //录音管理
@@ -216,6 +221,8 @@
         if(IOS7){
             [[recordingManagerViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[recordingManagerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+        }else{
+            recordingManagerViewControllerNav.navigationBar.tintColor=MAINBG;
         }
         
         //更多
@@ -231,6 +238,8 @@
         if(IOS7){
             [[moreViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[moreViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+        }else{
+            moreViewControllerNav.navigationBar.tintColor=MAINBG;
         }
         
         //添加标签控制器

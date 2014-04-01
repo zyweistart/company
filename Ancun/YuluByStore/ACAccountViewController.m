@@ -33,9 +33,9 @@
     
     UIView *container=nil;
     if(IOS7){
-        container=[[UIView alloc]initWithFrame:CGRectMake(0, STATUSHEIGHT+TOPNAVIGATIONHEIGHT, self.view.bounds.size.width, self.view.bounds.size.height-BOTTOMTABBARHEIGHT-STATUSHEIGHT-TOPNAVIGATIONHEIGHT)];
+        container=[[UIView alloc]initWithFrame:CGRectMake(0, STATUSHEIGHT+TOPNAVIGATIONHEIGHT, self.view.frame.size.width, self.view.frame.size.height-STATUSHEIGHT-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
     }else{
-        container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-BOTTOMTABBARHEIGHT-TOPNAVIGATIONHEIGHT)];
+        container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
     }
     [container setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:container];
@@ -54,12 +54,13 @@
         EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:
                                            CGRectMake(0.0f,
                                                       0.0f - self.tableView.bounds.size.height,
-                                                      self.tableView.bounds.size.width,
+                                                      self.view.bounds.size.width,
                                                       self.tableView.bounds.size.height)];
         view.delegate = self;
         [self.tableView addSubview:view];
         _refreshHeaderView = view;
     }
+    [_refreshHeaderView refreshLastUpdatedDate];
     
     self = [super init];
 
