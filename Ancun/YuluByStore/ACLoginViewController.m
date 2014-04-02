@@ -20,12 +20,13 @@
     UITextField *_txtUserName;
     UITextField *_txtPassword;
     
-    SSCheckBoxView *_checkbox;
-    
     unsigned long m_lastTabIndex;
     
     HttpRequest *_loginHttp;
     
+    BOOL rememberPassword;
+    
+    UIButton *btnRememberPwdImg;
 }
 
 - (id)init {
@@ -33,104 +34,100 @@
     if(self) {
         //登录代理
         [[Config Instance] setLoginResultDelegate:self];
+        int h=0;
+        if(IOS7){
+            h=STATUSHEIGHT;
+        }
+        //背景
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"loginbg"]]];
+        
+        float width=self.view.frame.size.width;
+        float height=self.view.frame.size.height;
+        UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, h, width, height-h)];
+        //触摸屏幕事件
+        [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+        [self.view addSubview:control];
+        //LOGO
+        UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-105.5/2, inch4?54:30, 105.5, 102.5)];
+        [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo"]]];
+        [control addSubview:logonv];
+        //登录输入框
+        UIView *userNameInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?225:160, 271, 51)];
+        [userNameInputView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_input_bg"]]];
+        [control addSubview:userNameInputView];
+        //账户输入框
+        _txtUserName=[[UITextField alloc] initWithFrame:CGRectMake(20, 5, 231, 41)];
+        [_txtUserName setPlaceholder:@"账号"];
+        [_txtUserName setFont:[UIFont systemFontOfSize: 22]];
+        [_txtUserName setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [_txtUserName setTextAlignment:NSTextAlignmentCenter];
+        [_txtUserName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_txtUserName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [_txtUserName setKeyboardType:UIKeyboardTypePhonePad];
+        [userNameInputView addSubview:_txtUserName];
+        UIView *passwordInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?293:223, 271, 51)];
+        [passwordInputView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_input_bg"]]];
+        [control addSubview:passwordInputView];
+        //密码输入框
+        _txtPassword=[[UITextField alloc] initWithFrame:CGRectMake(20, 5, 231, 41)];
+        [_txtPassword setPlaceholder:@"密码"];
+        [_txtPassword setFont:[UIFont systemFontOfSize: 22]];
+        [_txtPassword setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [_txtPassword setTextAlignment:NSTextAlignmentCenter];
+        [_txtPassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_txtPassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [_txtPassword setSecureTextEntry:YES];
+        [_txtPassword setDelegate:self];
+        [_txtPassword setReturnKeyType:UIReturnKeyDone];
+        [passwordInputView addSubview:_txtPassword];
+        //记住密码复选框
+        btnRememberPwdImg=[[UIButton alloc]initWithFrame:CGRectMake(35, inch4?356:286, 14.5, 14.5)];
+        [btnRememberPwdImg addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
+        [control addSubview:btnRememberPwdImg];
+        rememberPassword=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
+        if(rememberPassword){
+            [btnRememberPwdImg setImage:[UIImage imageNamed:@"login_g"] forState:UIControlStateNormal];
+        }else{
+            [btnRememberPwdImg setImage:[UIImage imageNamed:@"login_g_hover"] forState:UIControlStateNormal];
+        }
+        //记住密码文字
+        UIButton *btnRemberPwdLbl=[[UIButton alloc]initWithFrame:CGRectMake(55, inch4?354:284, 60, 18)];
+        btnRemberPwdLbl.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btnRemberPwdLbl setTitle:@"记住密码" forState:UIControlStateNormal];
+        [btnRemberPwdLbl addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
+        [control addSubview:btnRemberPwdLbl];
+        //找回密码
+        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(width/2+60, inch4?354:284, 68, 18)];
+        btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btnForgetPwd setTitle:@"找回密码" forState:UIControlStateNormal];
+        [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
+        [control addSubview:btnForgetPwd];
+        //登录按钮
+        UIButton *btnLogin=[[UIButton alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?387:327, 271, 51)];
+        [btnLogin setTitle:@"登录" forState:UIControlStateNormal];
+        btnLogin.titleLabel.font=[UIFont systemFontOfSize:30];
+        [btnLogin setBackgroundImage:[UIImage imageNamed:@"login_button"] forState:UIControlStateNormal];
+        [btnLogin addTarget:self action:@selector(onClickLogin:) forControlEvents:UIControlEventTouchUpInside];
+        [control addSubview:btnLogin];
+        //注册按钮
+        UIButton *btnRegister=[[UIButton alloc]initWithFrame:CGRectMake(width/2-147.5, inch4?455:385, 295, 32)];
+        btnRegister.titleLabel.font=[UIFont systemFontOfSize: 17.0];
+        [btnRegister setTitle:@"还没有账户，马上去注册>>" forState:UIControlStateNormal];
+        [btnRegister addTarget:self action:@selector(onClickRegister:) forControlEvents:UIControlEventTouchUpInside];
+        [control addSubview:btnRegister];
+        
+        UILabel *lblTipTxt=[[UILabel alloc]initWithFrame:CGRectMake(width/2-147.5, inch4?492:402, 295, 64)];
+        lblTipTxt.font=[UIFont systemFontOfSize:14];
+        [lblTipTxt setNumberOfLines:0];
+        [lblTipTxt setText:@"请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全."];
+        [lblTipTxt setTextColor:[UIColor whiteColor]];
+        [lblTipTxt setBackgroundColor:[UIColor clearColor]];
+        [control addSubview:lblTipTxt];
+        
+        [self autoLogin];
+        
     }
     return self;
-}
-
-- (void)buildUI56
-{
-//    NSLog(@"buildUI56");
-}
-
-- (void)buildUI7
-{
-//    NSLog(@"buildUI7");
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    float width=self.view.frame.size.width;
-    float height=self.view.frame.size.height;
-    UIControl *control=[[UIControl alloc]initWithFrame:CGRectMake(0, 0, width, height)];
-    //背景
-    [control setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:iPhone5?@"login_gb-568h":@"login_gb"]]];
-    [self.view addSubview:control];
-    //LOGO
-    UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-53.5, iPhone5?55:40, 107, 82)];
-    [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo"]]];
-    [control addSubview:logonv];
-    //登录输入框
-    UIView *inputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-131, iPhone5?195:160, 262, 75)];
-    [inputView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_input_gb"]]];
-    [control addSubview:inputView];
-    //账户输入框
-    _txtUserName=[[UITextField alloc] initWithFrame:CGRectMake(40, 5, 210, 27.5)];
-    [_txtUserName setPlaceholder:@"请输入账号"];
-    [_txtUserName setFont:[UIFont systemFontOfSize: 12.0]];
-    
-    [_txtUserName setClearButtonMode:UITextFieldViewModeWhileEditing];
-    [_txtUserName setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [_txtUserName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [_txtUserName setKeyboardType:UIKeyboardTypePhonePad];
-    [inputView addSubview:_txtUserName];
-    //密码输入框
-    _txtPassword=[[UITextField alloc] initWithFrame:CGRectMake(40, 42.5, 210, 27.5)];
-    [_txtPassword setPlaceholder:@"请输入密码"];
-    [_txtPassword setFont:[UIFont systemFontOfSize: 12.0]];
-    [_txtPassword setClearButtonMode:UITextFieldViewModeWhileEditing];
-    [_txtPassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [_txtPassword setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    [_txtPassword setSecureTextEntry:YES];
-    [_txtPassword setDelegate:self];
-    [_txtPassword setReturnKeyType:UIReturnKeyDone];
-    [inputView addSubview:_txtPassword];
-    //记住密码复选框
-    _checkbox = [[SSCheckBoxView alloc]
-                 initWithFrame:CGRectMake(25, iPhone5?296:256, 25, 25)
-                 style:kSSCheckBoxViewStyleGlossy
-                 checked:![Common getCacheByBool:DEFAULTDATA_FIRSTLOGIN]?YES:[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]];
-    [control addSubview:_checkbox];
-    //记住密码文字
-    UILabel *lblcheckboxtxt=[[UILabel alloc]initWithFrame:CGRectMake(55, iPhone5?305:265, 50, 18)];
-    lblcheckboxtxt.font=[UIFont systemFontOfSize:12.0];
-    [lblcheckboxtxt setText:@"记住密码"];
-    [lblcheckboxtxt setTextColor:[UIColor whiteColor]];
-    [lblcheckboxtxt setBackgroundColor:[UIColor clearColor]];
-    [control addSubview:lblcheckboxtxt];
-    //找回密码
-    UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(width/2+60, iPhone5?305:265, 68, 18)];
-    btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 10.0];
-    [btnForgetPwd setTitle:@"找回密码" forState:UIControlStateNormal];
-    [btnForgetPwd setBackgroundImage:[UIImage imageNamed:@"login_forgetpwd_gb"] forState:UIControlStateNormal];
-    [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnForgetPwd];
-    //登录按钮
-    UIButton *btnLogin=[[UIButton alloc]initWithFrame:CGRectMake(width/2-131, iPhone5?370:320, 262, 32)];
-    [btnLogin setTitle:@"登录" forState:UIControlStateNormal];
-    [btnLogin setBackgroundImage:[UIImage imageNamed:@"button_gb"] forState:UIControlStateNormal];
-    [btnLogin addTarget:self action:@selector(onClickLogin:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnLogin];
-    //注册按钮
-    UIButton *btnRegister=[[UIButton alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?420:370, 295, 32)];
-    btnRegister.titleLabel.font=[UIFont systemFontOfSize: 17.0];
-    [btnRegister setTitle:@"还没有账户，马上去注册>>" forState:UIControlStateNormal];
-    [btnRegister addTarget:self action:@selector(onClickRegister:) forControlEvents:UIControlEventTouchUpInside];
-    [control addSubview:btnRegister];
-    
-    UILabel *lblTipTxt=[[UILabel alloc]initWithFrame:CGRectMake(width/2-147.5, iPhone5?450:400, 295, 64)];
-    lblTipTxt.font=[UIFont systemFontOfSize:12.0];
-    [lblTipTxt setNumberOfLines:0];
-    [lblTipTxt setText:@"请使用本机号码注册或登录，非本机号码登录时通话录音将无法被正确保全."];
-    [lblTipTxt setTextColor:[UIColor whiteColor]];
-    [lblTipTxt setBackgroundColor:[UIColor clearColor]];
-    [control addSubview:lblTipTxt];
-    
-    //触摸屏幕事件
-    [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
-    
-    [self autoLogin];
-    
 }
 
 #pragma mark -
@@ -320,15 +317,24 @@
 #pragma mark -
 #pragma mark Custom Methods
 
+- (void)rememberPassword:(id)sender
+{
+    rememberPassword=!rememberPassword;
+    if(rememberPassword){
+        [btnRememberPwdImg setImage:[UIImage imageNamed:@"login_g"] forState:UIControlStateNormal];
+    }else{
+        [btnRememberPwdImg setImage:[UIImage imageNamed:@"login_g_hover"] forState:UIControlStateNormal];
+    }
+}
+
 - (void)autoLogin {
-    NSString *phone=[Common getCache:DEFAULTDATA_PHONE];
-    if(phone!=nil&&![@"" isEqualToString:phone]){
-        [_txtUserName setText:phone];
-        NSString *password=[Common getCache:DEFAULTDATA_PASSWORD];
-        if(password!=nil&&![@"" isEqualToString:password]){
-            [_txtPassword setText:password];
-            [_checkbox setChecked:[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]];
-            if([Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]){
+    if(rememberPassword){
+        NSString *userName=[Common getCache:DEFAULTDATA_PHONE];
+        if(![@"" isEqualToString:userName]){
+            [_txtUserName setText:userName];
+            NSString *password=[Common getCache:DEFAULTDATA_PASSWORD];
+            if(![@"" isEqualToString:password]){
+                [_txtPassword setText:password];
                 [self performSelector:@selector(onClickLogin:) withObject:self afterDelay:0.5];
             }
         }
@@ -339,18 +345,18 @@
     
     [self backgroundDoneEditing:nil];
     
-    NSString *phone=_txtUserName.text;
+    NSString *username=_txtUserName.text;
     NSString *password=_txtPassword.text;
     
-    [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:[_checkbox checked]];
+    [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:rememberPassword];
     
-    if(phone==nil||[phone isEqualToString:@""]){
+    if(username==nil||[@"" isEqualToString:username]){
         [Common alert:@"账号不能为空"];
-    }else if(password==nil||[password isEqualToString:@""]){
+    }else if(password==nil||[@"" isEqualToString:password]){
         [Common alert:@"密码不能为空"];
     }else{
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-        [requestParams setObject:phone forKey:@"username"];
+        [requestParams setObject:username forKey:@"username"];
         [requestParams setObject:@"c" forKey:@"loginsource"];
         [requestParams setObject:@"" forKey:@"mac"];
         [requestParams setObject:@"" forKey:@"ip"];
@@ -367,7 +373,12 @@
 - (void)onClickRegister:(id)sender {
     ACRegisterViewController *registerViewController=[[ACRegisterViewController alloc]init];
     UINavigationController *registerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:registerViewController];
-    registerViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+    if(IOS7){
+        [[registerViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        [[registerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+    }else{
+        registerViewControllerNav.navigationBar.tintColor=MAINBG;
+    }
     [self presentViewController:registerViewControllerNav animated:YES completion:nil];
 }
 
@@ -375,7 +386,12 @@
 - (void)onClickForgetPwd:(id)sender {
     ACForgetPwdViewController *forgetPwdViewController=[[ACForgetPwdViewController alloc]init];
     UINavigationController *forgetPwdViewControllerNav = [[UINavigationController alloc] initWithRootViewController:forgetPwdViewController];
-    forgetPwdViewControllerNav.navigationBar.tintColor=NAVCOLOR;
+    if(IOS7){
+        [[forgetPwdViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        [[forgetPwdViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+    }else{
+        forgetPwdViewControllerNav.navigationBar.tintColor=MAINBG;
+    }
     [self presentViewController:forgetPwdViewControllerNav animated:YES completion:nil];
 }
 

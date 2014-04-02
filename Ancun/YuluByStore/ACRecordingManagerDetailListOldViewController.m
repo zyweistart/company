@@ -29,7 +29,7 @@
             container=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-44)];
         }
         [self.view addSubview:container];
-        _playerView=[ACPlayerView instance:self];
+        _playerView=[[ACPlayerView alloc]initWithController:self];
         //self.view.frame.size.height:主视图高度
         //[playerView frame].size.height:播放视图的高度
         //44:为导航栏的高度

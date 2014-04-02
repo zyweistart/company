@@ -1,31 +1,22 @@
 #import <AVFoundation/AVFoundation.h>
 
-@interface ACPlayerView : UIView<AVAudioPlayerDelegate,UIActionSheetDelegate,ResultDelegate,HttpViewDelegate>{
-    
-    NSTimer *_sliderTimer;
-    AVAudioPlayer *_player;
-    
-}
+@interface ACPlayerView : UIView<AVAudioPlayerDelegate,UIActionSheetDelegate,ResultDelegate,HttpViewDelegate>
 
 @property (strong,nonatomic) NSString *path;
 @property (strong,nonatomic) NSMutableDictionary *dictionary;
 @property (strong,nonatomic) UIViewController *controller;
 
-@property (strong, nonatomic) IBOutlet UIButton *btn_notary;
-@property (strong, nonatomic) IBOutlet UIButton *btn_extraction;
-@property (strong, nonatomic) IBOutlet UIButton *btn_player;
-@property (strong, nonatomic) IBOutlet UISlider *sider_player;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_playertimerlong;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_playertimertotallong;
+@property (strong, nonatomic) UIButton *btn_notary;
+@property (strong, nonatomic) UIButton *btn_extraction;
+@property (strong, nonatomic) UIButton *btn_player;
+@property (strong, nonatomic) UISlider *sider_player;
+@property (strong, nonatomic) UILabel *lbl_playertimerlong;
+@property (strong, nonatomic) UILabel *lbl_playertimertotallong;
 
-+ (ACPlayerView *)instance:(UIViewController *)viewController;
+
+- (id)initWithController:(UIViewController*)controller;
 
 - (void)player:(NSString *)playerPath dictionary:(NSDictionary*)dic;
 - (void)stop;
-
-- (IBAction)btnPlayer:(id)sender;
-- (IBAction)sliderChanged:(UISlider *)sender;
-- (IBAction)notary:(id)sender;
-- (IBAction)extraction:(id)sender;
 
 @end
