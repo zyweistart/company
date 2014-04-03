@@ -1,0 +1,330 @@
+//
+//  ACRecordingCallDetailViewController.m
+//  Ancun
+//
+//  Created by Start on 4/3/14.
+//
+//
+
+#import "ACRecordingCallDetailViewController.h"
+#import "ACNotaryDetailViewController.h"
+#import "ACExtractionDetailViewController.h"
+
+@interface ACRecordingCallDetailViewController () <ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
+
+@end
+
+@implementation ACRecordingCallDetailViewController{
+    HttpRequest *_hRequest;
+    NSMutableDictionary *_data;
+    UILabel *_lblRemarkTip;
+    UITextView *_tv_remark;
+    
+    UIButton *_btn_notary;
+    UIButton *_btn_extraction;
+    NSString *_fileno;
+}
+
+
+- (id)initWithData:(NSDictionary *)data
+{
+    _data=[[NSMutableDictionary alloc]initWithDictionary:data];
+    _fileno=[_data objectForKey:@"fileno"];
+    self=[super init];
+    if(self){
+        
+        self.navigationItem.title=@"录音详细";
+        self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                               initWithTitle:@"返回"
+                                               style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(back:)];
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
+                                                initWithBarButtonSystemItem: UIBarButtonSystemItemSave
+                                                target:self
+                                                action:@selector(submitRemark:)];
+        
+        UIControl *container=[[UIControl alloc]initWithFrame:self.view.bounds];
+        [container addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+        [container setBackgroundColor:[UIColor whiteColor]];
+        [self.view addSubview:container];
+        
+        NSArray *names=[[NSArray alloc]initWithObjects:@"主叫号码:",@"被叫号码:",@"起始时间:",@"结束时间:",@"录音时长:",@"录音到期:", nil];
+        NSArray *value=[[NSArray alloc]initWithObjects:
+                        [_data objectForKey:@"callerno"],
+                        [_data objectForKey:@"calledno"],
+                        [_data objectForKey:@"begintime"],
+                        [_data objectForKey:@"endtime"],
+                        [Common secondConvertFormatTimerByCn:[_data objectForKey:@"duration"]],
+                        [_data objectForKey:@"recendtime"], nil];
+        
+        for(int i=0;i<[names count];i++){
+            UIControl *view=[[UIControl alloc]initWithFrame:CGRectMake(0, i*40, 320, 40)];
+            [view addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+            [container addSubview:view];
+            UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 75, 40)];
+            [lbl setFont:[UIFont systemFontOfSize:17]];
+            [lbl setTextAlignment:NSTextAlignmentRight];
+            [lbl setTextColor:[UIColor blackColor]];
+            [lbl setBackgroundColor:[UIColor clearColor]];
+            [lbl setText:[names objectAtIndex:i]];
+            [view addSubview:lbl];
+            lbl=[[UILabel alloc]initWithFrame:CGRectMake(105, 0, 195, 40)];
+            [lbl setFont:[UIFont systemFontOfSize:17]];
+            [lbl setTextAlignment:NSTextAlignmentLeft];
+            [lbl setTextColor:[UIColor blackColor]];
+            [lbl setBackgroundColor:[UIColor clearColor]];
+            [lbl setText:[value objectAtIndex:i]];
+            [view addSubview:lbl];
+        }
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(20, 240, 75, 40)];
+        [lbl setFont:[UIFont systemFontOfSize:17]];
+        [lbl setTextAlignment:NSTextAlignmentLeft];
+        [lbl setTextColor:[UIColor blackColor]];
+        [lbl setBackgroundColor:[UIColor clearColor]];
+        [lbl setText:@"备注"];
+        [container addSubview:lbl];
+        UIControl *view=[[UIControl alloc]initWithFrame:CGRectMake(0, 280, 320, 110)];
+        [view addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
+        [view setBackgroundColor:[UIColor clearColor]];
+        [container addSubview:view];
+        
+        _tv_remark=[[UITextView alloc]initWithFrame:CGRectMake(20, 5, 280,100)];
+        [_tv_remark setDelegate:self];
+        [view addSubview:_tv_remark];
+        _lblRemarkTip=[[UILabel alloc]initWithFrame:CGRectMake(5, 5, 200, 20)];
+        [_lblRemarkTip setText:@"备注内容长度请在100字以内"];
+        [_lblRemarkTip setFont:[UIFont systemFontOfSize:13]];
+        [_lblRemarkTip setTextColor:[UIColor grayColor]];
+        [_lblRemarkTip setBackgroundColor:[UIColor clearColor]];
+        [_tv_remark addSubview:_lblRemarkTip];
+        
+        _btn_notary=[[UIButton alloc]initWithFrame:CGRectMake(20, 400, 127, 35)];
+        _btn_notary.titleLabel.font=[UIFont systemFontOfSize:22];
+        [_btn_notary setBackgroundImage:[UIImage imageNamed:@"notary_gb"] forState:UIControlStateNormal];
+        [_btn_notary addTarget:self action:@selector(notary:) forControlEvents:UIControlEventTouchUpInside];
+        [container addSubview:_btn_notary];
+        
+        _btn_extraction=[[UIButton alloc]initWithFrame:CGRectMake(173, 400, 127, 35)];
+        _btn_extraction.titleLabel.font=[UIFont systemFontOfSize:22];
+        [_btn_extraction setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
+        [_btn_extraction addTarget:self action:@selector(extraction:) forControlEvents:UIControlEventTouchUpInside];
+        [container addSubview:_btn_extraction];
+        
+        //公证
+        if([@"1" isEqualToString:[_data objectForKey:@"cerflag"]]){
+            [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
+        }else if([@"2" isEqualToString:[_data objectForKey:@"cerflag"]]){
+            [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
+        }
+        
+        NSString *remark=[_data objectForKey:@"remark"];
+        if(![@"" isEqualToString:remark]){
+            [_lblRemarkTip setHidden:YES];
+            [_tv_remark setText:remark];
+        }
+        //提取码
+        if([@"1" isEqualToString:[_data objectForKey:@"accstatus"]]){
+            [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
+        }else if([@"2" isEqualToString:[_data objectForKey:@"accstatus"]]){
+            [_btn_extraction setTitle:@"申请提取码" forState:UIControlStateNormal];
+        }
+        
+    }
+    return self;
+}
+
+
+//后退
+- (void)back:(id)sender{
+    [Common resultNavigationViewController:self resultDelegate:_resultDelegate resultCode:RESULTCODE_ACRecordingDetailViewController_back requestCode:0 data:_data];
+}
+
+#pragma mark -
+#pragma mark Delegate Methods
+
+- (void)requestFinishedByResponse:(Response *)response requestCode:(int)reqCode{
+    if([response successFlag]){
+        if(reqCode==REQUESTCODE_SUBMITREMARK){
+            if(_data){
+                [_data setObject:_tv_remark.text forKey:@"remark"];
+            }
+            [Common alert:@"备注修改成功"];
+        }else if(reqCode==REQUESTCODE_APPLYNOTARY){
+            [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
+            [_data setObject:@"2" forKey:@"cerflag"];
+            
+            ACNotaryDetailViewController *notaryDetailViewController=[[ACNotaryDetailViewController alloc]init];
+            notaryDetailViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:notaryDetailViewController animated:YES];
+        }else if(reqCode==REQUESTCODE_CANCELNOTARY){
+            [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
+            [_data setObject:@"1" forKey:@"cerflag"];
+            
+            [Common alert:@"取消成功"];
+        }else if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply||
+                 reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
+            [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
+            [_data setObject:@"1" forKey:@"accstatus"];
+            ACExtractionDetailViewController *extractionDetailViewController=[[ACExtractionDetailViewController alloc]init];
+            [extractionDetailViewController setFileno:_fileno];
+            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
+                [extractionDetailViewController setLoad:NO];
+            }else{
+                [extractionDetailViewController setLoad:YES];
+            }
+            [extractionDetailViewController setResultDelegate:self];
+            [extractionDetailViewController setExtractionDics:[[response mainData]objectForKey:@"acccodeinfo"]];
+            extractionDetailViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:extractionDetailViewController animated:YES];
+        }
+        NSString *remark=_tv_remark.text;
+        if([remark isEqualToString:@""]){
+            _lblRemarkTip.hidden=NO;
+        } else {
+            _lblRemarkTip.hidden=YES;
+        }
+    }
+}
+
+- (void)onControllerResult:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary*)result{
+    if(resultCode==RESULTCODE_ACExtractionDetailViewController_back){
+        if([@"2" isEqualToString:[result objectForKey:@"accstatus"]]){
+            [_btn_extraction setTitle:@"申请提取码" forState:UIControlStateNormal];
+            [_data setObject:@"2" forKey:@"accstatus"];
+        }
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(actionSheet.tag==1){
+        if(buttonIndex==0){
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:_fileno forKey:@"fileno"];
+            //1:取消出证;2:申请出证
+            [requestParams setObject:@"2" forKey:@"cerflag"];
+            _hRequest=[[HttpRequest alloc]init];
+            [_hRequest setDelegate:self];
+            [_hRequest setController:self];
+            [_hRequest setIsShowMessage:YES];
+            [_hRequest setRequestCode:REQUESTCODE_APPLYNOTARY];
+            [_hRequest loginhandle:@"v4recCer" requestParams:requestParams];
+        }
+    }else if(actionSheet.tag==2){
+        if(buttonIndex==0){
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:_fileno forKey:@"fileno"];
+            //1:取消出证;2:申请出证
+            [requestParams setObject:@"1" forKey:@"cerflag"];
+            _hRequest=[[HttpRequest alloc]init];
+            [_hRequest setDelegate:self];
+            [_hRequest setController:self];
+            [_hRequest setIsShowMessage:YES];
+            [_hRequest setRequestCode:REQUESTCODE_CANCELNOTARY];
+            [_hRequest loginhandle:@"v4recCer" requestParams:requestParams];
+        }
+    }else if(actionSheet.tag==3){
+        if(buttonIndex==0){
+            NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+            [requestParams setObject:_fileno forKey:@"fileno"];
+            //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
+            [requestParams setObject:@"1" forKey:@"acccodeact"];
+            [requestParams setObject:@"10" forKey:@"vtime"];
+            _hRequest=[[HttpRequest alloc]init];
+            [_hRequest setDelegate:self];
+            [_hRequest setController:self];
+            [_hRequest setIsShowMessage:YES];
+            [_hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_apply];
+            [_hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
+        }
+    }
+}
+
+- (void)notary:(id)sender {
+    [self backgroundDoneEditing:nil];
+    if([@"1" isEqualToString:[_data objectForKey:@"cerflag"]]){
+        [Common actionSheet:self message:@"您确定将该录音提交至公证机构申办公证吗？" tag:1];
+    }else if([@"2" isEqualToString:[_data objectForKey:@"cerflag"]]){
+        [Common actionSheet:self message:@"您确定要取消该录音申办公证吗？" tag:2];
+    }
+}
+
+- (void)extraction:(id)sender {
+    [self backgroundDoneEditing:nil];
+    if([@"1" isEqualToString:[_data objectForKey:@"accstatus"]]){
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:_fileno forKey:@"fileno"];
+        //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
+        [requestParams setObject:@"2" forKey:@"acccodeact"];
+        _hRequest=[[HttpRequest alloc]init];
+        [_hRequest setDelegate:self];
+        [_hRequest setController:self];
+        [_hRequest setIsShowMessage:YES];
+        [_hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_view];
+        [_hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
+    }else if([[_data objectForKey:@"accstatus"] isEqualToString:@"2"]){
+        [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
+    }
+}
+
+//提交备注
+- (void)submitRemark:(id)sender{
+    [self backgroundDoneEditing:nil];
+    NSString *remark=_tv_remark.text;
+    if([@"" isEqualToString:remark]){
+        [Common alert:@"请输入备注内容"];
+    } else if([remark length]>100) {
+        [Common alert:@"备注长度请在100字以内"];
+    } else {
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:_fileno forKey:@"fileno"];
+        [requestParams setObject:remark forKey:@"remark"];
+        _hRequest=[[HttpRequest alloc]init];
+        [_hRequest setDelegate:self];
+        [_hRequest setController:self];
+        [_hRequest setIsShowMessage:YES];
+        [_hRequest setRequestCode:REQUESTCODE_SUBMITREMARK];
+        [_hRequest loginhandle:@"v4recRemark" requestParams:requestParams];
+    }
+}
+
+- (void)backgroundDoneEditing:(id)sender {
+    [_tv_remark resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    _lblRemarkTip.hidden=YES;
+    __block CGRect curFrame=self.view.frame;
+    [UIView animateWithDuration:0.3f animations:^{
+        curFrame.origin.y-=150;
+        self.view.frame=curFrame;
+    }];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    NSString *remark=_tv_remark.text;
+    if([remark isEqualToString:@""]){
+        _lblRemarkTip.hidden=NO;
+    } else {
+        _lblRemarkTip.hidden=YES;
+    }
+    __block CGRect curFrame=self.view.frame;
+    [UIView animateWithDuration:0.3f animations:^{
+        if(IOS7){
+            curFrame.origin.y=64;
+        }else{
+            curFrame.origin.y=0;
+        }
+        self.view.frame=curFrame;
+    }];
+}
+
+@end

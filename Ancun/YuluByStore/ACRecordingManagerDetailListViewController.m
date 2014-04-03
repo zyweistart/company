@@ -1,5 +1,6 @@
 #import "ACRecordingManagerDetailListViewController.h"
 #import "ACRecordingDetailViewController.h"
+#import "ACRecordingCallDetailViewController.h"
 #import "ACRecordingDetailCell.h"
 #import "DataSingleton.h"
 
@@ -125,6 +126,13 @@
             [[Config Instance] setIsRefreshRecordingList:YES];
 //            [_dataItemArray removeObjectAtIndex:indexPath.row];
 //            [_tableView reloadData];
+        }
+    }else if(reqCode==REQUESTCODE_GETINFO){
+        if([response successFlag]){
+            NSMutableDictionary *dictionary=[[NSMutableDictionary alloc]initWithDictionary:[[response mainData]objectForKey:@"recinfo"]];
+            ACRecordingCallDetailViewController *recordingCallDetailViewController=[[ACRecordingCallDetailViewController alloc]initWithData:dictionary];
+            [recordingCallDetailViewController setResultDelegate:self];
+            [self.navigationController pushViewController:recordingCallDetailViewController animated:YES];
         }
     }else{
         [super requestFinishedByResponse:response requestCode:reqCode];
@@ -331,6 +339,17 @@
     }
     if([self.dataItemArray count]>[indexPath row]){
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
+//        //重新加载保证数据为最新
+//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+//        [requestParams setObject:@"1" forKey:@"status"];
+//        [requestParams setObject:[dictionary objectForKey:@"fileno"] forKey:@"fileno"];
+//        _managerHttp=[[HttpRequest alloc]init];
+//        [_managerHttp setDelegate:self];
+//        [_managerHttp setController:self];
+//        [_managerHttp setRequestCode:REQUESTCODE_GETINFO];
+//        [_managerHttp setIsShowMessage:YES];
+//        [_managerHttp loginhandle:@"v4recGet" requestParams:requestParams];
+        
         ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
         [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
         [detailViewController setResultDelegate:self];

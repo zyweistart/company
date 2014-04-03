@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [_lblTitlte setText:@"忘记密码"];
+    [_lblTitlte setText:@"找回密码"];
     [_lblSuccessInfo setText:@"恭喜您，找回密码成功"];
     [_btnReadAgreementCheck setHidden:YES];
     [_btnReadAgreement setHidden:YES];
