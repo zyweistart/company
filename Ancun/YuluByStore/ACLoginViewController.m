@@ -5,7 +5,7 @@
 #import "ACOldAccountViewController.h"
 #import "ACRecordingManagerViewController.h"
 #import "ACMoreViewController.h"
-#import "ACRegisterViewController.h"
+#import "ACRegistrationViewController.h"
 #import "ACForgetPwdViewController.h"
 #import "SSCheckBoxView.h"
 
@@ -371,15 +371,8 @@
 
 //注册
 - (void)onClickRegister:(id)sender {
-    ACRegisterViewController *registerViewController=[[ACRegisterViewController alloc]init];
-    UINavigationController *registerViewControllerNav = [[UINavigationController alloc] initWithRootViewController:registerViewController];
-    if(IOS7){
-        [[registerViewControllerNav navigationBar]setBarTintColor:MAINBG];
-        [[registerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
-    }else{
-        registerViewControllerNav.navigationBar.tintColor=MAINBG;
-    }
-    [self presentViewController:registerViewControllerNav animated:YES completion:nil];
+    ACRegistrationViewController *registrationViewController=[[ACRegistrationViewController alloc]init];
+    [self presentViewController:registrationViewController animated:YES completion:nil];
 }
 
 //忘记密码
@@ -387,7 +380,7 @@
     ACForgetPwdViewController *forgetPwdViewController=[[ACForgetPwdViewController alloc]init];
     UINavigationController *forgetPwdViewControllerNav = [[UINavigationController alloc] initWithRootViewController:forgetPwdViewController];
     if(IOS7){
-        [[forgetPwdViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        [[forgetPwdViewControllerNav navigationBar]setBarTintColor:MAINBG1];
         [[forgetPwdViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
     }else{
         forgetPwdViewControllerNav.navigationBar.tintColor=MAINBG;
@@ -398,6 +391,24 @@
 - (void)backgroundDoneEditing:(id)sender {
     [_txtUserName resignFirstResponder];
     [_txtPassword resignFirstResponder];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    __block CGRect curFrame=self.view.frame;
+    [UIView animateWithDuration:0.3f animations:^{
+        curFrame.origin.y-=150;
+        self.view.frame=curFrame;
+    }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    __block CGRect curFrame=self.view.frame;
+    [UIView animateWithDuration:0.3f animations:^{
+        curFrame.origin.y=0;
+        self.view.frame=curFrame;
+    }];
 }
 
 @end

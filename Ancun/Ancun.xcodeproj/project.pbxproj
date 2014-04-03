@@ -80,6 +80,7 @@
 		C99B80F617A10B68004D0BFB /* guide2.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B80F217A10B68004D0BFB /* guide2.png */; };
 		C99B80F717A10B68004D0BFB /* guide3.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B80F317A10B68004D0BFB /* guide3.png */; };
 		C99B80F817A10B68004D0BFB /* guide4.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B80F417A10B68004D0BFB /* guide4.png */; };
+		C99F0C6A18EBDC9F00C27BFC /* ACRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */; };
 		C99FCA5117B086300003B2FF /* ACAccountPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA5017B086300003B2FF /* ACAccountPayCell.m */; };
 		C99FCA5417B086440003B2FF /* ACAccountUseRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */; };
 		C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */; };
@@ -88,6 +89,8 @@
 		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
 		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
 		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
+		C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */; };
+		C9CB41BF18ED0E2E00DB6099 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BD18ED0E2E00DB6099 /* EAIntroView.m */; };
 		C9D4D18917E2B8EE0013D03E /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4D17217E2B8EE0013D03E /* CDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D4D18A17E2B8EE0013D03E /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4D17517E2B8EE0013D03E /* CFilteringJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D4D18B17E2B8EE0013D03E /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4D17717E2B8EE0013D03E /* CJSONDeserializer_BlocksExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -132,9 +135,6 @@
 		C9D97A9F179FA6520076ACF3 /* ACRecordingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A55179FA6520076ACF3 /* ACRecordingDetailViewController.xib */; };
 		C9D97AA0179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A56179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib */; };
 		C9D97AA3179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */; };
-		C9D97AA5179FA6520076ACF3 /* ACRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5F179FA6520076ACF3 /* ACRegisterViewController.m */; };
-		C9D97AA6179FA6520076ACF3 /* ACRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A60179FA6520076ACF3 /* ACRegisterViewController.xib */; };
-		C9D97AA7179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A61179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib */; };
 		C9D97AAA179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A67179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m */; };
 		C9D97AAB179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */; };
 		C9D97C7B179FA6640076ACF3 /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AAE179FA6640076ACF3 /* BaseRefreshTableViewController.m */; };
@@ -342,6 +342,8 @@
 		C99B80F217A10B68004D0BFB /* guide2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide2.png; sourceTree = "<group>"; };
 		C99B80F317A10B68004D0BFB /* guide3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide3.png; sourceTree = "<group>"; };
 		C99B80F417A10B68004D0BFB /* guide4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide4.png; sourceTree = "<group>"; };
+		C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRegistrationViewController.h; sourceTree = "<group>"; };
+		C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRegistrationViewController.m; sourceTree = "<group>"; };
 		C99FCA4F17B086300003B2FF /* ACAccountPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountPayCell.h; sourceTree = "<group>"; };
 		C99FCA5017B086300003B2FF /* ACAccountPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPayCell.m; sourceTree = "<group>"; };
 		C99FCA5217B086440003B2FF /* ACAccountUseRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountUseRecordCell.h; sourceTree = "<group>"; };
@@ -356,6 +358,10 @@
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
 		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
+		C9CB41BA18ED0E2E00DB6099 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
+		C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
+		C9CB41BC18ED0E2E00DB6099 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
+		C9CB41BD18ED0E2E00DB6099 /* EAIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroView.m; sourceTree = "<group>"; };
 		C9D4D17117E2B8EE0013D03E /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		C9D4D17217E2B8EE0013D03E /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		C9D4D17417E2B8EE0013D03E /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -437,10 +443,6 @@
 		C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerDetailListViewController.m; sourceTree = "<group>"; };
 		C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingManagerViewController.h; sourceTree = "<group>"; };
 		C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerViewController.m; sourceTree = "<group>"; };
-		C9D97A5E179FA6520076ACF3 /* ACRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRegisterViewController.h; sourceTree = "<group>"; };
-		C9D97A5F179FA6520076ACF3 /* ACRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRegisterViewController.m; sourceTree = "<group>"; };
-		C9D97A60179FA6520076ACF3 /* ACRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACRegisterViewController.xib; sourceTree = "<group>"; };
-		C9D97A61179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACRegisterViewController@iPhone5.xib"; sourceTree = "<group>"; };
 		C9D97A66179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+MutableDeepCopy.h"; path = "../NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
 		C9D97A67179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+MutableDeepCopy.m"; path = "../NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
 		C9D97A68179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+OAURLEncodingAdditions.h"; path = "../NSString+OAURLEncodingAdditions.h"; sourceTree = "<group>"; };
@@ -751,6 +753,17 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		C9CB41B918ED0E2E00DB6099 /* EAIntroView */ = {
+			isa = PBXGroup;
+			children = (
+				C9CB41BA18ED0E2E00DB6099 /* EAIntroPage.h */,
+				C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */,
+				C9CB41BC18ED0E2E00DB6099 /* EAIntroView.h */,
+				C9CB41BD18ED0E2E00DB6099 /* EAIntroView.m */,
+			);
+			path = EAIntroView;
+			sourceTree = "<group>";
+		};
 		C9D4D17017E2B8EE0013D03E /* TouchJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +929,7 @@
 				C9D97B35179FA6640076ACF3 /* ATMHud */,
 				C9D97B43179FA6640076ACF3 /* baidu-mtj */,
 				C9D97B46179FA6640076ACF3 /* ChineseToPinyin */,
+				C9CB41B918ED0E2E00DB6099 /* EAIntroView */,
 				C9D97B4C179FA6640076ACF3 /* GHKit */,
 				C9D97B9D179FA6640076ACF3 /* MBProgressHUD */,
 				C9D97BA0179FA6640076ACF3 /* RefreshTableHeaderView */,
@@ -1268,8 +1282,8 @@
 				C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */,
 				C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */,
 				C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */,
-				C9D97A5E179FA6520076ACF3 /* ACRegisterViewController.h */,
-				C9D97A5F179FA6520076ACF3 /* ACRegisterViewController.m */,
+				C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */,
+				C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */,
 				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
 				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
 				C99B80DE17A0CAC0004D0BFB /* MyViewController.h */,
@@ -1306,8 +1320,6 @@
 				C9D97A41179FA6510076ACF3 /* ACNotaryDetailViewController@iPhone5.xib */,
 				C9D97A55179FA6520076ACF3 /* ACRecordingDetailViewController.xib */,
 				C9D97A56179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib */,
-				C9D97A60179FA6520076ACF3 /* ACRegisterViewController.xib */,
-				C9D97A61179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -1425,8 +1437,6 @@
 				C9D97A92179FA6520076ACF3 /* ACNotaryDetailViewController@iPhone5.xib in Resources */,
 				C9D97A9F179FA6520076ACF3 /* ACRecordingDetailViewController.xib in Resources */,
 				C9D97AA0179FA6520076ACF3 /* ACRecordingDetailViewController@iPhone5.xib in Resources */,
-				C9D97AA6179FA6520076ACF3 /* ACRegisterViewController.xib in Resources */,
-				C9D97AA7179FA6520076ACF3 /* ACRegisterViewController@iPhone5.xib in Resources */,
 				C9D97CC2179FA6650076ACF3 /* blackArrow.png in Resources */,
 				C9D97CC3179FA6650076ACF3 /* blackArrow@2x.png in Resources */,
 				C9D97CC4179FA6650076ACF3 /* blueArrow.png in Resources */,
@@ -1574,6 +1584,7 @@
 				C9D97A8C179FA6520076ACF3 /* ACMore.m in Sources */,
 				C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */,
 				C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */,
+				C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */,
 				C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */,
 				C9D97A94179FA6520076ACF3 /* ACPaymentCell.m in Sources */,
 				C9D97A96179FA6520076ACF3 /* ACPlayerView.m in Sources */,
@@ -1582,7 +1593,6 @@
 				C9D97A9C179FA6520076ACF3 /* ACRecordingDetailCell.m in Sources */,
 				C9D97A9E179FA6520076ACF3 /* ACRecordingDetailViewController.m in Sources */,
 				C9D97AA3179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m in Sources */,
-				C9D97AA5179FA6520076ACF3 /* ACRegisterViewController.m in Sources */,
 				C9D97AAA179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m in Sources */,
 				C9D97AAB179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m in Sources */,
 				C9D97C7B179FA6640076ACF3 /* BaseRefreshTableViewController.m in Sources */,
@@ -1601,8 +1611,10 @@
 				C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */,
 				C9D97C94179FA6650076ACF3 /* Reachability.m in Sources */,
 				C9D97C95179FA6650076ACF3 /* ATMHud.m in Sources */,
+				C9CB41BF18ED0E2E00DB6099 /* EAIntroView.m in Sources */,
 				C9D97C96179FA6650076ACF3 /* ATMHudQueueItem.m in Sources */,
 				C9D97C97179FA6650076ACF3 /* ATMHudView.m in Sources */,
+				C99F0C6A18EBDC9F00C27BFC /* ACRegistrationViewController.m in Sources */,
 				C9D97C98179FA6650076ACF3 /* ATMProgressLayer.m in Sources */,
 				C9D97C99179FA6650076ACF3 /* ATMSoundFX.m in Sources */,
 				C908CCB218EBDA36001EE433 /* SSCheckBoxView.m in Sources */,

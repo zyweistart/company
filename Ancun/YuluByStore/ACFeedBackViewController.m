@@ -71,7 +71,11 @@
 - (IBAction)viewMoveDown:(id)sender {
     __block CGRect curFrame=self.view.frame;
     [UIView animateWithDuration:0.3f animations:^{
-        curFrame.origin.y=0;
+        if(IOS7){
+            curFrame.origin.y=64;
+        }else{
+            curFrame.origin.y=0;
+        }
         self.view.frame=curFrame;
     }];
 }
