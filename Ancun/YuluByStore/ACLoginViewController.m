@@ -6,8 +6,7 @@
 #import "ACRecordingManagerViewController.h"
 #import "ACMoreViewController.h"
 #import "ACRegistrationViewController.h"
-#import "ACForgetPwdViewController.h"
-#import "SSCheckBoxView.h"
+#import "ACForgetPasswordViewController.h"
 
 #define TABNORMALBGCOLOR [UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]
 
@@ -290,6 +289,7 @@
         [Common setCache:DEFAULTDATA_PHONE data:@""];
         [Common setCache:DEFAULTDATA_PASSWORD data:@""];
     } else if(resultCode==RESULTCODE_ACLoginViewController_3) {
+        rememberPassword=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
         //自动登陆
         [self autoLogin];
     }
@@ -377,15 +377,8 @@
 
 //忘记密码
 - (void)onClickForgetPwd:(id)sender {
-    ACForgetPwdViewController *forgetPwdViewController=[[ACForgetPwdViewController alloc]init];
-    UINavigationController *forgetPwdViewControllerNav = [[UINavigationController alloc] initWithRootViewController:forgetPwdViewController];
-    if(IOS7){
-        [[forgetPwdViewControllerNav navigationBar]setBarTintColor:MAINBG1];
-        [[forgetPwdViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
-    }else{
-        forgetPwdViewControllerNav.navigationBar.tintColor=MAINBG;
-    }
-    [self presentViewController:forgetPwdViewControllerNav animated:YES completion:nil];
+    ACForgetPasswordViewController *frgetPasswordViewController=[[ACForgetPasswordViewController alloc]init];
+    [self presentViewController:frgetPasswordViewController animated:YES completion:nil];
 }
 
 - (void)backgroundDoneEditing:(id)sender {
@@ -406,7 +399,11 @@
 {
     __block CGRect curFrame=self.view.frame;
     [UIView animateWithDuration:0.3f animations:^{
-        curFrame.origin.y=0;
+        if(IOS7){
+            curFrame.origin.y=0;
+        }else{
+            curFrame.origin.y=20;
+        }
         self.view.frame=curFrame;
     }];
 }

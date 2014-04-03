@@ -15,7 +15,7 @@
 
 - (id)initWithController:(UIViewController*)controller
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 100)];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 67)];
     if(self){
         [self setController:controller];
         [self setBackgroundColor:MAINBG];
@@ -25,35 +25,37 @@
         [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
         [_btn_notary addTarget:self action:@selector(notary:) forControlEvents:UIControlEventTouchUpInside];
         [_btn_notary setBackgroundImage:[UIImage imageNamed:@"notary_gb"] forState:UIControlStateNormal];
-        [self addSubview:_btn_notary];
+//        [self addSubview:_btn_notary];
         
         _btn_extraction=[[UIButton alloc]initWithFrame:CGRectMake(173, 10, 127, 35)];
         [_btn_extraction setTitle:@"申请提取码" forState:UIControlStateNormal];
         [_btn_extraction addTarget:self action:@selector(extraction:) forControlEvents:UIControlEventTouchUpInside];
         [_btn_extraction setBackgroundImage:[UIImage imageNamed:@"extraction_gb"] forState:UIControlStateNormal];
-        [self addSubview:_btn_extraction];
+//        [self addSubview:_btn_extraction];
         
-        _btn_player=[[UIButton alloc]initWithFrame:CGRectMake(9, 48, 54, 47)];
+        _btn_player=[[UIButton alloc]initWithFrame:CGRectMake(9, 10, 54, 47)];
         [_btn_player addTarget:self action:@selector(btnPlayer:) forControlEvents:UIControlEventTouchUpInside];
         [_btn_player setImage:[UIImage imageNamed:@"player_normal"] forState:UIControlStateNormal];
         [self addSubview:_btn_player];
         
-        _sider_player=[[UISlider alloc]initWithFrame:CGRectMake(69, 48, 233, 29)];
+        _sider_player=[[UISlider alloc]initWithFrame:CGRectMake(69, 10, 233, 29)];
         [_sider_player addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:_sider_player];
         
-        _lbl_playertimerlong=[[UILabel alloc]initWithFrame:CGRectMake(71, 74, 70, 21)];
+        _lbl_playertimerlong=[[UILabel alloc]initWithFrame:CGRectMake(71, 36, 70, 21)];
         [_lbl_playertimerlong setText:@"00:00"];
         [_lbl_playertimerlong setFont:[UIFont systemFontOfSize:12]];
         [_lbl_playertimerlong setTextColor:[UIColor whiteColor]];
         [_lbl_playertimerlong setTextAlignment:NSTextAlignmentLeft];
+        [_lbl_playertimerlong setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_lbl_playertimerlong];
         
-        _lbl_playertimertotallong=[[UILabel alloc]initWithFrame:CGRectMake(233, 74, 67, 21)];
+        _lbl_playertimertotallong=[[UILabel alloc]initWithFrame:CGRectMake(233, 36, 67, 21)];
         [_lbl_playertimertotallong setText:@"00:00"];
         [_lbl_playertimertotallong setFont:[UIFont systemFontOfSize:12]];
         [_lbl_playertimertotallong setTextColor:[UIColor whiteColor]];
         [_lbl_playertimertotallong setTextAlignment:NSTextAlignmentRight];
+        [_lbl_playertimertotallong setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_lbl_playertimertotallong];
     }
     return self;

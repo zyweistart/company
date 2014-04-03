@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 
-@interface ACGuideViewController : BaseViewController <UIScrollViewDelegate>
+#import "EAIntroView.h"
 
-@property (nonatomic, strong) NSArray *contentList;
+@interface ACGuideViewController : BaseViewController <EAIntroDelegate>
 
 @end

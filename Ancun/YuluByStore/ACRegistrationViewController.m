@@ -9,49 +9,26 @@
 #import "ACRegistrationViewController.h"
 #import "ACNavigationWebPageViewController.h"
 
-#define SECOND 60
-
 @interface ACRegistrationViewController ()
 
 @end
 
-@implementation ACRegistrationViewController{
-    NSTimer *_verificationCodeTime;
-    
-    NSString *_phone;
-    NSString *_password;
-    NSString *_verificationCode;
-    
-    HttpRequest *_hRequest;
-    
-    int _second;
+@implementation ACRegistrationViewController {
     BOOL checked;
-    UILabel *_lblVerificationCodeInfo;
-    UIButton *_btnGetVerificationCode;
-    
-    UIImageView *step2;
-    UIImageView *step3;
-    UIControl *_regFirstView;
-    UIControl *_regSecondView;
-    UIControl *_regThirdView;
-    UIControl *_regFourthView;
-    UITextField *_regInputPhone;
-    UITextField *_regInputVerificationCode;
-    UITextField *_regInputPassword;
-    UITextField *_regInputRePassword;
 }
 
-- (id)init{
-    self = [super init];
-    if (self) {
-        self.navigationItem.title=@"用户注册";
+- (id)init
+{
+    self=[super init];
+    if(self){
+        _type=1;
     }
     return self;
 }
 
-
-- (void)buildUI7
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
     int h=0;
     if(IOS7){
         h=STATUSHEIGHT;
@@ -75,13 +52,13 @@
     [btnBack addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [control addSubview:btnBack];
     
-    UILabel *lbl1=[[UILabel alloc]initWithFrame:CGRectMake(110, 0, 100, 30)];
-    lbl1.font=[UIFont fontWithName:@"Helvetica-Bold" size:20];
-    [lbl1 setText:@"注册"];
-    [lbl1 setTextColor:[UIColor whiteColor]];
-    [lbl1 setBackgroundColor:[UIColor clearColor]];
-    [lbl1 setTextAlignment:NSTextAlignmentCenter];
-    [control addSubview:lbl1];
+    _lblTitlte=[[UILabel alloc]initWithFrame:CGRectMake(110, 0, 100, 30)];
+    _lblTitlte.font=[UIFont fontWithName:@"Helvetica-Bold" size:20];
+    [_lblTitlte setText:@"注册"];
+    [_lblTitlte setTextColor:[UIColor whiteColor]];
+    [_lblTitlte setBackgroundColor:[UIColor clearColor]];
+    [_lblTitlte setTextAlignment:NSTextAlignmentCenter];
+    [control addSubview:_lblTitlte];
     
     //LOGO
     UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-105.5/2, inch4?70:40, 105.5, 102.5)];
@@ -94,30 +71,30 @@
     UIImageView *step1=[[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 26, 26)];
     [step1 setImage:[UIImage imageNamed:@"pass"]];
     [schedule addSubview:step1];
-    lbl1=[[UILabel alloc]initWithFrame:CGRectMake(0, 36, 50, 20)];
-    lbl1.font=[UIFont systemFontOfSize:12];
-    [lbl1 setNumberOfLines:0];
-    [lbl1 setText:@"手机验证"];
-    [lbl1 setTextColor:[UIColor whiteColor]];
-    [lbl1 setBackgroundColor:[UIColor clearColor]];
-    [lbl1 setTextAlignment:NSTextAlignmentCenter];
-    [schedule addSubview:lbl1];
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 36, 50, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setNumberOfLines:0];
+    [lbl setText:@"手机验证"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setTextAlignment:NSTextAlignmentCenter];
+    [schedule addSubview:lbl];
     
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(39, 20, 97, 6)];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(39, 20, 97, 6)];
     [lbl setBackgroundColor:MAINBG2];
     [schedule addSubview:lbl];
     
     step2=[[UIImageView alloc]initWithFrame:CGRectMake(137, 10, 26, 26)];
     [step2 setImage:[UIImage imageNamed:@"wait"]];
     [schedule addSubview:step2];
-    UILabel *lbl2=[[UILabel alloc]initWithFrame:CGRectMake(125, 36, 50, 20)];
-    lbl2.font=[UIFont systemFontOfSize:12];
-    [lbl2 setNumberOfLines:0];
-    [lbl2 setText:@"设置密码"];
-    [lbl2 setTextColor:[UIColor whiteColor]];
-    [lbl2 setBackgroundColor:[UIColor clearColor]];
-    [lbl2 setTextAlignment:NSTextAlignmentCenter];
-    [schedule addSubview:lbl2];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(125, 36, 50, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setNumberOfLines:0];
+    [lbl setText:@"设置密码"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setTextAlignment:NSTextAlignmentCenter];
+    [schedule addSubview:lbl];
     
     lbl=[[UILabel alloc]initWithFrame:CGRectMake(164, 20, 97, 6)];
     [lbl setBackgroundColor:MAINBG2];
@@ -126,14 +103,14 @@
     step3=[[UIImageView alloc]initWithFrame:CGRectMake(262, 10, 26, 26)];
     [step3 setImage:[UIImage imageNamed:@"wait"]];
     [schedule addSubview:step3];
-    UILabel *lbl3=[[UILabel alloc]initWithFrame:CGRectMake(250, 36, 50, 20)];
-    lbl3.font=[UIFont systemFontOfSize:12];
-    [lbl3 setNumberOfLines:0];
-    [lbl3 setText:@"完成"];
-    [lbl3 setTextColor:[UIColor whiteColor]];
-    [lbl3 setBackgroundColor:[UIColor clearColor]];
-    [lbl3 setTextAlignment:NSTextAlignmentCenter];
-    [schedule addSubview:lbl3];
+    lbl=[[UILabel alloc]initWithFrame:CGRectMake(250, 36, 50, 20)];
+    lbl.font=[UIFont systemFontOfSize:12];
+    [lbl setNumberOfLines:0];
+    [lbl setText:@"完成"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
+    [lbl setTextAlignment:NSTextAlignmentCenter];
+    [schedule addSubview:lbl];
     //////////第一步
     int heigh1=inch4?280:220;
     _regFirstView=[[UIControl alloc]initWithFrame:CGRectMake(0, heigh1, width, 183)];
@@ -152,17 +129,17 @@
     [_regFirstView addSubview:_regInputPhone];
     
     checked=YES;
-    UIButton *btnReadAgreementCheck=[[UIButton alloc]initWithFrame:CGRectMake(30, 84.25, 14.5, 14.5)];
-    [btnReadAgreementCheck setImage:[UIImage imageNamed:@"login_g"] forState:UIControlStateNormal];
-    [btnReadAgreementCheck addTarget:self action:@selector(readAgreementCheck:) forControlEvents:UIControlEventTouchUpInside];
-    [_regFirstView addSubview:btnReadAgreementCheck];
+    _btnReadAgreementCheck=[[UIButton alloc]initWithFrame:CGRectMake(30, 84.25, 14.5, 14.5)];
+    [_btnReadAgreementCheck setImage:[UIImage imageNamed:@"login_g"] forState:UIControlStateNormal];
+    [_btnReadAgreementCheck addTarget:self action:@selector(readAgreementCheck:) forControlEvents:UIControlEventTouchUpInside];
+    [_regFirstView addSubview:_btnReadAgreementCheck];
     
-    UIButton *btnReadAgreement=[[UIButton alloc]initWithFrame:CGRectMake(50, 82.5, 240, 18)];
-    [btnReadAgreement setTitle:@"已阅读并同意《安存语录服务条款》" forState:UIControlStateNormal];
-    btnReadAgreement.titleLabel.font=[UIFont systemFontOfSize: 15];
-    [btnReadAgreement addTarget:self action:@selector(termsOfService:) forControlEvents:UIControlEventTouchUpInside];
-    [_regFirstView addSubview:btnReadAgreement];
-
+    _btnReadAgreement=[[UIButton alloc]initWithFrame:CGRectMake(50, 82.5, 240, 18)];
+    [_btnReadAgreement setTitle:@"已阅读并同意《安存语录服务条款》" forState:UIControlStateNormal];
+    _btnReadAgreement.titleLabel.font=[UIFont systemFontOfSize: 15];
+    [_btnReadAgreement addTarget:self action:@selector(termsOfService:) forControlEvents:UIControlEventTouchUpInside];
+    [_regFirstView addSubview:_btnReadAgreement];
+    
     UIButton *btnValidPhoneByVerificationCode=[[UIButton alloc]initWithFrame:CGRectMake(width/2-271/2, 127, 271, 51)];
     [btnValidPhoneByVerificationCode setTitle:@"获取验证码" forState:UIControlStateNormal];
     btnValidPhoneByVerificationCode.titleLabel.font=[UIFont systemFontOfSize:30];
@@ -189,10 +166,11 @@
     [_lblVerificationCodeInfo setText:@"验证码已发送，\n58秒后，可重新获取"];
     [_lblVerificationCodeInfo setFont:[UIFont systemFontOfSize:15]];
     [_lblVerificationCodeInfo setTextColor:[UIColor whiteColor]];
+    [_lblVerificationCodeInfo setBackgroundColor:[UIColor clearColor]];
     [_lblVerificationCodeInfo setNumberOfLines:0];
     [_lblVerificationCodeInfo setTextAlignment:NSTextAlignmentCenter];
     [_regSecondView addSubview:_lblVerificationCodeInfo];
-
+    
     _btnGetVerificationCode=[[UIButton alloc]initWithFrame:CGRectMake(width/2-271/2, 66, 271, 51)];
     [_btnGetVerificationCode setTitle:@"获取验证码" forState:UIControlStateNormal];
     _btnGetVerificationCode.titleLabel.font=[UIFont systemFontOfSize:30];
@@ -241,6 +219,7 @@
     [lbl setFont:[UIFont systemFontOfSize:12]];
     [lbl setTextAlignment:NSTextAlignmentCenter];
     [lbl setTextColor:[UIColor whiteColor]];
+    [lbl setBackgroundColor:[UIColor clearColor]];
     [_regThirdView addSubview:lbl];
     
     UIButton *btnSubmitPwd=[[UIButton alloc]initWithFrame:CGRectMake(width/2-271/2, 155, 271, 51)];
@@ -258,13 +237,14 @@
     [img1 setImage:[UIImage imageNamed:@"sucsse"]];
     [_regFourthView addSubview:img1];
     
-    UILabel *lblinfo=[[UILabel alloc]initWithFrame:CGRectMake(width/2-271/2, 40, 271, 80)];
-    [lblinfo setText:@"恭喜您，成功开通\n安存语录"];
-    [lblinfo setFont:[UIFont systemFontOfSize:25]];
-    [lblinfo setTextColor:[UIColor whiteColor]];
-    [lblinfo setNumberOfLines:0];
-    [lblinfo setTextAlignment:NSTextAlignmentCenter];
-    [_regFourthView addSubview:lblinfo];
+    _lblSuccessInfo=[[UILabel alloc]initWithFrame:CGRectMake(width/2-271/2, 40, 271, 80)];
+    [_lblSuccessInfo setText:@"恭喜您，成功开通\n安存语录"];
+    [_lblSuccessInfo setFont:[UIFont systemFontOfSize:25]];
+    [_lblSuccessInfo setTextColor:[UIColor whiteColor]];
+    [_lblSuccessInfo setNumberOfLines:0];
+    [_lblSuccessInfo setTextAlignment:NSTextAlignmentCenter];
+    [_lblSuccessInfo setBackgroundColor:[UIColor clearColor]];
+    [_regFourthView addSubview:_lblSuccessInfo];
     UIButton *btnDone=[[UIButton alloc]initWithFrame:CGRectMake(width/2-271/2, 127, 271, 51)];
     [btnDone setTitle:@"完成" forState:UIControlStateNormal];
     btnDone.titleLabel.font=[UIFont systemFontOfSize:30];
@@ -276,7 +256,6 @@
     [_regSecondView setHidden:YES];
     [_regThirdView setHidden:YES];
     [_regFourthView setHidden:YES];
-    
 }
 
 #pragma mark -
@@ -317,8 +296,10 @@
             default:
                 break;
         }
-    }else if([[response code] isEqualToString:@"120169"]){
-        //该手机号码已被注册
+    }else if([@"120169" isEqualToString:[response code]]||
+             [@"120020" isEqualToString:[response code]]){
+        //120169:该手机号码已被注册
+        //120020:用户不存在
         switch (reqCode) {
             case REQUESTCODE_GETVERIFICATIONCODE:
                 [_regFirstView setHidden:YES];
@@ -333,7 +314,6 @@
                 break;
         }
     }
-    
 }
 
 #pragma mark -
@@ -372,7 +352,7 @@
     [self backgroundDoneEditing:nil];
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
     [requestParams setObject:_phone forKey:@"phone"];
-    [requestParams setObject:@"1" forKey:@"actype"];
+    [requestParams setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"actype"];
     _hRequest=[[HttpRequest alloc]init];
     [_hRequest setDelegate:self];
     [_hRequest setController:self];
@@ -390,7 +370,7 @@
     }else{
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:_phone forKey:@"phone"];
-        [requestParams setObject:@"1" forKey:@"actype"];
+        [requestParams setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"actype"];
         [requestParams setObject:_verificationCode forKey:@"authcode"];
         _hRequest=[[HttpRequest alloc]init];
         [_hRequest setIsShowMessage:YES];
@@ -481,7 +461,11 @@
 {
     __block CGRect curFrame=self.view.frame;
     [UIView animateWithDuration:0.3f animations:^{
-        curFrame.origin.y=0;
+        if(IOS7){
+            curFrame.origin.y=0;
+        }else{
+            curFrame.origin.y=20;
+        }
         self.view.frame=curFrame;
     }];
 }
