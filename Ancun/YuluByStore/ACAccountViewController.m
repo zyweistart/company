@@ -2,7 +2,7 @@
 #import "ACAccountPayCell.h"
 #import "ACAccountUseRecordCell.h"
 #ifdef JAILBREAK
-    #import "ACRechargeViewController.h"
+    #import "ACRechargeByAlipayViewController.h"
 #else
     #import "ACRechargeByAppStoreViewController.h"
 #endif
@@ -169,9 +169,9 @@
         [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
 #ifdef JAILBREAK
-        ACRechargeViewController *rechargeViewController=[[ACRechargeViewController alloc] init];
-        rechargeViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:rechargeViewController animated:YES];
+        ACRechargeByAlipayViewController *rechargeByAlipayViewController=[[ACRechargeByAlipayViewController alloc] init];
+        rechargeByAlipayViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:rechargeByAlipayViewController animated:YES];
 #else
         ACRechargeByAppStoreViewController *rechargeByAppStoreViewController=[[ACRechargeByAppStoreViewController alloc] init];
         rechargeByAppStoreViewController.hidesBottomBarWhenPushed = YES;

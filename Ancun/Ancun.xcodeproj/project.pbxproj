@@ -14,6 +14,10 @@
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
 		C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */; };
 		C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9155D7918E90BC70075A693 /* ACContactsViewController.xib */; };
+		C91D0BD918EE83BA006B10A3 /* ACPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BD818EE83BA006B10A3 /* ACPaymentViewController.m */; };
+		C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */; };
+		C91D0BE418EE9F35006B10A3 /* ACAccountPay1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */; };
+		C91D0BE718EE9F4A006B10A3 /* ACAccountPay2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */; };
 		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
 		C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */; };
 		C978899718E16AC300157577 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C978899618E16AC300157577 /* Images.xcassets */; };
@@ -77,7 +81,6 @@
 		C9D97A89179FA6520076ACF3 /* ACModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */; };
 		C9D97A8A179FA6520076ACF3 /* ACModifyPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */; };
 		C9D97A8B179FA6520076ACF3 /* ACModifyPwdViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */; };
-		C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */; };
 		C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */; };
 		C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */; };
 		C9D97A91179FA6520076ACF3 /* ACNotaryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */; };
@@ -177,6 +180,14 @@
 		C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDialsViewController.h; sourceTree = "<group>"; };
 		C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDialsViewController.m; sourceTree = "<group>"; };
 		C9155D7918E90BC70075A693 /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
+		C91D0BD718EE83BA006B10A3 /* ACPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPaymentViewController.h; sourceTree = "<group>"; };
+		C91D0BD818EE83BA006B10A3 /* ACPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPaymentViewController.m; sourceTree = "<group>"; };
+		C91D0BDA18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAlipayViewController.h; sourceTree = "<group>"; };
+		C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeByAlipayViewController.m; sourceTree = "<group>"; };
+		C91D0BE218EE9F35006B10A3 /* ACAccountPay1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountPay1Cell.h; sourceTree = "<group>"; };
+		C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPay1Cell.m; sourceTree = "<group>"; };
+		C91D0BE518EE9F4A006B10A3 /* ACAccountPay2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountPay2Cell.h; sourceTree = "<group>"; };
+		C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPay2Cell.m; sourceTree = "<group>"; };
 		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
 		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
 		C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingCallDetailViewController.h; sourceTree = "<group>"; };
@@ -279,8 +290,6 @@
 		C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACModifyPwdViewController.m; sourceTree = "<group>"; };
 		C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACModifyPwdViewController.xib; sourceTree = "<group>"; };
 		C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACModifyPwdViewController@iPhone5.xib"; sourceTree = "<group>"; };
-		C9D97A39179FA6500076ACF3 /* ACMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreCell.h; sourceTree = "<group>"; };
-		C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreCell.m; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
 		C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreViewController.m; sourceTree = "<group>"; };
 		C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNotaryDetailViewController.h; sourceTree = "<group>"; };
@@ -521,6 +530,125 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C91D0BDD18EE9E1D006B10A3 /* NotUsed */ = {
+			isa = PBXGroup;
+			children = (
+				C91D0BDE18EE9ECD006B10A3 /* Cell */,
+				C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */,
+				C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */,
+				C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */,
+				C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */,
+				C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */,
+				C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */,
+				C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */,
+				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
+				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
+				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
+			);
+			name = NotUsed;
+			sourceTree = "<group>";
+		};
+		C91D0BDE18EE9ECD006B10A3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */,
+				C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */,
+				C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */,
+				C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */,
+				C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */,
+				C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */,
+				C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */,
+				C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		C91D0BE818EEA16B006B10A3 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C9D97A0F179FA64F0076ACF3 /* ACAccountViewController.h */,
+				C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */,
+				C91D0BD718EE83BA006B10A3 /* ACPaymentViewController.h */,
+				C91D0BD818EE83BA006B10A3 /* ACPaymentViewController.m */,
+				C91D0BDA18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.h */,
+				C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */,
+				C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */,
+				C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */,
+				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
+				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		C91D0BE918EEA17F006B10A3 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				C9D97A25179FA6500076ACF3 /* ACFeedBackViewController.h */,
+				C9D97A26179FA6500076ACF3 /* ACFeedBackViewController.m */,
+				C9D97A33179FA6500076ACF3 /* ACModifyPwdViewController.h */,
+				C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */,
+				C9D97A05179FA64E0076ACF3 /* ACAboutUsViewController.h */,
+				C9D97A06179FA64E0076ACF3 /* ACAboutUsViewController.m */,
+				C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */,
+				C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */,
+				C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */,
+				C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
+		C91D0BEA18EEA195006B10A3 /* Recording */ = {
+			isa = PBXGroup;
+			children = (
+				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
+				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
+				C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */,
+				C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */,
+				C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */,
+				C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */,
+				C9D97A53179FA6520076ACF3 /* ACRecordingDetailViewController.h */,
+				C9D97A54179FA6520076ACF3 /* ACRecordingDetailViewController.m */,
+				C9D97A5A179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.h */,
+				C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */,
+				C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */,
+				C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */,
+			);
+			name = Recording;
+			sourceTree = "<group>";
+		};
+		C91D0BEB18EEA1BA006B10A3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C99BC2E418ED2ACE00650DF5 /* ACForgetPasswordViewController.h */,
+				C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */,
+				C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */,
+				C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */,
+				C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */,
+				C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */,
+				C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */,
+				C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		C91D0BEC18EEA1D0006B10A3 /* Dial */ = {
+			isa = PBXGroup;
+			children = (
+				C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */,
+				C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */,
+			);
+			name = Dial;
+			sourceTree = "<group>";
+		};
+		C91D0BED18EEA1D8006B10A3 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C9A67EA717CD882900E9A81E /* ACContactsViewController.h */,
+				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		C9CB41B918ED0E2E00DB6099 /* EAIntroView */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,6 +1056,7 @@
 		C9D97D79179FA72C0076ACF3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C91D0BDD18EE9E1D006B10A3 /* NotUsed */,
 				C9F80CFA17B1D58E00E15885 /* Cell */,
 				C9D97D7B179FAB770076ACF3 /* Controller */,
 				C9F80CFB17B1D5E200E15885 /* View */,
@@ -939,56 +1068,12 @@
 		C9D97D7B179FAB770076ACF3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C9D97A05179FA64E0076ACF3 /* ACAboutUsViewController.h */,
-				C9D97A06179FA64E0076ACF3 /* ACAboutUsViewController.m */,
-				C9D97A0F179FA64F0076ACF3 /* ACAccountViewController.h */,
-				C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */,
-				C9A67EA717CD882900E9A81E /* ACContactsViewController.h */,
-				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
-				C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */,
-				C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */,
-				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
-				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
-				C9D97A25179FA6500076ACF3 /* ACFeedBackViewController.h */,
-				C9D97A26179FA6500076ACF3 /* ACFeedBackViewController.m */,
-				C99BC2E418ED2ACE00650DF5 /* ACForgetPasswordViewController.h */,
-				C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */,
-				C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */,
-				C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */,
-				C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */,
-				C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */,
-				C9D97A33179FA6500076ACF3 /* ACModifyPwdViewController.h */,
-				C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */,
-				C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */,
-				C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */,
-				C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */,
-				C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */,
-				C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */,
-				C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */,
-				C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */,
-				C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */,
-				C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */,
-				C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */,
-				C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */,
-				C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */,
-				C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */,
-				C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */,
-				C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */,
-				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
-				C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */,
-				C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */,
-				C9D97A53179FA6520076ACF3 /* ACRecordingDetailViewController.h */,
-				C9D97A54179FA6520076ACF3 /* ACRecordingDetailViewController.m */,
-				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
-				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
-				C9D97A5A179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.h */,
-				C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */,
-				C9D97A5C179FA6520076ACF3 /* ACRecordingManagerViewController.h */,
-				C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */,
-				C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */,
-				C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */,
-				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
-				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
+				C91D0BE818EEA16B006B10A3 /* Account */,
+				C91D0BED18EEA1D8006B10A3 /* Contacts */,
+				C91D0BEC18EEA1D0006B10A3 /* Dial */,
+				C91D0BEB18EEA1BA006B10A3 /* Main */,
+				C91D0BE918EEA17F006B10A3 /* More */,
+				C91D0BEA18EEA195006B10A3 /* Recording */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1024,22 +1109,16 @@
 		C9F80CFA17B1D58E00E15885 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C91D0BE218EE9F35006B10A3 /* ACAccountPay1Cell.h */,
+				C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */,
+				C91D0BE518EE9F4A006B10A3 /* ACAccountPay2Cell.h */,
+				C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */,
 				C99FCA4F17B086300003B2FF /* ACAccountPayCell.h */,
 				C99FCA5017B086300003B2FF /* ACAccountPayCell.m */,
-				C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */,
-				C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */,
 				C99FCA5217B086440003B2FF /* ACAccountUseRecordCell.h */,
 				C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */,
 				C9D97A15179FA64F0076ACF3 /* ACContactCell.h */,
 				C9D97A16179FA64F0076ACF3 /* ACContactCell.m */,
-				C9D97A39179FA6500076ACF3 /* ACMoreCell.h */,
-				C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */,
-				C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */,
-				C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */,
-				C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */,
-				C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */,
-				C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */,
-				C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */,
 				C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */,
 				C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */,
 				C9D97A4D179FA6520076ACF3 /* ACRecordingCell.h */,
@@ -1190,7 +1269,6 @@
 				C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */,
 				C9D97A89179FA6520076ACF3 /* ACModifyPwdViewController.m in Sources */,
 				C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */,
-				C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */,
 				C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */,
 				C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */,
 				C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */,
@@ -1208,12 +1286,14 @@
 				C9D97C83179FA6640076ACF3 /* IAPHelper.m in Sources */,
 				C9D97C7D179FA6640076ACF3 /* Common.m in Sources */,
 				C9D97C7E179FA6640076ACF3 /* Config.m in Sources */,
+				C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */,
 				C9D97C80179FA6640076ACF3 /* DataSingleton.m in Sources */,
 				C9D97C81179FA6640076ACF3 /* FileUtils.m in Sources */,
 				C9D97C82179FA6640076ACF3 /* HttpRequest.m in Sources */,
 				C9D97C84179FA6640076ACF3 /* LoadingCell.m in Sources */,
 				C9D97C86179FA6640076ACF3 /* LongPressButton.m in Sources */,
 				C9D97C87179FA6640076ACF3 /* Response.m in Sources */,
+				C91D0BD918EE83BA006B10A3 /* ACPaymentViewController.m in Sources */,
 				C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */,
 				C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */,
 				C9D97C94179FA6650076ACF3 /* Reachability.m in Sources */,
@@ -1229,6 +1309,7 @@
 				C9D97CA1179FA6650076ACF3 /* GHNSData+Base64.m in Sources */,
 				C9D97CB0179FA6650076ACF3 /* GHNSString+HMAC.m in Sources */,
 				C9D97CC0179FA6650076ACF3 /* ybase64.c in Sources */,
+				C91D0BE718EE9F4A006B10A3 /* ACAccountPay2Cell.m in Sources */,
 				C9D97CC1179FA6650076ACF3 /* MBProgressHUD.m in Sources */,
 				C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */,
 				C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */,
@@ -1255,6 +1336,7 @@
 				C9D4D18D17E2B8EE0013D03E /* CJSONSerializedData.m in Sources */,
 				C9D4D18E17E2B8EE0013D03E /* CDataScanner_Extensions.m in Sources */,
 				C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */,
+				C91D0BE418EE9F35006B10A3 /* ACAccountPay1Cell.m in Sources */,
 				C9D4D18F17E2B8EE0013D03E /* NSDictionary_JSONExtensions.m in Sources */,
 				C9D4D19017E2B8EE0013D03E /* CJSONDeserializer.m in Sources */,
 				C9D4D19117E2B8EE0013D03E /* CJSONScanner.m in Sources */,

@@ -5,7 +5,7 @@
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 #import "IAPHelper.h"
-#import "ACPaymentCell.h"
+#import "ACAccountPay2Cell.h"
 
 #ifdef  TEST
     #define PRODUCTRECORDNO_STRING @"1dc3838c3c2c9ce5a1fe54f9b6cf5bb9"
@@ -172,9 +172,9 @@
     int count=[[[IAPHelper sharedHelper]products]count];
     if(count>row) {
         static NSString *cellReuseIdentifier = @"ACPaymentCell";
-        ACPaymentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        ACAccountPay2Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
         if(cell==nil) {
-            cell = [[ACPaymentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+            cell = [[ACAccountPay2Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
         }
         SKProduct *product = [[IAPHelper sharedHelper].products objectAtIndex:row];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
