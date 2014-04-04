@@ -93,13 +93,13 @@
         [container addSubview:_rightTopTab];
         
         //增加充值按钮
-        UIImage* image= [UIImage imageNamed:@"rechargebg"];
-        CGRect frame_1= CGRectMake(0, 0, image.size.width, image.size.height);
-        UIButton* goRecharge= [[UIButton alloc] initWithFrame:frame_1];
-        [goRecharge setBackgroundImage:image forState:UIControlStateNormal];
+        UIButton* goRecharge= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 30)];
         [goRecharge setTitle:@"充值" forState:UIControlStateNormal];
         [goRecharge setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[goRecharge titleLabel]setFont:[UIFont systemFontOfSize:16]];
+        goRecharge.layer.cornerRadius=10;
+        goRecharge.layer.masksToBounds=YES;
+        [goRecharge setBackgroundColor:[UIColor colorWithRed:(65/255.0) green:(194/255.0) blue:(252/255.0) alpha:1]];
         [goRecharge addTarget:self action:@selector(accountPay:) forControlEvents:UIControlEventTouchUpInside];
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:goRecharge]];
     }

@@ -339,23 +339,23 @@
     }
     if([self.dataItemArray count]>[indexPath row]){
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-//        //重新加载保证数据为最新
-//        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-//        [requestParams setObject:@"1" forKey:@"status"];
-//        [requestParams setObject:[dictionary objectForKey:@"fileno"] forKey:@"fileno"];
-//        _managerHttp=[[HttpRequest alloc]init];
-//        [_managerHttp setDelegate:self];
-//        [_managerHttp setController:self];
-//        [_managerHttp setRequestCode:REQUESTCODE_GETINFO];
-//        [_managerHttp setIsShowMessage:YES];
-//        [_managerHttp loginhandle:@"v4recGet" requestParams:requestParams];
+        //重新加载保证数据为最新
+        NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+        [requestParams setObject:@"1" forKey:@"status"];
+        [requestParams setObject:[dictionary objectForKey:@"fileno"] forKey:@"fileno"];
+        _managerHttp=[[HttpRequest alloc]init];
+        [_managerHttp setDelegate:self];
+        [_managerHttp setController:self];
+        [_managerHttp setRequestCode:REQUESTCODE_GETINFO];
+        [_managerHttp setIsShowMessage:YES];
+        [_managerHttp loginhandle:@"v4recGet" requestParams:requestParams];
         
-        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
-        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
-        [detailViewController setResultDelegate:self];
-        detailViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailViewController animated:YES];
-        [detailViewController loadData];
+//        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
+//        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
+//        [detailViewController setResultDelegate:self];
+//        detailViewController.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:detailViewController animated:YES];
+//        [detailViewController loadData];
     }
 }
 

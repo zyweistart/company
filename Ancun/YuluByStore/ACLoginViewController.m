@@ -241,10 +241,8 @@
         //添加标签控制器
         UITabBarController *_tabBarController = [[UITabBarController alloc] init];
         [_tabBarController.view setBackgroundColor:MAINBG];
-        if(IOS7){
-            [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];
-            [[_tabBarController tabBar] setBackgroundImage:[[UIImage alloc] init]];
-        }
+        [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];
+        [[_tabBarController tabBar] setBackgroundImage:[[UIImage alloc] init]];
         _tabBarController.delegate = self;
         _tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              dialViewController,
