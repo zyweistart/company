@@ -11,7 +11,7 @@
 }
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil{
-    if(iPhone5){
+    if(inch4){
         nibNameOrNil=@"ACRecordingDetailViewController@iPhone5";
     }else{
         nibNameOrNil=@"ACRecordingDetailViewController";

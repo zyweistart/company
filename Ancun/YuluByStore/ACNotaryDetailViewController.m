@@ -7,7 +7,7 @@
 @implementation ACNotaryDetailViewController
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil{
-    if(iPhone5){
+    if(inch4){
         nibNameOrNil=@"ACNotaryDetailViewController@iPhone5";
     }else{
         nibNameOrNil=@"ACNotaryDetailViewController";

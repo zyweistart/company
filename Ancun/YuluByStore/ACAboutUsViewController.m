@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIImageView *imageView=[[UIImageView alloc]init];
-    if(iPhone5){
+    if(inch4){
        [imageView setFrame:CGRectMake(0, 20, 320, 458)];
        [imageView setImage:[UIImage imageNamed:@"aboutus-568h"]];
     }else{

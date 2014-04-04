@@ -424,7 +424,7 @@
 
 - (void)layoutPayUpgradeStorage {
     
-    int HEIGHT=iPhone5?395:350;
+    int HEIGHT=inch4?395:350;
     
     sMainView=[[UIScrollView alloc]initWithFrame:CGRectMake(10, 50, 300, HEIGHT)];
     sMainView.layer.cornerRadius=10;

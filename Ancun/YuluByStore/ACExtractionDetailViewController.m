@@ -11,7 +11,7 @@
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    if(iPhone5){
+    if(inch4){
         nibNameOrNil=@"ACExtractionDetailViewController@iPhone5";
     }else{
         nibNameOrNil=@"ACExtractionDetailViewController";
