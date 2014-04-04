@@ -3,34 +3,66 @@
 #import "ACAboutUsViewController.h"
 #import "ACFeedBackViewController.h"
 #import "ACModifyPwdViewController.h"
-#import "ACMoreCell.h"
-#import "ACMore.h"
 #import "FileUtils.h"
 
-@interface ACMoreViewController ()
-
-- (void)calculateTotal;
+@interface ACMoreViewController () <UIActionSheetDelegate>
 
 @end
 
-@implementation ACMoreViewController
+@implementation ACMoreViewController{
+    UILabel *lblCachName;
+    long long cachesize;
+}
 
 - (id)init{
     self = [super init];
     if(self){
         self.title=@"更多";
-        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
-        [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        [self.tableView setDelegate:self];
-        [self.tableView setDataSource:self];
-        [self.view addSubview:self.tableView];
+        UIScrollView *container=nil;
+        if(IOS7){
+            container=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-STATUSHEIGHT-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
+        }else{
+            container=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
+        }
+        [container setContentSize:CGSizeMake(self.view.frame.size.width, 442)];
+        [container setScrollEnabled:YES];
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"morebg"]]];
+        [self.view addSubview:container];
+        
+        NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"正在计算缓存大小",@"重新登录", nil];
+        
+        for(int i=0;i<6;i++){
+            UIButton *btnBg=[[UIButton alloc]initWithFrame:CGRectMake(15.75, 10+i*69.5+1*i,288.5,69.5)];
+            
+            UIImageView *icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"more_icon_%d",i+1]]];
+            [icon setFrame:CGRectMake(20, 21, 27.5, 27.5)];
+            [btnBg addSubview:icon];
+            if(i==4){
+                lblCachName=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 27.5)];
+                [lblCachName setText:[names objectAtIndex:i]];
+                [lblCachName setFont:[UIFont systemFontOfSize:22]];
+                [lblCachName setTextColor:[UIColor whiteColor]];
+                [lblCachName setBackgroundColor:[UIColor clearColor]];
+                [btnBg addSubview:lblCachName];
+            }else{
+                UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 27.5)];
+                [lbl setText:[names objectAtIndex:i]];
+                [lbl setFont:[UIFont systemFontOfSize:22]];
+                [lbl setTextColor:[UIColor whiteColor]];
+                [lbl setBackgroundColor:[UIColor clearColor]];
+                [btnBg addSubview:lbl];
+            }
+            
+            [btnBg setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [btnBg setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"more%d",i+1]] forState:UIControlStateNormal];
+            [btnBg setTag:i];
+            [btnBg addTarget:self action:@selector(onClickAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [container addSubview:btnBg];
+        }
+        
     }
     return self;
-}
-
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    [self reloadTableViewDataSource];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -40,66 +72,51 @@
     }
 }
 
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(actionSheet.tag==1){
+        if(buttonIndex==0){
+            [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_2 requestCode:0 data:nil];
+        }
+    }else if(actionSheet.tag==2){
+        if(buttonIndex==0){
+            [FileUtils removeCacheFile];
+//            [Common setCache:[Config Instance].cacheKey data:nil];
+            cachesize=0;
+            [Common alert:@"清除完成"];
+            [NSThread detachNewThreadSelector:@selector(calculateTotal) toTarget:self withObject:nil];
+        }
+    }
+}
+
 #pragma mark -
-#pragma mark Delegate Methods
+#pragma mark Custom Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.dataItemArray count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 45;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[_moreInSection objectForKey:[self.dataItemArray objectAtIndex:section]] count];
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
-    static NSString *cellReuseIdentifier=@"ACMoreCellIdentifier";
-    ACMoreCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
-    if(!cell){
-        cell = [[ACMoreCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
-    }
-    ACMore *more=[[_moreInSection objectForKey:[self.dataItemArray objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
-    cell.lblName.text=[more name];
-    cell.imgView.image=[UIImage imageNamed:[more img]];
-    
-    switch(more.tag){
-        case 1:
-        case 2:
-        case 3:
-        case 5:
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            break;
-        default:
-            cell.accessoryType=UITableViewCellAccessoryNone;
-            break;
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath{
+- (void)onClickAction:(UIButton *)sender
+{
     ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"小贴士" resourcePath:@"TipContent"];
     ACFeedBackViewController *feedBackViewController=[[ACFeedBackViewController alloc]init];
     ACAboutUsViewController *aboutUsViewController=[[ACAboutUsViewController alloc]init];
     ACModifyPwdViewController *modifyPwdViewController=[[ACModifyPwdViewController alloc]init];
-    ACMore *more=[[_moreInSection objectForKey:[self.dataItemArray objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
-    switch([more tag]){
-        case 1:
+    switch(sender.tag){
+        case 0:
             //小贴士
             navigationWebPageViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
             break;
-        case 2:
+        case 1:
             //意见反馈
             feedBackViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:feedBackViewController animated:YES];
             break;
-        case 3:
+        case 2:
             //关于我们
             aboutUsViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:aboutUsViewController animated:YES];
+            break;
+        case 3:
+            //修改密码
+            modifyPwdViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:modifyPwdViewController animated:YES];
             break;
         case 4:
             //清理缓存
@@ -114,70 +131,9 @@
             }
             break;
         case 5:
-            //修改密码
-            modifyPwdViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:modifyPwdViewController animated:YES];
-            break;
-        case 6:
             //重新登录
             [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
             break;
-    }
-}
-
-- (void)onControllerResult:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableArray *)result{
-    [_moreInSection removeAllObjects];
-    [self reloadTableViewDataSource];
-}
-
-- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(actionSheet.tag==1){
-        if(buttonIndex==0){
-            [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_2 requestCode:0 data:nil];
-        }
-    }else if(actionSheet.tag==2){
-        if(buttonIndex==0){
-            [FileUtils removeCacheFile];
-            //            [Common setCache:[Config Instance].cacheKey data:nil];
-            [[Config Instance]setIsCalculateTotal:YES];
-            cachesize=0;
-            [Common alert:@"清除完成"];
-            [self reloadTableViewDataSource];
-        }
-    }
-}
-
-#pragma mark -
-#pragma mark Custom Methods
-
-- (void)reloadTableViewDataSource{
-    if(!_moreInSection){
-        _moreInSection = [[NSMutableDictionary alloc] initWithCapacity:3];
-    }
-    [_moreInSection setObject:
-     [[NSArray alloc] initWithObjects:
-      [[ACMore alloc]initWith:@"小贴士" andImg:@"more_icon_tip" andTag:1],
-      [[ACMore alloc]initWith:@"意见反馈" andImg:@"more_icon_feedback" andTag:2],
-      [[ACMore alloc]initWith:@"关于我们" andImg:@"more_icon_aboutus" andTag:3],
-      nil] forKey:@"first"];
-    
-    [_moreInSection setObject:
-     [[NSArray alloc] initWithObjects:
-      [[ACMore alloc]initWith:@"缓存大小:正在计算" andImg:@"more_icon_delcache" andTag:4],
-      [[ACMore alloc]initWith:@"修改密码" andImg:@"more_icon_modifypwd" andTag:5],
-      nil] forKey:@"second"];
-    
-    [_moreInSection setObject:
-     [[NSArray alloc] initWithObjects:
-      [[ACMore alloc]initWith:@"重新登录" andImg:@"more_icon_relogin" andTag:6],
-      nil] forKey:@"third"];
-    
-    if(!self.dataItemArray){
-        self.dataItemArray = [[NSMutableArray alloc] initWithObjects:@"first",@"second",@"third",nil];
-    }
-    [self.tableView reloadData];
-    if([[Config Instance]isCalculateTotal]){
-        [NSThread detachNewThreadSelector:@selector(calculateTotal) toTarget:self withObject:nil];
     }
 }
 
@@ -194,12 +150,7 @@
     }else{//KB
         cacheName=[NSString stringWithFormat:@"%lldKB",cachesize/1024];
     }
-    [_moreInSection setObject:
-     [[NSArray alloc] initWithObjects:
-      [[ACMore alloc]initWith:[NSString stringWithFormat:@"缓存大小:%@",cacheName] andImg:@"more_icon_delcache" andTag:4],
-      [[ACMore alloc]initWith:@"修改密码" andImg:@"more_icon_modifypwd" andTag:5],
-      nil] forKey:@"second"];
-    [self.tableView reloadData];
+    [lblCachName setText:[NSString stringWithFormat:@"缓存大小:%@",cacheName]];
     [[Config Instance]setIsCalculateTotal:NO];
 }
 

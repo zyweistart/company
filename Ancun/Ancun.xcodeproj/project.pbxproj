@@ -77,7 +77,6 @@
 		C9D97A89179FA6520076ACF3 /* ACModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */; };
 		C9D97A8A179FA6520076ACF3 /* ACModifyPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */; };
 		C9D97A8B179FA6520076ACF3 /* ACModifyPwdViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */; };
-		C9D97A8C179FA6520076ACF3 /* ACMore.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A38179FA6500076ACF3 /* ACMore.m */; };
 		C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */; };
 		C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */; };
 		C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */; };
@@ -286,8 +285,6 @@
 		C9D97A34179FA6500076ACF3 /* ACModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACModifyPwdViewController.m; sourceTree = "<group>"; };
 		C9D97A35179FA6500076ACF3 /* ACModifyPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACModifyPwdViewController.xib; sourceTree = "<group>"; };
 		C9D97A36179FA6500076ACF3 /* ACModifyPwdViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACModifyPwdViewController@iPhone5.xib"; sourceTree = "<group>"; };
-		C9D97A37179FA6500076ACF3 /* ACMore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMore.h; sourceTree = "<group>"; };
-		C9D97A38179FA6500076ACF3 /* ACMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMore.m; sourceTree = "<group>"; };
 		C9D97A39179FA6500076ACF3 /* ACMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreCell.h; sourceTree = "<group>"; };
 		C9D97A3A179FA6500076ACF3 /* ACMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreCell.m; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
@@ -1017,8 +1014,6 @@
 		C9D97D7E179FB1C40076ACF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C9D97A37179FA6500076ACF3 /* ACMore.h */,
-				C9D97A38179FA6500076ACF3 /* ACMore.m */,
 				C9D97AC4179FA6640076ACF3 /* Response.h */,
 				C9D97AC5179FA6640076ACF3 /* Response.m */,
 				C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */,
@@ -1218,7 +1213,6 @@
 				C9D97A7F179FA6520076ACF3 /* ACFeedBackViewController.m in Sources */,
 				C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */,
 				C9D97A89179FA6520076ACF3 /* ACModifyPwdViewController.m in Sources */,
-				C9D97A8C179FA6520076ACF3 /* ACMore.m in Sources */,
 				C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */,
 				C9D97A8D179FA6520076ACF3 /* ACMoreCell.m in Sources */,
 				C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */,
