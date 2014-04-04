@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "player_normal.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "myaccountleftact@2x.png"
+      "filename" : "player_normal@2x.png"
     }
   ],
   "info" : {

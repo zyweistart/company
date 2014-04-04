@@ -424,8 +424,19 @@
 - (void)termsOfService:(id)sender{
     [self backgroundDoneEditing:nil];
     ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"服务条款" resourcePath:@"TermsOfService"];
-    navigationWebPageViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:navigationWebPageViewController animated:YES];
+    UINavigationController *navigationWebPageViewControllerNav=[[UINavigationController alloc]initWithRootViewController:navigationWebPageViewController];
+    if(IOS7){
+        [[navigationWebPageViewControllerNav navigationBar]setBarTintColor:MAINBG];
+        [[navigationWebPageViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+    }else{
+        navigationWebPageViewControllerNav.navigationBar.tintColor=MAINBG;
+    }
+    navigationWebPageViewController.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
+                                                                       initWithTitle:@"返回"
+                                                                       style:UIBarButtonItemStyleBordered
+                                                                       target:self
+                                                                       action:@selector(back:)];
+    [self presentViewController:navigationWebPageViewControllerNav animated:YES completion:nil];
 }
 
 - (void)updateTimer{
