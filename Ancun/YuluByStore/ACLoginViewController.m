@@ -180,6 +180,7 @@
             [[contactViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
             contactViewControllerNav.navigationBar.tintColor=MAINBG;
+            [contactViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
         //我的账户
@@ -202,6 +203,7 @@
             [[accountViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
             accountViewControllerNav.navigationBar.tintColor=MAINBG;
+            [accountViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
         //录音管理
@@ -219,6 +221,7 @@
             [[recordingManagerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
             recordingManagerViewControllerNav.navigationBar.tintColor=MAINBG;
+            [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
         //更多
@@ -236,6 +239,7 @@
             [[moreViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
             moreViewControllerNav.navigationBar.tintColor=MAINBG;
+            [moreViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
         //添加标签控制器
