@@ -75,8 +75,6 @@
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A16179FA64F0076ACF3 /* ACContactCell.m */; };
 		C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */; };
-		C9D97A7C179FA6520076ACF3 /* ACExtractionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */; };
-		C9D97A7D179FA6520076ACF3 /* ACExtractionDetailViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A22179FA6500076ACF3 /* ACExtractionDetailViewController@iPhone5.xib */; };
 		C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */; };
 		C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */; };
 		C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */; };
@@ -123,31 +121,8 @@
 		C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BA6179FA6640076ACF3 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CC7179FA6650076ACF3 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BA7179FA6640076ACF3 /* grayArrow.png */; };
 		C9D97CC8179FA6650076ACF3 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BA8179FA6640076ACF3 /* grayArrow@2x.png */; };
-		C9D97CF2179FA6650076ACF3 /* button_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF4179FA6640076ACF3 /* button_gb.png */; };
-		C9D97CF3179FA6650076ACF3 /* button_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */; };
-		C9D97CF7179FA6650076ACF3 /* extraction_button_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BF9179FA6640076ACF3 /* extraction_button_1.png */; };
-		C9D97CF8179FA6650076ACF3 /* extraction_button_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFA179FA6640076ACF3 /* extraction_button_1@2x.png */; };
-		C9D97CF9179FA6650076ACF3 /* extraction_button_2.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFB179FA6640076ACF3 /* extraction_button_2.png */; };
-		C9D97CFA179FA6650076ACF3 /* extraction_button_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFC179FA6640076ACF3 /* extraction_button_2@2x.png */; };
-		C9D97CFB179FA6650076ACF3 /* extraction_button_3.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFD179FA6640076ACF3 /* extraction_button_3.png */; };
-		C9D97CFC179FA6650076ACF3 /* extraction_button_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFE179FA6640076ACF3 /* extraction_button_3@2x.png */; };
-		C9D97CFD179FA6650076ACF3 /* extraction_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BFF179FA6640076ACF3 /* extraction_gb.png */; };
-		C9D97CFE179FA6650076ACF3 /* extraction_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C00179FA6640076ACF3 /* extraction_gb@2x.png */; };
-		C9D97CFF179FA6650076ACF3 /* extraction_option_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C01179FA6640076ACF3 /* extraction_option_gb.png */; };
-		C9D97D00179FA6650076ACF3 /* extraction_option_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C02179FA6640076ACF3 /* extraction_option_gb@2x.png */; };
-		C9D97D01179FA6650076ACF3 /* extraction_option_gb_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C03179FA6640076ACF3 /* extraction_option_gb_iphone5.png */; };
-		C9D97D02179FA6650076ACF3 /* extraction_option_gb_iphone5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C04179FA6640076ACF3 /* extraction_option_gb_iphone5@2x.png */; };
-		C9D97D03179FA6650076ACF3 /* feedkback_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C05179FA6640076ACF3 /* feedkback_gb.png */; };
-		C9D97D04179FA6650076ACF3 /* feedkback_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C06179FA6640076ACF3 /* feedkback_gb@2x.png */; };
-		C9D97D34179FA6650076ACF3 /* modifhypwd_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C36179FA6640076ACF3 /* modifhypwd_gb.png */; };
-		C9D97D35179FA6650076ACF3 /* modifypwd_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C37179FA6640076ACF3 /* modifypwd_gb@2x.png */; };
-		C9D97D5C179FA6650076ACF3 /* notary_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5E179FA6640076ACF3 /* notary_gb.png */; };
-		C9D97D5D179FA6650076ACF3 /* notary_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */; };
 		C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C60179FA6640076ACF3 /* notary_result_gb.png */; };
 		C9D97D5F179FA6650076ACF3 /* notary_result_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C61179FA6640076ACF3 /* notary_result_ok.png */; };
-		C9D97D68179FA6650076ACF3 /* recordingdetail_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C6A179FA6640076ACF3 /* recordingdetail_gb.png */; };
-		C9D97D69179FA6650076ACF3 /* recordingdetail_gb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C6B179FA6640076ACF3 /* recordingdetail_gb@2x.png */; };
-		C9D97D6A179FA6650076ACF3 /* recordingdetail_gbby1136.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C6C179FA6640076ACF3 /* recordingdetail_gbby1136.png */; };
 		C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C79179FA6640076ACF3 /* TermsOfService.txt */; };
 		C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C7A179FA6640076ACF3 /* TipContent.txt */; };
 		C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97D80179FB3730076ACF3 /* NSString+Utils.m */; };
@@ -278,8 +253,6 @@
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
 		C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionDetailViewController.h; sourceTree = "<group>"; };
 		C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionDetailViewController.m; sourceTree = "<group>"; };
-		C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACExtractionDetailViewController.xib; sourceTree = "<group>"; };
-		C9D97A22179FA6500076ACF3 /* ACExtractionDetailViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACExtractionDetailViewController@iPhone5.xib"; sourceTree = "<group>"; };
 		C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLoginViewController.h; sourceTree = "<group>"; };
 		C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLoginViewController.m; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
@@ -443,31 +416,8 @@
 		C9D97BA6179FA6640076ACF3 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		C9D97BA7179FA6640076ACF3 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		C9D97BA8179FA6640076ACF3 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
-		C9D97BF4179FA6640076ACF3 /* button_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gb.png; sourceTree = "<group>"; };
-		C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97BF9179FA6640076ACF3 /* extraction_button_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_button_1.png; sourceTree = "<group>"; };
-		C9D97BFA179FA6640076ACF3 /* extraction_button_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_button_1@2x.png"; sourceTree = "<group>"; };
-		C9D97BFB179FA6640076ACF3 /* extraction_button_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_button_2.png; sourceTree = "<group>"; };
-		C9D97BFC179FA6640076ACF3 /* extraction_button_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_button_2@2x.png"; sourceTree = "<group>"; };
-		C9D97BFD179FA6640076ACF3 /* extraction_button_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_button_3.png; sourceTree = "<group>"; };
-		C9D97BFE179FA6640076ACF3 /* extraction_button_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_button_3@2x.png"; sourceTree = "<group>"; };
-		C9D97BFF179FA6640076ACF3 /* extraction_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_gb.png; sourceTree = "<group>"; };
-		C9D97C00179FA6640076ACF3 /* extraction_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97C01179FA6640076ACF3 /* extraction_option_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_option_gb.png; sourceTree = "<group>"; };
-		C9D97C02179FA6640076ACF3 /* extraction_option_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_option_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97C03179FA6640076ACF3 /* extraction_option_gb_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extraction_option_gb_iphone5.png; sourceTree = "<group>"; };
-		C9D97C04179FA6640076ACF3 /* extraction_option_gb_iphone5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extraction_option_gb_iphone5@2x.png"; sourceTree = "<group>"; };
-		C9D97C05179FA6640076ACF3 /* feedkback_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedkback_gb.png; sourceTree = "<group>"; };
-		C9D97C06179FA6640076ACF3 /* feedkback_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedkback_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97C36179FA6640076ACF3 /* modifhypwd_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modifhypwd_gb.png; sourceTree = "<group>"; };
-		C9D97C37179FA6640076ACF3 /* modifypwd_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modifypwd_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97C5E179FA6640076ACF3 /* notary_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_gb.png; sourceTree = "<group>"; };
-		C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notary_gb@2x.png"; sourceTree = "<group>"; };
 		C9D97C60179FA6640076ACF3 /* notary_result_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_result_gb.png; sourceTree = "<group>"; };
 		C9D97C61179FA6640076ACF3 /* notary_result_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_result_ok.png; sourceTree = "<group>"; };
-		C9D97C6A179FA6640076ACF3 /* recordingdetail_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordingdetail_gb.png; sourceTree = "<group>"; };
-		C9D97C6B179FA6640076ACF3 /* recordingdetail_gb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recordingdetail_gb@2x.png"; sourceTree = "<group>"; };
-		C9D97C6C179FA6640076ACF3 /* recordingdetail_gbby1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordingdetail_gbby1136.png; sourceTree = "<group>"; };
 		C9D97C79179FA6640076ACF3 /* TermsOfService.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TermsOfService.txt; sourceTree = "<group>"; };
 		C9D97C7A179FA6640076ACF3 /* TipContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TipContent.txt; sourceTree = "<group>"; };
 		C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
@@ -533,6 +483,8 @@
 				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
 				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
 				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
+				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
+				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
 				C91D0BDE18EE9ECD006B10A3 /* Cell */,
 			);
 			name = NotUsed;
@@ -564,8 +516,6 @@
 				C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */,
 				C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */,
 				C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */,
-				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
-				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -1008,33 +958,10 @@
 			children = (
 				C9EE165517C4ACAE007089D6 /* aboutus-568h@2x.png */,
 				C9EE165317C48D47007089D6 /* aboutus@2x.png */,
-				C9D97BF4179FA6640076ACF3 /* button_gb.png */,
-				C9D97BF5179FA6640076ACF3 /* button_gb@2x.png */,
-				C9D97BF9179FA6640076ACF3 /* extraction_button_1.png */,
-				C9D97BFA179FA6640076ACF3 /* extraction_button_1@2x.png */,
-				C9D97BFB179FA6640076ACF3 /* extraction_button_2.png */,
-				C9D97BFC179FA6640076ACF3 /* extraction_button_2@2x.png */,
-				C9D97BFD179FA6640076ACF3 /* extraction_button_3.png */,
-				C9D97BFE179FA6640076ACF3 /* extraction_button_3@2x.png */,
-				C9D97BFF179FA6640076ACF3 /* extraction_gb.png */,
-				C9D97C00179FA6640076ACF3 /* extraction_gb@2x.png */,
-				C9D97C01179FA6640076ACF3 /* extraction_option_gb.png */,
-				C9D97C02179FA6640076ACF3 /* extraction_option_gb@2x.png */,
-				C9D97C03179FA6640076ACF3 /* extraction_option_gb_iphone5.png */,
-				C9D97C04179FA6640076ACF3 /* extraction_option_gb_iphone5@2x.png */,
-				C9D97C05179FA6640076ACF3 /* feedkback_gb.png */,
-				C9D97C06179FA6640076ACF3 /* feedkback_gb@2x.png */,
-				C9D97C36179FA6640076ACF3 /* modifhypwd_gb.png */,
-				C9D97C37179FA6640076ACF3 /* modifypwd_gb@2x.png */,
 				C9A8A93517BB7FF100652B90 /* nav.png */,
 				C9A8A93617BB7FF100652B90 /* nav@2x.png */,
-				C9D97C5E179FA6640076ACF3 /* notary_gb.png */,
-				C9D97C5F179FA6640076ACF3 /* notary_gb@2x.png */,
 				C9D97C60179FA6640076ACF3 /* notary_result_gb.png */,
 				C9D97C61179FA6640076ACF3 /* notary_result_ok.png */,
-				C9D97C6A179FA6640076ACF3 /* recordingdetail_gb.png */,
-				C9D97C6B179FA6640076ACF3 /* recordingdetail_gb@2x.png */,
-				C9D97C6C179FA6640076ACF3 /* recordingdetail_gbby1136.png */,
 				C9D97C79179FA6640076ACF3 /* TermsOfService.txt */,
 				C9D97C7A179FA6640076ACF3 /* TipContent.txt */,
 			);
@@ -1080,8 +1007,6 @@
 			isa = PBXGroup;
 			children = (
 				C9155D7918E90BC70075A693 /* ACContactsViewController.xib */,
-				C9D97A21179FA6500076ACF3 /* ACExtractionDetailViewController.xib */,
-				C9D97A22179FA6500076ACF3 /* ACExtractionDetailViewController@iPhone5.xib */,
 				C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */,
 				C9D97A41179FA6510076ACF3 /* ACNotaryDetailViewController@iPhone5.xib */,
 			);
@@ -1181,8 +1106,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D97995179FA3500076ACF3 /* InfoPlist.strings in Resources */,
-				C9D97A7C179FA6520076ACF3 /* ACExtractionDetailViewController.xib in Resources */,
-				C9D97A7D179FA6520076ACF3 /* ACExtractionDetailViewController@iPhone5.xib in Resources */,
 				C9D97A91179FA6520076ACF3 /* ACNotaryDetailViewController.xib in Resources */,
 				C9D97A92179FA6520076ACF3 /* ACNotaryDetailViewController@iPhone5.xib in Resources */,
 				C9D97CC2179FA6650076ACF3 /* blackArrow.png in Resources */,
@@ -1191,33 +1114,10 @@
 				C9D97CC5179FA6650076ACF3 /* blueArrow@2x.png in Resources */,
 				C9D97CC7179FA6650076ACF3 /* grayArrow.png in Resources */,
 				C9D97CC8179FA6650076ACF3 /* grayArrow@2x.png in Resources */,
-				C9D97CF2179FA6650076ACF3 /* button_gb.png in Resources */,
-				C9D97CF3179FA6650076ACF3 /* button_gb@2x.png in Resources */,
-				C9D97CF7179FA6650076ACF3 /* extraction_button_1.png in Resources */,
-				C9D97CF8179FA6650076ACF3 /* extraction_button_1@2x.png in Resources */,
-				C9D97CF9179FA6650076ACF3 /* extraction_button_2.png in Resources */,
-				C9D97CFA179FA6650076ACF3 /* extraction_button_2@2x.png in Resources */,
-				C9D97CFB179FA6650076ACF3 /* extraction_button_3.png in Resources */,
-				C9D97CFC179FA6650076ACF3 /* extraction_button_3@2x.png in Resources */,
-				C9D97CFD179FA6650076ACF3 /* extraction_gb.png in Resources */,
-				C9D97CFE179FA6650076ACF3 /* extraction_gb@2x.png in Resources */,
-				C9D97CFF179FA6650076ACF3 /* extraction_option_gb.png in Resources */,
-				C9D97D00179FA6650076ACF3 /* extraction_option_gb@2x.png in Resources */,
-				C9D97D01179FA6650076ACF3 /* extraction_option_gb_iphone5.png in Resources */,
-				C9D97D02179FA6650076ACF3 /* extraction_option_gb_iphone5@2x.png in Resources */,
-				C9D97D03179FA6650076ACF3 /* feedkback_gb.png in Resources */,
-				C9D97D04179FA6650076ACF3 /* feedkback_gb@2x.png in Resources */,
 				C978899718E16AC300157577 /* Images.xcassets in Resources */,
 				C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */,
-				C9D97D34179FA6650076ACF3 /* modifhypwd_gb.png in Resources */,
-				C9D97D35179FA6650076ACF3 /* modifypwd_gb@2x.png in Resources */,
-				C9D97D5C179FA6650076ACF3 /* notary_gb.png in Resources */,
-				C9D97D5D179FA6650076ACF3 /* notary_gb@2x.png in Resources */,
 				C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */,
 				C9D97D5F179FA6650076ACF3 /* notary_result_ok.png in Resources */,
-				C9D97D68179FA6650076ACF3 /* recordingdetail_gb.png in Resources */,
-				C9D97D69179FA6650076ACF3 /* recordingdetail_gb@2x.png in Resources */,
-				C9D97D6A179FA6650076ACF3 /* recordingdetail_gbby1136.png in Resources */,
 				C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */,
 				C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */,
 				C9A8A93717BB7FF100652B90 /* nav.png in Resources */,

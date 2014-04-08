@@ -6,7 +6,6 @@
 @end
 
 @implementation ACDialsViewController{
-    HttpRequest *_dialHttp;
     //长按标记
     Boolean longFlag;
     //退格定时器
@@ -213,11 +212,11 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"calltype"];
         [requestParams setObject:[Common formatPhone:phone] forKey:@"oppno"];
-        _dialHttp=[[HttpRequest alloc]init];
-        [_dialHttp setDelegate:self];
-        [_dialHttp setController:self];
-        [_dialHttp setIsShowMessage:YES];
-        [_dialHttp loginhandle:@"v4Call" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest loginhandle:@"v4Call" requestParams:requestParams];
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@,%@#",PHONENUMBER,phone]]];
     }

@@ -14,4 +14,6 @@
 
 @property (strong,nonatomic) NSObject<ResultDelegate> *resultDelegate;
 
+@property (strong,nonatomic) HttpRequest *hRequest;
+
 @end

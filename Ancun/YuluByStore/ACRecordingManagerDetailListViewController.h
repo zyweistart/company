@@ -10,4 +10,6 @@
 
 - (id)initWithOppno:(NSString*)_oppno;
 
+@property (strong,nonatomic) HttpRequest *hRequest;
+
 @end

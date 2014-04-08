@@ -3,5 +3,8 @@
 
 @interface ACAccountViewController :BaseRefreshTableViewController<UIScrollViewDelegate,UIActionSheetDelegate>
 
+
+@property (strong,nonatomic)HttpRequest *hRequest;
+
 @end
 

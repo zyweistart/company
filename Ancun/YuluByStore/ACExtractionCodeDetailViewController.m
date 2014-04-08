@@ -155,12 +155,12 @@
             [requestParams setObject:_fileno forKey:@"fileno"];
             //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
             [requestParams setObject:@"3" forKey:@"acccodeact"];
-            _hRequest=[[HttpRequest alloc]init];
-            [_hRequest setDelegate:self];
-            [_hRequest setController:self];
-            [_hRequest setIsShowMessage:YES];
-            [_hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_cancel];
-            [_hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_cancel];
+            [self.hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
         }
     }
 }

@@ -17,8 +17,6 @@
 
 @implementation ACAccountViewController {
     
-    HttpRequest *_loadHttp;
-    
     int currentTab;
     
     UIButton *_leftTopTab;
@@ -132,12 +130,12 @@
         //更新账户信息
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"raflag"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp setIsShowMessage:YES];
-        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [self.hRequest loginhandle:@"v4infoGet" requestParams:requestParams];
     } else {
         if(currentTab==1) {
             if([[Config Instance]isRefreshAccountPayList]) {
@@ -159,12 +157,12 @@
         //更新账户信息
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"raflag"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp setIsShowMessage:YES];
-        [_loadHttp setRequestCode:REFRESHUSERINFOREQUESTCODE];
-        [_loadHttp loginhandle:@"v4infoGet" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setRequestCode:REFRESHUSERINFOREQUESTCODE];
+        [self.hRequest loginhandle:@"v4infoGet" requestParams:requestParams];
     } else if([[Config Instance]isRefreshAccountPayList]) {
         [_leftTopTab sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
@@ -505,19 +503,19 @@
             [[Config Instance] setIsRefreshAccountPayList:YES];
             self.dataItemArray=_leftDataItemArray;
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-            _loadHttp=[[HttpRequest alloc]init];
-            [_loadHttp setDelegate:self];
-            [_loadHttp setController:self];
-            [_loadHttp loginhandle:@"v4combinfoGet" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest loginhandle:@"v4combinfoGet" requestParams:requestParams];
         } else if (currentTab == 2){
             self.dataItemArray=_rightDataItemArray;
             NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
             [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
             [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-            _loadHttp=[[HttpRequest alloc]init];
-            [_loadHttp setDelegate:self];
-            [_loadHttp setController:self];
-            [_loadHttp loginhandle:@"v4accnewDetail" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest loginhandle:@"v4accnewDetail" requestParams:requestParams];
         }
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];

@@ -9,9 +9,7 @@
 
 @end
 
-@implementation ACRecordingManagerViewController {
-    HttpRequest *_loadDataHttp;
-}
+@implementation ACRecordingManagerViewController
 
 - (id)init {
     self = [super init];
@@ -158,14 +156,14 @@ static NSString *cell2ReuseIdentifier=@"ACRecording2CellIdentifier";
         [requestParams setObject:@"desc" forKey:@"ordersort"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _loadDataHttp=[[HttpRequest alloc]init];
-        [_loadDataHttp setDelegate:self];
-        [_loadDataHttp setController:self];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
         //如果是从老用户转过来则查询新接口
         if([[[[Config Instance]userInfo]objectForKey:@"oldflag"]intValue]==1) {
-            [_loadDataHttp loginhandle:@"v4recStatn" requestParams:requestParams];
+            [self.hRequest loginhandle:@"v4recStatn" requestParams:requestParams];
         }else{
-            [_loadDataHttp loginhandle:@"v4recStat" requestParams:requestParams];
+            [self.hRequest loginhandle:@"v4recStat" requestParams:requestParams];
         }
     } else {
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];

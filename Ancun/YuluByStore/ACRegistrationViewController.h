@@ -12,7 +12,6 @@
 
 @interface ACRegistrationViewController : BaseViewController <UITextFieldDelegate,HttpViewDelegate>{
     
-    HttpRequest *_hRequest;
     NSTimer *_verificationCodeTime;
     
     NSString *_phone;
@@ -41,5 +40,7 @@
 
 - (void)backgroundDoneEditing:(id)sender;
 - (void)setPassword:(id)sender;
+
+@property (strong,nonatomic) HttpRequest *hRequest;
 
 @end

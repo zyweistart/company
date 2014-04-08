@@ -9,9 +9,7 @@
 
 @end
 
-@implementation ACRecordingManagerDetailListViewController{
-    HttpRequest *_managerHttp;
-}
+@implementation ACRecordingManagerDetailListViewController
 
 - (id)initWithOppno:(NSString *)oppno{
     _oppno=oppno;
@@ -200,11 +198,11 @@
                 [requestParams setObject:[_currentDictionary objectForKey:@"fileno"] forKey:@"fileno"];
                 [requestParams setObject:@"1" forKey:@"alteract"];
                 [requestParams setObject:[password md5] forKey:@"password"];
-                _managerHttp=[[HttpRequest alloc]init];
-                [_managerHttp setDelegate:self];
-                [_managerHttp setController:self];
-                [_managerHttp setRequestCode:REQUESTCODE_REMOVE];
-                [_managerHttp loginhandle:@"v4recAlter" requestParams:requestParams];
+                self.hRequest=[[HttpRequest alloc]init];
+                [self.hRequest setDelegate:self];
+                [self.hRequest setController:self];
+                [self.hRequest setRequestCode:REQUESTCODE_REMOVE];
+                [self.hRequest loginhandle:@"v4recAlter" requestParams:requestParams];
             }
         }
     }
@@ -285,13 +283,13 @@
                 NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
                 [requestParams setObject:@"1" forKey:@"status"];
                 [requestParams setObject:fileno forKey:@"fileno"];
-                _managerHttp=[[HttpRequest alloc]init];
-                [_managerHttp setDelegate:self];
-                [_managerHttp setIsFileDownload:YES];
-                [_managerHttp setPropertys:dictionary];
-                [_managerHttp setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
-                [_managerHttp setController:self];
-                [_managerHttp loginhandle:@"v4recDown" requestParams:requestParams];
+                self.hRequest=[[HttpRequest alloc]init];
+                [self.hRequest setDelegate:self];
+                [self.hRequest setIsFileDownload:YES];
+                [self.hRequest setPropertys:dictionary];
+                [self.hRequest setRequestCode:REQUESTCODE_FILE_DOWNLOAD];
+                [self.hRequest setController:self];
+                [self.hRequest loginhandle:@"v4recDown" requestParams:requestParams];
             }else{
                 [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
                 [Common noLoginAlert:self];
@@ -342,12 +340,12 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:@"1" forKey:@"status"];
         [requestParams setObject:[dictionary objectForKey:@"fileno"] forKey:@"fileno"];
-        _managerHttp=[[HttpRequest alloc]init];
-        [_managerHttp setDelegate:self];
-        [_managerHttp setController:self];
-        [_managerHttp setRequestCode:REQUESTCODE_GETINFO];
-        [_managerHttp setIsShowMessage:YES];
-        [_managerHttp loginhandle:@"v4recGet" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setRequestCode:REQUESTCODE_GETINFO];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest loginhandle:@"v4recGet" requestParams:requestParams];
         
 //        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
 //        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
@@ -395,10 +393,10 @@
         [requestParams setObject:@"desc" forKey:@"ordersort"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _managerHttp=[[HttpRequest alloc]init];
-        [_managerHttp setDelegate:self];
-        [_managerHttp setController:self];
-        [_managerHttp loginhandle:@"v4recQry" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest loginhandle:@"v4recQry" requestParams:requestParams];
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];

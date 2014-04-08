@@ -16,7 +16,6 @@
 @end
 
 @implementation ACRecordingCallDetailViewController{
-    HttpRequest *_hRequest;
     NSMutableDictionary *_data;
     UILabel *_lblRemarkTip;
     UITextView *_tv_remark;
@@ -60,7 +59,7 @@
                         [_data objectForKey:@"recendtime"], nil];
         int vFrameWidth=291;
         int height=35;
-        UIControl *vFrame=[[UIControl alloc]initWithFrame:CGRectMake(14.5, 0, vFrameWidth, 345)];
+        UIControl *vFrame=[[UIControl alloc]initWithFrame:CGRectMake(14.5, 10, vFrameWidth, 345)];
         [vFrame setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"xqbg"]]];
         [vFrame addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [container addSubview:vFrame];
@@ -106,22 +105,27 @@
         [_lblRemarkTip setBackgroundColor:[UIColor clearColor]];
         [_tv_remark addSubview:_lblRemarkTip];
         
-        _btn_notary=[[UIButton alloc]initWithFrame:CGRectMake(20, inch4?400:360, 127, 35)];
+        _btn_notary=[[UIButton alloc]initWithFrame:CGRectMake(20, inch4?410:370, 127, 35)];
         _btn_notary.titleLabel.font=[UIFont systemFontOfSize:22];
-        
         _btn_notary.layer.cornerRadius=5;
         _btn_notary.layer.masksToBounds=YES;
         [_btn_notary setBackgroundColor:[UIColor colorWithRed:(247/255.0) green:(90/255.0) blue:(83/255.0) alpha:1]];
         [_btn_notary addTarget:self action:@selector(notary:) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:_btn_notary];
         
-        _btn_extraction=[[UIButton alloc]initWithFrame:CGRectMake(173, inch4?400:360, 127, 35)];
+        _btn_extraction=[[UIButton alloc]initWithFrame:CGRectMake(173, inch4?410:370, 127, 35)];
         _btn_extraction.titleLabel.font=[UIFont systemFontOfSize:22];
         _btn_extraction.layer.cornerRadius=5;
         _btn_extraction.layer.masksToBounds=YES;
         [_btn_extraction setBackgroundColor:[UIColor colorWithRed:(1/255.0) green:(133/255.0) blue:(241/255.0) alpha:1]];
         [_btn_extraction addTarget:self action:@selector(extraction:) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:_btn_extraction];
+        
+        NSString *remark=[_data objectForKey:@"remark"];
+        if(![@"" isEqualToString:remark]){
+            [_lblRemarkTip setHidden:YES];
+            [_tv_remark setText:remark];
+        }
         
         //公证
         if([@"1" isEqualToString:[_data objectForKey:@"cerflag"]]){
@@ -130,11 +134,6 @@
             [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
         }
         
-        NSString *remark=[_data objectForKey:@"remark"];
-        if(![@"" isEqualToString:remark]){
-            [_lblRemarkTip setHidden:YES];
-            [_tv_remark setText:remark];
-        }
         //提取码
         if([@"1" isEqualToString:[_data objectForKey:@"accstatus"]]){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
@@ -234,12 +233,12 @@
             [requestParams setObject:_fileno forKey:@"fileno"];
             //1:取消出证;2:申请出证
             [requestParams setObject:@"2" forKey:@"cerflag"];
-            _hRequest=[[HttpRequest alloc]init];
-            [_hRequest setDelegate:self];
-            [_hRequest setController:self];
-            [_hRequest setIsShowMessage:YES];
-            [_hRequest setRequestCode:REQUESTCODE_APPLYNOTARY];
-            [_hRequest loginhandle:@"v4recCer" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest setRequestCode:REQUESTCODE_APPLYNOTARY];
+            [self.hRequest loginhandle:@"v4recCer" requestParams:requestParams];
         }
     }else if(actionSheet.tag==2){
         if(buttonIndex==0){
@@ -247,12 +246,12 @@
             [requestParams setObject:_fileno forKey:@"fileno"];
             //1:取消出证;2:申请出证
             [requestParams setObject:@"1" forKey:@"cerflag"];
-            _hRequest=[[HttpRequest alloc]init];
-            [_hRequest setDelegate:self];
-            [_hRequest setController:self];
-            [_hRequest setIsShowMessage:YES];
-            [_hRequest setRequestCode:REQUESTCODE_CANCELNOTARY];
-            [_hRequest loginhandle:@"v4recCer" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest setRequestCode:REQUESTCODE_CANCELNOTARY];
+            [self.hRequest loginhandle:@"v4recCer" requestParams:requestParams];
         }
     }else if(actionSheet.tag==3){
         if(buttonIndex==0){
@@ -261,12 +260,12 @@
             //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
             [requestParams setObject:@"1" forKey:@"acccodeact"];
             [requestParams setObject:@"10" forKey:@"vtime"];
-            _hRequest=[[HttpRequest alloc]init];
-            [_hRequest setDelegate:self];
-            [_hRequest setController:self];
-            [_hRequest setIsShowMessage:YES];
-            [_hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_apply];
-            [_hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
+            self.hRequest=[[HttpRequest alloc]init];
+            [self.hRequest setDelegate:self];
+            [self.hRequest setController:self];
+            [self.hRequest setIsShowMessage:YES];
+            [self.hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_apply];
+            [self.hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
         }
     }
 }
@@ -287,12 +286,12 @@
         [requestParams setObject:_fileno forKey:@"fileno"];
         //1:生成;2:查看;3:取消;:4:短信发送（安存语录后台发送，暂不支持）
         [requestParams setObject:@"2" forKey:@"acccodeact"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_view];
-        [_hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setRequestCode:REQUESTCODE_ACExtractionDetailViewController_view];
+        [self.hRequest loginhandle:@"v4recAcccode" requestParams:requestParams];
     }else if([[_data objectForKey:@"accstatus"] isEqualToString:@"2"]){
         [Common actionSheet:self message:@"凭提取码可在官网公开查询、验证本条通话录音，确定申请？" tag:3];
     }
@@ -310,12 +309,12 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:_fileno forKey:@"fileno"];
         [requestParams setObject:remark forKey:@"remark"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setRequestCode:REQUESTCODE_SUBMITREMARK];
-        [_hRequest loginhandle:@"v4recRemark" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setRequestCode:REQUESTCODE_SUBMITREMARK];
+        [self.hRequest loginhandle:@"v4recRemark" requestParams:requestParams];
     }
 }
 

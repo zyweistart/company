@@ -4,5 +4,7 @@
 
 @interface ACRechargeByAppStoreViewController :BaseRefreshTableViewController<HttpViewDelegate,SKProductsRequestDelegate,UIActionSheetDelegate>
 
+@property (strong,nonatomic)HttpRequest *hRequest;
+
 @end
 

@@ -5,4 +5,6 @@
 
 @interface ACRecordingManagerViewController : BaseRefreshTableViewController<UIActionSheetDelegate>
 
+@property (strong,nonatomic)HttpRequest *hRequest;
+
 @end

@@ -31,8 +31,6 @@
     UIView *paymentMainView;
     UIView *paymentSuccessView;
     
-    HttpRequest *_hRequest;
-    
     NSDictionary *_data;
     
 #ifndef JAILBREAK
@@ -213,20 +211,20 @@
     [requestParams setObject:@"1" forKey:@"quantity"];
 #ifdef JAILBREAK
     //支付宝支付
-    _hRequest=[[HttpRequest alloc]init];
-    [_hRequest setDelegate:self];
-    [_hRequest setController:self];
-    [_hRequest setIsShowMessage:YES];
-    [_hRequest setRequestCode:ALIPAYREQUESTCODE];
-    [_hRequest loginhandle:@"v4alipayReq" requestParams:requestParams];
+    self.hRequest=[[HttpRequest alloc]init];
+    [self.hRequest setDelegate:self];
+    [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest setRequestCode:ALIPAYREQUESTCODE];
+    [self.hRequest loginhandle:@"v4alipayReq" requestParams:requestParams];
 #else
     //苹果官方支付
-    _hRequest=[[HttpRequest alloc]init];
-    [_hRequest setDelegate:self];
-    [_hRequest setController:self];
-    [_hRequest setIsShowMessage:YES];
-    [_hRequest setRequestCode:REQUESTCODE_BUY_BUILD];
-    [_hRequest loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
+    self.hRequest=[[HttpRequest alloc]init];
+    [self.hRequest setDelegate:self];
+    [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest setRequestCode:REQUESTCODE_BUY_BUILD];
+    [self.hRequest loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
 #endif
     [_rechargeNav thirdStep];
 }
@@ -312,12 +310,12 @@
     [requestParams setObject:_orderRecordno forKey:@"recordno"];
 //    [requestParams setObject:[Crypto base64Encode:transaction.transactionReceipt] forKey:@"receiptdata"];
     [requestParams setObject:[[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding] forKey:@"receiptdata"];
-    _hRequest=[[HttpRequest alloc]init];
-    [_hRequest setDelegate:self];
-    [_hRequest setController:self];
-    [_hRequest setIsShowMessage:YES];
-    [_hRequest setRequestCode:REQUESTCODE_BUY_VERIFYING];
-    [_hRequest handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
+    self.hRequest=[[HttpRequest alloc]init];
+    [self.hRequest setDelegate:self];
+    [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest setRequestCode:REQUESTCODE_BUY_VERIFYING];
+    [self.hRequest handle:@"v4ephoneapppayCon" signKey:ACCESSKEY headParams:nil requestParams:requestParams];
 }
 
 //购买失败

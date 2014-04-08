@@ -125,11 +125,11 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:[oldPwd md5] forKey:@"passwordold"];
         [requestParams setObject:[newPwd md5] forKey:@"passwordnew"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest loginhandle:@"v4pwdModify" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest loginhandle:@"v4pwdModify" requestParams:requestParams];
     }
 }
 

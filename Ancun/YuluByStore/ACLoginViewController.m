@@ -21,8 +21,6 @@
     
     unsigned long m_lastTabIndex;
     
-    HttpRequest *_loginHttp;
-    
     BOOL rememberPassword;
     
     UIButton *btnRememberPwdImg;
@@ -359,11 +357,11 @@
         [requestParams setObject:@"" forKey:@"mac"];
         [requestParams setObject:@"" forKey:@"ip"];
         [requestParams setObject:@"1" forKey:@"raflag"];
-        _loginHttp=[[HttpRequest alloc]init];
-        [_loginHttp setIsShowMessage:YES];
-        [_loginHttp setDelegate:self];
-        [_loginHttp setController:self];
-        [_loginHttp handle:@"v4Login" signKey:[_txtPassword.text md5] requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest handle:@"v4Login" signKey:[_txtPassword.text md5] requestParams:requestParams];
     }
 }
 

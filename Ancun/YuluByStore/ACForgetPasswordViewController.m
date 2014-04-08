@@ -50,12 +50,12 @@
         [requestParams setObject:@"" forKey:@"ip"];
         [requestParams setObject:@"" forKey:@"mac"];
         [requestParams setObject:@"" forKey:@"raflag"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setRequestCode:REQUESTCODE_SIGNUP];
-        [_hRequest handle:@"v4pwdReset" signKey:nil headParams:nil requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setRequestCode:REQUESTCODE_SIGNUP];
+        [self.hRequest handle:@"v4pwdReset" signKey:nil headParams:nil requestParams:requestParams];
     }
 }
 

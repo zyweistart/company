@@ -10,5 +10,7 @@
 
 @interface ACDialsViewController : BaseViewController<ABNewPersonViewControllerDelegate,UIActionSheetDelegate,HttpViewDelegate>
 
+@property (strong,nonatomic)HttpRequest *hRequest;
+
 @end
 

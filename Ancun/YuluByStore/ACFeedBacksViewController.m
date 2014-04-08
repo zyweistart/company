@@ -46,7 +46,7 @@
         [tvContent setDelegate:self];
         [view addSubview:tvContent];
         
-        lblContentPlaceholder=[[UILabel alloc]initWithFrame:CGRectMake(5, 5, 247, 20)];
+        lblContentPlaceholder=[[UILabel alloc]initWithFrame:CGRectMake(5, IOS7?5:0, 247, 20)];
         [lblContentPlaceholder setText:@"请输入反馈信息，我们将为您不断改进"];
         [lblContentPlaceholder setFont:[UIFont systemFontOfSize:13]];
         [lblContentPlaceholder setTextColor:[UIColor grayColor]];
@@ -97,11 +97,11 @@
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:content forKey:@"feedcontent"];
         [requestParams setObject:txtEmail.text forKey:@"email"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest loginhandle:@"v4Feedback" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest loginhandle:@"v4Feedback" requestParams:requestParams];
     }
 }
 

@@ -27,7 +27,6 @@
     
     BOOL isTimeout;
     ACRechargeNav *_rechargeNav;
-    HttpRequest *_loadHttp;
     SKProductsRequest *_productsRequest;
     
 }
@@ -152,10 +151,10 @@
         [requestParams setObject:@"1"  forKey:@"status"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",PAGESIZE]  forKey:@"pagesize"];
         [requestParams setObject:[NSString stringWithFormat: @"%d",_currentPage] forKey:@"currentpage"];
-        _loadHttp=[[HttpRequest alloc]init];
-        [_loadHttp setDelegate:self];
-        [_loadHttp setController:self];
-        [_loadHttp loginhandle:@"v4QrycomboList" requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest loginhandle:@"v4QrycomboList" requestParams:requestParams];
     }else{
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
         [Common noLoginAlert:self];

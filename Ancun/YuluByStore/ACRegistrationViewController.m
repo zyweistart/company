@@ -353,13 +353,13 @@
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
     [requestParams setObject:_phone forKey:@"phone"];
     [requestParams setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"actype"];
-    _hRequest=[[HttpRequest alloc]init];
-    [_hRequest setDelegate:self];
-    [_hRequest setController:self];
-    [_hRequest setIsShowMessage:YES];
-    [_hRequest setMessage:@"获取验证码..."];
-    [_hRequest setRequestCode:REQUESTCODE_GETVERIFICATIONCODE];
-    [_hRequest handle:@"v4scodeGet" signKey:nil headParams:nil requestParams:requestParams];
+    self.hRequest=[[HttpRequest alloc]init];
+    [self.hRequest setDelegate:self];
+    [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest setMessage:@"获取验证码..."];
+    [self.hRequest setRequestCode:REQUESTCODE_GETVERIFICATIONCODE];
+    [self.hRequest handle:@"v4scodeGet" signKey:nil headParams:nil requestParams:requestParams];
 }
 
 - (void)submitVerificationCode:(id)sender{
@@ -372,12 +372,12 @@
         [requestParams setObject:_phone forKey:@"phone"];
         [requestParams setObject:[NSString stringWithFormat:@"%d",_type] forKey:@"actype"];
         [requestParams setObject:_verificationCode forKey:@"authcode"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setRequestCode:REQUESTCODE_SUBMITVERIFICATIONCODE];
-        [_hRequest handle:@"v4scodeVer" signKey:nil headParams:nil requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setRequestCode:REQUESTCODE_SUBMITVERIFICATIONCODE];
+        [self.hRequest handle:@"v4scodeVer" signKey:nil headParams:nil requestParams:requestParams];
     }
 }
 
@@ -400,13 +400,13 @@
         [requestParams setObject:@"" forKey:@"ip"];
         [requestParams setObject:@"" forKey:@"mac"];
         [requestParams setObject:@"" forKey:@"loginflag"];
-        _hRequest=[[HttpRequest alloc]init];
-        [_hRequest setDelegate:self];
-        [_hRequest setController:self];
-        [_hRequest setIsShowMessage:YES];
-        [_hRequest setMessage:@"注册信息提交中..."];
-        [_hRequest setRequestCode:REQUESTCODE_SIGNUP];
-        [_hRequest handle:@"v4Signup" signKey:nil headParams:nil requestParams:requestParams];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest setMessage:@"注册信息提交中..."];
+        [self.hRequest setRequestCode:REQUESTCODE_SIGNUP];
+        [self.hRequest handle:@"v4Signup" signKey:nil headParams:nil requestParams:requestParams];
     }
 }
 
