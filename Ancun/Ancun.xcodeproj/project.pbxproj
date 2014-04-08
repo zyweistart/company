@@ -41,6 +41,7 @@
 		C97889BD18E16B4F00157577 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BC18E16B4F00157577 /* Security.framework */; };
 		C97889BF18E16B9900157577 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BE18E16B9900157577 /* StoreKit.framework */; };
 		C98A1C5D17CE01DE00AC0CC9 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */; };
+		C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */; };
 		C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */; };
 		C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */; };
 		C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */; };
@@ -208,6 +209,8 @@
 		C97DA4D717A9EFF7000D9B31 /* ydefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ydefines.h; sourceTree = "<group>"; };
 		C98A1C5B17CE01DE00AC0CC9 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
+		C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionCodeDetailViewController.h; sourceTree = "<group>"; };
+		C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionCodeDetailViewController.m; sourceTree = "<group>"; };
 		C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAppStoreViewController.h; sourceTree = "<group>"; };
 		C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeByAppStoreViewController.m; sourceTree = "<group>"; };
 		C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGuideViewController.h; sourceTree = "<group>"; };
@@ -585,6 +588,8 @@
 		C91D0BEA18EEA195006B10A3 /* Recording */ = {
 			isa = PBXGroup;
 			children = (
+				C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */,
+				C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */,
 				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
 				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
 				C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */,
@@ -1236,6 +1241,7 @@
 				C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */,
 				C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */,
 				C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */,
+				C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */,
 				C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */,
 				C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */,
 				C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */,

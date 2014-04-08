@@ -36,7 +36,8 @@
         [container addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:container];
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(14.5, 10, 291, 194)];
+        UIControl *view=[[UIControl alloc]initWithFrame:CGRectMake(14.5, 10, 291, 194)];
+        [view addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg1"]]];
         [container addSubview:view];
         

@@ -8,7 +8,8 @@
 
 #import "ACRecordingCallDetailViewController.h"
 #import "ACNotaryDetailViewController.h"
-#import "ACExtractionDetailViewController.h"
+//#import "ACExtractionDetailViewController.h"
+#import "ACExtractionCodeDetailViewController.h"
 
 @interface ACRecordingCallDetailViewController () <ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
 
@@ -176,17 +177,37 @@
                  reqCode==REQUESTCODE_ACExtractionDetailViewController_view){
             [_btn_extraction setTitle:@"查看提取码" forState:UIControlStateNormal];
             [_data setObject:@"1" forKey:@"accstatus"];
-            ACExtractionDetailViewController *extractionDetailViewController=[[ACExtractionDetailViewController alloc]init];
-            [extractionDetailViewController setFileno:_fileno];
-            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
-                [extractionDetailViewController setLoad:NO];
-            }else{
-                [extractionDetailViewController setLoad:YES];
-            }
+//            ACExtractionDetailViewController *extractionDetailViewController=[[ACExtractionDetailViewController alloc]init];
+//            [extractionDetailViewController setFileno:_fileno];
+//            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
+//                [extractionDetailViewController setLoad:NO];
+//            }else{
+//                [extractionDetailViewController setLoad:YES];
+//            }
+//            [extractionDetailViewController setResultDelegate:self];
+//            [extractionDetailViewController setExtractionDics:[[response mainData]objectForKey:@"acccodeinfo"]];
+//            extractionDetailViewController.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:extractionDetailViewController animated:YES];
+            
+            
+            
+            
+            
+            ACExtractionCodeDetailViewController *extractionDetailViewController=[[ACExtractionCodeDetailViewController alloc]initWithLoad:reqCode==REQUESTCODE_ACExtractionDetailViewController_apply fileNo:_fileno extractionDics:[[response mainData]objectForKey:@"acccodeinfo"]];
             [extractionDetailViewController setResultDelegate:self];
-            [extractionDetailViewController setExtractionDics:[[response mainData]objectForKey:@"acccodeinfo"]];
+            
+//            [extractionDetailViewController setFileno:_fileno];
+//            if(reqCode==REQUESTCODE_ACExtractionDetailViewController_apply){
+//                [extractionDetailViewController setLoad:NO];
+//            }else{
+//                [extractionDetailViewController setLoad:YES];
+//            }
+//            [extractionDetailViewController setExtractionDics:[[response mainData]objectForKey:@"acccodeinfo"]];
+            
             extractionDetailViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:extractionDetailViewController animated:YES];
+            
+            
         }
         NSString *remark=_tv_remark.text;
         if([remark isEqualToString:@""]){

@@ -36,13 +36,14 @@
         [container addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:container];
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(14.5, 10, 291, 194)];
+        UIControl *view=[[UIControl alloc]initWithFrame:CGRectMake(14.5, 10, 291, 194)];
+        [view addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg1"]]];
         [container addSubview:view];
         
         txtOldPassword=[[UITextField alloc] initWithFrame:CGRectMake(17, 20.25, 257, 44.5)];
         [txtOldPassword setPlaceholder:@"输入旧密码"];
-        [txtOldPassword setFont:[UIFont systemFontOfSize: 22]];
+        [txtOldPassword setFont:[UIFont systemFontOfSize: 18]];
         [txtOldPassword setClearButtonMode:UITextFieldViewModeWhileEditing];
         [txtOldPassword setTextAlignment:NSTextAlignmentCenter];
         [txtOldPassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -53,7 +54,7 @@
         
         txtNewPassword=[[UITextField alloc] initWithFrame:CGRectMake(17, 74.75, 257, 44.5)];
         [txtNewPassword setPlaceholder:@"输入新密码"];
-        [txtNewPassword setFont:[UIFont systemFontOfSize: 22]];
+        [txtNewPassword setFont:[UIFont systemFontOfSize: 18]];
         [txtNewPassword setClearButtonMode:UITextFieldViewModeWhileEditing];
         [txtNewPassword setTextAlignment:NSTextAlignmentCenter];
         [txtNewPassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -64,7 +65,7 @@
         
         txtReNewPassword=[[UITextField alloc] initWithFrame:CGRectMake(17, 129.25, 257, 44.5)];
         [txtReNewPassword setPlaceholder:@"确认新密码"];
-        [txtReNewPassword setFont:[UIFont systemFontOfSize: 22]];
+        [txtReNewPassword setFont:[UIFont systemFontOfSize: 18]];
         [txtReNewPassword setClearButtonMode:UITextFieldViewModeWhileEditing];
         [txtReNewPassword setTextAlignment:NSTextAlignmentCenter];
         [txtReNewPassword setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
