@@ -14,7 +14,7 @@
     }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.navigationItem.title=@"成功";
+        self.navigationItem.title=@"申办公证";
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
                                                 initWithTitle:@"返回"
                                                 style:UIBarButtonItemStyleBordered
