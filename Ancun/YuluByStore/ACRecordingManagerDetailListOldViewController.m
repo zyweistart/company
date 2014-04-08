@@ -1,5 +1,4 @@
 #import "ACRecordingManagerDetailListOldViewController.h"
-#import "ACRecordingDetailViewController.h"
 #import "ACRecordingDetailCell.h"
 #import "DataSingleton.h"
 
@@ -327,11 +326,11 @@
     }
     if([self.dataItemArray count]>[indexPath row]){
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:[indexPath row]];
-        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
-        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
-        [detailViewController setResultDelegate:self];
-        detailViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailViewController animated:YES];
+//        ACRecordingDetailViewController *detailViewController=[[ACRecordingDetailViewController alloc]init];
+//        [detailViewController setFileno:[dictionary objectForKey:@"fileno"]];
+//        [detailViewController setResultDelegate:self];
+//        detailViewController.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:detailViewController animated:YES];
         
     }
 }

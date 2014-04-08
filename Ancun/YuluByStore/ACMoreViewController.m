@@ -1,8 +1,8 @@
 #import "ACMoreViewController.h"
 #import "ACNavigationWebPageViewController.h"
 #import "ACAboutUsViewController.h"
-#import "ACFeedBackViewController.h"
-#import "ACModifyPwdViewController.h"
+#import "ACFeedBacksViewController.h"
+#import "ACModifyPasswordViewController.h"
 #import "FileUtils.h"
 
 @interface ACMoreViewController () <UIActionSheetDelegate>
@@ -94,9 +94,9 @@
 - (void)onClickAction:(UIButton *)sender
 {
     ACNavigationWebPageViewController *navigationWebPageViewController=[[ACNavigationWebPageViewController alloc]initWithNavigationTitle:@"小贴士" resourcePath:@"TipContent"];
-    ACFeedBackViewController *feedBackViewController=[[ACFeedBackViewController alloc]init];
+    ACFeedBacksViewController *feedBacksViewController=[[ACFeedBacksViewController alloc]init];
     ACAboutUsViewController *aboutUsViewController=[[ACAboutUsViewController alloc]init];
-    ACModifyPwdViewController *modifyPwdViewController=[[ACModifyPwdViewController alloc]init];
+    ACModifyPasswordViewController *modifyPasswordViewController=[[ACModifyPasswordViewController alloc]init];
     switch(sender.tag){
         case 0:
             //小贴士
@@ -105,8 +105,8 @@
             break;
         case 1:
             //意见反馈
-            feedBackViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:feedBackViewController animated:YES];
+            feedBacksViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:feedBacksViewController animated:YES];
             break;
         case 2:
             //关于我们
@@ -115,8 +115,8 @@
             break;
         case 3:
             //修改密码
-            modifyPwdViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:modifyPwdViewController animated:YES];
+            modifyPasswordViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:modifyPasswordViewController animated:YES];
             break;
         case 4:
             //清理缓存

@@ -179,7 +179,6 @@
             [[contactViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[contactViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            contactViewControllerNav.navigationBar.tintColor=MAINBG;
             [contactViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
@@ -202,7 +201,6 @@
             [[accountViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[accountViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            accountViewControllerNav.navigationBar.tintColor=MAINBG;
             [accountViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
@@ -220,7 +218,6 @@
             [[recordingManagerViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[recordingManagerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            recordingManagerViewControllerNav.navigationBar.tintColor=MAINBG;
             [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
@@ -238,7 +235,6 @@
             [[moreViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[moreViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            moreViewControllerNav.navigationBar.tintColor=MAINBG;
             [moreViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         }
         
