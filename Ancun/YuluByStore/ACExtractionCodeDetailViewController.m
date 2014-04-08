@@ -101,7 +101,7 @@
         [lbl setText:@"温馨提醒:请妥善保管好您的录音提取码"];
         [view addSubview:lbl];
         
-        UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?310:265, 291, 40)];
+        UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?350:265, 291, 40)];
         [btn1 setTitle:@"复制提取码" forState:UIControlStateNormal];
         btn1.titleLabel.font=[UIFont systemFontOfSize:22];
         btn1.layer.cornerRadius=5;
@@ -110,7 +110,7 @@
         [btn1 addTarget:self action:@selector(pasteBoard:) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:btn1];
         
-        UIButton *btn2=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?360:315, 291, 40)];
+        UIButton *btn2=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?400:315, 291, 40)];
         [btn2 setTitle:@"以短信形式改善到手机" forState:UIControlStateNormal];
         btn2.titleLabel.font=[UIFont systemFontOfSize:22];
         btn2.layer.cornerRadius=5;
@@ -119,7 +119,7 @@
         [btn2 addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:btn2];
         
-        UIButton *btn3=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?410:365, 291, 40)];
+        UIButton *btn3=[[UIButton alloc]initWithFrame:CGRectMake(14.5, inch4?450:365, 291, 40)];
         [btn3 setTitle:@"撤销提取" forState:UIControlStateNormal];
         btn3.titleLabel.font=[UIFont systemFontOfSize:22];
         btn3.layer.cornerRadius=5;

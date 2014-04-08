@@ -521,7 +521,8 @@
 		C91D0BDD18EE9E1D006B10A3 /* NotUsed */ = {
 			isa = PBXGroup;
 			children = (
-				C91D0BDE18EE9ECD006B10A3 /* Cell */,
+				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
+				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
 				C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */,
 				C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */,
 				C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */,
@@ -532,6 +533,7 @@
 				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
 				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
 				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
+				C91D0BDE18EE9ECD006B10A3 /* Cell */,
 			);
 			name = NotUsed;
 			sourceTree = "<group>";
@@ -590,8 +592,6 @@
 			children = (
 				C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */,
 				C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */,
-				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
-				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
 				C9D97A3E179FA6510076ACF3 /* ACNotaryDetailViewController.h */,
 				C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */,
 				C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */,

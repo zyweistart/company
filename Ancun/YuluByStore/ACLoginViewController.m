@@ -179,7 +179,7 @@
             [[contactViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[contactViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            [contactViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+            [contactViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         
         //我的账户
@@ -201,7 +201,7 @@
             [[accountViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[accountViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            [accountViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+            [accountViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         
         //录音管理
@@ -218,7 +218,7 @@
             [[recordingManagerViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[recordingManagerViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+            [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         
         //更多
@@ -235,7 +235,7 @@
             [[moreViewControllerNav navigationBar]setBarTintColor:MAINBG];
             [[moreViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
         }else{
-            [moreViewControllerNav.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+            [moreViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         
         //添加标签控制器
