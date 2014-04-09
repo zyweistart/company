@@ -77,7 +77,11 @@
             lbl=[[UILabel alloc]initWithFrame:CGRectMake(105, 0, 195, height)];
             [lbl setFont:[UIFont systemFontOfSize:17]];
             [lbl setTextAlignment:NSTextAlignmentLeft];
-            [lbl setTextColor:[UIColor whiteColor]];
+            if(i==[names count]-1){
+                [lbl setTextColor:[UIColor redColor]];
+            }else{
+                [lbl setTextColor:[UIColor whiteColor]];
+            }
             [lbl setBackgroundColor:[UIColor clearColor]];
             [lbl setText:[value objectAtIndex:i]];
             [view addSubview:lbl];

@@ -45,8 +45,8 @@
         [control addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:control];
         //LOGO
-        UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-105.5/2, inch4?54:30, 105.5, 102.5)];
-        [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo"]]];
+        UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-130/2, inch4?54:30, 130, 130)];
+        [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo2"]]];
         [control addSubview:logonv];
         //登录输入框
         UIView *userNameInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?225:160, 271, 51)];
@@ -218,7 +218,6 @@
         }else{
             [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
-        
         //更多
         UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
         moreViewControllerNav.tabBarItem.title = @"更多";

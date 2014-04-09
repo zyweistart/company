@@ -41,7 +41,7 @@
         [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg1"]]];
         [container addSubview:view];
         
-        tvContent=[[UITextView alloc] initWithFrame:CGRectMake(17, 31.25, 257, 87)];
+        tvContent=[[UITextView alloc] initWithFrame:CGRectMake(17, 21.25, 257, 87)];
         [tvContent setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bigtxtbg"]]];
         [tvContent setDelegate:self];
         [view addSubview:tvContent];
@@ -53,14 +53,14 @@
         [lblContentPlaceholder setBackgroundColor:[UIColor clearColor]];
         [tvContent addSubview:lblContentPlaceholder];
         
-        txtEmail=[[UITextField alloc] initWithFrame:CGRectMake(17, 138.25, 257, 24.5)];
+        txtEmail=[[UITextField alloc] initWithFrame:CGRectMake(17, 128.25, 257, 44.5)];
         [txtEmail setPlaceholder:@"电子邮箱(可选)"];
         [txtEmail setFont:[UIFont systemFontOfSize: 15]];
         [txtEmail setClearButtonMode:UITextFieldViewModeWhileEditing];
         [txtEmail setTextAlignment:NSTextAlignmentCenter];
         [txtEmail setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [txtEmail setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-        [txtEmail setBackground:[UIImage imageNamed:@"txtbg2"]];
+        [txtEmail setBackground:[UIImage imageNamed:@"txtbg"]];
         [txtEmail setDelegate:self];
         [view addSubview:txtEmail];
         

@@ -320,47 +320,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *accountPayCell=@"ACAccountPayCell";
-    static NSString *accountPayCellTimeLong=@"ACAccountPayCellTimeLong";
     static NSString *accountUseRecordCell=@"ACAccountUseRecordCell";
     //获取当前的行
     NSInteger row=[indexPath row];
     if(currentTab==1) {
-         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
-        int ctype=[[dictionary objectForKey:@"ctype"]intValue];
-        if (ctype==2){
-            ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCellTimeLong];
-            if(!cell) {
-                cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCellTimeLong];
-            }
-            [cell.lblName setText:@"增值时长"];
-            int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
-            [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟",rectimelimit/60]];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            return cell;
-        } else {
-            ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell];
-            if(!cell) {
-                cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell];
-            }
-            int auciquotalimit=[[dictionary objectForKey:@"auciquotalimit"]intValue];
-            if(ctype==1){
-                [cell.lblName setText:@"增值存储"];
-                [cell.lblInfo setText:[NSString stringWithFormat:@"%dMB",auciquotalimit/1024/1024]];
-            } else if (ctype==3||ctype==0){
-                if(ctype==3){
-                    [cell.lblName setText:@"基础月度服务套餐"];
-                }else{
-                    [cell.lblName setText:@"新手10分钟免费体验"];
-                }
-                int rectimelimit=[[dictionary objectForKey:@"rectimelimit"]intValue];
-                [cell.lblInfo setText:[NSString stringWithFormat:@"%d分钟 %dMB",rectimelimit/60,auciquotalimit/1024/1024]];
-            }else if(ctype==9){
-                [cell.lblName setText:@"免费套餐 60分钟/31天"];
-            }
-            [cell.lblStartTime setText:[[dictionary objectForKey:@"starttime"] substringWithRange:NSMakeRange(0, 10)]];
-            [cell.lblEndTime setText:[[dictionary objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
-            return cell;
+        NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell];
+        if(!cell) {
+            cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell];
         }
+        [cell.lblName setText:[dictionary objectForKey:@"comboname"]];
+//        [cell.lblInfo setText:@"时长不限，存储不限"];
+        [cell.lblStartTime setText:[[dictionary objectForKey:@"starttime"] substringWithRange:NSMakeRange(0, 10)]];
+        [cell.lblEndTime setText:[[dictionary objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
+        return cell;
     } else {
         if([self.dataItemArray count]>row){
             NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
