@@ -1,5 +1,6 @@
-<!doctype>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;color:#000000;">1.产品介绍</span><span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;"></span>
@@ -8,7 +9,7 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">安存语录（</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">95105856</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">）由杭州安存网络科技有限公司联合电信运营商（中国移动，中国电信，中国联通等）、阿里云计算、公证机构共同推出，为用户提供一站式通话语音数据保全公证服务，同时还是</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">淘宝网官方唯一认可的第三方通话录音取证服务和维权证据。</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">无论是手机用户还是固话用户，注册并开通相关服务后，只需</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">通过手机客户端直接拨打对方号码或本地通讯录联系人，或</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">在对方号码前加拨平台服务接入号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">95105856</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，就可对相应通话内容进行实时录音保全。</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
 </p>
 <p class="MsoNormal" style="margin-left:0pt;text-indent:18pt;font-size:14px;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">安存语录运用全球首创的“电信运营商局端保全通话信息”、“阿里云云服务器智能同步存储”，“与国家公证机构无缝对接”等模式，严格保障了通话录音的真实性和完整性，所保全的录音严格满足证据的真实性、合法性要求，以公证的法定证明力为依托，是真正可成为被司法机关认可呈堂证供的通话录音，适用于需要保存双方通话沟通完整过程及详细内容，且对所保存的通话录音证据法律效力有极高要求的用户。</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">安存语录运用全球首创的"电信运营商局端保全通话信息"、"阿里云云服务器智能同步存储"，"与国家公证机构无缝对接"等模式，严格保障了通话录音的真实性和完整性，所保全的录音严格满足证据的真实性、合法性要求，以公证的法定证明力为依托，是真正可成为被司法机关认可呈堂证供的通话录音，适用于需要保存双方通话沟通完整过程及详细内容，且对所保存的通话录音证据法律效力有极高要求的用户。</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">安存语录（个人版）</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">iOS</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">客户端是全球首个录音公证电话</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">95105856</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">（安存语录）面向其使用</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">iPhone</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">手机的个人用户提供快速注册，便捷呼叫，查询账户信息及录音详情，申办公证等便捷功能的移动客户端，仅限</span><span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;color:#000000;">开通安存语录个人版服务的用户使</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">用</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
@@ -49,72 +50,98 @@
 <span style="color:#000000;">3、法律、财务、设计等专业服务个人从业者可通过安存语录实时记录提供服务期间的沟通过程，便于雇佣双方清晰中间过程，避免纠纷和在必要时维护各自的合法利益。</span></span><span style="font-size:9pt;font-family:微软雅黑;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;color:#000000;">3.资费说明</span><span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;"></span>
+<span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;color:#000000;">3.资费说明</span><span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;"></span></p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>个人用户版</strong></p>
+<p style="margin:0;font-family:微软雅黑;font-size:9pt;"> <strong>资费说明：</strong><br> 
+            通话费用：录音通话的通话费用按用户实际通话时长，由您所选择的运营商收取（按照本地通话费收取）。</p>
+<p style="font-family:微软雅黑;font-size:9pt;"><strong>一、产品套餐 </strong><br>          
+      </p><table border="0" cellspacing="0" cellpadding="0" style="font-family:微软雅黑;font-size:9pt; line-height:25px;border-left:1px solid #ccc;border-top:1px solid #ccc;">
+        <tbody><tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>套餐类型</strong></p></td>
+              <td width="133" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>价格 </strong></p></td>
+              <td width="101" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>享受时长 </strong></p></td>
+              <td width="85" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>出证权限 </strong></p></td>
+              <td width="87" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>提取码次数 </strong></p></td>
+              <td width="112" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>存储有效期</strong></p></td>
+            </tr>
+            <tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>免费套餐 <br>
+                X1</p></td>
+              <td width="133" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>0</p></td>
+              <td width="101" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>60分钟/月（30天） </p></td>
+              <td width="85" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="77" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>5次/月 </p></td>
+              <td width="112" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>1个月（30天） </p></td>
+            </tr>
+            <tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>包月套餐 <br>
+                X2</p></td>
+              <td width="133" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>50元/月（30天） </p></td>
+              <td width="101" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="85" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="77" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="112" rowspan="3" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>套餐到期后延长2年（730天） </p></td>
+            </tr>
+            <tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>半年套餐 <br>
+                X3</p></td>
+              <td width="133" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>240元/半年（180天） </p></td>
+              <td width="101" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="85" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="77" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+            </tr>
+            <tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>全年套餐 <br>
+                X4</p></td>
+              <td width="133" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>360元/全年（365天） </p></td>
+              <td width="101" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="85" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+              <td width="77" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p>无限制 </p></td>
+            </tr>
+            <tr>
+              <td width="80" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><p><strong>套餐备注 </strong></p></td>
+              <td width="508" colspan="5" valign="top" style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;padding-left:10px;"><ol>
+                <li><strong><em>用户如需包月付费，请通过官网后台自动充值或者联系客服。 </em></strong></li>
+                <li><strong><em>优惠套餐，限时促销。 </em></strong></li>
+              </ol></td>
+            </tr>
+        </tbody></table>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>二、套餐使用有效期</strong></p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;">包月套餐：包月形式，生效开始30天为期限。
 </p>
-<p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 录音通话的通话费用按用户实际通话时长，由运营商收取（按照本地通话费收取）。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;">（例：2014年7月31号开通包月套餐，到2014年8月30号24点包月套餐截止，如您还要使用，请继续购买包月套餐服务）</p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><span style="color:#F00;font-family:微软雅黑;font-size:9pt;">半年套餐：</span>半年形式，生效开始180天为期限。
 </p>
-<p class="MsoNormal" style="margin-left:0pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">3.1、</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">基础月度服务套餐（个人版）</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
-</p>
-<table border="1" cellspacing="0" cellpadding="0" style="color:#000000;font-family:verdana;font-size:14px;text-align:center;background-color:#FFFFFF;border:none;">
-	<tbody>
-		<tr>
-			<td width="92" rowspan="3" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">基础月度服务套餐</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-				</p>
-			</td>
-			<td width="104" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">价格</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-				</p>
-			</td>
-			<td width="255" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">服务内容</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td width="104" rowspan="2" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">98元</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">/31</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">天</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-				</p>
-			</td>
-			<td width="255" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">可供用户开通一个注册账户（手机号码）的相关服务。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td width="255" valign="top" style="font-family:'lucida Grande', Verdana;border:1pt solid windowtext;">
-				<p style="margin-left:0pt;text-indent:0pt;font-size:12pt;text-align:left;">
-					<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">可保全通话录音时长：</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">不限</span>
-				</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">备注：需手机本机号码与注册账户（手机号码）一致方能体验完整的应用服务；</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
-</p>
-<p class="MsoNormal" style="margin-left:0pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">3.2套餐使用有效期</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
-</p>
-<p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">基</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">础月度服务套餐：以月为单位提供基础服务</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，生效开始</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">31</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">天为期限。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-</p>
-<p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">（例：</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">2013</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">年</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">7</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">月</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">7</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">7</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">点开通基础服务套餐，</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">2013</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">年</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">8</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">月</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">6</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">6</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">点</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">59</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">分套餐有效期截止，如您需继续使用，需继续购买基础月度服务套餐）</span><a name="_GoBack"></a><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
-</p>
-<p class="MsoNormal" style="margin-left:0pt;font-size:14px;text-align:justify;font-family:Calibri;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">3.3通话录音数据保存时间：</span><span style="font-size:9pt;font-family:微软雅黑;"></span>
-</p>
-<p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">基础月度服务套餐到期并停止订阅相关服务后，</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">相关通话录音数据将为您保管</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">90</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">个自然日</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">。</span><span style="font-size:9pt;font-family:微软雅黑;color:#FF0000;"></span>
-</p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;">（例：2014年6月1号开通半年套餐，到2014年12月30号24点半年套餐截止，如您还要使用，请继续购买半年套餐服务或者升级全年套餐） </p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><span style="color:#F00;font-family:微软雅黑;font-size:9pt;">全年套餐:全年形式，</span>生效开始365天为期限.</p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;">（例：2014年6月1号开通全年套餐，到2015年5月30号24点全年套餐截止，如您还要使用，请继续购买全年套餐）
+&nbsp;</p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>三、语录保存时间</strong></p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>1、停止使用包月套餐后，对录音保存时间的说明 
+  <br>
+  例：包月套餐到期时间为：2014.09.30 23:59:59。
+  </strong><br>
+  相应的时间内操作权限如下： 
+  <br>
+  2014.10.1—2016.9.30 2年（730天）内用户可以对录音进行试听、下载、编辑、申请/取消公证、申请/取消提取码等在内的所有操作功能。 </p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>2、半年套餐
+  </strong><br>
+  <strong>例：半年套餐到期时间为：2014.06.30 23:59:59。 </strong><br>
+  相应的时间内操作权限如下： 
+  <br>
+  2014.7.1—2016.6.30 2年（730天）内用户可以对录音进行试听、下载、编辑、申请/取消公证、申请/取消提取码等在内的所有操作功能。
+&nbsp;</p>
+<p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>3、全年套餐</strong><br>
+  <strong>例：全年套餐到期时间为：2014.12.30 23:59:59。 </strong><br>
+    相
+  应的时间内操作权限如下：<br>
+2015.1.1—2017.12.30 2年（730天）内用户可以对录音进行试听、下载、编辑、申请/取消公证、申请/取消提取码等在内的所有操作功能。
+  &nbsp;</p>
+<strong><br>
+      <p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>企业及机构用户版</strong><br>
+      </p>
+      <p style="margin:10px 0;font-family:微软雅黑;font-size:9pt;"><strong>资费说明： </strong><br>
+        为提供给企业及机构用户更为完善的服务和解决方案，相关服务内容及收费方式详情请拨打安存语录全国统一热线95105856,或联系客服进行咨询和购买。</p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;color:#000000;">4．使用流程</span><span style="font-size:9pt;font-family:微软雅黑;font-weight:bold;"></span>
 </p>
@@ -128,7 +155,7 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【账户充值】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">进入安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，进入“我的账户”“充值”，选择套餐进行充值购买。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;">进入安存语录</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">APP</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">，进入"我的账户""充值"，选择套餐进行充值购买。</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;text-indent:18pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【通话录音】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>
@@ -143,10 +170,10 @@
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;"> 号码输入规则：</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#666666;"> </span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">呼叫手机：输入</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">“</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">手机号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">”</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#666666;"> </span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">呼叫手机：输入</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">"</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">手机号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">"</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
-	<span style="font-size:9pt;font-family:微软雅黑;color:#666666;"> </span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">呼叫固定电话：输入</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">“</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">区号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">+</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">固话号码</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">”</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
+	<span style="font-size:9pt;font-family:微软雅黑;color:#666666;"> </span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">呼叫固定电话：输入</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">"</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">区号</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">+</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">固话号码</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">"</span><span style="font-size:9pt;font-family:微软雅黑;color:#000000;">；</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;"></span>
 </p>
 <p style="margin-left:0pt;font-size:12pt;font-family:verdana;background-color:#FFFFFF;">
 	<span style="font-size:9pt;font-family:微软雅黑;color:#000000;font-weight:bold;">【录音收听】</span><span style="font-size:9pt;font-family:微软雅黑;color:#666666;font-weight:bold;"></span>

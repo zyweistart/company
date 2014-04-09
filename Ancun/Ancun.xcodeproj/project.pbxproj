@@ -40,8 +40,8 @@
 		C97889BB18E16B4400157577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889A918E16B4400157577 /* UIKit.framework */; };
 		C97889BD18E16B4F00157577 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BC18E16B4F00157577 /* Security.framework */; };
 		C97889BF18E16B9900157577 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BE18E16B9900157577 /* StoreKit.framework */; };
-		C98A1C5D17CE01DE00AC0CC9 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */; };
 		C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */; };
+		C992A9BA18F529F3001A6976 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C992A9B918F529F3001A6976 /* libBaiduMobStat.a */; };
 		C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */; };
 		C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */; };
 		C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */; };
@@ -182,10 +182,10 @@
 		C97889BC18E16B4F00157577 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C97889BE18E16B9900157577 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		C97DA4D717A9EFF7000D9B31 /* ydefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ydefines.h; sourceTree = "<group>"; };
-		C98A1C5B17CE01DE00AC0CC9 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
-		C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionCodeDetailViewController.h; sourceTree = "<group>"; };
 		C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionCodeDetailViewController.m; sourceTree = "<group>"; };
+		C992A9B818F529F3001A6976 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		C992A9B918F529F3001A6976 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAppStoreViewController.h; sourceTree = "<group>"; };
 		C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeByAppStoreViewController.m; sourceTree = "<group>"; };
 		C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGuideViewController.h; sourceTree = "<group>"; };
@@ -451,6 +451,7 @@
 				C97889B118E16B4400157577 /* CoreTelephony.framework in Frameworks */,
 				C97889B218E16B4400157577 /* CoreText.framework in Frameworks */,
 				C97889B318E16B4400157577 /* Foundation.framework in Frameworks */,
+				C992A9BA18F529F3001A6976 /* libBaiduMobStat.a in Frameworks */,
 				C97889B418E16B4400157577 /* libstdc++.dylib in Frameworks */,
 				C97889B518E16B4400157577 /* libz.1.2.5.dylib in Frameworks */,
 				C97889B618E16B4400157577 /* MessageUI.framework in Frameworks */,
@@ -461,7 +462,6 @@
 				C9D97C89179FA6640076ACF3 /* libalixpay.a in Frameworks */,
 				C9D97C8A179FA6650076ACF3 /* libcrypto.a in Frameworks */,
 				C9D97C8B179FA6650076ACF3 /* libssl.a in Frameworks */,
-				C98A1C5D17CE01DE00AC0CC9 /* libBaiduMobStat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +585,15 @@
 				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
 			);
 			name = Contacts;
+			sourceTree = "<group>";
+		};
+		C992A9B718F529F3001A6976 /* baidu-mtj */ = {
+			isa = PBXGroup;
+			children = (
+				C992A9B818F529F3001A6976 /* BaiduMobStat.h */,
+				C992A9B918F529F3001A6976 /* libBaiduMobStat.a */,
+			);
+			path = "baidu-mtj";
 			sourceTree = "<group>";
 		};
 		C9CB41B918ED0E2E00DB6099 /* EAIntroView */ = {
@@ -758,10 +767,10 @@
 		C9D97AC9179FA6640076ACF3 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				C992A9B718F529F3001A6976 /* baidu-mtj */,
 				C9D97ACA179FA6640076ACF3 /* alipay */,
 				C9D97B1E179FA6640076ACF3 /* ASIHTTP */,
 				C9D97B35179FA6640076ACF3 /* ATMHud */,
-				C9D97B43179FA6640076ACF3 /* baidu-mtj */,
 				C9D97B46179FA6640076ACF3 /* ChineseToPinyin */,
 				C9CB41B918ED0E2E00DB6099 /* EAIntroView */,
 				C9D97B4C179FA6640076ACF3 /* GHKit */,
@@ -895,15 +904,6 @@
 				C9D97B42179FA6640076ACF3 /* ATMTextLayer.m */,
 			);
 			path = ATMHud;
-			sourceTree = "<group>";
-		};
-		C9D97B43179FA6640076ACF3 /* baidu-mtj */ = {
-			isa = PBXGroup;
-			children = (
-				C98A1C5B17CE01DE00AC0CC9 /* BaiduMobStat.h */,
-				C98A1C5C17CE01DE00AC0CC9 /* libBaiduMobStat.a */,
-			);
-			path = "baidu-mtj";
 			sourceTree = "<group>";
 		};
 		C9D97B46179FA6640076ACF3 /* ChineseToPinyin */ = {
@@ -1076,11 +1076,6 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				TargetAttributes = {
-					C9D97986179FA3500076ACF3 = {
-						DevelopmentTeam = XLA7UCY3KD;
-					};
-				};
 			};
 			buildConfigurationList = C9D97980179FA3430076ACF3 /* Build configuration list for PBXProject "Ancun" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1265,6 +1260,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1288,12 +1284,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/YuluByStore/Librarys/alipay\"",
-					"\"$(SRCROOT)/YuluByStore/Librarys/baidu-mtj\"",
+					"\"YuluByStore/Librarys/alipay\"",
+					"\"YuluByStore/Librarys/baidu-mtj\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1312,6 +1309,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1328,13 +1326,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/YuluByStore/Librarys/alipay\"",
-					"\"$(SRCROOT)/YuluByStore/Librarys/baidu-mtj\"",
+					"\"YuluByStore/Librarys/alipay\"",
+					"\"YuluByStore/Librarys/baidu-mtj\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

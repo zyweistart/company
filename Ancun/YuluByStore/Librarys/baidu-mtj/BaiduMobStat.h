@@ -116,4 +116,18 @@ typedef enum _BaiduMobStatLogStrategy {
  */
 @property (nonatomic,retain) NSString* shortAppVersion;
 
+/**
+ *  v3.2  新增
+ *  开发这可以调用此接口来打印SDK中的日志，用于调试
+ */
+@property (nonatomic) BOOL enableDebugOn;
+
+
+/**
+ *  v3.22  新增
+ *  让开发者来填写adid，让统计更加精确
+ */
+@property (nonatomic, retain) NSString* adid; //added by 2014-01-12
+
+
 @end

@@ -2,7 +2,6 @@
 #import "ACDialsViewController.h"
 #import "ACContactsViewController.h"
 #import "ACAccountViewController.h"
-#import "ACOldAccountViewController.h"
 #import "ACRecordingManagerViewController.h"
 #import "ACMoreViewController.h"
 #import "ACRegistrationViewController.h"
@@ -49,7 +48,7 @@
         [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo2"]]];
         [control addSubview:logonv];
         //登录输入框
-        UIView *userNameInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?225:160, 271, 51)];
+        UIView *userNameInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?225:170, 271, 51)];
         [userNameInputView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_input_bg"]]];
         [control addSubview:userNameInputView];
         //账户输入框
@@ -62,7 +61,7 @@
         [_txtUserName setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [_txtUserName setKeyboardType:UIKeyboardTypePhonePad];
         [userNameInputView addSubview:_txtUserName];
-        UIView *passwordInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?293:223, 271, 51)];
+        UIView *passwordInputView=[[UIView alloc]initWithFrame:CGRectMake(width/2-271/2, inch4?293:233, 271, 51)];
         [passwordInputView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_input_bg"]]];
         [control addSubview:passwordInputView];
         //密码输入框
@@ -78,7 +77,7 @@
         [_txtPassword setReturnKeyType:UIReturnKeyDone];
         [passwordInputView addSubview:_txtPassword];
         //记住密码复选框
-        btnRememberPwdImg=[[UIButton alloc]initWithFrame:CGRectMake(35, inch4?356:286, 14.5, 14.5)];
+        btnRememberPwdImg=[[UIButton alloc]initWithFrame:CGRectMake(35, inch4?356:296, 14.5, 14.5)];
         [btnRememberPwdImg addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnRememberPwdImg];
         rememberPassword=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
@@ -88,13 +87,13 @@
             [btnRememberPwdImg setImage:[UIImage imageNamed:@"login_g_hover"] forState:UIControlStateNormal];
         }
         //记住密码文字
-        UIButton *btnRemberPwdLbl=[[UIButton alloc]initWithFrame:CGRectMake(55, inch4?354:284, 60, 18)];
+        UIButton *btnRemberPwdLbl=[[UIButton alloc]initWithFrame:CGRectMake(55, inch4?354:294, 60, 18)];
         btnRemberPwdLbl.titleLabel.font=[UIFont systemFontOfSize: 15];
         [btnRemberPwdLbl setTitle:@"记住密码" forState:UIControlStateNormal];
         [btnRemberPwdLbl addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnRemberPwdLbl];
         //找回密码
-        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(width/2+60, inch4?354:284, 68, 18)];
+        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(width/2+60, inch4?354:294, 68, 18)];
         btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
         [btnForgetPwd setTitle:@"找回密码" forState:UIControlStateNormal];
         [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];

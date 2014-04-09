@@ -27,8 +27,8 @@
         [_lblName setText:@"基础套餐"];
         [self addSubview:_lblName];
         
-        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 50)];
-        [_lblDescription setFont:[UIFont systemFontOfSize:13]];
+        _lblDescription=[[UILabel alloc]initWithFrame:CGRectMake(8, 30, 220, 60)];
+        [_lblDescription setFont:[UIFont systemFontOfSize:12]];
         [_lblDescription setTextAlignment:NSTextAlignmentLeft];
         [_lblDescription setNumberOfLines:0];
         [_lblDescription setLineBreakMode:NSLineBreakByCharWrapping];

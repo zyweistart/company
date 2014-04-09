@@ -325,12 +325,17 @@
     NSInteger row=[indexPath row];
     if(currentTab==1) {
         NSMutableDictionary *dictionary=[self.dataItemArray objectAtIndex:row];
+        int ctype=[[dictionary objectForKey:@"ctype"]intValue];
         ACAccountPayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountPayCell];
         if(!cell) {
             cell = [[ACAccountPayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountPayCell];
         }
         [cell.lblName setText:[dictionary objectForKey:@"comboname"]];
-//        [cell.lblInfo setText:@"时长不限，存储不限"];
+        if(ctype==3){
+            [cell.lblInfo setText:@"录音时长不限,提取码申请次数不限,存储有效期2年(730天)"];
+        }else{
+            [cell.lblInfo setText:@"60分钟/月(30天),提取码申请次数:5次/月(30天),存储有效期30天"];
+        }
         [cell.lblStartTime setText:[[dictionary objectForKey:@"starttime"] substringWithRange:NSMakeRange(0, 10)]];
         [cell.lblEndTime setText:[[dictionary objectForKey:@"endtime"] substringWithRange:NSMakeRange(0, 10)]];
         return cell;
