@@ -418,6 +418,13 @@
                 }  else {
                     [strContent appendString:@"未知"];
                 }
+            } else if(cgtype==8) {
+                [strContent appendString:@"录音提取"];
+                if(cgsubtype==1){
+                    
+                }else{
+                    [strContent appendString:@"\n未知"];
+                }
             }
             
             ACAccountUseRecordCell *cell = [self.tableView dequeueReusableCellWithIdentifier:accountUseRecordCell];

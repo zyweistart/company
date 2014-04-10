@@ -168,4 +168,9 @@
     return result;
 }
 
+- (BOOL)isNotEmpty
+{
+    return self!=nil&&![@"" isEqualToString:self];
+}
+
 @end

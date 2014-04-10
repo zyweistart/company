@@ -62,6 +62,7 @@
         [txtEmail setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [txtEmail setBackground:[UIImage imageNamed:@"txtbg"]];
         [txtEmail setDelegate:self];
+        [txtEmail setText:@""];
         [view addSubview:txtEmail];
         
         UIButton *btnSubmit=[[UIButton alloc]initWithFrame:CGRectMake(14.5, 224, 291, 40)];
@@ -91,12 +92,13 @@
 
 - (void)submitFeedBack:(id)sender {
     NSString *content=tvContent.text;
+    NSString *email=txtEmail.text;
     if([content isEqualToString:@""]){
         [Common alert:@"请输入反馈内容"];
     }else{
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
         [requestParams setObject:content forKey:@"feedcontent"];
-        [requestParams setObject:txtEmail.text forKey:@"email"];
+        [requestParams setObject:email forKey:@"email"];
         self.hRequest=[[HttpRequest alloc]init];
         [self.hRequest setDelegate:self];
         [self.hRequest setController:self];

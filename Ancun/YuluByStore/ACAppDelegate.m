@@ -11,6 +11,7 @@
 #import "ACLoginViewController.h"
 #import "ACGesturePasswordViewController.h"
 #import "ACRechargeConfirmViewController.h"
+#import "NSString+Utils.h"
 #import "ACRechargeNav.h"
 #ifndef TEST
 #import "BaiduMobStat.h"
@@ -74,8 +75,11 @@
         //直接进入登录页
         self.window.rootViewController=[[ACLoginViewController alloc]init];
 //        [Common setCache:DEFAULTDATA_GESTUREPWD data:@"1,4,7,8"];
-//        NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
-//        if(value!=nil&&![@"" isEqualToString:value]){
+//        NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
+//        NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
+//        NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
+//        BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
+//        if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
 //            self.window.rootViewController=[[ACGesturePasswordViewController alloc]init];
 //        }else{
 //            self.window.rootViewController=[[ACLoginViewController alloc]init];

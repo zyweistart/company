@@ -6,8 +6,8 @@
 //
 //
 
-#import "BaseViewController.h"
+#import "ACGesturePasswordViewController.h"
 
-@interface ACSetGesturePasswordViewController : BaseViewController
+@interface ACSetGesturePasswordViewController : ACGesturePasswordViewController
 
 @end

@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark 测试环境宏定义
-#define TEST
+//#define TEST
 #pragma mark 越狱版宏定义
 //#define JAILBREAK
 
@@ -63,6 +63,7 @@
 #define DEFAULTDATA_FIRSTLOGIN @"DEFAULTDATA_FIRSTLOGIN"
 #define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
 #define DEFAULTDATA_GESTUREPWD @"DEFAULTDATA_GESTUREPWD"
+#define DEFAULTDATA_CHECKVERSIONTIME @"DEFAULTDATA_CHECKVERSIONTIME"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2
@@ -79,6 +80,7 @@
 #define REQUESTCODE_BUY_LOADPRODUCT 112
 #define REQUESTCODE_BUY_BUILD 113
 #define REQUESTCODE_BUY_VERIFYING 114
+#define REQUESTCODE_CHECK_VERSION 11555
 //ResultDelegate代理返回的ResultCode常量
 #define RESULTCODE_ACLoginViewController_1 1
 #define RESULTCODE_ACLoginViewController_2 2

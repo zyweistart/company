@@ -216,7 +216,9 @@
             [recordingManagerViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         //更多
-        UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACMoreViewController alloc]init]];
+        ACMoreViewController *moreViewController=[[ACMoreViewController alloc]init];
+        [moreViewController checkVersion:NO];
+        UINavigationController *moreViewControllerNav = [[UINavigationController alloc] initWithRootViewController:moreViewController];
         moreViewControllerNav.tabBarItem.title = @"更多";
         [[moreViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_more_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_more"]];
         [[moreViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
@@ -231,7 +233,6 @@
         }else{
             [moreViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
-        
         //添加标签控制器
         UITabBarController *_tabBarController = [[UITabBarController alloc] init];
         [_tabBarController.view setBackgroundColor:MAINBG];

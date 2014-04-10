@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "KKGestureLockView.h"
 
-@interface ACGesturePasswordViewController : BaseViewController<UITabBarControllerDelegate,KKGestureLockViewDelegate>
+@interface ACGesturePasswordViewController : BaseViewController<KKGestureLockViewDelegate>
 
 @property (strong,nonatomic) KKGestureLockView *lockView;
 
