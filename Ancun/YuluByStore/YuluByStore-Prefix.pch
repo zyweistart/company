@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark 测试环境宏定义
-//#define TEST
+#define TEST
 #pragma mark 越狱版宏定义
 //#define JAILBREAK
 
@@ -52,6 +52,7 @@
 #define FONTCOLOR1 [UIColor colorWithRed:(0/255.0) green:(0/255.0) blue:(0/255.0) alpha:1]
 //字体颜色
 #define FONTCOLOR2 [UIColor colorWithRed:(65/255.0) green:(194/255.0) blue:(252/255.0) alpha:1]
+#define TABNORMALBGCOLOR [UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]
 //常量
 #define APPNAME @"安存语录"
 
@@ -61,6 +62,7 @@
 #define DEFAULTDATA_AUTOLOGIN @"DEFAULTDATA_AUTOLOGIN"
 #define DEFAULTDATA_FIRSTLOGIN @"DEFAULTDATA_FIRSTLOGIN"
 #define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
+#define DEFAULTDATA_GESTUREPWD @"DEFAULTDATA_GESTUREPWD"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2

@@ -7,8 +7,6 @@
 #import "ACRegistrationViewController.h"
 #import "ACForgetPasswordViewController.h"
 
-#define TABNORMALBGCOLOR [UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]
-
 @interface ACLoginViewController ()
 
 @end

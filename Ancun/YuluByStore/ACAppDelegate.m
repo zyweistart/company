@@ -9,6 +9,7 @@
 #import "ACAppDelegate.h"
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
+#import "ACGesturePasswordViewController.h"
 #import "ACRechargeConfirmViewController.h"
 #import "ACRechargeNav.h"
 #ifndef TEST
@@ -72,6 +73,13 @@
     }else{
         //直接进入登录页
         self.window.rootViewController=[[ACLoginViewController alloc]init];
+//        [Common setCache:DEFAULTDATA_GESTUREPWD data:@"1,4,7,8"];
+//        NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
+//        if(value!=nil&&![@"" isEqualToString:value]){
+//            self.window.rootViewController=[[ACGesturePasswordViewController alloc]init];
+//        }else{
+//            self.window.rootViewController=[[ACLoginViewController alloc]init];
+//        }
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
