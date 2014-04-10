@@ -19,6 +19,7 @@
 		C91D0BE418EE9F35006B10A3 /* ACAccountPay1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */; };
 		C91D0BE718EE9F4A006B10A3 /* ACAccountPay2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */; };
 		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
+		C9470DC518F62ABD0006D7AD /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9470DC418F62ABD0006D7AD /* libBaiduMobStat.a */; };
 		C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */; };
 		C978899718E16AC300157577 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C978899618E16AC300157577 /* Images.xcassets */; };
 		C97889AA18E16B4400157577 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C978899818E16B4400157577 /* AddressBook.framework */; };
@@ -41,7 +42,6 @@
 		C97889BD18E16B4F00157577 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BC18E16B4F00157577 /* Security.framework */; };
 		C97889BF18E16B9900157577 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BE18E16B9900157577 /* StoreKit.framework */; };
 		C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */; };
-		C992A9BA18F529F3001A6976 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C992A9B918F529F3001A6976 /* libBaiduMobStat.a */; };
 		C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */; };
 		C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */; };
 		C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */; };
@@ -159,6 +159,8 @@
 		C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPay2Cell.m; sourceTree = "<group>"; };
 		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
 		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
+		C9470DC318F62ABD0006D7AD /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		C9470DC418F62ABD0006D7AD /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingCallDetailViewController.h; sourceTree = "<group>"; };
 		C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingCallDetailViewController.m; sourceTree = "<group>"; };
 		C978899618E16AC300157577 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -184,8 +186,6 @@
 		C97DA4D717A9EFF7000D9B31 /* ydefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ydefines.h; sourceTree = "<group>"; };
 		C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionCodeDetailViewController.h; sourceTree = "<group>"; };
 		C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionCodeDetailViewController.m; sourceTree = "<group>"; };
-		C992A9B818F529F3001A6976 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
-		C992A9B918F529F3001A6976 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAppStoreViewController.h; sourceTree = "<group>"; };
 		C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeByAppStoreViewController.m; sourceTree = "<group>"; };
 		C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGuideViewController.h; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 				C97889B118E16B4400157577 /* CoreTelephony.framework in Frameworks */,
 				C97889B218E16B4400157577 /* CoreText.framework in Frameworks */,
 				C97889B318E16B4400157577 /* Foundation.framework in Frameworks */,
-				C992A9BA18F529F3001A6976 /* libBaiduMobStat.a in Frameworks */,
+				C9470DC518F62ABD0006D7AD /* libBaiduMobStat.a in Frameworks */,
 				C97889B418E16B4400157577 /* libstdc++.dylib in Frameworks */,
 				C97889B518E16B4400157577 /* libz.1.2.5.dylib in Frameworks */,
 				C97889B618E16B4400157577 /* MessageUI.framework in Frameworks */,
@@ -590,8 +590,8 @@
 		C992A9B718F529F3001A6976 /* baidu-mtj */ = {
 			isa = PBXGroup;
 			children = (
-				C992A9B818F529F3001A6976 /* BaiduMobStat.h */,
-				C992A9B918F529F3001A6976 /* libBaiduMobStat.a */,
+				C9470DC318F62ABD0006D7AD /* BaiduMobStat.h */,
+				C9470DC418F62ABD0006D7AD /* libBaiduMobStat.a */,
 			);
 			path = "baidu-mtj";
 			sourceTree = "<group>";
@@ -1289,10 +1289,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"YuluByStore/Librarys/alipay\"",
-					"\"YuluByStore/Librarys/baidu-mtj\"",
+					YuluByStore/Librarys/alipay,
+					"YuluByStore/Librarys/baidu-mtj",
+					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1332,9 +1333,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"YuluByStore/Librarys/alipay\"",
-					"\"YuluByStore/Librarys/baidu-mtj\"",
+					YuluByStore/Librarys/alipay,
+					"YuluByStore/Librarys/baidu-mtj",
+					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
