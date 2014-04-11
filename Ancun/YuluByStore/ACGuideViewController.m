@@ -1,4 +1,5 @@
 #import "ACGuideViewController.h"
+#import "ACGesturePasswordViewController.h"
 #import "ACLoginViewController.h"
 
 @interface ACGuideViewController ()
@@ -37,7 +38,16 @@
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
     [Common setCache:DEFAULTDATA_LASTVERSIONNO data:[infoDict objectForKey:@"CFBundleShortVersionString"]];
     
-    [UIApplication sharedApplication].keyWindow.rootViewController=[[ACLoginViewController alloc]init];
+    NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
+    NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
+    NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
+    BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
+    if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
+        [UIApplication sharedApplication].keyWindow.rootViewController=[[ACGesturePasswordViewController alloc]init];
+    }else{
+        [UIApplication sharedApplication].keyWindow.rootViewController=[[ACLoginViewController alloc]init];
+    }
+    
 }
 
 @end

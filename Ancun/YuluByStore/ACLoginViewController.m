@@ -6,6 +6,7 @@
 #import "ACMoreViewController.h"
 #import "ACRegistrationViewController.h"
 #import "ACForgetPasswordViewController.h"
+#import "NSString+Utils.h"
 
 @interface ACLoginViewController ()
 
@@ -179,11 +180,6 @@
         
         //我的账户
         UINavigationController *accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
-//        if([[Config Instance]isOldUser]) {
-//            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACOldAccountViewController alloc]init]];
-//        } else {
-//            accountViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAccountViewController alloc]init]];
-//        }
         accountViewControllerNav.tabBarItem.title = @"我的账户";
         [[accountViewControllerNav tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"nav_icon_account_hover"] withFinishedUnselectedImage:[UIImage imageNamed:@"nav_icon_account"]];
         [[accountViewControllerNav tabBarItem] setTitleTextAttributes:[NSDictionary
@@ -303,7 +299,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString *phone=_txtUserName.text;
-    if(phone==nil||[@"" isEqualToString:phone]) {
+    if(![phone isNotEmpty]) {
         [_txtPassword resignFirstResponder];
     } else {
         [self onClickLogin:nil];
@@ -325,12 +321,12 @@
 }
 
 - (void)autoLogin {
-    if(rememberPassword){
-        NSString *userName=[Common getCache:DEFAULTDATA_PHONE];
-        if(![@"" isEqualToString:userName]){
-            [_txtUserName setText:userName];
+    NSString *userName=[Common getCache:DEFAULTDATA_PHONE];
+    if([userName isNotEmpty]){
+        [_txtUserName setText:userName];
+        if(rememberPassword){
             NSString *password=[Common getCache:DEFAULTDATA_PASSWORD];
-            if(![@"" isEqualToString:password]){
+            if([password isNotEmpty]){
                 [_txtPassword setText:password];
                 [self performSelector:@selector(onClickLogin:) withObject:self afterDelay:0.5];
             }
@@ -347,9 +343,9 @@
     
     [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:rememberPassword];
     
-    if(username==nil||[@"" isEqualToString:username]){
+    if(![username isNotEmpty]){
         [Common alert:@"账号不能为空"];
-    }else if(password==nil||[@"" isEqualToString:password]){
+    }else if(![password isNotEmpty]){
         [Common alert:@"密码不能为空"];
     }else{
         NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];

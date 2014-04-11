@@ -35,7 +35,7 @@
         [self.view addSubview:container];
         
         NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"检测新版本",@"正在计算缓存大小",@"重新登录",@"手势密码", nil];
-        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"7",@"5",@"6",@"5", nil];
+        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"7",@"5",@"6",@"8", nil];
         NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"5",@"6",@"6",@"6",@"5", nil];
         
         for(int i=0;i<length;i++){

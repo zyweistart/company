@@ -72,7 +72,6 @@
         //新安装或升级则使用引导页
         self.window.rootViewController=[[ACGuideViewController alloc]init];
     }else{
-//        self.window.rootViewController=[[ACLoginViewController alloc]init];
         NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
         NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
         NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
