@@ -72,18 +72,16 @@
         //新安装或升级则使用引导页
         self.window.rootViewController=[[ACGuideViewController alloc]init];
     }else{
-        //直接进入登录页
-        self.window.rootViewController=[[ACLoginViewController alloc]init];
-//        [Common setCache:DEFAULTDATA_GESTUREPWD data:@"1,4,7,8"];
-//        NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
-//        NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
-//        NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
-//        BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
-//        if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
-//            self.window.rootViewController=[[ACGesturePasswordViewController alloc]init];
-//        }else{
-//            self.window.rootViewController=[[ACLoginViewController alloc]init];
-//        }
+//        self.window.rootViewController=[[ACLoginViewController alloc]init];
+        NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
+        NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
+        NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
+        BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
+        if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
+            self.window.rootViewController=[[ACGesturePasswordViewController alloc]init];
+        }else{
+            self.window.rootViewController=[[ACLoginViewController alloc]init];
+        }
     }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -92,8 +90,19 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     if([[Config Instance]isLogin]) {
+#ifdef JAILBREAK
         //重新返回到应用的时候刷新用户信息
         [[Config Instance] setIsRefreshUserInfo:YES];
+#endif
+        NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
+        NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
+        NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
+        BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
+        if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
+            if([[Config Instance]mainViewController]!=nil){
+                [[[Config Instance]mainViewController] presentModalViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES];
+            }
+        }
     }
 }
 

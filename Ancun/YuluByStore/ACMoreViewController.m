@@ -28,14 +28,14 @@
         }else{
             container=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
         }
-        int length=7;
+        int length=8;
         [container setContentSize:CGSizeMake(self.view.frame.size.width, 10+length*69.5+1*(length-1)+10)];
         [container setScrollEnabled:YES];
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"morebg"]]];
         [self.view addSubview:container];
         
         NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"检测新版本",@"正在计算缓存大小",@"重新登录",@"手势密码", nil];
-        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"6",@"5",@"6",@"5", nil];
+        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"7",@"5",@"6",@"5", nil];
         NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"5",@"6",@"6",@"6",@"5", nil];
         
         for(int i=0;i<length;i++){

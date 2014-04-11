@@ -35,22 +35,31 @@
     return self;
 }
 
+- (id)initWithFlag:(BOOL)flag
+{
+    self=[self init];
+    if(self){
+        _flag=flag;
+    }
+    return self;
+}
+
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode{
     if([passcode length]>6){
         NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
         if([passcode isEqualToString:value]){
-            [Common setCache:DEFAULTDATA_PHONE data:@"18368013123"];
-            [Common setCache:DEFAULTDATA_PASSWORD data:@"123456@"];
-            [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
-            [self goLoginPage];
+            if(_flag){
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
+                [self goLoginPage];
+            }
             return;
         }
     }
     errorCount++;
     if(errorCount>2){
         [Common alert:@"超过限制请重新登录"];
-        //清除账户
-        [Common setCache:DEFAULTDATA_PHONE data:@""];
         //清除登录密码
         [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         //清除手势密码

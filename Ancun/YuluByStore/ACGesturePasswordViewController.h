@@ -13,4 +13,8 @@
 
 @property (strong,nonatomic) KKGestureLockView *lockView;
 
+- (id)initWithFlag:(BOOL)flag;
+
+@property BOOL flag;
+
 @end

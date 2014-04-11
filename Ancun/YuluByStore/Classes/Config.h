@@ -20,6 +20,7 @@
 @property Boolean isRefreshUserInfo;
 
 @property (strong,nonatomic) UIViewController *currentViewController;
+@property (strong,nonatomic) UIViewController *mainViewController;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息

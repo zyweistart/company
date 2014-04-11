@@ -248,6 +248,7 @@
                                              recordingManagerViewControllerNav,
                                              moreViewControllerNav,
                                              nil];
+        [[Config Instance] setMainViewController:_tabBarController];
         
         [self presentViewController:_tabBarController animated:YES completion:nil];
         
@@ -269,6 +270,7 @@
 }
 
 - (void)onControllerResult:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableArray*)result{
+    [[Config Instance]setMainViewController:nil];
     if(resultCode==RESULTCODE_ACLoginViewController_1) {
         //登录
         [Config resetConfig];

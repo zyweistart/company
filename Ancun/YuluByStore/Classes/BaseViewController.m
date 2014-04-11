@@ -12,7 +12,7 @@
 - (id)init{
     self=[super init];
     if(self){
-        
+        [[Config Instance]setCurrentViewController:self];
     }
     return self;
 }
