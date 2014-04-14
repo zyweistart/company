@@ -21,6 +21,7 @@
 
 @property (strong,nonatomic) UIViewController *currentViewController;
 @property (strong,nonatomic) UIViewController *mainViewController;
+@property BOOL lock;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息

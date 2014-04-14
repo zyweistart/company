@@ -43,6 +43,14 @@
 		C97889BB18E16B4400157577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889A918E16B4400157577 /* UIKit.framework */; };
 		C97889BD18E16B4F00157577 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BC18E16B4F00157577 /* Security.framework */; };
 		C97889BF18E16B9900157577 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97889BE18E16B9900157577 /* StoreKit.framework */; };
+		C98C6A6718FBC51700D3EF37 /* icon_session.png in Resources */ = {isa = PBXBuildFile; fileRef = C98C6A5A18FBC51700D3EF37 /* icon_session.png */; };
+		C98C6A6818FBC51700D3EF37 /* icon_session@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98C6A5B18FBC51700D3EF37 /* icon_session@2x.png */; };
+		C98C6A6918FBC51700D3EF37 /* icon_timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = C98C6A5C18FBC51700D3EF37 /* icon_timeline.png */; };
+		C98C6A6A18FBC51700D3EF37 /* icon_timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98C6A5D18FBC51700D3EF37 /* icon_timeline@2x.png */; };
+		C98C6A6B18FBC51700D3EF37 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C98C6A5E18FBC51700D3EF37 /* libWeChatSDK.a */; };
+		C98C6A6C18FBC51800D3EF37 /* WeixinActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C98C6A6218FBC51700D3EF37 /* WeixinActivity.m */; };
+		C98C6A6D18FBC51800D3EF37 /* WeixinSessionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C98C6A6418FBC51700D3EF37 /* WeixinSessionActivity.m */; };
+		C98C6A6E18FBC51800D3EF37 /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C98C6A6618FBC51700D3EF37 /* WeixinTimelineActivity.m */; };
 		C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */; };
 		C997105A18F62EF100E56D22 /* KKGestureLockPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C997105718F62EF100E56D22 /* KKGestureLockPreviewView.m */; };
 		C997105B18F62EF100E56D22 /* KKGestureLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = C997105918F62EF100E56D22 /* KKGestureLockView.m */; };
@@ -196,6 +204,19 @@
 		C97889BC18E16B4F00157577 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C97889BE18E16B9900157577 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		C97DA4D717A9EFF7000D9B31 /* ydefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ydefines.h; sourceTree = "<group>"; };
+		C98C6A5A18FBC51700D3EF37 /* icon_session.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_session.png; sourceTree = "<group>"; };
+		C98C6A5B18FBC51700D3EF37 /* icon_session@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_session@2x.png"; sourceTree = "<group>"; };
+		C98C6A5C18FBC51700D3EF37 /* icon_timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_timeline.png; sourceTree = "<group>"; };
+		C98C6A5D18FBC51700D3EF37 /* icon_timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_timeline@2x.png"; sourceTree = "<group>"; };
+		C98C6A5E18FBC51700D3EF37 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		C98C6A5F18FBC51700D3EF37 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		C98C6A6018FBC51700D3EF37 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		C98C6A6118FBC51700D3EF37 /* WeixinActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinActivity.h; sourceTree = "<group>"; };
+		C98C6A6218FBC51700D3EF37 /* WeixinActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinActivity.m; sourceTree = "<group>"; };
+		C98C6A6318FBC51700D3EF37 /* WeixinSessionActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinSessionActivity.h; sourceTree = "<group>"; };
+		C98C6A6418FBC51700D3EF37 /* WeixinSessionActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinSessionActivity.m; sourceTree = "<group>"; };
+		C98C6A6518FBC51700D3EF37 /* WeixinTimelineActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinTimelineActivity.h; sourceTree = "<group>"; };
+		C98C6A6618FBC51700D3EF37 /* WeixinTimelineActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinTimelineActivity.m; sourceTree = "<group>"; };
 		C990FA9A18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionCodeDetailViewController.h; sourceTree = "<group>"; };
 		C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionCodeDetailViewController.m; sourceTree = "<group>"; };
 		C997105618F62EF100E56D22 /* KKGestureLockPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockPreviewView.h; sourceTree = "<group>"; };
@@ -465,6 +486,7 @@
 			files = (
 				C97889BF18E16B9900157577 /* StoreKit.framework in Frameworks */,
 				C97889BD18E16B4F00157577 /* Security.framework in Frameworks */,
+				C98C6A6B18FBC51700D3EF37 /* libWeChatSDK.a in Frameworks */,
 				C97889AA18E16B4400157577 /* AddressBook.framework in Frameworks */,
 				C97889AB18E16B4400157577 /* AddressBookUI.framework in Frameworks */,
 				C97889AC18E16B4400157577 /* AudioToolbox.framework in Frameworks */,
@@ -624,6 +646,34 @@
 				C9A67EA817CD882900E9A81E /* ACContactsViewController.m */,
 			);
 			name = Contacts;
+			sourceTree = "<group>";
+		};
+		C98C6A5818FBC51700D3EF37 /* WeixinActivity */ = {
+			isa = PBXGroup;
+			children = (
+				C98C6A5918FBC51700D3EF37 /* Resources */,
+				C98C6A6118FBC51700D3EF37 /* WeixinActivity.h */,
+				C98C6A6218FBC51700D3EF37 /* WeixinActivity.m */,
+				C98C6A6318FBC51700D3EF37 /* WeixinSessionActivity.h */,
+				C98C6A6418FBC51700D3EF37 /* WeixinSessionActivity.m */,
+				C98C6A6518FBC51700D3EF37 /* WeixinTimelineActivity.h */,
+				C98C6A6618FBC51700D3EF37 /* WeixinTimelineActivity.m */,
+			);
+			path = WeixinActivity;
+			sourceTree = "<group>";
+		};
+		C98C6A5918FBC51700D3EF37 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C98C6A5A18FBC51700D3EF37 /* icon_session.png */,
+				C98C6A5B18FBC51700D3EF37 /* icon_session@2x.png */,
+				C98C6A5C18FBC51700D3EF37 /* icon_timeline.png */,
+				C98C6A5D18FBC51700D3EF37 /* icon_timeline@2x.png */,
+				C98C6A5E18FBC51700D3EF37 /* libWeChatSDK.a */,
+				C98C6A5F18FBC51700D3EF37 /* WXApi.h */,
+				C98C6A6018FBC51700D3EF37 /* WXApiObject.h */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C992A9B718F529F3001A6976 /* baidu-mtj */ = {
@@ -828,6 +878,7 @@
 				C9D97B9D179FA6640076ACF3 /* MBProgressHUD */,
 				C9D97BA0179FA6640076ACF3 /* RefreshTableHeaderView */,
 				C9D4D17017E2B8EE0013D03E /* TouchJSON */,
+				C98C6A5818FBC51700D3EF37 /* WeixinActivity */,
 			);
 			path = Librarys;
 			sourceTree = "<group>";
@@ -1166,6 +1217,7 @@
 				C9D97A92179FA6520076ACF3 /* ACNotaryDetailViewController@iPhone5.xib in Resources */,
 				C9D97CC2179FA6650076ACF3 /* blackArrow.png in Resources */,
 				C9D97CC3179FA6650076ACF3 /* blackArrow@2x.png in Resources */,
+				C98C6A6918FBC51700D3EF37 /* icon_timeline.png in Resources */,
 				C9D97CC4179FA6650076ACF3 /* blueArrow.png in Resources */,
 				C9D97CC5179FA6650076ACF3 /* blueArrow@2x.png in Resources */,
 				C9D97CC7179FA6650076ACF3 /* grayArrow.png in Resources */,
@@ -1173,11 +1225,14 @@
 				C978899718E16AC300157577 /* Images.xcassets in Resources */,
 				C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */,
 				C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */,
+				C98C6A6818FBC51700D3EF37 /* icon_session@2x.png in Resources */,
 				C9D97D5F179FA6650076ACF3 /* notary_result_ok.png in Resources */,
 				C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */,
 				C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */,
+				C98C6A6718FBC51700D3EF37 /* icon_session.png in Resources */,
 				C9A8A93717BB7FF100652B90 /* nav.png in Resources */,
 				C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */,
+				C98C6A6A18FBC51700D3EF37 /* icon_timeline@2x.png in Resources */,
 				C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */,
 				C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */,
 			);
@@ -1210,6 +1265,7 @@
 				C9D97A9A179FA6520076ACF3 /* ACRecordingCell.m in Sources */,
 				C9D97A9C179FA6520076ACF3 /* ACRecordingDetailCell.m in Sources */,
 				C9D97AA3179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m in Sources */,
+				C98C6A6E18FBC51800D3EF37 /* WeixinTimelineActivity.m in Sources */,
 				C9D47CFD18F387F300472625 /* ACModifyPasswordViewController.m in Sources */,
 				C9D97AAA179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m in Sources */,
 				C9D97AAB179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m in Sources */,
@@ -1217,6 +1273,7 @@
 				C9D97C7C179FA6640076ACF3 /* BaseTableViewController.m in Sources */,
 				C9D97C83179FA6640076ACF3 /* IAPHelper.m in Sources */,
 				C9D97C7D179FA6640076ACF3 /* Common.m in Sources */,
+				C98C6A6D18FBC51800D3EF37 /* WeixinSessionActivity.m in Sources */,
 				C9A560CF18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m in Sources */,
 				C9D97C7E179FA6640076ACF3 /* Config.m in Sources */,
 				C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */,
@@ -1277,6 +1334,7 @@
 				C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */,
 				C91D0BE418EE9F35006B10A3 /* ACAccountPay1Cell.m in Sources */,
 				C9D4D18F17E2B8EE0013D03E /* NSDictionary_JSONExtensions.m in Sources */,
+				C98C6A6C18FBC51800D3EF37 /* WeixinActivity.m in Sources */,
 				C9D4D19017E2B8EE0013D03E /* CJSONDeserializer.m in Sources */,
 				C9D4D19117E2B8EE0013D03E /* CJSONScanner.m in Sources */,
 				C9D4D19217E2B8EE0013D03E /* CJSONSerializer.m in Sources */,
@@ -1356,6 +1414,7 @@
 					YuluByStore/Librarys/alipay,
 					"YuluByStore/Librarys/baidu-mtj",
 					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
+					"$(PROJECT_DIR)/YuluByStore/Librarys/WeixinActivity/Resources",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1400,6 +1459,7 @@
 					YuluByStore/Librarys/alipay,
 					"YuluByStore/Librarys/baidu-mtj",
 					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
+					"$(PROJECT_DIR)/YuluByStore/Librarys/WeixinActivity/Resources",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

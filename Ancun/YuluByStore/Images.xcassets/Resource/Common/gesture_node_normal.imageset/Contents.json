@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "gesture_node_normal.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",

@@ -21,12 +21,12 @@
 {
     self = [super init];
     if (self) {
-        self.view.backgroundColor = [UIColor whiteColor];
+        [self.view setBackgroundColor:MAINBG];
         self.lockView=[[KKGestureLockView alloc]initWithFrame:self.view.bounds];
-        [self.view addSubview:self.lockView];
+        [self.lockView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3"]]];        [self.view addSubview:self.lockView];
         self.lockView.normalGestureNodeImage = [UIImage imageNamed:@"gesture_node_normal"];
         self.lockView.selectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected"];
-        self.lockView.lineColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3];
+        self.lockView.lineColor = [[UIColor colorWithRed:(107/255.0) green:(166/255.0) blue:(216/255.0) alpha:1] colorWithAlphaComponent:0.3];
         self.lockView.lineWidth = 12;
         self.lockView.delegate = self;
         if(inch4){
@@ -46,12 +46,21 @@
         
         _flag=flag;
         
-        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, self.lockView.frame.size.height-60, 80, 18)];
-        btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
-        [btnForgetPwd setTitle:@"忘记密码~" forState:UIControlStateNormal];
-        [btnForgetPwd setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
-        [self.lockView addSubview:btnForgetPwd];
+        [[Config Instance] setLock:YES];
+        
+        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(20, self.lockView.frame.size.height-60, 120, 40)];
+        btn.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btn setTitle:@"忘记手势密码" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
+        [self.lockView addSubview:btn];
+        
+        btn=[[UIButton alloc]initWithFrame:CGRectMake(180, self.lockView.frame.size.height-60, 120, 40)];
+        btn.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btn setTitle:@"切换登录账户" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(onClickSwitchUser:) forControlEvents:UIControlEventTouchUpInside];
+        [self.lockView addSubview:btn];
         
     }
     return self;
@@ -64,10 +73,19 @@
     [self goLoginPage:YES];
 }
 
+- (void)onClickSwitchUser:(id)sender
+{
+    //清除登录用户密码
+    [Common setCache:DEFAULTDATA_PHONE data:@""];
+    [Common setCache:DEFAULTDATA_PASSWORD data:@""];
+    [self goLoginPage:NO];
+}
+
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode{
     NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
     if([passcode isEqualToString:value]){
         if(_flag){
+            [[Config Instance] setLock:NO];
             [self dismissViewControllerAnimated:YES completion:nil];
         }else{
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
@@ -75,15 +93,13 @@
         }
         return;
     }
-    errorCount++;
     if(errorCount>2){
         [Common alert:@"超过限制请重新登录"];
         //清除登录密码
         [Common setCache:DEFAULTDATA_PASSWORD data:@""];
         [self goLoginPage:YES];
-    }else{
-        [Common alert:@"手势密码出错，请重试!"];
     }
+    errorCount++;
 }
 
 - (void)goLoginPage:(BOOL)agp
@@ -91,7 +107,7 @@
     ACLoginViewController *loginViewController=[[ACLoginViewController alloc]init];
     [loginViewController setGotoAgainGesurePassword:agp];
     [self presentViewController:loginViewController animated:YES completion:^{
-        
+        [[Config Instance] setLock:NO];
     }];
 }
 

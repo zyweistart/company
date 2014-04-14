@@ -55,7 +55,8 @@
 #define TABNORMALBGCOLOR [UIColor colorWithRed:(253/255.0) green:(227/255.0) blue:(91/255.0) alpha:1]
 //常量
 #define APPNAME @"安存语录"
-
+//微信注册APP
+#define WEIXINREGISTERAPP @"wx6c2726803d4f336a"
 //配置常量
 #define DEFAULTDATA_PHONE @"DEFAULTDATA_PHONE"
 #define DEFAULTDATA_PASSWORD @"DEFAULTDATA_PASSWORD"

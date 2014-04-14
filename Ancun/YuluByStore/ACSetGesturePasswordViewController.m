@@ -26,7 +26,7 @@
         lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 20)];
         [lblInfo setText:@"请绘制解锁图案"];
         [lblInfo setFont:[UIFont systemFontOfSize:15]];
-        [lblInfo setTextColor:[UIColor blackColor]];
+        [lblInfo setTextColor:[UIColor whiteColor]];
         [lblInfo setBackgroundColor:[UIColor clearColor]];
         [lblInfo setTextAlignment:NSTextAlignmentCenter];
         [self.lockView addSubview:lblInfo];
@@ -42,7 +42,7 @@
             [Common setCache:DEFAULTDATA_PASSWORD data:[[Config Instance] PASSWORD]];
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
             [lblInfo setText:@"手势密码设置成功"];
-            [self performSelector:@selector(toRootViewController) withObject:nil afterDelay:1];
+            [self performSelector:@selector(toRootViewController) withObject:nil afterDelay:0.5];
         }else{
             firstPassCode=nil;
             [lblInfo setText:@"与上一次输入不一致，请重试"];

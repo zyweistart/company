@@ -6,6 +6,8 @@
 #import "ACNavGesturePasswordViewController.h"
 #import "FileUtils.h"
 #import "NSString+Utils.h"
+#import "WeixinSessionActivity.h"
+#import "WeixinTimelineActivity.h"
 
 @interface ACMoreViewController () <UIActionSheetDelegate>
 
@@ -28,15 +30,15 @@
         }else{
             container=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-TOPNAVIGATIONHEIGHT-BOTTOMTABBARHEIGHT)];
         }
-        int length=8;
+        int length=9;
         [container setContentSize:CGSizeMake(self.view.frame.size.width, 10+length*69.5+1*(length-1)+10)];
         [container setScrollEnabled:YES];
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"morebg"]]];
         [self.view addSubview:container];
         
-        NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"手势密码",@"检测新版本",@"正在计算缓存大小",@"重新登录", nil];
-        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"8",@"7",@"5",@"6", nil];
-        NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"5",@"5",@"6",@"6",@"6", nil];
+        NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"手势密码",@"检测新版本",@"正在计算缓存大小",@"应用分享",@"重新登录", nil];
+        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"8",@"7",@"5",@"9",@"6", nil];
+        NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"6",@"6",@"6", nil];
         
         for(int i=0;i<length;i++){
             UIButton *btnBg=[[UIButton alloc]initWithFrame:CGRectMake(15.75, 10+i*69.5+1*i,288.5,69.5)];
@@ -140,6 +142,12 @@
             }
         }
     }else if(sender.tag==7){
+        //应用分享
+        NSArray *activity = @[[[WeixinSessionActivity alloc] init], [[WeixinTimelineActivity alloc] init]];
+        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"安存语录,促使通话录音,严格满足证据的真实性、合法性要求,以公证的法定证明力为依托,是真正可成为被司法机关认可的呈堂证供的通话录音",[UIImage imageNamed:@"icon"],[NSURL URLWithString:@"https://itunes.apple.com/cn/app/an-cun-yu-lu-ge-ren-ban/id638597148?mt=8"]] applicationActivities:activity];
+        activityView.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint];
+        [self presentViewController:activityView animated:YES completion:nil];
+    }else if(sender.tag==8){
         //重新登录
         [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
     }

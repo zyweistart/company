@@ -6,7 +6,9 @@
 //  Copyright (c) 2012年 ancun. All rights reserved.
 //
 
-@interface ACAppDelegate : UIResponder <UIApplicationDelegate>
+#import "WXApi.h"
+
+@interface ACAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

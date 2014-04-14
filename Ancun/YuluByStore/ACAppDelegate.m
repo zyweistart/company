@@ -28,6 +28,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     //显示系统托盘
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [WXApi registerApp:WEIXINREGISTERAPP];
+    
 #ifndef TEST
     NSBundle *bundle=[NSBundle mainBundle];
     //测试环境下不进行百度统计
@@ -93,20 +96,34 @@
         //重新返回到应用的时候刷新用户信息
         [[Config Instance] setIsRefreshUserInfo:YES];
 #endif
+    }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    if([[Config Instance]isLogin]) {
         NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
         NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];
         NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
         BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
         if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
             if([[Config Instance]mainViewController]!=nil){
-                [[[Config Instance]mainViewController] presentModalViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES];
+                if(![[Config Instance]lock]){
+                    [[[Config Instance]mainViewController] presentModalViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES];
+                }
             }
         }
     }
 }
 
-#ifdef JAILBREAK
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [WXApi handleOpenURL:url delegate:self];
+#ifdef JAILBREAK
     AlixPay *alixpay = [AlixPay shared];
 	AlixPayResult *result = [alixpay handleOpenURL:url];
 	if (result) {
@@ -156,9 +173,9 @@
             [Common alert:result.statusMessage];
 		}
 	}
-    
-	return YES;
-}
 #endif
+    return YES;
+}
+
 
 @end
