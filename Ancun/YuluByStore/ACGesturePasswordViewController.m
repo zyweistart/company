@@ -31,6 +31,14 @@
         self.lockView.delegate = self;
         self.lockView.contentInsets = UIEdgeInsetsMake(150, 20, 100, 20);
         errorCount=0;
+        
+        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, inch4?500:294, 80, 18)];
+        btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btnForgetPwd setTitle:@"忘记密码~" forState:UIControlStateNormal];
+        [btnForgetPwd setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
+        [self.lockView addSubview:btnForgetPwd];
+        
     }
     return self;
 }
@@ -44,26 +52,29 @@
     return self;
 }
 
+- (void)onClickForgetPwd:(id)sender
+{
+    //清除登录密码
+    [Common setCache:DEFAULTDATA_PASSWORD data:@""];
+    [self goLoginPage];
+}
+
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode{
-    if([passcode length]>6){
-        NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
-        if([passcode isEqualToString:value]){
-            if(_flag){
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }else{
-                [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
-                [self goLoginPage];
-            }
-            return;
+    NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
+    if([passcode isEqualToString:value]){
+        if(_flag){
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
+            [self goLoginPage];
         }
+        return;
     }
     errorCount++;
     if(errorCount>2){
         [Common alert:@"超过限制请重新登录"];
         //清除登录密码
         [Common setCache:DEFAULTDATA_PASSWORD data:@""];
-        //清除手势密码
-        [Common setCache:DEFAULTDATA_GESTUREPWD data:@""];
         [self goLoginPage];
     }else{
         [Common alert:@"手势密码出错，请重试!"];

@@ -36,6 +36,9 @@
 //当前用户的套餐列表
 @property (strong,nonatomic) NSMutableArray *currentPackagesList;
 
+@property (strong,nonatomic) NSString *USERNAME;
+@property (strong,nonatomic) NSString *PASSWORD;
+
 + (Config *)Instance;
 
 + (void)resetConfig;

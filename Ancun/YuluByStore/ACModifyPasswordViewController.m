@@ -92,9 +92,11 @@
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode{
     if([response successFlag]){
         [Common alert:@"密码修改成功！"];
+        NSString *password=txtNewPassword.text;
+        [[Config Instance] setPASSWORD:password];
         //如果为自动登录则更新已保存的密码
         if((BOOL)[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]) {
-            [Common setCache:DEFAULTDATA_PASSWORD data:txtNewPassword.text];
+            [Common setCache:DEFAULTDATA_PASSWORD data:password];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
