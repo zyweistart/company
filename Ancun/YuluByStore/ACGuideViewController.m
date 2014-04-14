@@ -43,7 +43,7 @@
     NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
     BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
     if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
-        [UIApplication sharedApplication].keyWindow.rootViewController=[[ACGesturePasswordViewController alloc]init];
+        [UIApplication sharedApplication].keyWindow.rootViewController=[[ACGesturePasswordViewController alloc]initWithFlag:NO];
     }else{
         [UIApplication sharedApplication].keyWindow.rootViewController=[[ACLoginViewController alloc]init];
     }

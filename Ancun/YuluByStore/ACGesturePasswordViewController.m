@@ -29,16 +29,12 @@
         self.lockView.lineColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3];
         self.lockView.lineWidth = 12;
         self.lockView.delegate = self;
-        self.lockView.contentInsets = UIEdgeInsetsMake(150, 20, 100, 20);
+        if(inch4){
+            self.lockView.contentInsets = UIEdgeInsetsMake(100, 20, 100, 20);
+        }else{
+            self.lockView.contentInsets = UIEdgeInsetsMake(80, 20, 100, 20);
+        }
         errorCount=0;
-        
-        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, self.lockView.frame.size.height-40, 80, 18)];
-        btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
-        [btnForgetPwd setTitle:@"忘记密码~" forState:UIControlStateNormal];
-        [btnForgetPwd setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
-        [self.lockView addSubview:btnForgetPwd];
-        
     }
     return self;
 }
@@ -47,7 +43,16 @@
 {
     self=[self init];
     if(self){
+        
         _flag=flag;
+        
+        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, self.lockView.frame.size.height-60, 80, 18)];
+        btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
+        [btnForgetPwd setTitle:@"忘记密码~" forState:UIControlStateNormal];
+        [btnForgetPwd setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnForgetPwd addTarget:self action:@selector(onClickForgetPwd:) forControlEvents:UIControlEventTouchUpInside];
+        [self.lockView addSubview:btnForgetPwd];
+        
     }
     return self;
 }

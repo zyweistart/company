@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         self.title=@"密码绘制";
-        lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20)];
+        lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 20)];
         [lblInfo setText:@"请绘制解锁图案"];
         [lblInfo setFont:[UIFont systemFontOfSize:15]];
         [lblInfo setTextColor:[UIColor blackColor]];
