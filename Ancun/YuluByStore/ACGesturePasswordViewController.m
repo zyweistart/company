@@ -36,7 +36,7 @@
         }
         errorCount=0;
         
-        self.lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, 30)];
+        self.lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, 30)];
         [self.lblInfo setFont:[UIFont fontWithName:@"Helvetica-Bold" size:17]];
         [self.lblInfo setTextColor:[UIColor whiteColor]];
         [self.lblInfo setBackgroundColor:[UIColor clearColor]];

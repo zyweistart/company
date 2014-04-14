@@ -469,7 +469,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C914503D18FBAC0300B00B89 /* GesturePassword */ = {
+		C914503D18FBAC0300B00B89 /* Gesture */ = {
 			isa = PBXGroup;
 			children = (
 				C914503A18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.h */,
@@ -481,7 +481,7 @@
 				C997105F18F631A200E56D22 /* ACSetGesturePasswordViewController.h */,
 				C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */,
 			);
-			name = GesturePassword;
+			name = Gesture;
 			sourceTree = "<group>";
 		};
 		C91D0BE818EEA16B006B10A3 /* Account */ = {
@@ -1001,7 +1001,7 @@
 				C91D0BE818EEA16B006B10A3 /* Account */,
 				C91D0BED18EEA1D8006B10A3 /* Contacts */,
 				C91D0BEC18EEA1D0006B10A3 /* Dial */,
-				C914503D18FBAC0300B00B89 /* GesturePassword */,
+				C914503D18FBAC0300B00B89 /* Gesture */,
 				C91D0BEB18EEA1BA006B10A3 /* Main */,
 				C91D0BE918EEA17F006B10A3 /* More */,
 				C91D0BEA18EEA195006B10A3 /* Recording */,
