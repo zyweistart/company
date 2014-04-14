@@ -41,7 +41,7 @@ static NSString *loadingCellIdentifier=@"loadingCell";
 //        }
         cell = [[LoadingCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:loadingCellIdentifier];
     }
-    cell.lbl.font = [UIFont boldSystemFontOfSize:21.0];
+    cell.lbl.font = [UIFont systemFontOfSize:21.0];
     cell.lbl.text = isLoadOver ? loadOverString : loadingString;
     if (isLoading){
         cell.loading.hidden = NO;
@@ -68,7 +68,7 @@ static NSString *loadingCellIdentifier=@"loadingCell";
 //        }
         cell = [[LoadingCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:loadingCellIdentifier];
     }
-    cell.lbl.font = [UIFont boldSystemFontOfSize:21.0];
+    cell.lbl.font = [UIFont systemFontOfSize:21.0];
     cell.lbl.text = isLoadOver ? @"数据加载完毕" : (isLoading ? @"正在加载 . . ." : @"更多 . . .");
     if(currentPage==0){
         if(isLoadOver){

@@ -14,14 +14,10 @@
 @property Boolean isRefreshAccountPayList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountUseRecordList;
-//是否刷新时长版用户月份统计信息
-@property Boolean isRefreshOldAccountMonthList;
 //是否刷新用户信息
 @property Boolean isRefreshUserInfo;
-
-@property (strong,nonatomic) UIViewController *currentViewController;
-@property (strong,nonatomic) UIViewController *mainViewController;
-@property BOOL lock;
+//
+@property Boolean lock;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息
@@ -34,6 +30,10 @@
 @property (strong,nonatomic) NSMutableArray *noDialPhoneNumber;
 //当前用户的套餐列表
 @property (strong,nonatomic) NSMutableArray *currentPackagesList;
+
+@property (strong,nonatomic) UIViewController *currentViewController;
+@property (strong,nonatomic) UIViewController *paynmentViewController;
+@property (strong,nonatomic) UIViewController *mainViewController;
 
 @property (strong,nonatomic) NSString *USERNAME;
 @property (strong,nonatomic) NSString *PASSWORD;
