@@ -44,7 +44,6 @@
 		C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C990FA9B18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m */; };
 		C997105A18F62EF100E56D22 /* KKGestureLockPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C997105718F62EF100E56D22 /* KKGestureLockPreviewView.m */; };
 		C997105B18F62EF100E56D22 /* KKGestureLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = C997105918F62EF100E56D22 /* KKGestureLockView.m */; };
-		C997105E18F62F1B00E56D22 /* ACGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C997105D18F62F1B00E56D22 /* ACGesturePasswordViewController.m */; };
 		C997106118F631A200E56D22 /* ACSetGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */; };
 		C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */; };
 		C99B80DC17A0C8C7004D0BFB /* ACGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */; };
@@ -55,6 +54,9 @@
 		C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */; };
 		C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */; };
 		C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */; };
+		C9A560CC18FB7CA4006A5049 /* ACGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */; };
+		C9A560CF18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */; };
+		C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */; };
 		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
 		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
 		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
@@ -194,8 +196,6 @@
 		C997105718F62EF100E56D22 /* KKGestureLockPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKGestureLockPreviewView.m; sourceTree = "<group>"; };
 		C997105818F62EF100E56D22 /* KKGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockView.h; sourceTree = "<group>"; };
 		C997105918F62EF100E56D22 /* KKGestureLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKGestureLockView.m; sourceTree = "<group>"; };
-		C997105C18F62F1B00E56D22 /* ACGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGesturePasswordViewController.h; sourceTree = "<group>"; };
-		C997105D18F62F1B00E56D22 /* ACGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGesturePasswordViewController.m; sourceTree = "<group>"; };
 		C997105F18F631A200E56D22 /* ACSetGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACSetGesturePasswordViewController.h; sourceTree = "<group>"; };
 		C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACSetGesturePasswordViewController.m; sourceTree = "<group>"; };
 		C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAppStoreViewController.h; sourceTree = "<group>"; };
@@ -216,6 +216,12 @@
 		C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayViewController.m; sourceTree = "<group>"; };
 		C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountDayCell.h; sourceTree = "<group>"; };
 		C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayCell.m; sourceTree = "<group>"; };
+		C9A560CA18FB7CA4006A5049 /* ACGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGesturePasswordViewController.h; sourceTree = "<group>"; };
+		C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGesturePasswordViewController.m; sourceTree = "<group>"; };
+		C9A560CD18FB7CFD006A5049 /* ACNavGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavGesturePasswordViewController.h; sourceTree = "<group>"; };
+		C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavGesturePasswordViewController.m; sourceTree = "<group>"; };
+		C9A560D018FB7F2E006A5049 /* ACGestureStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGestureStatusCell.h; sourceTree = "<group>"; };
+		C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGestureStatusCell.m; sourceTree = "<group>"; };
 		C9A67EA717CD882900E9A81E /* ACContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactsViewController.h; sourceTree = "<group>"; };
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
 		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
@@ -543,6 +549,8 @@
 				C9D47CFC18F387F300472625 /* ACModifyPasswordViewController.m */,
 				C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */,
 				C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */,
+				C9A560CD18FB7CFD006A5049 /* ACNavGesturePasswordViewController.h */,
+				C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */,
 				C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */,
 				C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */,
 				C997105F18F631A200E56D22 /* ACSetGesturePasswordViewController.h */,
@@ -573,14 +581,14 @@
 			children = (
 				C99BC2E418ED2ACE00650DF5 /* ACForgetPasswordViewController.h */,
 				C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */,
-				C997105C18F62F1B00E56D22 /* ACGesturePasswordViewController.h */,
-				C997105D18F62F1B00E56D22 /* ACGesturePasswordViewController.m */,
 				C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */,
 				C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */,
 				C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */,
 				C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */,
 				C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */,
 				C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */,
+				C9A560CA18FB7CA4006A5049 /* ACGesturePasswordViewController.h */,
+				C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1054,6 +1062,8 @@
 				C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */,
 				C9D97A15179FA64F0076ACF3 /* ACContactCell.h */,
 				C9D97A16179FA64F0076ACF3 /* ACContactCell.m */,
+				C9A560D018FB7F2E006A5049 /* ACGestureStatusCell.h */,
+				C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */,
 				C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */,
 				C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */,
 				C9D97A4D179FA6520076ACF3 /* ACRecordingCell.h */,
@@ -1188,6 +1198,7 @@
 				C9D97C7C179FA6640076ACF3 /* BaseTableViewController.m in Sources */,
 				C9D97C83179FA6640076ACF3 /* IAPHelper.m in Sources */,
 				C9D97C7D179FA6640076ACF3 /* Common.m in Sources */,
+				C9A560CF18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m in Sources */,
 				C9D97C7E179FA6640076ACF3 /* Config.m in Sources */,
 				C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */,
 				C9D97C80179FA6640076ACF3 /* DataSingleton.m in Sources */,
@@ -1195,7 +1206,6 @@
 				C9D97C82179FA6640076ACF3 /* HttpRequest.m in Sources */,
 				C9D97C84179FA6640076ACF3 /* LoadingCell.m in Sources */,
 				C997106118F631A200E56D22 /* ACSetGesturePasswordViewController.m in Sources */,
-				C997105E18F62F1B00E56D22 /* ACGesturePasswordViewController.m in Sources */,
 				C9D97C86179FA6640076ACF3 /* LongPressButton.m in Sources */,
 				C9D97C87179FA6640076ACF3 /* Response.m in Sources */,
 				C91D0BD918EE83BA006B10A3 /* ACPaymentViewController.m in Sources */,
@@ -1206,6 +1216,7 @@
 				C9CB41BF18ED0E2E00DB6099 /* EAIntroView.m in Sources */,
 				C9D97C96179FA6650076ACF3 /* ATMHudQueueItem.m in Sources */,
 				C9D97C97179FA6650076ACF3 /* ATMHudView.m in Sources */,
+				C9A560CC18FB7CA4006A5049 /* ACGesturePasswordViewController.m in Sources */,
 				C99F0C6A18EBDC9F00C27BFC /* ACRegistrationViewController.m in Sources */,
 				C9D97C98179FA6650076ACF3 /* ATMProgressLayer.m in Sources */,
 				C9D97C99179FA6650076ACF3 /* ATMSoundFX.m in Sources */,
@@ -1226,6 +1237,7 @@
 				C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */,
 				C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */,
 				C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */,
+				C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */,
 				C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */,
 				C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */,
 				C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */,

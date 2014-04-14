@@ -22,7 +22,7 @@
 {
     self = [super init];
     if (self) {
-        self.title=@"手势设置";
+        self.title=@"密码绘制";
         lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
         [lblInfo setText:@"请绘制解锁图案"];
         [lblInfo setFont:[UIFont systemFontOfSize:15]];
@@ -55,7 +55,7 @@
 
 - (void)popToRootViewController
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

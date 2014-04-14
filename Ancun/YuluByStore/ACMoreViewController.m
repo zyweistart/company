@@ -3,7 +3,7 @@
 #import "ACAboutUsViewController.h"
 #import "ACFeedBacksViewController.h"
 #import "ACModifyPasswordViewController.h"
-#import "ACSetGesturePasswordViewController.h"
+#import "ACNavGesturePasswordViewController.h"
 #import "FileUtils.h"
 #import "NSString+Utils.h"
 
@@ -139,9 +139,9 @@
         [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
     }else if(sender.tag==7){
         //手势密码
-        ACSetGesturePasswordViewController *setGesturePasswordViewController=[[ACSetGesturePasswordViewController alloc]init];
-        setGesturePasswordViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:setGesturePasswordViewController animated:YES];
+        ACNavGesturePasswordViewController *navGesturePasswordViewController=[[ACNavGesturePasswordViewController alloc]init];
+        navGesturePasswordViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:navGesturePasswordViewController animated:YES];
     }
 }
 
