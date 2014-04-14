@@ -15,4 +15,10 @@
 
 @property (strong,nonatomic)HttpRequest *hRequest;
 
+- (void)paynmentedStep;
+
+- (void)paynmentingStep;
+
+- (void)successStep;
+
 @end

@@ -243,7 +243,6 @@
             if(currentTab == 1) {
                 [[Config Instance] setIsRefreshAccountPayList:NO];
                 _leftDataItemArray=self.dataItemArray;
-                [[Config Instance] setIsPayBase:NO];
                 [[Config Instance] setCurrentPackagesList:_leftDataItemArray];
                 if([_leftDataItemArray count]>0) {
                     //计算剩余套餐值
@@ -261,10 +260,6 @@
                                 if(ctype==0||ctype==3){
                                     basesum=[[data objectForKey:@"rectimelimit"]intValue];
                                     baseuse=[[data objectForKey:@"useurectime"]intValue];
-                                    if(ctype==3){
-                                        //标记当前用户已经购买过基础套餐
-                                        [[Config Instance] setIsPayBase:YES];
-                                    }
                                 }
                             }
                         } else if(ctype==2) {

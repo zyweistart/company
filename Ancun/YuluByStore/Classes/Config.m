@@ -22,10 +22,4 @@ static Config * instance = nil;
     instance=nil;
 }
 
-#pragma mark 是否为老用户
-- (BOOL) isOldUser {
-    //1老用户 2新用户
-    return [@"1" isEqualToString:[[[Config Instance] userInfo] objectForKey:@"uflag"]];
-}
-
 @end

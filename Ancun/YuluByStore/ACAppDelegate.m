@@ -17,7 +17,6 @@
 #ifdef JAILBREAK
     #import "AlixPay.h"
     #import "AlixPayResult.h"
-    #import "ACRechargeNav.h"
     #import "ACPaymentViewController.h"
 #else
     #import "IAPHelper.h"
@@ -37,7 +36,7 @@
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = NO; // 是否允许截获并发送崩溃信息，请设置YES或者NO
     
-    //设置您的app的发布渠道 [pp25,91,360,baidu,官网]
+//    设置您的app的发布渠道 [pp25,91,360,baidu,官网]
 //    statTracker.channelId = @"pp25";
 //    statTracker.channelId = @"91";
 //    statTracker.channelId = @"360";
@@ -154,7 +153,7 @@
             if(controller) {
                 if([controller isKindOfClass:[ACPaymentViewController class]]) {
                     ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
-//                    [viewController layoutSuccessPage];
+                    [viewController successStep];
                 }
             }
 		} else {
@@ -167,7 +166,7 @@
             if(controller) {
                 if([controller isKindOfClass:[ACPaymentViewController class]]) {
                     ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
-//                    [viewController.rechargeNav secondStep];
+                    [viewController paynmentedStep];
                 }
             }
             [Common alert:result.statusMessage];

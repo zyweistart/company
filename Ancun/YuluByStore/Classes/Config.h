@@ -32,8 +32,6 @@
 @property (strong,nonatomic) NSMutableDictionary *contact;
 //不能通过软件拔打的号码
 @property (strong,nonatomic) NSMutableArray *noDialPhoneNumber;
-//是否已经套餐过基础套餐
-@property (assign,nonatomic) BOOL isPayBase;
 //当前用户的套餐列表
 @property (strong,nonatomic) NSMutableArray *currentPackagesList;
 
@@ -43,7 +41,5 @@
 + (Config *)Instance;
 
 + (void)resetConfig;
-
-- (BOOL)isOldUser;
 
 @end

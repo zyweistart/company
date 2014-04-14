@@ -72,7 +72,6 @@
     [self.view addSubview:container];
     
     _rechargeNav=[[ACRechargeNav alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    [_rechargeNav secondStep];
     [container addSubview:_rechargeNav];
     
     paymentMainView=[[UIView alloc]initWithFrame:CGRectMake(10, 60, 300, 285)];
@@ -197,8 +196,31 @@
     
     [container addSubview:paymentSuccessView];
     
+    [self paynmentedStep];
+    
+}
+
+- (void)paynmentedStep
+{
+    [_rechargeNav secondStep];
     [paymentMainView setHidden:NO];
     [paymentSuccessView setHidden:YES];
+}
+
+- (void)paynmentingStep
+{
+    [_rechargeNav secondStep];
+    [paymentMainView setHidden:NO];
+    [paymentSuccessView setHidden:YES];
+}
+
+- (void)successStep
+{
+    [[Config Instance]setIsRefreshUserInfo:YES];
+    [[Config Instance]setIsRefreshAccountPayList:YES];
+    [_rechargeNav fourthStep];
+    [paymentMainView setHidden:YES];
+    [paymentSuccessView setHidden:NO];
 }
 
 //确认支付
@@ -226,7 +248,7 @@
     [self.hRequest setRequestCode:REQUESTCODE_BUY_BUILD];
     [self.hRequest loginhandle:@"v4phoneapppayReq" requestParams:requestParams];
 #endif
-    [_rechargeNav thirdStep];
+    [self paynmentingStep];
 }
 
 //返回我的账户
@@ -265,18 +287,14 @@
             SKProduct *product = [[IAPHelper sharedHelper]product:[_data objectForKey:@"appstorerecordno"]];
             [[IAPHelper sharedHelper] buyProductIdentifier:product];
         }else{
-            [_rechargeNav secondStep];
+            [self paynmentedStep];
         }
     } else if(reqCode==REQUESTCODE_BUY_VERIFYING) {
         if([response successFlag]) {
             //充值成功
-            [[Config Instance]setIsRefreshUserInfo:YES];
-            [[Config Instance]setIsRefreshAccountPayList:YES];
-            [_rechargeNav fourthStep];
-            [paymentMainView setHidden:YES];
-            [paymentSuccessView setHidden:NO];
+            [self successStep];
         } else {
-            [_rechargeNav secondStep];
+            [self paynmentedStep];
         }
     }
 #endif
@@ -291,7 +309,7 @@
             NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
         } else if(buttonIndex==1) {
-            [_rechargeNav secondStep];
+            [self paynmentedStep];
         }
     }
 #endif
@@ -321,7 +339,7 @@
 //购买失败
 - (void)productPurchaseFailed:(NSNotification *)notification {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [_rechargeNav secondStep];
+    [self paynmentedStep];
     SKPaymentTransaction * transaction = (SKPaymentTransaction *)notification.object;
     if (transaction.error.code != SKErrorPaymentCancelled) {
         [Common alert:transaction.error.localizedDescription];
