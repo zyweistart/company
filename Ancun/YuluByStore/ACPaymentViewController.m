@@ -259,7 +259,7 @@
     if(reqCode==REQUESTCODE_BUY_BUILD) {
         if([response successFlag]) {
             _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            //            [self performSelector:@selector(timeout:) withObject:nil afterDelay:120.0];
+//            [self performSelector:@selector(timeout:) withObject:nil afterDelay:120.0];
             
             _orderRecordno=[[[response mainData] objectForKey:@"payinfo"] objectForKey:@"recordno"];
             SKProduct *product = [[IAPHelper sharedHelper]product:[_data objectForKey:@"appstorerecordno"]];

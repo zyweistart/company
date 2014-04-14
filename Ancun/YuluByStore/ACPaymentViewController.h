@@ -13,7 +13,6 @@
 
 - (id)initWithData:(NSDictionary *)data;
 
-
 @property (strong,nonatomic)HttpRequest *hRequest;
 
 @end

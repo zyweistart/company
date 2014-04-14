@@ -153,7 +153,7 @@
             UIViewController *controller=[[Config Instance]currentViewController];
             if(controller) {
                 if([controller isKindOfClass:[ACPaymentViewController class]]) {
-//                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
+                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
 //                    [viewController layoutSuccessPage];
                 }
             }
@@ -166,7 +166,7 @@
             UIViewController *controller=[[Config Instance]currentViewController];
             if(controller) {
                 if([controller isKindOfClass:[ACPaymentViewController class]]) {
-//                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
+                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
 //                    [viewController.rechargeNav secondStep];
                 }
             }
