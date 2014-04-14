@@ -10,4 +10,6 @@
 
 @interface ACSetGesturePasswordViewController : ACGesturePasswordViewController
 
+- (void)toRootViewController;
+
 @end

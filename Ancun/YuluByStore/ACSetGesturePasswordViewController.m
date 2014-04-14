@@ -23,13 +23,13 @@
     self = [super init];
     if (self) {
         self.title=@"密码绘制";
-        lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20)];
         [lblInfo setText:@"请绘制解锁图案"];
         [lblInfo setFont:[UIFont systemFontOfSize:15]];
         [lblInfo setTextColor:[UIColor blackColor]];
         [lblInfo setBackgroundColor:[UIColor clearColor]];
         [lblInfo setTextAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:lblInfo];
+        [self.lockView addSubview:lblInfo];
     }
     return self;
 }
@@ -42,7 +42,7 @@
             [Common setCache:DEFAULTDATA_PASSWORD data:[[Config Instance] PASSWORD]];
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
             [lblInfo setText:@"手势密码设置成功"];
-            [self performSelector:@selector(popToRootViewController) withObject:nil afterDelay:1];
+            [self performSelector:@selector(toRootViewController) withObject:nil afterDelay:1];
         }else{
             firstPassCode=nil;
             [lblInfo setText:@"与上一次输入不一致，请重试"];
@@ -53,7 +53,7 @@
     }
 }
 
-- (void)popToRootViewController
+- (void)toRootViewController
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -13,6 +13,8 @@
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
 		C90DC02C18E950CB00FF25C9 /* ACDialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */; };
+		C914503C18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C914503B18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.m */; };
+		C914504018FBBAC200B00B89 /* ACGestureStatus2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C914503F18FBBAC200B00B89 /* ACGestureStatus2Cell.m */; };
 		C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9155D7918E90BC70075A693 /* ACContactsViewController.xib */; };
 		C91D0BD918EE83BA006B10A3 /* ACPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BD818EE83BA006B10A3 /* ACPaymentViewController.m */; };
 		C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */; };
@@ -154,6 +156,10 @@
 		C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNavigationWebPageViewController.m; sourceTree = "<group>"; };
 		C90DC02A18E950CB00FF25C9 /* ACDialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDialsViewController.h; sourceTree = "<group>"; };
 		C90DC02B18E950CB00FF25C9 /* ACDialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDialsViewController.m; sourceTree = "<group>"; };
+		C914503A18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAgainSetGesturePasswordViewController.h; sourceTree = "<group>"; };
+		C914503B18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAgainSetGesturePasswordViewController.m; sourceTree = "<group>"; };
+		C914503E18FBBAC200B00B89 /* ACGestureStatus2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGestureStatus2Cell.h; sourceTree = "<group>"; };
+		C914503F18FBBAC200B00B89 /* ACGestureStatus2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGestureStatus2Cell.m; sourceTree = "<group>"; };
 		C9155D7918E90BC70075A693 /* ACContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACContactsViewController.xib; sourceTree = "<group>"; };
 		C91D0BD718EE83BA006B10A3 /* ACPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPaymentViewController.h; sourceTree = "<group>"; };
 		C91D0BD818EE83BA006B10A3 /* ACPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPaymentViewController.m; sourceTree = "<group>"; };
@@ -486,6 +492,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C914503D18FBAC0300B00B89 /* GesturePassword */ = {
+			isa = PBXGroup;
+			children = (
+				C914503A18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.h */,
+				C914503B18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.m */,
+				C9A560CA18FB7CA4006A5049 /* ACGesturePasswordViewController.h */,
+				C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */,
+				C9A560CD18FB7CFD006A5049 /* ACNavGesturePasswordViewController.h */,
+				C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */,
+				C997105F18F631A200E56D22 /* ACSetGesturePasswordViewController.h */,
+				C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */,
+			);
+			name = GesturePassword;
+			sourceTree = "<group>";
+		};
 		C91D0BDD18EE9E1D006B10A3 /* NotUsed */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,12 +570,8 @@
 				C9D47CFC18F387F300472625 /* ACModifyPasswordViewController.m */,
 				C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */,
 				C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */,
-				C9A560CD18FB7CFD006A5049 /* ACNavGesturePasswordViewController.h */,
-				C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */,
 				C90BCF7817D037B200813641 /* ACNavigationWebPageViewController.h */,
 				C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */,
-				C997105F18F631A200E56D22 /* ACSetGesturePasswordViewController.h */,
-				C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */,
 			);
 			name = More;
 			sourceTree = "<group>";
@@ -587,8 +604,6 @@
 				C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */,
 				C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */,
 				C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */,
-				C9A560CA18FB7CA4006A5049 /* ACGesturePasswordViewController.h */,
-				C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1022,6 +1037,7 @@
 				C91D0BE818EEA16B006B10A3 /* Account */,
 				C91D0BED18EEA1D8006B10A3 /* Contacts */,
 				C91D0BEC18EEA1D0006B10A3 /* Dial */,
+				C914503D18FBAC0300B00B89 /* GesturePassword */,
 				C91D0BEB18EEA1BA006B10A3 /* Main */,
 				C91D0BE918EEA17F006B10A3 /* More */,
 				C91D0BEA18EEA195006B10A3 /* Recording */,
@@ -1062,6 +1078,8 @@
 				C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */,
 				C9D97A15179FA64F0076ACF3 /* ACContactCell.h */,
 				C9D97A16179FA64F0076ACF3 /* ACContactCell.m */,
+				C914503E18FBBAC200B00B89 /* ACGestureStatus2Cell.h */,
+				C914503F18FBBAC200B00B89 /* ACGestureStatus2Cell.m */,
 				C9A560D018FB7F2E006A5049 /* ACGestureStatusCell.h */,
 				C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */,
 				C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */,
@@ -1186,6 +1204,7 @@
 				C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */,
 				C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */,
 				C9D97A94179FA6520076ACF3 /* ACPaymentCell.m in Sources */,
+				C914504018FBBAC200B00B89 /* ACGestureStatus2Cell.m in Sources */,
 				C9D97A96179FA6520076ACF3 /* ACPlayerView.m in Sources */,
 				C9D97A98179FA6520076ACF3 /* ACRecording2Cell.m in Sources */,
 				C9D97A9A179FA6520076ACF3 /* ACRecordingCell.m in Sources */,
@@ -1219,6 +1238,7 @@
 				C9A560CC18FB7CA4006A5049 /* ACGesturePasswordViewController.m in Sources */,
 				C99F0C6A18EBDC9F00C27BFC /* ACRegistrationViewController.m in Sources */,
 				C9D97C98179FA6650076ACF3 /* ATMProgressLayer.m in Sources */,
+				C914503C18FB91BB00B00B89 /* ACAgainSetGesturePasswordViewController.m in Sources */,
 				C9D97C99179FA6650076ACF3 /* ATMSoundFX.m in Sources */,
 				C9D97C9A179FA6650076ACF3 /* ATMTextLayer.m in Sources */,
 				C9D97C9C179FA6650076ACF3 /* ChineseToPinyin.m in Sources */,

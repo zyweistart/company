@@ -6,6 +6,7 @@
 #import "ACMoreViewController.h"
 #import "ACRegistrationViewController.h"
 #import "ACForgetPasswordViewController.h"
+#import "ACAgainSetGesturePasswordViewController.h"
 #import "NSString+Utils.h"
 
 @interface ACLoginViewController ()
@@ -249,7 +250,19 @@
                                              nil];
         [[Config Instance] setMainViewController:_tabBarController];
         
-        [self presentViewController:_tabBarController animated:YES completion:nil];
+        [self presentViewController:_tabBarController animated:YES completion:^{
+            if(self.gotoAgainGesurePassword){
+                UINavigationController *againSetGesturePasswordViewControllerNav = [[UINavigationController alloc] initWithRootViewController:[[ACAgainSetGesturePasswordViewController alloc]init]];
+                if(IOS7){
+                    [[againSetGesturePasswordViewControllerNav navigationBar]setBarTintColor:MAINBG];
+                    [[againSetGesturePasswordViewControllerNav navigationBar]setBarStyle:UIBarStyleBlackTranslucent];
+                }else{
+                    [againSetGesturePasswordViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
+                }
+                [_tabBarController presentViewController:againSetGesturePasswordViewControllerNav animated:YES completion:nil];
+                self.gotoAgainGesurePassword=NO;
+            }
+        }];
         
     }else if([[response code] isEqualToString:@"120020"]){
         //用户不存在

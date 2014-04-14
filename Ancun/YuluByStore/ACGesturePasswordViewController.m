@@ -32,7 +32,7 @@
         self.lockView.contentInsets = UIEdgeInsetsMake(150, 20, 100, 20);
         errorCount=0;
         
-        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, inch4?500:294, 80, 18)];
+        UIButton *btnForgetPwd=[[UIButton alloc]initWithFrame:CGRectMake(120, self.lockView.frame.size.height-40, 80, 18)];
         btnForgetPwd.titleLabel.font=[UIFont systemFontOfSize: 15];
         [btnForgetPwd setTitle:@"忘记密码~" forState:UIControlStateNormal];
         [btnForgetPwd setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -56,7 +56,7 @@
 {
     //清除登录密码
     [Common setCache:DEFAULTDATA_PASSWORD data:@""];
-    [self goLoginPage];
+    [self goLoginPage:YES];
 }
 
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode{
@@ -66,7 +66,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }else{
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
-            [self goLoginPage];
+            [self goLoginPage:NO];
         }
         return;
     }
@@ -75,16 +75,19 @@
         [Common alert:@"超过限制请重新登录"];
         //清除登录密码
         [Common setCache:DEFAULTDATA_PASSWORD data:@""];
-        [self goLoginPage];
+        [self goLoginPage:YES];
     }else{
         [Common alert:@"手势密码出错，请重试!"];
     }
 }
 
-- (void)goLoginPage
+- (void)goLoginPage:(BOOL)agp
 {
     ACLoginViewController *loginViewController=[[ACLoginViewController alloc]init];
-    [self presentViewController:loginViewController animated:YES completion:nil];
+    [loginViewController setGotoAgainGesurePassword:agp];
+    [self presentViewController:loginViewController animated:YES completion:^{
+        
+    }];
 }
 
 @end

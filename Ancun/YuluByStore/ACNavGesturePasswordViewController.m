@@ -9,6 +9,7 @@
 #import "ACNavGesturePasswordViewController.h"
 #import "ACSetGesturePasswordViewController.h"
 #import "ACGestureStatusCell.h"
+#import "ACGestureStatus2Cell.h"
 
 @interface ACNavGesturePasswordViewController ()
 
@@ -61,13 +62,11 @@
         [cell setController:self];
         return cell;
     }else{
-        static NSString *cellReuseIdentifier=@"UITableViewCellIdentifier";
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
+        static NSString *cellReuseIdentifier=@"ACGestureStatus2CellIdentifier";
+        ACGestureStatus2Cell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier];
         if(!cell){
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
+            cell = [[ACGestureStatus2Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseIdentifier];
         }
-        [cell.textLabel setText:@"手势密码设置"];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         return cell;
     }
 }

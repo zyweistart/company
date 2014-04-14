@@ -34,9 +34,9 @@
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"morebg"]]];
         [self.view addSubview:container];
         
-        NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"检测新版本",@"正在计算缓存大小",@"重新登录",@"手势密码", nil];
-        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"7",@"5",@"6",@"8", nil];
-        NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"5",@"6",@"6",@"6",@"5", nil];
+        NSArray *names=[[NSArray alloc]initWithObjects:@"小贴士",@"意见反馈",@"关于我们",@"修改密码",@"手势密码",@"检测新版本",@"正在计算缓存大小",@"重新登录", nil];
+        NSArray *icons=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"8",@"7",@"5",@"6", nil];
+        NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"5",@"5",@"6",@"6",@"6", nil];
         
         for(int i=0;i<length;i++){
             UIButton *btnBg=[[UIButton alloc]initWithFrame:CGRectMake(15.75, 10+i*69.5+1*i,288.5,69.5)];
@@ -44,7 +44,7 @@
             UIImageView *icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"more_icon_%@",[icons objectAtIndex:i]]]];
             [icon setFrame:CGRectMake(20, 21, 27.5, 27.5)];
             [btnBg addSubview:icon];
-            if(i==5){
+            if(i==6){
                 lblCachName=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 27.5)];
                 [lblCachName setText:[names objectAtIndex:i]];
                 [lblCachName setFont:[UIFont systemFontOfSize:22]];
@@ -121,9 +121,14 @@
         modifyPasswordViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:modifyPasswordViewController animated:YES];
     }else if(sender.tag==4){
+        //手势密码
+        ACNavGesturePasswordViewController *navGesturePasswordViewController=[[ACNavGesturePasswordViewController alloc]init];
+        navGesturePasswordViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:navGesturePasswordViewController animated:YES];
+    }else if(sender.tag==5){
         //检测新版本
         [self checkVersion:YES];
-    }else if(sender.tag==5){
+    }else if(sender.tag==6){
         //清理缓存
         if([[Config Instance]isCalculateTotal]){
             [Common alert:@"正在计算缓存大小"];
@@ -134,14 +139,9 @@
                 [Common alert:@"当前的缓存文件为0KB，无须清除"];
             }
         }
-    }else if(sender.tag==6){
+    }else if(sender.tag==7){
         //重新登录
         [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
-    }else if(sender.tag==7){
-        //手势密码
-        ACNavGesturePasswordViewController *navGesturePasswordViewController=[[ACNavGesturePasswordViewController alloc]init];
-        navGesturePasswordViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:navGesturePasswordViewController animated:YES];
     }
 }
 

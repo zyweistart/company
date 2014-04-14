@@ -15,13 +15,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(15, 10, 195, 25)];
-        [lbl setFont:[UIFont systemFontOfSize:19]];
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 25)];
+        [lbl setFont:[UIFont systemFontOfSize:15]];
         [lbl setText:@"开启密码锁定"];
         [lbl setTextColor:FONTCOLOR1];
+        [lbl setTextColor:[UIColor blackColor]];
+        [lbl setBackgroundColor:[UIColor clearColor]];
         [self addSubview:lbl];
         
-        UISwitch *si=[[UISwitch alloc]initWithFrame:CGRectMake(250, 7, 0, 0)];
+        UISwitch *si=[[UISwitch alloc]initWithFrame:CGRectMake(inch4?250:220, 7, 0, 0)];
         NSString *gesturePwd=[Common getCache:DEFAULTDATA_GESTUREPWD];
         if([gesturePwd isNotEmpty]){
             [si setOn:YES];
