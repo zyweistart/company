@@ -10,15 +10,15 @@
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
 #import "ACGesturePasswordViewController.h"
-#import "ACRechargeConfirmViewController.h"
 #import "NSString+Utils.h"
-#import "ACRechargeNav.h"
 #ifndef TEST
 #import "BaiduMobStat.h"
 #endif
 #ifdef JAILBREAK
     #import "AlixPay.h"
     #import "AlixPayResult.h"
+    #import "ACRechargeNav.h"
+    #import "ACPaymentViewController.h"
 #else
     #import "IAPHelper.h"
 #endif
@@ -152,9 +152,9 @@
             //显示成功页面
             UIViewController *controller=[[Config Instance]currentViewController];
             if(controller) {
-                if([controller isKindOfClass:[ACRechargeConfirmViewController class]]) {
-                    ACRechargeConfirmViewController *viewController=(ACRechargeConfirmViewController *)controller;
-                    [viewController layoutSuccessPage];
+                if([controller isKindOfClass:[ACPaymentViewController class]]) {
+//                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
+//                    [viewController layoutSuccessPage];
                 }
             }
 		} else {
@@ -165,9 +165,9 @@
             //使引导箭头标为第二步
             UIViewController *controller=[[Config Instance]currentViewController];
             if(controller) {
-                if([controller isKindOfClass:[ACRechargeConfirmViewController class]]) {
-                    ACRechargeConfirmViewController *viewController=(ACRechargeConfirmViewController *)controller;
-                    [viewController.rechargeNav secondStep];
+                if([controller isKindOfClass:[ACPaymentViewController class]]) {
+//                    ACPaymentViewController *viewController=(ACPaymentViewController *)controller;
+//                    [viewController.rechargeNav secondStep];
                 }
             }
             [Common alert:result.statusMessage];

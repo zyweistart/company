@@ -147,18 +147,6 @@
             //从详细页跳转回来
             if(_playerView){
                 if([_playerView dictionary]){
-                    //公证
-                    if([[result objectForKey:@"cerflag"] isEqualToString:@"1"]){
-                        [[_playerView btn_notary] setTitle:@"申办公证" forState:UIControlStateNormal];
-                    }else if([[result objectForKey:@"cerflag"] isEqualToString:@"2"]){
-                        [[_playerView btn_notary] setTitle:@"取消公证" forState:UIControlStateNormal];
-                    }
-                    //提取码
-                    if([[result objectForKey:@"accstatus"] isEqualToString:@"1"]){
-                        [[_playerView btn_extraction] setTitle:@"查看提取码" forState:UIControlStateNormal];
-                    }else if([[result objectForKey:@"accstatus"] isEqualToString:@"2"]){
-                        [[_playerView btn_extraction] setTitle:@"申请提取码" forState:UIControlStateNormal];
-                    }
                     [_playerView setDictionary:result];
                 }
             }

@@ -30,11 +30,19 @@
         self.lockView.lineWidth = 12;
         self.lockView.delegate = self;
         if(inch4){
-            self.lockView.contentInsets = UIEdgeInsetsMake(100, 20, 100, 20);
+            self.lockView.contentInsets = UIEdgeInsetsMake(120, 20, 100, 20);
         }else{
             self.lockView.contentInsets = UIEdgeInsetsMake(80, 20, 100, 20);
         }
         errorCount=0;
+        
+        self.lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, 30)];
+        [self.lblInfo setFont:[UIFont fontWithName:@"Helvetica-Bold" size:17]];
+        [self.lblInfo setTextColor:[UIColor whiteColor]];
+        [self.lblInfo setBackgroundColor:[UIColor clearColor]];
+        [self.lblInfo setTextAlignment:NSTextAlignmentCenter];
+        [self.lockView addSubview:self.lblInfo];
+        
     }
     return self;
 }
@@ -47,6 +55,8 @@
         _flag=flag;
         
         [[Config Instance] setLock:YES];
+        
+        [self.lblInfo setText:[Common getCache:DEFAULTDATA_PHONE]];
         
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(20, self.lockView.frame.size.height-60, 120, 40)];
         btn.titleLabel.font=[UIFont systemFontOfSize: 15];

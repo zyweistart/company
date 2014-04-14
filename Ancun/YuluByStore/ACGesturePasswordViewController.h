@@ -12,6 +12,7 @@
 @interface ACGesturePasswordViewController : BaseViewController<KKGestureLockViewDelegate>
 
 @property (strong,nonatomic) KKGestureLockView *lockView;
+@property (strong,nonatomic) UILabel *lblInfo;
 
 - (id)initWithFlag:(BOOL)flag;
 

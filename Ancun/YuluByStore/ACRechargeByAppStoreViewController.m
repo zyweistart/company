@@ -1,7 +1,6 @@
 #import "ACRechargeByAppStoreViewController.h"
 #import "MBProgressHUD.h"
 #import "ACRechargeNav.h"
-#import "ACAccountRechargeCell.h"
 #import "DataSingleton.h"
 #import "NSString+Date.h"
 #import "IAPHelper.h"
@@ -196,7 +195,6 @@
                     //基础
                     type=1;
                 }
-                [cell setCurrentType:type];
                 [cell setData:dictionary];
                 [cell setControler:self];
                 return cell;

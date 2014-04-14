@@ -14,7 +14,6 @@
 @end
 
 @implementation ACSetGesturePasswordViewController{
-    UILabel *lblInfo;
     NSString *firstPassCode;
 }
 
@@ -23,13 +22,7 @@
     self = [super init];
     if (self) {
         self.title=@"密码绘制";
-        lblInfo=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 20)];
-        [lblInfo setText:@"请绘制解锁图案"];
-        [lblInfo setFont:[UIFont systemFontOfSize:15]];
-        [lblInfo setTextColor:[UIColor whiteColor]];
-        [lblInfo setBackgroundColor:[UIColor clearColor]];
-        [lblInfo setTextAlignment:NSTextAlignmentCenter];
-        [self.lockView addSubview:lblInfo];
+        [self.lblInfo setText:@"请绘制解锁图案"];
     }
     return self;
 }
@@ -41,15 +34,15 @@
             [Common setCache:DEFAULTDATA_PHONE data:[[Config Instance] USERNAME]];
             [Common setCache:DEFAULTDATA_PASSWORD data:[[Config Instance] PASSWORD]];
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
-            [lblInfo setText:@"手势密码设置成功"];
+            [self.lblInfo setText:@"手势密码设置成功"];
             [self performSelector:@selector(toRootViewController) withObject:nil afterDelay:0.5];
         }else{
             firstPassCode=nil;
-            [lblInfo setText:@"与上一次输入不一致，请重试"];
+            [self.lblInfo setText:@"与上一次输入不一致，请重试"];
         }
     }else{
         firstPassCode=passcode;
-        [lblInfo setText:@"请再次绘制解锁图案"];
+        [self.lblInfo setText:@"请再次绘制解锁图案"];
     }
 }
 

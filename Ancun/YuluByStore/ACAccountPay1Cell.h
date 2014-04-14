@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACAccountPay1Cell : UITableViewCell<UIActionSheetDelegate>
+@interface ACAccountPay1Cell : UITableViewCell
 
 
 @property (strong,nonatomic) UILabel *lblName;
@@ -18,7 +18,6 @@
 @property (strong,nonatomic) UILabel *lblTimeAndStorage;
 @property (strong,nonatomic) UIButton *btnGoPay;
 
-@property (assign,nonatomic) int currentType;
 @property (strong,nonatomic) NSMutableDictionary *data;
 @property (strong,nonatomic) UIViewController *controler;
 

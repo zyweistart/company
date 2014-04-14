@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C900D50C17AF892B00D027D4 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = C900D50B17AF892B00D027D4 /* NSString+Date.m */; };
-		C900D50F17AF98E200D027D4 /* ACOldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */; };
 		C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351917B9D81C00BECE31 /* ACRechargeNav.m */; };
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
@@ -20,7 +19,6 @@
 		C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BDB18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m */; };
 		C91D0BE418EE9F35006B10A3 /* ACAccountPay1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */; };
 		C91D0BE718EE9F4A006B10A3 /* ACAccountPay2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */; };
-		C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */; };
 		C9470DC518F62ABD0006D7AD /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9470DC418F62ABD0006D7AD /* libBaiduMobStat.a */; };
 		C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96FB4AA18ED45D70004958C /* ACRecordingCallDetailViewController.m */; };
 		C978899718E16AC300157577 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C978899618E16AC300157577 /* Images.xcassets */; };
@@ -61,15 +59,10 @@
 		C99F0C6A18EBDC9F00C27BFC /* ACRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99F0C6918EBDC9F00C27BFC /* ACRegistrationViewController.m */; };
 		C99FCA5117B086300003B2FF /* ACAccountPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA5017B086300003B2FF /* ACAccountPayCell.m */; };
 		C99FCA5417B086440003B2FF /* ACAccountUseRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */; };
-		C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */; };
-		C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */; };
-		C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */; };
 		C9A560CC18FB7CA4006A5049 /* ACGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */; };
 		C9A560CF18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560CE18FB7CFD006A5049 /* ACNavGesturePasswordViewController.m */; };
 		C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */; };
 		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
-		C9A8A93717BB7FF100652B90 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93517BB7FF100652B90 /* nav.png */; };
-		C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A8A93617BB7FF100652B90 /* nav@2x.png */; };
 		C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */; };
 		C9CB41BF18ED0E2E00DB6099 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BD18ED0E2E00DB6099 /* EAIntroView.m */; };
 		C9D47CFD18F387F300472625 /* ACModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D47CFC18F387F300472625 /* ACModifyPasswordViewController.m */; };
@@ -90,13 +83,11 @@
 		C9D97A71179FA6520076ACF3 /* ACAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */; };
 		C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */; };
 		C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A16179FA64F0076ACF3 /* ACContactCell.m */; };
-		C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */; };
 		C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */; };
 		C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */; };
 		C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */; };
 		C9D97A91179FA6520076ACF3 /* ACNotaryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */; };
 		C9D97A92179FA6520076ACF3 /* ACNotaryDetailViewController@iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D97A41179FA6510076ACF3 /* ACNotaryDetailViewController@iPhone5.xib */; };
-		C9D97A94179FA6520076ACF3 /* ACPaymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */; };
 		C9D97A96179FA6520076ACF3 /* ACPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A48179FA6510076ACF3 /* ACPlayerView.m */; };
 		C9D97A98179FA6520076ACF3 /* ACRecording2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A4B179FA6520076ACF3 /* ACRecording2Cell.m */; };
 		C9D97A9A179FA6520076ACF3 /* ACRecordingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A4E179FA6520076ACF3 /* ACRecordingCell.m */; };
@@ -137,25 +128,15 @@
 		C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97BA6179FA6640076ACF3 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9D97CC7179FA6650076ACF3 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BA7179FA6640076ACF3 /* grayArrow.png */; };
 		C9D97CC8179FA6650076ACF3 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97BA8179FA6640076ACF3 /* grayArrow@2x.png */; };
-		C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C60179FA6640076ACF3 /* notary_result_gb.png */; };
-		C9D97D5F179FA6650076ACF3 /* notary_result_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C61179FA6640076ACF3 /* notary_result_ok.png */; };
 		C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C79179FA6640076ACF3 /* TermsOfService.txt */; };
 		C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9D97C7A179FA6640076ACF3 /* TipContent.txt */; };
 		C9D97D81179FB3740076ACF3 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97D80179FB3730076ACF3 /* NSString+Utils.m */; };
-		C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */; };
 		C9E8EE78179FD5E600E47BD9 /* ACRecordingManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */; };
-		C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE165317C48D47007089D6 /* aboutus@2x.png */; };
-		C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE165517C4ACAE007089D6 /* aboutus-568h@2x.png */; };
-		C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */; };
-		C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */; };
-		C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C900D50A17AF892A00D027D4 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		C900D50B17AF892B00D027D4 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
-		C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountViewController.h; sourceTree = "<group>"; };
-		C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountViewController.m; sourceTree = "<group>"; };
 		C90A351817B9D81C00BECE31 /* ACRechargeNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeNav.h; sourceTree = "<group>"; };
 		C90A351917B9D81C00BECE31 /* ACRechargeNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeNav.m; sourceTree = "<group>"; };
 		C90A351B17BA054F00BECE31 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -177,8 +158,6 @@
 		C91D0BE318EE9F35006B10A3 /* ACAccountPay1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPay1Cell.m; sourceTree = "<group>"; };
 		C91D0BE518EE9F4A006B10A3 /* ACAccountPay2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountPay2Cell.h; sourceTree = "<group>"; };
 		C91D0BE618EE9F4A006B10A3 /* ACAccountPay2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPay2Cell.m; sourceTree = "<group>"; };
-		C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUseRecordViewController.h; sourceTree = "<group>"; };
-		C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACUseRecordViewController.m; sourceTree = "<group>"; };
 		C9470DC318F62ABD0006D7AD /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		C9470DC418F62ABD0006D7AD /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C96FB4A918ED45D70004958C /* ACRecordingCallDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingCallDetailViewController.h; sourceTree = "<group>"; };
@@ -237,12 +216,6 @@
 		C99FCA5017B086300003B2FF /* ACAccountPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountPayCell.m; sourceTree = "<group>"; };
 		C99FCA5217B086440003B2FF /* ACAccountUseRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountUseRecordCell.h; sourceTree = "<group>"; };
 		C99FCA5317B086440003B2FF /* ACAccountUseRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountUseRecordCell.m; sourceTree = "<group>"; };
-		C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountMonthCell.h; sourceTree = "<group>"; };
-		C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountMonthCell.m; sourceTree = "<group>"; };
-		C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountDayViewController.h; sourceTree = "<group>"; };
-		C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayViewController.m; sourceTree = "<group>"; };
-		C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOldAccountDayCell.h; sourceTree = "<group>"; };
-		C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACOldAccountDayCell.m; sourceTree = "<group>"; };
 		C9A560CA18FB7CA4006A5049 /* ACGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGesturePasswordViewController.h; sourceTree = "<group>"; };
 		C9A560CB18FB7CA4006A5049 /* ACGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGesturePasswordViewController.m; sourceTree = "<group>"; };
 		C9A560CD18FB7CFD006A5049 /* ACNavGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNavGesturePasswordViewController.h; sourceTree = "<group>"; };
@@ -251,8 +224,6 @@
 		C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGestureStatusCell.m; sourceTree = "<group>"; };
 		C9A67EA717CD882900E9A81E /* ACContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactsViewController.h; sourceTree = "<group>"; };
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
-		C9A8A93517BB7FF100652B90 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
-		C9A8A93617BB7FF100652B90 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C9CB41BA18ED0E2E00DB6099 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		C9CB41BC18ED0E2E00DB6099 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -296,8 +267,6 @@
 		C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAppDelegate.m; sourceTree = "<group>"; };
 		C9D97A15179FA64F0076ACF3 /* ACContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactCell.h; sourceTree = "<group>"; };
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
-		C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACExtractionDetailViewController.h; sourceTree = "<group>"; };
-		C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACExtractionDetailViewController.m; sourceTree = "<group>"; };
 		C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLoginViewController.h; sourceTree = "<group>"; };
 		C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLoginViewController.m; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
@@ -306,8 +275,6 @@
 		C9D97A3F179FA6510076ACF3 /* ACNotaryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNotaryDetailViewController.m; sourceTree = "<group>"; };
 		C9D97A40179FA6510076ACF3 /* ACNotaryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACNotaryDetailViewController.xib; sourceTree = "<group>"; };
 		C9D97A41179FA6510076ACF3 /* ACNotaryDetailViewController@iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ACNotaryDetailViewController@iPhone5.xib"; sourceTree = "<group>"; };
-		C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPaymentCell.h; sourceTree = "<group>"; };
-		C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPaymentCell.m; sourceTree = "<group>"; };
 		C9D97A47179FA6510076ACF3 /* ACPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPlayerView.h; sourceTree = "<group>"; };
 		C9D97A48179FA6510076ACF3 /* ACPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPlayerView.m; sourceTree = "<group>"; };
 		C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecording2Cell.h; sourceTree = "<group>"; };
@@ -344,9 +311,9 @@
 		C9D97AC0179FA6640076ACF3 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingCell.m; path = Classes/LoadingCell.m; sourceTree = "<group>"; };
 		C9D97AC2179FA6640076ACF3 /* LongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPressButton.h; sourceTree = "<group>"; };
 		C9D97AC3179FA6640076ACF3 /* LongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongPressButton.m; sourceTree = "<group>"; };
-		C9D97AC4179FA6640076ACF3 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Response.h; path = Classes/Response.h; sourceTree = "<group>"; };
-		C9D97AC5179FA6640076ACF3 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Response.m; path = Classes/Response.m; sourceTree = "<group>"; };
-		C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDelegate.h; path = Classes/ResultDelegate.h; sourceTree = "<group>"; };
+		C9D97AC4179FA6640076ACF3 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		C9D97AC5179FA6640076ACF3 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultDelegate.h; sourceTree = "<group>"; };
 		C9D97ACC179FA6640076ACF3 /* AlixPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPay.h; sourceTree = "<group>"; };
 		C9D97ACD179FA6640076ACF3 /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
 		C9D97ACE179FA6640076ACF3 /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
@@ -461,22 +428,10 @@
 		C9D97BA6179FA6640076ACF3 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		C9D97BA7179FA6640076ACF3 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		C9D97BA8179FA6640076ACF3 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
-		C9D97C60179FA6640076ACF3 /* notary_result_gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_result_gb.png; sourceTree = "<group>"; };
-		C9D97C61179FA6640076ACF3 /* notary_result_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notary_result_ok.png; sourceTree = "<group>"; };
 		C9D97C79179FA6640076ACF3 /* TermsOfService.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TermsOfService.txt; sourceTree = "<group>"; };
 		C9D97C7A179FA6640076ACF3 /* TipContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TipContent.txt; sourceTree = "<group>"; };
 		C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		C9D97D80179FB3730076ACF3 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
-		C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecordingManagerDetailListOldViewController.h; sourceTree = "<group>"; };
-		C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerDetailListOldViewController.m; sourceTree = "<group>"; };
-		C9EE165317C48D47007089D6 /* aboutus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutus@2x.png"; sourceTree = "<group>"; };
-		C9EE165517C4ACAE007089D6 /* aboutus-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutus-568h@2x.png"; sourceTree = "<group>"; };
-		C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeViewController.h; sourceTree = "<group>"; };
-		C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeViewController.m; sourceTree = "<group>"; };
-		C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountRechargeCell.h; sourceTree = "<group>"; };
-		C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountRechargeCell.m; sourceTree = "<group>"; };
-		C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeConfirmViewController.h; sourceTree = "<group>"; };
-		C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeConfirmViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,43 +482,6 @@
 				C997106018F631A200E56D22 /* ACSetGesturePasswordViewController.m */,
 			);
 			name = GesturePassword;
-			sourceTree = "<group>";
-		};
-		C91D0BDD18EE9E1D006B10A3 /* NotUsed */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97A1F179FA64F0076ACF3 /* ACExtractionDetailViewController.h */,
-				C9D97A20179FA6500076ACF3 /* ACExtractionDetailViewController.m */,
-				C99FCA6217B0EE670003B2FF /* ACOldAccountDayViewController.h */,
-				C99FCA6317B0EE680003B2FF /* ACOldAccountDayViewController.m */,
-				C900D50D17AF98E200D027D4 /* ACOldAccountViewController.h */,
-				C900D50E17AF98E200D027D4 /* ACOldAccountViewController.m */,
-				C9F80D0517B23CA700E15885 /* ACRechargeConfirmViewController.h */,
-				C9F80D0617B23CA700E15885 /* ACRechargeConfirmViewController.m */,
-				C9F80CFC17B21BAB00E15885 /* ACRechargeViewController.h */,
-				C9F80CFD17B21BAB00E15885 /* ACRechargeViewController.m */,
-				C9E2E2AB17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.h */,
-				C9E2E2AC17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m */,
-				C92D6A8418080E750060CAB6 /* ACUseRecordViewController.h */,
-				C92D6A8518080E750060CAB6 /* ACUseRecordViewController.m */,
-				C91D0BDE18EE9ECD006B10A3 /* Cell */,
-			);
-			name = NotUsed;
-			sourceTree = "<group>";
-		};
-		C91D0BDE18EE9ECD006B10A3 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				C9F80D0217B22A5900E15885 /* ACAccountRechargeCell.h */,
-				C9F80D0317B22A5A00E15885 /* ACAccountRechargeCell.m */,
-				C9D97A44179FA6510076ACF3 /* ACPaymentCell.h */,
-				C9D97A45179FA6510076ACF3 /* ACPaymentCell.m */,
-				C99FCA6517B0F0FF0003B2FF /* ACOldAccountDayCell.h */,
-				C99FCA6617B0F1000003B2FF /* ACOldAccountDayCell.m */,
-				C99FCA5F17B0E2780003B2FF /* ACOldAccountMonthCell.h */,
-				C99FCA6017B0E2790003B2FF /* ACOldAccountMonthCell.m */,
-			);
-			name = Cell;
 			sourceTree = "<group>";
 		};
 		C91D0BE818EEA16B006B10A3 /* Account */ = {
@@ -810,7 +728,6 @@
 				C978899618E16AC300157577 /* Images.xcassets */,
 				C9D97AAC179FA6640076ACF3 /* Classes */,
 				C9D97AC9179FA6640076ACF3 /* Librarys */,
-				C9D97D7E179FB1C40076ACF3 /* Model */,
 				C9D97BF1179FA6640076ACF3 /* Resources */,
 				C9D97991179FA3500076ACF3 /* Supporting Files */,
 				C9D97D79179FA72C0076ACF3 /* UI */,
@@ -860,6 +777,9 @@
 				C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */,
 				C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */,
 				C9D97D80179FB3730076ACF3 /* NSString+Utils.m */,
+				C9D97AC4179FA6640076ACF3 /* Response.h */,
+				C9D97AC5179FA6640076ACF3 /* Response.m */,
+				C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1058,12 +978,6 @@
 		C9D97BF1179FA6640076ACF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C9EE165517C4ACAE007089D6 /* aboutus-568h@2x.png */,
-				C9EE165317C48D47007089D6 /* aboutus@2x.png */,
-				C9A8A93517BB7FF100652B90 /* nav.png */,
-				C9A8A93617BB7FF100652B90 /* nav@2x.png */,
-				C9D97C60179FA6640076ACF3 /* notary_result_gb.png */,
-				C9D97C61179FA6640076ACF3 /* notary_result_ok.png */,
 				C9D97C79179FA6640076ACF3 /* TermsOfService.txt */,
 				C9D97C7A179FA6640076ACF3 /* TipContent.txt */,
 			);
@@ -1073,7 +987,6 @@
 		C9D97D79179FA72C0076ACF3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C91D0BDD18EE9E1D006B10A3 /* NotUsed */,
 				C9F80CFA17B1D58E00E15885 /* Cell */,
 				C9D97D7B179FAB770076ACF3 /* Controller */,
 				C9F80CFB17B1D5E200E15885 /* View */,
@@ -1094,16 +1007,6 @@
 				C91D0BEA18EEA195006B10A3 /* Recording */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		C9D97D7E179FB1C40076ACF3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C9D97AC4179FA6640076ACF3 /* Response.h */,
-				C9D97AC5179FA6640076ACF3 /* Response.m */,
-				C9D97AC6179FA6640076ACF3 /* ResultDelegate.h */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		C9E8EE77179FD2EC00E47BD9 /* XIB */ = {
@@ -1224,17 +1127,11 @@
 				C9D97CC8179FA6650076ACF3 /* grayArrow@2x.png in Resources */,
 				C978899718E16AC300157577 /* Images.xcassets in Resources */,
 				C9155D7A18E90BC70075A693 /* ACContactsViewController.xib in Resources */,
-				C9D97D5E179FA6650076ACF3 /* notary_result_gb.png in Resources */,
 				C98C6A6818FBC51700D3EF37 /* icon_session@2x.png in Resources */,
-				C9D97D5F179FA6650076ACF3 /* notary_result_ok.png in Resources */,
 				C9D97D77179FA6650076ACF3 /* TermsOfService.txt in Resources */,
 				C9D97D78179FA6650076ACF3 /* TipContent.txt in Resources */,
 				C98C6A6718FBC51700D3EF37 /* icon_session.png in Resources */,
-				C9A8A93717BB7FF100652B90 /* nav.png in Resources */,
-				C9A8A93817BB7FF100652B90 /* nav@2x.png in Resources */,
 				C98C6A6A18FBC51700D3EF37 /* icon_timeline@2x.png in Resources */,
-				C9EE165417C48D47007089D6 /* aboutus@2x.png in Resources */,
-				C9EE165617C4ACAE007089D6 /* aboutus-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1251,14 +1148,12 @@
 				C9D97A71179FA6520076ACF3 /* ACAccountViewController.m in Sources */,
 				C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */,
 				C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */,
-				C9D97A7B179FA6520076ACF3 /* ACExtractionDetailViewController.m in Sources */,
 				C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */,
 				C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */,
 				C96FB4AB18ED45D70004958C /* ACRecordingCallDetailViewController.m in Sources */,
 				C9D97A8F179FA6520076ACF3 /* ACMoreViewController.m in Sources */,
 				C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */,
 				C9D97A90179FA6520076ACF3 /* ACNotaryDetailViewController.m in Sources */,
-				C9D97A94179FA6520076ACF3 /* ACPaymentCell.m in Sources */,
 				C914504018FBBAC200B00B89 /* ACGestureStatus2Cell.m in Sources */,
 				C9D97A96179FA6520076ACF3 /* ACPlayerView.m in Sources */,
 				C9D97A98179FA6520076ACF3 /* ACRecording2Cell.m in Sources */,
@@ -1308,19 +1203,11 @@
 				C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */,
 				C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */,
 				C900D50C17AF892B00D027D4 /* NSString+Date.m in Sources */,
-				C900D50F17AF98E200D027D4 /* ACOldAccountViewController.m in Sources */,
 				C99FCA5117B086300003B2FF /* ACAccountPayCell.m in Sources */,
 				C99FCA5417B086440003B2FF /* ACAccountUseRecordCell.m in Sources */,
-				C99FCA6117B0E2790003B2FF /* ACOldAccountMonthCell.m in Sources */,
-				C99FCA6417B0EE680003B2FF /* ACOldAccountDayViewController.m in Sources */,
-				C99FCA6717B0F1010003B2FF /* ACOldAccountDayCell.m in Sources */,
 				C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */,
-				C9F80CFE17B21BAB00E15885 /* ACRechargeViewController.m in Sources */,
-				C9F80D0417B22A5A00E15885 /* ACAccountRechargeCell.m in Sources */,
-				C9F80D0717B23CA800E15885 /* ACRechargeConfirmViewController.m in Sources */,
 				C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */,
 				C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */,
-				C9E2E2AD17BCA15F00A3AA6F /* ACRecordingManagerDetailListOldViewController.m in Sources */,
 				C9985E1A17C35C240048C2FD /* ACRechargeByAppStoreViewController.m in Sources */,
 				C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */,
 				C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */,
@@ -1338,7 +1225,6 @@
 				C9D4D19017E2B8EE0013D03E /* CJSONDeserializer.m in Sources */,
 				C9D4D19117E2B8EE0013D03E /* CJSONScanner.m in Sources */,
 				C9D4D19217E2B8EE0013D03E /* CJSONSerializer.m in Sources */,
-				C92D6A8618080E750060CAB6 /* ACUseRecordViewController.m in Sources */,
 				C997105B18F62EF100E56D22 /* KKGestureLockView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1413,8 +1299,7 @@
 					"$(inherited)",
 					YuluByStore/Librarys/alipay,
 					"YuluByStore/Librarys/baidu-mtj",
-					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
-					"$(PROJECT_DIR)/YuluByStore/Librarys/WeixinActivity/Resources",
+					YuluByStore/Librarys/WeixinActivity/Resources,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1458,8 +1343,7 @@
 					"$(inherited)",
 					YuluByStore/Librarys/alipay,
 					"YuluByStore/Librarys/baidu-mtj",
-					"$(PROJECT_DIR)/YuluByStore/Librarys/baidu-mtj",
-					"$(PROJECT_DIR)/YuluByStore/Librarys/WeixinActivity/Resources",
+					YuluByStore/Librarys/WeixinActivity/Resources,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

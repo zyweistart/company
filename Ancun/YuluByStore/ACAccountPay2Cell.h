@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACAccountPay2Cell : UITableViewCell<UIActionSheetDelegate>
+@interface ACAccountPay2Cell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *lblName;
 @property (strong, nonatomic) UILabel *lblDescription;
 
-@property (assign,nonatomic) int currentType;
 @property (strong,nonatomic) NSMutableDictionary *data;
 @property (strong,nonatomic) UIViewController *controler;
 

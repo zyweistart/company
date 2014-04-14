@@ -7,7 +7,6 @@
 //
 
 #import "ACAccountPay1Cell.h"
-#import "ACRechargeConfirmViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ACPaymentViewController.h"
 
@@ -71,57 +70,6 @@
 - (void)goPay:(id)sender {
     ACPaymentViewController *paymentViewController=[[ACPaymentViewController alloc]initWithData:_data];
     [_controler.navigationController pushViewController:paymentViewController animated:YES];
-    
-    
-    //    ACRechargeConfirmViewController *rechargeConfirm=[[ACRechargeConfirmViewController alloc] init];
-    //    [rechargeConfirm setCurrentType:_currentType];
-    //    [rechargeConfirm setData:_data];
-    //    if(_currentType ==1) {
-    //        if([[Config Instance]isOldUser]&&[[[[Config Instance] userInfo]objectForKey:@"payuserflag"]intValue]==1){
-    //            int rectime=[[[[Config Instance]userInfo]objectForKey:@"rectime"]intValue]/60;
-    //            if(rectime>0) {
-    //                [Common actionSheet:self message:[NSString stringWithFormat:@"您原时长套餐还剩%d分钟，衷心建议您用完原套餐再充值，如果您坚持继续充值，原套餐中的可录音时长会被清零，多可惜啊",rectime] tag:1];
-    //            } else {
-    //                //新用户充值
-    //                [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
-    //            }
-    //        } else {
-    //            //新用户充值
-    //            [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
-    //        }
-    //    } else if (_currentType==2) {
-    //
-    //        if([[Config Instance]isOldUser]){
-    //            [Common alert:@"要先购买基础服务套餐后才能购买增值时长套餐，打好基础很重要哦"];
-    //        } else {
-    //            if([[Config Instance]isPayBase]){
-    //                [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
-    //            } else {
-    //                [Common alert:@"请先购买基础套餐"];
-    //            }
-    //        }
-    //    } else if (_currentType==3) {
-    //        if([[Config Instance]isOldUser]){
-    //            [Common alert:@"要先购买基础服务套餐后才能购买增值存储套餐，更多空间更多安心"];
-    //        } else {
-    //            if([[Config Instance]isPayBase]){
-    //                [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
-    //            } else {
-    //                [Common alert:@"请先购买基础套餐"];
-    //            }
-    //        }
-    //    }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(actionSheet.tag==1) {
-        if(buttonIndex==0) {
-            ACRechargeConfirmViewController *rechargeConfirm=[[ACRechargeConfirmViewController alloc] init];
-            [rechargeConfirm setCurrentType:_currentType];
-            [rechargeConfirm setData:_data];
-            [_controler.navigationController pushViewController:rechargeConfirm animated:YES];
-        }
-    }
 }
 
 @end

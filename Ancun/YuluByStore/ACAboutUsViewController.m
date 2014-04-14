@@ -20,7 +20,7 @@
     UIImageView *imageView=[[UIImageView alloc]init];
     if(inch4){
        [imageView setFrame:CGRectMake(0, 20, 320, 458)];
-       [imageView setImage:[UIImage imageNamed:@"aboutus-568h"]];
+       [imageView setImage:[UIImage imageNamed:@"aboutus-5"]];
     }else{
        [imageView setFrame:CGRectMake(0, 20, 320, 370)];
        [imageView setImage:[UIImage imageNamed:@"aboutus"]];

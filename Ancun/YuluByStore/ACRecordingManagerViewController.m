@@ -1,6 +1,5 @@
 #import "ACRecordingManagerViewController.h"
 #import "ACRecordingManagerDetailListViewController.h"
-#import "ACRecordingManagerDetailListOldViewController.h"
 #import "ACRecordingCell.h"
 #import "ACRecording2Cell.h"
 #import "DataSingleton.h"
