@@ -108,7 +108,7 @@
         BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
         if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
             UIViewController *currentViewController=[self.window visibleViewController];
-            if(currentViewController!=nil){
+            if(currentViewController!=nil&&![[Config Instance] lock]){
                 [currentViewController presentViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES completion:nil];
             }
         }
@@ -120,7 +120,8 @@
     return [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
     [WXApi handleOpenURL:url delegate:self];
 #ifdef JAILBREAK
     AlixPay *alixpay = [AlixPay shared];
