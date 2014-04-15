@@ -10,8 +10,8 @@
 #import "ACGuideViewController.h"
 #import "ACLoginViewController.h"
 #import "ACGesturePasswordViewController.h"
-#import "BaseUIActivityViewController.h"
 #import "NSString+Utils.h"
+#import "UIWindow+PazLabs.h"
 #ifndef TEST
 #import "BaiduMobStat.h"
 #endif
@@ -107,15 +107,9 @@
         NSString *PASSWORD=[Common getCache:DEFAULTDATA_PASSWORD];
         BOOL AUTOLOGIN=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];
         if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
-            UIViewController *currentViewController=(UIViewController *)[[[Config Instance] allViewControllerHierarchys] lastObject];
+            UIViewController *currentViewController=[self.window visibleViewController];
             if(currentViewController!=nil){
-                if(![[Config Instance]lock]){
-                    ACGesturePasswordViewController *gesturePasswordViewController=[[ACGesturePasswordViewController alloc]initWithFlag:YES];
-                    if([currentViewController isMemberOfClass:[BaseUIActivityViewController class]]){
-                        [[[Config Instance] allViewControllerHierarchys] addObject:gesturePasswordViewController];
-                    }
-                    [currentViewController presentViewController:gesturePasswordViewController animated:YES completion:nil];
-                }
+                [currentViewController presentViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES completion:nil];
             }
         }
     }

@@ -9,7 +9,6 @@
 #import "WXApi.h"
 #import "WeixinSessionActivity.h"
 #import "WeixinTimelineActivity.h"
-#import "BaseUIActivityViewController.h"
 
 @interface ACMoreViewController () <UIActionSheetDelegate>
 
@@ -150,13 +149,19 @@
         if([WXApi isWXAppInstalled]){
             activity = @[[[WeixinSessionActivity alloc] init],[[WeixinTimelineActivity alloc] init]];
         }
-        BaseUIActivityViewController *activityView = [[BaseUIActivityViewController alloc] initWithActivityItems:@[@"安存语录,促使通话录音,严格满足证据的真实性、合法性要求,以公证的法定证明力为依托,是真正可成为被司法机关认可的呈堂证供的通话录音",[NSURL URLWithString:@"https://itunes.apple.com/cn/app/an-cun-yu-lu-ge-ren-ban/id638597148?mt=8"]] applicationActivities:activity];
-        activityView.excludedActivityTypes = @[UIActivityTypeAirDrop,
+        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"安存语录,促使通话录音,严格满足证据的真实性、合法性要求,以公证的法定证明力为依托,是真正可成为被司法机关认可的呈堂证供的通话录音",[NSURL URLWithString:@"https://itunes.apple.com/cn/app/an-cun-yu-lu-ge-ren-ban/id638597148?mt=8"]] applicationActivities:activity];
+        
+        activityView.excludedActivityTypes = @[UIActivityTypePostToFacebook,
+                                               UIActivityTypePostToTwitter,
+                                               UIActivityTypePrint,
+                                               UIActivityTypeCopyToPasteboard,
+                                               UIActivityTypeAssignToContact,
                                                UIActivityTypeSaveToCameraRoll,
                                                UIActivityTypeAddToReadingList,
-                                               UIActivityTypeAssignToContact,
-                                               UIActivityTypeCopyToPasteboard,
-                                               UIActivityTypePrint];
+                                               UIActivityTypePostToFlickr,
+                                               UIActivityTypePostToVimeo,
+                                               UIActivityTypeAirDrop];
+        
         [self presentViewController:activityView animated:YES completion:nil];
     }else if(sender.tag==8){
         //重新登录

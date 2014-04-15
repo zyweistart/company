@@ -19,7 +19,6 @@
 //
 @property Boolean lock;
 
-@property (strong,nonatomic) NSMutableArray *allViewControllerHierarchys;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息
@@ -32,8 +31,6 @@
 @property (strong,nonatomic) NSMutableArray *noDialPhoneNumber;
 //当前用户的套餐列表
 @property (strong,nonatomic) NSMutableArray *currentPackagesList;
-
-@property (strong,nonatomic) UIViewController *paynmentViewController;
 
 @property (strong,nonatomic) NSString *USERNAME;
 @property (strong,nonatomic) NSString *PASSWORD;

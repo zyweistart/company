@@ -7,7 +7,6 @@
 #import "ACRegistrationViewController.h"
 #import "ACForgetPasswordViewController.h"
 #import "ACAgainSetGesturePasswordViewController.h"
-#import "BaseUITabBarViewController.h"
 #import "NSString+Utils.h"
 
 @interface ACLoginViewController ()
@@ -235,7 +234,7 @@
             [moreViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         //添加标签控制器
-        BaseUITabBarViewController *_tabBarController = [[BaseUITabBarViewController alloc] init];
+        UITabBarController *_tabBarController = [[UITabBarController alloc] init];
         [_tabBarController.view setBackgroundColor:MAINBG];
         if([[[UIDevice currentDevice] systemVersion]floatValue]>=6){
             [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];

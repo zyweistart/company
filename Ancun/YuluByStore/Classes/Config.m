@@ -13,8 +13,6 @@ static Config * instance = nil;
             [phoneList addObject:@"112"];
             [phoneList addObject:PHONENUMBER];
             [instance setNoDialPhoneNumber:phoneList];
-            NSMutableArray* hierarchys=[[NSMutableArray alloc]init];
-            [instance setAllViewControllerHierarchys:hierarchys];
         }
     }
     return instance;

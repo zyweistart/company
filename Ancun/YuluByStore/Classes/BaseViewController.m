@@ -20,30 +20,6 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
-{
-    [[[Config Instance] allViewControllerHierarchys] addObject:viewControllerToPresent];
-    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
-}
-
-- (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^)(void))completion
-{
-    [[[Config Instance] allViewControllerHierarchys] removeLastObject];
-    [super dismissViewControllerAnimated:flag completion:completion];
-}
-
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
-{
-    [[[Config Instance] allViewControllerHierarchys] addObject:modalViewController];
-    [super presentModalViewController:modalViewController animated:animated];
-}
-
-- (void)dismissModalViewControllerAnimated:(BOOL)animated
-{
-    [[[Config Instance] allViewControllerHierarchys] removeLastObject];
-    [super dismissModalViewControllerAnimated:animated];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
