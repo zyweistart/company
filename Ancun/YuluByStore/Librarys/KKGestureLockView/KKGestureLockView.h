@@ -29,13 +29,21 @@
 
 @property (nonatomic, strong) UIImage *normalGestureNodeImage;
 @property (nonatomic, strong) UIImage *selectedGestureNodeImage;
+@property (nonatomic, strong) UIImage *successSelectedGestureNodeImage;
+@property (nonatomic, strong) UIImage *failSelectedGestureNodeImage;
 
 @property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic, strong) UIColor *successLineColor;
+@property (nonatomic, strong) UIColor *failLineColor;
+
 @property (nonatomic, assign) CGFloat lineWidth;
 
 @property (nonatomic, strong, readonly) UIView *contentView;//the container of the gesture notes
 @property (nonatomic, assign) UIEdgeInsets contentInsets;
 
 @property (nonatomic, weak) id<KKGestureLockViewDelegate> delegate;
+
+- (void)failSelectedButtons;
+- (void)doneSelectedButtons;
 
 @end

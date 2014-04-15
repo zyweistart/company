@@ -6,8 +6,10 @@
 #import "ACNavGesturePasswordViewController.h"
 #import "FileUtils.h"
 #import "NSString+Utils.h"
+#import "WXApi.h"
 #import "WeixinSessionActivity.h"
 #import "WeixinTimelineActivity.h"
+#import "BaseUIActivityViewController.h"
 
 @interface ACMoreViewController () <UIActionSheetDelegate>
 
@@ -143,9 +145,18 @@
         }
     }else if(sender.tag==7){
         //应用分享
-        NSArray *activity = @[[[WeixinSessionActivity alloc] init], [[WeixinTimelineActivity alloc] init]];
-        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"安存语录,促使通话录音,严格满足证据的真实性、合法性要求,以公证的法定证明力为依托,是真正可成为被司法机关认可的呈堂证供的通话录音",[UIImage imageNamed:@"icon"],[NSURL URLWithString:@"https://itunes.apple.com/cn/app/an-cun-yu-lu-ge-ren-ban/id638597148?mt=8"]] applicationActivities:activity];
-        activityView.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint];
+        NSArray *activity=nil;
+        //判断微信是否已经安装
+        if([WXApi isWXAppInstalled]){
+            activity = @[[[WeixinSessionActivity alloc] init],[[WeixinTimelineActivity alloc] init]];
+        }
+        BaseUIActivityViewController *activityView = [[BaseUIActivityViewController alloc] initWithActivityItems:@[@"安存语录,促使通话录音,严格满足证据的真实性、合法性要求,以公证的法定证明力为依托,是真正可成为被司法机关认可的呈堂证供的通话录音",[NSURL URLWithString:@"https://itunes.apple.com/cn/app/an-cun-yu-lu-ge-ren-ban/id638597148?mt=8"]] applicationActivities:activity];
+        activityView.excludedActivityTypes = @[UIActivityTypeAirDrop,
+                                               UIActivityTypeSaveToCameraRoll,
+                                               UIActivityTypeAddToReadingList,
+                                               UIActivityTypeAssignToContact,
+                                               UIActivityTypeCopyToPasteboard,
+                                               UIActivityTypePrint];
         [self presentViewController:activityView animated:YES completion:nil];
     }else if(sender.tag==8){
         //重新登录

@@ -9,6 +9,9 @@
 #import "ACGesturePasswordViewController.h"
 #import "ACLoginViewController.h"
 
+#define SUCCESSCOLOR [[UIColor colorWithRed:(107/255.0) green:(166/255.0) blue:(216/255.0) alpha:1] colorWithAlphaComponent:0.3]
+#define FAILCOLOR [[UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] colorWithAlphaComponent:0.3]
+
 @interface ACGesturePasswordViewController () 
 
 @end
@@ -23,10 +26,18 @@
     if (self) {
         [self.view setBackgroundColor:MAINBG];
         self.lockView=[[KKGestureLockView alloc]initWithFrame:self.view.bounds];
-        [self.lockView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3"]]];        [self.view addSubview:self.lockView];
+        [self.lockView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3"]]];
+        [self.view addSubview:self.lockView];
         self.lockView.normalGestureNodeImage = [UIImage imageNamed:@"gesture_node_normal"];
-        self.lockView.selectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected"];
-        self.lockView.lineColor = [[UIColor colorWithRed:(107/255.0) green:(166/255.0) blue:(216/255.0) alpha:1] colorWithAlphaComponent:0.3];
+        
+        self.lockView.successSelectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected_success"];
+        self.lockView.failSelectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected_fail"];
+        self.lockView.selectedGestureNodeImage = self.lockView.successSelectedGestureNodeImage;
+        
+        self.lockView.successLineColor = SUCCESSCOLOR;
+        self.lockView.failLineColor = FAILCOLOR;
+        self.lockView.lineColor = self.lockView.successLineColor;
+        
         self.lockView.lineWidth = 12;
         self.lockView.delegate = self;
         if(inch4){
@@ -93,8 +104,10 @@
 }
 
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode{
+    
     NSString *value=[Common getCache:DEFAULTDATA_GESTUREPWD];
     if([passcode isEqualToString:value]){
+        [self.lockView doneSelectedButtons];
         if(_flag){
             [[Config Instance] setLock:NO];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -104,6 +117,7 @@
         }
         return;
     }
+    [self.lockView failSelectedButtons];
     if(errorCount>2){
         [Common alert:@"超过限制请重新登录"];
         //清除登录密码

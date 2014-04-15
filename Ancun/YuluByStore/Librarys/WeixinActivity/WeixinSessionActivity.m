@@ -12,7 +12,7 @@
 
 - (UIImage *)activityImage
 {
-    return [UIImage imageNamed:@"icon_session.png"];
+    return [UIImage imageNamed:@"icon_session"];
 }
 
 - (NSString *)activityTitle

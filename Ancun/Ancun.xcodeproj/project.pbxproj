@@ -63,6 +63,8 @@
 		C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */; };
 		C9A67EAA17CD882900E9A81E /* ACContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A67EA817CD882900E9A81E /* ACContactsViewController.m */; };
 		C9AEECB318FC15F4006D81A6 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AEECB218FC15F4006D81A6 /* libBaiduMobStat.a */; };
+		C9BDC19118FCED720032C97F /* BaseUIActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BDC19018FCED720032C97F /* BaseUIActivityViewController.m */; };
+		C9BDC19418FCF0450032C97F /* BaseUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BDC19318FCF0450032C97F /* BaseUITabBarViewController.m */; };
 		C9CB41BE18ED0E2E00DB6099 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */; };
 		C9CB41BF18ED0E2E00DB6099 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CB41BD18ED0E2E00DB6099 /* EAIntroView.m */; };
 		C9D47CFD18F387F300472625 /* ACModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D47CFC18F387F300472625 /* ACModifyPasswordViewController.m */; };
@@ -224,6 +226,10 @@
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
 		C9AEECB118FC15F4006D81A6 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		C9AEECB218FC15F4006D81A6 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
+		C9BDC18F18FCED720032C97F /* BaseUIActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUIActivityViewController.h; sourceTree = "<group>"; };
+		C9BDC19018FCED720032C97F /* BaseUIActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUIActivityViewController.m; sourceTree = "<group>"; };
+		C9BDC19218FCF0450032C97F /* BaseUITabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUITabBarViewController.h; sourceTree = "<group>"; };
+		C9BDC19318FCF0450032C97F /* BaseUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUITabBarViewController.m; sourceTree = "<group>"; };
 		C9CB41BA18ED0E2E00DB6099 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		C9CB41BC18ED0E2E00DB6099 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -753,6 +759,10 @@
 				C9D97AAE179FA6640076ACF3 /* BaseRefreshTableViewController.m */,
 				C9D97AAF179FA6640076ACF3 /* BaseTableViewController.h */,
 				C9D97AB0179FA6640076ACF3 /* BaseTableViewController.m */,
+				C9BDC18F18FCED720032C97F /* BaseUIActivityViewController.h */,
+				C9BDC19018FCED720032C97F /* BaseUIActivityViewController.m */,
+				C9BDC19218FCF0450032C97F /* BaseUITabBarViewController.h */,
+				C9BDC19318FCF0450032C97F /* BaseUITabBarViewController.m */,
 				C90A351B17BA054F00BECE31 /* BaseViewController.h */,
 				C90A351C17BA054F00BECE31 /* BaseViewController.m */,
 				C9D97AB1179FA6640076ACF3 /* Common.h */,
@@ -1147,6 +1157,7 @@
 				C9D97A6A179FA6520076ACF3 /* ACAboutUsViewController.m in Sources */,
 				C9D97A71179FA6520076ACF3 /* ACAccountViewController.m in Sources */,
 				C9D97A72179FA6520076ACF3 /* ACAppDelegate.m in Sources */,
+				C9BDC19418FCF0450032C97F /* BaseUITabBarViewController.m in Sources */,
 				C9D97A74179FA6520076ACF3 /* ACContactCell.m in Sources */,
 				C990FA9C18F39CF500C85ED9 /* ACExtractionCodeDetailViewController.m in Sources */,
 				C9D97A85179FA6520076ACF3 /* ACLoginViewController.m in Sources */,
@@ -1173,6 +1184,7 @@
 				C9D97C7E179FA6640076ACF3 /* Config.m in Sources */,
 				C91D0BDC18EE9A4D006B10A3 /* ACRechargeByAlipayViewController.m in Sources */,
 				C9D97C80179FA6640076ACF3 /* DataSingleton.m in Sources */,
+				C9BDC19118FCED720032C97F /* BaseUIActivityViewController.m in Sources */,
 				C9D97C81179FA6640076ACF3 /* FileUtils.m in Sources */,
 				C9D97C82179FA6640076ACF3 /* HttpRequest.m in Sources */,
 				C9D97C84179FA6640076ACF3 /* LoadingCell.m in Sources */,

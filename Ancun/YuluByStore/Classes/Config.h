@@ -4,20 +4,22 @@
 
 //是否已登陆
 @property Boolean isLogin;
-//是否需要计算缓存空间大小
-@property Boolean isCalculateTotal;
-//是否需要刷新录音详细页面
-@property Boolean isRefreshRecordingList;
+//是否刷新用户信息
+@property Boolean isRefreshUserInfo;
 //是否需要刷新使用记录页面
 @property Boolean isRefreshUseRecordList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountPayList;
 //是否刷新账户套餐列表页面
 @property Boolean isRefreshAccountUseRecordList;
-//是否刷新用户信息
-@property Boolean isRefreshUserInfo;
+//是否需要刷新录音详细页面
+@property Boolean isRefreshRecordingList;
+//是否需要计算缓存空间大小
+@property Boolean isCalculateTotal;
 //
 @property Boolean lock;
+
+@property (strong,nonatomic) NSMutableArray *allViewControllerHierarchys;
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
 //用户信息
@@ -31,9 +33,7 @@
 //当前用户的套餐列表
 @property (strong,nonatomic) NSMutableArray *currentPackagesList;
 
-@property (strong,nonatomic) UIViewController *currentViewController;
 @property (strong,nonatomic) UIViewController *paynmentViewController;
-@property (strong,nonatomic) UIViewController *mainViewController;
 
 @property (strong,nonatomic) NSString *USERNAME;
 @property (strong,nonatomic) NSString *PASSWORD;

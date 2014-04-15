@@ -7,6 +7,7 @@
 #import "ACRegistrationViewController.h"
 #import "ACForgetPasswordViewController.h"
 #import "ACAgainSetGesturePasswordViewController.h"
+#import "BaseUITabBarViewController.h"
 #import "NSString+Utils.h"
 
 @interface ACLoginViewController ()
@@ -234,7 +235,7 @@
             [moreViewControllerNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbg"] forBarMetrics:UIBarMetricsDefault];
         }
         //添加标签控制器
-        UITabBarController *_tabBarController = [[UITabBarController alloc] init];
+        BaseUITabBarViewController *_tabBarController = [[BaseUITabBarViewController alloc] init];
         [_tabBarController.view setBackgroundColor:MAINBG];
         if([[[UIDevice currentDevice] systemVersion]floatValue]>=6){
             [[_tabBarController tabBar] setShadowImage:[[UIImage alloc] init]];
@@ -248,7 +249,6 @@
                                              recordingManagerViewControllerNav,
                                              moreViewControllerNav,
                                              nil];
-        [[Config Instance] setMainViewController:_tabBarController];
         
         [self presentViewController:_tabBarController animated:YES completion:^{
             if(self.gotoAgainGesurePassword){
@@ -282,7 +282,6 @@
 }
 
 - (void)onControllerResult:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableArray*)result{
-    [[Config Instance]setMainViewController:nil];
     if(resultCode==RESULTCODE_ACLoginViewController_1) {
         //登录
         [Config resetConfig];

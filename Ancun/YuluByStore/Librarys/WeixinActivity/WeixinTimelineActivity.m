@@ -21,7 +21,7 @@
 
 - (UIImage *)activityImage
 {
-    return [UIImage imageNamed:@"icon_timeline.png"];
+    return [UIImage imageNamed:@"icon_timeline"];
 }
 
 - (NSString *)activityTitle

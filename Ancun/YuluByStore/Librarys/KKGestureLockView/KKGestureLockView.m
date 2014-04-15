@@ -191,17 +191,32 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
             }
             
             [self.delegate gestureLockView:self didEndWithPasscode:[passcodeArray componentsJoinedByString:@","]];
+            return;
         }
     }
     
+    [self doneSelectedButtons];
+
+}
+
+- (void)failSelectedButtons
+{
+    self.lineColor=self.failLineColor;
+    self.selectedGestureNodeImage=self.failSelectedGestureNodeImage;
+    [self setNeedsDisplay];
+    [self performSelector:@selector(doneSelectedButtons) withObject:nil afterDelay:0.3];
+}
+
+- (void)doneSelectedButtons
+{
+    self.lineColor=self.successLineColor;
+    self.selectedGestureNodeImage=self.successSelectedGestureNodeImage;
     for (UIButton *button in self.selectedButtons) {
         button.selected = NO;
     }
     [self.selectedButtons removeAllObjects];
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
     [self setNeedsDisplay];
-    
-
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{

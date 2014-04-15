@@ -142,7 +142,7 @@
 }
 
 - (void)newPersonViewController:(ABNewPersonViewController *)newPersonView didCompleteWithNewPerson:(ABRecordRef)person{
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -158,7 +158,7 @@
         newPersonViewController.newPersonViewDelegate=self;
         
         UINavigationController *newPersonViewControllerNav = [[UINavigationController alloc] initWithRootViewController:newPersonViewController];
-        [self presentModalViewController:newPersonViewControllerNav animated:YES];
+        [self presentViewController:newPersonViewControllerNav animated:YES completion:nil];
     }
 }
 
