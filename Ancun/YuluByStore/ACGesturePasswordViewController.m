@@ -10,7 +10,7 @@
 #import "ACLoginViewController.h"
 
 #define SUCCESSCOLOR [[UIColor colorWithRed:(107/255.0) green:(166/255.0) blue:(216/255.0) alpha:1] colorWithAlphaComponent:0.3]
-#define FAILCOLOR [[UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] colorWithAlphaComponent:0.3]
+#define FAILCOLOR [[UIColor colorWithRed:(136/255.0) green:(74/255.0) blue:(108/255.0) alpha:1] colorWithAlphaComponent:0.3]
 
 @interface ACGesturePasswordViewController () 
 

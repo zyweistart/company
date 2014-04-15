@@ -204,7 +204,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.lineColor=self.failLineColor;
     self.selectedGestureNodeImage=self.failSelectedGestureNodeImage;
     [self setNeedsDisplay];
-    [self performSelector:@selector(doneSelectedButtons) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(doneSelectedButtons) withObject:nil afterDelay:0.5];
 }
 
 - (void)doneSelectedButtons
