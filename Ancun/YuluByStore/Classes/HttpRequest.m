@@ -11,7 +11,6 @@
 #import "MBProgressHUD.h"
 #import "Reachability.h"
 #import "GHNSString+HMAC.h"
-#import "NSString+OAURLEncodingAdditions.h"
 #import "BaseRefreshTableViewController.h"
 
 @implementation HttpRequest {

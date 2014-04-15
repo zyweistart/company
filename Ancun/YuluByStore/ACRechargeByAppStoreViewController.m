@@ -2,7 +2,7 @@
 #import "MBProgressHUD.h"
 #import "ACRechargeNav.h"
 #import "DataSingleton.h"
-#import "NSString+Date.h"
+#import "NSString+Utils.h"
 #import "IAPHelper.h"
 #import "ACAccountPay2Cell.h"
 

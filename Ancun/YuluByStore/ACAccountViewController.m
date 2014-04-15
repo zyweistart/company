@@ -7,7 +7,7 @@
     #import "ACRechargeByAppStoreViewController.h"
 #endif
 #import "DataSingleton.h"
-#import "NSString+Date.h"
+#import "NSString+Utils.h"
 
 #define REFRESHUSERINFOREQUESTCODE 473281947
 

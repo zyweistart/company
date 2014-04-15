@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C900D50C17AF892B00D027D4 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = C900D50B17AF892B00D027D4 /* NSString+Date.m */; };
 		C90A351A17B9D81C00BECE31 /* ACRechargeNav.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351917B9D81C00BECE31 /* ACRechargeNav.m */; };
 		C90A351D17BA054F00BECE31 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90A351C17BA054F00BECE31 /* BaseViewController.m */; };
 		C90BCF7A17D037B700813641 /* ACNavigationWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90BCF7917D037B300813641 /* ACNavigationWebPageViewController.m */; };
@@ -96,7 +95,6 @@
 		C9D97A9C179FA6520076ACF3 /* ACRecordingDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A51179FA6520076ACF3 /* ACRecordingDetailCell.m */; };
 		C9D97AA3179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A5B179FA6520076ACF3 /* ACRecordingManagerDetailListViewController.m */; };
 		C9D97AAA179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A67179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m */; };
-		C9D97AAB179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */; };
 		C9D97C7B179FA6640076ACF3 /* BaseRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AAE179FA6640076ACF3 /* BaseRefreshTableViewController.m */; };
 		C9D97C7C179FA6640076ACF3 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AB0179FA6640076ACF3 /* BaseTableViewController.m */; };
 		C9D97C7D179FA6640076ACF3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D97AB2179FA6640076ACF3 /* Common.m */; };
@@ -137,8 +135,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C900D50A17AF892A00D027D4 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
-		C900D50B17AF892B00D027D4 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
 		C90A351817B9D81C00BECE31 /* ACRechargeNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeNav.h; sourceTree = "<group>"; };
 		C90A351917B9D81C00BECE31 /* ACRechargeNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeNav.m; sourceTree = "<group>"; };
 		C90A351B17BA054F00BECE31 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -295,8 +291,6 @@
 		C9D97A5D179FA6520076ACF3 /* ACRecordingManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRecordingManagerViewController.m; sourceTree = "<group>"; };
 		C9D97A66179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+MutableDeepCopy.h"; path = "../NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
 		C9D97A67179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+MutableDeepCopy.m"; path = "../NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
-		C9D97A68179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+OAURLEncodingAdditions.h"; path = "../NSString+OAURLEncodingAdditions.h"; sourceTree = "<group>"; };
-		C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+OAURLEncodingAdditions.m"; path = "../NSString+OAURLEncodingAdditions.m"; sourceTree = "<group>"; };
 		C9D97AAD179FA6640076ACF3 /* BaseRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRefreshTableViewController.h; sourceTree = "<group>"; };
 		C9D97AAE179FA6640076ACF3 /* BaseRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRefreshTableViewController.m; sourceTree = "<group>"; };
 		C9D97AAF179FA6640076ACF3 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
@@ -781,10 +775,6 @@
 				C9D97AC3179FA6640076ACF3 /* LongPressButton.m */,
 				C9D97A66179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.h */,
 				C9D97A67179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m */,
-				C900D50A17AF892A00D027D4 /* NSString+Date.h */,
-				C900D50B17AF892B00D027D4 /* NSString+Date.m */,
-				C9D97A68179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.h */,
-				C9D97A69179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m */,
 				C9D97D7F179FB3730076ACF3 /* NSString+Utils.h */,
 				C9D97D80179FB3730076ACF3 /* NSString+Utils.m */,
 				C9D97AC4179FA6640076ACF3 /* Response.h */,
@@ -1174,7 +1164,6 @@
 				C98C6A6E18FBC51800D3EF37 /* WeixinTimelineActivity.m in Sources */,
 				C9D47CFD18F387F300472625 /* ACModifyPasswordViewController.m in Sources */,
 				C9D97AAA179FA6520076ACF3 /* NSDictionary+MutableDeepCopy.m in Sources */,
-				C9D97AAB179FA6520076ACF3 /* NSString+OAURLEncodingAdditions.m in Sources */,
 				C9D97C7B179FA6640076ACF3 /* BaseRefreshTableViewController.m in Sources */,
 				C9D97C7C179FA6640076ACF3 /* BaseTableViewController.m in Sources */,
 				C9D97C83179FA6640076ACF3 /* IAPHelper.m in Sources */,
@@ -1214,7 +1203,6 @@
 				C9D97CC1179FA6650076ACF3 /* MBProgressHUD.m in Sources */,
 				C99BC2E618ED2ACE00650DF5 /* ACForgetPasswordViewController.m in Sources */,
 				C9D97CC6179FA6650076ACF3 /* EGORefreshTableHeaderView.m in Sources */,
-				C900D50C17AF892B00D027D4 /* NSString+Date.m in Sources */,
 				C99FCA5117B086300003B2FF /* ACAccountPayCell.m in Sources */,
 				C99FCA5417B086440003B2FF /* ACAccountUseRecordCell.m in Sources */,
 				C9A560D218FB7F2E006A5049 /* ACGestureStatusCell.m in Sources */,

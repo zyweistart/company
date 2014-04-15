@@ -16,7 +16,7 @@
              ] lowercaseString];
 }
 
-+ (NSData*)base64Decode:(NSString*)string{
+- (NSData*)base64Decode{
     unsigned long ixtext, lentext;
     unsigned char ch, inbuf[4], outbuf[4];
     short i, ixinbuf;
@@ -24,15 +24,15 @@
     const unsigned char *tempcstring;
     NSMutableData *theData;
     
-    if (string == nil) {
+    if (self == nil) {
         return [NSData data];
     }
     
     ixtext = 0;
     
-    tempcstring = (const unsigned char *)[string UTF8String];
+    tempcstring = (const unsigned char *)[self UTF8String];
     
-    lentext = [string length];
+    lentext = [self length];
     
     theData = [NSMutableData dataWithCapacity: lentext];
     
@@ -106,7 +106,7 @@
     return theData;
 }
 
-+ (NSString*)base64Encode:(NSData*)data{
+- (NSString*)base64Encode:(NSData*)data{
     static char base64EncodingTable[64] = {
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
         'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
@@ -171,6 +171,46 @@
 - (BOOL)isNotEmpty
 {
     return self!=nil&&![@"" isEqualToString:self];
+}
+
+- (NSString *) URLEncodedString {
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)self,NULL,CFSTR("!*'();:@&=+$,/?%#[]"),kCFStringEncodingUTF8));
+    //    [result autorelease];
+    return result;
+}
+
+- (NSString*) URLDecodedString {
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,(CFStringRef)self,CFSTR(""),kCFStringEncodingUTF8));
+    //    [result autorelease];
+    return result;
+}
+
+- (NSString *)dateStringFormat {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    //[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSDate *dateFormatted = [formatter dateFromString:self];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    return [formatter stringFromDate:dateFormatted];
+}
+
+- (NSDate *)stringConvertDate{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [dateFormatter dateFromString:self];
+}
+
+- (NSString *)getDateLongTimeByYYYYMMddHHmmss{
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSTimeZone *timeZone=[NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [formatter setTimeZone:timeZone];
+    NSDate *date=[formatter dateFromString:self];
+    return [NSString stringWithFormat:@"%zi",(long)[date timeIntervalSince1970]];
 }
 
 @end

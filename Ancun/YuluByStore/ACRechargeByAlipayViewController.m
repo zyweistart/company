@@ -10,7 +10,7 @@
 #import "ACRechargeNav.h"
 #import "ACAccountPay1Cell.h"
 #import "DataSingleton.h"
-#import "NSString+Date.h"
+#import "NSString+Utils.h"
 #import "IAPHelper.h"
 
 #ifdef  TEST
