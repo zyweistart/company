@@ -84,6 +84,7 @@
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(actionSheet.tag==1){
+        [[Config Instance]setLock:NO];
         if(buttonIndex==0){
             [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_2 requestCode:0 data:nil];
         }
@@ -177,6 +178,7 @@
         }
     }else if(sender.tag==8){
         //重新登录
+        [[Config Instance]setLock:YES];
         [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
     }
 }
