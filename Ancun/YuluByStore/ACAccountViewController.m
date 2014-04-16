@@ -74,7 +74,7 @@
         [lbl setText:[NSString stringWithFormat:@"当前账户：%@",[[[Config Instance]userInfo]objectForKey:@"phone"]]];
         [container addSubview:lbl];
         
-        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(4.5, 51, 155.5, 34.5)];
+        _leftTopTab=[[UIButton alloc]initWithFrame:CGRectMake(4, 51, 156, 35)];
         [_leftTopTab setTitle:@"充值套餐" forState:UIControlStateNormal];
         [_leftTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountleftact"] forState:UIControlStateNormal];
         _leftTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光
@@ -82,7 +82,7 @@
         [_leftTopTab addTarget:self action:@selector(leftTopButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [container addSubview:_leftTopTab];
         
-        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 155.5, 34.5)];
+        _rightTopTab=[[UIButton alloc]initWithFrame:CGRectMake(160, 51, 156, 35)];
         [_rightTopTab setTitle:@"使用记录" forState:UIControlStateNormal];
         [_rightTopTab setBackgroundImage:[UIImage imageNamed:@"myaccountright"] forState:UIControlStateNormal];
         _rightTopTab.showsTouchWhenHighlighted = YES;//指定按钮被按下时发光

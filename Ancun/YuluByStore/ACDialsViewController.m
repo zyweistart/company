@@ -108,10 +108,10 @@
         UIButton *dial=nil;
         
         if(inch4){
-            dial=[[UIButton alloc]initWithFrame:CGRectMake(29.25, topHeight+4*height+(4)*hspacing, 261.5, 61.5)];
+            dial=[[UIButton alloc]initWithFrame:CGRectMake(29, topHeight+4*height+(4)*hspacing, 262, 62)];
             [dial setBackgroundImage:[UIImage imageNamed:@"call"] forState:UIControlStateNormal];
         }else{
-            dial=[[UIButton alloc]initWithFrame:CGRectMake(14.25, topHeight+4*height+(4)*hspacing, 291.5, 51.5)];
+            dial=[[UIButton alloc]initWithFrame:CGRectMake(14, topHeight+4*height+(4)*hspacing, 292, 52)];
             [dial setBackgroundImage:[UIImage imageNamed:@"call4"] forState:UIControlStateNormal];
         }
         

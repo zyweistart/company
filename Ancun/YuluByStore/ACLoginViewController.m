@@ -77,7 +77,7 @@
         [_txtPassword setReturnKeyType:UIReturnKeyDone];
         [passwordInputView addSubview:_txtPassword];
         //记住密码复选框
-        btnRememberPwdImg=[[UIButton alloc]initWithFrame:CGRectMake(35, inch4?356:296, 14.5, 14.5)];
+        btnRememberPwdImg=[[UIButton alloc]initWithFrame:CGRectMake(35, inch4?356:296, 15, 15)];
         [btnRememberPwdImg addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
         [control addSubview:btnRememberPwdImg];
         rememberPassword=[Common getCacheByBool:DEFAULTDATA_AUTOLOGIN];

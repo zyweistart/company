@@ -42,20 +42,20 @@
         NSArray *bgs=[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"6",@"6",@"6", nil];
         
         for(int i=0;i<length;i++){
-            UIButton *btnBg=[[UIButton alloc]initWithFrame:CGRectMake(15.75, 10+i*69.5+1*i,288.5,69.5)];
+            UIButton *btnBg=[[UIButton alloc]initWithFrame:CGRectMake(15.75, 10+i*70+1*i,289,70)];
             
             UIImageView *icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"more_icon_%@",[icons objectAtIndex:i]]]];
-            [icon setFrame:CGRectMake(20, 21, 27.5, 27.5)];
+            [icon setFrame:CGRectMake(20, 21, 28, 28)];
             [btnBg addSubview:icon];
             if(i==6){
-                lblCachName=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 27.5)];
+                lblCachName=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 28)];
                 [lblCachName setText:[names objectAtIndex:i]];
                 [lblCachName setFont:[UIFont systemFontOfSize:22]];
                 [lblCachName setTextColor:[UIColor whiteColor]];
                 [lblCachName setBackgroundColor:[UIColor clearColor]];
                 [btnBg addSubview:lblCachName];
             }else{
-                UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 27.5)];
+                UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(60, 21, 200, 28)];
                 [lbl setText:[names objectAtIndex:i]];
                 [lbl setFont:[UIFont systemFontOfSize:22]];
                 [lbl setTextColor:[UIColor whiteColor]];

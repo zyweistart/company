@@ -61,7 +61,7 @@
     [control addSubview:_lblTitlte];
     
     //LOGO
-    UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-105.5/2, inch4?70:40, 105.5, 102.5)];
+    UIView *logonv=[[UIView alloc]initWithFrame:CGRectMake(width/2-106/2, inch4?70:40, 106, 103)];
     [logonv setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login_logo"]]];
     [control addSubview:logonv];
     
@@ -129,7 +129,7 @@
     [_regFirstView addSubview:_regInputPhone];
     
     checked=YES;
-    _btnReadAgreementCheck=[[UIButton alloc]initWithFrame:CGRectMake(30, 84.25, 14.5, 14.5)];
+    _btnReadAgreementCheck=[[UIButton alloc]initWithFrame:CGRectMake(30, 84, 15, 15)];
     [_btnReadAgreementCheck setImage:[UIImage imageNamed:@"login_g"] forState:UIControlStateNormal];
     [_btnReadAgreementCheck addTarget:self action:@selector(readAgreementCheck:) forControlEvents:UIControlEventTouchUpInside];
     [_regFirstView addSubview:_btnReadAgreementCheck];
