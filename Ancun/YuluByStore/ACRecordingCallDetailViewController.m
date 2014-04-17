@@ -7,8 +7,6 @@
 //
 
 #import "ACRecordingCallDetailViewController.h"
-#import "ACNotaryDetailViewController.h"
-//#import "ACExtractionDetailViewController.h"
 #import "ACExtractionCodeDetailViewController.h"
 
 @interface ACRecordingCallDetailViewController () <ResultDelegate,HttpViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
@@ -168,9 +166,7 @@
             [_btn_notary setTitle:@"取消公证" forState:UIControlStateNormal];
             [_data setObject:@"2" forKey:@"cerflag"];
             
-            ACNotaryDetailViewController *notaryDetailViewController=[[ACNotaryDetailViewController alloc]init];
-            notaryDetailViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:notaryDetailViewController animated:YES];
+            [Common alert:@"申办成功，更多信息请登录官网"];
         }else if(reqCode==REQUESTCODE_CANCELNOTARY){
             [_btn_notary setTitle:@"申办公证" forState:UIControlStateNormal];
             [_data setObject:@"1" forKey:@"cerflag"];
