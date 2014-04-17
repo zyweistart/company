@@ -233,7 +233,7 @@
     [_regFourthView addTarget:self action:@selector(backgroundDoneEditing:) forControlEvents:UIControlEventTouchDown];
     [control addSubview:_regFourthView];
     
-    UIImageView *img1=[[UIImageView alloc]initWithFrame:CGRectMake(width/2-47.5/2, 0, 47.5, 45.5)];
+    UIImageView *img1=[[UIImageView alloc]initWithFrame:CGRectMake(width/2-48/2, 0, 48, 46)];
     [img1 setImage:[UIImage imageNamed:@"sucsse"]];
     [_regFourthView addSubview:img1];
     

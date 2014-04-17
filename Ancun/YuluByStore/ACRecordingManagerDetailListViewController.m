@@ -177,7 +177,7 @@
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(alertView.tag==1){
-        if(buttonIndex==0){
+        if(buttonIndex==1){
             NSString *password=[[alertView textFieldAtIndex:0]text];
             if([password isEqualToString:@""]){
                 [Common alert:@"密码不能为空"];
@@ -309,11 +309,12 @@
                                   initWithTitle:@"请输入密码"
                                   message:@"录音删除后将无法恢复，确定删除?"
                                   delegate:self
-                                  cancelButtonTitle:@"确定"
-                                  otherButtonTitles:@"取消",nil];
+                                  cancelButtonTitle:@"取消"
+                                  otherButtonTitles:@"确定",nil];
             [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
             alert.tag=1;
             [alert show];
+            [[Config Instance] setAlertView:alert];
         }
     }
 }

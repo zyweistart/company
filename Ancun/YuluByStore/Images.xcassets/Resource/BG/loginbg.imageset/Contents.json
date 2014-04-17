@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "txtbg.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "txtbg@2x.png"
+      "filename" : "loginbg@2x.png"
     }
   ],
   "info" : {

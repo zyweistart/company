@@ -21,6 +21,23 @@
     [setting synchronize];
 }
 
++ (void)alert:(NSString *)message cancel:(NSString *)cancelName ok:(NSString *)okName delegate:(id<UIAlertViewDelegate>)delegate{
+    [Common alert:message cancel:cancelName ok:okName delegate:delegate tag:0];
+}
+
++ (void)alert:(NSString *)message cancel:(NSString *)cancelName ok:(NSString *)okName delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"信息"
+                          message:message
+                          delegate:delegate
+                          cancelButtonTitle:cancelName
+                          otherButtonTitles:okName, nil];
+    alert.tag=tag;
+    [alert show];
+    [[Config Instance] setAlertView:alert];
+}
+
 + (void)alert:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"信息"
@@ -29,18 +46,24 @@
                           cancelButtonTitle:@"确定"
                           otherButtonTitles:nil, nil];
     [alert show];
+    [[Config Instance] setAlertView:alert];
 }
 
-+ (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag{
++ (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message ok:(NSString *) okName tag:(NSInteger)tag{
     UIActionSheet *sheet = [[UIActionSheet alloc]
                             initWithTitle:message
                             delegate:delegate
                             cancelButtonTitle:@"取消"
-                            destructiveButtonTitle:@"确定"
+                            destructiveButtonTitle:okName
                             otherButtonTitles:nil,nil];
     sheet.tag=tag;
     //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
+    [[Config Instance] setActionSheet:sheet];
+}
+
++ (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag{
+    [Common actionSheet:delegate message:message ok:@"确定" tag:tag];
 }
 
 //没有登录时提示
@@ -53,6 +76,7 @@
                             otherButtonTitles:nil,nil];
     //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
+    [[Config Instance] setActionSheet:sheet];
 }
 
 + (NSString*)formatPhone:(NSString *)phone{

@@ -32,13 +32,7 @@
 
 - (void)close
 {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"信息"
-                          message:@"未设置新手势密码，确认退出吗？"
-                          delegate:self
-                          cancelButtonTitle:@"取消"
-                          otherButtonTitles:@"确定", nil];
-    [alert show];
+    [Common alert:@"未设置新手势密码，确认退出吗？" cancel:@"取消" ok:@"确定" delegate:self];
 }
 
 - (void)toRootViewController

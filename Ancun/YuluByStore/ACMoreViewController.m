@@ -84,7 +84,6 @@
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(actionSheet.tag==1){
-        [[Config Instance]setLock:NO];
         if(buttonIndex==0){
             [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_2 requestCode:0 data:nil];
         }
@@ -178,7 +177,6 @@
         }
     }else if(sender.tag==8){
         //重新登录
-        [[Config Instance]setLock:YES];
         [Common actionSheet:self message:@"确定要重新登录吗？" tag:1];
     }
 }
@@ -225,15 +223,9 @@
                 url=[versioninfo objectForKey:@"url"];
                 int minverno=[[versioninfo objectForKey:@"minverno"]intValue];
                 if(minverno>currentVersion){
+                    [[Config Instance]setLock:YES];
                     //强制升级
-                    UIAlertView *alert = [[UIAlertView alloc]
-                                          initWithTitle:@"当前版本已停用"
-                                          message:remark
-                                          delegate:self
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:@"立即更新", nil];
-                    alert.tag=11;
-                    [alert show];
+                    [Common alert:remark cancel:nil ok:@"立即更新" delegate:self tag:11];
                 }else{
                     int maxverno=[[versioninfo objectForKey:@"maxverno"]intValue];
                     if(maxverno>currentVersion){
@@ -253,14 +245,7 @@
                             }
                         }
                         //升级
-                        UIAlertView *alert = [[UIAlertView alloc]
-                                              initWithTitle:@"更新提示"
-                                              message:remark
-                                              delegate:self
-                                              cancelButtonTitle:@"下次再说"
-                                              otherButtonTitles:@"立即更新", nil];
-                        alert.tag=22;
-                        [alert show];
+                        [Common alert:remark cancel:@"下次再说" ok:@"立即更新" delegate:self tag:22];
                     }else{
                         if(_checkFlag){
                             [Common alert:@"当前版本为最新版本"];
@@ -276,6 +261,7 @@
 {
     int tag=alertView.tag;
     if(tag==11){
+        [[Config Instance]setLock:NO];
         //强制升级
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         [Common resultLoginViewController:self resultCode:RESULTCODE_ACLoginViewController_1 requestCode:0 data:nil];

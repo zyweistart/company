@@ -182,15 +182,7 @@
         case 14:
             //添加到联系人
             if([_dialString length]>0){
-                UIActionSheet *sheet = [[UIActionSheet alloc]
-                                        initWithTitle:nil
-                                        delegate:self
-                                        cancelButtonTitle:@"取消"
-                                        destructiveButtonTitle:@"创建联系人"
-                                        otherButtonTitles:nil,nil];
-                sheet.tag=1;
-                //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
-                [sheet showInView:[UIApplication sharedApplication].keyWindow];
+                [Common actionSheet:self message:nil ok:@"创建联系人" tag:1];
             }
             break;
         case 15:

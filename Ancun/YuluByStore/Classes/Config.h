@@ -35,6 +35,9 @@
 @property (strong,nonatomic) NSString *USERNAME;
 @property (strong,nonatomic) NSString *PASSWORD;
 
+@property (strong,nonatomic) UIAlertView *alertView;
+@property (strong,nonatomic) UIActionSheet *actionSheet;
+
 + (Config *)Instance;
 
 + (void)resetConfig;

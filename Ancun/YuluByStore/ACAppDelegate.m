@@ -109,6 +109,12 @@
         if([GESTUREPWD isNotEmpty]&&[PHONE isNotEmpty]&&[PASSWORD isNotEmpty]&&AUTOLOGIN){
             UIViewController *currentViewController=[self.window visibleViewController];
             if(currentViewController!=nil&&![[Config Instance] lock]){
+                if([[Config Instance] alertView]!=nil){
+                    [[[Config Instance] alertView] dismissWithClickedButtonIndex:0 animated:YES];
+                }
+                if([[Config Instance] actionSheet]!=nil){
+                    [[[Config Instance] actionSheet] dismissWithClickedButtonIndex:1 animated:YES];
+                }
                 [currentViewController presentViewController:[[ACGesturePasswordViewController alloc]initWithFlag:YES] animated:YES completion:nil];
             }
         }

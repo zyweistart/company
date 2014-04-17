@@ -9,17 +9,16 @@
 + (BOOL)getCacheByBool:(NSString *)key;
 + (void)setCacheByBool:(NSString *)key data:(BOOL)data;
 //提示选择
++ (void)alert:(NSString *)message cancel:(NSString *)cancelName ok:(NSString *)okName delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag;
++ (void)alert:(NSString *)message cancel:(NSString *)cancelName ok:(NSString *)okName delegate:(id<UIAlertViewDelegate>)delegate;
 + (void)alert:(NSString *)message;
-
++ (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message ok:(NSString *) okName tag:(NSInteger)tag;
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag;
-
 + (void)noLoginAlert:(id<UIActionSheetDelegate>)delegate;
 
 //字符格式处理
 + (NSString*)formatPhone:(NSString *)phone;
-
 + (NSString*)secondConvertFormatTimerByCn:(NSString *)second;
-
 + (NSString*)secondConvertFormatTimerByEn:(NSString *)second;
 
 //返回代理

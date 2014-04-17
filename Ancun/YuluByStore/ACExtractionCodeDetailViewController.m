@@ -50,7 +50,7 @@
         }
         [self.view addSubview:container];
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(14.5, 10, 291, 246.5)];
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(14, 10, 291, 247)];
         [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2"]]];
         [container addSubview:view];
         

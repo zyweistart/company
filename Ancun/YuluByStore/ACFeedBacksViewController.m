@@ -53,7 +53,7 @@
         [lblContentPlaceholder setBackgroundColor:[UIColor clearColor]];
         [tvContent addSubview:lblContentPlaceholder];
         
-        txtEmail=[[UITextField alloc] initWithFrame:CGRectMake(17, 128.25, 257, 44.5)];
+        txtEmail=[[UITextField alloc] initWithFrame:CGRectMake(17, 128, 257, 45)];
         [txtEmail setPlaceholder:@"电子邮箱(可选)"];
         [txtEmail setFont:[UIFont systemFontOfSize: 15]];
         [txtEmail setClearButtonMode:UITextFieldViewModeWhileEditing];
