@@ -35,6 +35,7 @@
             [Common setCache:DEFAULTDATA_PHONE data:[[Config Instance] USERNAME]];
             [Common setCache:DEFAULTDATA_PASSWORD data:[[Config Instance] PASSWORD]];
             [Common setCacheByBool:DEFAULTDATA_AUTOLOGIN data:YES];
+            [[Config Instance] setLock:NO];
             [self.lblInfo setText:@"手势密码设置成功"];
             [self performSelector:@selector(toRootViewController) withObject:nil afterDelay:0.5];
         }else{
