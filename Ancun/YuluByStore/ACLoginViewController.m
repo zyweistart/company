@@ -144,10 +144,6 @@
             return;
         }
         [[Config Instance] setCacheKey:[NSString stringWithFormat:@"cache_%@",[[Config Instance]USERNAME]]];
-        if(![Common getCacheByBool:DEFAULTDATA_FIRSTLOGIN]){
-            //TODO:第一次登录
-        }
-        [Common setCacheByBool:DEFAULTDATA_FIRSTLOGIN data:YES];
         [Common setCache:DEFAULTDATA_PHONE data:[[Config Instance]USERNAME]];
         if([Common getCacheByBool:DEFAULTDATA_AUTOLOGIN]){
             [Common setCache:DEFAULTDATA_PASSWORD data:[[Config Instance]PASSWORD]];
