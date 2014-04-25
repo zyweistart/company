@@ -9,7 +9,7 @@
 #endif
 
 #pragma mark 测试环境宏定义
-//#define TEST
+#define TEST
 #pragma mark 越狱版宏定义
 //#define JAILBREAK
 
@@ -64,6 +64,7 @@
 #define DEFAULTDATA_LASTVERSIONNO @"DEFAULTDATA_LASTVERSIONNO"
 #define DEFAULTDATA_GESTUREPWD @"DEFAULTDATA_GESTUREPWD"
 #define DEFAULTDATA_CHECKVERSIONTIME @"DEFAULTDATA_CHECKVERSIONTIME"
+#define DEFAULTDATA_DEVICETOKEN @"DEFAULTDATA_DEVICETOKEN"
 //请求码常量
 #define REQUESTCODE_ACExtractionDetailViewController_apply 1
 #define REQUESTCODE_ACExtractionDetailViewController_view 2
