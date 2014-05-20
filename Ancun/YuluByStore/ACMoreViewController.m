@@ -213,7 +213,7 @@
             NSDictionary *versioninfo=[[response mainData] objectForKey:@"versioninfo"];
             if(versioninfo!=nil){
                 NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
-                int currentVersion=[[infoDict objectForKey:@"CFBundleShortVersionString"] intValue];
+                int currentVersion=[[infoDict objectForKey:@"CFBundleVersion"] intValue];
                 NSString *remark=[versioninfo objectForKey:@"remark"];
                 url=[versioninfo objectForKey:@"url"];
                 int minverno=[[versioninfo objectForKey:@"minverno"]intValue];

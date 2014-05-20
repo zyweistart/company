@@ -36,7 +36,7 @@
 - (void)introDidFinish {
     //进入应用之后才进行存储
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
-    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:[infoDict objectForKey:@"CFBundleShortVersionString"]];
+    [Common setCache:DEFAULTDATA_LASTVERSIONNO data:[infoDict objectForKey:@"CFBundleVersion"]];
     
     NSString *GESTUREPWD=[Common getCache:DEFAULTDATA_GESTUREPWD];
     NSString *PHONE=[Common getCache:DEFAULTDATA_PHONE];

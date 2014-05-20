@@ -54,7 +54,7 @@
     //设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
     statTracker.sessionResumeInterval = 60;
     //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    statTracker.shortAppVersion  = [[bundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    statTracker.shortAppVersion  = [[bundle infoDictionary] objectForKey:@"CFBundleVersion"];
     //设置您在mtj网站上添加的app的appkey
     [statTracker startWithAppId:[bundle objectForInfoDictionaryKey:@"BaiduWithAppId"]];
 #endif
@@ -69,7 +69,7 @@
     float lastVersionNo=[[Common getCache:DEFAULTDATA_LASTVERSIONNO] floatValue];
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
     //获取当前使用的版本号
-    NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleShortVersionString"];
+    NSString *currentVersionNo=[infoDict objectForKey:@"CFBundleVersion"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if([currentVersionNo floatValue]>lastVersionNo){
         //新安装或升级则使用引导页

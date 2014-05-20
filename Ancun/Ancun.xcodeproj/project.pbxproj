@@ -199,7 +199,7 @@
 		C9985E1817C35C210048C2FD /* ACRechargeByAppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRechargeByAppStoreViewController.h; sourceTree = "<group>"; };
 		C9985E1917C35C220048C2FD /* ACRechargeByAppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRechargeByAppStoreViewController.m; sourceTree = "<group>"; };
 		C99B80D917A0C8C7004D0BFB /* ACGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGuideViewController.h; sourceTree = "<group>"; };
-		C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGuideViewController.m; sourceTree = "<group>"; };
+		C99B80DA17A0C8C7004D0BFB /* ACGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACGuideViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C99BC2E418ED2ACE00650DF5 /* ACForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACForgetPasswordViewController.h; sourceTree = "<group>"; };
 		C99BC2E518ED2ACE00650DF5 /* ACForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACForgetPasswordViewController.m; sourceTree = "<group>"; };
 		C99F0C6818EBDC9F00C27BFC /* ACRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRegistrationViewController.h; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		C9A560D118FB7F2E006A5049 /* ACGestureStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGestureStatusCell.m; sourceTree = "<group>"; };
 		C9A67EA717CD882900E9A81E /* ACContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactsViewController.h; sourceTree = "<group>"; };
 		C9A67EA817CD882900E9A81E /* ACContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactsViewController.m; sourceTree = "<group>"; };
-		C9AEECB118FC15F4006D81A6 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		C9AEECB118FC15F4006D81A6 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BaiduMobStat.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C9AEECB218FC15F4006D81A6 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		C9CB41BA18ED0E2E00DB6099 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		C9CB41BB18ED0E2E00DB6099 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
@@ -258,13 +258,13 @@
 		C9D97A0F179FA64F0076ACF3 /* ACAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountViewController.h; sourceTree = "<group>"; };
 		C9D97A10179FA64F0076ACF3 /* ACAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAccountViewController.m; sourceTree = "<group>"; };
 		C9D97A11179FA64F0076ACF3 /* ACAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAppDelegate.h; sourceTree = "<group>"; };
-		C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAppDelegate.m; sourceTree = "<group>"; };
+		C9D97A12179FA64F0076ACF3 /* ACAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C9D97A15179FA64F0076ACF3 /* ACContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContactCell.h; sourceTree = "<group>"; };
 		C9D97A16179FA64F0076ACF3 /* ACContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACContactCell.m; sourceTree = "<group>"; };
 		C9D97A2D179FA6500076ACF3 /* ACLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLoginViewController.h; sourceTree = "<group>"; };
 		C9D97A2E179FA6500076ACF3 /* ACLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLoginViewController.m; sourceTree = "<group>"; };
 		C9D97A3C179FA6510076ACF3 /* ACMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreViewController.h; sourceTree = "<group>"; };
-		C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreViewController.m; sourceTree = "<group>"; };
+		C9D97A3D179FA6510076ACF3 /* ACMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACMoreViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C9D97A47179FA6510076ACF3 /* ACPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPlayerView.h; sourceTree = "<group>"; };
 		C9D97A48179FA6510076ACF3 /* ACPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPlayerView.m; sourceTree = "<group>"; };
 		C9D97A4A179FA6520076ACF3 /* ACRecording2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRecording2Cell.h; sourceTree = "<group>"; };
