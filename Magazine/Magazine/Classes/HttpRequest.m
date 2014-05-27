@@ -83,7 +83,7 @@
     // 设置请求方法
     request.HTTPMethod = @"POST";
     // 60秒请求超时
-    request.timeoutInterval = 60;
+    request.timeoutInterval = 10;
     //设置请求头参数
     for(NSString *key in _head) {
         //URL编码

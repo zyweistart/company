@@ -175,7 +175,7 @@
     
     //验证数据是否已经加载完毕
     if(self.currentPage == totalpage){
-        self.endReached = YES;
+//        self.endReached = YES;
     }else{
         self.endReached = NO;
     }
