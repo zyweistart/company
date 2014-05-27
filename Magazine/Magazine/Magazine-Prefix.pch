@@ -49,14 +49,12 @@
 
 #ifdef TEST
     //测试环境定义的常量
-//    #define ANCUN_HTTP_URL @"http://192.168.0.254:8080/rest/RestService"
-//    #define ANCUN_HTTP_URL @"http://115.236.89.210:8888/accore/http/HttpService"
-    #define ANCUN_HTTP_URL @"http://192.168.0.221:8080/accore/rest/RestService"
+    #define ANCUN_HTTP_URL @"http://notary.onlinenotary.cn:5111/api/api.php?"
     #define ACCESSID @"b99810e661d546f14763f15a9270c28d"
     #define ACCESSKEY @"aRxzVdMiopnzpJco3fPJOmXSDZL7rGiL3UgbqQA9YeJ="
 #else
     //正式环境定义的常量
-    #define ANCUN_HTTP_URL @"http://server.ancun.com:3391/rest/RestService"
+    #define ANCUN_HTTP_URL @"http://notary.onlinenotary.cn:5111/api/api.php?"
     #define ACCESSID @"e4e60d050f5513e086b47c4fdca35646"
     #define ACCESSKEY @"fUETGmOIiMujnipQnFm6rJIyO2wJDZSftsK4dwmmoSZ="
 #endif

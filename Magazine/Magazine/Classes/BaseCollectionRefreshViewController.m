@@ -16,7 +16,15 @@
         self.refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.collectionView.bounds.size.height, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height)];
         self.refreshHeaderView.keyNameForDataStore = [NSString stringWithFormat:@"%@_LastRefresh", [self class]];
         [self.collectionView addSubview:self.refreshHeaderView];
+        //注册加载更多数据CELL
         [self.collectionView registerClass:[CollectionViewLoadingCell class] forCellWithReuseIdentifier:CELLIDENTIFIERLOADINGCELL];
+        //加载缓存数据
+        NSString *responseString=[Common getCache:CACHE_DATA];
+        if(responseString!=nil){
+            NSDictionary *resultJSON=[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+            [self pagingHandle:resultJSON];
+        }
+        
     }
     return self;
 }
@@ -62,6 +70,16 @@
     }
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(!self.endReached){
+        if(indexPath.row == [self.dataItemArray count])  {
+            return CGSizeMake(320, 40);
+        }
+    }
+    return CGSizeMake(100, 100);
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == [self.dataItemArray count])  {
@@ -93,20 +111,74 @@
         [self.refreshHeaderView setCurrentDate];
         [UIView setAnimationDuration:.3];
         [self.collectionView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-        //数据刷新完毕重新加载表的数据
-        [self.collectionView reloadData];
     }
     [UIView commitAnimations];
 }
 
 - (void)doRefresh
 {
-    NSLog(@"子类必须覆盖该方法，该语句不得出现在控制台上");
+    [self loadDataWithPage:1];
 }
 
 - (void)loadMore
 {
-    NSLog(@"子类必须覆盖该方法，该语句不得出现在控制台上");
+    [self loadDataWithPage:self.currentPage+1];
+}
+
+- (void)loadDataWithPage:(int)page
+{
+   NSAssert(NO,@"子类必须覆盖该方法，该语句不得出现在控制台上"); 
+}
+
+- (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
+{
+    //存入缓存
+    if(self.currentPage==1){
+        [Common setCache:CACHE_DATA data:[response responseString]];
+    }
+    if([response successFlag]){
+        //分页处理
+        [self pagingHandle:[response resultJSON]];
+        if(_loading){
+            //还原下拉刷新状态
+            [self setLoading:NO];
+        }
+        //刷新数据表
+        [self.collectionView reloadData];
+    }else{
+        //还原下拉刷新状态
+        if(_loading){
+            [self setLoading:NO];
+        }
+    }
+}
+
+- (void)requestFailed:(int)reqCode
+{
+    //还原下拉刷新状态
+    if(_loading){
+        [self setLoading:NO];
+    }
+}
+
+//分页处理
+- (void)pagingHandle:(NSDictionary*)resultJSON
+{
+    self.currentPage=[[resultJSON objectForKey:@"currentpage"] intValue];
+    int totalpage=[[resultJSON objectForKey:@"totalpage"] intValue];
+    
+    NSArray *data=[resultJSON objectForKey:@"data"];
+    if(self.currentPage==1){
+        [self.dataItemArray removeAllObjects];
+    }
+    [self.dataItemArray addObjectsFromArray:data];
+    
+    //验证数据是否已经加载完毕
+    if(self.currentPage == totalpage){
+        self.endReached = YES;
+    }else{
+        self.endReached = NO;
+    }
 }
 
 @end

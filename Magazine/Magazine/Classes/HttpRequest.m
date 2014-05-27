@@ -9,8 +9,6 @@
 #import "HttpRequest.h"
 #import "ATMHud.h"
 #import "MBProgressHUD.h"
-#import "GHNSString+HMAC.h"
-#import "BaseTableRefreshViewController.h"
 
 @implementation HttpRequest {
     
@@ -18,7 +16,6 @@
     MBProgressHUD *_mbpHud;
     
     NSString* _action;
-    NSString* _signKey;
     NSMutableDictionary* _head;
     NSMutableDictionary* _request;
     
@@ -42,23 +39,19 @@
     }
 }
 
-- (void)loginhandle:(NSString*)url requestParams:(NSMutableDictionary*)request {
-    if([[Config Instance]isLogin]) {
-        [request setObject:[[[Config Instance] userInfo] objectForKey:@"accessid"] forKey:@"accessid"];
-        [self handle:url signKey:[[[Config Instance] userInfo] objectForKey:@"accesskey"]  headParams:nil requestParams:request];
-    } else {
-        [Common noLoginAlert:self];
+- (id)init
+{
+    self=[super init];
+    if(self){
+        _isVerify=YES;
+        _isFileDownload=NO;
     }
+    return self;
 }
 
-- (void)handle:(NSString*)url signKey:(NSString*)signKey requestParams:(NSMutableDictionary*)request {
-    [self handle:url signKey:signKey headParams:nil requestParams:request];
-}
-
-- (void)handle:(NSString*)action signKey:(NSString*)signKey headParams:(NSMutableDictionary*)head requestParams:(NSMutableDictionary*)request {
+- (void)handle:(NSString*)action headParams:(NSMutableDictionary*)head requestParams:(NSMutableDictionary*)request {
     if ([HttpRequest isNetworkConnection]) {
         _action=action;
-        _signKey=signKey;
         _head=head;
         _request=request;
         if(_isFileDownload) {
@@ -79,43 +72,14 @@
 }
 
 - (void)handle {
-    
-    NSMutableDictionary *common=[[NSMutableDictionary alloc]init];
-    [common setObject:_action forKey:@"action"];
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    [common setObject:[dateFormatter stringFromDate:[NSDate date]] forKey:@"reqtime"];
-    
-    NSMutableDictionary *mainjson=[[NSMutableDictionary alloc]init];
-    [mainjson setObject:common forKey:@"common"];
-    [mainjson setObject:_request forKey:@"content"];
-    
-    NSMutableDictionary *requestJSON=[[NSMutableDictionary alloc]init];
-    [requestJSON setObject:mainjson forKey:@"request"];
-    NSString *requestBodyContent=[[NSString alloc] initWithData:[Common toJSONData:requestJSON] encoding:NSUTF8StringEncoding];
-    
-//    NSString *requestBodyContent=[XML generate:_action requestParams:_request];
-    
-    if(_head==nil) {
-        _head=[[NSMutableDictionary alloc]init];
+    //组装请求的URL地址
+    NSMutableString *URL=[[NSMutableString alloc]initWithString:ANCUN_HTTP_URL];
+    for(NSString *key in _request){
+        [URL appendFormat:@"%@=%@&",key,[_request objectForKey:key]];
     }
-    
-    if([_head objectForKey:@"sign"]==nil) {
-        //签名
-        if(_signKey) {
-            [_head setObject:[[requestBodyContent md5] gh_HMACSHA1:_signKey] forKey:@"sign"];
-        } else {
-            [_head setObject:[requestBodyContent md5] forKey:@"sign"];
-        }
-    }
-    
-    [_head setObject:@"JSON" forKey:@"format"];
-    
-    //请求长度
-    [_head setObject:[NSString stringWithFormat:@"%d",[[requestBodyContent dataUsingEncoding:NSUTF8StringEncoding] length]] forKey:@"reqlength"];
-    
+    [URL appendString:@"a=a"];
     // 初始化一个请求
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:ANCUN_HTTP_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]];
     // 设置请求方法
     request.HTTPMethod = @"POST";
     // 60秒请求超时
@@ -125,14 +89,6 @@
         //URL编码
         [request addValue:[[_head objectForKey:key] URLEncodedString] forHTTPHeaderField:key];
     }
-    // 对字符串进行编码后转成NSData对象
-    NSData *data = [requestBodyContent dataUsingEncoding:NSUTF8StringEncoding];
-//    // 设置请求头信息-请求体长度
-//    [request setValue:[NSString stringWithFormat:@"%i", data.length] forHTTPHeaderField:@"Content-Length"];
-//    // 设置请求头信息-请求数据类型
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    // 设置请求主体
-    request.HTTPBody = data;
     // 初始化一个连接
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
     // 开始一个异步请求
@@ -193,50 +149,25 @@
     if( [_delegate respondsToSelector: @selector(connectionDidFinishLoading:)]) {
         [_delegate connectionDidFinishLoading:connection];
     } else if( [_delegate respondsToSelector: @selector(requestFinishedByResponse:requestCode:)]) {
-        Response *response=nil;
+        Response *response=[[Response alloc]init];
+        [response setData:_data];
+        [response setPropertys:_propertys];
+        [response setSuccessFlag:YES];
         if(!_isFileDownload) {
-            NSString *responseString =[[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-            response=[Common toResponseData:responseString];
-//            response=[XML analysis:responseString];
-            [response setPropertys:_propertys];
-//            [response setResponseString:responseString];
-            if(!_isVerify) {
-//                NSLog(@"%@---%@",[response code],[response msg]);
+            //转换成JSON格式
+            [response setResultJSON:[NSJSONSerialization JSONObjectWithData:[response data] options:NSJSONReadingMutableLeaves error:nil]];
+            [response setResponseString:[[NSString alloc] initWithData:[response data] encoding:NSUTF8StringEncoding]];
+            NSString *result=[[response resultJSON] objectForKey:@"result"];
+            if([@"success" isEqualToString:result]){
+                [response setSuccessFlag:YES];
+            }else if([@"failed" isEqualToString:result]){
                 [response setSuccessFlag:NO];
-                if([[response code] isEqualToString:@"100000"]) {
-                    [response setSuccessFlag:YES];
-                } else if([[response code] isEqualToString:@"110042"]) {
-                    //暂无记录
-//                    if([self.controller isKindOfClass:[BaseRefreshTableViewController class]]) {
-//                        [[((BaseRefreshTableViewController*)self.controller) dataItemArray]removeAllObjects];
-//                        [[((BaseRefreshTableViewController*)self.controller) tableView]reloadData];
-//                    }
-                    [response setSuccessFlag:YES];
-                    if(self.controller){
-                        [Common alert:[response msg]];
-                    }
-                } else if([[response code] isEqualToString:@"110026"]) {
-                    //通行证编号错误或未登录
-                    [[Config Instance]setIsLogin:NO];
-                    [Common noLoginAlert:self];
-                } else if([[response code] isEqualToString:@"110036"]) {
-                    //签名不匹配或密码不正确
-                    [Common alert:@"用户名或密码不正确"];
-                } else if([[response code] isEqualToString:@"120020"]) {
-                    //用户不存在
-                } else if([[response code] isEqualToString:@"120169"]) {
-                    //该手机号码已被注册
-                } else if([[response code] isEqualToString:@"120202"]) {
-                    //录音时长不足
-                    [Common alert:@"录音时长不足，充值相关套餐后才能通话录音"];
-                } else {
-                    [Common alert:[response msg]];
+            }
+            if(_isVerify) {
+                if(![response successFlag]){
+                    [Common alert:[[response resultJSON] objectForKey:@"reason"]];
                 }
             }
-        } else {
-            response=[[Response alloc]init];
-            [response setPropertys:_propertys];
-            [response setData:_data];
         }
         [_delegate requestFinishedByResponse:response requestCode:self.requestCode];
     }
@@ -275,11 +206,6 @@
         //移动流量下载行为
         if(buttonIndex==0) {
             [self handle];
-        }
-    } else {
-        //未登陆行为
-        if(buttonIndex==0){
-            [Common resultLoginViewController:self.controller resultCode:0 requestCode:0 data:nil];
         }
     }
 }

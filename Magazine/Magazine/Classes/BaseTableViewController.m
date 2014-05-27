@@ -24,6 +24,8 @@
             [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
             [self.tableView setDelegate:self];
             [self.tableView setDataSource:self];
+            //始终允许滚动否则数据如果不够一行则无法进行下拉刷新
+            self.tableView.alwaysBounceVertical = YES;
             [self.view addSubview:self.tableView];
             self.dataItemArray=[[NSMutableArray alloc]init];
         }
@@ -41,7 +43,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"子类必须覆盖该方法，该语句不得出现在控制台上");
+    NSAssert(NO,@"子类必须覆盖该方法，该语句不得出现在控制台上");
     return nil;
 }
 

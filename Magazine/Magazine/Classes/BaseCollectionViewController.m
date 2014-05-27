@@ -13,6 +13,8 @@
             [self.collectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
             self.collectionView.dataSource=self;
             self.collectionView.delegate=self;
+            //始终允许滚动否则数据如果不够一行则无法进行下拉刷新
+            self.collectionView.alwaysBounceVertical = YES;
             [self.collectionView setBackgroundColor:[UIColor whiteColor]];
             [self.view addSubview:self.collectionView];
             self.dataItemArray=[[NSMutableArray alloc]init];

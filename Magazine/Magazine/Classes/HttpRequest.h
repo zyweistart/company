@@ -41,8 +41,6 @@
 
 + (NetworkStatus)getNetworkStatus;
 + (BOOL)isNetworkConnection;
-- (void)loginhandle:(NSString*)url requestParams:(NSMutableDictionary*)request;
-- (void)handle:(NSString*)url signKey:(NSString*)signKey requestParams:(NSMutableDictionary*)request;
-- (void)handle:(NSString*)url signKey:(NSString*)signKey  headParams:(NSMutableDictionary*)head requestParams:(NSMutableDictionary*)request;
+- (void)handle:(NSString*)url headParams:(NSMutableDictionary*)head requestParams:(NSMutableDictionary*)request;
 
 @end
