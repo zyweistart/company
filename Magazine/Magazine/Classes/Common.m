@@ -149,14 +149,6 @@
     }
 }
 
-//返回登录界面
-+ (void)resultLoginViewController:(UIViewController *)view resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary*)result{
-    if([[[Config Instance] loginResultDelegate] respondsToSelector:@selector(onControllerResult:requestCode:data:)]){
-        [[[Config Instance] loginResultDelegate] onControllerResult:resultCode requestCode:requestCode data:result];
-    }
-    [view dismissViewControllerAnimated:YES completion:nil];
-}
-
 //返回调用
 + (void)resultNavigationViewController:(UIViewController *)view resultDelegate:(NSObject<ResultDelegate> *)resultDelegate resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary *)result{
     if(resultDelegate){
@@ -179,10 +171,10 @@
         NSString *content=[dictioanry objectForKey:tag];
         if(![@"" isEqualToString:content]) {
             if(content){
-                NSMutableArray *dataItemArray=[[Common toResponseData:content] dataItemArray];
-                if([dataItemArray count]>0){
-                    return dataItemArray;
-                }
+//                NSMutableArray *dataItemArray=[[Common toResponseData:content] dataItemArray];
+//                if([dataItemArray count]>0){
+//                    return dataItemArray;
+//                }
             }
         }
     }
@@ -198,69 +190,6 @@
     }else{
         return nil;
     }
-}
-
-+ (Response*)toResponseData:(NSString*)repsonseString
-{
-    Response *response=[[Response alloc]init];
-    if(repsonseString!=nil&&![@"" isEqualToString:repsonseString]){
-        [response setResponseString:repsonseString];
-        [response setData:[[response responseString] dataUsingEncoding: NSUTF8StringEncoding]];
-        if([response data]!=nil){
-            //转换成JSON格式
-            NSDictionary *resultJSON=[NSJSONSerialization JSONObjectWithData:[response data] options:NSJSONReadingMutableLeaves error:nil];
-            if(resultJSON!=nil){
-                [response setResultJSON:resultJSON];
-                NSDictionary *responseData=[resultJSON objectForKey:@"response"];
-                if(responseData!=nil){
-                    //响应信息
-                    NSDictionary *info=[responseData objectForKey:@"info"];
-                    if(info!=nil){
-                        [response setCode:[info objectForKey:@"code"]];
-                        [response setMsg:[info objectForKey:@"msg"]];
-                    }
-                    //主体内容
-                    NSDictionary *content=[responseData objectForKey:@"content"];
-                    if(content!=nil){
-                        //响应的分页信息
-                        NSDictionary *pageinfo=[content objectForKey:@"pageinfo"];
-                        if(pageinfo){
-                            [response setPageInfo:pageinfo];
-                            for(NSString *key in content){
-                                if(![@"pageinfo" isEqualToString:key]){
-                                    NSMutableArray *nsArr=[[NSMutableArray alloc]init];
-                                    NSDictionary *dataItemArray=[content objectForKey:key];
-                                    for(id data in dataItemArray){
-                                        for(NSString *dinfo in data){
-                                            [nsArr addObject:[[NSMutableDictionary alloc]initWithDictionary:[data objectForKey:dinfo]]];
-                                        }
-                                    }
-                                    [response setDataItemArray:nsArr];
-                                    break;
-                                }
-                            }
-                        }else{
-                            static NSString *combolistStr=@"combolist";
-                            NSDictionary *combolist=[content objectForKey:combolistStr];
-                            if(combolist!=nil){
-                                NSMutableArray *nsArr=[[NSMutableArray alloc]init];
-                                NSDictionary *dataItemArray=[content objectForKey:combolistStr];
-                                for(id data in dataItemArray){
-                                    for(NSString *dinfo in data){
-                                        [nsArr addObject:[[NSMutableDictionary alloc]initWithDictionary:[data objectForKey:dinfo]]];
-                                    }
-                                }
-                                [response setDataItemArray:nsArr];
-                            }else{
-                                [response setMainData:content];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return response;
 }
 
 @end

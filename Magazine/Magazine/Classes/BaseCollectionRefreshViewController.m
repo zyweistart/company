@@ -62,7 +62,8 @@
     }
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     if(self.endReached){
         return [self.dataItemArray count];
     }else{
@@ -143,22 +144,27 @@
             //还原下拉刷新状态
             [self setLoading:NO];
         }
-        //刷新数据表
-        [self.collectionView reloadData];
     }else{
+        self.endReached = YES;
         //还原下拉刷新状态
         if(_loading){
             [self setLoading:NO];
         }
     }
+    //刷新数据表
+    [self.collectionView reloadData];
 }
 
 - (void)requestFailed:(int)reqCode
 {
+    NSLog(@"RWMTB ");
+    self.endReached = YES;
     //还原下拉刷新状态
     if(_loading){
         [self setLoading:NO];
     }
+    //刷新数据表
+    [self.collectionView reloadData];
 }
 
 //分页处理
@@ -175,7 +181,7 @@
     
     //验证数据是否已经加载完毕
     if(self.currentPage == totalpage){
-//        self.endReached = YES;
+        self.endReached = YES;
     }else{
         self.endReached = NO;
     }

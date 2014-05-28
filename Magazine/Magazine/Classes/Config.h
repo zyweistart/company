@@ -9,10 +9,6 @@
 
 //唯一缓存键名称
 @property (strong,nonatomic) NSString *cacheKey;
-//用户信息
-@property (strong,nonatomic) NSMutableDictionary *userInfo;
-//登陆代理
-@property (strong,nonatomic) NSObject<ResultDelegate> *loginResultDelegate;
 
 + (Config *)Instance;
 

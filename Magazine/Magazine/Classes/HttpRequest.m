@@ -1,11 +1,3 @@
-//
-//  HttpConnection.m
-//  Ancun
-//
-//  Created by Start on 13-9-12.
-//
-//
-
 #import "HttpRequest.h"
 #import "ATMHud.h"
 #import "MBProgressHUD.h"
@@ -44,6 +36,7 @@
     self=[super init];
     if(self){
         _isVerify=YES;
+        _isShowMessage=YES;
         _isFileDownload=NO;
     }
     return self;
@@ -106,7 +99,7 @@
             _mbpHud = [[MBProgressHUD alloc] initWithView:self.controller.view];
             [self.controller.view addSubview:_mbpHud];
             if(self.message) {
-                _mbpHud.labelText = _message;
+                _mbpHud.labelText = self.message;
             }
             _mbpHud.dimBackground = NO;
             _mbpHud.square = YES;
@@ -162,11 +155,14 @@
                 [response setSuccessFlag:YES];
             }else if([@"failed" isEqualToString:result]){
                 [response setSuccessFlag:NO];
-            }
-            if(_isVerify) {
-                if(![response successFlag]){
-                    [Common alert:[[response resultJSON] objectForKey:@"reason"]];
+                if(_isVerify) {
+                    if(![response successFlag]){
+                        [Common alert:[[response resultJSON] objectForKey:@"reason"]];
+                    }
                 }
+            }else{
+                [response setSuccessFlag:NO];
+                [Common alert:@"未知异常"];
             }
         }
         [_delegate requestFinishedByResponse:response requestCode:self.requestCode];

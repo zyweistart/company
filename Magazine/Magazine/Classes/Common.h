@@ -21,9 +21,6 @@
 + (NSString*)secondConvertFormatTimerByCn:(NSString *)second;
 + (NSString*)secondConvertFormatTimerByEn:(NSString *)second;
 
-//返回代理
-+ (void)resultLoginViewController:(UIViewController *)view resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary *)result;
-
 + (void)resultNavigationViewController:(UIViewController *)view resultDelegate:(NSObject<ResultDelegate> *)resultDelegate resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary *)result;
 
 + (void)setCacheXmlByList:(NSString *)xml tag:(NSString *)tag;
@@ -31,7 +28,5 @@
 + (NSMutableArray *)getCacheXmlByList:(NSString *)tag;
 
 + (NSData *)toJSONData:(id)theData;
-
-+ (Response*)toResponseData:(NSString*)repsonseString;
 
 @end

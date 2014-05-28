@@ -66,7 +66,7 @@
         return cell;
     }
     cell= [[UITableViewCell alloc]init];
-    cell.textLabel.text = [NSString stringWithFormat:@"Row %d", indexPath.row+1];
+    cell.textLabel.text = [NSString stringWithFormat:@"Row %ld", indexPath.row+1];
     cell.imageView.image = [UIImage imageNamed:@"iOS6"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

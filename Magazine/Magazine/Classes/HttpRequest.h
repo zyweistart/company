@@ -1,11 +1,3 @@
-//
-//  HttpConnection.h
-//  Ancun
-//
-//  Created by Start on 13-9-12.
-//
-//
-
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
 #import "NSString+Utils.h"

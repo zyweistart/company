@@ -23,7 +23,7 @@
             return CGSizeMake(320, 40);
         }
     }
-    return CGSizeMake(100, 172);
+    return CGSizeMake(310, 177);
 }
 
 //每个UICollectionView展示的内容
@@ -51,6 +51,7 @@
     self.hRequest=[[HttpRequest alloc]init];
     [self.hRequest setDelegate:self];
     [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:NO];
     [self.hRequest handle:@"" headParams:nil requestParams:params];
 }
 

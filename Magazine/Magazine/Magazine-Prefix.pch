@@ -35,7 +35,7 @@
 //底部标签高度
 #define BOTTOMTABBARHEIGHT 49
 //分页大小
-#define PAGESIZE 12
+#define PAGESIZE 4
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
