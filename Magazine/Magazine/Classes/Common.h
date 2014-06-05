@@ -29,4 +29,6 @@
 
 + (NSData *)toJSONData:(id)theData;
 
++ (void)loadImageWithImageView:(UIImageView*)image url:(NSString *)url fileName:(NSString*)fileName;
+
 @end

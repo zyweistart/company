@@ -3,6 +3,7 @@
 #import "EGORefreshTableHeaderView.h"
 #import "HttpRequest.h"
 
+
 @interface BaseCollectionRefreshViewController : BaseCollectionViewController<HttpViewDelegate>
 {
     BOOL _loading;

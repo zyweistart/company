@@ -192,4 +192,43 @@
     }
 }
 
++ (void)loadImageWithImageView:(UIImageView*)image url:(NSString *)url fileName:(NSString*)fileName
+{
+    //创建文件管理器
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    //获取Documents主目录
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    //得到相应的Documents的路径
+    NSString* docDir = [paths objectAtIndex:0];
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
+    NSString *path = [docDir stringByAppendingPathComponent:fileName];
+    if([fileManager fileExistsAtPath:path]){
+        //缓存图片存在则直接显示
+        [image setImage:[UIImage imageWithContentsOfFile:path]];
+    }else{
+        //首先设置为默认图片
+        [image setImage:[UIImage imageNamed:@"default_book"]];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            //异步加载网络图片
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (imageData) {
+                    //加载成功后把图片缓存至本地
+                    //创建数据缓冲区
+                    NSMutableData* writer = [[NSMutableData alloc] init];
+                    //将字符串添加到缓冲中
+                    [writer appendData: imageData];
+                    //将其他数据添加到缓冲中
+                    //将缓冲的数据写入到临时文件中
+                    [writer writeToFile:path atomically:YES];
+                    //把图片进行展示
+                    [image setImage:[UIImage imageWithContentsOfFile:path]];
+                }
+            });
+        });
+    }
+}
+
 @end

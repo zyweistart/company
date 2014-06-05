@@ -38,7 +38,10 @@
     NSDictionary *data=[self.dataItemArray objectAtIndex:indexPath.row];
     [shelfCell.title setText:[data objectForKey:@"periods"]];
     [shelfCell.price setText:[NSString stringWithFormat:@"%d",[indexPath row]+1]];
-//    [shelfCell loadImage:[data objectForKey:@"frontPageUrl"]];
+    
+    NSString *frontPageUrl=[data objectForKey:@"frontPageUrl"];
+    NSString *fileName=[frontPageUrl substringWithRange:NSMakeRange(33,25)];
+    [Common loadImageWithImageView:shelfCell.image url:frontPageUrl fileName:fileName];
     return shelfCell;
 }
 

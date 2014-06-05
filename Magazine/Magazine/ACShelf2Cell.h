@@ -15,6 +15,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 
-- (void)loadImage:(NSString *)url;
-
 @end
