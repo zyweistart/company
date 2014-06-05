@@ -24,7 +24,6 @@
             NSDictionary *resultJSON=[NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
             [self pagingHandle:resultJSON];
         }
-        
     }
     return self;
 }
@@ -86,7 +85,7 @@
     if(indexPath.row == [self.dataItemArray count])  {
 		CollectionViewLoadingCell *cell = (CollectionViewLoadingCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELLIDENTIFIERLOADINGCELL forIndexPath:indexPath];
         //开始执行加载更多方法
-        [self loadMore];
+        [self performSelector:@selector(loadMore) withObject:nil afterDelay:0.5];
 		return cell;
     }
     return nil;
@@ -133,10 +132,6 @@
 
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
 {
-    //存入缓存
-    if(self.currentPage==1){
-        [Common setCache:CACHE_DATA data:[response responseString]];
-    }
     if([response successFlag]){
         //分页处理
         [self pagingHandle:[response resultJSON]];
@@ -145,11 +140,18 @@
             [self setLoading:NO];
         }
     }else{
+        if(self.currentPage==1){
+            [self.dataItemArray removeAllObjects];
+        }
         self.endReached = YES;
         //还原下拉刷新状态
         if(_loading){
             [self setLoading:NO];
         }
+    }
+    //存入缓存
+    if(self.currentPage==1){
+        [Common setCache:CACHE_DATA data:[response responseString]];
     }
     //刷新数据表
     [self.collectionView reloadData];
@@ -157,7 +159,7 @@
 
 - (void)requestFailed:(int)reqCode
 {
-    NSLog(@"RWMTB ");
+    [Common alert:@"网络异常，请重试"];
     self.endReached = YES;
     //还原下拉刷新状态
     if(_loading){

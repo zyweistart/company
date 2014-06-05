@@ -23,7 +23,7 @@
             return CGSizeMake(320, 40);
         }
     }
-    return CGSizeMake(310, 177);
+    return CGSizeMake(100, 177);
 }
 
 //每个UICollectionView展示的内容
@@ -37,7 +37,7 @@
     
     NSDictionary *data=[self.dataItemArray objectAtIndex:indexPath.row];
     [shelfCell.title setText:[data objectForKey:@"periods"]];
-    [shelfCell.price setText:@"收费"];
+    [shelfCell.price setText:[NSString stringWithFormat:@"%d",[indexPath row]+1]];
 //    [shelfCell loadImage:[data objectForKey:@"frontPageUrl"]];
     return shelfCell;
 }

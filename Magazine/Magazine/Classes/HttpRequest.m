@@ -156,9 +156,7 @@
             }else if([@"failed" isEqualToString:result]){
                 [response setSuccessFlag:NO];
                 if(_isVerify) {
-                    if(![response successFlag]){
-                        [Common alert:[[response resultJSON] objectForKey:@"reason"]];
-                    }
+                    [Common alert:[[response resultJSON] objectForKey:@"reason"]];
                 }
             }else{
                 [response setSuccessFlag:NO];
