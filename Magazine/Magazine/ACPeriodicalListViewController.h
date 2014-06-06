@@ -2,4 +2,8 @@
 
 @interface ACPeriodicalListViewController : BaseTableViewController
 
+- (id)initWithData:(NSDictionary *)data;
+
+- (void)loadData;
+
 @end

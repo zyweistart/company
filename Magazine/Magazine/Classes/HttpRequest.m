@@ -68,7 +68,7 @@
     //组装请求的URL地址
     NSMutableString *URL=[[NSMutableString alloc]initWithString:ANCUN_HTTP_URL];
     for(NSString *key in _request){
-        [URL appendFormat:@"%@=%@&",key,[_request objectForKey:key]];
+        [URL appendFormat:@"%@=%@&",key,[[_request objectForKey:key] URLEncodedString]];
     }
     [URL appendString:@"a=a"];
     // 初始化一个请求

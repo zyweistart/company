@@ -1,10 +1,9 @@
 #import <UIKit/UIKit.h>
 #import "BaseCollectionViewController.h"
 #import "EGORefreshTableHeaderView.h"
-#import "HttpRequest.h"
 
 
-@interface BaseCollectionRefreshViewController : BaseCollectionViewController<HttpViewDelegate>
+@interface BaseCollectionRefreshViewController : BaseCollectionViewController
 {
     BOOL _loading;
 }
@@ -15,8 +14,6 @@
 @property (nonatomic, assign) BOOL loading;
 //是否已经加载完毕
 @property (nonatomic, assign) BOOL endReached;
-
-@property (nonatomic,strong) HttpRequest *hRequest;
 
 - (void)loadDataWithPage:(int)page;
 

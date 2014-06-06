@@ -30,6 +30,7 @@
 		C94A313019334285002163B2 /* ACShelf2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A312F19334285002163B2 /* ACShelf2Cell.xib */; };
 		C94A3132193342D4002163B2 /* ACShelf3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A3131193342D4002163B2 /* ACShelf3Cell.xib */; };
 		C94A3135193342E7002163B2 /* ACShelf3Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A3134193342E7002163B2 /* ACShelf3Cell.m */; };
+		C9826FCB19404F830067FF3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9826FCA19404F830067FF3A /* Main.storyboard */; };
 		C98F8C431932DA66008E4757 /* ACMagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C421932DA66008E4757 /* ACMagazineViewController.m */; };
 		C98F8C461932DA81008E4757 /* ACHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C451932DA81008E4757 /* ACHistoryViewController.m */; };
 		C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C481932DAA2008E4757 /* ACRecentViewController.m */; };
@@ -133,6 +134,7 @@
 		C94A3131193342D4002163B2 /* ACShelf3Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACShelf3Cell.xib; sourceTree = "<group>"; };
 		C94A3133193342E7002163B2 /* ACShelf3Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACShelf3Cell.h; sourceTree = "<group>"; };
 		C94A3134193342E7002163B2 /* ACShelf3Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACShelf3Cell.m; sourceTree = "<group>"; };
+		C9826FCA19404F830067FF3A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C98F8C411932DA66008E4757 /* ACMagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMagazineViewController.h; sourceTree = "<group>"; };
 		C98F8C421932DA66008E4757 /* ACMagazineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMagazineViewController.m; sourceTree = "<group>"; };
 		C98F8C441932DA81008E4757 /* ACHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACHistoryViewController.h; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				C9F2036F192EE3A90083C490 /* Service */,
 				C9F2033E192EE3060083C490 /* Supporting Files */,
 				C9F2047A192EE4F50083C490 /* UI */,
+				C9826FCA19404F830067FF3A /* Main.storyboard */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				C9F20342192EE3060083C490 /* InfoPlist.strings in Resources */,
 				C94A310E19333535002163B2 /* Settings.bundle in Resources */,
 				C9F20461192EE4E60083C490 /* blackArrow.png in Resources */,
+				C9826FCB19404F830067FF3A /* Main.storyboard in Resources */,
 				C9229C171934270B00A103F9 /* RefreshArrow@2x.png in Resources */,
 				C9F20467192EE4E60083C490 /* grayArrow@2x.png in Resources */,
 				C9F20463192EE4E60083C490 /* blueArrow.png in Resources */,

@@ -9,6 +9,7 @@
 - (id)init{
     self=[super init];
     if(self){
+        [self.view setBackgroundColor:[UIColor whiteColor]];
         if(iOS7){
             self.edgesForExtendedLayout = UIRectEdgeNone;
             self.extendedLayoutIncludesOpaqueBars = NO;
@@ -42,6 +43,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+}
+
+
+- (void)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)buildUI56

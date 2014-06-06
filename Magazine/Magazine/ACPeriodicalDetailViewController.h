@@ -10,4 +10,6 @@
 
 @interface ACPeriodicalDetailViewController : BaseViewController
 
+- (id)initWithData:(NSDictionary *)data;
+
 @end

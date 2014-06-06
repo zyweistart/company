@@ -14,21 +14,13 @@
 + (void)alert:(NSString *)message;
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message ok:(NSString *) okName tag:(NSInteger)tag;
 + (void)actionSheet:(id<UIActionSheetDelegate>)delegate message:(NSString *)message tag:(NSInteger)tag;
-+ (void)noLoginAlert:(id<UIActionSheetDelegate>)delegate;
-
-//字符格式处理
-+ (NSString*)formatPhone:(NSString *)phone;
-+ (NSString*)secondConvertFormatTimerByCn:(NSString *)second;
-+ (NSString*)secondConvertFormatTimerByEn:(NSString *)second;
-
-+ (void)resultNavigationViewController:(UIViewController *)view resultDelegate:(NSObject<ResultDelegate> *)resultDelegate resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary *)result;
 
 + (void)setCacheXmlByList:(NSString *)xml tag:(NSString *)tag;
 
 + (NSMutableArray *)getCacheXmlByList:(NSString *)tag;
 
 + (NSData *)toJSONData:(id)theData;
-
++ (void)loadHtmlWithWebView:(UIWebView*)webView url:(NSString *)url fileName:(NSString*)fileName;
 + (void)loadImageWithImageView:(UIImageView*)image url:(NSString *)url fileName:(NSString*)fileName;
 
 @end

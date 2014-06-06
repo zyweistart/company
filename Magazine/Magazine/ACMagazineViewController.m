@@ -1,4 +1,5 @@
 #import "ACMagazineViewController.h"
+#import "ACPeriodicalDetailViewController.h"
 #import "ACShelf2Cell.h"
 
 @interface ACMagazineViewController ()
@@ -43,6 +44,14 @@
     NSString *fileName=[frontPageUrl substringWithRange:NSMakeRange(33,25)];
     [Common loadImageWithImageView:shelfCell.image url:frontPageUrl fileName:fileName];
     return shelfCell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *data=[self.dataItemArray objectAtIndex:indexPath.row];
+    ACPeriodicalDetailViewController *periodicalDetailViewController=[[ACPeriodicalDetailViewController alloc]initWithData:data];
+    UINavigationController *periodicalDetailViewControllerNav=[[UINavigationController alloc]initWithRootViewController:periodicalDetailViewController];
+    [self presentViewController:periodicalDetailViewControllerNav animated:YES completion:nil];
 }
 
 - (void)loadDataWithPage:(int)page

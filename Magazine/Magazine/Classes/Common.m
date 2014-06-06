@@ -63,92 +63,6 @@
     [Common actionSheet:delegate message:message ok:@"确定" tag:tag];
 }
 
-//没有登录时提示
-+ (void)noLoginAlert:(id<UIActionSheetDelegate>)delegate{
-    UIActionSheet *sheet = [[UIActionSheet alloc]
-                            initWithTitle:@"登录超时"
-                            delegate:delegate
-                            cancelButtonTitle:@"取消"
-                            destructiveButtonTitle:@"重新登录"
-                            otherButtonTitles:nil,nil];
-    //UIActionSheet与UITabBarController结合使用不能使用[sheet showInView:self.view];
-    [sheet showInView:[UIApplication sharedApplication].keyWindow];
-}
-
-+ (NSString*)formatPhone:(NSString *)phone{
-    if(phone){
-        NSMutableString *phoneNumber=[[NSMutableString alloc]init];
-        for(int i=0;i<[phone length];i++){
-            unichar c=[phone characterAtIndex:i];
-            if((c>=48&&c<=57)||c==43){
-                [phoneNumber appendFormat:@"%c",c];
-            }
-        }
-        return [NSString stringWithFormat:@"%@",phoneNumber];
-    }
-    return @"";
-}
-
-//把秒转换成12时12分12秒中文形式
-+ (NSString*)secondConvertFormatTimerByCn:(NSString *)second{
-    NSInteger sec=[second intValue];
-    int day=sec/(60*60*24);
-    int h=(sec%(60*60*24))/(60*60);
-    int m=((sec%(60*60*24))%(60*60))/60;
-    int s=(((sec%(60*60*24))%(60*60))%60)%60;
-    if(day>0){
-        return [NSString stringWithFormat:@"%d天%d时%d分%d秒",day,h,m,s];
-    }else if(h>0){
-        return [NSString stringWithFormat:@"%d时%d分%d秒",h,m,s];
-    }else if(m>0){
-        return [NSString stringWithFormat:@"%d分%d秒",m,s];
-    }else{
-        return [NSString stringWithFormat:@"%d秒",s];
-    }
-}
-
-//把秒转换成12:12:12英文形式
-+ (NSString*)secondConvertFormatTimerByEn:(NSString *)second{
-    NSInteger sec=[second intValue];
-    int day=sec/(60*60*24);
-    int h=(sec%(60*60*24))/(60*60);
-    int m=((sec%(60*60*24))%(60*60))/60;
-    int s=(((sec%(60*60*24))%(60*60))%60)%60;
-    NSString *days=nil;
-    NSString *hs=nil;
-    NSString *ms=nil;
-    NSString *ss=nil;
-    if(day>=10){
-        days=[NSString stringWithFormat:@"%d",day];
-    }else{
-        days=[NSString stringWithFormat:@"0%d",day];
-    }
-    if(h>=10){
-        hs=[NSString stringWithFormat:@"%d",h];
-    }else{
-        hs=[NSString stringWithFormat:@"0%d",h];
-    }
-    if(m>=10){
-        ms=[NSString stringWithFormat:@"%d",m];
-    }else{
-        ms=[NSString stringWithFormat:@"0%d",m];
-    }
-    if(s>=10){
-        ss=[NSString stringWithFormat:@"%d",s];
-    }else{
-        ss=[NSString stringWithFormat:@"0%d",s];
-    }
-    if(day>0){
-        return [NSString stringWithFormat:@"%@:%@:%@:%@",days,hs,ms,ss];
-    }else if(h>0){
-        return [NSString stringWithFormat:@"%@:%@:%@",hs,ms,ss];
-    }else if(m>0){
-        return [NSString stringWithFormat:@"%@:%@",ms,ss];
-    }else{
-        return [NSString stringWithFormat:@"00:%@",ss];
-    }
-}
-
 //返回调用
 + (void)resultNavigationViewController:(UIViewController *)view resultDelegate:(NSObject<ResultDelegate> *)resultDelegate resultCode:(NSInteger)resultCode requestCode:(NSInteger)requestCode data:(NSMutableDictionary *)result{
     if(resultDelegate){
@@ -192,6 +106,48 @@
     }
 }
 
++ (void)loadHtmlWithWebView:(UIWebView*)webView url:(NSString *)url fileName:(NSString*)fileName
+{
+    //创建文件管理器
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    //获取Documents主目录
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    //得到相应的Documents的路径
+    NSString* docDir = [paths objectAtIndex:0];
+    NSString *documentPath=[docDir stringByAppendingPathComponent:@"documents"];
+    //文件夹不存在则创建目录
+    if(![fileManager fileExistsAtPath:documentPath]){
+        [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
+    NSString *path = [documentPath stringByAppendingPathComponent:fileName];
+    if([fileManager fileExistsAtPath:path]){
+        //缓存文件存在则直接显示
+        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+    }else{
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            //异步加载网络文件
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (data) {
+                    //加载成功后把文件缓存至本地
+                    //创建数据缓冲区
+                    NSMutableData* writer = [[NSMutableData alloc] init];
+                    //将字符串添加到缓冲中
+                    [writer appendData: data];
+                    //将其他数据添加到缓冲中
+                    //将缓冲的数据写入到临时文件中
+                    [writer writeToFile:path atomically:YES];
+                    //把文件进行展示
+                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+                }
+            });
+        });
+    }
+}
+
 + (void)loadImageWithImageView:(UIImageView*)image url:(NSString *)url fileName:(NSString*)fileName
 {
     //创建文件管理器
@@ -200,9 +156,14 @@
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     //得到相应的Documents的路径
     NSString* docDir = [paths objectAtIndex:0];
+    NSString *documentPath=[docDir stringByAppendingPathComponent:@"images"];
+    //文件夹不存在则创建目录
+    if(![fileManager fileExistsAtPath:documentPath]){
+        [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     //更改到待操作的目录下
-    [fileManager changeCurrentDirectoryPath:[docDir stringByExpandingTildeInPath]];
-    NSString *path = [docDir stringByAppendingPathComponent:fileName];
+    [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
+    NSString *path = [documentPath stringByAppendingPathComponent:fileName];
     if([fileManager fileExistsAtPath:path]){
         //缓存图片存在则直接显示
         [image setImage:[UIImage imageWithContentsOfFile:path]];
