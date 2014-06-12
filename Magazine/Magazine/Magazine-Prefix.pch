@@ -28,6 +28,8 @@
 #define iOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
 //4寸手机
 #define inch4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define CONTENTSIZEWIDTH 320
 //状态栏高度
 #define STATUSHEIGHT 20
 //顶部导航条高度

@@ -1,5 +1,5 @@
 #import "ACPeriodicalListViewController.h"
-#import "ACPeriodicalContentViewController.h"
+#import "ACPeriodicalRootContentViewController.h"
 
 @interface ACPeriodicalListViewController ()
 
@@ -54,10 +54,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *d=[self.dataItemArray objectAtIndex:[indexPath row]];
-    ACPeriodicalContentViewController *periodicalContentViewController=[[ACPeriodicalContentViewController alloc]initWithData:d];
+    ACPeriodicalRootContentViewController *periodicalContentViewController=[[ACPeriodicalRootContentViewController alloc]initWithData:self.dataItemArray Index:indexPath.row];
+    [periodicalContentViewController setTitle:[self.data objectForKey:@"periods"]];
     [self.navigationController pushViewController:periodicalContentViewController animated:YES];
-    [periodicalContentViewController loadData];
 }
 
 @end

@@ -20,7 +20,6 @@
 		C94A311419333BB0002163B2 /* ACMyCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A311319333BB0002163B2 /* ACMyCollectViewController.m */; };
 		C94A311719333BFD002163B2 /* ACPeriodicalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A311619333BFD002163B2 /* ACPeriodicalDetailViewController.m */; };
 		C94A311A19333C18002163B2 /* ACPeriodicalListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A311919333C18002163B2 /* ACPeriodicalListViewController.m */; };
-		C94A311D19333C2D002163B2 /* ACPeriodicalContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A311C19333C2D002163B2 /* ACPeriodicalContentViewController.m */; };
 		C94A31201933412B002163B2 /* ACRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A311F1933412B002163B2 /* ACRegisterViewController.m */; };
 		C94A312319334133002163B2 /* ACLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A312219334133002163B2 /* ACLoginViewController.m */; };
 		C94A312619334146002163B2 /* ACResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A312519334146002163B2 /* ACResetPasswordViewController.m */; };
@@ -36,6 +35,9 @@
 		C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C481932DAA2008E4757 /* ACRecentViewController.m */; };
 		C98F8C4C1932DAB6008E4757 /* ACMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C4B1932DAB6008E4757 /* ACMyViewController.m */; };
 		C98F8C4F1932DC63008E4757 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C4E1932DC63008E4757 /* BaseCollectionViewController.m */; };
+		C9DCD30419494065001CF348 /* ACPeriodicalRootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */; };
+		C9DCD3071949407B001CF348 /* ACPeriodicalDataContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */; };
+		C9DCD30A1949408A001CF348 /* ACPeriodicalModelContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */; };
 		C9F20336192EE3060083C490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20335192EE3060083C490 /* Foundation.framework */; };
 		C9F20338192EE3060083C490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20337192EE3060083C490 /* CoreGraphics.framework */; };
 		C9F2033A192EE3060083C490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20339192EE3060083C490 /* UIKit.framework */; };
@@ -117,8 +119,6 @@
 		C94A311619333BFD002163B2 /* ACPeriodicalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalDetailViewController.m; sourceTree = "<group>"; };
 		C94A311819333C18002163B2 /* ACPeriodicalListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalListViewController.h; sourceTree = "<group>"; };
 		C94A311919333C18002163B2 /* ACPeriodicalListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalListViewController.m; sourceTree = "<group>"; };
-		C94A311B19333C2D002163B2 /* ACPeriodicalContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalContentViewController.h; sourceTree = "<group>"; };
-		C94A311C19333C2D002163B2 /* ACPeriodicalContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalContentViewController.m; sourceTree = "<group>"; };
 		C94A311E1933412B002163B2 /* ACRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRegisterViewController.h; sourceTree = "<group>"; };
 		C94A311F1933412B002163B2 /* ACRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRegisterViewController.m; sourceTree = "<group>"; };
 		C94A312119334133002163B2 /* ACLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLoginViewController.h; sourceTree = "<group>"; };
@@ -145,6 +145,12 @@
 		C98F8C4B1932DAB6008E4757 /* ACMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMyViewController.m; sourceTree = "<group>"; };
 		C98F8C4D1932DC63008E4757 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
 		C98F8C4E1932DC63008E4757 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewController.m; sourceTree = "<group>"; };
+		C9DCD30219494065001CF348 /* ACPeriodicalRootContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalRootContentViewController.h; sourceTree = "<group>"; };
+		C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalRootContentViewController.m; sourceTree = "<group>"; };
+		C9DCD3051949407B001CF348 /* ACPeriodicalDataContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalDataContentViewController.h; sourceTree = "<group>"; };
+		C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalDataContentViewController.m; sourceTree = "<group>"; };
+		C9DCD3081949408A001CF348 /* ACPeriodicalModelContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalModelContentViewController.h; sourceTree = "<group>"; };
+		C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalModelContentViewController.m; sourceTree = "<group>"; };
 		C9F20332192EE3060083C490 /* Magazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F20335192EE3060083C490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9F20337192EE3060083C490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -348,12 +354,16 @@
 				C94A311019333B34002163B2 /* ACMySubscriptionViewController.m */,
 				C98F8C4A1932DAB6008E4757 /* ACMyViewController.h */,
 				C98F8C4B1932DAB6008E4757 /* ACMyViewController.m */,
-				C94A311B19333C2D002163B2 /* ACPeriodicalContentViewController.h */,
-				C94A311C19333C2D002163B2 /* ACPeriodicalContentViewController.m */,
+				C9DCD3051949407B001CF348 /* ACPeriodicalDataContentViewController.h */,
+				C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */,
 				C94A311519333BFD002163B2 /* ACPeriodicalDetailViewController.h */,
 				C94A311619333BFD002163B2 /* ACPeriodicalDetailViewController.m */,
 				C94A311819333C18002163B2 /* ACPeriodicalListViewController.h */,
 				C94A311919333C18002163B2 /* ACPeriodicalListViewController.m */,
+				C9DCD3081949408A001CF348 /* ACPeriodicalModelContentViewController.h */,
+				C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */,
+				C9DCD30219494065001CF348 /* ACPeriodicalRootContentViewController.h */,
+				C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */,
 				C98F8C471932DAA2008E4757 /* ACRecentViewController.h */,
 				C98F8C481932DAA2008E4757 /* ACRecentViewController.m */,
 				C94A311E1933412B002163B2 /* ACRegisterViewController.h */,
@@ -668,6 +678,7 @@
 				C94A310919331FC4002163B2 /* BaseTableRefreshViewController.m in Sources */,
 				C9F20460192EE4E60083C490 /* MBProgressHUD.m in Sources */,
 				C9F2036C192EE3920083C490 /* ACMainViewController.m in Sources */,
+				C9DCD3071949407B001CF348 /* ACPeriodicalDataContentViewController.m in Sources */,
 				C9F20456192EE4E60083C490 /* ATMTextLayer.m in Sources */,
 				C94A312C19334254002163B2 /* ACShelf2Cell.m in Sources */,
 				C9F20465192EE4E60083C490 /* EGORefreshTableHeaderView.m in Sources */,
@@ -690,6 +701,7 @@
 				C9F20441192EE4E60083C490 /* BaseViewController.m in Sources */,
 				C94A31201933412B002163B2 /* ACRegisterViewController.m in Sources */,
 				C94A3135193342E7002163B2 /* ACShelf3Cell.m in Sources */,
+				C9DCD30A1949408A001CF348 /* ACPeriodicalModelContentViewController.m in Sources */,
 				C9229C1F193455E800A103F9 /* TableViewLoadingCell.m in Sources */,
 				C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */,
 				C94A312619334146002163B2 /* ACResetPasswordViewController.m in Sources */,
@@ -697,7 +709,7 @@
 				C9F20453192EE4E60083C490 /* ATMHudView.m in Sources */,
 				C98F8C461932DA81008E4757 /* ACHistoryViewController.m in Sources */,
 				C9F2034B192EE3060083C490 /* Magazine.xcdatamodeld in Sources */,
-				C94A311D19333C2D002163B2 /* ACPeriodicalContentViewController.m in Sources */,
+				C9DCD30419494065001CF348 /* ACPeriodicalRootContentViewController.m in Sources */,
 				C94A311719333BFD002163B2 /* ACPeriodicalDetailViewController.m in Sources */,
 				C9229C1A1934507C00A103F9 /* CollectionViewLoadingCell.m in Sources */,
 				C9F2044A192EE4E60083C490 /* NSString+Utils.m in Sources */,
