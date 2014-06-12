@@ -8,9 +8,11 @@
         <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endPageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="frontPageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="introduction" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="periods" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="readpotin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recommmend" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalPage" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -22,7 +24,7 @@
         <attribute name="smallTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-38" positionY="74" width="128" height="223"/>
+        <element name="Book" positionX="-38" positionY="74" width="128" height="255"/>
         <element name="Periodical" positionX="-306" positionY="45" width="128" height="118"/>
     </elements>
 </model>

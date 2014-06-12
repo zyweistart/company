@@ -22,7 +22,9 @@
 @property (nonatomic, retain) NSString * introduction;
 @property (nonatomic, retain) NSString * periods;
 @property (nonatomic, retain) NSString * price;
+@property (nonatomic, retain) NSString * readpotin;
 @property (nonatomic, retain) NSString * recommmend;
 @property (nonatomic, retain) NSString * totalPage;
+@property (nonatomic, retain) NSString * index;
 
 @end

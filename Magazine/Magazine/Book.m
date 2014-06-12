@@ -21,7 +21,9 @@
 @dynamic introduction;
 @dynamic periods;
 @dynamic price;
+@dynamic readpotin;
 @dynamic recommmend;
 @dynamic totalPage;
+@dynamic index;
 
 @end

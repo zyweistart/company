@@ -1,4 +1,5 @@
 #import "BaseViewController.h"
+#import "Book.h"
 
 @interface ACPeriodicalDataContentViewController : BaseViewController
 
@@ -6,6 +7,8 @@
 
 - (void)loadData;
 
-@property (strong,nonatomic)NSDictionary *data;
+@property NSUInteger index;
+
+@property (strong,nonatomic) Book *book;
 
 @end

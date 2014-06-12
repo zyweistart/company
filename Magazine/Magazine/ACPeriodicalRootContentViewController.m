@@ -5,19 +5,20 @@
 
 @property NSInteger index;
 @property (strong,nonatomic)NSArray *itemDataArray;
+@property (strong,nonatomic) Book *book;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 
 @end
 
 @implementation ACPeriodicalRootContentViewController
 
-- (id)initWithData:(NSArray *)data Index:(NSInteger)index
+- (id)initWithData:(NSArray *)data Index:(NSInteger)index book:(Book *)book
 {
     self=[super init];
     if(self){
         self.index=index;
         self.itemDataArray=data;
-        NSLog(@"%@",self.itemDataArray[index]);
+        self.book=book;
         self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         self.pageViewController.delegate = self;
         self.pageViewController.dataSource = self;
@@ -43,13 +44,15 @@
         return nil;
     }
     ACPeriodicalDataContentViewController *periodicalDataContentViewController=[[ACPeriodicalDataContentViewController alloc]initWithData:self.itemDataArray[index]];
+    [periodicalDataContentViewController setIndex:index];
+    [periodicalDataContentViewController setBook:self.book];
     [periodicalDataContentViewController loadData];
     return periodicalDataContentViewController;
 }
 
 - (NSUInteger)indexOfViewController:(ACPeriodicalDataContentViewController *)viewController
 {
-    return [self.itemDataArray indexOfObject:viewController.data];
+    return viewController.index;
 }
 
 #pragma mark - Page View Controller Data Source

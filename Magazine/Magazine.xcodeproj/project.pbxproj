@@ -29,8 +29,9 @@
 		C94A313019334285002163B2 /* ACShelf2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A312F19334285002163B2 /* ACShelf2Cell.xib */; };
 		C94A3132193342D4002163B2 /* ACShelf3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A3131193342D4002163B2 /* ACShelf3Cell.xib */; };
 		C94A3135193342E7002163B2 /* ACShelf3Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A3134193342E7002163B2 /* ACShelf3Cell.m */; };
+		C94BBDC019498A51000D227D /* BookService.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BBDBF19498A51000D227D /* BookService.m */; };
+		C94BBDC9194991CB000D227D /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BBDC8194991CB000D227D /* Book.m */; };
 		C9829A5319497BD100EC4279 /* Periodical.m in Sources */ = {isa = PBXBuildFile; fileRef = C9829A5219497BD100EC4279 /* Periodical.m */; };
-		C9829A5619497BD200EC4279 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = C9829A5519497BD200EC4279 /* Book.m */; };
 		C98F8C431932DA66008E4757 /* ACMagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C421932DA66008E4757 /* ACMagazineViewController.m */; };
 		C98F8C461932DA81008E4757 /* ACHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C451932DA81008E4757 /* ACHistoryViewController.m */; };
 		C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C481932DAA2008E4757 /* ACRecentViewController.m */; };
@@ -134,10 +135,12 @@
 		C94A3131193342D4002163B2 /* ACShelf3Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACShelf3Cell.xib; sourceTree = "<group>"; };
 		C94A3133193342E7002163B2 /* ACShelf3Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACShelf3Cell.h; sourceTree = "<group>"; };
 		C94A3134193342E7002163B2 /* ACShelf3Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACShelf3Cell.m; sourceTree = "<group>"; };
+		C94BBDBE19498A51000D227D /* BookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookService.h; sourceTree = "<group>"; };
+		C94BBDBF19498A51000D227D /* BookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookService.m; sourceTree = "<group>"; };
+		C94BBDC7194991CB000D227D /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		C94BBDC8194991CB000D227D /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		C9829A5119497BD100EC4279 /* Periodical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periodical.h; sourceTree = "<group>"; };
 		C9829A5219497BD100EC4279 /* Periodical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periodical.m; sourceTree = "<group>"; };
-		C9829A5419497BD200EC4279 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
-		C9829A5519497BD200EC4279 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		C98F8C411932DA66008E4757 /* ACMagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMagazineViewController.h; sourceTree = "<group>"; };
 		C98F8C421932DA66008E4757 /* ACMagazineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMagazineViewController.m; sourceTree = "<group>"; };
 		C98F8C441932DA81008E4757 /* ACHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACHistoryViewController.h; sourceTree = "<group>"; };
@@ -262,8 +265,8 @@
 		C9829A5719497BDB00EC4279 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C9829A5419497BD200EC4279 /* Book.h */,
-				C9829A5519497BD200EC4279 /* Book.m */,
+				C94BBDC7194991CB000D227D /* Book.h */,
+				C94BBDC8194991CB000D227D /* Book.m */,
 				C9829A5119497BD100EC4279 /* Periodical.h */,
 				C9829A5219497BD100EC4279 /* Periodical.m */,
 			);
@@ -440,6 +443,8 @@
 				C9F2038B192EE4E60083C490 /* ResultDelegate.h */,
 				C9F2038C192EE4E60083C490 /* UIWindow+PazLabs.h */,
 				C9F2038D192EE4E60083C490 /* UIWindow+PazLabs.m */,
+				C94BBDBE19498A51000D227D /* BookService.h */,
+				C94BBDBF19498A51000D227D /* BookService.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -675,6 +680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C94BBDC9194991CB000D227D /* Book.m in Sources */,
 				C9F20455192EE4E60083C490 /* ATMSoundFX.m in Sources */,
 				C9F2045C192EE4E60083C490 /* GHNSString+HMAC.m in Sources */,
 				C94A312319334133002163B2 /* ACLoginViewController.m in Sources */,
@@ -703,7 +709,6 @@
 				C9F20452192EE4E60083C490 /* ATMHudQueueItem.m in Sources */,
 				C9F20450192EE4E60083C490 /* Reachability.m in Sources */,
 				C98F8C4C1932DAB6008E4757 /* ACMyViewController.m in Sources */,
-				C9829A5619497BD200EC4279 /* Book.m in Sources */,
 				C9F20458192EE4E60083C490 /* ChineseToPinyin.m in Sources */,
 				C94A312919334246002163B2 /* ACShelf1Cell.m in Sources */,
 				C9F20442192EE4E60083C490 /* Common.m in Sources */,
@@ -724,6 +729,7 @@
 				C9F2044A192EE4E60083C490 /* NSString+Utils.m in Sources */,
 				C9F20451192EE4E60083C490 /* ATMHud.m in Sources */,
 				C9F2044C192EE4E60083C490 /* UIWindow+PazLabs.m in Sources */,
+				C94BBDC019498A51000D227D /* BookService.m in Sources */,
 				C9F20459192EE4E60083C490 /* EAIntroPage.m in Sources */,
 				C9829A5319497BD100EC4279 /* Periodical.m in Sources */,
 			);

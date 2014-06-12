@@ -1,6 +1,7 @@
 #import "ACPeriodicalDetailViewController.h"
 #import "ACPeriodicalListViewController.h"
 #import "Common.h"
+#import "BookService.h"
 
 @interface ACPeriodicalDetailViewController ()
 
@@ -16,6 +17,10 @@
     if (self) {
         self.title=@"期刊详情";
         self.data=data;
+        
+        BookService *bookService=[[BookService alloc]init];
+        [bookService save:self.data];
+        
         //初始化UI
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
                                                 initWithTitle:@"关闭"

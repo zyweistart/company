@@ -1,4 +1,5 @@
 #import "ACPeriodicalDataContentViewController.h"
+#import "BookService.h"
 
 @interface ACPeriodicalDataContentViewController () <UIScrollViewDelegate,UIWebViewDelegate>
 
@@ -8,6 +9,8 @@
 @property (strong,nonatomic) UILabel *bigTitle;
 @property (strong,nonatomic) UILabel *smallTitle;
 @property (strong,nonatomic) UIWebView *webView;
+
+@property (strong,nonatomic)NSDictionary *data;
 
 @end
 
@@ -70,7 +73,12 @@
     //重置ScrollView的内容高度
     [self.scroll setContentSize:CGSizeMake(CONTENTSIZEWIDTH, webViewHeight+newFrame.origin.y)];
     //获取最后阅读的位置并进行跳至
-//    [self.scroll setContentOffset:CGPointMake(0, 600) animated:YES];
+    if([[self.book index]intValue]==self.index){
+        float readpoint=[[self.book readpotin]floatValue];
+        if(readpoint>0){
+            [self.scroll setContentOffset:CGPointMake(0, readpoint) animated:YES];
+        }
+    }
 }
 
 - (void)loadData
@@ -84,8 +92,16 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    NSLog(@"当前阅读的位置点是:%f",self.scroll.contentOffset.y);
+    [self saveIndexPoint];
     [super viewWillDisappear:animated];
+}
+
+- (void)saveIndexPoint
+{
+    BookService *bookService=[[BookService alloc]init];
+    [self.book setIndex:[NSString stringWithFormat:@"%ld",self.index]];
+    [self.book setReadpotin:[NSString stringWithFormat:@"%f",self.scroll.contentOffset.y]];
+    [bookService saveByBook:self.book];
 }
 
 @end

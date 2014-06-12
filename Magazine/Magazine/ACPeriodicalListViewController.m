@@ -1,13 +1,16 @@
 #import "ACPeriodicalListViewController.h"
 #import "ACPeriodicalRootContentViewController.h"
+#import "BookService.h"
 
-@interface ACPeriodicalListViewController ()
+@interface ACPeriodicalListViewController () <UIActionSheetDelegate>
 
 @property (strong,nonatomic)NSDictionary *data;
 
 @end
 
-@implementation ACPeriodicalListViewController
+@implementation ACPeriodicalListViewController{
+    Book *book;
+}
 
 - (id)initWithData:(NSDictionary *)data
 {
@@ -34,6 +37,16 @@
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
 {
     if([response successFlag]){
+        
+        BookService *bookService=[[BookService alloc]init];
+        NSString *periods=[self.data objectForKey:@"periods"];
+        book=[bookService get:periods];
+        if(book!=nil){
+            if([[book readpotin]intValue]>0){
+                [Common actionSheet:self message:@"是否继续阅读" ok:@"继续阅读" tag:1];
+            }
+        }
+        
         [self.dataItemArray addObjectsFromArray:[[response resultJSON]objectForKey:@"data"]];
         [self.tableView reloadData];
     }
@@ -54,9 +67,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ACPeriodicalRootContentViewController *periodicalContentViewController=[[ACPeriodicalRootContentViewController alloc]initWithData:self.dataItemArray Index:indexPath.row];
+    ACPeriodicalRootContentViewController *periodicalContentViewController=[[ACPeriodicalRootContentViewController alloc]initWithData:self.dataItemArray Index:indexPath.row book:book];
     [periodicalContentViewController setTitle:[self.data objectForKey:@"periods"]];
     [self.navigationController pushViewController:periodicalContentViewController animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSIndexPath *path = [NSIndexPath indexPathForRow:[[book index]intValue] inSection:0];
+    [self tableView:self.tableView didSelectRowAtIndexPath:path];
 }
 
 @end
