@@ -70,7 +70,7 @@
     //重置ScrollView的内容高度
     [self.scroll setContentSize:CGSizeMake(CONTENTSIZEWIDTH, webViewHeight+newFrame.origin.y)];
     //获取最后阅读的位置并进行跳至
-    //    [self.scroll setContentOffset:CGPointMake(0, 600) animated:YES];
+//    [self.scroll setContentOffset:CGPointMake(0, 600) animated:YES];
 }
 
 - (void)loadData
@@ -84,7 +84,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"当前阅读的位置点是:%f",self.scroll.contentOffset.y);
+//    NSLog(@"当前阅读的位置点是:%f",self.scroll.contentOffset.y);
     [super viewWillDisappear:animated];
 }
 

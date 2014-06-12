@@ -1,9 +1,7 @@
 #import "BaseViewController.h"
 
-@interface ACPeriodicalRootContentViewController : BaseViewController<UIPageViewControllerDelegate>
+@interface ACPeriodicalRootContentViewController : BaseViewController<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 
 - (id)initWithData:(NSArray *)data Index:(NSInteger)index;
-
-@property (strong, nonatomic) UIPageViewController *pageViewController;
 
 @end

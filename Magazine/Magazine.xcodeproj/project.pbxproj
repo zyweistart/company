@@ -29,7 +29,8 @@
 		C94A313019334285002163B2 /* ACShelf2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A312F19334285002163B2 /* ACShelf2Cell.xib */; };
 		C94A3132193342D4002163B2 /* ACShelf3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A3131193342D4002163B2 /* ACShelf3Cell.xib */; };
 		C94A3135193342E7002163B2 /* ACShelf3Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A3134193342E7002163B2 /* ACShelf3Cell.m */; };
-		C9826FCB19404F830067FF3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9826FCA19404F830067FF3A /* Main.storyboard */; };
+		C9829A5319497BD100EC4279 /* Periodical.m in Sources */ = {isa = PBXBuildFile; fileRef = C9829A5219497BD100EC4279 /* Periodical.m */; };
+		C9829A5619497BD200EC4279 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = C9829A5519497BD200EC4279 /* Book.m */; };
 		C98F8C431932DA66008E4757 /* ACMagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C421932DA66008E4757 /* ACMagazineViewController.m */; };
 		C98F8C461932DA81008E4757 /* ACHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C451932DA81008E4757 /* ACHistoryViewController.m */; };
 		C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C481932DAA2008E4757 /* ACRecentViewController.m */; };
@@ -37,7 +38,6 @@
 		C98F8C4F1932DC63008E4757 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C4E1932DC63008E4757 /* BaseCollectionViewController.m */; };
 		C9DCD30419494065001CF348 /* ACPeriodicalRootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */; };
 		C9DCD3071949407B001CF348 /* ACPeriodicalDataContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */; };
-		C9DCD30A1949408A001CF348 /* ACPeriodicalModelContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */; };
 		C9F20336192EE3060083C490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20335192EE3060083C490 /* Foundation.framework */; };
 		C9F20338192EE3060083C490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20337192EE3060083C490 /* CoreGraphics.framework */; };
 		C9F2033A192EE3060083C490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20339192EE3060083C490 /* UIKit.framework */; };
@@ -134,7 +134,10 @@
 		C94A3131193342D4002163B2 /* ACShelf3Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACShelf3Cell.xib; sourceTree = "<group>"; };
 		C94A3133193342E7002163B2 /* ACShelf3Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACShelf3Cell.h; sourceTree = "<group>"; };
 		C94A3134193342E7002163B2 /* ACShelf3Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACShelf3Cell.m; sourceTree = "<group>"; };
-		C9826FCA19404F830067FF3A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C9829A5119497BD100EC4279 /* Periodical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periodical.h; sourceTree = "<group>"; };
+		C9829A5219497BD100EC4279 /* Periodical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periodical.m; sourceTree = "<group>"; };
+		C9829A5419497BD200EC4279 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		C9829A5519497BD200EC4279 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		C98F8C411932DA66008E4757 /* ACMagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMagazineViewController.h; sourceTree = "<group>"; };
 		C98F8C421932DA66008E4757 /* ACMagazineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMagazineViewController.m; sourceTree = "<group>"; };
 		C98F8C441932DA81008E4757 /* ACHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACHistoryViewController.h; sourceTree = "<group>"; };
@@ -149,8 +152,6 @@
 		C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalRootContentViewController.m; sourceTree = "<group>"; };
 		C9DCD3051949407B001CF348 /* ACPeriodicalDataContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalDataContentViewController.h; sourceTree = "<group>"; };
 		C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalDataContentViewController.m; sourceTree = "<group>"; };
-		C9DCD3081949408A001CF348 /* ACPeriodicalModelContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalModelContentViewController.h; sourceTree = "<group>"; };
-		C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalModelContentViewController.m; sourceTree = "<group>"; };
 		C9F20332192EE3060083C490 /* Magazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F20335192EE3060083C490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9F20337192EE3060083C490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -258,6 +259,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C9829A5719497BDB00EC4279 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9829A5419497BD200EC4279 /* Book.h */,
+				C9829A5519497BD200EC4279 /* Book.m */,
+				C9829A5119497BD100EC4279 /* Periodical.h */,
+				C9829A5219497BD100EC4279 /* Periodical.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		C9F20329192EE3060083C490 = {
 			isa = PBXGroup;
 			children = (
@@ -301,7 +313,6 @@
 				C9F2036F192EE3A90083C490 /* Service */,
 				C9F2033E192EE3060083C490 /* Supporting Files */,
 				C9F2047A192EE4F50083C490 /* UI */,
-				C9826FCA19404F830067FF3A /* Main.storyboard */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -360,8 +371,6 @@
 				C94A311619333BFD002163B2 /* ACPeriodicalDetailViewController.m */,
 				C94A311819333C18002163B2 /* ACPeriodicalListViewController.h */,
 				C94A311919333C18002163B2 /* ACPeriodicalListViewController.m */,
-				C9DCD3081949408A001CF348 /* ACPeriodicalModelContentViewController.h */,
-				C9DCD3091949408A001CF348 /* ACPeriodicalModelContentViewController.m */,
 				C9DCD30219494065001CF348 /* ACPeriodicalRootContentViewController.h */,
 				C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */,
 				C98F8C471932DAA2008E4757 /* ACRecentViewController.h */,
@@ -541,6 +550,7 @@
 		C9F2047A192EE4F50083C490 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C9829A5719497BDB00EC4279 /* Model */,
 				C9F2036E192EE3A40083C490 /* Cell */,
 				C9F2036D192EE39C0083C490 /* Controller */,
 				C9F2047B192EE50D0083C490 /* View */,
@@ -637,7 +647,6 @@
 				C9F20342192EE3060083C490 /* InfoPlist.strings in Resources */,
 				C94A310E19333535002163B2 /* Settings.bundle in Resources */,
 				C9F20461192EE4E60083C490 /* blackArrow.png in Resources */,
-				C9826FCB19404F830067FF3A /* Main.storyboard in Resources */,
 				C9229C171934270B00A103F9 /* RefreshArrow@2x.png in Resources */,
 				C9F20467192EE4E60083C490 /* grayArrow@2x.png in Resources */,
 				C9F20463192EE4E60083C490 /* blueArrow.png in Resources */,
@@ -694,6 +703,7 @@
 				C9F20452192EE4E60083C490 /* ATMHudQueueItem.m in Sources */,
 				C9F20450192EE4E60083C490 /* Reachability.m in Sources */,
 				C98F8C4C1932DAB6008E4757 /* ACMyViewController.m in Sources */,
+				C9829A5619497BD200EC4279 /* Book.m in Sources */,
 				C9F20458192EE4E60083C490 /* ChineseToPinyin.m in Sources */,
 				C94A312919334246002163B2 /* ACShelf1Cell.m in Sources */,
 				C9F20442192EE4E60083C490 /* Common.m in Sources */,
@@ -701,7 +711,6 @@
 				C9F20441192EE4E60083C490 /* BaseViewController.m in Sources */,
 				C94A31201933412B002163B2 /* ACRegisterViewController.m in Sources */,
 				C94A3135193342E7002163B2 /* ACShelf3Cell.m in Sources */,
-				C9DCD30A1949408A001CF348 /* ACPeriodicalModelContentViewController.m in Sources */,
 				C9229C1F193455E800A103F9 /* TableViewLoadingCell.m in Sources */,
 				C98F8C491932DAA2008E4757 /* ACRecentViewController.m in Sources */,
 				C94A312619334146002163B2 /* ACResetPasswordViewController.m in Sources */,
@@ -716,6 +725,7 @@
 				C9F20451192EE4E60083C490 /* ATMHud.m in Sources */,
 				C9F2044C192EE4E60083C490 /* UIWindow+PazLabs.m in Sources */,
 				C9F20459192EE4E60083C490 /* EAIntroPage.m in Sources */,
+				C9829A5319497BD100EC4279 /* Periodical.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
