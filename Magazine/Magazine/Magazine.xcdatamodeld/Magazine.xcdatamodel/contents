@@ -13,18 +13,20 @@
         <attribute name="periods" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="readpotin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="readtime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="recommmend" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalPage" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Periodical" representedClassName="Periodical" syncable="YES">
         <attribute name="bigTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bookId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contenturl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="downloadUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="periods" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="smallTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-38" positionY="74" width="128" height="255"/>
-        <element name="Periodical" positionX="-306" positionY="45" width="128" height="118"/>
+        <element name="Book" positionX="-38" positionY="74" width="128" height="270"/>
+        <element name="Periodical" positionX="-306" positionY="45" width="128" height="135"/>
     </elements>
 </model>

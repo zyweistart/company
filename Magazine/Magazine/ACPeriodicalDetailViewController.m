@@ -2,15 +2,24 @@
 #import "ACPeriodicalListViewController.h"
 #import "Common.h"
 #import "BookService.h"
+#import "PeriodicalService.h"
+#import "MBProgressHUD.h"
 
 @interface ACPeriodicalDetailViewController ()
 
-@property (strong,nonatomic)NSDictionary *data;
-@property (strong,nonatomic)NSArray *dataItemArray;
+@property (strong,nonatomic) NSDictionary *data;
+@property (strong,nonatomic) NSMutableArray *dataItemArray;
+@property (strong,nonatomic) UIButton *btnSubscription;
+@property (strong,nonatomic) UIButton *btnRead;
+@property (strong,nonatomic) UIButton *btnDownload;
 
 @end
 
-@implementation ACPeriodicalDetailViewController
+@implementation ACPeriodicalDetailViewController{
+    MBProgressHUD *_mbpHud;
+    BookService *bookService;
+    PeriodicalService *periodicalService;
+}
 
 - (id)initWithData:(NSDictionary *)data;
 {
@@ -19,8 +28,9 @@
         self.title=@"期刊详情";
         self.data=data;
         
-        BookService *bookService=[[BookService alloc]init];
+        bookService=[[BookService alloc]init];
         [bookService save:self.data];
+        periodicalService=[[PeriodicalService alloc]init];
         
         //初始化UI
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]
@@ -57,24 +67,24 @@
         [lbl4 setTextAlignment:NSTextAlignmentLeft];
         [self.view addSubview:lbl4];
         
-        UIView *bottomBtn=[[UIView alloc]initWithFrame:CGRectMake(0, control.frame.size.height-108, 320, 44)];
-        [control addSubview:bottomBtn];
+        UIView *bottomView=[[UIView alloc]initWithFrame:CGRectMake(0, control.frame.size.height-108, 320, 44)];
+        [control addSubview:bottomView];
         
-        UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
-        [btn1 setTitle:@"订阅" forState:UIControlStateNormal];
-        [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn1 addTarget:self action:@selector(subscription:) forControlEvents:UIControlEventTouchUpInside];
-        [bottomBtn addSubview:btn1];
-        UIButton *btn2=[[UIButton alloc]initWithFrame:CGRectMake(105, 0, 110, 44)];
-        [btn2 setTitle:@"阅读" forState:UIControlStateNormal];
-        [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn2 addTarget:self action:@selector(read:) forControlEvents:UIControlEventTouchUpInside];
-        [bottomBtn addSubview:btn2];
-        UIButton *btn3=[[UIButton alloc]initWithFrame:CGRectMake(215, 0, 105, 44)];
-        [btn3 setTitle:@"已下载" forState:UIControlStateNormal];
-        [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn3 addTarget:self action:@selector(download:) forControlEvents:UIControlEventTouchUpInside];
-        [bottomBtn addSubview:btn3];
+        self.btnSubscription=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 44)];
+        [self.btnSubscription setTitle:@"订阅" forState:UIControlStateNormal];
+        [self.btnSubscription setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.btnSubscription addTarget:self action:@selector(subscription:) forControlEvents:UIControlEventTouchUpInside];
+        [bottomView addSubview:self.btnSubscription];
+        self.btnRead=[[UIButton alloc]initWithFrame:CGRectMake(105, 0, 110, 44)];
+        [self.btnRead setTitle:@"阅读" forState:UIControlStateNormal];
+        [self.btnRead setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.btnRead addTarget:self action:@selector(read:) forControlEvents:UIControlEventTouchUpInside];
+        [bottomView addSubview:self.btnRead];
+        self.btnDownload=[[UIButton alloc]initWithFrame:CGRectMake(215, 0, 105, 44)];
+        [self.btnDownload setTitle:@"下载" forState:UIControlStateNormal];
+        [self.btnDownload setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.btnDownload addTarget:self action:@selector(download:) forControlEvents:UIControlEventTouchUpInside];
+        [bottomView addSubview:self.btnDownload];
         
         //加载数据
         NSString *frontPageUrl=[data objectForKey:@"frontPageUrl"];
@@ -102,60 +112,81 @@
 //下载
 - (void)download:(id)sender
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_group_t group = dispatch_group_create();
-    //创建文件管理器
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    //获取Documents主目录
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    //得到相应的Documents的路径
-    NSString* docDir = [paths objectAtIndex:0];
-    NSString *documentPath=[docDir stringByAppendingPathComponent:@"documents"];
-    //文件夹不存在则创建目录
-    if(![fileManager fileExistsAtPath:documentPath]){
-        [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    //更改到待操作的目录下
-    [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
-    for(NSDictionary *dv in self.dataItemArray){
-        NSString *url=[dv objectForKey:@"downloadUrl"];
-        NSString *fileName=[url substringFromIndex:30];
-        NSString *path = [documentPath stringByAppendingPathComponent:fileName];
-        if(![fileManager fileExistsAtPath:path]){
-            dispatch_group_async(group, queue, ^{
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-                if (data) {
-                    //创建数据缓冲区
-                    NSMutableData* writer = [[NSMutableData alloc] init];
-                    //将字符串添加到缓冲中
-                    [writer appendData: data];
-                    //将缓冲的数据写入到文件中
-                    [writer writeToFile:path atomically:YES];
-                }
-            });
+    if([self.dataItemArray count]>0){
+        _mbpHud = [[MBProgressHUD alloc] initWithView:self.view];
+        _mbpHud.dimBackground = NO;
+        _mbpHud.square = YES;
+        [_mbpHud show:YES];
+        [self.view addSubview:_mbpHud];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_group_t group = dispatch_group_create();
+        //创建文件管理器
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        //获取Documents主目录
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+        //得到相应的Documents的路径
+        NSString* docDir = [paths objectAtIndex:0];
+        NSString *documentPath=[docDir stringByAppendingPathComponent:@"documents"];
+        //文件夹不存在则创建目录
+        if(![fileManager fileExistsAtPath:documentPath]){
+            [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
+        //更改到待操作的目录下
+        [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
+        for(NSDictionary *dv in self.dataItemArray){
+            NSString *url=[dv objectForKey:@"downloadUrl"];
+            NSString *fileName=[url substringFromIndex:30];
+            NSString *path = [documentPath stringByAppendingPathComponent:fileName];
+//            if(![fileManager fileExistsAtPath:path]){
+                dispatch_group_async(group, queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+                    if (data) {
+                        //创建数据缓冲区
+                        NSMutableData* writer = [[NSMutableData alloc] init];
+                        //将字符串添加到缓冲中
+                        [writer appendData: data];
+                        //将缓冲的数据写入到文件中
+                        [writer writeToFile:path atomically:YES];
+                    }
+                });
+//            }
+        }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            [_mbpHud hide:YES];
+            [self.btnDownload setTitle:@"已下载" forState:UIControlStateNormal];
+        });
     }
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [Common alert:@"下载完成了"];
-    });
 }
 
 - (void)loadDataDataItemArray
 {
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    [params setObject:@"gettitlebyjid" forKey:@"act"];
-    [params setObject:[NSString stringWithFormat:@"%@",[self.data objectForKey:@"periods"]] forKey:@"jid"];
-    self.hRequest=[[HttpRequest alloc]init];
-    [self.hRequest setDelegate:self];
-    [self.hRequest setController:self];
-    [self.hRequest setIsShowMessage:YES];
-    [self.hRequest handle:@"" headParams:nil requestParams:params];
+    NSString *periods=[self.data objectForKey:@"periods"];
+    NSArray *dArray=[periodicalService getListWithBookId:periods];
+    if([dArray count]==0){
+        NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+        [params setObject:@"gettitlebyjid" forKey:@"act"];
+        [params setObject:[NSString stringWithFormat:@"%@",[self.data objectForKey:@"periods"]] forKey:@"jid"];
+        self.hRequest=[[HttpRequest alloc]init];
+        [self.hRequest setDelegate:self];
+        [self.hRequest setController:self];
+        [self.hRequest setIsShowMessage:YES];
+        [self.hRequest handle:@"" headParams:nil requestParams:params];
+    }else{
+        self.dataItemArray=[[NSMutableArray alloc]init];
+        for(Periodical *p in dArray){
+            [self.dataItemArray addObject:[periodicalService periodicalConvertDictionary:p]];
+        }
+    }
 }
 
 - (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
 {
     if([response successFlag]){
+        NSString *periods=[self.data objectForKey:@"periods"];
         self.dataItemArray=[[response resultJSON]objectForKey:@"data"];
+        for(NSDictionary *d in self.dataItemArray){
+            [periodicalService save:d bookId:periods];
+        }
     }
 }
 

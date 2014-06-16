@@ -2,7 +2,7 @@
 //  Book.m
 //  Magazine
 //
-//  Created by Start on 6/12/14.
+//  Created by Start on 6/16/14.
 //  Copyright (c) 2014 Ancun. All rights reserved.
 //
 
@@ -18,12 +18,13 @@
 @dynamic descriptions;
 @dynamic endPageUrl;
 @dynamic frontPageUrl;
+@dynamic index;
 @dynamic introduction;
 @dynamic periods;
 @dynamic price;
 @dynamic readpotin;
 @dynamic recommmend;
 @dynamic totalPage;
-@dynamic index;
+@dynamic readtime;
 
 @end

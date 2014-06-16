@@ -12,8 +12,10 @@
 
 @interface BookService : NSObject
 
+- (NSArray*)getList;
 - (Book*)get:(NSString*)periods;
 - (BOOL)save:(NSDictionary*)data;
 - (BOOL)saveByBook:(Book *)book;
+- (NSMutableDictionary*)bookConvertDictionary:(Book*)book;
 
 @end

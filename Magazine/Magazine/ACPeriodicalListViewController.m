@@ -8,7 +8,7 @@
 
 @end
 
-@implementation ACPeriodicalListViewController{
+@implementation ACPeriodicalListViewController {
     Book *book;
 }
 

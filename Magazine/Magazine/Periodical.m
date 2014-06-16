@@ -2,7 +2,7 @@
 //  Periodical.m
 //  Magazine
 //
-//  Created by Start on 6/12/14.
+//  Created by Start on 6/16/14.
 //  Copyright (c) 2014 Ancun. All rights reserved.
 //
 
@@ -12,9 +12,10 @@
 @implementation Periodical
 
 @dynamic bigTitle;
+@dynamic bookId;
 @dynamic contenturl;
 @dynamic downloadUrl;
-@dynamic smallTitle;
 @dynamic periods;
+@dynamic smallTitle;
 
 @end
