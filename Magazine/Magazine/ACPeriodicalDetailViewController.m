@@ -6,6 +6,7 @@
 @interface ACPeriodicalDetailViewController ()
 
 @property (strong,nonatomic)NSDictionary *data;
+@property (strong,nonatomic)NSArray *dataItemArray;
 
 @end
 
@@ -96,13 +97,66 @@
 {
     ACPeriodicalListViewController *periodicalListViewController=[[ACPeriodicalListViewController alloc]initWithData:self.data];
     [self.navigationController pushViewController:periodicalListViewController animated:YES];
-    [periodicalListViewController loadData];
+    [periodicalListViewController loadData:self.dataItemArray];
 }
 //下载
 - (void)download:(id)sender
 {
-    NSLog(@"download");
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    //创建文件管理器
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    //获取Documents主目录
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    //得到相应的Documents的路径
+    NSString* docDir = [paths objectAtIndex:0];
+    NSString *documentPath=[docDir stringByAppendingPathComponent:@"documents"];
+    //文件夹不存在则创建目录
+    if(![fileManager fileExistsAtPath:documentPath]){
+        [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
+    for(NSDictionary *dv in self.dataItemArray){
+        NSString *url=[dv objectForKey:@"downloadUrl"];
+        NSString *fileName=[url substringFromIndex:30];
+        NSString *path = [documentPath stringByAppendingPathComponent:fileName];
+        if(![fileManager fileExistsAtPath:path]){
+            dispatch_group_async(group, queue, ^{
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+                if (data) {
+                    //创建数据缓冲区
+                    NSMutableData* writer = [[NSMutableData alloc] init];
+                    //将字符串添加到缓冲中
+                    [writer appendData: data];
+                    //将缓冲的数据写入到文件中
+                    [writer writeToFile:path atomically:YES];
+                }
+            });
+        }
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [Common alert:@"下载完成了"];
+    });
 }
 
+- (void)loadDataDataItemArray
+{
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:@"gettitlebyjid" forKey:@"act"];
+    [params setObject:[NSString stringWithFormat:@"%@",[self.data objectForKey:@"periods"]] forKey:@"jid"];
+    self.hRequest=[[HttpRequest alloc]init];
+    [self.hRequest setDelegate:self];
+    [self.hRequest setController:self];
+    [self.hRequest setIsShowMessage:YES];
+    [self.hRequest handle:@"" headParams:nil requestParams:params];
+}
+
+- (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
+{
+    if([response successFlag]){
+        self.dataItemArray=[[response resultJSON]objectForKey:@"data"];
+    }
+}
 
 @end

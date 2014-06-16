@@ -12,4 +12,6 @@
 
 - (id)initWithData:(NSDictionary *)data;
 
+- (void)loadDataDataItemArray;
+
 @end

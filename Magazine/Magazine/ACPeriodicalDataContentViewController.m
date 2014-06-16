@@ -45,6 +45,7 @@
         [self.webView setDelegate:self];
         [self.webView.scrollView setBounces:NO];
         [self.webView  setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.webView setBackgroundColor:[UIColor clearColor]];
         [self.scroll addSubview:self.webView];
     }
     return self;
@@ -77,6 +78,7 @@
         float readpoint=[[self.book readpotin]floatValue];
         if(readpoint>0){
             [self.scroll setContentOffset:CGPointMake(0, readpoint) animated:YES];
+            [Common alert:@"已为你自动跳转至上次阅读的位置"];
         }
     }
 }
@@ -99,7 +101,7 @@
 - (void)saveIndexPoint
 {
     BookService *bookService=[[BookService alloc]init];
-    [self.book setIndex:[NSString stringWithFormat:@"%ld",self.index]];
+    [self.book setIndex:[NSString stringWithFormat:@"%d",self.index]];
     [self.book setReadpotin:[NSString stringWithFormat:@"%f",self.scroll.contentOffset.y]];
     [bookService saveByBook:self.book];
 }

@@ -4,6 +4,6 @@
 
 - (id)initWithData:(NSDictionary *)data;
 
-- (void)loadData;
+- (void)loadData:(NSArray *)dataItem;
 
 @end

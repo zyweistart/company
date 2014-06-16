@@ -22,33 +22,18 @@
     return self;
 }
 
-- (void)loadData
+- (void)loadData:(NSArray *)dataItem
 {
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    [params setObject:@"gettitlebyjid" forKey:@"act"];
-    [params setObject:[NSString stringWithFormat:@"%@",[self.data objectForKey:@"periods"]] forKey:@"jid"];
-    self.hRequest=[[HttpRequest alloc]init];
-    [self.hRequest setDelegate:self];
-    [self.hRequest setController:self];
-    [self.hRequest setIsShowMessage:YES];
-    [self.hRequest handle:@"" headParams:nil requestParams:params];
-}
-
-- (void)requestFinishedByResponse:(Response*)response requestCode:(int)reqCode
-{
-    if([response successFlag]){
-        
-        BookService *bookService=[[BookService alloc]init];
-        NSString *periods=[self.data objectForKey:@"periods"];
-        book=[bookService get:periods];
-        if(book!=nil){
-            if([[book readpotin]intValue]>0){
-                [Common actionSheet:self message:@"是否继续阅读" ok:@"继续阅读" tag:1];
-            }
+    [self.dataItemArray addObjectsFromArray:dataItem];
+    [self.tableView reloadData];
+    
+    BookService *bookService=[[BookService alloc]init];
+    NSString *periods=[self.data objectForKey:@"periods"];
+    book=[bookService get:periods];
+    if(book!=nil){
+        if([[book readpotin]intValue]>0){
+            [Common actionSheet:self message:@"是否上次继续阅读" ok:@"继续阅读" tag:1];
         }
-        
-        [self.dataItemArray addObjectsFromArray:[[response resultJSON]objectForKey:@"data"]];
-        [self.tableView reloadData];
     }
 }
 

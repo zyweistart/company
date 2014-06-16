@@ -52,6 +52,7 @@
     ACPeriodicalDetailViewController *periodicalDetailViewController=[[ACPeriodicalDetailViewController alloc]initWithData:data];
     UINavigationController *periodicalDetailViewControllerNav=[[UINavigationController alloc]initWithRootViewController:periodicalDetailViewController];
     [self presentViewController:periodicalDetailViewControllerNav animated:YES completion:nil];
+    [periodicalDetailViewController loadDataDataItemArray];
 }
 
 - (void)loadDataWithPage:(int)page

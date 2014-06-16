@@ -123,8 +123,10 @@
     [fileManager changeCurrentDirectoryPath:[documentPath stringByExpandingTildeInPath]];
     NSString *path = [documentPath stringByAppendingPathComponent:fileName];
     if([fileManager fileExistsAtPath:path]){
-        //缓存文件存在则直接显示
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+        if(webView){
+            //缓存文件存在则直接显示
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+        }
     }else{
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
@@ -140,8 +142,10 @@
                     //将其他数据添加到缓冲中
                     //将缓冲的数据写入到临时文件中
                     [writer writeToFile:path atomically:YES];
-                    //把文件进行展示
-                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+                    if(webView){
+                        //把文件进行展示
+                        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+                    }
                 }
             });
         });
