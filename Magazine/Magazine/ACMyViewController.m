@@ -1,4 +1,5 @@
 #import "ACMyViewController.h"
+#import "ACLoginViewController.h"
 #import "Config.h"
 
 #define SKEY @"key"
@@ -11,7 +12,6 @@
 {
     self=[super initWithUITableViewStyle:UITableViewStyleGrouped];
     if(self){
-        [[Config Instance]setIsLogin:YES];
         NSDictionary *d1= @{SKEY: @"我的订阅",SVALUE:@"1",SNEXT:@"1"};
         NSDictionary *d2= @{SKEY: @"我的收藏",SVALUE:@"2",SNEXT:@"1"};
         NSDictionary *d3= @{SKEY: @"消息",SVALUE:@"3",SNEXT:@"1"};
@@ -45,6 +45,16 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *data=[[self.dataItemArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    int value=[[data objectForKey:SVALUE]intValue];
+    if(value==4){
+        ACLoginViewController *loginViewController=[[ACLoginViewController alloc]init];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
 }
 
 @end
