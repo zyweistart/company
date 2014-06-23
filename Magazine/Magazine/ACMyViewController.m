@@ -6,6 +6,14 @@
 #define SVALUE @"value"
 #define SNEXT @"isnext"
 
+@interface ACMyViewController ()
+
+@property BOOL isLogin;
+@property (strong,nonatomic) NSArray *loginArr;
+@property (strong,nonatomic) NSArray *noLoginArr;
+
+@end
+
 @implementation ACMyViewController
 
 - (id)init
@@ -17,15 +25,23 @@
         NSDictionary *d3= @{SKEY: @"消息",SVALUE:@"3",SNEXT:@"1"};
         NSDictionary *d4= @{SKEY: @"登录",SVALUE:@"4",SNEXT:@"1"};
         NSDictionary *d5= @{SKEY: @"退出",SVALUE:@"5",SNEXT:@"0"};
-        if([[Config Instance]isLogin]){
-            //登录状态
-            self.dataItemArray=[[NSMutableArray alloc]initWithObjects:@[d1,d2],@[d3],@[d5], nil];
-        }else{
-            //未登录状态
-            self.dataItemArray=[[NSMutableArray alloc]initWithObjects:@[d4],@[d3], nil];
-        }
+        //未登录状态
+        self.noLoginArr=@[@[d4],@[d3]];
+        //登录状态
+        self.loginArr=@[@[d1,d2],@[d3],@[d5]];
+        self.isLogin=[[Config Instance]isLogin];
+        [self reloadData];
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if(self.isLogin!=[[Config Instance]isLogin]){
+        [self reloadData];
+        self.isLogin=[[Config Instance]isLogin];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -54,7 +70,24 @@
     if(value==4){
         ACLoginViewController *loginViewController=[[ACLoginViewController alloc]init];
         [self.navigationController pushViewController:loginViewController animated:YES];
+    }else if(value==5){
+        [Common alert:@"退出成功"];
+        [[Config Instance]setIsLogin:NO];
+        [self reloadData];
     }
+}
+
+- (void)reloadData
+{
+    [self.dataItemArray removeAllObjects];
+    if([[Config Instance]isLogin]){
+        //登录状态
+        [self.dataItemArray addObjectsFromArray:self.loginArr];
+    }else{
+        //未登录状态
+        [self.dataItemArray addObjectsFromArray:self.noLoginArr];
+    }
+    [self.tableView reloadData];
 }
 
 @end
