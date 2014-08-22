@@ -40,6 +40,8 @@
 		C98F8C4F1932DC63008E4757 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F8C4E1932DC63008E4757 /* BaseCollectionViewController.m */; };
 		C9DCD30419494065001CF348 /* ACPeriodicalRootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */; };
 		C9DCD3071949407B001CF348 /* ACPeriodicalDataContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */; };
+		C9F0D1351957D06400A06F53 /* ACMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D1341957D06400A06F53 /* ACMessageViewController.m */; };
+		C9F0D1371957D34F00A06F53 /* RegisterViewStep.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F0D1361957D34F00A06F53 /* RegisterViewStep.xib */; };
 		C9F20336192EE3060083C490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20335192EE3060083C490 /* Foundation.framework */; };
 		C9F20338192EE3060083C490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20337192EE3060083C490 /* CoreGraphics.framework */; };
 		C9F2033A192EE3060083C490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F20339192EE3060083C490 /* UIKit.framework */; };
@@ -158,6 +160,9 @@
 		C9DCD30319494065001CF348 /* ACPeriodicalRootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalRootContentViewController.m; sourceTree = "<group>"; };
 		C9DCD3051949407B001CF348 /* ACPeriodicalDataContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPeriodicalDataContentViewController.h; sourceTree = "<group>"; };
 		C9DCD3061949407B001CF348 /* ACPeriodicalDataContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPeriodicalDataContentViewController.m; sourceTree = "<group>"; };
+		C9F0D1331957D06400A06F53 /* ACMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMessageViewController.h; sourceTree = "<group>"; };
+		C9F0D1341957D06400A06F53 /* ACMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMessageViewController.m; sourceTree = "<group>"; };
+		C9F0D1361957D34F00A06F53 /* RegisterViewStep.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewStep.xib; sourceTree = "<group>"; };
 		C9F20332192EE3060083C490 /* Magazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F20335192EE3060083C490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9F20337192EE3060083C490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -365,6 +370,8 @@
 				C98F8C421932DA66008E4757 /* ACMagazineViewController.m */,
 				C9F2036A192EE3920083C490 /* ACMainViewController.h */,
 				C9F2036B192EE3920083C490 /* ACMainViewController.m */,
+				C9F0D1331957D06400A06F53 /* ACMessageViewController.h */,
+				C9F0D1341957D06400A06F53 /* ACMessageViewController.m */,
 				C94A311219333BB0002163B2 /* ACMyCollectViewController.h */,
 				C94A311319333BB0002163B2 /* ACMyCollectViewController.m */,
 				C94A310F19333B34002163B2 /* ACMySubscriptionViewController.h */,
@@ -571,6 +578,7 @@
 		C9F2047B192EE50D0083C490 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C9F0D1361957D34F00A06F53 /* RegisterViewStep.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -652,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F20464192EE4E60083C490 /* blueArrow@2x.png in Resources */,
+				C9F0D1371957D34F00A06F53 /* RegisterViewStep.xib in Resources */,
 				C94A313019334285002163B2 /* ACShelf2Cell.xib in Resources */,
 				C9229C161934270B00A103F9 /* RefreshArrow.png in Resources */,
 				C9F20342192EE3060083C490 /* InfoPlist.strings in Resources */,
@@ -733,6 +742,7 @@
 				C9DCD30419494065001CF348 /* ACPeriodicalRootContentViewController.m in Sources */,
 				C94A311719333BFD002163B2 /* ACPeriodicalDetailViewController.m in Sources */,
 				C9229C1A1934507C00A103F9 /* CollectionViewLoadingCell.m in Sources */,
+				C9F0D1351957D06400A06F53 /* ACMessageViewController.m in Sources */,
 				C9F2044A192EE4E60083C490 /* NSString+Utils.m in Sources */,
 				C9F20451192EE4E60083C490 /* ATMHud.m in Sources */,
 				C9F2044C192EE4E60083C490 /* UIWindow+PazLabs.m in Sources */,

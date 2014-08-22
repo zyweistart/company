@@ -1,5 +1,8 @@
 #import "ACMyViewController.h"
+#import "ACMySubscriptionViewController.h"
+#import "ACMyCollectViewController.h"
 #import "ACLoginViewController.h"
+#import "ACMessageViewController.h"
 #import "Config.h"
 
 #define SKEY @"key"
@@ -67,10 +70,24 @@
 {
     NSDictionary *data=[[self.dataItemArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     int value=[[data objectForKey:SVALUE]intValue];
-    if(value==4){
+    if(value==1){
+        //我的订阅
+        ACMySubscriptionViewController *mySubscriptionViewController=[[ACMySubscriptionViewController alloc]init];
+        [self.navigationController pushViewController:mySubscriptionViewController animated:YES];
+    }else if(value==2){
+        //我的收藏
+        ACMyCollectViewController *myCollectViewController=[[ACMyCollectViewController alloc]init];
+        [self.navigationController pushViewController:myCollectViewController animated:YES];
+    }else if(value==3){
+        //消息
+        ACMessageViewController *messageViewController=[[ACMessageViewController alloc]init];
+        [self.navigationController pushViewController:messageViewController animated:YES];
+    }else if(value==4){
+        //登陆
         ACLoginViewController *loginViewController=[[ACLoginViewController alloc]init];
         [self.navigationController pushViewController:loginViewController animated:YES];
     }else if(value==5){
+        //退出
         [Common alert:@"退出成功"];
         [[Config Instance]setIsLogin:NO];
         [self reloadData];

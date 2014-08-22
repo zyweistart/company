@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        
+        self.title=@"我的收藏";
     }
     return self;
 }
